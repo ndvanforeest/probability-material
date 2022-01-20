@@ -1,0 +1,56 @@
+\subsection{BH.9.1}
+\label{sec:bh.9.1}
+
+Here is the code.
+
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import randint, norm
+
+mus = np.array([2, 5, 8])
+stds = np.array([0.1, 0.5, 1])
+
+
+m2 = stds ** 2 + mus ** 2 # this
+v = m2.mean() - (mus.mean()) ** 2 # this
+print(mus.mean(), v)
+
+routes = []
+for i in range(3):
+    routes.append(norm(mus[i], stds[i])) # this
+
+
+num = 200
+options = randint(0, 3).rvs(num) # this
+
+times = np.zeros(num)  # this
+for i in range(num):
+    times[i] = routes[options[i]].rvs() # this
+
+print(times.mean(), times.var())
+\end{minted}
+
+\begin{exercise}
+Explain the lines marked as `this', i.e., how does the program work?
+\end{exercise}
+
+\begin{exercise}
+Run the code and explain the results. Are the simulated results in line with the theory?
+\end{exercise}
+
+\begin{exercise}
+Modify the code so that you can plot the histogram of the \verb|times| vector. Include your code and a figure. Set also a seed equal to, e.g.,  the day of the month in which you do the assignment.
+\end{exercise}
+
+
+\begin{exercise}
+Set $\mu_8$ to 80 instead of $8$. Rerun the code and explain what happens to the mean and the variance. Then change to 800 and include a histogram of the PDF of the times.
+\end{exercise}
+
+
+\begin{exercise}
+Change $\sigma_1$ from $0.1$ to $10$.  Run the code and describe what you get. What's wrong with such a large std?
+\begin{solution}
+The route lengths can become negative.
+\end{solution}
+\end{exercise}

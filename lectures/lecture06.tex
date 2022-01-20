@@ -1,0 +1,89 @@
+\documentclass[lectures]{subfiles}
+\begin{document}
+
+\section{Lecture 6}
+
+
+\begin{exercise}
+Let $X \sim \Pois{\lambda}$ and $Y \sim \Pois{\mu}$ be independent. What is the distribution of $Z = X + Y$?\\
+\begin{hint}
+Use the Binomial theorem:
+\begin{align}
+    (a + b)^n = \sum_{k=0}^n {n \choose k}a^k b^{n-k},
+\end{align}
+\textit{for any non negative integer $n$.}
+\end{hint}
+
+\begin{solution}
+We use a convolution sum. First note that the domain of $X$ and $Y$ is $0,1,2,\ldots$. For any $n=0,1,2,\ldots$ we get
+\begin{align}
+    \P{Z = n} &= \sum_{k=0}^\infty \P{X = k} \P{Z = n \ | \ X = k} \\
+    &= \sum_{k=0}^\infty \P{X = k} \P{Y = n - X \ | \ X = k} \\
+    &= \sum_{k=0}^n \P{X = k} \P{Y = n - k} \\
+    &= \sum_{k=0}^n \frac{e^{-\lambda}}{k!}\lambda^k  \cdot \frac{e^{-\mu}}{(n-k)!}\mu^{n-k}  \\
+    &= e^{-(\lambda+\mu)} \sum_{k=0}^n \frac{1}{k!(n-k)!} \cdot \lambda^k\mu^{n-k}  \\
+    &= \frac{e^{-(\lambda+\mu)}}{n!} \sum_{k=0}^n \frac{n!}{k!(n-k)!} \cdot \lambda^k\mu^{n-k}  \\
+    &= \frac{e^{-(\lambda+\mu)}}{n!} \sum_{k=0}^n {n \choose k} \cdot \lambda^k\mu^{n-k}  \\
+    &= \frac{e^{-(\lambda+\mu)}}{n!} (\lambda + \mu)^k.
+\end{align}
+We recognize this as the PMF of a Poisson distribution with parameter $\lambda+\mu$. Hence, $Z \sim \Pois{\lambda + \mu}$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+(BH.8.4.3.) Let $X_1, X_2, \ldots$ be i.i.d. $\Exp{\lambda}$ distributed. Let $T_n = \sum_{k=1}^n X_k$. Show that $T_n$ has the following pdf:
+\begin{align}
+    f_{T_n}(t) = \frac{\lambda^n}{(n-1)!} t^{n-1} e^{-\lambda t}, \quad t > 0.
+\end{align}
+That is, show that $T_n$ follows a \emph{Gamma distribution} with parameters $n$ and $\lambda$. (We will learn about the Gamma distribution in BH.8.4.)\\
+\begin{hint}
+Use mathematical induction.
+\end{hint}
+
+\begin{solution}
+We use mathematical induction. For $n=1$ we have $T_1 = X_1$, which follows an exponential distribution with rate $\lambda$. We get
+\begin{align}
+    \frac{\lambda^n}{(n-1)!} t^{n-1} e^{-\lambda t} &= \frac{\lambda^1}{0!} t^{0} e^{-\lambda t}\\
+    &= \lambda e^{-\lambda t},
+\end{align}
+for all $t>0$. Hence, the statement is true for $n=1$. Now suppose the statement is true for $n-1 \geq 1$. That is, we assume that
+\begin{align}
+    f_{T_{n-1}}(t) = \frac{\lambda^{n-1}}{(n-2)!} t^{n-2} e^{-\lambda t}, \quad t > 0.
+\end{align}
+We need to prove that it follows that the statement holds for $n$. Note that $T_n = T_{n-1} + X_n$. Moreover, the domain of both $X_n$ and $T_{n-1}$ is $(0,\infty)$. This yields the convolution integral for all $t>0$:
+\begin{align}
+    f_{T_n}(t) &= \int_{-\infty}^{\infty} f_{T_{n-1}}(t - x) f_{X_n}(x) dx \\
+    &= \int_0^t f_{T_{n-1}}(t - x) f_{X_n}(x) dx \\
+    &= \int_0^t \frac{\lambda^{n-1}}{(n-2)!} (t-x)^{n-2} e^{-\lambda (t-x)} \lambda e^{-\lambda x} dx \\
+    &= \frac{\lambda^{n} e^{-\lambda t}}{(n-2)!} \int_0^t (t-x)^{n-2}  dx \\
+    &= \frac{\lambda^{n} e^{-\lambda t}}{(n-2)!} \Bigg[ -\frac{(t - x)^{n-1}}{n-1} \Bigg]_{x=0}^t \\
+    &= \frac{\lambda^{n} e^{-\lambda t}}{(n-2)!} \Bigg( 0 - \frac{-t^{n-1}}{n-1} \Bigg) \\
+    &= \frac{\lambda^{n} }{(n-1)!} t^{n-1} e^{-\lambda t}.
+\end{align}
+Hence, the statement holds for $n$. By mathematical induction, the statement holds for any $n=1,2,\ldots$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Let $X,Y$ be i.i.d. $\mathcal{N}(0,1)$ distributed and define $Z = X + Y$. Show that $Z \sim \mathcal{N}(0,2)$ using a convolution integral.
+
+\begin{solution}
+Recall the pdf of a $\mathcal{N}(\mu,\sigma^2)$ random variable $T$:
+\begin{align}
+    f_T(t) = \frac{1}{\sqrt{2\pi}\sigma} \exp\left\{-\frac{(t-\mu)^2}{2 \sigma^2}\right\}, \quad t \in \R.
+\end{align}
+We use a convolution integral. We have for every $z \in \R$:
+\begin{align}
+    f_Z(z) &= \int_{-\infty}^\infty f_Y(z - x) f_X(x) dx \\
+    &= \int_{-\infty}^\infty \frac{1}{\sqrt{2\pi}} \exp\left\{-\frac{(z - x)^2}{2}\right\} \frac{1}{\sqrt{2\pi}} \exp\left\{-\frac{x^2}{2 }\right\} dx \\
+    &= \frac{1}{2\pi} \int_{-\infty}^\infty  \exp\left\{-\frac{z^2 - 2zx + 2 x^2}{2}\right\} dx \\
+    &= \frac{1}{2\pi} \int_{-\infty}^\infty  \exp\left\{-\left[\frac{1}{2}z^2 - zx +  x^2\right]\right\} dx \\
+    &= \frac{1}{2\pi} \int_{-\infty}^\infty  \exp\left\{-\left[\left(x - \frac{1}{2}z\right)^2 + \frac{1}{4}z^2\right]\right\} dx \\
+    &= \frac{1}{2\pi} \exp\left\{-\frac{1}{4}z^2\right\} \int_{-\infty}^\infty  \exp\left\{-\left(x - \frac{1}{2}z\right)^2\right\} dx \\
+    &= \frac{1}{\sqrt{2\pi} \cdot \sqrt{2}} \exp\left\{-\frac{z^2}{2 \cdot \sqrt{2}^2}\right\} \cdot \int_{-\infty}^\infty  \frac{1}{\sqrt{2\pi} \cdot (1/\sqrt{2})} \exp\left\{-\frac{\left(x - \tfrac{1}{2}z\right)^2}{2 \cdot (1/\sqrt{2})^2}\right\} dx \\
+    &= \frac{1}{\sqrt{2\pi} \cdot \sqrt{2}} \exp\left\{-\frac{z^2}{2 \cdot \sqrt{2}^2}\right\},
+\end{align}
+where in the last step we recognize that the integral on the right is the integral of the pdf of a $\mathcal{N}(\tfrac{1}{2}z, 1/2)$ random variable, which integrates to one (since any pdf integrates to one). We are left with the pdf of a $\mathcal{N}(0,2)$ random variable. Hence, $Z \sim \mathcal{N}(0,2)$.
+\end{solution}
+\end{exercise}
+\end{document}

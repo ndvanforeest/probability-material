@@ -1,0 +1,1220 @@
+% arara: pdflatex: { shell: yes }
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex: { shell: yes }
+
+\input{header.tex}
+\chapter{Chapter 8: Questions and remarks}
+
+\section{Simple questions}
+
+
+
+
+
+\subsection*{Section 8.1}
+
+
+\begin{exercise}
+In probability theory we often want to study properties of  functions of rvs. Provide an example for such  a function.
+\begin{solution}
+Recall that $\V{X} = \E{X^2}-(\E X)^2$; so we have to deal with the function $g(x) = x^{2}$ because $\E{X^2}= \E{g(X)}$.
+Note that even to properly define the variance, we have to deal with a function that is not one-to-one everywhere on $\R$.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Let the rv $X$ be uniform on the set $\{0, 1, 2, 3, 4, 5\}$. Derive the PMF and the CDF of $Z=3X$. Explicitly specify the domain.
+\begin{solution}
+  \begin{align}
+    \label{eq:17}
+    X &\in \{0, \ldots, 5\} \implies Z \in \{0, 3, 6, 9, 12, 15\}, \quad \text{and not in } \{0, 1, 2, \ldots, 14, 15\},\\
+z &= g(x) = 3x,\\
+p_{Z}(z) &= \sum_{x: g(x) =z } p_{X}(x) = \frac{1}{6} \1{z \in \{0, 3, 6, 9, 12, 15\}}, \\
+F_{Z}(z) &=\frac{1}{6} \sum_{x=0}^{z} \1{x \in \{0, 3, 6, 9, 12, 15\}}.
+  \end{align}
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+Suppose $y=g(x)$ for some differentiable function $g$. We like to express the PDF $f_{Y}$ for $Y=g(X)$ in terms of the PDF $f_X$ and $g$.
+This is easy  when $g$ is strictly increasing and has an inverse at $y$, because
+\begin{align}\label{eq:1D-CDF}
+F_{Y}(y) = \P{Y\leq y} = \P{g(X) \leq y} = \P{X\leq g^{-1}(y)} = F_X(g^{-1}(y)).
+\end{align}
+Now we  take the derivative at the LHS and RHS to get with the chain rule
+\begin{align*}
+f_{Y}(y) = F_{Y}'(y) = \frac{\d }{\d y} F_{X}(g^{-1}(y)) = f_{X}(g^{-1}(y)) \frac{\d }{\d y} g^{-1}(y) = f_{X}(x) \frac{1}{g'(x)},
+\end{align*}
+where we write $x=g^{-1}(y)$ in the last step.
+But why is the derivative of $g^{-1}(y)$ at $y$ equal to $1/g'(x)$, with $x=g^{-1}(y)$?
+\begin{solution}
+To get the derivative of $g^{-1}$, consider the equality $g(g^{-1}(y)) = y$. Then, taking derivatives with respect to $y$ at both sides, and  applying the chain rule,
+\begin{align*}
+g(g^{-1}(y)) = y \implies \frac{\d}{\d y} g(g^{-1}(y)) =1 \iff g'(g^{-1}(y)) \frac{\d}{\d y} g^{-1}(y) = 1 \implies  \frac{\d}{\d y} g^{-1}(y)  = 1 /g'(x),
+\end{align*}
+where we use that $g^{-1}(y)=x$.
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+When $g$ is not strictly increasing everywhere, there can be no or multiple points $x$ such that $g(x)=y$.
+Explain that in such cases it is much more difficult to  express $F_Y$ in terms of $F_X$ than directly use the densities (assuming that $g$ is differentiable).  Extend your reasoning to 2D.
+\begin{solution}
+When working the CDFs, we need to solve the problem $\{x : g(x) \leq y\}$. If we take $g(x) = \sin x + x/100$ then this is really messy. In fact, to solve this, we first solve for the set ${x : g(x) = y}$, which might still be hard, but requires less work than check each and every interval.
+
+With PDFs  we only have to require \emph{locally} that $g$ is one-to-one, and we don't have to work with inequalities, but can direcly focus on the set $\{x : g(x) = y\}$.
+
+In 2D,  functions can have saddle points, i.e., points in which the function increases in one direction and decreases in another.
+Then finding the set of points $x$ such that\footnote{} $g(x,y)\leq (u,v)$ (which we need if we want to express $\P{g(X, Y) \leq (u,v)}$ in terms of the distribution $F_{X,Y}$) is not a particularly attractive task, to say the least.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+The general 1D change of variables formula is like this,
+\begin{align*}
+f_{Y}(y) = \sum_{x_{i}: g(x_{i})=y}f_{X}(x_{i})\frac 1{|g'(x_{i})|},
+\end{align*}
+with some natural conditions on $g$.
+Apply this formula to the case $g(x)= x^{2}$.
+\begin{solution}
+Note that $g(x)=x^2$ is not monotone increasing, moreover, $g^{-1}(y)$  does not exist (in $\R$) for $y< 0$.
+We  split the line into disjoint intervals in which $g$ is either strictly increasing or decreasing, and then we apply the above rule in each of the intervals. Since  $g'(x)= 2x$ and $x=\pm \sqrt y$,
+\begin{align*}
+f_{Y}(y) = f_{X}(\sqrt{y})\frac 1{2\sqrt y} + f_{X}(-\sqrt{y})\frac 1{2\sqrt y}.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise} If $X\sim \Exp{1}$,  use  the change-of-variables theorem to obtain the density of $Y=g(X)=\lambda X$. What is $\E Y$?
+\begin{solution}
+Take $y= g(x)= \lambda x$. Then,
+\begin{align*}
+f_{Y}(y) = f_X(x)\frac{\d x}{\d y} = f_{X}(x) \frac{1}{g'(x)} = e^{-y/\lambda} \frac 1 \lambda.
+\end{align*}
+With this,
+\begin{align*}
+\E Y = \int_0^{\infty} y f_Y(y) \d y = \int_0^{\infty} y e^{-y/\lambda} \frac 1 \lambda  \d y.
+\end{align*}
+To solve this integral, I recognize $y/\lambda$ in the exponent, and I want to get rid of the $1/\lambda$ factor. Hence, I write $u=y/\lambda$, and use this to see that
+\begin{align*}
+u = y/\lambda \implies \d u = \d y /\lambda \implies \d y = \lambda \d u.
+\end{align*}
+Then, including $a$ and $b$ for the boundaries to show explicitly what is going on when changing the variables
+\begin{align*}
+\int_{a}^b y/\lambda e^{-y/\lambda} \d y =
+\int_{a/\lambda }^{b/\lambda } u e^{-u} \lambda \d u = \lambda \int_{a/\lambda }^{b/\lambda } u e^{-u}  \d u.
+\end{align*}
+Applying this to our case so that $a = 0/\lambda = 0$ and $b = \infty/\lambda = \infty$,
+\begin{align*}
+\E Y = \lambda \int_{0 }^{\infty } u e^{-u}  \d u = \lambda \E X.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Show that the 1D change-of-variables formula relates directly to the substitution rule of integration theory to solve 1D integrals.
+\begin{solution}
+When we have the density  $f_{Y}$ and the function $g$, then the substitution rule says that,
+\begin{align*}
+\int_{a}^b f_{Y}(g(x)) g'(x)\d x = \int_{g(a)}^{g(b)} f_{Y}(y) \d y.
+\end{align*}
+We also want that the transformation from $X$ to $Y$ does not affect the probability of the set (event) $A = [a,b]$, hence,
+\begin{align*}
+\int_{g(a)}^{g(b)} f_{Y}(y) \d y = \int_{a}^{b} f_{X}(x) \d x.
+\end{align*}
+Combining the above two equations gives that
+\begin{align*}
+\int_{a}^{b} f_{Y}(g(x))) g'(x) \d x = \int_{a}^{b} f_{X}(x) \d x.
+\end{align*}
+Since this holds for any $a$ and $b$, it follows that
+\begin{align*}
+f_{Y}(g(x)) g'(x) = f_{X}(x).
+\end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Use the change of variable formula to relate the $\Geo{p}$ and the $\FS{p}$ distributions.
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.8.1.1 write that `The support of $Y$ is all $g(x)$ with $x$ in the support of $X$.' Do they say that $\supp{Y} = \{x : g(x) \in \supp{X}$? BTW, with is the difference between $\supp{X}$ and $\sup{X}$?
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+BH.8.1.3. Check how all moments were found.
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Let $X \sim \Unif{0, 5}$. Using the one dimensional change of variables theorem (BH.8.1.1),  derive the PDF and the CDF of $Z=3X$. Explicitly specify the domain.
+\begin{solution}
+  \begin{align}
+X &\in [0, 5]  \implies Z \in [0, 15],\\
+z &= 3x = g(x) \implies x = z/3, \\
+f_{Z}(z) &= f_{X}(x) \frac{\d x}{\d z},\\
+\frac{\d z}{\d x} &= 3,\\
+f_{Z}(z) &= f_{X}(z/3) \frac{1}{3}.
+  \end{align}
+$F_{Z}(u) = 1$ for $u\geq 15$ and $F_{Z}(u) = 0$ for $u\leq 0$. When $0\leq u \leq 15$,
+  \begin{align}
+  F_{Z}(u) &= \int_{0}^{u} f_{X}(z/3) \frac{1}{3} \d z = \frac{1}{5}\int_{0}^{u} \1{0\leq  z/3\leq 5}  \frac{1}{3} \d z \\
+&= \frac{1}{5}\int_{0}^{u} \1{0\leq z\leq 15}  \frac{1}{3} \d z = \frac{u}{15}.
+  \end{align}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+When $Z=X^3$ and $X\sim \Unif{0,5}$, using the one dimensional change of variables theorem to  derive the PDF and the CDF of $Z$. Specify the domain of $Z$.
+\begin{solution}
+\begin{align}
+X &\in [0, 5]  \implies Z \in [0, 125],\\
+z &= x^{3} = g(x) \implies x = z^{1/3}, \\
+f_{Z}(z) &= f_{X}(x) \frac{\d x}{\d z},\\
+\frac{\d z}{\d x} &= 3 x^{2} = 3 z^{2/3},\\
+f_{Z}(z) &= f_{X}(z^{1/3}) \frac{1}{3z^{2/3}}.
+ \end{align}
+When $F_{Z}(u) = 1$ for $u\leq 125$ and $F_{Z}(u) = 0$ for $u\leq 0$. When $0\leq u \leq 125$,
+ \begin{align}
+ F_{Z}(u) &= \int_{0}^{u} f_{X}(z^{1/3}) \frac{1}{3z^{2/3}} \d z = \frac{1}{5}\int_{0}^{u} \1{0\leq  z^{1/3}\leq 5}  \frac{1}{3z^{2/3}} \d z \\
+&= \frac{1}{5}\int_{0}^{u} \1{0\leq z\leq 125}  \frac{1}{3z^{2/3}} \d z \\
+&= \frac{1}{5}\int_{0}^{u}  \frac{1}{3z^{2/3}} \d z =  \frac{1}{5}z^{1/3}\biggr|_{0}^{u} = u^{1/3}/5.
+ \end{align}
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+Let $X \sim \Norm{\mu,\sigma^2}$. Using the one dimensional change of variables theorem  BH.8.1.1, show that $Z = \frac{X-\mu}{\sigma}\sim \Norm{0, 1}$.
+\begin{solution}
+  \begin{align}
+    \label{eq:18}
+    z &= g(x) = (x-\mu)/\sigma, \implies x = \sigma z + \mu\\
+f_{Z}(z) &= f_{X}(x) \frac{\d x}{\d z}, \\
+\frac{\d z}{\d x } &= \frac{1}{\sigma}, \\
+f_{Z}(z) &= f_{X}(x) \sigma = \sigma f_{X}(\sigma z + \mu) \\
+\intertext{and now using the density of $X\sim \Norm{\mu, \sigma$},}
+f_{Z}(z) &=\frac1{\sqrt{2\pi} \sigma } e^{-(\sigma z + \mu -\mu)^{2}/2\sigma^{2}} \sigma = \frac1{\sqrt{2\pi}} e^{-z^{2}/2}.
+  \end{align}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Let $X \sim \Exp{1}$. Derive the PDF of $e^{-X}$.
+\begin{solution}
+  \begin{align}
+z &= g(x) = e^{-x} \implies x = - \log z,\\
+x &\in (0, \infty) \implies z \in (0, 1),\\
+f_{Z}(z) &= f_{X}(x) \frac{\d x}{\d z}, \\
+\frac{\d z}{\d x } &= - e^{-x}, \quad \text{Don't forget to take the abs value next}, \\
+f_{Z}(z) &= f_{X}(x) e^{x} = e^{-x} e^{x} = 1 \1{0< z < 1},
+  \end{align}
+where we include the domain of $Z$ in the last equality.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Let $X, Y$ be iid standard normal. Using the $n$-dimensional change of variables theorem, derive the joint PDF of $(X+Y, X-Y)$.
+
+Check your final answer using BH.7.5.8.
+\begin{solution}
+\begin{align}
+(u,v) &= (x+y, x-y) = g(x,y) \implies (x,y) = ((u+v)/2, (u-v)/2), \\
+\frac{\partial (u,v)}{\partial (x, y)} &=
+  \begin{vmatrix}
+    1 & 1 \\
+1 & -1
+  \end{vmatrix} = -2 \implies |-2| = 2,\\
+f_{U,V}(u,v) &= f_{X,Y}(x,y) \frac{\partial(x,y)}{\partial(u,v)} = f_{X,Y}((u+v)/2, (u-v)/2) /2 \\
+&= \frac{1}{4\pi} e^{-((u+v)/2)^{2}/2} e^{-((u-v)/2)^{2}/2} \\
+&= \frac{1}{4\pi} e^{-u^{2}/4-v^{2}/4},
+\end{align}
+where we work out the squares and simplify.
+Hence, $U$ and $V$ are independent and normally distributed with mean 0 and $\sigma=\sqrt 2$.
+This is in line with our earlier definition of a multi-variate normal distribution.
+\end{solution}
+
+\end{exercise}
+
+
+\begin{exercise}
+Specify the domain of the new random variable for the following transformations; this important aspect of the change of variables is often overlooked.
+Let $U$, $V$, $W$, $X$, $X_1$, $X_2$, $Y$ and $Z$ be rvs and let $a$, $b$ and $c$ be arbitrary constants.
+\begin{enumerate}
+    \item $Z = Y^{4}$ for $Y \in (-\infty,\infty)$;
+    \item $Y = X^{3}+a$ for $X \in (0,1)$;
+    \item $U = |V|+b$ for $V \in (-\infty,\infty)$;
+    \item $Y = e^{X^3}$ for $X \in (-\infty,\infty)$;
+    \item $V = U \1{U \leq c}$ for $U \in (-\infty,\infty)$;
+    \item $Y = \sin(X)$ for $X \in (-\infty,\infty)$;
+    \item $Y = \frac{X_1}{X_1+X_2}$ for $X_1 \in (0,\infty)$ and $X_2 \in (0,\infty)$;
+    \item $Z = \log(UV)$ for $U \in (0,\infty)$ and $V \in (0,\infty)$. \\
+\end{enumerate}
+\begin{solution}
+\begin{enumerate}
+    \item $Z = Y^{4} \in [0, \infty)$ for $Y \in (-\infty,\infty)$;
+    \item $Y = X^{3}+a \in (a, a+1)$ for $X \in (0,1)$;
+    \item $U = |V|+b \in [b, \infty)$ for $V \in (-\infty,\infty)$;
+    \item $Y = e^{X^3} \in (0, \infty)$ for $X \in (-\infty,\infty)$;
+    \item $V = U \1{U \leq c} \in (-\infty, c]$ for $U \in (-\infty,\infty)$;
+    \item $Y = \sin(X) \in [-1, 1]$ for $X \in (-\infty,\infty)$;
+    \item $Y = \frac{X_1}{X_1+X_2} \in (0, 1)$ for $X_1 \in (0,\infty)$ and $X_2 \in (0,\infty)$;
+    \item $Z = \log(UV) \in (-\infty, \infty)$ for $U \in (0,\infty)$ and $V \in (0,\infty)$. \\
+\end{enumerate}
+\end{solution}
+
+\end{exercise}
+
+\begin{exercise}
+When adding a different equality, we need to be careful to not create a functional relationship between our two new variables $U,V$, for example $U=X+Y$ and $V=\sin(X+Y)$, or $U=\frac X Y$ and $V = \frac Y X$ for conforming $X,Y$.
+What would happen to the determinant of the Jacobian matrix if we did?
+Why would this happen?
+Explain in your own words.
+\begin{solution}
+  When the variables become dependent, the Jacobian becomes zero. For instance,  in the latter case,
+\begin{align}
+\frac{\partial (u,v)}{\partial (x, y)} =
+  \begin{vmatrix}
+    1/y & -x/y^{2} \\
+-y/x^{2} & 1/x
+  \end{vmatrix} = \frac{1}{x y} - \frac{x}{y^2}\frac{y}{x^{2}} = 0.
+\end{align}
+Moreover, the function $g$ is not locally one-to-one.
+
+\end{solution}
+\end{exercise}
+
+
+\subsection*{Section 8.2}
+\label{sec:section-8.2}
+
+
+\begin{exercise}
+To find the distribution of a convolution through the change of variables formula, we seem to need to add a `redundant' equality?
+But why is that?
+What would be the problem if we do not add this?
+Explain in your own words.
+\begin{solution}
+If we would not add this extra variable, we cannot use the change of variables theorem. We also need a function to deal with the scaling. In the change of variables theorem, this is the Jacobian.
+
+nThere is also another problem.
+Consider the function $g(x, y)$ that maps $\R^{2}$ to $\R$.
+The inverse set $\{ (x,y) : g(x,y) =z \}$ can be quite complicated, while the set $\{y : g(x, y) = z\}$ for a fixed $x$ is hopefully just one point.
+Hence, the mapping $(x, y) \to (x, g(x,y))$ is, at least locally, one-to-one.
+
+It is possible to deal with the more general problem, but this requires much more theory than we need for this course.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+In this exercise, we combine what we learned in BH.8.1.4 and  BH.8.1.9.  Let $S$ be the sum of two iid chi-square distributed variables (with one degree of freedom). Using just these two examples, show that $S \sim \Exp{1/2}$.
+
+\begin{hint}
+Let $X, Y$ be iid standard normal. Since the square of a standard normal r.v. is chi-square distributed, we can write $S$ as $S=X^2+Y^2$ (here we use  BH.8.1.4).
+\end{hint}
+\begin{solution}
+  From BH.8.1.4: $Z$ chi-square $\implies X=\sqrt{Z} \sim \Norm{0,1}$.
+  Then, from BH.8.1.9,
+\begin{equation}
+X^{2}+Y^2 = (\sqrt{2T} \cos U)^2 + (\sqrt{2T} \sin U)^2 = 2T \left(\cos^2 U+\sin^2 U\right) = 2T \sim \Exp{1/2},
+\end{equation}
+ when $X, Y\sim \Norm{0,1}$.
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+A student has obtained an iid
+random sample of size 2 from a Cauchy distribution. Let the rvs $X$ and $Y$ model the  values of the first and second sample.
+Since s/he does not know what the mean of a Cauchy distribution is, s/he wants to average the sample to obtain what she thinks is a good estimate of the true mean.
+
+To find the distribution of this sample mean, we need to find an expression for $f_W(w)$, where $W=\frac{X+Y}2$.
+
+\begin{enumerate}
+\item Find an expression for $f_W(w)$ in the form of an integral, but do not solve it.
+\item It turns out that if we solve the integral, we get that $f_W(w) = f_X(w)$. The distribution of our sample mean is still Cauchy; we did not obtain a better estimate of the Cauchy mean by calculating the sample mean!
+
+Explain (in your own words) why this makes sense.
+\end{enumerate}
+\begin{solution}
+ Take $g(x,y) = (x, w) = (x, (x+y)/2)$. Then, $y=2w -x$.
+\begin{align}
+\frac{\partial (x,w)}{\partial (x, y)} &=
+  \begin{vmatrix}
+    1 & 0 \\
+1/2 & 1/2
+  \end{vmatrix} = 1/2,\\
+f_{X,W}(x,w) &= f_{X,Y}(x,y) \frac{\partial(x,y)}{\partial(x,w)} = \frac{1}{\pi(1+x^{2})}\frac{1}{\pi(1+(2w-x)^{2})} 2,\\
+f_{W}(w) &= \int_{-\infty}^{\infty} f_{X,W}(x,w) \d x = \frac{2}{\pi^{2}} \int_{-\infty}^{\infty} \frac{1}{1+x^{2}}\frac{1}{1+(2w-x)^{2}} \d x.
+\end{align}
+
+The expectation of a Cauchy distributed r.v. $X$ is not well-defined because $\E{|X|} = \infty$. As a consequence, taking the average of some outcomes (i.e. a sample) will also not give a sensible answer.
+\end{solution}
+\end{exercise}
+
+
+\subsection*{Section 8.3}
+\label{sec:section-8.3}
+
+\begin{exercise}
+If $a=b=1$, why is $\Beta{a,b}=\Unif{[0,1]]}$?
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+If $a=b$, why is $\Beta{a,b}$ symmetric?
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+If $a>b$ and  $X\sim\Beta{a,b}$, is $\E X > 1/2$?
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.8.3.2, last equation. How do the authors get to the equation
+\begin{equation*}
+\beta(a,b) = \frac{1}{(a+b-1) {a+b-2\choose a-1}}?
+\end{equation*}
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.8.3.3. The authors write that $X$ is not marginally Binomial, but is conditionally Binomial. What is the difference?
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.8.3.3. The authors use a smart trick to find an expression for the posterior distribution $f_{p|X=k}$ of $p$. Use this posterior to derive an expression for $\P{X=k}$ by using the fact that
+\begin{equation*}
+\P{X=k} = \frac{{n\choose k} p^{k}(1-p)^{n-k} \Beta{a,b}}{\Beta{a+k, b+n-k}},
+\end{equation*}
+and simplyfing the RHS.
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.8.3.3. Why does $a-1$ correspond to  the number of prior successes, in other words, why is it not $a$, but $a-1$?
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.8.3.4.b. Given that the first patient is cured, what is the probability that the rest of the patients, i.e., the other $n-1$, will also be cured?
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Is this claim correct? Let $T$ be the sum of two iid $\Unif{0,1}$ rvs.
+Then there exist $a, b$ such that $T \sim \Beta{a,b}$. (You don't need to derive the distribution of $T$.)
+\begin{solution}
+Incorrect: The support of $T$ is $(0,2)$ whereas the support of any beta distribution is $(0,1)$. Hence, $T$ does not have a beta distribution for some $a,b$.\\
+Also see page 378 of the book for the distribution of the sum of two uniform distributions. This might help your intuition for this solution.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Show that $\beta(1, b) = 1/b$ by integrating the PDF of the beta distribution for $a=1$. (Do not use the results of BH 8.5 for this exercise.)
+\begin{solution}
+We use that the PDF integrates to 1:
+$$1 = \int_0^1 \frac1{\beta(1,b)} (1-x)^{b-1} \d x =  \frac1{\beta(1,b)}  \left[-\frac{1}{b}(1-x)^{b}\right]_0^1 =  \frac{1}{\beta(1,b) b}.$$
+Hence, $\beta(1, b) = \frac1b$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Let $a, b > 1$. Show that the PDF of the beta distribution attains a maximum at $x = \frac{a-1}{a+b-2}$. Explicitly indicate where the assumption that  $a, b > 1$ is used.
+\begin{solution}
+The scaling factor $\beta(a, b)$ is a positive constant, so we may as well leave it out and maximize $x^{a-1}(1-x)^{b-1}$. Note that its derivative (to $x$) is given by
+\begin{align*}
+\frac{d}{dx} x^{a-1}(1-x)^{b-1} &= ((a-1)(1-x) -(b-1)x)x^{a-2}(1-x)^{b-2} \\ &= ((a-1) - (a+b-2)x) x^{a-2}(1-x)^{b-2}.
+\end{align*}
+Setting this to zero yields $x = \frac{a-1}{a+b-2}$ as the only candidate for an interior optimum. Since $a, b > 1$, we have $0 < x < 1$. If  $a, b > 1$, then the PDF converges to 0 as $x \to 0$ or $x \to 1$, so then we conclude that $x = \frac{a-1}{a+b-2}$ indeed yields a maximum. (Think about this last sentence; most students do not use the information that $a,b>1$ correctly.)
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Explain in your own words:
+\begin{enumerate}
+\item What is a prior?
+\item What is a conjugate prior?
+\end{enumerate}
+\begin{solution}
+A prior is a distribution reflecting one's information or belief about a parameter before updating it with information.
+
+It is harder than you might think, hardly any student gives a completely satisfactory answer here. Compare your solution to the definition above. If they are different, try to understand how exactly your solution was different and determine which definition is better.
+
+A conjugate prior is a prior distribution such that the posterior distribution is in the same family of distributions.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise} \phantom{ }
+\begin{enumerate}
+\item Look up on the web: what is the conjugate prior of the multinomial distribution? Give a name and a formula.
+\item Explain why the Beta distribution is a special case of this distribution.
+\end{enumerate}
+\begin{solution}
+Dirichlet distribution. The Beta distribution is a special case of the Dirichlet distribution, because binomial is a special case of multinomial. Of course, this can also be shown directly using the formula.
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+You make a test with $n$ multiple choice questions and you give the correct answer to each question independently with probability $p$. The teacher's prior belief about $p$ is reflected by a uniform distribution: $p \sim \Unif{0,1}$.
+Let $X$ be the number of correct answers you give.
+What is the teacher's posterior distribution $p|X=k$? (You don't have to do a lot of math here; simply use a result from the book.)
+\begin{solution}
+The prior is $p \sim \text{Beta}(1,1)$. The posterior is $p|X=k \sim \text{Beta}(1+k,1+n-k)$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+You find a coin on the street. Initially, you are rather confident that this should be (approximately) a fair coin. This is reflected in your prior belief of the probability $p$ of heads: $p \sim \Beta{10,10}$. Your friend is a bit more skeptical and assumes a uniform prior: $p \sim \Unif{0,1}$.  You toss the coin 1000 times, and it comes up heads 900 times.
+\begin{enumerate}
+\item Determine your posterior distribution. (Again, use  a result from the book)
+\item Determine your friend's posterior distribution.
+\item Compare the means of your posterior distribution and your friend's posterior distribution. Comment on the effect of the prior distribution if you have a lot of data.
+\end{enumerate}
+\begin{solution}
+Let $X$ denote the number of heads.
+\begin{enumerate}
+    \item Your posterior is $p|X=900 \sim \text{Beta}(910,110)$.
+    \item Your friend's posterior is $p|X=900 \sim \text{Beta}(901,101)$.
+    \item The mean of your posterior is $\frac{910}{910+110} = \frac{91}{102} \approx 0.892$; the mean of your friend's posterior is  $\frac{901}{901+101} = \frac{901}{1002} \approx 0.899$. The difference is small, so the  effect of the prior distribution is small if you have a lot of data. This effect is known as \textit{washing out the prior}.
+\end{enumerate}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+We have an urn with 1000 coins. One of those is biased such that $\P{H} = 99/100 = 1-\P{T}$, all others are fair. You select at random a coin, i.e., with probability $1/1000$ you select the biased one, and start throwing. You see 10 heads in row.
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+BH.8.3.5. write that $X_j$ is an indicator of the $j$th throw beind made. Can this be the formal definition: $X_j = \1{N\geq j}$?
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Use the pmf of the Beta-Binomial distribution to prove the following identity:
+\begin{equation*}
+   \sum_{k=0}^n \frac{\binom{n}{k}\binom{a+b-2}{a-1}  (a+b-1) }{\binom{a+b+n-2}{a+k-1}(a+b+n-1)} = 1.
+\end{equation*}
+for all positive integers $a, b, n$.
+\begin{solution}
+This  states that the PMF of the Beta-Binomial distribution, $$P(X=k) = \binom{n}{k} \frac{\beta(a+k,b+n-k)}{\beta(a,b)},$$ sums to 1. To see this, we have to rewrite the beta functions in terms of binomial coefficients:
+\begin{align*}
+   \frac{1}{\beta(a,b)} = \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)} = \frac{(a+b-1)!}{(a-1)! (b-1)!} = (a+b-1) \binom{a+b-2}{a-1}, \\
+   \frac{1}{\beta(a+k,b+n-k)}  = (a+b+n-1) \binom{a+b+n-2}{a+k-1}.
+\end{align*}
+Plugging this in gives the result.
+\end{solution}
+\end{exercise}
+
+
+
+\subsection*{Section 8.4}
+\label{sec:section-8.4}
+
+\begin{exercise}
+What is the SCV of $\Gamm{n, \lambda}$ distributed rv $X$?
+\begin{solution}
+$\V X = n/\lambda^{2}$, $\E X = n/\lambda$, SCV $=1/n$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+We have a machine that has temperature $x_0e^{-\alpha t}$ after a time $t$. We switch it on when $q$ jobs arrive. Job interarrival times are $\Exp{\lambda}$. Why  does the temperature at the moment the $q$th job arrives have the distribution $x_0\exp{-\alpha Y}$, with $Y\sim \Gamm{q-1, \lambda}$?
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+Consider the chi-square distribution (with one degreee of freedom) from BH.8.1.4.
+
+Starting from the expression $f_Y(y) = \varphi \left(\sqrt{y}\right) y^{-1/2}$ in this example, show that this  chi-square distribution is a special case of the Gamma distribution and specify the corresponding values of the parameters $a$ and $\lambda$.
+
+\begin{solution} We fill in $\varphi(x) = \frac{1}{\sqrt{2\pi}} e^{-x^2/2}$ to find
+\begin{equation*} f_Y(y) = \varphi \left(\sqrt{y}\right) y^{-1/2} = \frac{1}{\sqrt{2\pi}} y^{-1/2} e^{-(\sqrt{y})^2/2} = \frac{1}{\sqrt{2\pi}} y^{-1/2} e^{-y/2}, \end{equation*} so $a = \tfrac12$ and $\lambda = \tfrac12$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Is the sum of any two Gamma distributions again Gamma?
+\begin{solution}
+Incorrect: the scale parameters $\lambda$ need to be the same \emph{and} both random variables need to be independent.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Prove by induction that $\Gamma(n)=(n-1)!$ if $n$ is a positive integer.
+
+\begin{solution}
+The base case is $n=1$. We have $\Gamma(1) = \int_0^\infty e^{-x} \d x = 1 = 0!$, so the statement holds for $n=1$. Now let $k \in \mathbb N$ be arbitrary and assume that the statement holds for $n=k$, i.e. that $\Gamma(k) = (k-1)!$. Then \begin{equation}\Gamma(k+1) = k\Gamma(k) = k (k-1)! = k! = ((k+1)-1)!,
+\end{equation}
+so the statement also holds for $n=k+1$. By mathematical induction, we conclude that  $\Gamma(n)=(n-1)!$ for all positive integers $n$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Is the Poisson distribution  the conjugate prior of the Gamma distribution?
+\begin{solution}
+Incorrect: It is the other way around, the Gamma distribution is the conjugate prior of the Poisson distribution. This statement doesn't make much sense, for example one would need to say for which parameter of the Gamma distribution it is the prior. In addition, the parameters of the Gamma distribution can be any positive real number, so the conjugate prior of (either parameter) of the Gamma distribution is a continuous distribution, so in particular not the Poisson distribution.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Let $X \sim \Gamm{4,2}$ and $Y \sim \Gamm{7,2}$ be independent rvs. What is the distribution of $X+Y$? What is the distribution of $\frac{X}{X+Y}$?
+
+\begin{solution}
+$X+Y \sim \text{Gamm}(11,2)$ and $\frac{X}{X+Y} \sim \text{Beta}(4,7)$.
+\end{solution}
+\end{exercise}
+
+
+
+
+
+\subsection*{Section 8.6}
+\label{sec:section-8.6}
+
+Read the definition of an order statistic. Skip the rest of BH.8.6.
+
+\begin{exercise}
+If you can answer this question, then you basically know everything you need to know about order statistics for the purpose of this course.)\\
+Let $X_1,X_2,\ldots,X_9$ be a collection of random variables. Fill in the gaps (with just one word each time):
+\begin{enumerate}
+    \item $X_{(1)}$ denotes the ... of $X_1,X_2,\ldots,X_9$.
+    \item $X_{(9)}$ denotes the ... of $X_1,X_2,\ldots,X_9$.
+    \item $X_{(5)}$ denotes the ... of $X_1,X_2,\ldots,X_9$.
+\end{enumerate}
+\begin{solution}
+\begin{enumerate}
+    \item Minimum
+    \item Maximum
+    \item Median
+\end{enumerate}
+\end{solution}
+\end{exercise}
+
+
+
+\section{BH exercises: hints and solutions}
+
+
+\begin{exercise} BH.8.11. With convolution we know how to  add and subtract independent rvs. Now we make a start with division. You'll see that this operator is not as simple as you always thought.
+
+Before solving the problem, let's take a step back.
+You learned arithmetic at primary school.
+In all those problems, the numbers you had to add, subtract, etc.
+where supposed to be known precisely.
+At secondary school, you learned how to arithmetic with symbols.
+And now, at university, your next step is learn how to do arithmetic with rvs.
+
+Here is an example to show you the relevance of this.
+In a paint factory at which a couple of my students did their master's thesis, the inventory level of dyes and other raw materials is often not known exactly.
+There are plenty of simple explanations for this.
+Raw materials are kept in big bags, and personnel uses shovels to take it out of the bags.
+Of course, occasionally, there is some spillage on the floor, and this extra `demand' is not reported.
+The demand side is also not exact.
+A customer orders for example 500 kg of red paint.
+To make this, the operators follow a recipe, but dyes (in certain combinations) do not always give the same  result. Therefore, the paint for each order is checked, and when it does not meet the quality level, the batch has to be adjusted by adding a bit more of certain dyes or solvents, or other chemical products.
+
+When the planner has to make a decision on when to reorder a certain raw material, s/he divides the total amount of raw material by the average demand size. And this leads to occasional stock outs. When the stock level and the demands are treated as a rvs, such stock outs may be prevented, but this requires to be capable of determining the distribution of the something like $Y/X$.
+
+\begin{hint}
+Start with the case $v=0$. Use the proof of BH.8.1.1. Reason carefully; corner cases as simple to miss.
+
+Then, make a graph of the two branches of the hyperbola's $1/t$, one branch for $t>0$, the other for $t<0$.
+Then draw a horizontal line to indicate the level $V=v$; this shows with part(s) of the hyperbola's lie below $v$.
+Then compute the probability for each branch. This will give the answer of the  book immediately.
+\end{hint}
+\begin{solution}
+
+From the hint, we first focus on a set $\{V\leq 0\} = \{1/T \leq 0\}$. Now,  $1/T\leq 0 \iff T\leq 0$. And therefore $\P{V\leq 0} = \P{T\leq 0} = F_T(0)$.
+
+If $v<0$, then $1/T \leq v \leq 0\iff 1/v \leq T \leq 0$. Therefore
+$F_V(v) = F_T(0) - F_T(1/v)$.
+
+If $v>0$, then $1/T \leq v$ when $T<0$ or $T\geq 1/v$. Hence,
+$F_V(v) = F_T(0) + 1- F_T(1/v)$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise} BH.8.15. We'll use this exercise in a lecture to show how the normal distribution originates from astronomy (or dart throwing).
+
+The notation is a bit clumsy for the angle coordinate. Write $\Theta$ for the rv and $\theta$ for its value.
+\begin{hint}
+a. See BH.8.1.9.
+
+b. If $(X,Y)$ are uniform on the disk, then the function $g(x,y)$ must be constant on this disk. Use an indicator to ensure that $X^2+Y^2\leq 1$. Finally, normalize.
+
+c. What are the densities of $X$ and $Y$ when they are $N(0,1)?$
+\end{hint}
+
+\begin{solution}
+a.  I remember this: $f_{X,Y}(x,y) \d x \d y = f_{R, \Theta}(r, \theta) \d r \d \theta$. From this,
+\begin{align*}
+f_{R, \Theta}(r, \theta)  = f_{X,Y}(x,y) \left| \frac{\partial (x,y)}{\partial(r, \theta)} \right|.
+\end{align*}
+Now, since $x=r\cos \theta$ and $y=r \sin \theta$,
+\begin{align*}
+\frac{\partial (x,y)}{\partial(r, \theta)} =
+  \begin{pmatrix}
+    \cos \theta & -r \sin \theta \\
+ \sin \theta & r \cos \theta
+  \end{pmatrix},
+\end{align*}
+which has determinant equal to $r$.
+It is given that $f_{X,Y}(x,y)=g(x^2+y^2) = g(r^2)$. Hence,
+\begin{align*}
+f_{R, \Theta}(r, \theta)  = f_{X,Y}(x,y) r = g(r^2)r,
+\end{align*}
+with $r\geq 0, \theta\in[0, 2\pi$.
+The RHS  does not  depend on $\theta$. Hence, $f_{\Theta}(\theta)$ must be a constant.
+
+b. Use the hint. Since $g$ is a constant, $f_{R, \Theta}(r, \theta) \propto r$. Thus,
+\begin{align*}
+  \int_{0}^{1}\int_{0}^{2\pi} r \d r \d \theta = 2\pi (1/2) r^{2}|_0^{1} = \pi.
+\end{align*}
+So, $1/\pi$ is the normalization constant.
+
+c. $f_{X,Y}(x,y) = \exp{-x^2}/\sqrt{2\pi}\exp{-y^{2}}/\sqrt{2\pi} = \exp{-(x^2+y^2)/2\pi} = \exp{-r^{2}}/2\pi$. Indeed, $f_{X,Y}(x,y)$ has the form $g(x^2+y^2)$. The rest is as in part b.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH. 8.18. Here we deal with division of rvs.
+\begin{hint} We can make a transform $T, U$ such that $T=X/Y$ and $U=X$  to use a 2D transformation. Compute $x$ and $y$ as functions of $t$ and $u$. Then the Jacobian.
+\end{hint}
+\begin{solution}
+I always start with this line: $f_{T,U}(t,u) \d t \d u = f_{X,Y}(x,y) \d x \d y$.
+Then,
+\begin{align*}
+\frac{\partial (t, u)}{\partial (x,y)} =
+  \begin{pmatrix}
+1/y & -x/y^{2} \\
+    1 & 0
+  \end{pmatrix} = x/y^{2}.
+\end{align*}
+We don't need to take absolute signs in the last expression because $X, Y$ are positive rvs.
+Next, $x=u$, $y=u/t$. With this,
+\begin{align*}
+  f_{T,U}(t,u) = f_{X,Y}(x,y) \left(\frac{\partial (t, u)}{\partial (x,y)}\right)^{-1} = f_{X,Y}(u,u/t) y^{2}/x = f_X(u)f_Y(u/t) u/t^{2}.
+\end{align*}
+
+b. Use part a.
+\begin{align*}
+f_{T} = \frac 1{t^2} \int_0^{\infty} x f_X(x) f_Y(x/t) \d x.
+\end{align*}
+Since $f_X$ and $f_Y$ are not given explicitly, we cannot make further progress.
+
+All and all, division of rvs is not so simple.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.8.23. We already analyzed how to handle addition, subtraction and division. It remains to deal with multiplication.
+\begin{hint}
+You might want to follow the approach of BH.8.18.
+\end{hint}
+\begin{solution}
+a.
+\begin{align*}
+f_{X,T}(x,t) &= f_{X,Y}(x,y) |\frac{\partial (x,y)}{\partial (x, t)}|, \\
+\frac{\partial (x,t)}{\partial (x,y)} &=
+  \begin{pmatrix}
+    1 & 0 \\
+y & x
+  \end{pmatrix} = x. \\
+&\implies \\
+f_{X,T}(x,t) &= f_{X,Y}(x,y)/x= f_{X,Y}(x,t/x)/x,
+\end{align*}
+since $y=t/x$. Finally, for $f_T$, marginalize $x$ out by integration.
+
+b. Just do the algebra. With part a. you have the answer, so you can check.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.8.31
+\begin{hint}
+Use the bank-post office Story 8.5.1 to see that $T$ and $W$ are independent.
+\end{hint}
+\end{exercise}
+
+
+\begin{exercise}
+BH.8.36.
+\begin{hint}
+a. See BH.8.5.1. The exponential is a special case of the gamma distribution. See also BH.8.34.c. $T_1/T_2$ is a function of $T_1/(T_1+T_2)$.
+
+b. This can be solved with a joint distribution function and integration over the event $\{T_1<T_2\}$. However, we can use Exercise BH.7.10 or BH.7.1.24.
+
+c. First she has to wait for the first server to become free. This is the minimum of the two exponentials.
+With $\P{T_1<T_2}$ server 1 is the first.
+What is the probability that the other server is empty first? Then, once she is at a server, what is her expected service time? The total time in the system is the time in queue plus the service time.
+\end{hint}
+\begin{solution}
+a. I did not attempt any smart tricks. Take as transform $u=s/t$ and $v=s+t$, where I associate $s$ to $T_{1}$ and $t$  to $T_2$. Then,
+\begin{align*}
+\frac{\partial (u,v)}{\partial (s,t)} &=
+  \begin{pmatrix}
+    1/t & -s/t^{2} \\
+1 & 1
+  \end{pmatrix} = \frac 1 t + \frac{s}{t^{2}} = \frac{t+s}{t^{2}} = \frac{v}{t^{2}}
+\end{align*}
+With a bit of algebra: $s=uv/(u+1)$ and $t=v/(u+1)$. Therefore the Jacobian becomes equal to $(u+1)^2/v$. Next,
+\begin{align*}
+  f_{U, V}(u,v) &= f_{T_1,T_2}(s,t) \frac{\partial (s,t)}{\partial (u,v)}
+  =  f_{T_1}(uv/(u+1) f_{T_2}(v/(u+1)) \frac{(u+1)^{2}}{v} \\
+  &=  \lambda^{2} \exp(-\lambda uv/(u+1) - \lambda v/(u+1)) \frac{(u+1)^{2}}{v} \\
+  &=  \lambda^{2} \exp(-\lambda v) \frac{(u+1)^{2}}{v}.
+\end{align*}
+This factors into one term with only $v$ and another with only $u$. Hence, $U$ and $V$ are independent.
+
+
+b. With the hint,
+\begin{align*}
+\P{T_1<T_2}
+&= \int_0^{\infty} \P{T_1< T_2\given T_1=s} f_{T_1}(s)\d s \\
+&= \int_0^{\infty} \P{s< T_2\given T_1=s} \lambda_1e^{-\lambda_1 s} \d s \\
+&= \lambda_{1} \int_0^{\infty} e^{-\lambda_{2} s} e^{-\lambda_1 s} \d s = \frac{\lambda_1}{\lambda_1+\lambda_2}.
+\end{align*}
+
+c. See the hint. Alice first has to wait for the first server to become free. The expected time in queue is $1/(\lambda_1+\lambda_2)$. If server 1 is the first, then Alice spends a  time $1/\lambda_1$ in service. Thus, the total time is
+\begin{align*}
+  \frac{1}{\lambda_1+\lambda_2} +
+  \frac{\lambda_1}{\lambda_1+\lambda_2} \frac{1}{\lambda_{1}} +
+  \frac{\lambda_2}{\lambda_1+\lambda_2} \frac{1}{\lambda_{2}}  =
+\frac{3}{\lambda_1+\lambda_{2}}.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.8.40. A nice question on the exam could be to take another prior, e.g., $p$ uniform on $[1/3, 2/3]$. How would that affect the solution?
+\begin{hint}
+Apply beta-binomial conjugacy.
+\end{hint}
+\begin{solution}
+Let us solve the question from first principles. At the end, I'll give the short solution based on Beta-Binomial conjugacy.
+
+Let $f(p)$ be our prior density (In the exercise it is taken to be uniform). Then
+\begin{align*}
+\P{p>r}=\int \1{p>r}f(p) \d p = \int_{r}^{1} f(p) \d p
+\end{align*}
+is our belief that $p>r$. For this exercise, we are interested in the relation $\P{p>r} \geq c$. For instance, suppose we take $c=0.95$, then we like to know which value for $r$ achieves that $\P{p>r} \geq c$?
+
+We can start with one trial, i.e., $n=1$. Then we analyze the case for $n=2$, and so on, and hope to see a pattern.  Here are the standard steps of Bayesian reasoning.
+\begin{enumerate}
+\item I want to know the density $f_1(p | N= 1)$, i.e, the density of $p$ after having seen one  successful test.  (Note here that I am careful about notation. We do $n=1$ trials, and then the number of successes is given by the random variable $N$.)
+\item Now I use Bayes' rule:
+   \begin{align*}
+    f_1(p| N=1) &= \frac{f_1(p, N=1)}{\P{N=1}} = \frac{f_1( N=1| p)}{\P{N=1}} f(p).
+   \end{align*}
+   Here $f(p)$ acts as the prior density on $p$.
+\item It is clear that $f_1(N=1|p) = p$, because  we know that  an item passes a test with probability $p$, when $p$ is given.
+\item Perhaps I don't need $\P{N=1}$ if I can guess it (though see below), but here it is just for completeness' sake.
+   \begin{align*}
+   \P{N=1} = \int f(N=1|p) f(p) \d p = \int_0^{1} p \d p = 1/2,
+   \end{align*}
+   because the prior $f(p) = \1{p\in [0,1]}$, i.e., uniform on $[0,1]$, i.e, it is $\Beta{1,1}$.
+\item With this, $f_1(p|N=1) = \frac{p}{1/2} \1{p\in[0,1]} = 2p  \1{p\in[0,1]}$.
+\item Thus, $\P{p>r\given N=1} = \int_{0}^1 \1{p>r} f_1(p |N=1)\d p = \int_{r}^1 2p\d p = 1-r^2$.
+\end{enumerate}
+Sometimes we are lucky and we don't have to compute the denominator in Bayes' formula. We did this earlier, but let's show again how this works.
+   \begin{align*}
+    f_1(p| N=1) &= \frac{f_1(p, N=1)}{\P{N=1}} \propto f_1( N=1| p)f(p) = p \1{0\leq p \leq 1}.
+   \end{align*}
+Now $f_1(p| N=1)$ is a PDF, hence must integrate to 1. Thus, $\int_{0}^{1} p \d p = 1/2$, must be the normalization constant by which we have to divide to turn $f_1$ into a real PDf. In this case we don't save any work, but sometimes this really helps, in particular when dealing with integrals with Beta distributed rvs.
+
+Now generalize to larger $n$, compute $f_2(p|N=2)$, then for $n=3$, and so on, until you see the pattern.
+
+We can also directly use the ideas of the book. Starting with a prior $\Beta{1,1}$, after $n$ `wins', the distribution becomes $\Beta{1+n, 1}$.  Then,
+\begin{align*}
+  \P{p>r} = \frac{\Gamma(n+2)}{\Gamma(n+1)\Gamma(1)}\int_r^1 p^n \d p = 1-r^{n+1}.
+   = (n+1) p^{n+1}|_r^{1} = 1-r^{n+1}.
+\end{align*}
+
+\end{solution}
+\end{exercise}
+
+\begin{exercise} BH.8.52. The concepts discussed here are useful to better understand how to generate exponential random numbers.
+\begin{hint}
+a.
+\begin{align*}
+\P{X_j\leq c} = \P{ \log U_{j} \geq -c} = \P{ U_{j} \geq e^{-c}} = \P{1-U_{j} \leq 1-e^{-c}}.
+\end{align*}
+What is the distribution of $1-U_{j}$?
+
+b. $\log \Pi_{j=1}^{n} U_{j} = \sum_{j=1}^n \log U_j = \sum_{j=1}^n (-X_{j})$.  But $-X_j\sim \Exp{1}$, hence the sum is just a sum of iid Exp rvs. What is the distribution of this sum?
+
+\end{hint}
+\begin{solution}
+a. By the  hint and  the fact that $U_j$ is uniform on $[0,1]$, so that $1-U_j$ is also uniform,  the last  equality of the hint implies  that
+$\P{ 1-U_{j} \leq 1- e^{-c}} = \P{ U_{j} \leq 1-e^{-c}} =  1-e^{-c}$.
+But then, $X_{j}\sim \Exp{1}$.
+
+b. The sum of $n$ iid exponentials is $\Gamm{n, \lambda}$. And so, if $S_n=\sum_i^n X_{i}$, then $\P{S_n\leq x} = \int_{0}^{x}f(y) \d y$, with $f(y)$ the gamma density with $n$ and $\lambda=1$.
+
+Just to test my skills, I used MGFs, because I know that the MGF of a sum of iid rvs is the product of the MGF of one them. Since $e^{\log u} = u$,
+\begin{align*}
+  \E{e^{-s \log U}} &= \int_{0}^1 e^{-s \log u}\d u = \int_{0}^{1} u^{-s}\d u.
+\end{align*}
+If $s\geq 1$ this does not converge (convince yourself that you understand this). With $s<1$,
+\begin{align*}
+  \E{e^{-s \log U}} &= \frac1 {-s+1} u^{-s+1}|_0^1 = \frac{1}{1-s}.
+\end{align*}
+Therefore,
+\begin{align*}
+  \E{e^{-s S_n}}
+  &=  \E{e^{-s \log U_1 -s \log U_2 - \cdots -s \log U_n}}
+  = \left(\E{e^{-s\log U}}\right)^n \\
+  &= \left(\frac{1}{1-s}\right)^{n},
+\end{align*}
+and this is the MGF of a $\Gamm{n, \lambda=1}$ rvs.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.8.54.  We tackle this also with simulation in an assignment.
+
+I find it easier to consider $Y=pX$, rather than $pX/q$. Note that since $q=1-p\to 1$ as $p\to 0$, the factor $1/q$ is immaterial for the final result.
+
+Read my solution too, as I develop some nice ideas in passing.
+
+\begin{hint}
+Use BH.4.3.9. Then, start with a geometic rv, then extend to a negative binomial rv.
+\end{hint}
+\begin{solution}
+\begin{align*}
+M_{Y}(s) =\E{\exp{s Y}} = p \sum_{i=0}^{\infty} e^{s p i} q^{i} = p/(1-qe^{sp}).
+\end{align*}
+Now, use that $e^{s p)} \approx 1 + s p$ for $p\ll 1$. (This is easier than using l' Hopital's rule as BH do in their solution). Hence, the denominator becomes $\approx 1-(1-p)(1+sp) = p(1-s) - sp^{2} \approx p(1-s)$ when $p\ll 1$ Hence,
+\begin{align*}
+M_{Y}(s) \approx p/(p(1-s) =  1/(1-s).
+\end{align*}
+In the limit $p\to 0$ the LHS converges to the RHS, which is the MGF of an exponential rv. For the rest, follow the solution of BH.
+
+Here is another line of attack. Let us first use probability theory to find out what is $\sum_{i=0}^{\infty} q^{1}$ for some $|q|<1$. Take $X\sim\Geo{p}$, so that $X$ corresponds to the number of failures (tails say) until we see a success (heads say). So, $X$ corresponds to the number of tails until we see a heads. Now if we keep on throwing, then we know that eventually a heads will appear. Therefore $p + pq +pq^2 + \cdots = 1$, that, is $p\sum_i^{\infty} q^{i}=1$. But this implies that $\sum_{i=0}^{\infty}q^i = 1/ p = 1/(1-q)$.
+
+By similar reasoning, if we keep on throwing the coin until we see $r$ heads then we know that $p^r \sum_{i=0}^{\infty} {r+i-1 \choose r} q^{i} = 1$.  Therefore,
+\begin{align*}
+\sum_{i=0}^{\infty} {r+i-1 \choose r} q^{i} =  \frac{1}{p^{2}}= \frac{1}{(1-q)^{r}}.
+\end{align*}
+With this insight, for $X\sim\NBin{p,n}$
+\begin{align*}
+  M_X(s) &= p^r \sum_{i=0}^{\infty} {r+i-1 \choose r} q^{i} e^{si}
+ = p^r \sum_{i=0}^{\infty} {r+i-1 \choose r} (e^{s}q)^{i} \\
+  &= \frac{p^r}{(1-qe^{s})^{r}} \approx \left(\frac{p}{p(1-s)}\right)^{r},
+\end{align*}
+where we use again Taylor's expansion for $p\ll 1$.x
+\end{solution}
+\end{exercise}
+
+
+
+
+\section{Challenge: Ping pong balls ina Beluga}
+
+This challenge is a continuation of the simulation we did for the Beluga case, and we discuss some ways to check whether $\V {N} \approx \V V \V v$ holds in general, and then we try to find a better approximation. We chopped up the challenge into many exercises, to help you organize the ideas.
+
+
+Recall that earlier we have been a bit sloppy about the units, measuring the volumes of the airplane in $\m^{3}$ and a ping pong ball in $\cm^{3}$, so actually $N$ is in millions of ping pong balls.
+Note that using different units can easily lead to  confusion; as a take-away , choose one unit.
+
+One way to check the correctness of $\V N \approx \V V \V v$ is to change the scale. In fact, memorize that changing scale is an easy way to check laws.
+
+\begin{exercise}
+Suppose we instead measure the size of a ping pong ball in meters and the size of the airplane in hectometers.
+Explain that $N$ is still in millions of ping pong balls.
+What happens to $\V{N}$ and what happens to $\V V \V v$ (theoretically)?
+\end{exercise}
+
+
+Another way to check a statement is to consider some extreme cases.
+
+\begin{exercise} Suppose that we would know the size of a ping pong ball very accurately, i.e.  we consider the extreme case where $\V v \rightarrow 0$. Explain that the approximation is not a good approximation in this limit.
+\end{exercise}
+
+
+\begin{exercise}
+Which of these two checks convinces you most that something is wrong with this approximation, and why?
+\end{exercise}
+
+We now turn to the task of trying to find a good approximation.
+
+\begin{exercise} Assume that $X$ and $Y$ are independent. Show that
+\begin{equation*}
+\V {X Y} = \V {X} \V {Y} + \V{X} \E {Y}^2 + \E {X}^2 \V{Y}.
+\end{equation*}
+\end{exercise}
+
+\begin{exercise} \label{ex:beluga5}
+Assume in addition that we know at least one of $X$ and $Y$ quite precisely. Argue that the following is then a good approximation:
+\begin{equation*}
+\V {X Y} \approx \V{X} \E {Y}^2 + \E {X}^2 \V{Y}.
+\end{equation*}
+\end{exercise}
+
+
+So far we have only considered the variance of a product, but we would like to know the variance of a ratio.
+For this we can use Taylor expansions to  make accurate approximations.
+
+\begin{exercise}  \label{ex:beluga6}
+Find the first order Taylor expansion of $\frac{1}{Z}$ around $a=  \E {Z}$. By taking the expectation and the variance of this expansion, show that
+\begin{align*}
+\E{\frac{1}{Z}} &\approx \frac{1}{\E{Z}}, & \V{\frac{1}{Z}} &\approx \frac{\V{Z}}{\E{Z}^4}.
+\end{align*}
+\end{exercise}
+
+\begin{exercise}
+Combine all of the above to derive the following approximation for the variance of the ratio of two independent random variables $X$ and $Z$:
+\begin{equation*}
+\V {\frac{X}{Z}} \approx \frac{\V{X}}{\E{Z}^2} + \E {X}^2\frac{\V{Z}}{\E{Z}^4}.
+\end{equation*}
+\end{exercise}
+
+
+\begin{exercise}
+Check this approximation in the ways of the first two exercises.
+\end{exercise}
+
+
+
+After doing all this work, we would of course like to know how well this approximation does.
+When comparing the approximation to the sample standard deviation found in~\cref{ex:2a} for \texttt{num=500}, the result may be a bit disappointing.
+However, this is just because the sample standard deviation is also an estimate of the actual standard deviation of $N$, so by chance the result may be closer to $\V V \V v$ than to our new approximation.
+
+ In Chapter 10, you will learn something about the distribution of the sample variance. For now, just increase  \texttt{num}. We know this decreases the variance of the sample mean and it also decreases the variance of the sample variance, so we get a more accurate estimate.
+
+\begin{exercise} Use the result of the previous exercise to compute an approximation for $\V {N}  = \V {V/v}$. Also use the code with a (much) higher value of \texttt{num}, to show that the approximation $\V {N}  \approx \V V \V v$ is likely to be worse, even in the setting of~\cref{ex:2} where it was quite good.
+\end{exercise}
+
+The following two exercises are really optional, but I found them very neat and insightful.
+
+
+
+\begin{exercise}
+Recall that for a non-negative random variable $X$ with finite variance, we define the squared coefficient of variation as $ \mathrm{SCV}(X) = \V {X} /\E {X}^2$.
+Using the SCV, show that the approximations of~\cref{ex:beluga5} and~\cref{ex:beluga6} can be rewritten in the following neat way:
+\begin{align*}
+\mathrm{SCV}(XY) &\approx \mathrm{SCV}(X) + \mathrm{SCV}(Y). \\
+\mathrm{SCV}\left(1/Z \right) &\approx \mathrm{SCV}(Z). \\
+\end{align*}
+\end{exercise}
+
+
+In BH.10, you will learn Jensen's inequality, which implies that $\E{\frac{1}{Z}} \geq \frac{1}{\E{Z}}$ for all positive random variables $Z$. In the following exercise, we reflect on this by finding a more accurate approximation based on the second order Taylor expansion.
+
+\begin{exercise} Find the second order Taylor expansion of $\frac{1}{Z}$ around $a=  \E {Z}$.
+By taking the expectation, show that
+\begin{align*}
+\E{\frac{1}{Z}} \approx \frac{1}{\E{Z}} + \frac{2\V{Z}}{\E{Z}^3}.
+\end{align*}
+Note that this is always at least $\dfrac{1}{\E{Z}}$.
+\end{exercise}
+
+
+\section{Challenge: Benford's law}
+
+
+
+In this exercise, we discuss Benford's law. Recall that the first step towards this law was taken in Lecture 5, Exercise 3. In this exercise, we showed that if $X,Y$ are iid uniform on $[1, 10)$, that then the density of $Z = XY$ is given by $$f_Z(z) = \frac{\log(\min\{10,z\}) - \log(\max\{1, z/10\})}{81} I_{1 \leq z \leq 100}.$$
+Note that $\log$ denotes the natural logarithm. \\
+Benford's law is a statement about the distribution of the first digit of the product of sufficiently many variables that are iid uniform on $[1, 10)$. We first consider the first digit of the product of two such variables, i.e. the first digit of $Z$.
+
+
+\begin{exercise}
+Let $K$ be the first digit of $Z$. Show that the PMF of $K$ is given by
+$$P(K = k)  = \frac{9k\log(k) - 9(k+1)\log(k+1) + 9+ 10 \log(10)}{81}$$
+for $k \in \{1, 2, \ldots, 9\}$.
+
+\end{exercise}
+
+
+\begin{exercise}
+Check that $\sum_{k=1}^9 P(K = k) = 1$. This can be done nicely by recognizing a \textit{telescoping sum}: many terms cancel because they appear once with a minus and once with a plus.
+\end{exercise}
+
+
+Another way to derive the first digit of $Z$ is to first divide $Z$ by 10 if $Z \geq 10$. This yields a random variable $W$ with support $[1, 10)$. Clearly, the division doesn't affect the first digit.  The next exercise asks to derive the resulting density. This can be a bit tricky; you should check your answer by verifying that the distribution of the first digit of $W$ matches the distribution of the first digit of $Z$.
+
+\begin{exercise}
+Let $W = Z$ if $1 \leq Z < 10$ and $W = \tfrac{Z}{10}$ if $10 \leq Z < 100$. Derive the density of $W$.
+\end{exercise}
+
+
+We now turn to the product of more than two (independent) random variables. It would be very tedious to do this analytically, so we will instead use some code. However, to do this we have to approximate the continuous uniform variable by a discrete random variable. We use the discrete uniform distribution on $\{1+ 0.5 \cdot \frac{9}{s}, 1 + 1.5 \cdot \frac{9}{s}, 1 + 2.5 \cdot \frac{9}{s}, \ldots, 1 + (s-0.5) \cdot \frac{9}{s}\}$; in total this set has $s$ elements. However, a product of two elements from this set may not again be an element of this set. To solve this, we identify all elements of the interval $\left(1+ k \cdot \frac{9}{s}, 1+ (k+1)\cdot \frac{9}{s}\right)$ with $1+ (k+0.5)\cdot \frac{9}{s}$. We now use a loop to approximate the distribution of the product of $p+1$ random variables by looking at  all possible values of the product of $p$ random variables and one additional uniformly distributed random variable. Note that in the code, $s$ is called \texttt{steps} and $p$ is  called \verb|p_idx|.
+
+Executing the code may take a while. If it takes more than 1 minute, you may decrease \texttt{steps}, but please do note that you did so.
+
+\begin{minted}[]{python}
+import math
+
+steps = 900
+products = 15
+p_unif = [1.0/steps] * steps
+p_mat = [p_unif]
+
+for p_idx in range(1, products):
+    p_vec = [0] * steps
+        for s1 in range(steps):
+            for s2 in range(steps):
+                product = (1 + (s1 + 0.5)*9/steps) * (1 + (s2 + 0.5)*9/steps)
+                prod_probability = p_mat[p_idx - 1][s1] * 1/steps
+
+                if product > 10:
+                    product = product/10
+
+                prod_idx = math.floor((product-1)/9 * steps)
+                p_vec[prod_idx] += prod_probability
+
+    p_mat.append(p_vec)
+
+
+p_digits = []
+for p_idx in range(products):
+    vec = []
+    for digit in range(1, 10):
+        pd = sum(p_mat[p_idx][((digit-1)*steps//9):(digit*steps//9)])
+        vec.append(round(pd, 6))
+    p_digits.append(vec)
+
+print(p_digits)
+\end{minted}
+
+
+\begin{minted}[]{R}
+steps <- 900
+products <- 15
+p_unif <- rep(1/steps, steps)
+p_mat <- matrix(0, nrow = steps, ncol = products)
+p_mat[, 1] <- p_unif
+
+for (p_idx in 2:products) {
+  p_vec <- rep(0, steps)
+  for (s1 in 1:steps) {
+    for (s2 in 1:steps) {
+      product <- (1 + (s1 - 0.5)*9/steps) * (1 + (s2 - 0.5)*9/steps)
+      prod_probability <- p_mat[s1, p_idx - 1] *  1/steps
+
+      if (product > 10) {
+        product <- product/10
+      }
+
+      prod_idx <- ceiling((product-1)/9 * steps)
+      p_vec[prod_idx] <- p_vec[prod_idx] + prod_probability
+    }
+  }
+  p_mat[, p_idx] = p_vec
+}
+
+p_digits <- matrix(0, nrow = 9, ncol = products)
+for (p_idx in 1:products) {
+  for (digit in 1:9) {
+    pd = sum(p_mat[((digit-1)*(steps/9)+1):(digit*(steps/9)), p_idx])
+    p_digits[digit, p_idx] = round(pd, 6)
+  }
+}
+p_digits
+\end{minted}
+
+\vspace{5pt}
+
+\begin{exercise}
+Explain line P.13 (R.12) of the code.
+\end{exercise}
+
+\begin{exercise}
+Briefly comment on the results for $p=2$ compared the exact result derived in the first exercise. Why is it important to make this comparison?
+\end{exercise}
+
+When looking at the results for larger $p$, it seems that the probabilities converge. The limit random variable $B$ then satisfies the property that the first digit of $B$ and the first digit of $BU$ (where $U \sim \Unif{1,10}$) are identically distributed.  Proving this is quite challenging (even for the challenge). In addition, we first need to know what the distribution of $B$ is.
+
+To guess the  distribution of the first digit of $B$, we look at the results of our code and try some transformations to see if this yields familiar numbers. It turns out that the first digit $M$ of $B$ has the following distribution:
+\begin{equation*}
+P(M=k) = \log_{10}\left(\frac{k+1}{k}\right),
+\end{equation*}
+for $k \in \{1,2,\ldots, 9\}$.
+
+\begin{exercise}
+Briefly comment on these exact values of $P(M=k)$ compared to the values for $p=15$ that result from the code. Give two reasons why the code results are not exact. Which reason do you think is the most important?
+\end{exercise}
+
+\begin{exercise}
+Check that $\sum_{k=1}^9 P(M = k) = 1$. You can again use a telescoping sum.
+\end{exercise}
+
+
+Besides the theoretical aspects covered in this challenge, Benford's law states that the first digit of numbers of naturally occurring sets that span several orders of magnitude, such as  vote counts by county (or municipality), transaction sizes, etc., approximately follow this distribution. Initially this was just seen as an interesting curiosity of no practical value, but recently it has been used in fraud detection. If you're interested, you might check out this YouTube video by Numberphile: \url{https://www.youtube.com/watch?v=XXjlR2OK1kM&ab_channel=Numberphile}
+
+
+\input{trailer.tex}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "study-guide.tex"
+%%% End:

@@ -1,0 +1,275 @@
+\documentclass[lectures]{subfiles}
+\begin{document}
+
+\section{Lecture 11}
+\label{sec:lecture-11}
+
+% Main topics:
+% \begin{enumerate}
+% \item Conditional expectation
+% \item Adam's and Eve's law.
+% \end{enumerate}
+% \clearpage
+
+
+\begin{exercise}
+As a continuation of BH.9.2.4, we now ask you to use Eve's law to compute $\V Y$, the variance of the second break point.
+\begin{solution}
+Recall that $\V X = 1/12$. More generally, if the stick has length $l$, then $\V X = l^{2}/12$. With this idea and using the solution of BH.9.2.4,
+\begin{align}
+\E{Y\given X=x} &= x/2,\\
+\V{Y\given X=x}
+&= \E{Y^{2}\given X=x} - (\E{Y\given X=x})^{2} \\
+&= \frac{1}{x}\int_{0}^{x} y^{2} \d y - \left(\frac1x\int_{0}^{x} y \d y\right)^{2}  = x^{3}/3x - (x^{2}/2x)^{2} = x^{2}/12\\
+\intertext{Replacing $x$ by $X$:}
+\E{Y\given X} &= X/2,\\
+\V{Y\given X} &= X^{2}/12, \\
+\intertext{Adam's law:}
+\E{Y\given X} &= X/2 \implies \E{Y} = \E{\E{Y\given X}} = \E{X/2} = 1/4.
+\intertext{Eve's law:}
+\V Y &= \E{\V{Y\given X}} + \V{\E{Y\given X}} \\
+\V{Y\given X} &= X^{2}/12 \implies \E{\V{Y\given X}} = \E{X^2}/12 = \frac{1}{12} \int_0^1x^2 \d x = \frac{1}{12\cdot 3}\\
+\E{Y\given X} &= X/2 \implies \V{\E{Y\given X}} = \V{X/2} = \frac{1}{4} \frac{1}{12}, \\
+\V Y &= 1/12 (1/3 + 1/4) = 7/144.
+\end{align}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+A server (e.g., a machine, a mechanic, a doctor) spends a random amount $T$ on a job.
+While the server works on the job, it sometimes gets interrupted to do other tasks $\{R_{i}\}$.
+Such tasks can be failures of the machine, and they need to be repaired before the machine can continue working again.
+(In the case of a mechanic, interruptions occur when the mechanic has to check some other machine or help other mechanics.)
+It is clear that such interruptions can only occur when the server is working.
+Assume that the interruptions arrive according to a Poisson process with rate $\lambda$, i.e., the number of failures $N| T \sim\Pois{\lambda T}$.
+The interruptions $\{R_{i}\}$ are independent of $T$ and form an iid sequence with common mean $\E R$ and variance $\V R$.
+(Typically, we get estimates for $\E T$ and $\V T$ from measurements.)
+
+Use Adam and Eve's laws to express the expectation and variance of the total time $S$ to complete a job in terms of $\E T$ and $\V R$.
+\begin{solution}
+
+Below we need some properties of the Poisson distribution.
+\begin{align}
+\E{N(T)} &= \E{\E{N(T)\given T}}\\
+\E{\E{N(T)\given T=t}}&= \E{N(t)} = \lambda t \\
+\E{\E{N(T)\given T}}&= \lambda T \\
+\E{N(T)} &= \E{\E{N(T)\given T}} = \E{\lambda T} = \lambda \E T\\
+\V{N(t)} &= \lambda t
+% \V N &= \E{\V{N\given T}} + \V{\E{N\given T}} \\
+% \V{N\given T} &= \lambda T  \implies \E{\V{N\given T}} = \lambda \E{T} \\
+% \E{N\given T} &= \lambda T \implies \V{\E{N\given T}} = \V{\lambda T} = \lambda^{2} \V T \\
+% \V N &= \lambda \E T + \lambda^{2} \V T.
+\end{align}
+
+The  duration $S$ of a job  is its own service time $T$ plus all interruptions, hence $S = T+ \sum_{i=1}^{N(T)} R_{i}$, hence
+\begin{align}
+\E S &= \E{\E{S\given T}}   = \E{\E{T + \sum_{i=1}^{N(T)} R_{i}\given T}} \\
+\E{S\given T = t} &= \E{T + \sum_{i=1}^{N(T)} R_{i}\given T=t} = \E{t + \sum_{i=1}^{N(t)} R_{i}} = t + \E{\sum_{i=1}^{N(t)} R_{i}} \\
+\E{\sum_{i=1}^{N(t)} R_{i}}  &= \E{\E{\sum_{i=1}^{N(t)} R_{i}\given N(t)}}\\
+\E{\sum_{i=1}^{N(t)} R_{i}\given N(t)= n} &= \E{\sum_{i=1}^{n} R_{i}} = n \E R  \implies \E{\sum_{i=1}^{N(t)} R_{i}\given N(t)} = N(t) \E R \\
+\E{\sum_{i=1}^{N(t)} R_{i}} &= \E{N(t) \E R} = \E R \E{N(t)} = \lambda t \E R\\
+\E{S \given T=t} &= t + \lambda \E R t = (1+\lambda \E R) t \\
+\E{S \given T} &= (1+\lambda \E R) T \\
+\E S  &= \E{(1 + \lambda \E R )T} = (1+\lambda \E R) \E T.
+\end{align}
+(When rereading this exercise, explain per step which assumption we use to get to the next step.)
+
+For the variance,
+\begin{align}
+\V S &= \E{\V{S\given T}} + \V{\E{S\given T}}.
+\end{align}
+From the above we immediately have
+\begin{align}
+\V{\E{S\given T}} &= \V{(1+\lambda \E R) T} = (1+\lambda\E R)^{2} \V T.
+\end{align}
+For $\E{\V{S\given T}}$ we go step  by step.
+\begin{align}
+\V{S\given T=t} &= \V{T + \sum_{i=1}^{N(T)} R_{i}\given T=t} = \V{\sum_{i=1}^{N(t)} R_{i}},
+\end{align}
+as $\V t = 0$. But $N(t)$ is a Poisson rv. So we need to use Eve's law again, but now condition on $N(t)$.
+\begin{align}
+\V{\sum_{i=1}^{N(t)} R_{i}} &= \E{\V{\sum_{i=1}^{N(t)} R_{i}\given N(t)}} + \V{\E{\sum_{i=1}^{N(t)} R_{i}\given N(t)}}.
+\end{align}
+For the middle part:
+\begin{align}
+\V{\sum_{i=1}^{N(t)} R_{i}\given N(t)=n} &= \V{\sum_{i=1}^{n} R_{i}}  = n \V R \\
+\V{\sum_{i=1}^{N(t)} R_{i}\given N(t)} &= N(t) \V R \\
+\E{\V{\sum_{i=1}^{N(t)} R_{i}\given N(t)}} &= \E{N(t) \V R}=  \lambda t \V R.
+\end{align}
+For the right part:
+\begin{align}
+\E{\sum_{i=1}^{N(t)} R_{i}\given N(t)=n} &= n \E R\\
+\E{\sum_{i=1}^{N(t)} R_{i}\given N(t)} &= N(t) \E R\\
+\V{\E{\sum_{i=1}^{N(t)} R_{i}\given N(t)}} &= \V{N(t)\E R} = (\E R)^{2} \V{N(t)} = (\E R)^{2} \lambda t.
+\end{align}
+And so,
+\begin{align}
+\V{\sum_{i=1}^{N(t)} R_{i}} &= \lambda t \V R  + \lambda t (\E R)^{2}  = \lambda t \E{R^{2}}.
+\end{align}
+Putting the things together:
+\begin{align}
+\V{S\given T=t} &= \V{\sum_{i=1}^{N(t)} R_{i}} = \lambda t \E{R^{2}}\\
+\V{S\given T} &= \lambda T \E{R^{2}}\\
+\E{\V{S\given T}} &= \lambda \E{R^{2}} \E T.
+\end{align}
+So, finally,
+\begin{align}
+\V S &= \lambda \E{R^{2}} \E T + (1+\lambda\E R)^{2} \V T.
+\end{align}
+
+Special cases for you to sort out:
+\begin{enumerate}
+\item  $R$ and $T$ constant. Why is still $\V S > 0$?
+\item Take $R$ and $T$ exponential; then the expressions for $\V T$ etc are still easy to manage.
+\end{enumerate}
+\end{solution}
+\end{exercise}
+
+
+This and the next exercise illustrate how to think about conditional expectation when the rv on which we condition is discrete.
+
+\begin{exercise}
+We have a standard fair die and we paint red the sides with $1, 2, 3$ and blue the other sides.
+Let $X$ be the color after a throw and $Y$ the number.
+Use the definitions of conditional expectation, conditional variance and Adam's and Eve's law to compute $\E X$ and $\V X$.
+Compare that to the results you would obtain from using the standard methods; you should get the same result.
+
+BTW, it's easy to make some variations on this exercise by painting other combinations of sides, e.g., only 1 and 2 are red.
+\begin{solution}
+The first step is easy:
+\begin{align}
+\E{Y\given X=r} &= \sum_{y} y \P{Y=y\given X=r} = \sum_{y} y \frac{\P{Y=y,  X=r}}{\P{X=r}} = \frac{(1+2+3)/6}{1/2}  = 2, \\
+\E{Y\given X=b} &= \frac{(4 + 5+ 6)/6}{1/2}  = 5.
+\end{align}
+
+Recall that in the stick breaking exercise, we first computed $\E{Y\given X = x} = x/2$, and then we replaced $x$ by $X$ to get $\E{Y\given X} = X/2$. In the present case (with the die), where is the $x$ at the RHS? In other words, how to turn the above into a function $g(x)$ so that we can replace $x$ by $X$ to get a rv?
+
+
+Here is the solution. Define $g$ as
+\begin{equation}
+  \label{eq:111}
+  g(x) =
+  \begin{cases}
+    \E{Y\given X=r}, & \text{if } x = r \\
+    \E{Y\given X=b}, & \text{if } x = b.
+  \end{cases}
+\end{equation}
+But this is equal to
+\begin{equation}
+  \label{eq:112}
+  g(x) = \E{Y\given X=r} \1{x=r} + \E{Y\given X=b} \1{x=b}.
+\end{equation}
+
+With this insight:
+\begin{align*}
+\E{Y\given x} &=  g(x) = \E{Y\given X=r} \1{x=r} + \E{Y\given X=b} \1{x=b}, \\
+\E{Y\given X} &=  g(X) = \E{Y\given X=r} \1{X=r} + \E{Y\given X=b} \1{X=b}.
+\end{align*}
+Here, the indicators are the rvs!
+
+And now,
+\begin{align}
+\E Y &= \E{\E{Y\given X}} = \E{g(X)} \\
+&=\E{\E{Y\given X=r} \1{X=r} + \E{Y\given X=b} \1{X=b}}\\
+&=\E{\E{Y\given X=r} \1{X=r}} + \E{\E{Y\given X=b} \1{X=b}}\\
+&=\E{Y\given X=r} \E{\1{X=r}} + \E{Y\given X=b} \E{\1{X=b}}\\
+&=\E{Y\given X=r} \P{X=r} + \E{Y\given X=b} \P{X=b}\\
+&=2 \frac{1}{2}+ 5 \frac{1}{2}.
+\end{align}
+
+In view of this, let's consider LOTE again. Observing that
+\begin{align}
+A_{1} = \{s \in S : \textrm{paint of $s$ is red}\} = \{1, 2,3 \} \\
+A_{2} = \{s \in S : \textrm{paint of $s$ is blue}\} = \{4, 5, 6\},
+\end{align}
+we have
+\begin{align}
+  \E{Y\given X=r} &= \E{Y\given A_{1}}, \\
+  \E{Y\given X=b} &= \E{Y\given A_{2}} \\
+  g(x) &= \E{Y\given X=r} \1{x=r} + \E{Y\given X=b} \1{x=b} \\
+   &= \E{Y\given A_{1}} \1{x\in A_{1}} + \E{Y\given A_{2}} \1{x=A_{2}} \\
+ &= \sum_{i=1,2}  \E{Y\given A_{i}} \1{x\in A_{i}}
+\end{align}
+The last is simple to generalize!
+\begin{align}
+  g(x)  &= \sum_{i}  \E{Y\given A_{i}} \1{x\in A_{i}}  \\
+  g(X)  &= \sum_{i}  \E{Y\given A_{i}} \1{X\in A_{i}}.
+\end{align}
+And now we define $\E{Y\given X} = g(X)$. Remember these general equations!
+
+
+Now observe that Adam's law and LOTE are the same for discrete rvs:
+\begin{align*}
+\E{Y}
+&= \E{\E{Y\given X}} \\
+&= \E{g(X)} \\
+&=\E{\sum_{i} \E{Y\given A_{i}} \1{X\in A_{i}}} \\
+&=\sum_{i}  \E{Y\given A_{i}} \E{\1{X\in A_{i}}} \\
+&=\sum_{i}  \E{Y\given A_{i}} \P{A_{i}}.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+
+
+
+
+\begin{exercise}
+We have a continuous r.v. $X$ with PDF
+\begin{align}
+  \label{eq:1123}
+  f(x) =
+  \begin{cases}
+    1/2, & 0\leq x < 1, \\
+    1/4, & 1\leq x \leq 3,
+  \end{cases}
+\end{align}
+and $0$ elsewhere. Compute $\E X$ and $\V X$.
+
+Then define the r.v.
+$Y$ such that $Y=\1{X< 1} + 2\1{X\geq 1}$.
+Explain what information you obtain about $X$ when somebody tells that $Y=1$, or that $Y=2$.
+Use conditioning on $Y$ and Adam's and Eve's laws to recompute $\E X$ and $\V X$.
+
+Again, with this exercise we can check whether we are applying all concepts in the correct way.
+\begin{solution}
+
+Using the properties of the uniform distribution,
+\begin{align}
+\E X &= \frac{1}{2} \int_0^1 x \d x + \frac{1}{4} \int_1^3 x \d x = \frac{1}{4} + \frac{9-1}{8} = \frac{5}{4} \\
+\E{X^2} &=  \frac{1}{2}\int_0^{1} x^{2}\d x + \frac{1}{4}\int_1^{3} x^{2}\d x = \frac{1}{6} + \frac{27-1}{12} = \frac{7}{3} \\
+\V X &=  \frac{7}{3} - \frac{25}{16} = \frac{37}{48}.
+\end{align}
+
+$Y=1 \implies 0\leq X< 1$,  $Y=2 \implies 2\leq X \leq 4$.
+
+\begin{align}
+\E{X\given Y=1} &= 1/2, \\
+\E{X\given Y=2} &= 2, \\
+g(y) &= \E{X\given Y=1}\1{y=1} + \E{X\given Y=2}\1{y=2}\\
+g(Y) &= \E{X \given Y} = \frac{1}{2} \1{Y=1} + 2 \1{Y=2},\\
+\E{X} &= \E{\E{X\given Y}} = \E{g(Y)} \\
+&=\E{\frac{1}{2} \1{Y=1} + 2 \1{Y=2}} \\
+&= \frac{1}{2} \E{\1{Y=1}} + 2 \E{\1{Y=2}} \\
+&= \frac{1}{2} \P{Y=1} + 2 \P{Y=2} \\
+\P{Y=1} &= \E{\1{Y=1}} = \E{\1{X<1}} = \frac{1}{2} \\
+\P{Y=2} &= \E{\1{Y=2}} = \E{\1{X\geq 1}} = \frac{1}{2} \\
+\E X &= \frac{1}{2} \frac{1}{2} + 2 \frac{1}{2} = \frac{5}{4}.
+\end{align}
+
+
+\begin{align}
+\V{X\given Y} &= \V{X\given Y=1}\1{Y=1} + \V{X\given Y=2}\1{Y=2} \\
+&= \frac{1}{12} \1{Y=1} + \frac{4}{12} \1{Y=2}, \\
+\E{\V{X\given Y}} &= \frac{1}{12} \frac{1}{2} + \frac{4}{12} \frac{1}{2} = \frac{5}{24}, \\
+\V{\E{X \given Y}} &= \frac{1}{4}\V{\1{Y=1}} + 4\V{\1{Y=2}} + 2\cov{\frac{1}{2}\1{Y=1}, 2\1{Y=2}} \\
+\V{\1{Y=1}} &= \V{\1{Y=2}}  = \frac{1}{4}, \\
+2\cov{\frac{1}{2}\1{Y=1}, 2\1{Y=2}} &= 2\cov{\1{Y=1}, \1{Y=2}}=-2\E{\1{Y=1}}\E{\1{Y=2}} = -\frac{1}{2}\\
+\V{\E{X \given Y}} &= \frac{1}{16} + 1 - \frac{1}{2} = \frac{9}{16}\\
+\V X &= \E{\V{X\given Y}} + \V{\E{X\given Y}} = \frac{5}{24} + \frac{9}{16}.
+\end{align}
+I forgot the covariance at first :-(
+\end{solution}
+\end{exercise}
+\end{document}

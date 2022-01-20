@@ -1,0 +1,9 @@
+#+title:   Probability distributions, lecture slides
+#+SUBTITLE: EBP038A05
+#+author: Nicky D. van Foreest
+#+date: {{{time(%Y-%m-%d)}}}
+
+* Files overview
+1. ~lectures-questions.pdf~ :  Questions (and hints) to be discussed in the lectures.
+1. ~lectures-solutions.tex~ :  Questions, hints and solutions
+2. ~lectures-demo.tex~ :  Only handy when you like to make a file for a lecture (hence not so useful for students). It changes the page size, orientation, and the font size so that it can used as slides.

@@ -1,0 +1,57 @@
+\documentclass[lectures]{subfiles}
+\begin{document}
+
+\section{Lecture 14}
+
+
+We shoot an arrow at a target. We aim at the center of the target. Our aim is not perfect though. We model our horizontal and vertical deviation from the target (in inches) by two independent standard normal random variables $X$ and $Y$, respectively. (So $X<0$ if we shoot to far to the left, for example.)
+
+\begin{exercise}
+Compute the density function of the (Euclidean) distance from our arrow to the center of the target. Compare the result to the pdf of a standard normal random variable.
+\begin{solution}
+Let $W$ denote the distance in question. That is, $W = \| (X,Y) \|_2 = \sqrt{X^2 + Y^2}$. Write $V = X^2 + Y^2$. Then, $V$ has a $\chi^2_2$ distribution and $W = \sqrt{V}$. Note that for $v \geq 0$, the function $w = g(v) = \sqrt{v}$ is invertible, with $v = g^{-1}(w) = w^2$. Hence, using the pdf of a $\chi^2_2$ distribution and the change of variables technique from chapter 8, we obtain
+\begin{align}
+    f_W(w) &=  |\frac{dv}{dw}| f_V(v) \\
+    &= 2w f_V(w^2) \\
+    &= 2w \frac{1}{\sqrt{2\pi (w^2)}} e^{-(w^2)/2} \\
+    &= \frac{2}{\sqrt{2\pi}} e^{-(w^2)/2},
+\end{align}
+for $w \geq 0$. Observe that this looks a lot like the pdf of a standard normal distribution. In fact, it is twice the standard normal pdf, but on half of its domain.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+What is the expected distance from the center of the target?
+\begin{solution}
+We have
+\begin{align}
+    \E{W} &= \int_{0}^{\infty} w \frac{2}{\sqrt{2\pi}} e^{-(w^2)/2} dw \\
+    &= \left[ - \frac{2}{\sqrt{2\pi}} e^{-(w^2)/2} \right]_0^\infty \\
+    &= 0 + \frac{2}{\sqrt{2\pi}}.
+\end{align}
+So $\E{W} = \frac{2}{\sqrt{2\pi}}$.
+\end{solution}
+\end{exercise}
+
+Last week I stepped in dog poo two days in a row. This annoyed me and I decided that if the same happens to me again more than 5 times in the next 50 days, I will move to a neighbourhood with a lower dog population density.
+
+\begin{exercise}
+Suppose that the probability I step in dog poo on a given day is 5\%. Moreover, assume that the days are independent. Use a central limit theorem-based approximation to approximate the probability that I will decide to move as a result of the dog poo situation. (You may ignore the continuity correction.)
+\begin{solution}
+Define $Y_n$ as the number of times I step in dog poo in $n$ subsequent days. Then, $Y_n \sim \text{Bin}(n, p)$, where $n=50$ and $p = 0.05$. By the Normal approximation of the Binomial distribution, we have approximately
+\begin{align}
+    Y_n \sim \mathcal{N}(np, np(1-p)).
+\end{align}
+Let $Z \sim \mathcal{N}(0,1)$. Then, for the probability that I will move we get
+\begin{align}
+    \P{Y_n > 5} &= \P{\frac{Y_n - np}{\sqrt{np(1-p)}} > \frac{5 - np}{\sqrt{np(1-p)}} } \\
+    &\approx \P{Z > \frac{5 - 50\cdot 0.05}{\sqrt{100 \cdot 0.05 \cdot 0.95}} } \\
+    &= \P{Z > \frac{2.5}{\sqrt{4.75}} } \\
+    &= 1 - \Phi(\frac{2.5}{\sqrt{4.75}}) =  1 - 0.87 = 0.13.
+\end{align}
+So the probability I will move is approximately 13\%.
+\end{solution}
+\end{exercise}
+
+\end{document}

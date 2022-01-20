@@ -1,0 +1,63 @@
+\input{header.tex}
+
+\subsection{BH.10.9}
+
+
+\begin{exercise}
+In the code below we compute or simulate the various expressions of BH.10.9. Check the results and compare it to the analytical results. Are both results in line? If not, do you know why that might be the case? What can you do about that?
+
+I don't know how to build $\E{\V{Y|X}}$ in any sensible way. Since $Y$ is independent of $X$, the conditioning does not have any influence. Thus, this numerical exercise is skipped.
+\end{exercise}
+
+\begin{minted}{python}
+import numpy as np
+from scipy.stats import expon
+
+np.random.seed(3)
+
+X = expon(2)
+Y = expon(2)
+
+print(np.exp(-X.mean()), X.expect(lambda x: np.exp(-x)))
+
+n_sample = 1000
+X_sample = X.rvs(n_sample)
+Y_sample = Y.rvs(n_sample)
+p1 = sum(X_sample > Y_sample + 3) / n_sample
+p2 = sum(Y_sample > X_sample + 3) / n_sample
+print(p1, p2)
+
+p3 = sum(X_sample > Y_sample - 3) / n_sample
+print(p1, p3)
+
+EXY = X_sample @ Y_sample / n_sample
+EX4 = X.expect(lambda x: x ** 4)
+print(EX4, EXY * EXY)
+
+p = sum(np.abs(X_sample + Y_sample) > 3) / n_sample
+print(p, X.mean())
+\end{minted}
+
+
+\begin{exercise}
+Now make the plot and  explain what is wrong.
+\end{exercise}
+
+\begin{exercise}
+The line  marked as `this' should be replaced with
+\begin{minted}{python}
+plt.plot(supp, pmf * np.sqrt(n))
+\end{minted}
+Explain why.  (You should memorize  that comparing PMFs and PDFs is not straightforward.)
+\end{exercise}
+
+\begin{exercise}
+Why do I use simulation to estimate $\E{XY}$? Recall an earlier assignment in which we used numerical  integration. How successful was that?
+\end{exercise}
+
+\begin{exercise}
+What would you do to increase the credibility of the claims. (Note these claims  are based on case checking and simulation. There is no actual proof, however, they can act as counter-examples.)
+\end{exercise}
+
+
+\input{trailer}

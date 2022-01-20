@@ -1,0 +1,92 @@
+% arara: pdflatex: { shell: yes }
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex: { shell: yes }
+
+
+\documentclass[a4paper,12pt]{article}
+
+
+%\usepackage[nosolutions]{optional}
+%\usepackage[justhints]{optional}
+%\usepackage[check]{optional}
+\usepackage[all-solutions-at-end]{optional}
+
+\usepackage{../common/preamble}
+\newcommand{\sectionbreak}{\clearpage}
+\setcounter{tocdepth}{2}
+\usepackage{a4wide}
+\usepackage{../common/abbreviations}
+
+% \Opensolutionfile{hint}
+% \Opensolutionfile{ans}
+
+
+
+\author{Nicky van Foreest \\
+  Joost Doornbos, Wietze Koops, Mikael Makonnen
+}
+\date{\today}
+\title{Probability distributions EBP038A05\\
+Assignments}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+
+\subfile{intro.tex}
+
+
+\section{Assignment 1}
+\subfile{bh-5-exp.tex}
+\subfile{bh-5-6-5.tex}
+\subfile{bh-7-1.tex}
+\subfile{bh-7-9.tex}
+
+\section{Assignment 2}
+\subfile{bh-7-48.tex}
+\subfile{bh-7-53.tex}
+\subfile{bh-7-86.tex}
+
+\section{Assignment 3}
+\subfile{bh-8-4-figure.tex}
+\subfile{bh-8-4-3.tex}
+\subfile{bh-8-1.tex}
+\subfile{bh-8-18.tex}
+
+\section{Assignment 4}
+\subfile{bh-8-27.tex}
+\subfile{bh-8-36.tex}
+\subfile{bh-8-54.tex}
+
+\section{Assignment 5}
+\subfile{bh-9-1-7.tex}
+\subfile{bh-9-1-9.tex}
+\subfile{bh-9-6-1.tex}
+\subfile{bh-9-1.tex}
+
+\section{Assignment 6}
+\subfile{bh-9-25.tex}
+\subfile{bh-9-37.tex}
+\subfile{bh-9-50.tex}
+\subfile{bh-10-2-3.tex}
+
+
+\section{Assignment 7}
+\subfile{bh-10-9.tex}
+\subfile{bh-10-28.tex}
+\subfile{bh-10-30.tex}
+\subfile{bh-10-39.tex}
+
+
+
+
+% \opt{justhints}{
+% \Closesolutionfile{hint}
+% \clearpage
+% \section{Hints}
+% \input{hint}
+% \input{ans}
+% }
+
+\end{document}

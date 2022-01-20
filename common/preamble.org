@@ -1,0 +1,47 @@
+#+LATEX_CLASS: article
+
+#+LATEX_CLASS_OPTIONS: [a4paper]
+
+#+LATEX_HEADER: \usepackage{a4wide}
+#+LATEX_HEADER: \usepackage[english]{babel}
+#+LATEX_HEADER: \usepackage{mathpazo}
+#+LaTeX_HEADER: \usepackage{mathtools,amsthm,amssymb,amsmath}
+#+LATEX_HEADER: \usepackage{tikz}
+#+LATEX_HEADER: \usepackage{cleveref}
+
+# \usepackage{pgfplots}
+
+
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \setminted[python]{linenos=true}
+#+LATEX_HEADER: \setminted[python]{frame=lines}
+
+#+LaTeX_HEADER: \theoremstyle{definition}
+#+LaTeX_HEADER: \newtheorem{exercise}{Ex}[section]
+
+#+LaTeX_HEADER: \newcommand{\Exp}[1]{\mathrm{Exp}(#1)}
+#+LaTeX_HEADER: \newcommand{\Bern}[1]{\mathrm{Bern}(#1)}
+#+LaTeX_HEADER: \newcommand{\Beta}[1]{\mathrm{Beta}(#1)}
+#+LaTeX_HEADER: \newcommand{\FS}[1]{\mathrm{FS}(#1)}
+#+LaTeX_HEADER: \newcommand{\DUnif}[1]{\mathrm{DUnif}(#1)}
+#+LaTeX_HEADER: \newcommand{\Geo}[1]{\mathrm{Geo}(#1)}
+#+LaTeX_HEADER: \newcommand{\NBin}[1]{\mathrm{NBin}(#1)}
+#+LaTeX_HEADER: \newcommand{\Norm}[1]{\mathrm{Norm}(#1)}
+#+LaTeX_HEADER: \newcommand{\Poi}[1]{\mathrm{Poi}(#1)}
+#+LaTeX_HEADER: \newcommand{\R}{\mathbb{R}}
+#+LaTeX_HEADER: \renewcommand{\d}[1]{\,\textrm{d}#1}
+# +LaTeX_HEADER: \renewcommand{\max}[1]{\,\mathrm{max}\{#1\}}
+# +LaTeX_HEADER: \renewcommand{\min}[1]{\,\mathrm{min}\{#1\}}
+#+LaTeX_HEADER: \newcommand{\given}{\,\middle|\,}
+#+LaTeX_HEADER: \renewcommand{\P}[1]{\,\mathsf{P}\left[#1\right]}
+#+LaTeX_HEADER: \newcommand{\E}[1]{\,\mathsf{E}\/\left[#1\right]}
+#+LaTeX_HEADER: \newcommand{\EE}[2]{\,\mathsf{E}_{#1}\left[#2\right]}
+#+LaTeX_HEADER: \newcommand{\V}[1]{\,\mathsf{V}\left[#1\right]}
+#+LaTeX_HEADER: \newcommand{\VV}[2]{\,\mathsf{V}_{#1}\left[#2\right]}
+#+LaTeX_HEADER: \newcommand{\cov}[1]{\,\mathsf{Cov}\left[#1\right]}
+#+LaTeX_HEADER: \newcommand{\1}[1]{\,I_{#1}} % indicator
+#+LaTeX_HEADER: \newcommand{\abs}[1]{\left\vert#1\right\vert}
+#+LaTeX_HEADER: \newcommand{\iid}{\ensuremath{\mathrm{iid.}\,}}
+#+LaTeX_HEADER: \newcommand{\nvf}[1]{\textbf{#1}}
+# \newcommand{\A}{\, \& \, }
+# \renewcommand{\O}{\, \parallel \, }

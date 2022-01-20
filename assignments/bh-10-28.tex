@@ -1,0 +1,120 @@
+\input{header.tex}
+
+\subsection{BH.10.28}
+
+\begin{exercise}
+Let us first plot the PMF of the standardized version of $X_{n}$ for $n=10$. Explain the code below BEFORE making the plot.
+\end{exercise}
+
+\begin{minted}{python}
+import numpy as np
+from scipy.stats import poisson, norm
+import matplotlib.pyplot as plt
+
+n = 10
+X = poisson(n)
+N = norm()
+
+pmf = np.zeros(2 * n)
+for i in range(len(pmf)):
+    pmf[i] = X.pmf(i)
+supp = (np.linspace(0, len(pmf), num=len(pmf)) - n) / np.sqrt(n)
+
+
+plt.plot(supp, pmf)  # this
+plt.plot(supp, norm.pdf(supp))
+plt.savefig("figures/bh-10-28.pdf")
+\end{minted}
+
+
+\begin{exercise}
+Now make the plot and  explain what is wrong.
+\end{exercise}
+
+\begin{exercise}
+The line  marked as `this' should be replaced with
+\begin{minted}{python}
+plt.plot(supp, pmf * np.sqrt(n))
+\end{minted}
+Explain why.  (You should memorize  that comparing PMFs and PDFs is not straightforward.)
+\end{exercise}
+
+
+\begin{exercise}
+Make the plot of $n=2$ and $n=20$, include both plots and explain the results.
+\end{exercise}
+
+\begin{exercise}
+The code below computes $M_{Y}(s)$ where $Y$ is the standardized version of $X_{n}$. Then it compares $M_Y$ to the MGF of the standard normal distribution.
+\begin{enumerate}
+\item Explain how it works.
+\end{enumerate}
+\end{exercise}
+
+\begin{minted}{python}
+import numpy as np
+from scipy.stats import poisson, norm
+import matplotlib.pyplot as plt
+
+n = 10
+X = poisson(n)
+num = 50
+S = np.linspace(-1, 1, num)
+M = np.zeros(num)
+pmf = X.pmf(range(100)) # this
+
+for i in range(num):
+    for j in range(len(pmf)):
+        M[i] += np.exp(S[i] * (j - n) / np.sqrt(n)) * pmf[j]
+
+
+plt.plot(S, M, label="M X")
+plt.plot(S, np.exp(S * S / 2), label="M N")
+plt.xlabel("s")
+plt.legend()
+plt.savefig("figures/bh-10-28-mgf.pdf")
+\end{minted}
+
+\begin{exercise}
+The line marked as `this' computes the PMF upfront. Why is that a good idea?
+Why do we stop the computation of the PMF at 100?
+\end{exercise}
+
+
+\begin{exercise}
+In the code below, one of the for loop is removed.
+\begin{enumerate}
+\item What is the change?
+\item Will this change have an effect on the speed of the computation?
+\item Which of the two alternatives do you find more readible?
+\end{enumerate}
+\end{exercise}
+
+
+\begin{minted}{python}
+import numpy as np
+from scipy.stats import poisson, norm
+import matplotlib.pyplot as plt
+
+n = 10
+X = poisson(n)
+num = 50
+S = np.linspace(-1, 1, num)
+M = np.ones(num)
+
+for i in range(num):
+    M[i] = X.expect(lambda j: np.exp(S[i] * (j - n) / np.sqrt(n)))
+
+plt.plot(S, M, label="M X")
+plt.plot(S, np.exp(S * S / 2), label="M N")
+plt.xlabel("s")
+plt.legend()
+plt.savefig("figures/bh-10-28-mgf.pdf")
+\end{minted}
+
+\begin{exercise}
+Change \mintinline{python}{n} to 20 and to 50. Does the quality improve? Choose some value for \mintinline{python}{n} that you like, and include the graph.
+\end{exercise}
+
+
+\input{trailer}

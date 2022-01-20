@@ -1,0 +1,80 @@
+\input{header}
+
+
+\subsection{BH.10.2.3}
+
+Let us try to understand the weak law of large numbers by means of simulation. An easy example is to take $X_{i}\sim\Unif{0,1}$, so that is what we do here.
+
+\begin{minted}[]{python}
+import numpy as np
+from numpy.random import uniform
+
+np.random.seed(3)
+
+n = 10
+N = 50 # num samples
+
+mu = 1 / 2
+var = 1 / 12
+eps = 0.1
+
+X = uniform(size=[num_samples, n])
+
+Y = X.mean(axis=1)
+
+larger = np.abs(Y - mu) > eps
+count = larger.sum()
+P = count / N
+RHS = var / (n * eps * eps)
+print(P, RHS)
+\end{minted}
+
+\begin{minted}[]{R}
+set.seed(3)
+
+n = 10
+N = 50
+
+mu = 1 / 2
+var = 1 / 12
+eps = 0.1
+
+X = matrix(runif(N * n), N, n)
+
+Y = rowMeans(X)
+
+larger = abs(Y - mu) > eps
+count = sum(larger)
+P = count / N
+RHS = var / (n * eps * eps)
+print(P)
+print(RHS)
+\end{minted}
+
+
+\begin{exercise}
+Explain \texttt{mu} and \texttt{var}.
+\end{exercise}
+,
+\begin{exercise}
+What is \texttt{Y}? What is the symbol that BH use for this?
+\end{exercise}
+
+\begin{exercise}
+What are the meanings of \texttt{larger} and \texttt{count}?
+\end{exercise}
+
+\begin{exercise}
+What is \texttt{RHS} in the notation of BH?
+\end{exercise}
+
+\begin{exercise}
+What inequality of BH do we check by printing \texttt{RHS}  and \texttt{P}?
+\end{exercise}
+
+\begin{exercise}
+Choose some different values for $n$ and the sample size $N$. Is the inequality always true?
+\end{exercise}
+
+
+\input{trailer}

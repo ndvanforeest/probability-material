@@ -1,0 +1,775 @@
+% arara: pdflatex: { shell: yes }
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex: { shell: yes }
+
+\input{header.tex}
+
+
+\chapter{Chapter 9: Questions and remarks}
+
+\section{Simple questions}
+
+
+\subsection*{Section 9.1}
+
+\begin{remark}
+Skip BH.9.1.6.
+\end{remark}
+
+\begin{exercise}
+BH.9.1.7. We will also simulate this in an assignment.
+
+I  like this example as it  shows how to make optimal decisions under uncertainty, but I have to admit that I don't understand the reasoning, or the use of conditional probablity to solve this problem. Here is how I would solve the problem.
+\begin{enumerate}
+\item Explain that $X=(V-b)\1{b \geq \alpha V}$, with $\alpha=2/3$, is the rv that models our payoff.
+\item Why is this wrong: $\E X = \E{(V-b)\1{b \geq \alpha V}} = V \E{\1{b \geq \alpha V}} -b \E{\1{b \geq \alpha V}}$?
+\item Compute $\E X$, and provide a bound on $\alpha$ to ensure that $\E X > 0$.
+\end{enumerate}
+\begin{solution}
+\begin{align*}
+\E X &= \int_0^1 (v-b) \1{b\geq \alpha v} \d v = \int_0^{b/\alpha} v \d v - b \int_0^{b/\alpha}  \d v \\
+  &= b^2/2\alpha^2 - b^2/\alpha = \frac{b^{2}}{\alpha^{2}} \frac{1-2\alpha}{2}.
+\end{align*}
+Clearly, $\alpha>1/2$ to ensure that $\E X > 0$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.9.1.7. Suppose $b<\alpha V$, for some $\alpha\in(0,1)$ the bid is rejected.
+By the solution of BH.9.1.7, if $\alpha=2/3$, you should not enter this game.
+But is there another $\alpha$ (smaller or larger than $2/3$) at which entering the game is interesting?
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.9.1.8. Apply the same type of argumentation to find $\E X$ when $X\sim \FS{p}$.
+\begin{hint}
+\end{hint}
+\begin{solution}
+$\E X = 1 + q\E X$, because we have to throw at least once, and with probability $q$, we start again. Hence, $\E X = 1/(1-q) = 1/p$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.9.1.8. Use first step analysis to  find $N_{r} := \E X$ when $X\sim \NBin{r,p}$.
+\begin{solution}
+Suppose the first throw is a success, then we need $r-1$ more successes, if the first throw is a failure, we are back at `hole one'. Thus, $N_{r} = p N_{r-1}+q(1+N_{r})$. Simplifying (and using that $p/(1-q)=1$) gives $N_{r} = N_{r-1} + q/p$, which implies $N_{r} = r q/p$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.9.1.9. I reason slightly differently here. Write $N_{r}$ for the number of throws required to reach $r$ heads in row. Then I need $N_{r-1}$ throws in expectation to reach the state in which there are $r-1$ heads in row. Suppose now that we are in this state, i.e.,  there are $r-1$ heads in row. Then, if I throw heads, with probability $p$, I reach the state with $r$ heads in row, and I am done. However, if I throw tails, with probability $q$, I have to start all over again.  Use this argument to derive the recursion $N_{r} = N_{r-1} + p\cdot 1 + q(1+N_{r})$.  Solve this to obtain
+\begin{equation}
+N_{r} = \sum_{i=1}^{r} 1/p^i.
+\end{equation}
+\begin{solution}
+\begin{equation}
+N_{r} = N_{r-1} + p\cdot 1 + q(1+N_{r}) \implies N_{r} = N_{r-1}/p + 1/p \implies N_{r} = \sum_{i=1}^{r} 1/p^i.
+\end{equation}
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+Compute the expected outcome of a die throw (with a 6-sided die), given that the outcome is even. Introduce proper notation for random variables and events.
+\begin{solution}
+Let $X$ be the outcome of the die throw (note that $X$ is a random variable) and let $A$ be the event that the outcome is even. Then
+\begin{equation*}
+\E{X\given A} = 2 \P{X=2|A} + 4 \P{X=4|A} + 6 \P{X=6|A} = \tfrac13 \cdot (2+4+6)  = 4.
+\end{equation*}
+We conclude that $\E{X\given A} = 4$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.9.1.10.  Let $p_i$, $0\leq i\leq b$ be the probability to hit $b$ before $0$.
+\begin{enumerate}
+\item Why is $p_0=p_1/2$?
+\item Why is $p_{b}=1$?
+\item Explain the recursion $p_i=p_{i-1}/2 + p_{i+1}/2$ for $0 < i <b$?
+\item Show that point $3$ implies that $p_i =  \alpha i$ for $0<i<b$ for any $\alpha$ we like.
+\item Combine the fact that $p_{b}=1$ with $p_{i} = \alpha i$ for all $0<i<b$ to see that $\alpha=1/b$.
+\item Conclude that $p_0=1/2b$.
+\end{enumerate}
+\begin{solution}
+For 4: take $i=b-1$. Then solve for $\alpha$ in $\alpha(b-1) = \alpha(b-2)/2+1/2$, because $p_{b}=1$. This gives $\alpha=1/b$.
+\end{solution}
+\end{exercise}
+
+
+
+\subsection*{Section 9.2}
+\label{sec:section-9.2}
+
+\begin{remark} About BH. 9.2.1. This definition is subtle, and it takes time to understand.
+Here is a slightly different explanation; perhaps it's useful for you.
+
+Take some random variable $X$, say.
+Then, as in Chapter 7,  we can be interested in  $\E{g(X)}$, i.e., the expectation of the rv $g(X)$.
+
+When $Y$ is continuous we can compute $\E{Y \given X=x}$ with  the conditional CDF
+\begin{align*}
+\E{Y\given X=x } =\int f_{Y| X}(y | x) \d y.
+\end{align*}
+(For discrete rv., replace the integral by the PMF.)
+Observe that this is just a function of $x$; define this function as $g(x) = \int f_{Y| X}(y | x)\d y$. And now, as before, we consider the random variable $g(X)$, and we  \emph{call this rv the conditional expectation} of $Y$ given $X$.
+
+It is true that $X$ plays some sort of double role---first we use it in the conditioning in the definition of the function $g$, and then we plug it into  $g$ again---and this is perhaps confusing. But I finally `got  it', when I understood that $g$ can be interpreted as just some function of $x$. And then we compute $\E{g(X)}$, and so on.
+\end{remark}
+
+
+
+\begin{exercise}
+BH.9.2.2. Is $\E{Y\given \1{A}}$? a number or a rv?
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+
+\subsection*{Section 9.3}
+\label{sec:section-9.3}
+
+\begin{remark}
+On BH.9.3.2 (Taking out what is known.) Perhaps it is easier to cristalize  $X$ into $x$. Then $g(x) = \E{h(x) Y|X} = h(x) \E{Y|X}$, because $h(x)$ is just a function. The rvs $\E{H(X) Y|X}$ and $h(X) \E{Y|X}$ are then both  equal to $g(X)$.
+\end{remark}
+
+\begin{exercise}
+On BH.9.3.9. Show that $\cov{Y-\E{Y|X}, \E{Y|X}}=0$.
+\begin{solution}
+We have that $\E{Y-\E{Y|X}}=0$. Hence, $\E{Y-\E{Y|X}}\E X = 0$. Then define $h(X) = \E{Y|X}$ and apply BH.9.3.9 to see that $\E{(Y-\E{Y|X})h(X)} = 0$. From the definition of the covariance, $\cov{W, Z} = \E{WZ} - \E W \E Z$, we have shown that both terms are zero.
+\end{solution}
+\end{exercise}
+
+
+\subsection*{Section 9.4}
+\label{sec:section-9.4}
+
+
+\begin{exercise}
+Consider a casino where, for any $a>0$, it is possible to pay $a$ euro and get a chance of $\tfrac15$ on receiving $4a$ euro and a chance of $\tfrac45$ of receiving nothing.
+Adam enters the casino with $b$ euros, and bets half of his money on this gamble.
+Let $X$ be the amount of money he has after the gamble.
+After that, he again bets half of the money he then has (i.e.
+half of $X$) on this gamble.
+Let $Y$ be the amount of money he has after the second gamble.
+\begin{enumerate}
+\item Compute $\E{X}$.
+\item Compute $\E{Y|X}$.
+\item Compute $\E{Y}$.
+\end{enumerate}
+Explicitly mention the laws/rules you use.
+\begin{solution}
+
+1. Since Adam keeps $b/2$ and does the gamble with $a = b/2$, we have
+\begin{equation*}
+\E{X} = b/2 + \tfrac15 \cdot 4(b/2) + \tfrac45 \cdot 0 = 0.9 b.
+\end{equation*}
+2. The computation is the same as in part 1., but with $X$ instead of $b$:
+\begin{equation*}
+\E{Y|X} = X/2 + \tfrac15 \cdot 4(X/2) + \tfrac45 \cdot 0 = 0.9 X.
+\end{equation*}
+Note that the result is a random variable. \\
+3. Using Adam's law (and linearity of expectation), we conclude that:
+\begin{equation*}
+\E{Y} = \E{\E{Y|X}} = \E{0.9X} = 0.9\E{X} = 0.81b.
+\end{equation*}
+In general, if Adam would do this $n$ times, the expected amount of money he has after $n$ such gambles would be $0.9^n b$. This would be very difficult to show without Adam's law!
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Let $N \sim \Pois{\lambda}$, and let $X|N \sim \Bin{N, p}$, where $p \in (0,1)$ and $\lambda > 0$ are known constants.
+Compute $\E{X}$ using Adam's law.
+Check your answer using the chicken-egg story; with this story you can also obtain the distribution of $X$.
+\begin{solution}
+We have $\E{X|N} = Np$, so using Adam's law (and linearity of expectation), we conclude that $\E{X} = \E{\E{X|N}} = \E{Np} = \E{N}p = \lambda p$.
+
+This is in accordance with $X \sim \Pois{\lambda p}$, which was shown in the chicken-egg story.
+
+Some students reported answers like $\lambda^{2}p$. This is wrong, and can be immediately seen by checking units: the unit of $\lambda$ being 1 per time.
+
+Others wrote $\E{X\given N= n} n p$, hence $\E X = \E{\E{X\given N}}= \E{np} = np$.
+
+Apparently, such students are not aware of the idea that $\E{X\given N}$ is a random variable.
+When this happens during the exam, you will score 0 points for that particular part of a question.
+
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Correct? If $A$ is an event and $\1{A}$ is its indicator, then for all random variables $X$ we have $\E{X \given A} = \E{X \given \1{A}}$.
+\begin{solution}
+Incorrect:  $\E{X \given A}$ is a number since $A$ is an event, whereas $\E{X \given \1{A}}$ is a random variable since $\1{A}$ is a random variable. A correct statement is $\E{X \given A} = \E{X \given \1{A} = 1}$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Correct? If $X$ and $Y$ are independent, then $\V{\E{Y \given X}} = 0$.
+\begin{solution}
+Correct, if  $X$ and $Y$ are independent, then $\E{Y \given X} = \E{Y}$ which is a constant (formally, a degenerate random variable).
+Since the variance of a constant is 0, we conclude that $\V{\E{Y \given X}} = 0$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Let $X \sim \Exp{\lambda}$, and let $a$ be a constant.
+\begin{enumerate}
+\item Compute $\E{X \given X \geq a}$ using an integral and an indicator.
+\item Explain the answer using a property of the exponential distribution.
+\end{enumerate}
+\begin{solution}
+1. We compute $\E{X \given X \geq a}$ as follows:
+\begin{align*} \E{X \given X \geq a} &= \int_0^\infty y f(y|A) \d y
+\\ &= \int_0^\infty y \frac{\lambda e^{-\lambda y} \1{y \geq a}}{e^{-\lambda a}} \d y
+\\ &= \lambda \int_a^\infty y e^{-\lambda (y-a)} \d y
+\\ &= -y e^{-\lambda (y-a)}\biggr|_a^\infty +  \int_a^\infty e^{-\lambda (y-a)} \d y
+\\ &= a   - \frac1{\lambda} e^{-\lambda (y-a)}\biggr|_a^\infty   = a+\frac1\lambda.    \end{align*}
+
+2.
+The result also follows from the memoryless property, which states that conditional on the event that $X \geq a$, we have that $X-a | X \geq a \sim\Exp{\lambda}$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+A hat contains 9 fair coins and one coin that lands heads with probability 0.8. You pick a coin from the hat uniformly at random and toss it 10 times. Let $A$ be the event that you pick a fair coin, and let $X$ be the number of heads. Let $B$ be the event that the first four tosses all show heads.
+
+\begin{enumerate}
+\item Compute $\E{X \given A}$.
+\item Compute $\E{X \given A^c}$.
+\item Compute $\E{X}$.
+\item Compute $\P{B}$.
+\item Compute $\P{A \given B}$.
+\item Compute $\E{X \given B}$.
+\item Compute $\E{X \given B^c}$. \textit{Hint}: it is not necessary to compute $\P{A \given B^c}$.
+\end{enumerate}
+
+\begin{solution}
+1. Note that $X \, |\, A \sim \Bin{10, 0.5}$, so $\E{X \given A} = 10 \cdot 0.5 = 5$. \\
+2. Note that $X \, |\,  A^c \sim \Bin{10, 0.8}$, so $\E{X \given A^c} = 10 \cdot 0.8 = 8$. \\
+3. By LOTE we have $\E{X} = \P{A}\E{X \given A} +\P{A^c} \E{X \given A^c}  = 0.9 \cdot 5 + 0.1\cdot 8 = 5.3$. \\
+4. Note that  $\P{B \given A}  = 0.5^4$ and $\P{B \given A^c}  = 0.8^4$.
+By LOTP we have
+\begin{equation*}
+\P{B} = \P{A}\P{B \given A} +\P{A^c} \P{B \given A^c}  = 0.9 \cdot 5 + 0.1\cdot 8 = 0.09721.
+\end{equation*}
+5. By Bayes' rule $\P{A \given B} = \frac{\P{B \given A}\P{A}}{\P{B}} \approx 0.57864$. \\
+6. Note that $\E{X \given A, B} = 4 + 6 \cdot 0.5 = 7$ and $\E{X \given A^c, B} = 4 + 6 \cdot 0.8 = 8.8$. By LOTP with extra conditioning we have
+\begin{equation*}
+\P{X \given B} = \P{A \given B}\E{X \given A, B} + \P{A^c \given B}\E{X \given A^c, B} \approx 7.75844.
+\end{equation*}
+7. By LOTE we have $\P{B}\E{X \given B} +\P{B^c} \E{X \given B^c}  = \E{X} = 5.3$. We know $\P{B}$ and $\E{X \given B}$, so solving this for $\E{X \given B^c}$ yields $\E{X \given B^c} \approx 5.035$.
+
+One or more students wrote the LOTE as $\E X = \sum_{Y} \E{X\given Y} \P{Y}$. This is wrong, as you cannot sum over a rv. This is correct: $\E{X} = \sum_{y} \E{X\given Y=y} \P{Y=y}$, so sum over the \emph{outcomes} of a rv.
+
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Consider random variables $X, Y \in [0,1]^2$ with joint PDF $f_{X,Y}(x,y) = 2 \1{x \leq y}$.
+
+Determine $\E{Y \given X}$ and $\E{X \given Y}$.
+\begin{solution}
+The marginal density of $X$ is given by $f_X(x) = 2(1-x)$.
+
+So the conditional density is given by $f_{Y|X}(y|x) = \frac{f_{X,Y}(x,y)}{f_X(x)} = \frac{\1{x \leq y}}{1-x}$. Hence,
+\begin{equation*}
+\E{Y \given X = x} = \int_0^1 y \frac{\1{x \leq y}}{1-x} \d y  = \frac1{1-x}  \int_x^1 y \d y = \frac1{1-x} \left[\tfrac12y^2\right]_x^1 = \frac{\tfrac12\left(1-x^2\right)}{1-x} =  \tfrac12 \left(1+x\right) .
+\end{equation*}
+We conclude that $\E{Y \given X} = \tfrac12(1+X)$.
+
+
+The marginal density of $Y$ is given by $f_Y(y) = 2y$.
+
+So the conditional density is given by $f_{X|Y}(x|y) = \frac{f_{X,Y}(x,y)}{f_Y(y)} = \frac{\1{x \leq y}}{y}$. So
+\begin{equation*}
+\E{X \given Y = y} = \int_0^1 x \frac{\1{x \leq y}}{y} \d x  = \frac1{y}   \int_0^y x \d x = \tfrac12 y.
+\end{equation*}
+We conclude that $\E{X \given Y} = \tfrac12Y$.
+
+Some students wrote for instance $\E{X\given Y} = y/2$.
+Apparently, such students are not aware of the idea that $\E{X\given N}$ is a random variable.
+When this happens during the exam, you will score 0 points for that particular part of a question.
+
+\end{solution}
+\end{exercise}
+
+
+
+
+
+\begin{exercise}
+Prove that $\E{X \given X \geq a} > \E{X}$ for any $a$ with $0 < \P{X \geq a} < 1$.
+\begin{solution}
+Note that $\E{X \given X \geq a} \geq a > \E{X \given X < a}$. By LOTE:
+\begin{align*}
+\E{X} &= \P{X \geq a}  \E{X \given X \geq a} + \P{X <a}  \E{X \given X < a}
+\\  &< \P{X \geq a}  \E{X \given X \geq a} + \P{X <a}  \E{X \given X \geq a}
+\\  &= \E{X \given X \geq a},
+\end{align*}
+where the inequality is strict since $ \P{X <a} > 0$.
+\end{solution}
+\end{exercise}
+
+
+
+
+\begin{exercise}
+Let $N \sim \Pois{\lambda}$ and let  $X|N \sim \Bin{N, p}$, where $p \in (0,1)$ and $\lambda > 0$ are known constants. Find $\E{N \given X}$.
+\begin{hint}
+  For a smart argument, use the chicken-egg story.
+  Recall that the number of hatched eggs and the number of unhatched eggs are independent (since $N \sim \Pois{\lambda}$); i.e.
+  $N-X$ and $X$ are independent.
+\end{hint}
+\begin{solution}
+With the hint,
+\begin{equation*} \E{N \given X} = \E{N-X \given X} + \E{X \given X} = \E{N-X} + X = \lambda(1-p) + X. \end{equation*}
+As a check, $\E{ \E{N \given X}} = \E{\lambda(1-p) + X} = \lambda(1-p)  + \lambda p = \lambda  = \E{N}$.
+
+Here is straightforward computation.
+You should check each and every step as they are based on pattern recognition.
+\begin{align}
+  \label{eq:22}
+\E{N \given X=k}
+&= \sum_{n=k}^{\infty} n \P{N=n \given X=k } \\
+&= \frac{1}{\P{X=k}} \sum_{n=k}^{\infty} n e^{-\lambda}\frac{\lambda^{n}}{n!} {n \choose k} p^{k}(1-p)^{n-k} \\
+&= \frac{1}{\P{X=k}}\sum_{n=k}^{\infty} n e^{-\lambda}\frac{1}{n!} \frac{n!}{k!(n-k)!}(\lambda p)^{k}(\lambda(1-p))^{n-k} \\
+&= \frac{e^{-\lambda p} (\lambda p)^{k}/k!}{\P{X=k}}\sum_{n=k}^{\infty} n e^{-\lambda(1-p)}\frac{1}{(n-k)!}(\lambda(1-p))^{n-k} \\
+&= \sum_{n=k}^{\infty} n e^{-\lambda(1-p)}\frac{1}{(n-k)!}(\lambda(1-p))^{n-k} \\
+&= \sum_{n=0}^{\infty} (n+k) e^{-\lambda(1-p)}\frac{1}{n!}(\lambda(1-p))^{n} \\
+&= k  + \sum_{n=0}^{\infty} n e^{-\lambda(1-p)}\frac{1}{n!}(\lambda(1-p))^{n} \\
+&= k  + \lambda (1-p).
+\end{align}
+Hence, $\E{N\given X}= \lambda(1-p) + X$. Since $\E X = \lambda p$, we get $\E N = \lambda$ with Adam's law, as above.
+\end{solution}
+\end{exercise}
+
+\subsection*{Section 9.5}
+\label{sec:section-9.5}
+
+\begin{exercise}
+BH.9.5.1. Is $\V{Y|X}= \V{\E{Y|X}}$?
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+Use Eve's law to show that $\V Y \geq \V{\E{Y\given X}}$.
+\begin{solution}
+By Eve's law,
+\begin{align}
+    \V Y = \E{\V{Y\given X}} + \V{\E{Y\given X}} \geq \V{\E{Y\given X}},
+\end{align}
+since $\V{Y\given X} \geq 0$ for all $X$, which implies that $\E{\V{Y\given X}} \geq 0$.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Let $Z\sim \mathcal{N}(\mu, \sigma^2)$ and $Y=\sqrt{Z}+Z^2.$ Find $\V{Y|Z}$.
+\begin{solution}
+Conditional on $Z$, $Y$ is a constant, and the variance of a constant is 0. Hence, $\V{Y|Z} = 0$.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Correct? $\V{Y}=\V{Y|A}\P{A}+\V{Y|A^c}\P{A^c}$ for any random variable $Y$ and event $A$.
+
+\begin{solution}
+Incorrect. Counterexample: Let $Y\sim$ Bern(1/2) and $A$ be the event $Y=0$. then Var($Y|A$) and Var($Y|A^c$) are both 0, but Var($Y$)=1/4.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Let $X, Y$ be random variables. Explain the difference between $\V{Y|X}$ and $\V{Y|X=x}$.
+
+\begin{solution}
+$\V{Y|X}$ is a random variable, but $\V{Y|X=x}$ is a constant.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Show that $\E{(Y - \E{Y |X})^2|X} = \E{Y^2|X} - (\E{Y |X})^2$.
+
+\begin{solution}
+Define $g(X) = \E{Y|X}$. Then,
+\begin{align}
+    \E{(Y - \E{Y |X})^2|X}&= \E{(Y - g(X))^2|X}\\
+    &=\E{Y^2-2Yg(X)+g(X)^2|X}\\
+    &=\E{Y^2|X}-2\E{Yg(X)|X}+\E{g(X)^2|X}\\
+    &=\E{Y^2|X}-2g(X)\E{Y|X}+g(X)^2\\
+    &=\E{Y^2|X}-2g(X)^2+g(X)^2\\
+    &=\E{Y^2|X}-(\E{Y |X})^2
+\end{align}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Let $X\sim \mathcal{N}(\mu,\sigma^2)$ and $W|X \sim \mathcal{N}(0,X^2)$. Find $\V{W}.$
+
+\begin{solution}
+Using Eve's Law we have
+\begin{align}
+    \V{W} = \V{\E{W|X}}+\E{\V{W|X}} =\V{0} + \E{X^2} = 0+  \mu^2 + \sigma^2 = \mu^2 + \sigma^2.
+\end{align}
+
+\end{solution}
+\end{exercise}
+
+
+\section{BH exercises: hints and solutions}
+
+\begin{exercise}BH.9.1. It is easy to associate an indicator with the route chosen:  let $R\in \{1,2,3\}$ be the rv corresponding to the route.
+
+We tackle this problem also in an assignment.
+
+\begin{hint}
+Then, $\E{T\given R} = \sum_j \E{R_j} \1{R=j}$, where $R_j$ is the time of route $j$. We know that $\E{R_j} = \mu_j$. Now apply the LOTP.
+
+For b.  realize that $\V T = \E{T^{2}} - (\E T)^2$.
+
+\end{hint}
+\begin{solution}
+Using the hint, for a. $\E T = \E{\sum_j \E{R_j} \1{R=j}} = \sum_j \E{R_j} \E{\1{R=j}} = (\mu_{1}+\mu_2+\mu_3)/3$.
+
+For b.,  $\E{T^2|R}$, realize that $\E{R_j^2} = \mu_j^2+\sigma_j^2$, because $\V{R_j} = \E{R_j^2}-(\E{R_j})^2$.
+Finally, with these ideas,
+\begin{align*}
+\V{\E{T\given R}}
+&= \E{ (\E{T\given R})^{2}} - (\E{\E{T\given R}})^{2} \\
+&= (\mu_1^2+\mu_2^2+\mu_{3}^2)/3 + (\mu_1+\mu_2+\mu_3)^2/9.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.9.25. We tackle this problem also in an assignment with simulation.  Check out \url{https://en.wikipedia.org/wiki/Kelly_criterion} you're interested.
+\begin{hint}
+Use Adam's law to express $\E{X_{n+1}}$ in terms of $\E{X_{n}}$, then use recursion.
+\end{hint}
+\begin{solution}
+\begin{align*}
+  \E{X_{n+1} |X_n=100} &= 100 + pf 100 - (1-p)f 100  = 100(1-f + 2pf) \\
+  \E{X_{n+1} |X_n} &= X_{n}( 1- f + 2pf) \\
+  \E{X_{n+1} } &= ( 1- f + 2pf) \E{X_{n}} \\
+  \E{X_{n+1} } &= ( 1- f + 2pf)^{2} \E{X_{n-1}} =  ( 1- f + 2pf)^{n+1}X_{0}.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+BH.9.28.
+\end{exercise}
+
+
+\begin{exercise}
+BH.9.32. The results of this exercise are (or should be) used by nearly all software packages to control inventory levels of companies such as supermarkets and bol.com.
+\begin{hint}
+a. Let $Y$ be the amount purchased by the first customer that comes along, let $P$ be the rv that is 1 if the customer does indeed purchase, and 0 otherwise, and let $X$ be the size of the purchase. Why is $Y=XP$? What is $\E{P}$? What is $\E{Y\given P}$? What is $\E{Y^{2}\given P}$. You might want to use BH.9.1.
+
+
+b. Let $N\sim\Pois{8\lambda}$ be the number of customers that pass by. Given $N=n$, what is $\E{S\given N}$, where $S=\sum_{i=1}^N X_iP_{i}$ is the total sales. Now use the law of total expectation. What is $\V{S\given N}$? Use Eve's law  to compute $\V S$. Bigger hint, read Example 9.6.1.
+\end{hint}
+\begin{solution}
+Use that $P^{2}=P$ (indicator funtion), Adam and Eve, and that $N\sim \Pois{8\lambda}$,
+\begin{align*}
+  \E{Y|P}&= \E{PX|P} = \E{X}\E{P|P} = \mu P, &\V{Y|P} &= \V{XP|P} = P^{2} \V{X|P} = P \sigma^2 \\
+  \E Y &= \mu p, & \V Y &= \E{\V{Y|P}} + \V{\E{Y|P}} = \sigma^2 p + \mu^{2}p(1-p), \\
+  \E{S|N} &= N \E Y, & \V{S|N} &= N \V Y \\
+  \E N &= 8 \lambda, & \V N &=  8\lambda.
+\end{align*}
+Now use BH.9.6.1. It's just a matter of filling in how.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.9.37.
+
+Bootstrapping is used in statistics to, for instance, construct confidence intervals. It is a much used and intuitive technique.
+
+Extra exercise to  help you recall some ideas of Ch 1. How many different bootstrap samples are possible?
+
+I used some extra ideas to save some time. We say that the rvs $\{X_i\}$ are independent and  distributed as the common rv~$X$ when $X_i\sim F_X$ where $F_X$ is the CDF of the rv $X$. Then $\E{X_{i}}=\E X$, and so on.  Next,  I prefer to write $Y_{j}= X_j^{*}$, as this writes (and types) faster. Finally,  it is easy to define
+$Y_j = \sum_{i=1}^n X_i\1{S_j = i}$, where $S_{j}\sim \DUnif{\{1, \ldots, n\}}$ is the \(j\)th sample of the $\{X_{i}\}$.
+ \begin{solution}
+
+a. Here you should assume that the $X_i$ are not yet known. Thus, the expectation over $X_i$ is taken with respect to the CDF $F_X$. Using the independence of $X_j$ and $S_j$, $\1{S_j=i}\1{S_j=k} = 0$ if $i\neq k$, and that $\E{\1{S_j=k}} = 1/n$,
+\begin{align*}
+\E{Y_j} &= \sum_i \E{X_i}\E{\1{S_{j}=i}} = \mu, \\
+\E{Y_j^2}  &= \E{\sum_k\sum_{l} X_k X_{l} \1{S_j=k}\1{S_{j}=l}}
+= \E{\sum_k X_k^{2}  \1{S_j=k}} =\sum_{k} \E{X^{2}} n^{-1} = \E{X^{2}}, \\
+\V{Y_j}&= \E{Y_j^{2}}- (\E{Y_{j}})^{2} = \sigma^{2}.
+\end{align*}
+
+b. Now we are given the outcomes (samples) $X_i=x_i$ of $n$ experiments.
+I prefer to write $D = X_{1}, \ldots, X_{n}$ as it is shorter.
+Noting that $S_j$ and $D$ are independent, and that $\E{X_{k}|D} = X_{k}$,
+\begin{align*}
+  \E{Y_{j}|D} = \sum_k X_k \E{\1{S_j=k}|D} = \frac 1 n \sum_k X_k := \bar X
+\end{align*}
+Observe that this average  need  not be the same as $\mu$!
+
+The conditional variance. Since $S_j$ and $S_k$ are independent when $j\neq k$, it must be that $Y_j|D$ and $Y_k|D$ are also conditionally independent. Moreover, $\{Y_j|D\}$ are conditionally iid. Therefore,
+\begin{align*}
+\E{Y_{j}^{2}|D}
+&= \E{\sum_k\sum_l X_kX_l\1{S_j=k}\1{S_j=l}|D} \\
+&= \E{\sum_kX_k^{2}\1{S_j=k}|D}  = \sum_kX_k^{2}\E{\1{S_j=k}|D} \\
+&= \frac 1 n \sum_{k} X_k^{2}, \\
+\V{Y_j| D} &= \frac 1 n \sum_{k} X_k^{2} - (\bar X)^{2} = \frac 1 n \sum_{k} (X_k - \bar X)^{2} = \frac{n-1}n \sigma^{2},\\
+\V{\bar Y|D} &= \V{\frac 1 n\sum_{j}Y_{j}|D} = \frac 1{n^{2}} \sum_j \V{Y_j|D} = \frac 1 n \V{Y_1|D}.
+\end{align*}
+
+
+c. For $\E{\bar Y}$ use linearity and Adam's law:
+\begin{align*}
+\E{\bar Y} = \E{\E{\bar Y|D}} = \frac 1 n \sum_{k}\E{X_{k}} = \E X = \mu.
+\end{align*}
+
+
+Here are the details for $\V{\bar Y}$. Using  BH.6.3.3 and BH.6.3.4,
+\begin{align*}
+\E{\V{\bar Y|D}} &=  \frac 1 n \E{\V{Y_{1}|D}} =
+\frac 1 {n^2} \E{ \sum_{i=1}^n (X_i-\bar X)^2} \\
+&= \frac{n-1} {n^2} \E{\frac 1 {n-1} \sum_{i=1}^n (X_i-\bar X)^2}
+= \frac{n-1} {n^2} \E{S_{n}^2} = \frac{(n-1)\sigma^{2}} {n^2} \\
+\V{\E{\bar Y|D}} &= \V{\bar X}= \frac 1{n^{2}} \sum_{i} \V{X_{i}} = \frac 1 n \sigma^{2}.
+\end{align*}
+Now use Eve's law to add both terms to get $V{\bar Y}$.
+
+
+d. We add randomness twice, first we draw  samples to get $D$, and then we draw randomly from $D$.
+
+The extra exercise: immediate from Example 1.4.22. We are not interested in the sequence of the bootstrap sample. BTW, the story that goes for me with this example is the `balls and bars story'. I have $n$ balls to distribute over $k$ boxes. Hence, there are $k-1$ bars to separate the boxes. For the bootstrap sample, I have to distribute $n$ bootstrap samples (the $X^*_{i}$) over $n$ boxes (the initial sample $X_i$.)
+
+If $n$ is small, say $n=4$. Does it make sense to take more than 1000 bootstrap samples?
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.9.39. There are numerous examples of rvs with  non-zero kurtosis, for instance,  claim sizes of car accidents, the time patients spend in hospital beds, finance. This exercise helps to understand how a positive kurtosis may originate.
+\end{exercise}
+
+\begin{exercise} BH.9.50.  We will also simulate this in an assignment.
+\begin{hint}
+a.
+$N | \lambda \sim \Pois{\lambda}$.
+
+b. Analogous to BH.9.6.1
+
+c. and d. See BH.8.4.5.
+\end{hint}
+\begin{solution}
+a. Using the hint gives us $\E{N\given \lambda} = \lambda$ and $\V{N\given \lambda}= \lambda$.
+
+Now use Adam and Eve.
+
+b. Just copy the formulas of BH.9.6.1
+
+c. With the hint, observe that $\Exp(1)=\Gamma{1,1}$. In the relevant formula of BH.8.4.5 ($\P{Y=y}$), take $t=r_0=b_0=1$ and conclude that $\P{N=n}=2^{-n-1}$. Hence, $N\sim\Geo{1/2}$.
+
+d. Same story. The relevant formula is $f_1(\lambda|y)$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.9.52
+\end{exercise}
+
+\begin{exercise}
+BH.9.55.  Suppose first you draw just one number per day, what is then the recursion? Then suppose you draw 2 numbers per day.
+
+An interesting variation is to find a recursion for the number of \emph{draws} instead of \emph{days} are needed until all  numbers have been seen.
+\end{exercise}
+
+\begin{exercise}
+BH.9.56.
+\begin{hint}
+Refresh your  knowledge of the Beta distributions.
+
+a. Since we include the win, the number of games $T|p$ (since we assume $p$ given) must be $\sim\FS{p}$. Hence, $\E{T|p} = 1/p$
+
+To get $\E T$ use Adam's law. Realize that you have to take the integral with respect to $p$!
+
+b. $1+\E G$ is smaller than the expected time as computed in a. Why is this so?
+
+c. The number of wins, conditional on $p$, out of $n$ is $X|p\sim\Bin{n,p}$. Then use Beta-Binomial conjugacy.
+
+BTW, I find it easier to think about $f(p, X=k)$ instead of $f(p|X=k)$, since on the event $(p, X=k)$.
+\begin{equation*}
+f(p, X=k) \propto p^{a-1} q^{b-1} {n \choose k} p^k q^{n-k} \propto p^{a-1+k}q^{b-1+n-k}.
+\end{equation*}
+Then, as  $f(p|X=k) = f(p, X=k)/\P{X=k} \sim f(p, X=k)$ (because $\P{X=k}$ is just a constant) we get the same result op to a scaling factor. But we can use the reasoning of BH.8.3.3 to get the correct constant.
+\end{hint}
+\begin{solution}
+a. From the hint,
+\begin{align*}
+\E{T}
+&=\E{\E{T|p}} = \frac{1}{\beta(a,b)}\int_0^{1}\frac 1 p p^{a-1}(1-p)^{b-1} \d p \\
+&= \frac{1}{\beta(a,b)}\int_0^{1} p^{a-2}(1-p)^{b-1} \d p
+= \frac{\beta(a-1, b)}{\beta(a,b)} \\
+&= \frac{a+b-1}{a-1} = 1 + \frac b {a-1}.
+\end{align*}
+To get the last equation,  use the definition of $\beta(a,b)$ in terms of factorials (see the Bayes' billiards story) to simplify. This is easy, many terms cancel.
+
+
+b. Take $Y=1+G$, then $Y$ has the first success distribution since $G$ is geometric. Hence, $\E Y = (a+b)/a= 1 + b/a$. Clearly, this is smaller than $1+b/(a-1) = \E T$.
+
+But why is this so?
+
+
+I must miss something here.
+The prior is $\Beta{a, b}$.
+Then Beta-Binomial conjugacy story, we assume that Vishy won $a-1$ games, and lost $b-1$ games.
+My guess for Vishy winning the next game would be $(a-1)/(a+b-2)$, not $a/(a+b)$.
+But I make an error here. Check the BH problem 9.57. You'll see that we should indeed use $a/(a+b)$!  Tricky!
+
+c.  Immediate from BH.8.3.3: $p|X=7 \sim\Beta{a+7, b+3}$.
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+BH.9.57
+\begin{hint}
+a. The prior of $p$ is uniform on $[0,1]$. But this is equal to $\Beta{1,1}$. Now use  Beta-Binomial conjugacy.
+
+b. Write $S_n=\sum_{i=1}^nX_{i}$. What are $\P{X_{n+1}=1|p}$ and $\P{S_n=k|p}$?
+\end{hint}
+\begin{solution}
+a. By  the hint,
+\begin{equation*}
+f(p|X_1=x_{1}) \propto f(p, X_1=x_{1}) \propto
+p^{a-1} q^{b-1} p^{x_1}q^{1-x_1}
+\propto p^{a+x_1-1} q^{b+(1-x_{1})-1}.
+\end{equation*}
+Hence, $p|X_1=x_1 \sim \Beta{a+x_1, b+(1-x_{1})}$. We can now use this as prior to see that  $p|X_1=x_{a}, X_{2}=x_{2} \sim \Beta{1+x_1+x_2, 1+ (1-x_1) + (1-x_2)}$, and so on. Hence, $p|X_{1}, \ldots X_{n} \sim \Beta{1+S_k, 1+n-S_{k}}$.
+
+b. With the hint, $\P{X_{n+1}=1|p} = p$ and $\P{S_n=k|p} ={n \choose k} p^{k}q^{n-k} \propto p^{k}q^{n-k}$. Also $X_{n_+1}|p$ and $S_n|p$ are conditionally independent.
+Therefore,
+\begin{equation*}
+\P{X_{n+1}=1, S_n=k | p} \propto p p^kq^{n-k} = p^{k+1} q^{n-k},
+\end{equation*}
+which in turn implies that
+\begin{equation*}
+\P{X_{n+1}=1| S_n=k, p} \propto = p^{k+1} q^{n-k}.
+\end{equation*}
+Hence, $X_{n+1}| S_n=k, p \sim \Beta{k+2, n-k+1}$.
+Now, $X_{n+1}\in \{0, 1\}$, so that $\P{X_{n+1}=1| S_n=k, p} = \E{X_{n+1}| S_n=k, p} = (k+2)/(n+3)$, since $X_{n+1}| S_n=k, p \sim \Beta{k+2, n-k+1}$.
+
+The last step is to realize that $\E{X_{n+1}|S_{n}=k} = \E{\E{X_{n+1}|S_{n}=k, p}|S_{n=k}}$.
+
+Here is another way to get the same result.
+\begin{align*}
+\P{S_n=k} &= \frac 1 {n+1},\text{ by Bayes' billiard}, \\
+\P{X_{n+1}=1,S_n=k} &=  \int_0^1 \P{X_{n+1}=1,S_n=k\given p} f(p) \d p
+= \int_0^1 p {n \choose k} p^{k} (1-p)^{n-k} f(p) \d p \\
+&= \frac{k+1}{n+1}\int_0^1  {n+1 \choose k+1} p^{k+1} (1-p)^{n-k} f(p) \d p \\
+&= \frac{k+1}{n+1} \frac 1 {n+2}, \text{ again with Bayes' billiard}, \\
+\P{X_{n+1}=1 \given S_n=k} &= \P{X_{n+1}=1,S_n=k}/\P{S_{n}=k}.
+\end{align*}
+Now simplify.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.9.58. In part c.\/ the prior is the uniform distribution. What would happen if you would take the prior of part b, i.e., $a$ out of $j$ wins?
+\begin{hint}
+a. Recall that the uniform distribution on $[0,1]$ is $\Beta{a,b}$ with $a=b=1$. I prefer to write $S_n=\sum_{j=1}^n X_j$. First compute $\E{S_n\given p}$. Then compute $\E{\E{S_n| p}}$. Note that the outer expectation is an integral with respect to $p$ and the density of $\Beta{1,1}$.
+
+For the variance, use Eve's law.
+
+b. Use Beta-Binomial conjugacy. Or use the insights of BH.9.56 and BH.9.57.
+
+c. Bayes Billiards.
+\end{hint}
+
+\begin{solution}
+\begin{align*}
+\E{S_n|p} &= np \\
+\E{p} &= \frac 1{\beta(a,b)}\int_0^1pp^{a-1}q^{b-1}\d p = \frac{\beta(a+1,b)}{\beta(a,b)} = \frac a{a+b} = 1/2\\
+\E{\E{S_n|p}} &= n\E{p} = n/2. \\
+\V{S_n|p}  &= np q\\
+\E{\V{S_n|p}}  &= n\E{p q} = n \E p - n \E{p^{2}} = n/2 - n\E{p^{2}}\\
+\E{p^2} &=  \frac 1{\beta(a,b)}\int_0^1p^{2}p^{a-1}q^{b-1}\d p =
+\frac{\beta(a+2,b)}{\beta(a,b)} = \frac{a(a+1)}{(a+b)(a+b+1)} = \frac 2{2\cdot 3} = 1/3\\
+\V{\E{S_{n}|p}} &= \V{n p} = n^{2} \V p = n^{2}/12.
+\end{align*}
+The rest of Eve's law is now trivial.
+
+b. We start with a $\Beta{1,1}$ prior on $p$. After the first win, the prior gets updated to $\Beta{1+1, 1}$, after a loss to $\Beta{1, 1+1}$. Reasoning like this, after $a$ wins and $j-a$ losses, the distribution for a win becomes $\Beta{1+a, a+ j-1}$. Therefore, by using the hint in the book,  $\E{p | S_j=a } = (a+1)/(j+2)$.
+
+c. When somebody doesn't give me any information about what team can win, then any outcome must be equally likely. (What else can it be?)
+This is also my way to understand the expression in BH.8.3.2. Hence, $\P{X=k} = 1/(n+1)$. Observe that we use the prior $p\sim\Beta{1,1}$.
+
+When the prior is $\Beta{a, j-a}$, we should get the negative hypergeometric distribution, see the remark  in BH.8.3.3.
+
+d. Shanille scores the first and missed the second. Hence, there are 98 shots left, out which she has to score $49$.  Thus, we ask for $\P{S_{98}=49|p}$, where $p\sim \Beta{a=1,b=1}$ is the prior since she hit $a=1$  out of $a+b=2$ shots. This places us in the situation of part c above, with $n=98$. Hence, $\P{S_{98}=49|p} = 1/99$.
+\end{solution}
+\end{exercise}
+
+
+\section{Challenge: Betting}
+\label{sec:betting}
+
+Consider the setting of BH.9.25, which you also studied in the coding section. We use the notation from that exercise.
+In this exercise we will discuss how to set $f$, the betting fraction. In particular, we will discuss the \textit{Kelly criterion}, which states that the betting fraction should be $f = 2p-1$ if $p > \tfrac12$ is the winning probability.
+
+We discuss its relationship to expected utility theory, which you will also study in Introduction to Mathematical Economics. Expected utility theory states that bets should be chosen to maximize expected utility. So we solve $\max\limits_{0 \leq f \leq 1} \E{U(X_{n+1}) \given X_n}$.
+
+
+
+\begin{exercise}
+Show that solving the maximization problem for the utility function $U(x) = \log(x)$ yields the betting fractions from the Kelly criterion, $f = 2p-1$ if $p > \tfrac12$ and $f=0$ if $p \leq \tfrac12$.
+\end{exercise}
+
+Other people may have a different utility function, which yields a different betting fraction.
+
+\begin{exercise}
+Calculate the utility maximizing betting fraction $f$ if $U(x) = \sqrt{x}$.
+\end{exercise}
+
+Note that for both of these utility functions, the betting fraction $f$ does not depend on the wealth $X_n$ before the gamble, but in general $f$ does depend on $X_n$.
+
+Now that we have two different betting fractions, we compare them. For that, we first need the following result:
+
+\begin{exercise}
+Assume that $f$ does not depend on $X_n$. Let $x_0 = 1$. Show that there exist constants $a, b$ such that $\log (X_n) = a W + b$ and $W  \sim \Bin{n, p}$, and determine $a$ and $b$ in terms of $f$.
+\end{exercise}
+
+Theorem 10.3.6. states that (for sufficiently large $n$) we can approximate a random variable with the binomial distribution $W  \sim \Bin{n, p}$ by a random variable with the normal distribution $\Norm{np, np(1-p)}$. While you will only learn about the proof of this next week, we are already going to use this approximation here.
+
+\begin{exercise}
+Two people (Carl and Daria) participate in $n$ rounds of this betting game. Their games are independent. Carl's initial wealth is $x_0 = 1$ and Daria's initial wealth is $y_0 = 1$. We denote Carl's wealth after $n$ rounds by $X_n$ and Daria's wealth after $n$ rounds by $Y_n$. Carl chooses $f$ according to the Kelly criterion, i.e. $f = 2p-1$.  Daria chooses $f$ to be the  utility maximizing betting fraction for  $U(x) = \sqrt{x}$.
+Use the previously mentioned normal approximation to derive an approximation for the difference $\log(Y_n) - \log(X_n)$.
+\end{exercise}
+
+Kelly's criterion does not mention utility functions, it just recommends to set $f = 2p-1$ regardless of one's utility function. The next exercise is meant to give some insight why.
+
+
+\begin{exercise}
+Use \texttt{pnorm} in R, or \texttt{norm.cdf} in Python, to approximate $P(X_n > Y_n)$ for some chosen values for $n$ and $p$. What do you think that happens if $n \to \infty$ for a fixed $p$? Explain why this is an argument to use the Kelly criterion  regardless of one's utility function. Also, explain why maximizing utility suggests a different $f$ in spite of this result.
+\end{exercise}
+
+
+\input{trailer.tex}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "study-guide.tex"
+%%% End:

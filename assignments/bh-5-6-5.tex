@@ -1,0 +1,100 @@
+\subsection{BH.5.6.5}
+Read this example of BH first.
+We chop up the exercise in many small exercises..
+
+
+For the python code below, run it for a small number of samples; here I choose \texttt{samples=2}. Read the print statements, and use that to answer the questions below.
+
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import expon
+
+np.random.seed(10)
+
+labda = 6
+num = 3
+samples = 2
+
+X = expon(scale=labda).rvs((samples, num))
+print(X)
+T = np.sort(X, axis=1)
+print(T)
+print(T.mean(axis=0))
+
+expected = np.array([labda / (num - j) for j in range(num)])
+print(expected)
+print(expected.cumsum())
+\end{minted}
+
+
+\begin{minted}[]{R}
+set.seed(10)
+
+labda = 6
+num = 3
+samples = 2
+
+X = matrix(rexp(samples * num, rate = 1 / labda), nrow = samples, ncol = num)
+print(X)
+bigT = X
+for (i in 1:samples) {
+  bigT[i,] = sort(bigT[i,])
+}
+print(bigT)
+print(colMeans(bigT))
+
+expected = rep(0, num)
+for (j in 1:num) {
+  expected[j] = labda / (num - (j - 1))
+}
+print(expected)
+print(cumsum(expected))
+\end{minted}
+
+
+
+\begin{exercise}
+In line P.11\footnote{Line P.x refers to line x of the Python code.
+  Line R.x refers to line x of the R code.}
+we print the value of \texttt{X} in line P.10, R.7 and R.8, respectively.
+What is the meaning of \texttt{X}?
+\begin{solution}
+$X$ is a matrix of i.i.d. draws from an exponential distribution with parameter $\lambda$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+What is the meaning of \texttt{T} in line P.12 (R.11)?
+\begin{solution}
+$T$ is a sorted version of $X$, where we sort each row increasingly.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+What do we print in line P.14, R.14?
+\begin{solution}
+We print the mean value of each column of $T$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+What is meaning of the variable \texttt{expected}?
+\begin{solution}
+This is an array with expected values of the $i$th order statistic $X_{(i)}$ (see B.H.5.6.5 afor a proof of this result).
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+ What is the \texttt{cumsum} of \texttt{expected}?
+\begin{solution}
+The cumsum is the cumulative sum up to and including the current index. So the final entry indicates the expected value of the sum of all three entries of \verb|expected|.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+ Now that you understand what is going on, rerun the simulation for a larger number of samples, e.g., 1000, and discuss the results briefly.
+\begin{solution}
+The result of \verb|print(T.mean(axis=0))| should be close to that of \verb|print(expected.cumsum())|.
+\end{solution}
+\end{exercise}

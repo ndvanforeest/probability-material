@@ -1,0 +1,90 @@
+\documentclass[lectures]{subfiles}
+\begin{document}
+\section{Lecture 8}
+
+\begin{exercise}
+Let $X$ be a continuous random variable with a pdf
+\begin{align}
+    f_X(x) = \begin{cases}
+    c, &\text{if } 0 \leq x \leq 4, \\
+    0, &\text{otherwise}.
+    \end{cases}
+\end{align}
+\begin{enumerate}
+    \item What is the value of $c$?
+    \item What is the distribution of $X$?
+    \item Do we need to know the value of $c$ to determine the distribution of $X$?
+\end{enumerate}
+
+\begin{solution}
+We need that the pdf $f_X$ integrates to one. Hence, we need
+\begin{align}
+    \int_{-\infty}^\infty f_X(x) dx &= 1 \qquad \iff \\
+    \int_{0}^4 c dx &= 1 \qquad \iff \\
+    4c &= 1 \qquad \iff \\
+    c &= 1/4.
+\end{align}
+Clearly, $X$ is uniformly distributed on $[0,4]$. In fact, we do not need to know the value of $c$ to determine this. It is sufficient to know that the pdf of $X$ is constant on the interval $[0,4]$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Let $X$ be a continuous random variable with a pdf
+\begin{align}
+    f_X(x) = c \cdot e^{-\frac{(x - 4)^2}{8}}, \quad x \in \R.
+\end{align}
+\begin{enumerate}
+    \item What is the value of $c$?
+    \item What is the distribution of $X$?
+    \item Do we need to know the value of $c$ to determine the distribution of $X$?
+\end{enumerate}
+\begin{solution}
+We need that the pdf $f_X$ integrates to one. Hence, we need
+\begin{align}
+    \int_{-\infty}^\infty f_X(x) dx &= 1 \qquad \iff \\
+    \int_{-\infty}^\infty c \cdot e^{-\frac{(x - 4)^2}{8}} dx &= 1 \qquad \iff \\
+    c \cdot \sqrt{2\pi}\cdot 2 \int_{-\infty}^\infty  \frac{1}{\sqrt{2\pi}\cdot 2} e^{-\frac{1}{2}\frac{(x - 4)^2}{2^2}} dx &= 1 \qquad \iff \\
+    c \cdot \sqrt{2\pi}\cdot 2 \cdot 1 &= 1 \qquad \iff \\
+    c &= \frac{1}{\sqrt{2\pi}\cdot 2}.
+\end{align}
+Clearly, $X$ is $N(4,2)$ distributed. In fact, we do not need to know the value of $c$ to determine this. It is sufficient to observe the structure of the pdf as a function of $x$.
+\end{solution}
+\end{exercise}
+
+
+(BH.8.4.5) Fred is waiting at a bus stop. He knows that buses arrive according to a Poisson process with rate $\lambda$ buses per hour. Fred does not know the value of $\lambda$, though. Fred quantifies his uncertainty of $\lambda$ by the \textit{prior distribution} $\lambda \sim \text{Gamma}(r_0, b_0)$, where $r_0$ and $b_0$ are known, positive constants with $r_0$ an integer.
+
+Fred has waited for $t$ hours at the bus stop. Let $Y$ denote the number of buses that arrive during this time interval. Suppose that Fred has observed that $Y=y$.
+
+\begin{exercise}
+Find Fred's (hybrid) joint distribution for $Y$ and $\lambda$.
+\begin{solution}
+See the book.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Find Fred's marginal distribution for $Y$. Use this to compute $\E{Y}$. Interpret the result.
+\begin{solution}
+See the book for the solution to the first part. From the result, it follows that $\E{Y} = \frac{r_0}{b_0} t$ (just plug in the parameters of the Negative Binomial distribution into the expression for the expected value on page 161).\\
+Note that the expected number of buses is linear in time $t$ and has a rate of $r_0/b_0$ per hour, which is the expected value of the rate $\lambda$ of our Poisson process.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Find Fred's posterior distribution for $\lambda$, i.e., his conditional distribution of $\lambda$ given the data $y$.
+\begin{solution}
+See the book.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Find Fred's posterior mean $\E{\lambda | Y = y}$ and variance $\V{\lambda|Y=y}$.
+\begin{solution}
+See the book.
+\end{solution}
+\end{exercise}
+
+
+%\end{comment}
+\end{document}

@@ -1,0 +1,93 @@
+\subsection{BH.8.18}
+
+
+Use python uncertainties module.\footnote{\url{https://pythonhosted.org/uncertainties/}}.
+
+
+We can demonstrate the use of Taylor's equation to see how uncertaintly should propagate\footnote{\url{https://en.wikipedia.org/wiki/Propagation_of_uncertainty}}.
+
+
+
+How many ping pong balls fit into an Airbus Beluga?
+One way to answer this is as follows.
+According to this \href{https://en.wikipedia.org/wiki/Airbus\_Beluga}{wiki-page} the cargo volume $V$ of this airplane is $1500 \m^{3}$.
+But this number is based on the physical dimensions that is available to store containers, tanks, and so on.
+So, I estimate the volume as about twice that amount, i.e., $V = 2500 \m^{3}$.
+The volume of a ping pong ball is $v = 4 \pi r^3/3  = \py{4*3.14*8/3} \cm^{3}$ with $r=2$ cm.
+A plain division gives \py{2500/33.5} ping pong balls.
+Note, I left out the $10^{6}$ conversion from meters to cm, and I do not take into the sphere packing factor.
+Besides that, I hope you agree with me that providing an result with the precision as given here is plain ridiculous.\footnote{For reasons incomprehensible to me, even professional econometricians sometimes  report results with 10 digits or more, without questioning the precision.}
+
+
+In fact, I know that the volumes of an air plane and a ping pong ball is an estimate, rather than a precise number as assumed above.
+It seems to be better to approximate $V$ and $v$ as rvs.
+Let's assume that
+   \begin{align*}
+V \sim N(2500, 500^{2}), & v \sim N(33.5, 0.5^{2}),
+\end{align*}
+where the variances express my trust in my guess work.
+What is now the mean of $N = V/v$ and its std? Can we get the CDF?
+From BH8.18 you know that finding the closed form expression for the distribution of $N$ is not entirely simple.
+However, with simulation it's easy to get an estimates for the mean and the std.
+
+
+\begin{exercise}
+Explain lines marked as `this'.
+
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import norm
+
+num = 500
+
+np.random.seed(3)
+
+V = norm(loc=2500, scale=500) # this
+v = norm(loc=33.5, scale=0.5) # this
+
+print(V.mean(), V.std()) # just a check
+
+N = V.rvs(num) / v.rvs(num) # this
+print(N.mean(), N.std())
+
+print(2500/33.5)
+print(np.sqrt(500*0.5))
+\end{minted}
+
+\begin{minted}[]{R}
+num <- 500
+
+set.seed(3)
+
+V = rnorm(num, 2500, 500) # this
+v = rnorm(num, 33.5, 0.5) # this
+
+N = V / v  # this
+paste(mean(N), sd(N))
+
+2500/33.5
+sqrt(500*0.5)
+\end{minted}
+\end{exercise}
+
+
+\begin{exercise}
+Contrary to BH.7.1.25 if you run the code above, you'll see that $\E N < \infty$, and is very near to the deterministic answer.
+But isn't this strange: we divide two normal random variables, just like BH.7.1.25, but there the expectation is infinite.
+Explain why it works for the Beluga case, but not for the case discussed in BH.7.1.25.
+\begin{solution}
+If we divide two $\sim \Norm{0,1}$ r.v.s we obtain a Cauchy distributed rv.
+Note that here both rvs have a mean of $0$.
+In contrast, in the Beluga case, the normally distributed rvs have positive expectation.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Include code to make a histogram of the PDF of $N$.
+\end{exercise}
+
+
+
+\begin{remark}
+Here is a final, and optional, question. The numerical results suggest the interesting guess $\V N \approx \V V * \V v$, but is this true more generally?
+\end{remark}

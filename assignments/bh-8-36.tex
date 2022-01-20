@@ -1,0 +1,119 @@
+We simulate the post office part of BH.8.36.
+Read it now, i.e., before reading the text below.
+Then read the code below.
+In the questions we ask you to explain what the code does.
+There are lots of print statements that have been commented out, but we left them in for you to include while experimenting with the code to see how the code works.
+(I often use print statements of intermediate results when writing a program, just to see whether I am still on track.
+Once I checked, I remove them, because they clutter the looks of the code.)
+
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import expon
+
+np.random.seed(3)
+
+labdas = np.array([3, 4])
+
+N = 10
+
+T1 = expon(scale=1 / labdas[0]).rvs(N)
+# print(T1.mean())
+T2 = expon(scale=1 / labdas[1]).rvs(N)
+T = np.zeros([2, N])
+T[0, :] = T1
+T[1, :] = T2
+# print(T)
+server = np.argmin(T, axis=0)
+# print(server)
+
+# BH.8.36.b
+print((server == 1).mean())
+
+# BH.8.36.c
+# print(labdas[server])
+S = expon(scale=1).rvs(N) / labdas[server]
+# print(S)
+
+D = np.min(T, axis=0) + S
+# print(D)
+
+print(D.mean(), D.std())
+\end{minted}
+
+\begin{minted}[]{R}
+set.seed(3)
+
+labdas = 3:4
+
+N = 10
+
+T1 = rexp(N, rate = labdas[1])
+T2 = rexp(N, rate = labdas[2])
+
+
+bigT = matrix(0, nrow = 2, ncol = N)
+bigT[1,] = T1
+bigT[2,] = T2
+
+server = rep(0, ncol(bigT))
+
+for (i in 1:ncol(bigT)) {
+  server[i] = which.min(bigT[,i])
+}
+
+print(mean((server == 1)))
+
+S = rexp(N, rate = 1) / labdas[server]
+print(S)
+
+D = apply(bigT, MARGIN = 2, FUN = min) + S
+
+print(mean(D))
+print(sd(D))
+\end{minted}
+
+\begin{exercise}
+Explain why  \texttt{T1} corresponds to a number of service times of the first server.
+\end{exercise}
+
+\begin{exercise}
+To what do the rows of \texttt{T} (\texttt{bigT}) correspond?
+\end{exercise}
+
+\begin{exercise}
+What is the content of \texttt{server}? Why do we compute this?
+\end{exercise}
+
+\begin{exercise}
+Explain how we use the fundamental bridge in line P.21 (R.21) to answer BH.8.36.b.
+\end{exercise}
+
+
+\begin{exercise}
+Alice is taken into service by the server that finishes first.
+We need to simulate the service time that Alice needs at that server.
+Explain how we do this in line P.25 (R.23). Hint, reread BH.5.5 on the exponential. BTW, this is a good time to reread BH.5.3.
+\end{exercise}
+
+\begin{exercise}
+Why is \texttt{np.min(T, axis=0)} in the python code (\texttt{apply(bigT, MARGIN=2, FUN=min)} in  R) the time Alice spends waiting in queue, i.e., the time Alice spends in the post office before her service starts?
+\end{exercise}
+
+
+\begin{exercise}
+Why is \texttt{D} the departure time of Alice, i.e., the time Alice spends in the post office?
+\end{exercise}
+
+
+\begin{exercise}
+Set \texttt{N} to 1000 or so, or any other large number to your liking, but not so large that your computer will keep simulating for a month\ldots Compare the values of the simulation to the theoretical result that you have to compute in BH.8.36.c.
+\end{exercise}
+
+
+\begin{exercise}
+Run the code for $\lambda_{1}=1$ fixed, and take $\lambda_{2}$ equal to $0.5, 1, 1.5$ and $2$ successively. Compute the mean time waiting time and mean sojourn time of Alice, and put your results in a table. Compare the results of the simulation to the theoretical values.
+\end{exercise}
+
+There is an important lesson to learn here.
+With simulation it is, often, reasonably simple to get numerical answers, but it requires many simulations to see a pattern in the numbers.
+For patterns we can better use theory, as theory gives us formulas that show how the output of some model depends on the input.

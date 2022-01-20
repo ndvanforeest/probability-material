@@ -1,0 +1,225 @@
+\documentclass[lectures]{subfiles}
+\begin{document}
+
+\section{Lecture 13}
+\label{sec:lecture-13}
+
+
+
+\begin{exercise}
+A shop receives demands with sizes $\{X_{k}\}$ for some product, for instance, cans with beans.
+Write $\mu = \E X$ and $\sigma^{2} = \V X$.
+
+Suppose $n$ customers arrive.
+The shop has an initial inventory of $I$ cans on the shelf.
+a) Use the CLT to determine $I$ such that the probability that the total demand~$D$ remains below $I$ is larger than some threshold $\alpha$.
+b) The safety stock is defined as $I$ minus the expected demand.
+How large is the safety stock?
+c) When is it reasonable to use the CLT to estimate $I$?
+\begin{solution}
+We have $D=\sum_{i=1}^{n} X_{i}$. Hence, $\E D = n \E X = n \mu$ and $\V D = n \V X = n \sigma^{2}$. We search for $I$ such that
+\begin{equation}
+  \label{eq:131}
+\alpha = \P{D \leq I}   = \P{\bar D_n \leq \bar I_{n}},
+\end{equation}
+where
+\begin{align}
+  \label{eq:132}\
+\bar D_{n} &:= \frac{D-n\mu}{\sigma \sqrt n}   = \frac{D/n - \mu}{\sigma/\sqrt n}, &
+\bar I_{n} &:= \frac{I-n\mu}{\sigma \sqrt n}   = \frac{I/n - \mu}{\sigma/\sqrt n}.
+\end{align}
+Hence, by the CLT, $\bar D_{n}\sim \Norm{0, 1}$ if $n$ large. Thus, we need to find $I$ such that
+\begin{align}
+\P{\bar D_{n} \leq \bar I_{n}} &= \Phi(\bar I_{n}) = \alpha \implies \bar I_{n} = \Phi^{-1}(\alpha) \\
+&\implies  I = n\mu + \sigma \sqrt n \Phi^{-1}(\alpha).
+\end{align}
+Once we found $I$, the safety stock is $I-n\mu$.
+
+Of course, `reasonable' is an imprecise concept.
+But we are tempted to say that it is reasonable to use the CLT to estimate the distribution of $D$ when we need more than a few customers to empty the stock.
+Hence, when $I/\mu \geq 10$, then the CLT already performs reasonably well to estimate the tail probability $\P{D>I}$.
+
+An interesting extension is to suppose that the number of customers is Poisson distributed. Then we need Eve's law to determine $\V D$.
+
+\end{solution}
+\end{exercise}
+
+
+The next couple of exercises concentrate on the interpretation of expectation when dealing with real money, not just toy examples like throwing dice.
+We use this to explain why people pay for insurance, even though they have a negative expected value due to the payments to the insurance company.
+You should  give  some thought to exercises in the proper sequence.
+
+\begin{exercise}
+Suppose we have one perfectly fair die.
+When the die lands 1, 2 you loose your investment, otherwise your investment gets doubled.
+ You are given two options: bet all the money $M$ you have and whatever you can lay your hands on (possibly including the total fortune of your parents, your friends, and so on), or not bet at all.
+Show that your expected gain is $M/3$.
+Given this, would you play this game?
+\begin{solution}
+You invest $M$. When you win, you receive  $2M$, otherwise you loose your investment. Hence, your expected gain is $2 M 4/6 - M = M/3 > 0$.
+As E.T.
+Jaynes puts it: `It seemed obvious to Bernoulli, as it doubtless does also to the reader, that nobody in his right mind would really choose the first alternative.
+This means that our common sense, in some cases, rejects the criterion of maximizing expected profit.'
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+You are given two options: bet any amount of  money you like on the basis that with probability $p=10^{-6}$ you win  $1 000 001$ times what you wagered, but with probability $1-p$ you loose all.
+Would you bet all the money you have?
+\begin{solution}
+  Of course not.
+  Loosing all you have is much worse than your increased happyness when your fortune gets doubled.
+  One way to model this effect is to assign a `utility' to your money.
+  A particular model is then to assign a utility of $\log m$ to an amount of money $m$. Then the  utility of doubling is $\log(2m)$ while loosing it all is $\log 0 = -\infty$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Consider the, so-called, St.
+Petersburg game in which we throw a fair coin until it comes up heads, and then we stop.
+When the coin lands heads on the $n$th throw, you receive $2^{n}$ Euros.
+Suppose your initial capital is $m$ and you invest $f$, then your expected gain is $m-f + \sum_{n=1}^{\infty} 2^{-n} 2^{n} = \infty$.
+But, how much are you actually prepared to pay to enter this game?
+To resolve this, we don't focus on monetary expectation but instead on expected utility (see the previous exercise).
+Explain that, when investing $f$, the later is given by
+\begin{equation}
+  \label{eq:135}
+  \sum_{n=1}^{\infty} 2^{-n}\log(m - f + 2^{n}).
+\end{equation}
+\begin{solution}
+This game comes with an interesting story,  check Wikipedia.
+
+Clearly, you can easily loose most of your investment $f$, but potentially you can earn a lot. We are therefore in same setting as the previous exercise.
+
+Suppose you have a capital $m$ to which you assign a utility $\log m$.
+The expected utility follows right away from LOTE,
+because right after paying $f$ your capital is $m-f$, and when the $n$th throw is the first time heads turns up, your capital becomes $m-f+2^{n}$.
+Then take the log to convert this capital to utility, and take the expectation.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+For $m=200$, write a computer program to compute $f'$ such that
+\begin{equation}
+  \label{eq:136}
+\log m =  \sum_{n=1}^{\infty} 2^{-n}\log(m - f' + 2^{n}).
+ \end{equation}
+What is the interpretation of this $f'$?
+\begin{solution}
+%  This $f'$ is a breakpoint.
+  If you don't play the game, your utility is the LHS, i.e. $\log m$.
+  If you pay $f$ to enter the game, your expected utility is given by the RHS.
+  For an investment $f'$ both sides are equal, so your utility is the same in either case.
+  When you can enter the game by paying $f<f'$, you should play the game, if you think that the $\log$ function models your utility).
+
+
+  To find $f'$ we use bi-section.
+  We assume that the function $g$ is increasing, and $g(a) \leq 0 \leq g(b)$.
+  This implementation aims at showing you the algorithm.
+  Don't use it for real problems.
+  There are better algorithms (although based on the same principles), and they include necessary tests on whether the conditions on $g$ are met.
+
+\begin{samepage}
+\begin{pyblock}
+def find_root(g, a, b, eps=1e-3):
+    while b - a > eps:
+        mid = (a + b) / 2
+        print(f"a = {a}, mid = {mid}, b = {b}\n")
+        if g(mid) > 0:
+            b = mid
+        else:
+            a = mid
+    return (a + b) / 2
+\end{pyblock}
+\end{samepage}
+
+
+Let' apply it to finding the root of the function $x\to x-5.5$.
+(It's useful but not necessary that you read about the anonymous function \texttt{lambda }in python.)
+Study the output carefully.
+It is important that you understand how bisection works.
+\begin{pyblock}
+print(find_root(lambda x: x - 5.5, 0, 10.19027301723047810283))
+\end{pyblock}
+
+\printpythontex
+
+\begin{samepage}
+
+Now apply it to our gain, and think hard about the sign of the gain function. We want it such that it is $<0$ for $f=0$ and $>0$ for $f\gg 0$.
+\begin{pyblock}
+from math import log
+
+m = 200
+
+def gain(f):
+    return log(m) - sum(log(m - f + 2 ** n) / 2 ** n for n in range(1, 100))
+
+
+print(find_root(gain, 0, 200))
+\end{pyblock}
+
+\end{samepage}
+
+\printpythontex
+
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+Suppose you pay a premium $P$ to an insurance company to be protected against a random loss $L \in \{L_{i}, i \leq n\}$ occurring with probability $\P{L = L_{i}} = p_{i}$.
+Since insurance companies are very large, their utility is nearly linear in the range of $L_{i}$.
+Assume your utility function for money is the log function and you have an initial amount $M$ of money.
+Explain that you and the insurance company are willing to do business when the premium $P$ satisfies
+\begin{equation}
+  \label{eq:1313-7}
+\E L < P <   M - \exp\left(\E{\log (M-L)}\right).
+\end{equation}
+\begin{solution}
+
+As the potential losses $L_{i}$ are relativey small for  the insurance company, their expected gain is $P-\E L$. When this is positive, the insurance company is happy.
+
+If you don't take the insurance, your utility is  $\sum_{i=1}^{n} p_{i} \log (M-L_{i}) = \E{\log(M-L)}$, while if you do take the insurance and pay $P$, your utility is $\log(M-P)$. So by taking the insurance, your gained utility is
+\begin{equation}
+  \label{eq:138}
+\log(M-P) - \E{\log(M-L)}.
+\end{equation}
+For this gain to be  positive we need that $P$ is such that
+\begin{equation}
+  \label{eq:139}
+M-P > \exp\left(\E{\log(M-L)}\right).
+\end{equation}
+The RHS in \cref{eq:1313-7} follows now immediately.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Use the Taylor series of $\log (1-x) \approx x + x^{2}/2$ and $e^{x} \approx 1+x $  to see that when $M$ quite a bit larger than $\E L$ that
+\begin{equation}
+  \label{eq:137}
+M - \exp\left(\E{\log (M-L)}\right) \approx \E L + \frac{\V L}{2 M} + \cdots
+\end{equation}
+Interpret the result.
+\begin{solution}
+  \begin{align}
+M - \exp\left(\E{\log (M-L)}\right)
+&=  M - \exp\left(\E{\log M + \log (1-L/M)}\right)  \\
+&=  M - \exp\left(\log M + \E{\log (1-L/M)}\right)  \\
+&=  M - M \exp\left(\E{\log (1-L/M)}\right)  \\
+&\approx  M - M \exp\left(\E{ L/M + L^{2}/2M^{2}}\right)  \\
+&=  M - M \exp\left(\E{L}/M + \E{L^{2}}/2M^{2}\right)  \\
+&\approx  M - M \left(1+ \E{L}/M + \E{L^{2}}/2M^{2}\right)  \\
+&= \E L  + \frac{\E{L^{2}}}{2M} \\
+&= \E L + \frac{\V{L}}{2M} + \frac{(\E{L})^{2}}{2M}.
+  \end{align}
+
+  In words, when the premium $P>\E L$, the insurance company is interested.
+  And when $P< \E L + \V{L}/2M$, you might be interested as the insurance protects you against the \emph{variability} of the loss.
+
+\end{solution}
+\end{exercise}
+\end{document}

@@ -1,0 +1,80 @@
+\input{header}
+
+\subsection{BH.7.53}
+\label{sec:bh.53}
+
+\begin{exercise}
+Read and solve BH.7.53.
+\end{exercise}
+
+
+\begin{exercise}
+The code in \cref{BH.7.53.p} or~\cref{BH.7.53.r}   simulates this exercise.
+Run the code. (To improve your understanding, just change some parameters here and there, and check the output.) Explain the lines marked with $\# *$. (In particular, why do we do a \verb|runs| number of runs to estimate the covariance?) Finally, explain the output.
+\end{exercise}
+
+\begin{listing}[!ht]
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import randint
+
+np.random.seed(3)
+
+
+num = 4
+steps = randint(0, 4).rvs(num) # *
+print(steps)
+X = (2 * steps - 1) * (steps < 2) # *
+Y = (2 * steps - 5) * (steps >= 2) # *
+print(X)
+print(Y)
+R2 = X * X + Y * Y
+print(f"{num=}, {R2.sum()=}")
+
+
+def cov(X, Y):
+    return (X * Y).mean() - X.mean() * Y.mean()  # *
+
+
+num = 10
+runs = 300
+Ss = np.zeros(runs)  # *
+Ts = np.zeros(runs)
+for i in range(runs):  # *
+    steps = randint(0, 4).rvs(num)
+    X = (2 * steps - 1) * (steps < 2)
+    Y = (2 * steps - 5) * (steps >= 2)
+    Ss[i] = X.sum() # *
+    Ts[i] = Y.sum() # *
+
+print(f"{cov(Ss,Ts)=}") # *
+\end{minted}
+\caption{BH.7.53, python code.}
+\label{BH.7.53.p}
+\end{listing}
+
+\begin{listing}[!ht]
+\begin{minted}[]{R}
+a <- 3;
+\end{minted}
+\caption{BH.7.53, R code.}
+\label{BH.7.53.r}
+\end{listing}
+
+\begin{exercise}
+Modify the code so that the drunkard makes steps of size $2$ in when moving left or right; the stepsizes up or down remain the same. What happes with $\E{R^{2}_n}$?
+\begin{solution}
+The line for the $x$-steps becomes
+
+\begin{minted}[]{python}
+X = (4 * steps - 2) * (steps < 2)  # *
+\end{minted}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Optional: Add a third dimension.
+\end{exercise}
+
+
+\input{trailer}

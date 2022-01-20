@@ -1,0 +1,66 @@
+\subsection{BH.8.54}
+\label{sec:bh.8.54}
+
+
+Read and solve BH.8.54. Perhaps you should read the hints in the study guide on this problem too.
+First we consider the case with $r=1$, and we need to tackle some technical details.
+
+\begin{exercise}
+Just as in the problem, let $Y=p X/ q$. Why is $\E Y = 1$?
+\end{exercise}
+
+\begin{exercise}
+If $Z\sim\Exp{1}$, then explain that $M_Z(s) = 1/(1-s)$ for $s<1$.
+\end{exercise}
+
+\begin{exercise}
+Use the mathematical solution of the problem to explain that $M_Y(s)\to M_Z(s)$ as $p\to 0$.
+\end{exercise}
+
+
+\begin{exercise}
+Here is code to compare $M_Y(s)$ to $M_{Z}(s)$. Explain what the function $M(s)$ does. Then explain why in the line marked as `this' we multiply with $1-s_{i}$.  Explain why we limit $s$ to the interval $[0, 0.8]$. Finally, explain why the graph goes through the point $x=0, y = 1$.
+
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import geom, gamma
+import matplotlib.pyplot as plt
+
+np.random.seed(3)
+
+p = 0.1
+q = 1 - p
+n = 10000
+
+
+def M(s):
+    X = geom(p).rvs(n)
+    Y = p * X / q
+    return np.exp(s * Y).mean()
+
+
+num = 30
+m = np.zeros(num)
+s = np.linspace(0, 0.8, num)
+for i in range(num):
+    m[i] = M(s[i]) * (1 - s[i])  # this
+
+plt.plot(s, m, label="MY")
+plt.tight_layout()
+plt.savefig("figures/moments.pdf")
+\end{minted}
+\end{exercise}
+
+\begin{exercise}
+The match is not terrric when $p=0.1$. Rerun the code, but now with $p=1/1000$. Which line to you have to change for this? Include your graph. Is the match better now?
+\end{exercise}
+
+\begin{exercise}
+The problem asks for the general $r$. What lines of code have to change to deal with general $r$? Modify the code appropriately, and explain why your code is correct.
+\begin{solution}
+The limiting mgf is the mgf of the gamma distribution. This is $(1/(1-s)^{r}$. Also the mgf of the geom must be raised to the power $r$.
+\begin{minted}[]{python}
+    m[i] = (M(s[i]) * (1 - s[i]))**r
+\end{minted}
+\end{solution}
+\end{exercise}

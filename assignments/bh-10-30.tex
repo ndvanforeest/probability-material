@@ -1,0 +1,58 @@
+\input{header.tex}
+
+\subsection{BH.10.30}
+
+\begin{exercise}
+Explain how the code below implements the solution of parts a and b BH.10.30. (Of course we skip the proof of the convergence to $g(\alpha)$ here.)
+\end{exercise}
+
+\begin{minted}{python}
+import numpy as np
+from scipy.stats import bernoulli
+import matplotlib.pyplot as plt
+
+np.random.seed(3)
+
+num = 100
+p, alpha = 0.5, 0.5
+revenue = 0.5 + 1.2 * bernoulli(p).rvs(num)
+
+Y = np.ones(num)
+Y[0] = 1
+for i in range(1, num):
+    Y[i] = (1 - alpha + alpha * revenue[i]) * Y[i - 1]
+
+print(np.log(Y[-1]) / num)
+
+# plt.plot(Y) # this
+
+def g(alpha):
+    return 0.5 * np.log((1 + 0.7 * alpha) * (1 - 0.5 * alpha))
+
+
+plt.ylim(-10 * g(alpha), 10 * g(alpha)) # this
+plt.axhline(g(alpha), c='r', lw=2, label="g")
+plt.plot(np.log(Y)[1:] / range(1, num), label="(log Yn)/n")
+plt.legend()
+plt.savefig("figures/bh-10-30.pdf")
+\end{minted}
+
+\begin{exercise}
+Uncomment the relevant line to obtain a plot of $Y_{n}$ as a function $n$. Make the plot and include it in your assigment.
+\end{exercise}
+
+\begin{exercise}
+Take \mintinline{python}{num} much larger, e.g., 100 000. What is $(\log Y_n)/n$ now?
+\end{exercise}
+
+
+\begin{exercise}
+Print $(\log Y_n)/n$  for various values of $\alpha$. For instance, take $\alpha = 1/10, 2/10, 3/10, 4/10$.
+\end{exercise}
+
+\begin{exercise}
+If you like a simple challenge, include a plot of $(\log Y_n)/n$ as a function of $\alpha$. However, skip this if you don't have time, or interest in this extension of the problem. (Perhaps, if you find programming hard, you should do it to improve your skills :-) )
+\end{exercise}
+
+
+\input{trailer}

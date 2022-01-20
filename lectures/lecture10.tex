@@ -1,0 +1,121 @@
+\documentclass[lectures]{subfiles}
+\begin{document}
+
+\section{Lecture 10}
+
+We have a wooden stick of length 100 cm that we break twice.
+First, we break the stick at a random point that is uniformly distributed over the entire stick.
+We keep the left end of the stick.
+Then, we break the remaining stick again at a random point, uniformly distributed again, and we keep the left end again.
+
+\begin{exercise}
+What is the expected length of the stick we end up with?
+\begin{solution}
+Let $X \sim \Unif{0,100}$ denote the point where the first stick is broken (in cm). Let $S$ denote the point where the second stick is broken (i.e., the length of the remaining stick). Then, $S \sim \Unif{0,X}$. We want to compute $\E{Y}$. Using Adam's law we obtain
+\begin{align}
+    \E{S} &= \E{\E{S|X}} \\
+    &= \E{X/2} \\
+    &= \E{X}/2 \\
+    &= 100/4 = 25.
+\end{align}
+Hence, we end up with a stick of expected length 25 cm.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Now we change the story slightly. Every time we break a stick, we keep the \textit{longest} part. What is the expected length of the remaining stick?
+\begin{solution}
+Let $X$ denote the point where the initial stick gets broken; let $Y$ denote the length of the first remaining stick; let $Z$ denote the point where the first remaining stick gets broken; let $S$ denote the length of the final remaining stick. We have
+\begin{align}
+    &X \sim \Unif{0,100}, \\
+    &Y = \max\{X,100 - X\}, \\
+    &Z \sim \Unif{0,Y}, \\
+    &S = \max\{Z, Y-Z\}.
+\end{align}
+We have
+\begin{align}
+    \E{S} = \E{\E{S|Y}},
+\end{align}
+where
+\begin{align}
+    \E{S|Y=y} &= \E{\max\{Z, Y-Z\}|Y=y} \\
+    & = \E{\max\{Z, y-Z\}|Y=y} \\
+    & = \P{Z \geq y|Y=y}\E{Z|Z \geq y, Y=y} + \P{Z < y|Y=y}\E{y - Z|Z < y, Y=y} \\
+    & = \frac{1}{2}\cdot \frac{3y}{4} + \frac{1}{2}\cdot \frac{3y}{4} \\
+    & = \frac{3y}{4}.
+\end{align}
+Hence,
+\begin{align}
+    \E{S} &= \E{\E{S|Y}} \\
+    &= \E{\frac{3Y}{4}}  \\
+    &= \frac{3}{4}\E{Y}.
+\end{align}
+We have
+\begin{align}
+    \E{Y} &= \E{\max\{X,100 - X\}} \\
+    &= \frac{3}{4} \cdot 100 = 75,
+\end{align}
+by symmetry with $\E{S|Y=y}$ above. Hence,
+\begin{align}
+    \E{S} &= \frac{3}{4}\E{Y} \\
+     &= \frac{3}{4}\cdot 75 = 56.25 \\
+\end{align}
+So we expect to end up with a stick of length 56.25 cm.
+\end{solution}
+\end{exercise}
+
+
+
+(Same story as last week; BH.8.4.5) Fred is waiting at a bus stop. He knows that buses arrive according to a Poisson process with rate $\lambda$ buses per hour. Fred does not know the value of $\lambda$, though. Fred quantifies his uncertainty of $\lambda$ by the \textit{prior distribution} $\lambda \sim \text{Gamma}(r_0, b_0)$, where $r_0$ and $b_0$ are known, positive constants with $r_0$ an integer.
+
+Fred has waited for $t$ hours at the bus stop. Let $Y$ denote the number of buses that arrive during this time interval. Suppose that Fred has observed that $Y=y$.
+
+\begin{exercise}
+How many buses does Fred expect to observe? I.e., compute $\E{Y}$
+\begin{solution}
+Last week, we solved this question by first deriving the marginal distribution of $Y$ (which was negative binomial) and then computing the mean of this distribution. We obtained $\E{Y} = \frac{r_0}{b_0}t$.\\
+Now, let's use conditional expectations instead. By Adam's law,
+\begin{align}
+    \E{Y} &= \E{\E{Y|\lambda}}.
+\end{align}
+Since $Y | \lambda \sim \text{Pois}(\lambda t)$, we have
+\begin{align}
+    \E{\E{Y|\lambda}} &= \lambda t.
+\end{align}
+Hence,
+\begin{align}
+    \E{Y} &= \E{\E{Y|\lambda}} \\
+    &= \E{\lambda t} \\
+    &= \E{\lambda} t \\
+    &= \frac{r_0}{b_0} t.
+\end{align}
+\end{solution}
+\end{exercise}
+
+(BH.9.3.10).
+An extremely widely used method for data analysis in statistics is \textit{linear regression}.
+In its most basic form, the linear regression model uses a single explanatory variable $X$ to predict a response variable $Y$.
+For instance, let $X$ be the number of hours studied for an exam and let $Y$ be the grade on the exam.
+The linear regression model assumes that the conditional expectation of $Y$ is \textit{linear} in $X$:
+\begin{align}
+    \E{Y|X} = a + b X.
+\end{align}
+
+\begin{exercise}
+Show that an equivalent way to express this is to write
+\begin{align}
+    Y = a + bX + \varepsilon,
+\end{align}
+where $\varepsilon$ is a random variable (called the \textit{error}) with $\E{\varepsilon|X} = 0$.
+\begin{solution}
+See the book.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Solve for the constants $a$ and $b$ in terms of $\E{X}$, $\E{Y}$, $\cov{X,Y}$, and $\V{Y}$.
+\begin{solution}
+See the book.
+\end{solution}
+\end{exercise}
+\end{document}

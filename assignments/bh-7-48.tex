@@ -1,0 +1,82 @@
+\subsection{BH.7.48} Read this exercise first and solve it. Then consider the code below.
+
+\begin{minted}[]{python}
+import numpy as np
+
+np.random.seed(3)
+
+
+def find_number_of_maxima(X):
+    num_max = 0
+    M = -np.infty
+    for x in X:
+        if x > M:
+            num_max += 1
+            M = x
+    return num_max
+
+
+num = 10
+X = np.random.uniform(size=num)
+print(X)
+
+print(find_number_of_maxima(X))
+
+samples = 100
+Y = np.zeros(samples)
+for i in range(samples):
+    X = np.random.uniform(size=num)
+    Y[i] = find_number_of_maxima(X)
+
+print(Y.mean(), Y.var(), Y.std())
+\end{minted}
+
+
+\begin{minted}[]{R}
+set.seed(3)
+
+find_number_of_maxima = function(X) {
+  num_max = 0
+  M = -Inf
+  for (x in X) {
+    if(x > M) {
+      num_max = num_max + 1
+      M = x
+    }
+  }
+  return(num_max)
+}
+
+
+num = 10
+X = runif(num, min = 0, max = 1)
+print(X)
+
+print(find_number_of_maxima(X))
+
+samples = 100
+Y = rep(0, samples)
+for (i in 1:samples) {
+  X = runif(num, min = 0, max = 1)
+  Y[i] = find_number_of_maxima(X)
+}
+
+print(mean(Y))
+print(var(Y))
+print(sd(Y))
+\end{minted}
+
+\begin{exercise}
+Explain how the small function in lines P.6 to P.13 (R.4-R.12) works.
+(You should know that \texttt{x += 1} is an extremely useful abbreviation of the code \texttt{x = x + 1}).
+\begin{solution}
+It iterates through the elements of $X$ and checks how often the current value is larger than any of the previous values.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Explain the code in lines P.25 and P.26 (R.25, R.26).
+\begin{solution}
+We draw a sample of a $U[0,1]$ distribution of size \verb|num| and compute the corresponding number of maxima (or ``records'').
+\end{solution}
+\end{exercise}

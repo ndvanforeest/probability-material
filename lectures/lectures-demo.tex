@@ -1,0 +1,41 @@
+% arara: clean: { files: [blg, idx, ilg, ind, log, out, pytxcode, rel, toc ]}
+% arara: clean: {files: [ ans.tex, hint.tex] }
+% arara: pdflatex: { shell: yes, interaction: nonstopmode }
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex: { shell: yes, interaction: nonstopmode }
+
+
+
+\documentclass[12pt]{article}
+
+%\usepackage[all-solutions-at-end]{optional}
+\usepackage[check]{optional}
+%\usepackage[nosolutions]{optional}
+
+\input{header.tex}
+
+\usepackage[a5paper,landscape]{geometry}
+\usepackage{fouriernc}
+
+\AtEndEnvironment{exercise}{\clearpage} %  each exercise on a new page
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\subfile{lecture01.tex}
+% \subfile{lecture02.tex}
+% \subfile{lecture03.tex}
+% \subfile{lecture04.tex}
+% \subfile{lecture05.tex}
+% \subfile{lecture06.tex}
+% \subfile{lecture07.tex}
+% \subfile{lecture08.tex}
+% \subfile{lecture09.tex}
+% \subfile{lecture10.tex}
+% \subfile{lecture11.tex}
+% \subfile{lecture12.tex}
+% \subfile{lecture13.tex}
+% \subfile{lecture14.tex}
+
+\end{document}

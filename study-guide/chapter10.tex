@@ -1,0 +1,551 @@
+% arara: pdflatex: { shell: yes }
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex: { shell: yes }
+\input{header.tex}
+
+
+\chapter{Chapter 10: Questions and remarks}
+
+
+\section{Simple questions}
+
+
+\subsection*{Section 10.1}
+
+
+\begin{exercise}
+On BH.10.1.1:  here is perhaps simpler proof of the Cauchy-Schwarz inequality.  Define  $f(t) = \E{(Y-tX)^2}$.
+\begin{enumerate}
+\item Explain that $f(t)\geq 0$.
+\item Write $f(t) = \E{(Y-tX)^2}$ as a polynomial of the second degree, i.e., in the form $f(t) = a t^2 + b t + c$  (Hint, see the proof of BH.10.1.1).
+\item Since $f(t) \geq 0$, how many (real) roots can it have at most?
+\item What are the implications of this for the discriminant $D=b^2-4ac$?
+\item Show that the Cauchy-Schwarz inequality directly follows from this restriction on $D$.
+\end{enumerate}
+\begin{solution}
+$f$ is the expectation of something non-negative. Then, work out the square and apply linearity of the expectation. As $f\geq 0$, it can have most one root, hence $D\leq 0$. But $D=4\E{XY} - 4\E{X^{2}}\E{Y^{2}}$.
+\end{solution}
+\end{exercise}
+
+\begin{remark}
+I find it easier to remember the Cauchy-Schwarz inequality in the form $(\E{XY})^2 \leq \E{X^2}\E{Y^2}$; like this there are squares on both sides.
+\end{remark}
+
+\begin{exercise}
+On BH.10.1.3. How do they get from $\P{X>0}$ to the inequality for $\P{X=0}$? (Provide the details.)
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+On BH.10.1.3. Do the algebra to show that $\P{X=0}=1/(\mu+1)$.
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+On BH.10.1.3. Explain that we actually use Markov's inequality.
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+On BH.10.1.3. What is the probability of two people with birthdays 2 days apart?
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{remark}
+I often forget the direction in Jensen's inequality. To check, the following reasoning works for me: I know that $\V X \geq 0$, but $\V X = \E{X^{2}} - (\E X)^2 = \E{g(X)}-g(\E X)$ with $g(x)=x^2$. Then, from the graph of the parabola, i.e., the graph of $g$, I know that $g$ is convex.
+\end{remark}
+
+
+\begin{exercise}
+In Jensen's inequality, when does equality hold? Can you explain (in terms of convexity and concavity) why equality holds for only this type of functions?
+
+\begin{solution}
+Equality holds for functions that are both convex and concave. The only functions that are both convex and concave are affine functions, i.e., functions of the type $g(x)=a x+b$.\\
+Assuming that $g$ is twice differentiable, we can show this as follows. Convexity is  equivalent to $g''(x)\geq 0$ and concavity is equivalent to $g''(x)\leq 0$. This means $g''(x)=0$ and the only functions for which this holds are affine functions.
+
+If you like maths, consider generalizing the condition.
+Is it necessary to assume that $g$ is twice differentiable?
+For instance, it is not hard to prove that a convex function is continuous.
+Consider now a point at which $g$ is convex and concave at the same time, does it follow that $g$ is twice differentiable at such a point?
+\end{solution}
+\end{exercise}
+
+\begin{remark}
+Skip  BH.10.1.7, 10.1.8, 10.1.9
+\end{remark}
+
+\begin{exercise}
+When  $X$ is a non-negative rv, prove the simplest form of Markov's inequality: $\P{X\geq a} \leq \E X/a$ for $a\geq 0$. Then show that BH.10.1.10 follows from this.
+\begin{hint}
+Use that $X\geq X\1{X\geq a} \geq a \1{X\geq a}$.
+\end{hint}
+\begin{solution}
+In the equation of the hint, take expectations at both sides. Realize that $\E{\1{X\geq a}} =\P{X\geq a}$. Next, for any rv, $|X|\geq 0$. Hence, we can apply the simple form of Markov's inequality to get the result of the book.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Which of the following are equivalent to Chebyshev's inequality? Show why or why not.
+\begin{enumerate}
+    \item $P(\left|X-\E X \right| \geq a) \leq \frac{\V X}{a^2}$ for all $a>0$
+    \item $P(\left|X-\E X \right| < a) > \frac{\V X}{a^2}$ for all $a>0$
+    \item $P(\left|X-\E X \right| < a) \geq 1-\frac{\V X}{a^2}$ for all $a>0$
+    \item $P(\left|X-\E X \right| \geq c\sigma) \leq \frac{1}{c^2}$ for all $c>0$ and $\sigma^2=\V X$.
+\end{enumerate}
+\begin{solution}
+By definition, equation (1) is Chebyshev's inequality. Letting $a=c\sigma_X$ we get (4). Equation (3) follows from multiplying (1) by $-1$, adding 1 and using the complement rule. Equation (2) is not equivalent to any of the others, as this is not how reversing inequalities works.
+\end{solution}
+\end{exercise}
+
+\begin{exercise} On BH.10.1.11.
+Why is Chebyshev's inequality of no use if we try to plug in values for $0<a\leq \sqrt{\V{X}}$?
+
+\begin{solution}
+This will result in the trivial bound $\P{|X - \mu| \geq a}\leq B$, for some $B\geq 1$. But we already know that every probability is at most one. So the bound does not tell us anything interesting.
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+BH.10.1.13 shows that Chernoff's inequality is a very strict bound.
+Is Chernoff's inequality always the tightest bound (out of the ones you know)?
+What about the case where $X$ is defined as follows
+% Let $X$ be a r.v.
+% on the set $\{0,2\}$ taking on values in this set with probabilities
+\begin{align*}
+    &\P{X=0} = \frac{3}{4}, & \P{X=2} = \frac{1}{4}.
+\end{align*}
+
+\begin{hint}
+  Consider $\P{X\geq2}$ and compare Chernoff's inequality to Markov's inequality.
+\end{hint}
+
+\begin{solution}
+In this (pathological) example we get from Markov's inequality that $P(X\geq 2) \leq \frac{E(X)}{2}=\frac{1}{4}$. This means the Markov bound is tight, as it is equal to the probability that $X$ exceeds 2. From Chernoff's bound we get
+\begin{align*}
+    P(X\geq 2)\leq \frac{E(e^{t  X})}{e^{2t}} = \frac{3+e^{2t}}{4 e^{2t}} = \frac{1}{4}\left(1+\frac{3}{e^{2t}}\right) > \frac{1}{4}\quad\forall t>0.
+\end{align*} Hence here the Markov bound is tighter. We use the facts from probability theory that $E(X)=\frac12$ and that $E(e^{t X})=\frac34+e^{2 t}\frac14$ in this example.
+\end{solution}
+\end{exercise}
+
+
+
+
+\subsection*{Section 10.2}
+\label{sec:section-10.2}
+
+\begin{exercise}
+Is the following statement equivalent to the strong or the weak law of large numbers?
+Fix $\epsilon>0$. For all $\delta>0$, there is an $n$ so large that $\P{|\bar X_n-\mu|>\epsilon} \leq \delta$.
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Which of the two following statements correctly represents the strong law: $\lim_{n\to\infty} \P{|X_n-\mu|>\epsilon} = 1$ for all $\epsilon>0$, or $\P{\lim_{n\to\infty} |X_n-\mu|=0} = 1$.
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+On BH.10.2.5. Where have we applied this idea earlier?
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+
+
+\subsection*{Section 10.3}
+\label{sec:section-10.3}
+
+\begin{exercise}
+On BH.10.3.1. I prefer to write $\frac{\bar X_n-\mu}{\sigma/\sqrt n}$. Why could that be?
+\begin{solution}
+Divide by the std corresponds to the standard transformation $(X-\mu)/\sigma$. Like this, I don't have to remember anything new. Algebra gives the formula of the book.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+On BH.10.3.7. $\E{\log Y_n}=\log 100 - 0.081n$. Explain the $0.081$. Think also about the paradoxical outcome. (Once again, probability theory \emph{is} hard.)
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+On BH.10.3.7. The stock rises $\alpha$ \% and decreases $\beta$ \%. Find a relation between  $\alpha, \beta$  such that $\lim Y_{n}\geq 1$.
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+On BH.10.3.7. Note that $\E{\log Y_n} \sim -0.081 n$, i.e., has has negative drift, but $\log \E{Y_n} \sim n \log 1.1$. Check that this is not in conflict with Jensen's inequality.
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\subsection*{Section 10.4}
+\label{sec:section-10.4}
+
+\begin{exercise}
+On BH.10.4.3. Why is $n \bar Z_n^2\sim \chi_1^2$?
+\begin{hint}
+\end{hint}
+\begin{solution}
+Here is the reason.
+$\bar Z_n$ is the sum of $n$ normal rvs $Z_j$, hence normal itself.
+As each of these $Z_j$ is standard normal, $\E{\bar Z_n}=0$, and $\V{\bar Z_n}=n^{-2}\sum_{j} \V{Z_{j}}=1/n$, by independence.
+Therefore, $\sqrt{n} \bar Z_{n} \sim N(0,1) \implies (\sqrt{n}\bar Z_n)^2 \sim \chi_1^2$, where we use Definition 10.4.1 and Theorem 10.4.2 in the last step.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+On BH.10.4.3. Show that $\sum_j^n (Z_j-\bar Z_n)^2$ and $\bar Z_n^2$ are independent.
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+A fair coin is tossed 100 times. We are interested in the probability that the number of heads that turn up is at most 40. What is the tightest upper bound on this probability that we can find by using Chebyshev's inequality? Hint: use a symmetry argument.
+\begin{solution}
+Let $X$ be the r.v. corresponding to the number of heads. Then $X\sim \text{Binomial}\left(100,\frac12\right)$, which has moments $\E{X} = 100 \cdot \frac{1}{2} = 50$ and $\V{X} = 100 \cdot \frac{1}{2} \cdot \frac{1}{2} = 25$. By symmetry of the $\text{Binomial}\left(100,\frac12\right)$ distribution,
+\begin{align}
+    \P{ X \leq 40} = \P{ X \geq 60 }.
+\end{align}
+Hence, using Chebyshev's inequality,
+\begin{align}
+    \P{ X \leq 40} &= \frac{1}{2}  \P{ |X - 50| \geq 10 } \\
+    &= \frac{1}{2} \P{ |X - 50| \geq 10 } \\
+    &\leq \frac{1}{2} \frac{\V{X}}{10^2} \\
+    &= \frac{1}{2} \frac{25}{100} = \frac{1}{8}.
+\end{align}
+Hence,
+\begin{align}
+    \P{ X \leq 40} &\leq \frac{1}{8}.
+\end{align}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Here is inequality from which all inequalities in BH 10.1.3 immediately follow. It's worth memorizing.
+Take any rv $X$ and a function $f$ that is non-negative and non-decreasing.
+\begin{enumerate}
+\item Why is this true for any $a$: $f(a) \1{X\geq a} \leq f(X) \1{X\geq a} \leq f(X)$?
+\item Take expectations in the inequality of the previous step and use the fundamental bridge to show that $\P{X\geq a} \leq \E{f(X)}/f(a)$.
+\item What part of the proof goes wrong if  $f$ can also be negative?
+\item Show that Markov's inequality follows by taking $Y=|X|$ and  $f(x)=x$. Why don't we take $f(x) = |x|$?
+\item Show that Chebyshev's inequality follows by taking $Y=|X-\mu|$ and $f(x)=x^2$.
+\item Show that Chernoff's inequality follows by taking $f(x)=e^{x}$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}\label{ex:13-1}
+Let the set of r.v.s $\{X_{k}, k\geq 1\}$ be the outcomes of throws of a biased coin. We take $X_{j}=1$ if the outcome is heads, and $X_{j}=0$ if tails. Suppose $\E{X_{k}} = \mu$ and $\V{X_{k}} = \sigma^{2}$.
+Let $Y_{j} = \sum_{i=n j + 1}^{(n+1)j} X_{i}/n$, i.e., $Y_{j}$ is the sample mean of the $j$ batch of throws. Since $\{Y_{j}, j\geq 1\}$ are iid, take $Y$ as the common r.v., i.e., $Y_{j} \sim Y$.
+What is a (frequentist) explanation of the statement $\P{|Y-\mu|>\epsilon} \leq \sigma^{2}/n \epsilon$?
+\begin{solution}
+  We assemble $m$ observations of $Y_{j}$ (hence, we throw the coin $n m$ times).
+  Suppose we see $M$ times that $|Y_{j} - \mu|> \epsilon$. Then we expect that $M/m < \sigma^{2}/n\epsilon$.
+
+Thus,  Chebyshev's inequality makes a statement about sample means of size $n$, say.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Interpret the WLLN in terms of the previous exercise.
+\begin{solution}
+  First fix some $\epsilon>0$.
+  Now take some $n$ and determine the fraction of outliers, that is, count how many of the sample means $Y_{1}=\sum_{i=1}^{n} X_{i}/n, Y_{2}=\sum_{i=n+1}^{2n} X_{i}/n, \ldots$ lie outside the interval $[\mu-\epsilon, \mu + \epsilon]$ and divide by the number of samples taken.
+  The WLLN says this: If the sample averages $Y_{1}, Y_{2}$ are taken over larger sets of the $X_{j}$, i.e., $n$ is larger so that we put more throws in a batch, then the fraction of outliers become smaller.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+In the setting of~\cref{ex:13-1}, the probability of a sequence of outcomes like this: $H, T, H, T, H, T,\ldots$, i.e., a sequence in which the heads and tails alternate, has probability zero. However, $\sum_{i=1}^{n}\1{X_{i}=H}/n \to 1/2$. So, we have a sequence that occurs with probability zero, but still the average along the sequence has the proper limit. Doesn't this violate the SLLN?
+\begin{solution}
+The SLLN says nothing about individual sample paths, i.e.,  strings of outcomes like $H, T, H, T, \ldots$. In fact, the probability of obtaining any particular sample path has zero probability. Instead, the SLLN makes a statement about sets of sample paths. For the coin it says that it is virtually impossible to pick a path from the set of paths whose  long-run fraction of heads is not equal to $1/2$.
+\end{solution}
+\end{exercise}
+
+
+\section{BH exercises: hints and solutions}
+
+\begin{exercise}
+BH.10.2
+\end{exercise}
+
+\begin{exercise}
+BH.10.3
+This is just a funny exercise, but I wonder whether it has a practical value.
+\begin{hint}
+First check the assumption that $Y\neq a X$, for some $a>0$; why is it there?
+Then, take a suitable $g$ in Jensen's inequality.
+Bigger hint: $g(x)=1/x$.
+
+In the solution guide, the authors do not explain the $>$, while in Jensen's inequality there is a $\leq$. To see why the $>$ is allowed here, rethink the assumption in the exercise, and reread Theorem 10.1.5.
+
+Finally, at what $p$ is $p(1-p)$ maximal?
+\end{hint}
+\end{exercise}
+
+\begin{exercise}
+BH.10.6
+\begin{hint}
+Apple the idea of BH.10.1.3 to $W=(X-\mu)^2$.
+\end{hint}
+\begin{solution}
+Take $W$ as in the hint and $Z=1$. By the inequality of Cauchy-Schwarz, $(\E{W})^2 \geq \E{W^2}$. The LHS is $\sigma^{4}$, the RHS is $\E{(X-\mu)^4}$. The rest  follows right away from the definition of kurtosis.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+B.10.9
+\begin{hint}
+a. Jensen's inequality, $g(x)=e^x$
+
+b. Use symmetry: $X$ and $Y$ are iid.
+
+c. Which set of events is larger?
+
+d.
+Use Jensen's inequality and Cauchy-Schwarz.
+
+e. Eve's law.
+
+f. Use Markov's inequality and  the triangle inequality
+\end{hint}
+\begin{solution}
+a. $\leq$ Immediate from the hint.
+
+b. $=$: immediate from the hint
+
+c.
+\begin{align*}
+\P{X>Y-3} =  \P{X>Y+3} + \P{Y-3\leq X \leq Y+3}.
+\end{align*}
+Both terms on the RHS are non-negative.
+
+d. Use the hint. $(\E{XY})^{2} \leq \E{X^2}\E{Y^2} =(\E{X^2})^{2} \leq \E{X^4}$, where we use that  $X$ and $Y$ are iid, so that $\E{X^2}$ and $\E{Y^2}$ are equal.
+
+e. $=$: since $X$ and $Y$ are independent, $\V{Y|X} = \V Y$.
+
+f. From the hint,  $\P{|X+Y|>3} \leq \E{|X+Y|}/3 \leq \E{|X|}/3 + \E{|Y|}/3 = 2\E{|X|}/3 \leq \E{|X|}$. Why is there not an $<$ in the last step?
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.10.23.
+\end{exercise}
+
+\begin{exercise}
+BH.10.26.
+\begin{solution}
+a.
+I did things a bit differently than in the book. Take $S_n=\sum_{i=1}^n X_i$ with $X_i\sim\Bern{p}$. Then I know this:
+\begin{align*}
+\P{S_n=k} = {n \choose k} p^k(1-p)^{n-k} \to e^{-\lambda} \lambda^k/k! = \P{N=k}, \quad\text{if } N\sim\Pois{\lambda},
+\end{align*}
+for $n\to \infty$, $p\to0$ but such that $p n = \lambda$.
+I also know from the CTL that $S_n\sim N(n p, n p(1-p))$ if $n$ becomes large.
+But, $N(n p, n p(1-p)) \to N(\lambda, \lambda)$ in the above limit.
+Now take $\lambda=n$ to see that $\Pois{\lambda} \sim N(n,n)$.
+
+b.
+Check the solution manual. Then, with $\mu=\sigma=\lambda=n$, and $n\gg 1$,
+\begin{align*}
+\Phi(n+1/2) - \Phi(n-1/2)
+&= \frac 1 {\sqrt{2\pi \sigma^{2}}}\int_{n-1/2}^{n+1/2} e^{-(x-\mu)/2\sigma^{2}} \d x\\
+&= \frac 1 {\sqrt{2\pi n }}\int_{-1/2}^{1/2} e^{-x^{2}/2n} \d x\\
+&= \frac 1 {\sqrt{2\pi n }}\int_{-1/2}^{1/2} (1 - x^{2}/2n) \d x\\
+&= \frac 1 {\sqrt{2\pi n }} (1- 1/(24 n)).
+\end{align*}
+So, we found another term to approximate $n!$ yet better.
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+BH.10.28. Note that standardized version of a rv $X$ is $Y=(X-\mu)/\sigma$ where $\E X = \mu$ and $\V X = \sigma$.
+\begin{hint}
+The idea is to prove that the MGF of $X_n$ converges to the MGF of a $N(\mu, \sigma^{2})$ rv as $n\to\infty$. Thus, read and follow the proof of the CTL, BH.10.3.1.
+
+What are  $\E{X_n}$ and $\V{X_n}$ if $X\sim \Pois{n}$?  Once you know that, explain that the MGF of the standardized version of $X_n$ is equal to  $\exp\{-n+s \sqrt n + n e^{-s/\sqrt n}\}$.
+
+Perhaps you should do BH.10.27 first.
+\end{hint}
+\begin{solution}
+Since $X_n\sim \Pois{n}$, $\E{X_n}=n$, $\V{X_n}=n$. Using the hints, with $Y_{n}$ the standardized version of $X_n$:
+\begin{align*}
+M_{Y_n}(s) &= \sum_{i=0}^{\infty} e^{-n} n^i/i!\cdot e^{s (i-n)/\sqrt n}
+= e^{-n} e^{s\sqrt n} \sum_{i=0}^{\infty}  (ne^{s/\sqrt n})^i/i!\\
+&= \exp\{-n+s \sqrt n + n e^{-s/\sqrt n}\}.
+\end{align*}
+With Taylor's expansion for $e^x$ to second order,
+\begin{align*}
+-n+s \sqrt n + n e^{-s/\sqrt n} \approx -n+s \sqrt n + n \left(1 -s/\sqrt n + s^{2}/2 n\right) =   s^2/2.
+\end{align*}
+Now follow the proof of the CTL, BH.10.3.1.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+BH..10.30. The problem demonstrates a simple investment strategy.
+If you plan to work as a quant in finance or as an actuary, or if you play poker, or some similar game, such strategies should interest you naturally.
+
+\begin{hint}
+a. See BH.10.3.7. Try to convert the recursion for $Y_n$ to a form as in that example.
+
+b. Just substitute $\alpha$ in the relevant formula of part a.
+\end{hint}
+\begin{solution}
+a. Define $I_n$ as the success indicator: it is 1 if I win, and 0 if I loose.  For round 1, suppose I win, then $Y_{1} = Y_0/2 + 1.7 Y_0/2= 1.35 Y_{0}$. If I lose,
+$Y_{1} = Y_0/2 + 0.5 Y_0/2= 0.75 Y_{0}$. Therefore,
+\begin{align*}
+Y_n = Y_{n-1} (1.35)^{I_{n}}(0.75)^{1-I_{n}}.
+\end{align*}
+With this expression, the rest  is simple, just  follow  BH.10.3.7.
+It turns out that $Y_n\to\infty$ as $n\to\infty$.
+
+b. Use the hint.
+\begin{align*}
+Y_n &= Y_{n-1} (1+0.7\alpha)^{I_{n}}(1-0.5\alpha)^{1-I_{n}} \implies \\
+\log Y_n &= \log Y_{n-1}  + I_{n} \log(1+0.7\alpha) + (1-I_{n})\log (1-0.5\alpha)  \\
+& = \log Y_{0}  + \log(1+0.7\alpha) \sum_{i=1}^{n}I_{i}  + \log(1-0.5\alpha).\sum_{i=1}^{n} (1-I_{i})
+\end{align*}
+By the strong law, $\sum I_i/n \to 1/2$ and $\sum (1-I_{i})/n \to 1/2$. Therefore
+\begin{align*}
+n^{-1}\log Y_n \to 0.5 \log(1+0.7\alpha) + 0.5\log(1-0.5\alpha) = 0.5 \log( (1+0.7\alpha)(1-0.5\alpha)) = g(\alpha)
+\end{align*}
+For the maximum, take the derivative with respect to $\alpha$. This gives $\alpha=2/7$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH.10.36.
+\end{exercise}
+
+
+\begin{exercise}
+BH.10.39.
+\begin{solution}
+a.
+ $\P{N=n} = \P{X_1 < 1, X_2<1, \cdots X_{n-1}<1, X_n>1}$. But, then $N$ must have the  first success distribution, and $N-1$ be geometric.
+
+
+b.
+Let $X_i$ be the inter-arrival time between jobs $i-1$ and $i$. Then $S_n=\sum_i^n X_i$ is the arrival time of job $n$. We want that $S_{M-1} < 10 \leq S_M$. Since the $X_i$ are $\sim \Exp{\lambda}$, $S_n \sim \Pois{\lambda t}$.
+
+c.  The sum of $n$ iid $\Exp{1}$ rvs is $\Gamm{n,1}$. Since $\bar X_{n}$ has mean $1$, $X_{n} \sim \Gamm{n,n}$. Then $\V{X_n} = 1/n$ (I just looked it up in the back of the book).  By the CLT, $\bar X_n$ is approximated well by a $\Norm{\mu, \sigma^{2}}$ rv with $\mu=1, \sigma^2=1/n$.
+
+\end{solution}
+\end{exercise}
+
+
+
+\section{Challenge: Records}
+\label{sec:records}
+
+
+In BH.7.48 you looked at the number of records in high jumping.
+Let $X_j$ be how high the $j$th jumper jumped.
+As in that exercise, we assume that $X_1, X_2, \ldots$ are iid.
+with a continuous distribution and say that the $j$th jumper sets a record if $X_j$ is larger than $X_i$ for all $1\leq i \leq j-1$.
+Let $X_i^*$ denote the $i$th record, i.e., the height of highest jump for the first $i$ jumps.
+We write $f_X$ and $F_X$ for the PDF and CDF of the iid
+jumping heights, and $X$ for a random variable with density $f_X$.
+Finally, we write $G_X$ for the survivor function of $X$, i.e.
+$G_X(x) = 1-F_X(x)$.
+
+It is not necessary to know the solution of BH.7.48 to do the challenge. In the challenge, we instead look at the distribution of the $i$th record, the expectation of the $i$th record and the expected improvement of the record: $\E{X_{n+1}^* - X_n^*}$.
+
+
+\begin{exercise}
+Let $f_{X_{i+1}^*, X_i^*}$ be the joint PDF of the $(i+1)$th and the $i$th record.
+Prove that $$f_{X_{i+1}^*, X_i^*}(u,v) = \frac{f_X(u)}{G_X(v)} f_{X_i^*}(v) \1{u >v}.$$
+\end{exercise}
+
+Note that $X_1^* = X_1$. We now derive the density of $X_2^*$, and then proceed with the general case. These are challenging problems, be sure to check out the hints if you are stuck.
+
+\begin{exercise}
+Prove that $$f_{X_2^*}(u) = - f_X(u) \log(G_X(u)).$$
+\begin{hint}
+Use a substitution. What is the derivative of the survivor function?
+\end{hint}
+\end{exercise}
+
+\begin{exercise}
+Prove that $$f_{X_n^*}(u) = f_X(u) \cdot \frac{(-\log(G_X(u)))^{n-1}}{\Gamma(n)}.$$
+\begin{hint}
+If you need to prove something for all natural numbers $n$, it is always good to try using mathematical induction, especially since we already know something relating $X_{n+1}^*$ and $X_n^*$.
+Note that you can again use the same substitution as in the previous exercise. After that, you need another substitution.
+\end{hint}
+\end{exercise}
+
+In general case, it is hard to compute the integral of $u f_{X_n^*}(u)$ which is required to compute $\E{X_n^*}$.
+For the exponential distribution however, it is still possible to find the result analytically.
+
+\begin{exercise}
+Assume that $X \sim \Exp{\lambda}$. Determine $\E{X_n^*}$, and hence the expected improvement of the record: $\E{X_{n+1}^* - X_n^*}$, using the PDF from the previous exercise.
+\begin{hint}
+Do you recognize the PDF of $X_n^*$ for $X \sim \Exp{\lambda}$?
+\end{hint}
+\end{exercise}
+
+
+When $X$ is exponentially distributed, we can also use directly use the properties of the exponential distribution to determine  $\E{X_{n+1}^* - X_n^*}$.
+
+\begin{exercise}
+In Exercise 6 of Assignment 5 you found an expression for $\E{X \given X \geq a}$ if $X \sim \Exp{\lambda}$. Use this expression and Adam's law to determine  $\E{X_{n+1}^* - X_n^*}$  if $X \sim \Exp{\lambda}$.
+\end{exercise}
+
+\begin{exercise}
+Is the exponential distribution a realistic model for record improvements? Why (not)? If not, why is it still good to look at this case? Explain briefly.
+\end{exercise}
+
+We now consider this model for other distributions as well. Although for many distributions finding analytical results is very difficult or impossible, it can still be interesting to make a plot for the record improvements for other distributions.
+
+
+
+
+\begin{exercise}
+Assume that $X$ has PDF $f_X(x) = 2xe^{-x^2}$ for $x>0$, and $f_X(x) = 0$ otherwise. Plot $\E{X_{n+1}^* - X_n^*}$ as a function of $n$. You may use code for computing the survival function and the expectation, although it is possible (but not recommended) to do it analytically.
+\end{exercise}
+
+\input{trailer.tex}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "study-guide.tex"
+%%% End:

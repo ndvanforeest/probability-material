@@ -1,0 +1,172 @@
+\subsection{BH.8.27}
+
+We start from BH.8.27 (which you have to read now).  We are interested in the difference between the distribution of $X+Y+Z$ and the normal distribution. But why the normal distribution? As it turns out, the central limit law, see BH.10, states that the distribution of sums of r.v.s converge to the normal distribution (in a specific sense)
+
+Here is some code to simulate.
+
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import norm
+
+import matplotlib.pylab as plt
+import seaborn as sns
+
+sns.set()
+
+np.random.seed(3)
+
+k = 3
+Zexact = norm(loc=k / 2, scale=np.sqrt(k / 12))
+X = np.arange(0, 3, 0.1)
+
+XYZ = np.random.uniform(size=(4000, k))
+# print(XYZ)  # if you want to see it.
+Z = XYZ.sum(axis=1)
+sns.distplot(Z)
+plt.plot(X, Zexact.pdf(X))
+plt.show()
+\end{minted}
+
+\begin{minted}[]{R}
+set.seed(3)
+
+k = 3
+X <- seq(0, 3, by = 0.1)
+Zexact <- dnorm(X, mean = k / 2, sd = sqrt(k / 12))
+
+
+XYZ <- matrix(NA, 4000, k)
+for (i in 1:k) {
+  XYZ[,i] <- runif(4000, min = 0, max = 1)
+}
+Z <- rowSums(XYZ)
+
+par()
+hist(Z, prob = TRUE, breaks = 31)
+lines(X, Zexact, type = "l", col = "orange")
+lines(density(Z), col = "blue")
+\end{minted}
+
+
+\begin{exercise}
+What is the shape of \verb|XYZ| in the code above, i.e., how many rows and columns does it have? If you don't know, run the code, and print it.
+\end{exercise}
+
+\begin{exercise}
+What is the shape (rows and columns) of \verb|Z|?
+\end{exercise}
+
+\begin{exercise}
+Explain the values for \verb|loc|~ and \verb|shape| in \verb|Zexact|.
+  (Read the documentation of scipy.stats.norm on the web is necessary.)
+  To which definition in BH does this loc-scale transformation relate?
+\end{exercise}
+
+
+\begin{exercise}
+Change the seed to your student id, or any other number you like, run the code, and include the graph produced by your simulation.
+Explain what you see.
+\end{exercise}
+
+
+Now we do an exact computation.
+
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import norm
+
+import matplotlib.pylab as plt
+import seaborn as sns
+
+sns.set()
+
+N = 200
+x = np.linspace(0, 2, 2 * N)
+fx = np.ones(N) / N
+f2 = np.convolve(fx, fx)
+f3 = np.convolve(f2, fx)
+
+k = 3
+
+x = np.linspace(0, k, len(f3))
+Zexact = norm(loc=k / 2, scale=np.sqrt(k / 12))
+
+
+plt.plot(x, N * f3, label="conv")
+plt.plot(x, Zexact.pdf(x))
+plt.legend()
+plt.show()
+\end{minted}
+
+\begin{minted}[]{R}
+N = 200
+x = seq(0, 2, length.out = 2 * N)
+fx = rep(1, N) / N
+f2 = convolve(fx, fx, type = "open")
+f3 = convolve(f2, fx, type = "open")
+
+k = 3
+
+x = seq(0, k, length.out = length(f3))
+Zexact = dnorm(x, mean = k/2, sd = sqrt(k / 12))
+
+par()
+plot(x, N * f3, col = "blue", type = "l", ylim = c(0, 0.8))
+lines(x, Zexact, type = "l", col = "orange")
+legend("topright", legend = "conv", bty = "n",
+      lwd = 2, cex = 1.2, col = "blue", lty = 1)
+\end{minted}
+
+\begin{exercise}
+Read the documentation of ~np.convolve~. Why is it called like this?
+\end{exercise}
+
+\begin{exercise}
+In the code, what is \texttt{f2}?
+\end{exercise}
+
+\begin{exercise}
+What is \texttt{f3}?
+\end{exercise}
+
+\begin{exercise}
+Why do we set \texttt{k=3}?
+\end{exercise}
+
+\begin{exercise}
+A bit harder, why do we plot \texttt{N*f3}, i.e., why do have to multiply with \texttt{N}? Relate this to the meaning of $f(x)\d x$, where $f$ the density of some random variable.
+(To understand why is very important. Think hard, and read the solution when it becomes available.)
+\begin{solution}
+  Suppose we chop up the area under some arbitrary  function $g$ in blocks of height $g(x)$ and length $\Delta x$.
+  Then the area of such a block is $g(x) \Delta x$.
+
+
+  In our case, we chop up the interval in parts with length $\Delta x = 1/N$.
+  The elements of $f3$ are such that $f3[i] = f_{3}(x_{i}) \Delta x$, where $x_{i}$ lies in the $i$th interval and $f_{3}$ is the density of the sum of the three r.v.s. But then, $f_{3}(x_{i}) = f3[i]/\Delta x = N f3[i]$.
+
+  Forgetting to scale with $\Delta x = 1/N$ is a common error when dealing with densities.
+  Hence, recall that, notationally, $f(x) \d x$ means a block of height $f(x)$ and length $\d x$. Don't forget to deal with the $\d x$!
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Yet a tiny bit harder, consider \texttt{f4 = np.convolve(f3, fx)} and \texttt{g4 = np.convolve(f2, f2)}. Why are they, numerically speaking,  equal?
+\begin{solution}
+Take four r.v.s $U, V, X, Y$. Then
+  \begin{equation}
+    \label{eq:15}
+(U+V+X) + Y = (U+V) + (X+Y).
+  \end{equation}
+Thus the density of $(U+V+X) + Y$ must be the same as the density of $(U+V) + (X+Y)$.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+When you would compute the maximum of \texttt{np.abs(f4 -g4)} you would see that this is about $10^{-10}$, or so.
+Hence, a small number.
+This is not equal to 0, but we know that this is due to rounding effects.
+
+How can we use the function \texttt{np.isclose()} to get around this problem?
+(You should memorize from this question that you should take care when testing on whether floating point numbers are the same or not.)
+\end{exercise}

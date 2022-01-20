@@ -1,0 +1,35 @@
+\subsection{BH-8-4-3. Sum of two gamma rvs}
+\label{sec:sum-two-gamma}
+
+Let us investigate BH.8.4.3. The rvs $X$ and $Y$ are independent, $X\sim\Exp{\lambda}$ and $Y\sim\Exp{\mu}$. We want to compare $X+Y$ to $\Gamma{2, \mu}$ and $\Gamma{2, \lambda}$, just to see what happens.
+
+\begin{exercise}
+Run the  code below. Explain the lines marked as `this'. In particular, why do we simulate outcomes for $X$ and $Y$? Then, why are the shape and scale variables as they are? Then explain the three graphs.
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import expon, gamma
+import matplotlib.pyplot as plt
+
+labda, mu = 3, 5
+
+n = 1000
+X = expon(scale=1 / labda)
+Y = expon(scale=1 / mu)
+Z = X.rvs(n) + Y.rvs(n)          # this
+G1 = gamma(2, scale=1 / labda)   # this
+G2 = gamma(2, scale=1 / mu)      # this
+
+support = np.arange(0, 5, 0.03)
+
+plt.hist(Z, label="Z", density=True)
+plt.plot(support, G1.pdf(support), label="G1")
+plt.plot(support, G2.pdf(support), label="G2")
+plt.legend()
+plt.tight_layout()
+plt.savefig("figures/gamma1.pdf")
+\end{minted}
+\end{exercise}
+
+\begin{exercise}
+Modify the above code such that $X$ and $Y$ are both $\Exp{\lambda}$. Then make a histogram of a simulation of $X+Y$ and compare it to the PDF of the correct gamma  distribution. Discuss your result, and include the figure of course.
+\end{exercise}

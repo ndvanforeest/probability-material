@@ -1,0 +1,158 @@
+\subsection{BH.7.1}
+\label{sec:bh.7.1}
+
+First read and solve BH.7.1. Answers and hints are in the study guide.
+
+
+\begin{exercise}\label{ex:ab}
+Sketch, on paper, the 2D area that corresponds to the event that Alice and Bob meet. Just make a photo with your mobile phone and include it. (Like this you learn how to include jpeg or png files in \LaTeX.)
+\end{exercise}
+
+\begin{exercise}
+Write $A$ and $B$ for the rvs corresponding to the arrival times of Alice and Bob.
+Explain  you have to compute the expectation of  $\1{A<B+0.25}\cdot\1{B-0.25 < A}$
+to compute the probability that Alice and Bob meet.
+Then,  explain that is this equal to
+\begin{equation}
+\int_0^1\int_{}^1 \1{a<b+0.25}\cdot \1{b-0.25 < a} \d a \d b.
+\end{equation}
+\end{exercise}
+
+\begin{exercise}
+What is the probability that they meet (i.e., solve the integral by hand).
+\end{exercise}
+
+\begin{exercise}
+Explain this code to compute numerically the probability of overlap. Check the web on what is an anonymous function in python or R, and explain why we use that here.
+(Hint: anonymous functions are useful "when it’s not worth the effort to give it a name". Do we use elswhere the anonymous function we define here?)
+\begin{minted}[]{python}
+from scipy.integrate import dblquad
+
+area = dblquad(lambda a, b: (b - 0.25 < a) * (a < b + 0.25), 0, 1, 0, 1)
+print(area)
+\end{minted}
+\end{exercise}
+
+\begin{exercise}
+Explain the output, i.e., the results of the print statements, of this piece of code.
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import uniform
+
+np.random.seed(3)
+
+n = 5
+alice = uniform(0, 1).rvs(n)
+bob = uniform(0, 1).rvs(n)
+print(alice)
+print(bob)
+print((alice < bob))
+\end{minted}
+I tend to set the seed of the random number generator so that I always get the same results. This helps a lot when debugging, because the numbers don't change time and again.
+\end{exercise}
+
+\begin{exercise}
+Run  this piece of code, and then check that you get different output every time.
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import uniform
+
+n = 5
+alice = uniform(0, 1).rvs(n)
+bob = uniform(0, 1).rvs(n)
+print(alice)
+print(bob)
+overlap = (alice < bob) # this
+print(overlap)
+\end{minted}
+Explain that the line marked as `this' implements an indicator function.
+\end{exercise}
+
+
+\begin{exercise}
+Run  this piece of code, and explain the output.
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import uniform
+
+np.random.seed(3)
+
+n = 5
+alice = uniform(0, 1).rvs(n)
+bob = uniform(0, 1).rvs(n)
+overlap = (bob - 0.1 < alice) * (alice < bob + 0.1)
+print(alice)
+print(bob)
+print(overlap)  # this line
+\end{minted}
+\end{exercise}
+
+\begin{exercise}
+To find the probability of overlap, we have to modify in the code above the line marked as `this line' to
+\begin{minted}[]{python}
+print(overlap.mean())
+\end{minted}
+Change this in your code and explain what it does.
+\end{exercise}
+
+
+\begin{exercise}
+Modify the  code of the previous exercise so that you sample 1000 times an appointment between Alice and Bob, and such that they only meet when 15 minutes appart. Include your code and show the output.
+\end{exercise}
+
+
+\begin{exercise}
+Contrary to~\cref{ex:ab} suppose Bob is not prepared to wait longer than 5 minutes, while Alice is still prepared to wait for 15 minutes. Write down the integral that corresponds to the proability that they meet.  Solve it by hand. Modify the above code such that you can evaluate it numerically. Include your code in the answers.
+\end{exercise}
+
+\begin{exercise}
+Contrary to~\cref{ex:ab} suppose Bob is prepared to wait for 20 minutes when he arrives before 1230, but just 10 when he arrives after 1230, while Alice is still prepared to wait for 15 minutes. Write down the integral that corresponds to the proability that they meet. Explain that this is the code to compute this.
+
+\begin{minted}[]{python}
+from scipy.integrate import dblquad
+area1 = dblquad(lambda a, b: (b - 1 / 3.0 < a) * (a < b + 0.25), 0, 1, 0, 0.5)
+area2 = dblquad(lambda a, b: (b - 1 / 6.0 < a) * (a < b + 0.25), 0, 1, 0.5, 1)
+print(area1[0] + area2[0])
+\end{minted}
+\end{exercise}
+
+\begin{exercise}
+Contrary to~\cref{ex:ab} suppose Bob's arrival time is $\Exp{\lambda}$ with $\lambda=1/2$,  while Alice's arrival time is still uniform.
+Explain the code below.
+\begin{minted}[]{python}
+import numpy as np
+from scipy.integrate import dblquad
+from scipy.stats import uniform, expon
+
+np.random.seed(3)
+
+labda = 1.0 / 2
+end = 5
+
+value = dblquad(
+    lambda a, b: (b - 0.25 < a) * (a < b + 0.25) * np.exp(-labda * b), 0, 1, 0, end
+)
+print(value)
+
+area = value[0] * labda
+print(area)
+
+n = 100000
+alice = uniform(0, 1).rvs(n)
+bob = expon(scale=1 / labda).rvs(n)
+overlap = (bob - 0.25 < alice) * (alice < bob + 0.25)
+print(overlap.mean())
+\end{minted}
+\end{exercise}
+
+\begin{exercise}
+Changing the value of the variable \verb|end| to 10 0 in the code above, and run it again. Then chang  it to 50, and finally to 1000.  When I do this, I get a very strange answers for 50 and 1000. Try to explain what goes wrong.
+\end{exercise}
+
+
+Hopefully you got by now the point: modeling is an interesting, but  quite difficult, activity. Once you have the model, the computer can help solve the problem.
+
+
+You should memorize that integration in multiple dimensions quickly becomes unmanageable. In fact, most higher D integrals are approximated with simulation, like we do here in the simulation part.
+
+You should also memorize that computers are extremely dumb, and that they can live with any answer that comes out of a computation. Here, since we compare a simulation with a direct integration, we see a difference, and that makes us suspicious about the correctness of both. Mind, we humans can do pretty smart things, and we should typically distrust the output of computers. (That is why I often include tests.)

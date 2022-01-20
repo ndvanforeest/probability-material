@@ -1,0 +1,140 @@
+\input{header}
+\subsection{BH.9.6.1}
+\label{sec:bh.9.6.1}
+
+Read BH.9.6.1 first. We will redo the computations and check the results with simulation. We will also cover many other topics as we proceed.
+
+
+
+\begin{exercise}
+We need to model the distribution of an individual demand $X$.
+As an example, we can use the beta distribution. In the example  $\mu$ and $\sigma$ are assumed as given, but for the beta distribution we need an $a$ and $b$. One way is to solve by hand for $a$ and $b$ for given $\mu$ and $\sigma$. However, we can also be lazy and let the computer do the work. Here is the code to do that.
+
+Explain how this code works. (You can use the relevant documentation on the web on how the function fsolve works.) Why do I use $\mu=1/2$ and $\sigma^{2}=1/12$ as test case? Are the $a$ and $b$ that comes out of the solver correct? What does the final check do?
+\begin{minted}[]{python}
+from scipy.stats import beta
+from scipy.optimize import fsolve
+
+mu, var = 1 / 2, 1 / 12  # why this test case?
+
+
+def func(x):
+    a, b = x[0], x[1]
+    m = a / (a + b)
+    v = m * (1 - m) / (a + b + 1)
+    return [m - mu, v - var]
+
+
+a, b = fsolve(func, [2, 2])
+print(a, b)
+X = beta(a, b)
+print(X.stats(moments='mv')) # final check.
+\end{minted}
+\end{exercise}
+
+\begin{exercise}
+What do you expect to get when you would choose $\mu=2$? If it fails, why is that?
+\end{exercise}
+
+\begin{exercise}
+What do you expect to get when you would choose $\sigma > 1/2$? If it fails, why is that? Hint, when an rv has a support on $[0,1]$, why is the variance at most $1/4$?
+\end{exercise}
+
+\begin{remark}
+When setting up simulations and choosing variables, make sure that the variables you choose actually make any sense.
+\end{remark}
+
+Now we know how to find $a$ and $b$ for given $\mu$ and $\sigma$, we henceforth assume that $a=1$ and $b=2$, as this is easier to work with.
+
+\begin{exercise}
+Now that we know how to simulate individual demands, we can compute the mean and the variance with the formulas of the book and compare this to simulation.
+
+Explain the lines marked as `this' of the code. (The rest must be clear for you. If not, then you have to be seriously concerned about your understanding of programming.)
+
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import poisson, beta
+from scipy.optimize import fsolve
+
+np.random.seed(3)
+
+labda = 3
+N = poisson(labda)
+# print(N.rvs(100).mean()) # why this line?
+
+X = beta(a=1, b=2)
+mu, var = X.stats(moments='mv')
+
+days = 1000
+demands = np.zeros(days)
+for i in range(days):
+    demands[i] = X.rvs(N.rvs()).sum()  # this
+
+print(demands.mean(), demands.var())
+print(labda * mu, var * labda + mu * mu * labda) # this
+\end{minted}
+\end{exercise}
+
+\begin{exercise}
+Here is the code to compute the mean and variance with Adam and Eve's laws. Explain how it works. In particular:
+\begin{enumerate}
+\item explain the `this' lines;
+\item what are the contents of the demand matrix;
+\item what is the $P$;
+\item  how are $EX, EV$ and $VE$  computed;
+\item Note in particular the difference between $EXn$ and $EXN$, and similarly for the variance.  Use BH.9.2.1 to explain why I use a small $n$ and a large $N$ in the naming of the variables.
+\end{enumerate}
+
+Remark: I realize that this is a hard piece of code, but your understanding of Eve's law will increase by a lot. Some  subtle points about the code that you \emph{don't} have to explain:
+\begin{enumerate}
+\item Suppose the largest amount of customers (jobs) that we saw during the simulation is $7$. Then on any day we can have $0, \ldots, 7$ demands, i.e, 8 possible outcomes. Thus, per row in the demands matrix we need to have 8 columns.
+\item The numpy function that computes the mean gives a warning when it is applied to an empty array. (Just try it to see how it works.)  We prevent this by computing the histogram (i.e., the empirical PDF) for $n=0$ separately. The same reasoning applies to the case when idx has zero length.
+\end{enumerate}
+
+
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import poisson, beta
+
+np.random.seed(3)
+
+labda = 3
+N = poisson(labda)
+
+X = beta(a=1, b=2)
+mu, var = X.stats(moments='mv')
+
+days = 1000
+n_jobs = N.rvs(days)
+n_max = n_jobs.max() + 1  # see the comments
+demands = np.zeros((days, n_max))
+for day in range(days):
+    n = n_jobs[day]
+    demands[day, :n] = X.rvs(n)  # this
+
+
+P = np.zeros(n_max)
+EXn = np.zeros(n_max)
+VXn = np.zeros(n_max)
+P[0] = np.argwhere(n_jobs == 0).size / days
+for n in range(1, n_max):
+    idx = np.argwhere(n_jobs == n)
+    if idx.size == 0:
+        continue
+    P[n] = idx.size / days  # this
+    EXn[n] = demands[idx, :n].mean() * n  # this
+    VXn[n] = demands[idx, :n].var() * n  # this
+
+EXN = rv_discrete(values=(EXn, P))  # this
+
+print("mean:", labda * mu, EXN.mean())
+
+VXN = rv_discrete(values=(VXn, P))  # this
+print("EV: ", var * labda, VXN.mean())
+
+VE = EXN.var()
+print("VE: ", mu * mu * labda, VE)
+\end{minted}
+\end{exercise}
+
+\input{trailer}

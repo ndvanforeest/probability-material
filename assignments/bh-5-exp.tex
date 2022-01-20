@@ -1,0 +1,109 @@
+\input{header}
+
+\subsection{Why is the Exponential Distribution so important?}
+
+At the Paris metro, a train arrives every 3 minutes on a platform.
+Suppose that 50 people arrive between the departure of a train and an arrival.
+It seems entirely reasonable to me to model the arrival times of the individual people as distributed on the interval \([0,3]\).
+What is the distribution of the inter-arrival times of these people?
+It turns out to be exponential!
+
+You might want to compare your final result to Figure BH.13.1 (It is not forbidden to read the book beyond what you have to do for this course!).
+In this exercise we use simulation to see that clustering of arrival times.
+
+
+\begin{minted}[]{python}
+import numpy as np
+
+np.random.seed(3)
+
+
+num = 5 # small sample at first, for checking.
+start, end = 0, 3
+labda = num / (end - start)  # per minute
+print(1 / labda)
+
+A = np.sort(np.random.uniform(start, end, size=num))
+print(A)
+print(A[1:])
+print(A[:-1])
+X = A[1:] - A[:-1]
+print(X)
+
+print(X.mean(), X.std())
+\end{minted}
+
+
+\begin{minted}[]{R}
+set.seed(3)
+
+
+num = 5
+start = 0
+end = 3
+labda = num / (end - start)
+print(1 / labda)
+
+A = sort(runif(num, min = start, max = end))
+print(A)
+print(A[-1])
+print(A[-length(A)])
+X = A[-1] - A[-length(A)]
+print(X)
+
+print(mean(X))
+print(sd(X))
+\end{minted}
+
+\begin{exercise}
+Explain the result of line P.12 (R.13)
+\begin{solution}
+This are the arrival times of 5 passengers within the time interval of 3 minutes (sorted increasingly).
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Compare the result of  line P.13 and P.14 (R.12, R.13);  explain what is \texttt{A[1:]} (\texttt{A[-1]})
+\begin{solution}
+\verb|A[1:]| is an array of all elements of \verb|A| except the first one.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Compare the result of  line P.12 and P.14 (R.11 and R.13);  explain what is \texttt{A[:-1]} (\texttt{A[-length(A)]}).
+\begin{solution}
+\verb|A[:-1]| is an array of all elements of \verb|A| except the last one.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+ Explain what is \texttt{X} in P.15 (R.14)
+\begin{solution}
+\verb|X| consists of the interarrival times.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Why do we compare $1/\lambda$ and \texttt{X.mean()}?
+\begin{solution}
+$1/\lambda$ is the expected interarrival time. $\verb|X.mean()|$ is the sample average of the interarrival times.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Recall that $\E X = \sigma (X)$ when $X\sim \Exp{\lambda}$.
+Hence, what do you expect to see for \texttt{X.std()}?
+\begin{solution}
+For \verb|X.std()| we expect to see $1/\lambda = 0.6$ too (if $X$ is indeed exponentially distributed with parameter $\lambda$).
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+ Run the code for a larger sample, e.g. 50, and discuss (very briefly) your results.
+\begin{solution}
+For a sample of size 50, we expect an average interarrival time of $0.06$ and an equal standard deviation if the distribution of the interarrival times is indeed exponential. We indeed observe a sample mean and sample average that are very close to this value.
+\end{solution}
+\end{exercise}
+
+
+\input{trailer}

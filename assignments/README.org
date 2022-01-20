@@ -1,0 +1,8 @@
+#+title:   Probability distributions, assignments
+#+SUBTITLE: EBP038A05, 2021-2022
+#+author: Nicky D. van Foreest
+#+date: {{{time(%Y-%m-%d)}}}
+
+* Files overview
+1. ~assignments.pdf~ :  Questions and hints for the assignments
+2. ~assignment-answer-template.tex~: the tex file that you have to use to hand in your assignment.

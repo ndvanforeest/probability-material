@@ -1,0 +1,195 @@
+\documentclass[lectures]{subfiles}
+\begin{document}
+
+\section{Lecture 7}
+\label{sec:lecture-7}
+
+\begin{exercise}
+At the end of Story 2 of Bayes' billiards (BH.8.3.2) there is the expression
+\begin{equation}
+\label{eq:72}
+\beta(a,b) = \frac{(a-1)!(b-1)!}{(a+b-1)!}.
+\end{equation}
+Derive this equation.
+\begin{solution}
+We have by the Bayes' billiard stories that
+\begin{align}
+{n \choose k} \int_0^1 p^k(1-p)^{n-k}\d p = \frac{1}{n+1},
+\end{align}
+but the integral is equal to $\beta(k+1, n-k+1)$ by the definition of the $\beta$ function. Hence,
+\begin{align*}
+\beta(k+1, n-k+1)
+&= \frac{1}{(n+1) {n \choose k}} = \frac{(n-k)!k!}{(n+1)!}.
+\end{align*}
+Taking $a-1 = k$, $b-1 =n -k$, then $n=b-1+k = a+b-2$, so that
+\begin{align*}
+\beta(a, b) = \frac{(b-1)!(a-1)!}{(a+b-1)!}.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+In the Beta-Binomial conjugacy story, BH take as prior $f(p) = \1{p\in [0,1]}$, and then they remark that when $f(p) \sim \beta(a,b)$ for general $a, b \in \N$, we must obtain the negative hypergeometric distribution.
+I found this pretty intriguing, so my question is: Relate the Bayes' billiards story to the story of the Negative Hypergeometric distribution, and, in passing, provide an interpretation of $a$ and $b$ in terms of white and black balls.
+Before trying to answer this question, look up the details of the negative hypergeometric distribution.
+(In other words, this exercise is meant to help you sort out the details of the remark of BH about the negative hypergeometric distribution.)
+\begin{solution}
+  Let's follow the Bayes' billiards story no 1, but in the context of the negative hypergeometric distribution.
+  We have $w$ white balls, and $b$ black balls.
+  We place, arbitrarily all balls on a line, and mark the $r$th, $r\leq w$, white ball.
+  Call this ball the pivot.
+  Then we ask:  what is the probability that the number of black balls $X$ lying at the left of the pivot is equal to $k$, i.e, $\P{X=k}$?
+
+Conditional on the position of the pivot being $p$, we must have that
+\begin{equation}
+\label{eq:73}
+\P{X=k} = w \int_0^1{b \choose k} p^k(1-p)^{b-k} \times {w -1 \choose r-1}p^{r-1} (1-p)^{w-r} \d p.
+\end{equation}
+To see this, reason as follows.
+There are $w$ ways to choose one of the white balls as the pivot.
+(I initially forgot this factor.)
+Then, given $p$, $k$ black balls lie to the left of the pivot; the rest lies to the right.
+Then, of the $w-1$ remaining white balls, $r-1$ also have to lie the left of the pivot, and the others to the right (observe that $w-1 - (r-1) = w -r$, hence $(1-p)^{w-r}$.)
+
+With the definition of the  $\beta$ function, we can simplify to this:
+\begin{align}
+\P{X=k}
+&= w{b \choose k} {w -1 \choose r-1}  \int_0^1 p^{k+r-1}(1-p)^{b-k+w-r} \d p \\
+&= w{b \choose k} {w -1 \choose r-1}  \beta(k+r, b-k+w-r + 1)\\
+&= w{b \choose k} {w -1 \choose r-1} \frac{(r+k-1)! (b-k+w-r)!}{(w+b)!}.
+\end{align}
+
+Now, from the story of the negative hypergeometric distribution, we have that
+\begin{align}
+\P{X=k}
+&= \frac{{w \choose r-1}{b \choose k}}{{w+b \choose r+k -1}}\frac{w-(r-1)}{w -(r-1) +b-k} \\
+\end{align}
+To see this, note that when $X=k$, the $r+k$th ball is white (hence we stop).
+The probability to select a white ball then $w-(r-1)$ out of the remaining $w-(r-1) + b-k$.
+(For $X$ to be equal to $k$ we have removed $k$ black balls and $r-1$ white balls).
+And we have to multiply by the number of combinations to select $r-1$ of the $w$ balls and $k$ of the black balls.
+
+
+Next, with a some algebra---here we do the work, but the books just say `after a bit of algebra we find', and then it is left to you to do the algebra---,
+\begin{align}
+\label{eq:717}
+\P{X=k}
+&= \frac{{w \choose r-1}{b \choose k}}{{w+b \choose r+k -1}}\frac{w-r+1}{w+b-r-k+1} \\
+&= {w \choose r-1}{b \choose k} \frac{(r+k-1)!(w+b-r-k+1)!}{(w+b)!}\frac{w-r+1}{w+b-r-k+1} \\
+&= {w \choose r-1}{b \choose k} \frac{(r+k-1)!(w+b-r-k)!}{(w+b)!}(w-r+1) \\
+&= w {w -1 \choose r-1}{b \choose k} \frac{(r+k-1)!(w+b-r-k)!}{(w+b)!},
+\end{align}
+where we use that
+\begin{align}
+  w{w-1 \choose r-1} &= w\frac{ (w-1)!}{(w-r)! (r-1)!} = \frac{ w!}{(w-r)! (r-1)!} \\
+&=\frac{ w!}{(w-r+1)! (r-1)!} (w-r+1)= {w\choose r-1} (w-r+1).
+\end{align}
+
+The results for the Bayes' billiards match with those of the negative hypergeometric distribution!
+
+So, inspecting~\cref{eq:73} we see that the $a$ and $b$ parameters in the $\beta$ distribution for the prior $f(p)$ are such that $a=r$ and $b=w-r+1$.
+(Don't confuse the $b$ here with the number of black balls.
+I took the $b$ to stick to the notation of the book.)
+In other words, the $a$ corresponds to the white ball we mark as the pivot, and $b$ to the remaining number of white balls (plus 1).
+\end{solution}
+\end{exercise}
+
+The next real exercise is about recursion applied to the negative hypergeometric distribution. But to get in the mood, here is short fun question on how to use recursion.
+
+\begin{exercise}
+We have a chocolate bar consisting of $n$ small squares.
+The bar is in any shape you like, square, rectangular, whatever.
+What is the number of times you have to break the bar such that you end up with the $n$ single pieces?
+%Recursive arguments are very powerful, and I often find them very insightful (and I also like this type of reasoning).
+\begin{solution}
+  Write $T(n)$ for the number of times you have to break the bar when there are $n$ squares.
+  Clearly, $T(1) =0$.
+  In general, suppose $n=m+k$, $1 \leq k < n$, then $T(n) = T(m) + T(k) + 1$, because we need $T(k)$ to break the part with $k$ pieces, and $T(m)$ for the part with $m$ pieces, and we need 1 to break the big bar into the two parts. But then, with the \emph{boundary condition} $T(1)=0$,
+  \begin{align*}
+    T(2) &= T(1) + T(1) + 1 = 1, \\
+T(3) &= T(1) + T(2) + 1 = 1 + 1 = 2,
+  \end{align*}
+and so on. So we guess that $T(n)=n-1$ for any $n$. Let's check. It certainly holds for $n=1$.  Generally,
+\begin{align*}
+n-1 = T(n) = T(k) + T(m) + 1 = k-1 + m-1 + 1 = k+m-1 = n-1.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Use recursion to find the expected number $X$ of black balls drawn without replacement at random from an urn containing $w\geq 1$ white balls and $b$ black balls before we draw 1 white ball.
+In other words, I ask to use recursion to compute $\E X$ for $X$ a negative hypergeometric distribution with parameters $w,b, r=1$ and show that
+\begin{align}
+  \label{eq:727}
+\E X = \frac{b}{w+1}
+\end{align}
+\begin{hint}
+For ease, write $N(w,b)= \E X$ for an  urn with $w\geq r = 1$ white balls and $b$ black balls. Then explain that
+\begin{align}
+N(w, 0) &= 0\quad \text{ for all $w$},\\
+  N(w,b) &= \frac{b}{w+b} (1+N(w, b-1)).
+\end{align}
+Then show that this implies that $N(w,b) = b/ (w+1)$.
+\end{hint}
+\begin{solution}
+If there are no black balls left, then we cannot pick a black ball which implies that $N(w, 0) = 0$.
+As soon as we pick a white ball, we have to stop.
+
+When $w, b \geq 1$ two things can happen.
+Suppose we pick a white ball, then we stop right away and we cannot increase the number of black balls picked.
+Suppose we pick a black ball, which happens with probability $b/(b+w)$, we obtain one black ball, and we continue with one black ball less.
+Hence, with LOTE,
+\begin{align}
+  N(w,b) = \frac{b}{w+b} (1+N(w, b-1)).
+\end{align}
+You should realize that here we use conditioning; we condition on the color of the ball picked.
+
+Now we need a real tiny bit of inspiration.
+Let's \emph{guess} that $N(w,b)=\alpha b$ for some $\alpha>0$.
+Guessing is always allowed; if it works, we are done (since the recursion, together with the boundary condition, has a unique solution: just repeatedly applying it allows us to calculate all values).
+In general, you can make any guess whatsoever, but mind that only the good guesses work. So, trying the form $N(w,b) = \alpha b$, we find that
+\begin{equation*}
+\alpha b = \frac{b}{w+b} (1+ \alpha (b-1)) \stackrel{\textrm{\tiny algebra}}{\implies} \alpha = \frac{1}{w+1} \implies  N(w, b) = \frac{b }{w+1}.
+\end{equation*}
+This is consistent with the boundary condition $N(w,0)=0$. Hence, we can move the case $b=0$ to the case with $b=1$, and so on, thereby proving the validity of the formula in general.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Extend the previous exercise to cope with the case $r\geq 2$.
+For this, write $N_{r}(w,b)$ for an urn with $w$ white balls and $b$ black balls, and $r$ white balls to go.
+\begin{hint}
+Explain that $N_{0}(w,b) = 0$ and
+\begin{align}
+  N_r(w,b) &= \frac{w}{w+b} N_{r-1}(w-1, b) +  \frac{b}{w+b} (1+N_{r}(w, b-1)).
+\end{align}
+Then show that this implies that $N_{r}(w,b) = r b/ (w+1)$.
+\end{hint}
+\begin{solution}
+The recursion follows right away by noticing that we pick a white ball with probability $w/(w+b)$, but then we remove one white ball \emph{and} we have one white ball less to go.
+With probability $b/(w+b)$ we pick a black ball, in which case the number of black balls drawn increases by one, but there is one black ball less in the urn.
+
+The boundary condition is also clear: $N_{0}(w,b)=0$ because we stop.
+Note that this is consistent with the previous exercise.
+
+If $r=2$, we use from the previous exercise that
+\begin{equation*}
+N_{r-1}(w-1, b) = N_{1}(w-1, b) = \frac{b }{w-1 + 1} = \frac{b }{w}.
+\end{equation*}
+Using this in the recursion,
+\begin{align*}
+  N_2(w,b)
+&= \frac{w}{w+b} N_{1}(w-1, b) +  \frac{b}{w+b} (1+N_{2}(w, b-1)) \\
+&= \frac{w}{w+b} \frac{b }{w} +  \frac{b}{w+b} (1+N_{2}(w, b-1)) \\
+&=  \frac{b}{w+b} (2+N_{2}(w, b-1)).
+\end{align*}
+But this has the same form as~\cref{eq:727}, except that the 1 has been replaced by a 2. But, now we are dealing with the case $r=2$ instead of $r=1$. Hence, by the same token,
+\begin{equation*}
+  N_2(w,b) = 2 \frac{b}{w+1}
+\end{equation*}
+Knowing the result for $r=2$, we fill this for $r=3$, and so on, to get the general result.
+
+What an elegant procedure;  we pull ourselves out of the swamp, just like Baron Munchhausen.
+\end{solution}
+\end{exercise}
+\end{document}

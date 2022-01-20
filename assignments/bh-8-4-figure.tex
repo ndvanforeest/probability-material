@@ -1,0 +1,71 @@
+\input{header}
+
+\subsection{BH.8.4 Figure}
+The challenge is to make Figure BH.8.4 for a specific case.
+
+We throw a coin a number of times. We take some beta distribution as prior for the probability $p$ that Heads appears. Then we update the PDF of $p$ according to outcomes of the throws.
+
+\begin{exercise}
+Run the follow code and explain the output.
+
+We define the variables H and T as these outcomes are easier to memorize than 1 and 0. Like this, there is less possibility for confusion, hence less bugs.
+
+\begin{minted}[]{python}
+H, T = 1, 0
+outcomes = [H, T]
+
+h, t = 1, 1  # this
+h += outcomes[0] == H
+t += outcomes[0] == T
+print(f"{h=}, {t=}")
+
+h += outcomes[1] == H
+t += outcomes[1] == T
+print(f"{h=}, {t=}")
+\end{minted}
+\end{exercise}
+
+
+\begin{exercise}
+Explain the code below. Why does the line marked as `this' relate to the  prior distribution? What is that prior distribution?
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import beta
+import matplotlib.pyplot as plt
+
+support = np.arange(0, 1, 0.03)
+
+H, T = 1, 0
+outcomes = [H, H, T, H, H, H, T, H, H]
+h, t = 1, 1  # this
+
+fig, axes = plt.subplots(3, 3, sharey="all", figsize=(6, 3))  # this
+for i, ax in enumerate(axes.flatten()):  # this
+    h += outcomes[i] == H
+    t += outcomes[i] == T
+    X = beta(h, t).pdf(support)
+    ax.plot(support, X)
+    ax.set_title(f'h={h-1}, t={t-1}')
+
+plt.tight_layout()
+plt.savefig("beta.pdf")
+\end{minted}
+\end{exercise}
+
+\begin{exercise}
+What do the PDFs actually model? Explain why the PDFs behave as they do. For instance, why does the location of the peak move from right to left to right?
+\end{exercise}
+
+\begin{exercise}
+Which conjugacy relation between prior and data do we use here to update the prior to the posterior?
+\end{exercise}
+
+\begin{exercise}
+Adapt the  code above such that the prior is $a=3.5, b= 1.5$, the outcomes are T, H, T, H, T, H, and the output is a figure with 3 x 2 subfigures. Besides the explanation, include the figure.
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+
+
+\input{trailer}

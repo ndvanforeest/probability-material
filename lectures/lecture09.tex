@@ -1,0 +1,375 @@
+\documentclass[lectures]{subfiles}
+\begin{document}
+
+\section{Lecture 9}
+\label{sec:lecture-9}
+
+
+
+
+\begin{exercise}
+The lifetime $X$ of a machine is $\Exp{\lambda}$.
+Compute $\E{X \given X\leq \tau}$ where $\tau$ is some positive constant.
+
+Define $Y=\1{X\leq \tau}$.  Use  Adam's law and LOTP to show that $\E{X} = \E{\E{X\given Y}} = 1/\lambda$. Observe that this is just a check on our results.
+\begin{solution}
+Since $X\sim \Exp{\lambda}$,
+\begin{equation*}
+\P{X\leq t | X\leq \tau} = \frac{\P{X\leq \min\{t, \tau\}}}{\P{X\leq \tau}} = \frac{1-e^{-\lambda\min\{t, \tau\}}}{1-e^{-\lambda \tau}}.
+\end{equation*}
+ Defining
+\begin{equation*}
+  f(t) = \partial_{t} \P{X\leq t | X\leq \tau} = \lambda \frac{e^{-\lambda t}}{1-e^{-\lambda \tau}} \1{0\leq t \leq \tau},
+\end{equation*}
+we get
+\begin{align}
+  \label{eq:9925}
+\E{X|X\leq \tau}
+&= \int t f(t) \d t \\
+&= \frac{1}{1-e^{-\lambda \tau}}\int_{0}^{\tau} \lambda t e^{-\lambda t} \d t.
+\end{align}
+Simplifying,
+\begin{align}
+\label{eq:926}
+\int_0^{\tau} \lambda t e^{-\lambda t} \d t
+&= \left.- t e^{-\lambda t}\right|_{0}^{\tau} + \int_0^{\tau} e^{-\lambda t} \d t \\
+&= -\tau e^{-\lambda \tau} + \frac{e^{-\lambda \tau} -1}{-\lambda} \\
+&= \frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda},
+\end{align}
+\begin{align}
+  \label{eq:925}
+\E{X|X\leq \tau}
+&= \frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda(1-e^{-\lambda \tau})}.
+\end{align}
+
+For part 2: by memorylessness, $\E{X\given X>\tau} = \tau + 1/\lambda$. Hence,
+\begin{align}
+  \label{eq:94}
+\E X
+&= \E{\E{X\given Y}}, \quad \text{Adam's law} \\
+&= \E{X\given Y=1}\P{Y=1} + \E{X\given Y=0}\P{Y=0}, \quad \text{LOTE}\\
+&= \E{X\given X\leq \tau}\P{X\leq \tau} + \E{X\given X>\tau} \P{X>\tau} \\
+&= \frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda(1-e^{-\lambda \tau})} (1-e^{-\lambda \tau}) + (\tau+ 1/\lambda) e^{-\lambda \tau} \\
+&= 1/\lambda - e^{-\lambda \tau}/\lambda - \tau e^{-\lambda \tau} + \tau e^{-\lambda T} + e^{-\lambda \tau}/\lambda \\
+&=1/\lambda.
+\end{align}
+
+Here is a final point for you to think hard about: ${X\leq \tau}$ is an event, $Y=\1{X \leq \tau}$ is a r.v. Therefore the following is sloppy notation: $\E{\E{X\given X\leq \tau}}$, and when using, it is easy to get confused, because where is the random variable we should have according to Adam's law?
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+We have a station with two machines, one is working, the other is off.
+If the first fails, the other machine takes over.
+The repair time of the first machine is a constant $\tau$.
+If the second machine fails before the first is repaired, the station stops working, i.e., is `down'.
+Use a conditioning argument to find the expected time $\E T$ until the station is down when the lifetimes of both machines is iid $\sim\Exp{\lambda}$.
+\begin{solution}
+Let $X_i$ be the lifetime of machine $i$. Suppose that  the second machine does not break down before $\tau$, then
+\begin{equation}
+\E{T| X_{2}>\tau} = \E{X_{1} + \tau + C |X_2>\tau} = 1/\lambda + \tau + \E T,
+\end{equation}
+because the expected time until machine 1 fails is $1/\lambda$, then we wait until it is repaired, and then, by memoryless, a new cycle $C$ starts, which has an expected duration of $\E T$.
+
+Next condition on the second machine breaking down before $\tau$. Then, since $X_{1}$ and $X_2$ are independent and by the previous exercise,
+\begin{equation}
+\E{T| X_{2}\leq \tau} = \E{X_{1} + X_{2}  |X_2\leq \tau} = \frac{1}{\lambda} + \frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda(1-e^{-\lambda \tau})}.
+\end{equation}
+
+By LOTE and using $\P{X_{2}\geq \tau} = e^{-\lambda \tau}$,
+\begin{align}
+  \label{eq:924}
+\E T
+&=
+\E{T| X_{2}\leq \tau} \P{X_{2}\leq \tau} + \E{T| X_{2}\geq \tau} \P{X_{2}\geq \tau} \\
+&=(1-e^{-\lambda \tau})\left( \frac 1\lambda+
+\frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda(1-e^{-\lambda \tau})} \right)
++e^{-\lambda \tau}\left( \frac{1}{\lambda} + \tau + \E T \right) \\
+&=\frac{1}{\lambda} + \frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda}
++e^{-\lambda \tau} \tau + e^{-\lambda \tau}\E T \\
+&\implies \\
+\left( 1-e^{-\lambda \tau} \right) \E T
+&=\frac{2-e^{-\lambda \tau}}{\lambda} \\
+&\implies \\
+\E T
+&=\frac{2-e^{-\lambda \tau}}{\lambda(1-e^{-\lambda \tau})}.
+\end{align}
+
+For you to do: Check the limits $\tau=0$ and $\tau=\infty$. Is the result in accordance with your intuition?
+
+Two challenges: Does the problem become much harder when $X_{1}$ and $X_{2}$ are still exponential, but have different failure rates $\lambda_1$ and $\lambda_{2}$? Can you extend the analysis to 3 machines, or $n$ machines?
+
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+We draw, with replacement, balls, numbered 1 to $N$, from an urn.
+Find a recursion to compute the expected number $\E T$ of draws necessary to see all balls.
+\begin{solution}
+Write $T_{n}$ for expected time to finish given that we have seen $n$ different balls. Thus, $\E T = T_{0}$.
+Then for $n< N$ and using conditioning and LOTE
+\begin{align}
+T_n
+&= 1
++T_{n+1} \P{\text{draw a new ball}}
++T_{n} \P{\text{draw an old ball}}  \\
+&= 1
++T_{n+1} \frac{N-n}{N}
++T_{n} \frac{n}{N} \\
+&\implies\\
+T_n \frac{N-n}{N} &= 1 +T_{n+1} \frac{N-n}{N} \\
+&\implies \\
+T_n &= \frac{N}{N-n}  +T_{n+1}.
+\end{align}
+How about the boundary conditions, i.e., what is $T_{n}$ for $n=N$?
+That's obvious: $T_{N} = 0$. Hence,
+\begin{equation}
+T_{N-1} = \frac{N}{N-(N-1)} + T_{N} = N,
+\end{equation}
+and so on.
+
+If you are interested,  push the result a bit further: approximate $T_{0}$ for $N\gg 0$.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Write code to compute $\E T$ for $N=45$.
+\begin{solution}
+Here is the python code.
+
+\begin{pyblock}
+N = 45
+
+
+def T(n):
+    if n >= N:
+        return 0
+    return N / (N - n) + T(n + 1)
+
+# print(T(44))
+# print(T(0))
+\end{pyblock}
+\begin{minted}{R}
+N = 45
+
+bigT = function(n) {
+  if(n >= N) {
+    return(0)
+  }
+  return(N / (N - n) + bigT(n + 1))
+}
+
+#print(bigT(44))
+#print(bigT(0))
+\end{minted}
+Here are the results $T(44) = \py{T(44)}$ (check!) and $T(0) = \py{T(0)}$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+We draw, with replacement, balls, numbered 1 to $N$, from an urn, but 6 at a time (not just one as in the previous exercise).
+Find a recursion to compute the expected number $\E T$ of draws necessary to see all balls.
+\begin{solution}
+  Write $T_{n}$ for expected time to finish given that we have seen $n$ different balls.
+  Take 6 balls.
+  If we would know the number $k$ of new balls drawn, then $T_{n} = 1 + T_{n+k}$.
+  What is the probability to draw $k$ new balls  out of the 6 we pick?
+  This must be
+\begin{equation}
+\label{eq:930}
+{n \choose 6-k}{N-n \choose k}\big/{N \choose 6}.
+\end{equation}
+Therefore, by LOTE,
+\begin{align}
+T_{n}
+\approx
+1 + \sum_{k=0}^{6} \frac{{n \choose 6-k}{N-n \choose k}}{{N \choose 6}} T_{n+k}.
+\end{align}
+But there is a slight problem, if there are just 2 new balls,  we cannot pick $k=6$ new balls. In general, we can pick $k=\min\{6, N-n\}$ new balls. Hence,
+\begin{align}
+T_{n}
+&=
+1 + \sum_{k=0}^{\min\{6, N-n\}} \frac{{n \choose 6-k}{N-n \choose k}}{{N \choose 6}} T_{n+k} \\
+&\implies \\
+T_{n} - \frac{{n \choose 6}{N-n \choose 0}}{{N \choose 6}} T_{n}
+&=1 + \sum_{k=1}^{\min\{6, N-n\}} \frac{{n \choose 6-k}{N-n \choose k}}{{N \choose 6}} T_{n+k} \\
+&\implies \\
+T_{n}\left( {N\choose 6}  -{n \choose 6} \right)
+&={N\choose 6} + \sum_{k=1}^{\min\{6, N-n\}}{n \choose 6-k}{N-n \choose k} T_{n+k} \\
+\end{align}
+And this is the final result.
+
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+For the previous exercise, compute $\E T$ for $N=45$.
+\begin{solution}
+  When we draw $m=6$ balls at a time, we should take care how we compute the recursion.
+
+  To see this, consider for ease the case in which we draw two balls at at time.  Now I want to know how often each function gets called in the computation. For this, I write a simple helper function $S(n, N)$ that returns $1$ for being called plus $S(n+1, N) + S(n+2, N)$. Like this, I can find out how often the functions are called in the recursion.
+
+\begin{pyblock}
+def S(n, N):
+    if n >= N:
+        return 0
+    return 1 + S(n + 1, N) + S(n + 2, N)
+
+
+for N in range(1, 25):
+    print(S(0, N))
+\end{pyblock}
+\begin{minted}{R}
+S = function(n, N) {
+  if(n >= N) {
+    return(0)
+  }
+  return(1 + S(n + 1, N) + S(n + 2, N))
+}
+
+for (N in 1:24) {
+  print(S(0, N))
+}
+\end{minted}
+The result is this: \printpythontex.
+Apparently, the number of functions called grows very rapidly.
+When we want to compute for 6 balls and $N=45$ the situation must be much, much worse.
+
+The way out is to \emph{store} intermediate results rather than computing them time and again.
+For this we use the concept \emph{memoization}.
+You should memorize this concept when dealing with the computation of recursions.
+In short, this means that we check whether we computed the value of a function earlier.
+If so, get the value from memory, otherwise, do the computation, and store it for later purposes.
+
+Let's check what happens if we print out how often the function gets called when using memoization.
+\begin{pyblock}
+from functools import lru_cache
+
+@lru_cache   # This realizes the memoization.
+def S(n, N):
+    if n >= N:
+        return 0
+    print(f"Called for n = {n}\n")
+    return 1 + S(n + 1, N) + S(n + 2, N)
+
+
+S(0, 5)
+\end{pyblock}
+\begin{minted}{R}
+library("memoise")
+
+S = function(n, N) {
+  if(n >= N) {
+    return(0)
+  }
+  cat("Called for n =", n, "\n")
+  return(1 + S(n + 1, N) + S(n + 2, N))
+}
+S = memoise(S)
+
+S(0, 5)
+\end{minted}
+Now the result is this:
+\begin{center}
+\printpythontex
+\end{center}
+This is much better, for each $n$ the function in the recursion gets called just once.
+
+To convince you that memoization really works, let's remove the memoization.
+\begin{pyblock}
+def S(n, N):
+    if n >= N:
+        return 0
+    print(f"Called for n = {n}\n")
+    return 1 + S(n + 1, N) + S(n + 2, N)
+
+
+S(0, 5)
+\end{pyblock}
+\begin{minted}{R}
+S = function(n, N) {
+  if(n >= N) {
+    return(0)
+  }
+  cat("Called for n =", n, "\n")
+  return(1 + S(n + 1, N) + S(n + 2, N))
+}
+
+S(0, 5)
+\end{minted}
+This is the result:
+\begin{center}
+\printpythontex
+\end{center}
+You see how often the function is called with $n=4$?
+
+
+
+For the course you don't have to look up on the web how memoization is implemented, but I advice you to read about.
+Understanding such ideas makes you much better at programming, which is important in view of the fact that many of you will have to use computers a lot in your profession careers.
+Besides this, memoization lies at the heart of how spreadsheet programs such as excel work.
+
+Now we know that we have to use memoization, we can turn to the balls and urn problem.
+I build a general function $T(n,m)$ for the situation in which we have seen $n$ balls and we pick $m$ balls at a time.
+Like this, I can check with the earlier case in which we picked just one ball by computing $T(n, 1)$.
+(Hopefully you learn from this that you should also test your code.)
+
+
+%\begin{pyblock}[][numbers=left]
+\begin{pyblock}
+from math import comb
+from functools import lru_cache
+
+N = 45
+
+
+@lru_cache
+def T(n, m):
+    if n >= N:
+        return 0
+    res = comb(N, m)
+    for k in range(1, min(m, N - n) + 1):
+        P = comb(n, m - k)
+        P *= comb(N - n, k)
+        res += P * T(n + k, m)
+    return res / (comb(N, m) - comb(n, m))
+
+\end{pyblock}
+\begin{minted}{R}
+library("memoise")
+
+N = 45
+
+bigT = function(n, m) {
+  if(n >= N) {
+    return(0)
+  }
+  res = choose(N, m)
+  for (k in 1:min(m, N - n)) {
+    P = choose(n, m - k)
+    P = P * choose(N - n, k)
+    res = res + P * bigT(n + k, m)
+  }
+  return(res / (choose(N, m) - choose(n, m)))
+}
+bigT = memoise(bigT)
+
+bigT(0, 1)
+bigT(0, 6)
+\end{minted}
+Here is the check: $T(0, 1) = \py{T(0, 1)}$, which is the same as our earlier computation.
+
+Next, $T(0, 6) = \py{T(0,6)}$.
+This is more than $6$ as fast, i.e., $6\times T(0, 6) = \py{6*T(0, 6)} < T(0,1)$.
+Why is that?
+Well, the 6 balls we pick from the urn are guaranteed to be drawn without replacement.
+
+
+Can you solve the following extension? Suppose for each time you draw a set of balls, you get the value (in Euro's say) of the numbers on the balls, and then you put the balls back in the urn.
+The game stops when you have seen all balls at least once. What is your expected gain?
+
+\end{solution}
+\end{exercise}
+\end{document}

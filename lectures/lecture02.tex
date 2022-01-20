@@ -1,0 +1,120 @@
+\documentclass[lectures]{subfiles}
+\begin{document}
+
+\section{Lecture 2}
+
+% Read the problems of \verb|memoryless\_excursions.pdf|.
+% All the problems in that document relate to topics discussed in Sections BH.7.1 and BH.7.2, and quite a lot of topics you have seen in the previous course on probability theory.
+
+\begin{exercise}
+Let $L=\min\{X, Y\}$, where $X, Y\sim \Geo{p}$ and independent.
+What is the domain of $L$? Then, use the fundamental bridge and 2D LOTUS to show that
+\begin{equation*}
+\P{L\geq i}=q^{2i} \implies L\sim\Geo{1-q^{2}}.
+\end{equation*}
+\begin{hint}
+The fundamental bridge and 2D LOTUS have  the general form
+\begin{equation*}
+\P{g(X,Y}\in A\} = \E{\1{g(X, Y) \in A}} = \sum_{i}\sum_j \1{g(i, j)\in A} \P{X=i, Y=j}.
+  \end{equation*}
+Take  $g(i,j) = \min\{i, j\}$.
+\end{hint}
+\begin{solution}
+With the hint,
+  \begin{align*}
+\P{L\geq k}
+&= \sum_{i}\sum_{j} \1{\min\{i,j\}\geq k} \P{X=i, Y=j}\\
+&= \sum_{i\geq k} \sum_{j\geq k} \P{X=i}\P{Y=j}\\
+&=  \P{X\geq k}\P{Y\geq k} = q^{k} q^{k} = q^{2k}.
+  \end{align*}
+$\P{L>i}$ has the same form as $\P{X>i}$, but now with $q^{2i}$ rather than $q^{i}$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}\label{ex:1}
+Let $M=\max\{X, Y\}$, where $X, Y\sim \Geo{p}$ and independent.
+Show that
+\begin{align*}
+\P{M=k} = 2 pq^{k}(1-q^{k}) + p^2q^{2k}.
+\end{align*}
+\begin{hint}
+  Use 2D LOTUS on $g(x,y) = \1{\max\{x, y\} = k}$.
+\end{hint}
+\begin{solution}
+  \begin{align*}
+\P{M=k}
+&= \P{\max\{X, Y\} = k} \\
+&=p^{2}\sum_{ij}\1{\max\{i,j\} =k} q^i q^j\\
+&=2 p^{2}\sum_{ij}\1{i=k}\1{j < k} q^i q^j + p^{2}\sum_{ij}\1{i=j=k} q^{i} q^j \\
+&=2 p^{2}q^{k}\sum_{j < k} q^j + p^{2}q^{2k}\\
+&=2 p^{2}q^{k}\frac{1-q^{k}}{1-q} +  p^{2}q^{2k}\\
+  \end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}\label{ex:2}
+Explain that
+\begin{equation*}
+\P{L=i, M=k} = 2p^{2}q^{i+k}\1{k>i}+ p^{2}q^{2i}\1{i=k}).
+\end{equation*}
+\begin{solution}
+  \begin{align*}
+\P{L=i, M=k}
+&= 2\P{X=i, Y=k}\1{k>i} + \P{X=Y=i}\1{i=k} \\
+&= 2p^{2}q^{i+k}\1{k>i}+ p^{2}q^{2i}\1{i=k}.
+  \end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+With the previous exercise, use marginalization to compute the marginal PMF $\P{M=k}$.x
+\begin{solution}
+  \begin{align*}
+\P{M=k}
+&= \sum_{i} \P{L=i, M=k} \\
+ &= \sum_{i} (2p^{2}q^{i+k}\1{k>i}+ p^{2}q^{2i}\1{i=k}) \\
+ &= 2p^2q^k\sum_{i=0}^{k-1} q^{i}+ p^{2}q^{2k} \\
+ &= 2pq^k (1-q^{k})+ p^{2}q^{2k} \\
+ &= 2pq^k + (p^{2}-2p) q^{2k},
+  \end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Now take $X, Y$ iid and $\sim \Exp{\lambda}$.
+Use the fundamental bridge to show that for $u\leq v$, the joint CDF has the form
+\begin{equation*}
+  F_{L,M}(u,v) = \P{L\leq u, M\leq v} = 2\int_0^u (F_Y(v)- F_Y(x)) f_X(x) \d x.
+\end{equation*}
+\begin{solution}
+First the joint distribution. With $u\leq v$,
+  \begin{align*}
+F_{L,M}(u,v) &= \P{L\leq u, M \leq v} \\
+&= 2\iint \1{x \leq u, y\leq v, x\leq y} f_{X,Y}(x,y)\d x \d y \\
+&= 2\int_0^u \int_x^v f_Y(y) \d y f_X(x) \d x & \text{independence} \\
+&= 2\int_0^u (F_Y(v)- F_Y(x)) f_X(x) \d x.
+  \end{align*}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}\label{ex:25}
+Take partial derivatives to show that for the joint PDF,
+\begin{equation*}
+f_{L,M}(u,v) = 2f_X(u) f_Y(v)\1{u\leq v}.
+\end{equation*}
+\begin{solution}
+Taking partial derivatives,
+\begin{align*}
+f_{L,M}(u,v)
+&=\partial_v\partial_{u}F_{L,M}(u,v) \\
+&=2 \partial_v\partial_{u} \int_0^u (F_Y(v)- F_Y(x)) f_X(x) \d x  \\
+&=2 \partial_v \left\{(F_Y(v)- F_Y(u)) f_X(u) \right \}  \\
+&=2 f_X(u)\partial_v F_Y(v)  \\
+&=2 f_X(u)f_Y(v).
+\end{align*}
+\end{solution}
+\end{exercise}
+
+
+\end{document}

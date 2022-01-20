@@ -1,0 +1,687 @@
+% arara: pdflatex: { shell: yes }
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex: { shell: yes }
+
+\input{header}
+
+
+\chapter{Old  exam questions}
+
+\begin{exercise}
+Inspired by BH.7.3.6, compute $\V M$ and $\V L$ by first computing $\E{M^{2}}$ and $\E{L^{2}}$.
+\begin{hint}
+By the previous exercise, realize that $L\sim\Exp{2\lambda}$.  Use these properties.
+\end{hint}
+\begin{solution}
+I \emph{have remembered} that $\V X = \E X$ when $X\sim \Exp{\lambda}$. Since $\V X = \E{X^{2}} - (\E X)^{2}$, $\E{X^2}=2/\lambda^{2}$. Applying this to $L$, we see that $\E{L^2} = 2/(2\lambda)^{2} = 1/2\lambda^{2}$. Moreover, $\V L = 1/4\lambda^{2}$.
+
+Next, $f_M(x) = 2 f_x(x) F_Y(x)$. Hence,
+\begin{equation*}
+\E{M^2} = \int x^2 2 \lambda e^{-\lambda x} (1-e^{-\lambda x}\d x = 2 \int x^2  \lambda e^{-\lambda x} \d x - \int x^{2} 2 \lambda e^{-2\lambda x}\d x.
+\end{equation*}
+The first integral is just 2 times $\E{X^{2}}$, the second is $\E{L^2}$. Hence, $\E{M^2}=4/\lambda^2-1/2\lambda^2= 7/2\lambda^{2}$. Finally, $\V M = 7/2\lambda^2 - 9/4\lambda^2= 5/4\lambda^{2}$.
+\end{solution}
+\end{exercise}
+
+
+
+
+
+\begin{exercise}
+Let $(X,Y)$ follow a Bivariate Normal distribution, with $X$ and $Y$ marginally following $\mathcal{N}(\mu,\sigma^2)$ and with correlation $\rho$ between $X$ and $Y$.
+\begin{enumerate}
+\item Use the definition of a Multivariate Normal Distribution to show that $(X+Y, X-Y)$ is also Bivariate Normal.
+\item Find the marginal distributions of $X+Y$ and $X-Y$.
+\item Compute $\cov{X+Y,X-Y}$. Then, write down the expression for the joint PDF of $(X+Y, X-Y)$.
+\end{enumerate}
+\begin{solution}
+\begin{enumerate}
+    \item Since $(X,Y)$ are bivariate normally distributed, every linear combination of $X$ and $Y$ is normally distributed. Note that every linear combination of $(X+Y)$ and $(X-Y)$ can be written as a linear combination of $X$ and $Y$. Hence, every linear combination of $(X+Y)$ and $(X-Y)$ is normally distributed. Hence, $(X+Y, X-Y)$ is bivariate normally distributed.
+    \item By the story above, both $X$ and $Y$ are normally distributed. We have
+    \begin{align}
+        \E{X+Y} = \E{X} + \E{Y} = \mu + \mu = 2\mu,
+    \end{align}
+    and
+    \begin{align}
+        \E{X-Y} = \E{X} - \E{Y} = \mu - \mu = 0.
+    \end{align}
+    Moreover,
+    \begin{align}
+        \V{X+Y} = \V{X} + \V{Y} + 2\cov{X,Y} = 2\sigma^2 + 2\rho\sigma^2 = 2(1+\rho)\sigma^2.
+    \end{align}
+    Simlarly,
+    \begin{align}
+        \V{X-Y} &= \V{X} + \V{-Y} + 2\cov{X,-Y} = \V{X} + \V{Y} - 2\cov{X,Y} \\
+&= 2\sigma^2 -2\rho\sigma^2 = 2(1-\rho)\sigma^2.
+    \end{align}
+    So we have found that $X+Y \sim N(2\mu,2(1+\rho)\sigma^2)$ and $X-Y \sim N(0, 2(1-\rho)\sigma^2$.
+    \item We have
+    \begin{align}
+        \cov{X+Y,X-Y} &= \cov{X,X} - \cov{X,Y} + \cov{Y,X} - \cov{Y,Y} \\
+&= \V{X} - \V{Y} = \sigma^2 - \sigma^2 = 0.
+    \end{align}
+    Write $U = X+Y$, $V = X - Y$. Plugging all the parameters into the formula for the joint pdf of a bivariate normal distribution (see \url{https://en.wikipedia.org/wiki/Multivariate_normal_distribution#Bivariate_case}), we obtain
+    \begin{align}
+        f_{U,V}(u,v) = \frac{1}{2\pi\sqrt{2(1+\rho)\sigma^2 2(1-\rho)\sigma^2} } \text{exp}\left(-\frac{1}{2}\left[\frac{(u - 2\mu)^2}{2(1+\rho)\sigma^2} + \frac{v^2}{2(1-\rho)\sigma^2} \right]\right).
+    \end{align}
+\end{enumerate}
+\end{solution}
+\end{exercise}
+
+
+
+
+\begin{exercise}
+This is about the simplest model for an insurance company that I can think of.
+We start with an initial capital $I_0=2$.
+The company receives claims and contributions every period, a week say.
+In the $i$th period, we receive a contribution $X_{i}$ uniform on the set $\{1, 2,\ldots,10\}$ and a claim $C_i$ uniform on $\{0, 1, \ldots 8\}$.
+\begin{enumerate}
+\item What is the meaning of $I_1=I_0+X_1-C_1$?
+\item What is the meaning of $I_2=I_1+X_2-C_2$?
+\item What is the interpretation of $I_1'=\max\{I_0-C_1,0\} + X_1$?
+\item What is the interpretation of $I_2'=\max\{I_1'-C_2,0\} + X_2$?
+\item What is the interpretation of $\bar I_{n} = \min\{I_{i} : 0\leq i\leq n\}$?
+\item What is  $\P{I_1 < 0}$?
+\item What is  $\P{I_1' < 0}$?
+\item What is  $\P{I_2 < 0}$?
+\item What is  $\P{I_2' < 0}$?
+\item Provide an interpretation in terms of the inventory of rice, say, at a supermarket for $I_{1}$ and $I_{1}'$.
+\end{enumerate}
+\begin{solution}
+This question tests your modeling skills too.
+
+In hindsight, the questions have to reorganized a bit.
+The capital at the end of the $i$th week is $I_{i} = I_{i-1} + X_{i} - C_{i}$.
+
+Suppose claims arrive at the beginning of the week, and contributions arrive at the end of the week (people prefer to send in their claims early, but they prefer to pay their contribution as late as possible).
+If we don't have sufficient money in cash, then we cannot pay a claim.
+Thus, $\max\{I_{0}-C_{1}\}$ is our capital just before the contribution arrives. Hence, $I_{1}'$ is our capital at the end of week 1 under the assumption that we never pay out more than we have in cash. Likewise for $I_{2}'$
+
+$\bar I_{n}$ is the lowest capital we have seen for the first $n$ weeks.
+
+In the supermarket setting, $I_{i}$ is our inventory is we can be temporarily out of stock, but as soon as new deliveries---so called replenishments---arrive then we serve the waiting customers immediately.
+The model with $I'$ corresponds to a setting is which we consider unmet demand as lost.
+
+\begin{align}
+\P{I_{0} < = 0} &= \P{2 + X_{1} - C_{1} < 0} = \frac{1}{10} \sum_{i=1}^{10} \P{C_{1} > 2 + i } = \frac{1}{10} \sum_{i=1}^{5} \P{C_{1} > 2 + i } \\
+&= \frac{1}{10} \sum_{i=1}^{5} \frac{6-i}{9}.
+\end{align}
+
+When grading, I realized that questions 8 was not quite reasonable to ask as an exam question.
+We graded this leniently.
+As I find it too boring to compute these probabilities by hand, here is the python code.
+The ideas in the code are highly interesting and useful.
+The main data structure here is a dictionary, one of the most used data structure in python.
+I don't have the R code yet, so if you take the (unwise) decision to stick to only R, you have to wait a bit until somebody sends me the R code for this problem.
+\begin{minted}{python}
+C = {}
+for i in range(0, 9):
+    C[i] = 1 / 9
+
+X = {}
+for i in range(1, 11):
+    X[i] = 1 / 10
+
+
+I0 = 2
+
+I1 = {}
+for k, p in X.items():
+    for l, q in C.items():
+        i = I0 + k - l
+        I1[i] = I1.get(i, 0) + p * q
+
+print("I1, ", sum(I1.values()))  # check
+
+
+# compute P(I1<0):
+P = sum(r for i, r in I1.items() if i < 0)
+print(P)
+
+
+I2 = {}
+for i, r in I1.items():
+    for k, p in X.items():
+        for l, q in C.items():
+            j = i + k - l
+            I2[j] = I2.get(j, 0) + r * p * q
+
+print("I2 ", sum(I2.values()))  # just a check
+
+# compute P(I2<0):
+P = sum(r for i, r in I2.items() if i < 0)
+\end{minted}
+
+Interestingly, $I_{i}'\geq 1$. (This is so simple to see that I first did it wrong.)
+
+
+
+Mistake: note that $X_{i}$   and $C_{i}$ are discrete rvs, not continuous.
+The sum of two uniform random variables is not uniform. For example, think of the sum of two die throws. Is getting 2 just as likely as getting 7?
+\end{solution}
+\end{exercise}
+
+
+
+
+
+\begin{exercise}
+Take $X\sim\Unif{\{-2, -1, 1, 2\}}$ and $Y= X^2$. What is the correlation coefficient of $X$ and $Y$?
+If we would consider another distribution for $X$, would that change the correlation?
+\begin{solution}
+We have
+\begin{align}
+    \cov{X,Y} = \cov{X,X^2} = \E{XX^2} - \E{X}\E{X^2} = 0 - 0\cdot 2.5 = 0.
+\end{align}
+Hence, $\text{Corr}(X,Y) = 0$. \\
+Yes, for instance, take $X \sim \Unif{\{0,1\}}$. Then,
+\begin{align}
+    \cov{X,Y} = \E{XX^2} - \E{X}\E{X^2} = 0.5 - 0.5\cdot 0.5 = 0.25.
+\end{align}
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+We have a machine that consists of two components.
+The machine works as long as both components have not failed (in other words, the machine fails when one of the two components fails).
+Let $X_i$ be the lifetime of component $i$.
+\begin{enumerate}
+\item What is the interpretation of $\min\{X_1, X_{2}\}$?
+\item If $X_1, X_2$ iid $\sim \Exp{10}$ (in hours), what is the probability that the machine is still `up' (i.e., not failed) at time $T$?
+\item Use the previous result to determine the distribution of $\min \{X_1, X_2\}$.
+\item What is the expected time until the machine fails?
+\end{enumerate}
+\begin{solution}
+\begin{enumerate}
+    \item The interpretation is: the time until the first component fails. That is, the time until the machine stops working.
+    \item Let $\lambda = 10$. We have
+    \begin{align}
+        \P{\text{machine not failed at time $T$}} &= \P{\min\{X_1, X_2\} > T} \\
+        &= \P{X_1 > T, X_2 > T} \\
+        &= \P{X_1 > T}\P{X_2 > T} \\
+        &= e^{-\lambda T} \cdot e^{-\lambda T} \\
+        &= e^{-(2\lambda)T} \\
+        &= e^{-20T} \\
+    \end{align}
+    \item Note that
+    \begin{align}
+        \P{\min\{X_1, X_2\} \leq T} = 1 - \P{\min\{X_1, X_2\} > T} = 1 - e^{-20T}.
+    \end{align}
+    Note that this is the cdf of an exponential distribution with parameter $20$. Hence, $\min\{X_1, X_2\} \sim \text{exp}(20)$.
+    \item The expected time until the machine fails is
+    \begin{align}
+        \E{\min\{X_1, X_2\}} = 1/20,
+    \end{align}
+    i.e., 3 minutes. Apparently, the machine is not very robust.
+\end{enumerate}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+We have two rvs X and Y with the joint PDF $f_{X,Y}(x,y) = \frac{6}{7}(x+y)^2$ for $x, y \in (0,1)$ and 0 else. Also we consider the two rvs U and V with the joint PDF $f_{U,V}(u,v) = 2$ for $u, v \in [0,1], u+v \leq 1$ and 0 else.
+\begin{enumerate}
+\item Compute $\P{X+Y>1}$.
+\item Compute $\cov{U,V}$.
+\end{enumerate}
+(Hint: first draw the area over which you want to integrate, if this does not help check out the discussion board post on exercise 7.13a from the first Tutorial)
+\begin{solution}
+\begin{enumerate}
+    \item We have
+    \begin{align}
+        \P{X+Y>1} &= \int_{-\infty}^\infty \int_{-\infty}^\infty I_{X + Y > 1} f_{X,Y}(x,y) \d y \d x \\
+        &= \int_{0}^1 \int_{1-x}^1  \frac{6}{7}(x+y)^2 \d y \d x \\
+        &=\frac{6}{7} \int_{0}^1 \Big[\frac{1}{3} (x+y)^3 \Big]_{y=1-x}^1 \d x \\
+        &=\frac{2}{7} \int_{0}^1 \Big( (x+1)^3 - (x + 1 - x)^3 \Big) \d x \\
+        &=\frac{2}{7} \int_{0}^1 \Big( (x+1)^3 - 1 \Big) \d x \\
+        &=\frac{2}{7} \Big[ \frac{1}{4}(x+1)^4 - x \Big]_{x=0}^1 \\
+        &=\frac{1}{14}\Big[ (x+1)^4 - 4x \Big]_{x=0}^1 \\
+        &=\frac{1}{14} \Big( \big( (1+1)^4 - 4\big) - \big((0+1)^4 - 0 \big) \Big) \\
+        &=\frac{1}{14} \Big( 16 - 4 - 1 \Big) \\
+        &= \frac{11}{14}.
+    \end{align}
+    \item We have
+    \begin{align}
+        \cov{U,V} &= \E{UV} - \E{U}\E{V}.
+    \end{align}
+    First, we compute
+    \begin{align}
+        \E{UV} &= \int_0^1 \int_0^{1-u} 2 uv \d v \d u \\
+        &= \int_0^1 [uv^2]_{v=0}^{1-u} \d u \\
+        &= \int_0^1 \big( u(1-u)^2 - 0\big) \d u \\
+        &= \int_0^1 u(1 - 2u + u^2) \d u \\
+        &= \int_0^1 (u - 2u^2 + u^3) \d u \\
+        &= \Big[ \frac{1}{2}u^2 - \frac{2}{3}u^3 + \frac{1}{4}u^4 \Big]_{u=0}^1 \\
+        &= \frac{1}{2} - \frac{2}{3} + \frac{1}{4} \\
+        &= \frac{1}{12}.
+    \end{align}
+    Next,
+    \begin{align}
+        \E{U} &= \int_0^1 \int_0^{1-u} 2 u \d v \d u \\
+        &= \int_0^1 2 u \int_0^{1-u} 1 \d v \d u \\
+        &= \int_0^1 2 u(1-u) \d u \\
+        &= 2 \int_0^1 (u - u^2) \d u \\
+        &= 2  \Big[\frac{1}{2}u^2 - \frac{1}{3}u^3\Big]_{u=0}^1 \\
+        &= 2 \Big(\frac{1}{2} - \frac{1}{3}\Big) \\
+        &= \frac{1}{3}
+    \end{align}
+    By symmetry, $\E{V} = \frac{1}{3}$. Hence,
+    \begin{align}
+        \cov{U,V} &= \E{UV} - \E{U}\E{V} \\
+        &= \frac{1}{12} - \frac{1}{3}\frac{1}{3}\\
+        &= \frac{1}{12} - \frac{1}{9} \\
+        &= -\frac{1}{36}.
+    \end{align}
+\end{enumerate}
+\end{solution}
+\end{exercise}
+
+
+
+
+\begin{exercise}
+Let $U=X+Y$ and $V=X-Y$ where $X,Y\sim U[0,1]$ and independent. Show that
+\begin{align*}
+f_{U,V}(u,v) = \frac 12 \1{|v| \leq u \leq 2-|v|}.
+\end{align*}
+\begin{solution}
+Since $(u,v) = g(x,y)  = (x+y, x-y)$,
+\begin{align*}
+\frac{\partial(u,v)}{\partial(x,y)} =
+\begin{bmatrix}
+1 & 1 \\
+1 & -1
+\end{bmatrix} = |-2| =2.
+\end{align*}
+Moreover, $x=(u+v)/2$, $y=(u-v)/2$, so that
+\begin{align*}
+f_{U,V}(u,v) = f_{X,Y}(x,y) \frac{\partial(x,y)}{\partial(u,v)} = f_{X,Y}(x,y)/2 = f_X(x) f_Y(y)/2 = \frac 1 2.
+\end{align*}
+The difficulty is in the domain, however. Note that $x$ and $y$ satisfy $0 \leq x \leq 1$, $0 \leq y \leq 1$.
+So $0 \leq (u+v)/2 \leq 1$ and $0 \leq (u-v)/2 \leq 1$, which simplifies to $-v \leq u \leq 2-v$ and $v \leq u \leq 2+v$, which can also be written as $|v| \leq u \leq 2-|v|$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Let $X$ and $Y$ have PDF $f_{X,Y}$. Take $g(x,y) = (\min\{x,y\}, \max\{x,y\})$.
+Why is
+\begin{align*}
+f_{U,V}(u,v) = f_{X,Y}(u, v) + f_{X,Y}(v, u)?
+\end{align*}
+Simplify to $f_{U,V}(u,v) = 2f(u)f(v)$ for the case $X, Y$ iid with common PDF $f$.
+\begin{solution}
+Note that $u(x,y)=\min\{x,y\} = x\1{x\leq y} + y\1{x> y}$. With a similar expression for $v$ we find for the Jacobian:
+\begin{align*}
+\frac{\partial(u,v)}{\partial(x,y)} =
+\begin{bmatrix}
+\1{x\leq y} & \1{y < x} \\
+\1{y<x} & \1{x\leq y}
+\end{bmatrix} = |\1{x\leq y} - \1{x>y}| = 1.
+\end{align*}
+If $(U,V) = g(X,Y)$, then $g^{-1}(u,v) = \{(u,v), (v,u)\}$, i.e., a set of two points.
+
+If $X,Y$ iid with PDF, then $f_{X,Y}(x,y) = f(x)f(y)$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Let $X, Y$ be continuous rvs with CDF $F_{X,Y}(x,y) = (x-1)^{2}(y-2)/8$ for $x \in (1, 3)$.
+\begin{enumerate}[a.]
+\item Explain that $y\in (2,4)$ for  $F$ to be a proper CDF.
+\item What is $F(3,7)$?
+\item Determine the PDF.
+\item Compute $\P{2< X < 3}$
+\item Compute $\P{2< X < 3, 2<Y<3}$.
+\item Compute $\P{Y< 2X}$.
+\item Compute $\P{Y\leq  2X}$.
+\item Compute $\P{Y< 2X, Y+2X > 6}$.
+\end{enumerate}
+\begin{solution}
+a.
+\begin{align}
+\label{eq:11}
+F \geq 0 &\implies 2<y\\
+F \leq 1 &\implies F(3, y)\leq 1 \implies F(3,4)=1
+\end{align}
+
+b. $F(3,7) = 1$.
+
+c. $f(x,y) = \partial_{x} \partial_{y} F(x,y) = (x-1)/4$ for $x\in(1,3), y\in(2,4)$ and $0$ elsewhere.
+
+d.
+\begin{align}
+\P{2 < X < 3}
+&= F_{X}(3) - F_{X}(2) \\
+&= F_{X,Y}(3, 4) - F_{X,Y}(2,4) = 1 - 1\cdot 2/8 = 3/4.
+\end{align}
+
+e.
+Make a drawing of the rectangle $[2,3]\times[2,4]$. Then check what parts of this are covered by $F_{X,Y}$.
+\begin{align}
+\P{2 < X < 3, 2 < Y < 3}
+&= F_{X,Y}(3, 3) - F_{X,Y}(2,3)  - F_{X,Y}(3, 2) + F_{X,Y}(2,2).
+\end{align}
+The rest is just number plugging.
+
+
+f.
+Use the fundamental bridge and c.
+\begin{align}
+\P{Y< 2 X}
+&= \E{\1{Y < 2 X}} \\
+&= \iint \1{y < 2 x} f_{X,Y}(x,y) \d x \d y\\
+&= \frac{1}{4}\iint \1{y < 2 x} \1{2< y <4} \1{1<x<3} (x-1) \d x \d y\\
+&= \frac{1}{4}\int_{1}^{3} (x-1) \int \1{2<y < \min\{2 x,4\}}  \d y \d x \\
+&= \frac{1}{4}\int_{1}^{3} (x-1) (\min\{2 x,4\}-2) \d x \\
+&= \frac{1}{4}\int_{1}^{2} (x-1) (2 x-2) \d x
++ \frac{1}{4}\int_{2}^{3} (x-1) (4-2) \d x.
+\end{align}
+Finishing the computation must be easy for you now (and if not, practice real hard).
+
+g. As $X, Y$ continuous, the answer is equal to that of f.
+
+h. Similar to f. but a bit more involved.
+\begin{align}
+  \P{Y< 2 X, Y + 2X > 6}
+  &= \E{\1{Y < 2 X, Y > 6 - 2X}} \\
+  &= \iint \1{y < 2 x, y> 6-2x} f_{X,Y}(x,y) \d x \d y\\
+  &= \frac{1}{4}\iint \1{y < 2 x, y>6-2x} \1{2< y <4} \1{1<x<3} (x-1) \d x \d y\\
+  &= \frac{1}{4}\int_{1}^{3}(x-1) \int \1{\max\{2, 6 -2x\} < y < \min\{2 x, 4\}} \d y \d x\\
+  &= \frac{1}{4}\int_{1}^{3}(x-1) [\min\{2x, 4\} - \max\{2, 6 -2x\}]^{+} \d x,
+    \intertext{where we need the $[\cdot]^{+}$  to ensure the positivity of $\min\{2x, 4\} - \max\{2, 6 -2x\}$. To see this, make a graph of  the function $\min\{2x, 4\} - \max\{2, 6 -2x\}$. Also, from this graph,}
+  &= \frac{1}{4}\int_{3/2}^{2}(x-1) (2x - 6 + 2x)  \d x + \frac{1}{4}\int_{2}^{3}(x-1) (4-2) \d x.
+\end{align}
+The rest is for you.
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+Consider the general case where we are given the relationship $U = V^4$ between the random variables $U$ and $V$ for $V \in (-3,2)$.
+Explain why we cannot simply invoke the change of variables theorem.
+
+Now imagine $V$ following a uniform distribution on the given interval. Consider the given transformation on the intervals $(-3,0)$ and $(0,2)$ separately. Explain why this allows you to employ the change of variables theorem and find the distribution of $U$ on these intervals. Finally combine these results (using indicator functions) and state the PDF of $U$ (remember to adjust the domain for the indicator functions according to the transformations).
+\begin{hint}
+What is the domain of $V$ on each of the intervals $(-3,0)$ and $[0,2)$? For the final part, combining the results into one PDF: Use LOTP, conditioning on $U \geq 0$.
+\end{hint}
+\begin{solution}
+  The function $g(x)=x^{4}$ is not one-to-one on $\R$.
+  It is, however, locally, one-to-one, around the roots of $U$.
+  (In this course we don't deal with complex numbers, for your interest, it can be proven that the equation $x^{4}-y$ has, in general, four roots in the complex plane.)
+
+  We need to be bit careful with applying the change of variables formula, but we are OK if we apply it locally around the roots $U^{1/4}$ and $- U^{1/4}$.
+  However, mind that we also should take care of the domain of $V$, so it might be that these roots don't lie in the domain of $V$.
+
+With all this, let's first tackle the Jacobian, and then get the domain right with indicators.
+\begin{align}
+u &= g(v) = v^{4} \implies v = \pm u^{1/4},\\
+f_{U}(u) \d u &= f_{V}(v) \d v \implies  f_{U}(u) = f_{V}(v) \frac{\d v}{\d u},\\
+\frac{\d u}{\d v} &= 4 v^{3} = 4 u^{3/4}\1{v\geq 0} - 4u^{3/4}\1{v<0},\\
+f_{U}(u) &= \frac{f_{V}(-u^{1/4})}{4 (-u)^{3/4}} \1{-u^{1/4}\in (-3, 0)} + \frac{f_{V}(u^{1/4})}{4 (u)^{3/4}} \1{u^{1/4}\in [0,2)} \\
+&= \frac{f_{V}(-u^{1/4})}{4 (-u)^{3/4}} \1{u\in (0, 81)} + \frac{f_{V}(u^{1/4})}{4 (u)^{3/4}} \1{u \in [0,16)}.
+\intertext{If $V$ has the uniform distribution, then $f_V(v) = \tfrac15$ for $v \in (-3, 2)$, so}
+f_{U}(u) &= \frac{1}{20 (-u)^{3/4}} \1{u\in (0, 81)} + \frac{1}{20 (u)^{3/4}} \1{u \in [0,16)}.
+\end{align}
+\end{solution}
+
+\end{exercise}
+
+\begin{exercise}
+Let $U \sim  \Unif{0, \pi}$.
+Use  BH.8.1.9 to show that $X = \tan(U)$ has the Cauchy distribution. Compare this exercise to BH.8.1.5.
+\begin{solution}
+Here is a direct approach.
+  \begin{align}
+    \label{eq:20}
+x&=\tan u = g(u) \implies u = \arctan x\\
+\frac{\d x}{\d u } &= \frac{1}{\cos^{2} u} = \frac{\sin^{2}u + \cos^{2}u }{\cos^{2}u} = \tan^{2} u + 1 = x^{2} + 1,\\
+f_{X}(x) &= f_{U}(u) \frac{\d u}{\d x} = \frac{1}{\pi}\1{u\in (0, \pi)} \frac{1}{1+x^{2}} \\
+&=\frac{1}{\pi(1+x^{2})}\1{\arctan x \in (0, \pi)} =\frac{1}{\pi(1+x^{2})}.
+  \end{align}
+  In the last equation we just shifted the $\tan$ from $(-\pi/2, \pi/2]$ to the interval $(0, \pi)$.
+  The $\tan$ has also a proper inverse in $(0,\pi)$ (make a drawing of $\tan$ to see this), hence all is well-defined.
+\end{solution}
+\end{exercise}
+
+
+
+\new{You walk into} a bar and you find two people, Amy and Bob, playing a game of darts. Their game consists of several rounds, called \textit{legs}, and the first person to win 7 legs wins the match. You have never seen Amy or Bob play before, so you don't know their strength. Denoting by $p$ the probability that Amy wins a leg, your prior belief can be modeled by a uniform distribution: $p \sim \Unif{0,1}$.  (Note: we assume that $p$ remains constant during the entire match; even though your \textit{beliefs} about $p$ might change.)
+
+Denoting by $A$ a leg won by Amy and by $B$ a leg won by Bob, the result of the first 10 legs is: $AAABBAABAB$. Your friend Charles is very confident that Amy will win the match and he offers you a bet: if Amy wins the match, you must pay €10 to Charles; if Bob wins the match, he must pay you €300. You are tempted to take the bet, but you want to do some calculations first.
+\begin{exercise}
+Is the order in which Amy and Bob won their respective legs relevant for your posterior probability that Bob will win the match?
+\begin{solution}
+No. The only relevant information is the amount of legs won by each player.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Let $A_n$ denote the number of legs that Amy won out of a total of $n$ legs. Express the result of the first 10 legs in terms of $A_n$
+\begin{solution}
+Our current information can be represented as: $A_{10} = 6$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+What is the distribution of $A_n | p$ (i.e., the distribution of $A_n$ given the value of $p$)?
+\begin{solution}
+We have $A_n \sim \Bin{n,p}$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Find the posterior distribution of $p$ after observing $A_n = k$.
+\begin{solution}
+Let $f_0$ denote the prior distribution of $p$. Then for the posterior pdf we find by Bayes' theorem:
+\begin{align}
+    f_1(p|A_n = k) &= \frac{\P{A_n = k \ | p} f_0(p)}{\P{A_n = k}} \\
+    &= \frac{{n \choose k} p^k (1-p)^{n-k} \cdot 1}{\P{A_n = k}} \\
+    &\propto p^k (1-p)^{n-k},
+\end{align}
+in which we recognize the pdf of a $\text{Beta}(k+1,n-k+1)$ distribution (up to a normalizing constant). Hence, $p |A_n = k \sim \text{Beta}(k+1,n-k+1)$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+According to your posterior belief about $p$, what is the probability that Bob wins the match? Express your answer in terms of beta functions. (Hint: Use the law of total probability.)
+\begin{solution}
+Important: we have already observed 10 legs with an outcome, with which we have updated our belief. Hence, we should use the \textit{posterior} distribution given $A_{10} = 6$ in this exercise! (It's easy to make a mistake here.)
+Think about it. Suppose instead we had observed 1000 legs and Amy had won 990 of them (i.e., $A_{1000} = 990$). Wouldn't we use this information if someone offered us a bet?
+
+Note that Bob should wins the match if and only if he wins the next three legs. Let $W_k$ be short-hand notation for the event ``Bob wins the $k$th leg''. Then, observing that $W_{11},W_{12},W_{13}$ are independent, and using the LOTP in the fourth step, we obtain
+\begin{align}
+    \P{ \text{Bob wins the match} \ | \ A_{10} = 6 } &= \P{ W_{11} \cap W_{12} \cap W_{13} \ | \ A_{10} = 6 } \\
+    &= \P{ W_{11} \ | \ A_{10} = 6} \P{ W_{12} \ | \ A_{10} = 6} \P{ W_{13} \ | \ A_{10} = 6} \\
+    &= \P{ W_{11} \ | \ A_{10} = 6}^3 \\
+    &= \int_{0}^1 \P{ I_{11} \ | \ p,  A_{10} = 6}^3 f_1(p | A_{10} = 6) dp \\
+    &= \int_{0}^1 (1-p)^3 \cdot \frac{p^6(1-p)^{4}}{\beta(7,5)}  dp \\
+    &= \frac{\beta(7,8)}{\beta(7,5)} \int_{0}^1 \frac{p^6(1-p)^{7}}{\beta(7,8)}  dp \\
+    &= \frac{\beta(7,8)}{\beta(7,5)}.
+\end{align}
+(Note that we very explicitly do all the steps here. It might be more intuitively clear if you skip the first few steps and write
+\begin{align}
+    \P{ \text{Bob wins the match} \ | \ A_{10} = 6 } &= \int_{0}^1 (1-p)^3 f_1(p | A_{10} = 6) dp,
+\end{align}
+and work from there).
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Using the expression
+\begin{align}
+    \beta(a,b) = \frac{(a-1)!(b-1)!}{(a+b-1)!}
+\end{align}
+for every positive integers $a,b$, compute the probabilty from the previous question as a number.
+\begin{solution}
+We have
+\begin{align}
+    \P{ \text{Bob wins the match} \ | \ A_{10} = 6 } &= \frac{\beta(7,8)}{\beta(7,5)} \\
+    &= \left(\frac{6!7!}{14!}\right)/\left(\frac{6!4!}{11!}\right) \\
+    &= \frac{7!/4!}{14!/11!} \\
+    &= \frac{7\cdot 6 \cdot 5}{14 \cdot 13 \cdot 12} \\
+    &= 5/52 \\
+    &= 0.0962.
+\end{align}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Assuming that you want to maximize your expected outcome, should you take the bet?
+\begin{solution}
+Our expected profit when taking the bet is
+\begin{align}
+    &300 \cdot \P{ \text{Bob wins the match} \ | \ A_{10} = 6 } - 10 \cdot \P{ \text{Amy wins the match} \ | \ A_{10} = 6 } \\
+    &\qquad= 300 \cdot \frac{5}{52} - 10 \cdot (1 - \frac{5}{52}) \\
+    &\qquad= 19.808.
+\end{align}
+So we expect to make a profit of €19.81. Hence, you should take the bet.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+On BH.9.5.4. With $Z$ and $W$ as given in the example, show that $\E{Z|W} = \rho$ and $\V{Z|W} = 1-\rho^{2}$.
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Prove that
+\begin{equation}
+  \label{eq:21}
+\E{(Y - \E{Y|X} - h(X))^2} = \E{(Y - \E{Y|X})^2} + \E{(h(X))^2}
+\end{equation}
+for all random variables $X, Y$ and all functions $h$. Explain why this result implies that  $\E{Y|X}$ is the best predictor of $Y$ based on $X$.
+\begin{solution}
+By the linearity of expectation and BH Theorem 9.3.9:
+\begin{align*}
+\E{(Y - \E{Y|X} - h(X))^2} &= \E{(Y - \E{Y|X})^2 - 2(Y - \E{Y|X})h(X) + (h(X))^2}
+\\ &= \E{(Y - \E{Y|X})^2} - \E{2(Y - \E{Y|X})h(X)} + \E{(h(X))^2}
+\\ &= \E{(Y - \E{Y|X})^2} + \E{(h(X))^2}.
+\end{align*}
+Since $\E{(h(X))^2} \geq 0$, we conclude that $\E{(Y - \E{Y|X} - h(X))^2} \geq \E{(Y - \E{Y|X})^2}$ for any function $h$, so $\E{Y|X}$ is the predictor of $Y$ based on $X$ with the lowest mean squared error, i.e. the best predictor of $Y$ based on $X$.
+\end{solution}
+\end{exercise}
+
+
+
+\new{In the next} couple of problems we derive Eve's law in a slightly different way then BH.
+
+Define $\hat X = \E{X\given Y}$ as an \emph{estimator} of $X$ and $\tilde X = X - \hat X$ as the estimation error.
+
+\begin{exercise}\label{ex:5}
+Show that $\E{\tilde X\given Y} = 0$.
+\begin{solution}
+\begin{align}
+\label{eq:4}
+\E{\tilde X \given Y} = \E{X - \hat X \given Y} &=
+\E{X\given Y}  - \E{ \E{X\given Y}\given Y}  \\
+&=\E{X\given Y}  -  \E{X\given Y}\E{1\given Y}  \\
+&=\E{X\given Y}  -  \E{X\given Y}1 = 0
+\end{align}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}\label{ex:4}
+Prove that $\E{\tilde X} = 0$. What does it mean that $\E{\tilde X} =0$?
+\begin{hint}
+  Use~\cref{ex:5}
+\end{hint}
+\begin{solution}
+\begin{equation}
+\label{eq:5}
+\E{\tilde X} = \E{\E{\tilde X\given Y}} = \E{ 0 \given Y} =0.
+\end{equation}
+This means that the estimation error $\tilde X$ does not have bias.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Prove that $\E{\tilde X\hat X} = 0$.
+\begin{hint}
+  Use~\cref{ex:4} and the definitions.
+\end{hint}
+\begin{solution}
+\begin{align}
+\E{\tilde X\hat X} &= \E{\E{\tilde X \hat X \given Y}}  \\
+&= \E{\E{\tilde X \E{X\given Y} \given Y}}  \\
+&= \E{\E{X\given Y}\E{\tilde X \given Y}}  \\
+&= \E{\E{X\given Y} 0  \given Y}  = 0
+\end{align}
+
+Here, in the rest of the exercises about this topic, we have seen the most terrible mistakes during grading.
+Hence, study the reasonging applied very carefully, and ensure you know the motivation behind each and every step.
+There will be questions in the exam about this, and you have to be able to use the arguments. If not, you fail the exam; simple as that. So, you are warned!
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Show that $\cov{\hat X, \tilde X} = 0$. Conclude that
+\begin{equation}
+\label{eq:8}
+\V{X} = \V{\hat X + \tilde X} = \V{\hat X} + \V{\tilde X}.
+\end{equation}
+\begin{solution}
+Using the previous exercises,
+\begin{equation}
+\cov{\hat X, \tilde X} = \E{\hat X \tilde X} - \E{\hat X} \E{\tilde X} = 0 - \E{\hat X} 0 = 0.
+\end{equation}
+Next, from the definition of $\tilde X = X - \hat X \implies X = \tilde X + \hat X$.
+The variance of the sum is the sum of the variances since $\hat X$ and $\tilde X$ are uncorrelated.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Prove that $\V{\tilde X} = \E{\V{X\given Y}}$. Conclude Eve's law.
+\begin{solution}
+Since $\E{\tilde X} = 0$,
+\begin{align}
+\label{eq:9}
+\V{\tilde X} &= \E{\tilde X^{2}}  \\
+&= \E{\E{\tilde X^{2}\given Y}} \\
+&= \E{\E{(X - \hat X)^{2}\given Y}} \\
+&= \E{\E{(X - \E{X\given Y})^{2}\given Y}} \\
+&= \E{\V{X\given Y}},
+\end{align}
+where the last equation follow from the definition of $\V{X\given Y}$.
+
+For Eve's law, use the above and the previous exercise to see that
+\begin{equation}
+\V{X} = \V{\hat X} + \V{\tilde X} = \V{\E{X\given Y}} + \E{\V{X\given Y}}.
+\end{equation}
+\end{solution}
+\end{exercise}
+
+\new{Chebyshev's inequality is} useful in proving notions of convergence in probability, which you will see repeatedly in later courses.
+We say $X_n$ converges in probability to the random variable $Z$ if
+\begin{align*}
+    \lim_{n\rightarrow\infty}P(\left|X_n-Z\right| \geq \varepsilon) = 0\quad\forall\varepsilon>0
+\end{align*}\\
+Note that in the above definition setting $Z=a$ for some constant $a$ would still be valid, as technically the constant $a$ is a random variable.
+
+\begin{exercise}
+Let $Y_n$ denote the number of heads obtained from throwing a fair coin $n$ times. Then $\frac{Y_n}{n}$ clearly is the proportion of heads in the sample. Find the expectation of this proportion, and show that it converges in probability to its mean. This is denoted as $\frac{Y_n}{n}\xrightarrow{p}\E{\frac{Y_n}{n}}$ and is known as the weak law of large numbers.\\
+\begin{hint}
+Use Chebyshev's inequality;  then take the limit on both sides.
+\end{hint}
+\begin{solution}
+From Probability Theory we know $E\left(\frac{Y_n}{n}\right)=\frac12$ and $V\left(\frac{Y_n}{n}\right) = \frac{1}{4 n}$. Then by Chebyshev's inequality,
+\begin{align*}
+    \lim_{n\rightarrow\infty}P\left(\left|\frac{Y_n}{n}-\frac12\right| \geq \varepsilon\right) \leq  \lim_{n\rightarrow\infty}\frac{V\left(\frac{Y_n}{n}\right)}{\varepsilon^2} =  \lim_{n\rightarrow\infty}\frac{1}{4n\varepsilon^2} = 0\quad\forall\varepsilon>0.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Where would this proof break down if we try to apply it to e.g. the Cauchy distribution?
+\begin{solution}
+The Cauchy distribution has no mean to converge to.
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

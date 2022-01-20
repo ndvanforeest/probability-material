@@ -1,0 +1,149 @@
+\documentclass[lectures]{subfiles}
+\begin{document}
+\section{Lecture 12}
+
+Some inequalities. Fill in either ``$\leq$'' or ``$\geq$'' at the location of the question mark.
+
+
+
+\begin{exercise}
+$\E{XY}^2 \quad?\quad \E{X^2}\E{Y^2}$.
+\begin{solution}
+By the Cauchy-Schwartz inequality,
+\begin{align}
+    \E{XY} \leq \sqrt{\E{X^2}\E{Y^2}}.
+\end{align}
+Squaring both sides yields the solution
+\begin{align}
+    \E{XY}^2 \leq \E{X^2}\E{Y^2}.
+\end{align}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+$\E{\log (X) } \quad?\quad \log(\E{X})$
+\begin{solution}
+By Jensen's inequality, $\E{\log X } \leq \log \E{X}$, since $\log(\cdot)$ is a concave function.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+$\V{Y} \quad?\quad \E{\V{Y|X}}$
+\begin{solution}
+By Eve's law we have
+\begin{align}
+    \V{Y} &= \E{\V{Y|X}} + \V{\E{Y|X}}.
+\end{align}
+Since $\V{\E{Y|X}} \geq 0$, it follows that
+\begin{align}
+    \V{Y} &\geq \E{\V{Y|X}}.
+\end{align}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+$\E{|X|} \quad?\quad \sqrt{\E{X^2}}$
+\begin{solution}
+Note that $|X| = \sqrt{X^2}$. Define $Y = X^2$ and note that $g(y) = \sqrt{y}$ is a concave function. Hence, by Jensen's inequality,
+\begin{align}
+    \E{|X|} &= \E{g(Y)} \leq g(\E{Y}) = \sqrt{\E{X^2}}.
+\end{align}
+Hence, the solution is $\E{|X|} \leq \sqrt{\E{X^2}}$
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+$\P{X^2 \geq 4} \quad?\quad \E{|X|}/2$
+\begin{solution}
+We have
+\begin{align}
+    \P{X^2 \geq 4} = \P{|X| \geq 2} \leq \E{|X|}/2,
+\end{align}
+by Markov's inequality.
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+Let $Z \sim N(0,1)$. Then, $\P{Z > \sqrt{2}} \quad?\quad 1/e$.
+\begin{solution}
+By Chernoff's inequality,
+\begin{align}
+    \P{Z > \sqrt{2}} &\leq \frac{\E{e^{tZ}}}{e^{\sqrt{2}t}} \\
+    &= \frac{e^{\frac{1}{2}t^2}}{e^{\sqrt{2}t}} \\
+    &= e^{\frac{1}{2}t^2 - \sqrt{2}t},
+\end{align}
+for every $t > 0$. This inequality is tightest for $t = \sqrt{2}$, as this minimizes $\frac{1}{2}t^2 - \sqrt{2}t$. Plugging in this value yields
+\begin{align}
+    \P{Z > \sqrt{2}} &\leq e^{\frac{1}{2}\sqrt{2}^2 - \sqrt{2}\cdot \sqrt{2}}\\
+    &\leq e^{1 - 2} = 1/e.
+\end{align}
+\end{solution}
+\end{exercise}
+
+%\newpage
+
+We consider the height of a certain population of people (e.g., all students at the University of Groningen). For some reason, we don't know the value of the mean $\mu$ of the population, but we do know that the standard deviation $\sigma$ is 10 cm. We use the sample mean $\bar{X}_n$ of an i.i.d. sample $X_1, \ldots, X_n$, from the population (measured in cm) to estimate the true mean $\mu$.  We want to choose the sample size $n$ in such a way that our estimate $\bar{X}_n$ is sufficiently reliable.
+
+\begin{exercise}
+One measure of reliability of our estimator $\bar{X}_n$ is its standard deviation. Let's say we find our estimator reliable if its standard deviation is at most 1 cm. Give a lower bound for $n$ for which we can guarantee that our esitmator is reliable in this sense.
+\begin{solution}
+We want to guarante that $sd(\bar{X}_n) \geq 1$, which is equivalent to $\V{\bar{X}_n} \geq 1$. We have
+\begin{align}
+    \V{\bar{X}_n} &= \V{\frac{1}{n}\sum_{i=1}^n X_i} \\
+    &= \frac{1}{n^2} \sum_{i=1}^n \V{X_i} \\
+    &= \frac{1}{n^2} \cdot n \cdot \sigma^2 \\
+    &= \frac{100}{n}.
+\end{align}
+So to guarantee we have a reliable estimator, we need $\frac{100}{n} \geq 1$, which is equivalent to $n \geq 100$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Another measure of reliability of our estimator is given by the probability that our estimate is very bad. Specifically, we say our estimate is reliable if we can be 99\% sure that our estimate is off by less than 5 cm. Give a lower bound for $n$ for which we can guarantee that our estimator is reliable in this sense.
+\begin{solution}
+We need to guarantee that
+\begin{align}
+    \P{| \bar{X}_n - \mu | \leq 5} \geq 0.99,
+\end{align}
+which is equivalent to
+\begin{align}
+    \P{| \bar{X}_n - \mu | > 5} < 0.01,
+\end{align}
+Note that $\bar{X}_n$ is a random variable with mean $\mu$ and variance $\sigma^2/n = 100/n$. Using Chebyshev's inequality, we obtain
+\begin{align}
+    \P{| \bar{X}_n - \mu | > 5} &< \frac{100/n}{5^2} = 4/n.
+\end{align}
+Equating the right-hand side to 0.01 yields $n=400$. So we need $n \geq 400$.
+\end{solution}
+\end{exercise}
+
+%\newpage
+
+Little Mike needs to get ready for school. He must leave within 15 minutes, but there are two more things he needs to do: eat his breakfast and get dressed. The time it takes Mike to eat his breakfast has a mean value of 6 minutes with a standard deviation of 3 minutes. The time it takes Mike to get dressed has a mean value of 4 minutes with a standard deviation of 1 minute.
+\begin{exercise}
+Give a lower bound for the probability that Mike will be ready for school in time.
+\begin{solution}
+Let $X$ and $Y$ denote the time it takes Mike to eat his breakfast and get dressed, respectively. Let $Z = X + Y$ denote the total time Mike needs to finish his morning routine. Let $\mu$ denote the mean of $Z$, i.e., $\mu = \E{Z} = \E{X+Y} = 6+4 = 10$. Then,
+\begin{align}
+    \P{Z < 15} = 1 - \P{Z \geq 15},
+\end{align}
+where, using Chebyshev's inequality,
+\begin{align}
+  \P{Z \geq 15} &= \P{Z - \mu \geq 5} \\
+  &\leq \P{|Z - \mu| \geq 5} \\
+  &\leq \frac{\V{Z}}{5^2} \\
+  &= \frac{\V{X} + \V{Y}}{25} \\
+  &= \frac{9 + 1}{25} \\
+  &= 10/25 = 0.4.
+\end{align}
+Hence,
+\begin{align}
+    \P{Z < 15} \geq 1 - 0.4 = 0.6.
+\end{align}
+So the probabilty that Mike will be ready in time is at least 60\%.
+\end{solution}
+\end{exercise}
+\end{document}

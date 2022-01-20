@@ -1,0 +1,261 @@
+\documentclass[lectures]{subfiles}
+\begin{document}
+
+\section{Lecture 5}
+\label{sec:lecture-5}
+
+% Remarks:
+% \begin{enumerate}
+% \item Sometimes the book speaks about `dreadful integrals', and it goes at length to avoid computing them. In my opinion this is not good.
+% \item Avoiding analysis requires nearly always finding clever tricks, but, Clever tricks do not generalize; Clever tricks are error prone, and even can trip up (very) clever people; clever tricks are psychologically not helpful to people new in the field, e.g., students,
+%   (`I could have never come up with this idea.')
+% \item So, I prefer not to use clever tricks but propose to reduce the problem to an analysis problem, and use plain computations.
+% \item I assume you also read BH and my notes. In particular the intro remarks on BH.8.
+% \item I added exercises at the end of the material of lecture 1 so that you practice with 2D integration, and moved the exercises on this topic of lecture 3 also to the material of lecture 1.
+% \end{enumerate}
+
+% \clearpage
+
+% Plan for today:
+% \begin{enumerate}
+% \item A derivation of the normal distribution.
+% \item Why is there a $\pi$ in the normalization constant of the normal distribution?
+% \item The first  step in  the analysis of Benford's law.
+% \end{enumerate}
+
+% \clearpage
+
+\textsc{Here is a nice} geometrical explanation of how the normal distribution originates.
+
+\begin{exercise}\label{ex:1}
+Suppose $z_0=(x_0,y_{0})$ is the target on a dart board at which Barney (our national darts hero) aims, but you can also interpret it as the true position of a star in the sky.
+Let $z$ be the actual position at which the dart of Barney lands on the board, or the measured position of the star.
+For ease, take $z_0$ as the origin, i.e., $z_0=(0,0)$.
+Then make the following assumptions:
+\begin{enumerate}
+\item The disturbance $(x,y)$ has the same distribution in any direction.
+\item The disturbance $(x,y)$ along the $x$ direction and the $y$ direction are independent.
+\item Large disturbances are less likely than small disturbances.
+\end{enumerate}
+Show that the disturbance along the $x$-axis (hence $y$-axis) is normally distributed. You can use BH.8.17 as a source of inspiration. (This is perhaps a hard exercise, but  the solution is easy to understand and very useful to memorize.)
+
+\begin{solution}
+Since the disturbance $(x,y)$ has the same distribution in any direction, it has in particular the same distribution in the $x$ and $y$ direction.
+From this and property 2 we conclude that the joint PDF of the disturbance $(x,y)$ must satisfy
+\begin{equation}
+  \label{eq:051}
+  f_{X,Y}(x,y) = f_X(x)f_Y(x) =: f(x)f(y),
+\end{equation}
+where we use property 2 first and then property 1, and we write $f(x)$ for ease.
+Since the disturbance has the same distribution in \textit{any} direction, the density $f$ can only depend on the distance $r$ from the origin but not on the angle. Therefore, the probability that the dart lands on some square $\d x\d y$ must be such that
+\begin{equation}
+  \label{eq:054}
+  f(x)f(y) \d x \d y = g(r) \d x \d y,
+\end{equation}
+for some function $g$, hence $g(r) = f(x)f(y)$. But since $g$ does not depend on the angle $\phi$,
+\begin{equation}
+\label{eq:055}
+\partial_{\phi} g(r) = 0 = f(x) \partial_{\phi}f(y) + f(y) \partial_{\phi}f(x).
+\end{equation}
+
+What can we about $\partial_{\phi} f(x)$ and $\partial_{\phi}f(y)$?
+The relation between $x$ and $y$ and $r$ and $\phi$ is given by the relations:
+\begin{align}
+\label{eq:056}
+x &= r \cos \phi, & y&=r\sin \phi.
+\end{align}
+Using the chain rule,
+\begin{align}
+  \label{eq:057}
+  \partial_{\phi} f(x) &= \partial_{x} f(x) \frac{\d x}{\d \phi} = f'(x) r (-\sin \phi) = - f'(x) y, \\
+  \partial_{\phi} f(y) &= \partial_{y} f(y) \frac{\d y}{\d \phi} = f'(y) r \cos \phi =  f'(y) x.
+\end{align}
+All this gives for \cref{eq:055}
+\begin{equation}
+\label{eq:058}
+0 = x f(x) f'(y) - y f(y)f'(x).
+\end{equation}
+Simplifying,
+\begin{equation}
+  \label{eq:059}
+   \frac{f'(x)}{x f(x)} = \frac{f'(y)}{ y f(y)}.
+\end{equation}
+But now notice that must hold for all $x$ and $y$ at the same time. The only possibility is that there is some constant $\alpha$ such that
+\begin{equation}
+\label{eq:0510}
+   \frac{f'(x)}{x f(x)} =  \frac{f'(y)}{y f(y)} = \alpha.
+\end{equation}
+Hence, our $f$ must satisfy for all $x$
+\begin{equation}
+\label{eq:0511}
+f'(x) = \alpha x f(x).
+\end{equation}
+Differentiating the guess $f(x) = a e^{ x^2/{2 \alpha}}$, for some constant $a$, shows that this $f$ satisfies this differential equation.
+
+Finally, by the third property, we want that $f$ decays as $x$ increases, so that necessarily $\alpha<0$.
+
+
+We set $\alpha = -1/2\sigma^{2}$ to get the final answer:
+\begin{equation}
+  \label{eq:0512}
+  f(x) = a e^{-x^{2}/2 \sigma^{2}}.
+\end{equation}
+It remains to find the normalization constant $a$; recall, $f$ must be a PDF. This is the topic of the next exercise.
+\end{solution}
+\end{exercise}
+
+We next find the normalizing constant of the normal distribution (and thereby offer an opportunity to practice with change of variables).
+
+\begin{exercise}
+For this purpose consider two circles in the plane: $C(N)$ with radius $N$ and $C(\sqrt 2 N)$ with radius $\sqrt 2 N$.
+It is obvious that the square $S(N) = [-N,N]\times[-N,N]$ contains the first circle, and is contained in the second.
+Therefore,
+\begin{equation}
+  \label{eq:0513}
+  \iint_{C(N)}f_{X,Y}(x,y) \d x\d y \leq
+  \iint_{S(N)}f_{X,Y}(x,y) \d x\d y \leq
+  \iint_{C(\sqrt 2 N)}f_{X,Y}(x,y) \d x\d y.
+\end{equation}
+Now substitute the normal distribution of~\cref{ex:1}.
+Then use polar coordinates (See BH.8.1.9) to solve the integrals over the circles, and derive the normalization constant.
+\begin{solution}
+\begin{equation}
+\label{eq:0514}
+  \iint_{C(N)}f_{X,Y}(x,y) \d x\d y =
+a^{2}  \iint_{C(N)} e^{-(x^{2}+y^{2})/2\sigma} \d x\d y.
+\end{equation}
+Since  $x = r \cos \phi$ and $y=r\sin \phi$, we get that $x^2+y^2 = r^{2}$. For the Jacobian,
+\begin{equation}
+  \label{eq:0515}
+  \frac{\partial(x, y)}{\partial(r,\phi)} =
+  \begin{vmatrix}
+    \cos \phi  & -r\sin \phi \\
+    \sin \phi  & r\cos \phi
+  \end{vmatrix}
+= r(\cos^{2} \phi + \sin^2 \phi) = r.
+\end{equation}
+Therefore
+\begin{equation}
+\label{eq:0516}
+\d x \d y = r \d r \d \phi,
+\end{equation}
+from which
+\begin{align}
+a^{2}  \iint_{C(N)} e^{-(x^{2}+y^{2})/2\sigma} \d x\d y
+&=a^{2}  \iint_{C(N)} e^{-r^{2}/2\sigma^{2}} r \d r\d \phi \\
+&= a^{2}  \int_{0}^{N} \int_{0}^{2\pi} e^{-r^{2}/2\sigma^{2}} r \d r\d \phi \\
+&= a^{2}  2\pi \int_{0}^{N}  e^{-r^{2}/2\sigma^{2}} r \d r \\
+&= - a^{2}  2\pi{\sigma^{2}} e^{-r^{2}/2\sigma^{2}}\biggr|_{0}^{N} \\
+&= a^{2}2\pi{\sigma^{2}} (1-e^{-N^{2}/2\sigma^{2}}),
+\end{align}
+where we use~\cref{eq:0511}.
+
+
+Therefore, for the square,
+\begin{equation}
+a^{2}2\pi{\sigma^{2}} (1-e^{-N^{2}/2\sigma^{2}}) \leq
+  \iint_{S(N)}f_{X,Y}(x,y) \d x\d y \leq
+a^{2}2\pi{\sigma^{2}} (1-e^{-2N^{2}/2\sigma^{2}}).
+\end{equation}
+Taking $N\to\infty$ we conclude that
+\begin{align}
+a^{2}2\pi{\sigma^{2}}
+&=\iint f_{X,Y}(x,y) \d x\d y
+=a^{2}  \iint e^{-x^{2}/2\sigma^{2}} e^{-y^{2}/2\sigma} \d x\d y\\
+&=a^{2}  \int_{-\infty}^{\infty} \int_{-\infty}^{\infty }e^{-x^{2}/2\sigma^{2}} e^{-y^{2}/2\sigma} \d x\d y
+=a^{2} \left( \int_{-\infty}^{\infty }e^{-x^{2}/2\sigma^{2}} \d x\right)^{2},
+\end{align}
+and therefore
+\begin{equation}
+\label{eq:0518}
+\int_{-\infty}^{\infty }e^{-x^{2}/2\sigma^{2}} \d x = \sqrt{2 \pi}\sigma.
+\end{equation}
+\end{solution}
+\end{exercise}
+
+
+\textsc{Benford's law makes} a statement on the first significant digit of numbers.
+Look it up on the web; it is a fascinating law.
+It's used to detect fraud by insurance companies and the tax department, but also to see whether the US elections in 2020 have been rigged, or whether authorities manipulate the statistics of the number of deceased by Covid.
+You can find the rest of the analysis in Section 5.5 of `The art of probability for scientists and engineers' by R.W.
+Hamming. The next exercise is a first step in the analysis of Benford's law.
+
+\begin{exercise}
+Let $X,Y$ be iid with density $f$ and support $[1,10)$. Find an expression for the density of $Z=X Y$. What is the support (domain) of $Z$? If $X,Y\sim\Unif{[1,10)}$, what is $f_{Z}$?
+\begin{solution}
+Let's first find the density $f_{X,Z}$.
+Let $g(x,y) = (x, z) = (x, x y)$, i.e., we take $z=x y$. It is simple to see that $y=z/x$.
+
+We use the mnemonic
+\begin{equation}
+\label{eq:0520}
+f_{X,Z}(x,z) \d x \d z =
+f_{X,Y}(x,y) \d x \d y
+\end{equation}
+to see that the density $f_{X,Z}$ must be given by
+\begin{equation}
+f_{X,Z}(x,z)  = f_{X,Y}(x,y) \frac{\partial(x,y)}{\partial(x, z)}.
+\end{equation}
+Now (I take this form because I find it easier to differentiate in this sequence),
+\begin{equation}
+\label{eq:0519}
+\left(\frac{\partial(x,y)}{\partial(x,z)}\right)^{-1} =
+\frac{\partial(x,z)}{\partial(x,y)} =
+\begin{vmatrix}
+  1 & 0 \\
+y & x
+\end{vmatrix} = x.
+\end{equation}
+and therefore, using that $X$ and $Y$ are iid with density $f$,
+\begin{equation}
+f_{X,Z}(x,z)  = f_{X,Y}(x,y) \frac{1}{x} = f(x)f(y)/x = f(x)f(z/x)/ x.
+\end{equation}
+(Don't forget to take $1/x$ instead of $x$.)
+
+It remains to tackle the domain of $f_{X,Z}$.
+In particular, we have to account for the fact that $X, Y\in [1,10)$.
+Surely, $Z\in [1, 100)$, but if $Z=80$, say, than necessarily $X>8$.
+Hence, the domain is not $(x,z) \in [1,10]\times [1, 100]$, but more complicated.
+
+We already have that $1\leq x < 10$. We also have the condition $z/x = y\in [1, 10)$, which we can simplify to a condition on $x$,
+\begin{equation}
+\label{eq:0522}
+1\leq z/x < 10 \iff 1 \geq x/z > 1/10 \iff z \geq x > z/10.
+\end{equation}
+Combining both constraints gives
+\begin{equation}
+\max\{1, z/10\} < x \leq \min\{10, z\}.
+\end{equation}
+All in all,
+\begin{equation}
+f_{X,Z}(x,z)  = f(x)f(z/x)/ x \1{\max\{1, z/10\}< x \leq \min\{10, z\}}.
+\end{equation}
+As a test, $z=110 \implies x > 110/10 > 10$, but the indicator says that $x\leq 10$, hence we get 0 for the indicator, which is what we want in this case. (You should test $Z=0$, $Z=1$, $Z=5$.)
+
+I advice you to make a sketch of the support of $X$ and $Z$.
+
+
+With marginalization
+\begin{equation}
+f_{Z}(z) =
+\int_{1}^{10} f_{X,Z}(x,z) \d x.
+\end{equation}
+We can plug in the above expression, but that just results in a longer expression that we cannot solve unless we make a specific choice for $f$.
+
+Finally, if $X,Y$ uniform on $[1,10)$, then $f(x)=1/9$, hence,
+\begin{align}
+f_{Z}(z)
+&=\frac{1}{9^{2}}\int_{1}^{10}  \1{\max\{1, z/10\}< x \leq \min\{10, z\}} \frac{\d x}{x}\\
+&=\frac{\log(\min\{10, z\}) - \log(\max\{1, z/10\})}{81} \1{1\leq z < 100}.
+\end{align}
+Do we need an indicator to ensure that $f_{X,Z}(x,z)\geq0$ for all $z \in [1, 100)$, or is this already satisfied by the expression above?
+
+It's easy to make some interesting variations for the exam:
+\begin{enumerate}
+\item Change the domains or the distributions of $X$ and $Y$.
+\item Take $Z=X/Y$, or $Z=X+Y$.
+\end{enumerate}
+
+\end{solution}
+\end{exercise}
+\end{document}

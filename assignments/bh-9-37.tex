@@ -1,0 +1,63 @@
+\input{header}
+\subsection{BH.9.37}
+
+With this exercise we illustrate why (and how) to use bootstrapping. At first it appears a bit strange: we have a set of observations (samples) $X=\{X_{1}, X_2, \ldots, X_{n}\}$. For this we can compute the mean, std, and the empirical distribution with standard procedures, so why sample (bootstrap) from $X$?
+
+One type of question that seems hard to answer by classical means is to characterize the median, in particular the std and distribution of the median, of the population (that is, the population from which we took the sample $X$).
+
+Bootstrapping is nowadays used a lot in datascience.
+
+\begin{exercise}
+Run the code below, and then explain what is \mintinline{python}{sample}, \mintinline{python}{bootstrap} and \mintinline{python}{medians}. Why do we use \mintinline{python}{axis=1}?
+\end{exercise}
+
+\begin{exercise}
+Change some numbers (such as the range of the random numbers from which we obtained the initial sample). Include your code,  make the plot, and include it in your assignment.
+\end{exercise}
+
+\begin{minted}{python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(3)
+
+sample = np.random.randint(200, size=100)
+n_boot = 5000
+bootstrap = np.random.choice(sample, replace=True, size=(n_boot, len(sample)))
+
+medians = np.median(bootstrap, axis=1)
+# print(medians.mean(), medians.std())
+# print(np.percentile(medians, [2.5, 97.5]))
+
+plt.hist(medians, bins=100, density=True)
+plt.axvline(np.percentile(medians, 2.5), c='r', lw=2)
+plt.axvline(medians.mean(), c='r', lw=2)
+plt.axvline(np.percentile(medians, 97.5), c='r', lw=2)
+plt.savefig("figures/bootstrap.pdf")
+\end{minted}
+
+\begin{exercise}
+Finally, let us compare the information we obtained from bootstrapped to the medians we would obtain when we would sample from the real population.
+\begin{enumerate}
+\item What is here the real population?
+\item In a real life situation, what is less costly: real sampling or bootstrapping?
+\item Explain the ideas of the code below.
+\item Compare this figure to the one obtained by bootstrapping. Comment on major differences.
+\end{enumerate}
+\begin{minted}{python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(3)
+
+samples = np.random.randint(200, size=(500, 100))
+medians = np.median(samples, axis=1)
+plt.hist(medians, bins=100, density=True)
+plt.savefig("figures/real_medians.pdf")
+\end{minted}
+\end{exercise}
+
+
+
+
+\input{trailer}

@@ -1,0 +1,189 @@
+\subsection{BH.9.1.7}
+
+The aim is to use a simulator to analyze the expected profit for the game of BH.9.1.7 but for a different prior than the uniform.
+First, however, we build BH.9.1.7 with the uniform prior so that you we our code.
+
+First read and solve BH.9.1.7.
+
+\begin{exercise}
+Run the code below. What are the values of \verb|accepted|? What does it represent. How is the gain computed? Why do we take the mean?
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import uniform
+
+np.random.seed(3)
+
+alpha = 2 / 3
+n = 100
+V = uniform(0, 1).rvs(n)
+
+bid = 0.5
+accepted = bid > alpha * V
+gain = (V - bid) * accepted
+print(gain.mean())
+\end{minted}
+\end{exercise}
+
+
+\begin{exercise}
+Here is some code to compute the gain for multiple bids. Explain how the function $f$ works, in other words, how it handles the  formatting of floating point numbers.
+The rest of the code must be clear to you, so you don't have to explain that.
+
+Pretty printing floating points is something you really have to learn. If you unquote the line marked as `unquote this line' and rerun the program, you'll see why people like to see formatted numbers.
+
+Hint, search the web (python or R documentation) on formatting floating poinat numbers.
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import uniform
+
+
+def f(x):  # format floating point numbers
+    # return f"{x}"  # unquote this line
+    return f"{x:3.3f}"
+
+
+np.random.seed(3)
+
+
+alpha = 2 / 3
+n = 100
+V = uniform(0, 1).rvs(n)
+
+for b in np.arange(0.1, 1, 0.1):
+    accepted = b > alpha * V
+    gain = (V - b) * accepted
+    print(f"{f(b)}, {f(gain.mean())}")
+\end{minted}
+\end{exercise}
+
+
+\begin{exercise}
+Use the  code of the previous exercise as a starting point to make a graph of the gain as a function of the bid. Compute the bids for $0.05, 0.1, 0.15$, etc, i.e., in steps of $0.05$. Include your code,  a figure, and comment on the graph.  Use your student id as seed.
+\end{exercise}
+
+
+\begin{exercise}
+It is very easy to compute the expected gain by means of numerical integration. Run the code below and explain how the \verb|res| variable is computed.  Is the result similar to the simulation? Once again (so that you really remember what an anonymous function is!), explain very briefly why we use an anonymous function here.
+\begin{minted}[]{python}
+import numpy as np
+from scipy.integrate import quad
+
+alpha = 2 / 3
+n = 100
+b = 0.5
+
+res = quad(lambda v: (v - b) * (b > alpha * v), 0, 1)
+print(res)
+\end{minted}
+\end{exercise}
+
+\begin{exercise}
+Modify the numerical integrator  such that the prior on $V$ is $\Beta{8, 2}$. Include your code and give the result for a bid of $1/2$.
+\begin{solution}
+\begin{minted}[]{python}
+import numpy as np
+from scipy.integrate import quad
+from scipy.stats import beta
+
+alpha = 2 / 3
+n = 100
+b = 0.5
+prior = beta(8, 2)
+
+res = quad(lambda v: (v - b) * (b > alpha * v) * prior.pdf(v), 0, 1)
+print(res)
+\end{minted}
+\end{solution}
+\end{exercise}
+
+\subsection{BH.9.1.7.The mystery box}
+
+We use  simulation to solve  BH.9.7.
+Read it now, i.e., before reading the text below, then read the code below.
+Note how short  this code is;  amazing, isn't it?
+
+
+
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import uniform
+import matplotlib.pyplot as plt
+
+np.random.seed(3)
+
+
+N = 1000
+a, b = 0, 1000_000
+V = uniform(a, b).rvs(N)
+
+x_range = np.linspace(b / 5, b / 2, num=50)
+y = np.zeros_like(x_range)
+
+for i, b in enumerate(x_range):
+    payoff = (V - b) * (b >= V / 4)
+    y[i] = payoff.mean()
+
+
+plt.plot(x_range, y)
+plt.show()
+\end{minted}
+
+\begin{minted}[]{R}
+set.seed(3)
+
+N = 1000
+a = 0
+b = 1000000
+V = runif(N, min = a, max = b)
+
+x_range = seq(b / 5, b / 2, length.out = 50)
+y = rep(0, length(x_range))
+
+
+i = 1
+for (b in x_range) {
+  payoff = (V - b) * (b >= V / 4)
+  y[i] = mean(payoff)
+  i = i + 1
+}
+
+plot(x_range, y, type = "l", col = "blue")
+\end{minted}
+
+
+\begin{exercise}
+For the python code use the scipy documentation to explain why $V\sim\Unif{[0,10^{6}]}$. For R, explain the save fo \texttt{runif}.
+\end{exercise}
+
+
+
+\begin{exercise}
+What are the smallest and the largest value of \verb|x_range|?
+\end{exercise}
+
+\begin{exercise}
+Run the code above and make a graph. Include the graph in your report, and explain what you see in the graph. For instance, is there a maximum? If so, can you explain where the maximum occurs? Can you explain how the maximum should be?
+\end{exercise}
+
+
+\begin{exercise}
+Suppose after seeing the graph of the payoffs, and this graph would only increase, or decrease, how would you change \verb|x_range|? Do you expect to see a maximum?
+\end{exercise}
+
+
+
+
+\begin{exercise}
+For N small, e.g. N=10, you can get quite strange values. Why is that?
+\end{exercise}
+
+
+\begin{exercise}
+Change the acceptance threshold from to $V/4$ to $V/5$ (or $V/6$, or some other value you like), and make a graph of the payoffs.
+Include the graph in your report.
+\end{exercise}
+
+\begin{exercise}
+Change the payoff function to e.g $\sqrt{V-b}$, or some weird function that you like particularly such as $\sin |V-b|$ (any non-trivial function goes).
+Make a graph of the  mean and std of the payoff. Can you explain your graph?
+\end{exercise}

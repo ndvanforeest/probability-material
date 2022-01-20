@@ -1,0 +1,89 @@
+\subsection{BH.7.9}
+\label{sec:bh.7.9}
+
+First read and solve BH.7.9. Here we provide a simulation.
+
+\begin{exercise}
+Run this code, and use the documentation of scipy.stats.geom to explain why it fails. Perhaps you can also use the wikipedia page on the geometric distribution. (Hint: is the first success distribution of the geometric distribution?)
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import randint, geom
+
+np.random.seed(3)
+
+p, num = 0.1, 10000
+q = 1 - p
+rv = geom(p)  # This line
+X = rv.rvs(num)
+
+if X.min() != 0:
+    raise ValueError("The minimal value of X is not 0")
+if not np.isclose(q / p, X.mean(), 0.1):
+    raise ValueError("The mean of X is not ok")
+\end{minted}
+\end{exercise}
+
+\begin{exercise}
+The code of the previous exercise failed, on purpose.   It will work if we change the line marked as ``this line'', into this:
+\begin{minted}[]{python}
+rv = geom(p, loc=-1)
+\end{minted}
+Explain the difference, and why it now works. Relate this location-scale transformation to one of the distributions you know from BH.
+\end{exercise}
+
+Memorize from this exercise that with such checks you can build code that fails when it gets unexpected input.
+
+
+\begin{exercise}
+Run this code and explain in detail the output. Make, and include, some simple example code to show that you are correct.
+
+\begin{minted}[]{python}
+import numpy as np
+
+N = np.array([3, 4, 4, 8, 4])
+X = np.array([8, 7, 6, 5, 3])
+print(np.argwhere(N == 4))
+Xn = X[np.argwhere(N == 4)]
+print(Xn)
+\end{minted}
+\end{exercise}
+
+\begin{exercise}
+Explain the lines marked with `this in the code of listing~\cref{BH.7.9.p}. You already explained the other parts so you don't have to do that again.
+\end{exercise}
+
+
+\begin{listing}[!ht]
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import randint, geom
+import matplotlib.pyplot as plt
+
+np.random.seed(3)
+
+p, num = 0.1, 100000
+q = 1 - p
+rv = geom(p, loc=-1)
+X = rv.rvs(num)
+
+Y = rv.rvs(num)
+N = X + Y
+
+fig, axes = plt.subplots(3, 3, sharey="all", figsize=(6, 3))  # this
+n = 7  # gives nice results, after some experimentation
+for ax in axes.flatten():  # this
+    Xn = X[np.argwhere(N == n)]
+    y, bins = np.histogram(Xn, bins=np.linspace(0, n + 1, n + 2)) # this
+    ax.plot(range(n + 1), y, 'bo', ms=3, label='N=8')  # this
+    ax.vlines(range(n + 1), 0, y, colors='b', lw=2, alpha=0.5) # this
+    ax.set_title(f'{n=} ({len(Xn)})')
+    ax.set_ylim(0) # this
+    n += 1
+\end{minted}
+\caption{BH.7.9, python code.}
+\label{BH.7.9.p}
+\end{listing}
+
+\begin{exercise}
+Explain the results. Do they match with the theoretical results?
+\end{exercise}

@@ -1,0 +1,90 @@
+\input{header.tex}
+
+\subsection{BH.10.39}
+
+BH.10.39.a asks about the first time such that some exponential rv exceeds a certain threshold.
+Part b is about when the sum of a number of r.v.s exceed a threshold.
+Such problems are called \emph{hitting times}.
+
+\begin{minted}{python}
+import numpy as np
+from scipy.stats import expon
+
+np.random.seed(3)
+
+X = expon(scale=1)
+
+# part a
+
+N = 10
+res = np.zeros(N)
+for i in range(N):
+    n = 0
+    while X.rvs() < 1:
+        n += 1
+    res[i] = n
+
+print(res.mean(), res.std())
+
+# part b
+
+N = 100
+res = np.zeros(N)
+for i in range(N):
+    M = X.rvs()
+    n = 1
+    while M < 10:
+        M += X.rvs()
+        n += 1
+    res[i] = n
+
+print(res.mean(), res.std())
+\end{minted}
+
+\begin{minted}[]{R}
+set.seed(3)
+
+# part a
+
+N = 10
+res = rep(0, N)
+for (i in 1:N) {
+  n = 0
+  while (rexp(1, rate = 1) < 1) {
+    n = n + 1
+    res[i] = n
+  }
+}
+
+print(mean(res))
+print(sd(res))
+
+# part b
+
+N = 100
+res = rep(0, N)
+for (i in 1:N) {
+  M = rexp(1, rate = 1)
+  n = 1
+  while(M < 10) {
+    M = M + rexp(1, rate = 1)
+    n = n + 1
+    res[i] = n
+  }
+}
+
+print(mean(res))
+print(sd(res))
+\end{minted}
+
+
+By now you have so much experience with reading code that you must be able to explain all without intermediate steps to guide you.
+\begin{exercise}
+Explain how the first part of the code simulates BH.10.39.a.
+\end{exercise}
+
+\begin{exercise}
+Explain how the second part of the code simulates BH.10.39.b.
+\end{exercise}
+
+\input{trailer}

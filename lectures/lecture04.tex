@@ -1,0 +1,174 @@
+\documentclass[lectures]{subfiles}
+\begin{document}
+
+\section{Lecture 4}
+
+
+
+
+\begin{exercise} BH.7.65 Let $(X_1, \ldots, X_k)$ be Multinomial with parameters $n$ and $(p_1, \ldots, p_k)$. Use indicator r.v.s to show that $\cov(X_i, X_j) = -n p_i p_j$ for $i \neq j$.
+
+\begin{solution}
+See solution manual.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Suppose $(X,Y)$ are bi-variate normal distributed with mean vector $\mu = (\mu_X, \mu_Y) = (0,0)$, standard deviations $\sigma_X = \sigma_Y = 1$ and correlation $\rho_{X Y}$ between $X$ and $Y$. Specify the joint pdf of $X$ and $X + Y$.
+\begin{solution}
+Define $V := X$ and $W := X + Y$. Observe that for any $t_V, t_W$, we have
+\begin{align}
+    t_V V + t_W W &= t_V X + t_W (X + Y) \\
+    &= (t_V + t_W) X + t_W Y.
+\end{align}
+Hence, any linear combination of $V$ and $W$ is a linear combination of $X$ and $Y$. Since $(X,Y)$ is bi-variate normal, every linear combination of $X$ and $Y$ is normally distributed. Hence, every linear combination of $V$ and $W$ is normally distributed. Hence, by definition, $(V,W)$ is bi-variate normally distributed.
+
+We need to compute the mean vector and covariance matrix of $(V,W)$. We have
+\begin{align}
+    \mu_V = \E{V} = \E{X} = \mu_X = 0,
+\end{align}
+and
+\begin{align}
+    \mu_W = \E{W} = \E{X + Y} = \mu_X + \mu_Y = 0.
+\end{align}
+Next, we have
+\begin{align}
+    \V{V} = \V{X} = \sigma_X^2 = 1,
+\end{align}
+and
+\begin{align}
+    \V{W} &= \V{X + Y} = \V{X} + \V{Y} + 2\cov(X,Y)\\
+    &= 1 + 1 + 2 \rho_{XY} \sigma_X \sigma_Y = 2(1 + \rho_{XY}).
+\end{align}
+Finally,
+\begin{align}
+    \cov(V,W) &= \cov(X, X + Y) = \cov(X, X) + \cov(X, Y) \\
+    &= \sigma_X^2 + \rho_{XY} \sigma_X \sigma_Y = 1 + \rho_{XY},
+\end{align}
+and hence,
+\begin{align}
+    \rho_{VW} := \cor(V,W) &= \frac{\cov(V,W)}{\sqrt{\V{V}\V{W}}} \\
+    &= \frac{1 + \rho_{XY}}{\sqrt{1 \cdot 2(1 + \rho_{XY})}} \\
+    &= \sqrt{\frac{1 + \rho_{XY}}{2}}.
+\end{align}
+We have now specified all parameters of the bi-variate normal distribution. This yields the following joint pdf:
+\begin{align}
+    f_{V,W}(v,w) &= \frac{1}{2\pi \sigma_V \sigma_W \tau_{VW}} \exp\left(-\frac{1}{2 \tau_{VW}^2}\left(\left(\frac{v}{\sigma_V}\right)^2 + \left(\frac{w}{\sigma_W}\right)^2 - 2 \frac{\rho_{VW}}{\sigma_V \sigma_W} vw\right) \right),
+\end{align}
+where $\tau_{VW} := \sqrt{1 - \rho_{VW}^2} = \sqrt{1 - \frac{1 + \rho_{XY}}{2}} = \sqrt{\frac{1 - \rho_{XY}}{2}}$ and $\sigma_V = \sqrt{\V{V}} = 1$ and $\sigma_W = \sqrt{\V{W}} = \sqrt{2(1 + \rho_{XY})}$. Hence,
+\begin{align}
+    f_{V,W}(v,w) &= \frac{1}{2\pi \sqrt{1 - (\rho_{XY})^2}} \exp\left(-\frac{1}{1 - \rho_{XY}}\left(v^2 + \frac{w^2}{2(1 + \rho_{XY})}-vw\right)\right).
+\end{align}
+
+\end{solution}
+\end{exercise}
+
+
+The following exercises will show how probability theory can be used in finance. We will look at the trade off between risk and return in a financial portfolio.
+
+John is an investor who has $\$ 10,000$ to invest.
+There are three stocks he can choose from.
+The returns on investment $(A,B,C)$ of these three stocks over the following year (in terms of percentages) follow a multinomial distribution.
+The expected returns on investment are $\mu_A = 7.5 \%$, $\mu_B = 10\%$, $\mu_C = 20\%$.
+The corresponding standard deviations are $\sigma_A = 7\%$, $\sigma_B = 12 \%$ and $\sigma_C = 17\%$.
+Note that risk (measured in standard deviation) increases with expected return.
+The correlation coefficients between the different returns are $\rho_{AB} = 0.7$, $\rho_{AC} = -0.8$, $\rho_{BC} = -0.3$.
+
+\begin{exercise}
+Suppose the investor decides to invest $\$ 2,000$ in stock A, $\$4,000$ in stock B, $\$2,000$ in stock C and to put the remaining $\$ 2,000$ in a savings account with a zero interest rate. What the expected value of his portfolio after a year?
+\begin{solution}
+Let $X$ denote the value of the portfolio after a year in thousands of dollars. Then,
+\begin{align}
+    X &:= 2(1 + A) + 4(1 + B) + 2(1 + C) + 2 \\
+    &= 10 + 2A + 4B + 2C.
+\end{align}
+Then,
+\begin{align}
+    \E{X} &= \E{ 10 + 2A + 4B + 2C } \\
+    &= 10 + 2\E{A} + 4\E{B} + 2\E{C} \\
+    &= 10 + 2\cdot 0.075  + 4 \cdot 0.1  + 2 \cdot 0.2 \\
+    &= 10 + 0.15  + 0.4  + 0.4 \\
+    &= 10.95
+\end{align}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+What is the standard deviation of the value of the portfolio in a year?
+\begin{solution}
+We have
+\begin{align}
+    \V{X} &= \V{ 10 + 2A + 4B + 2C} \\
+    &= \V{2A} + \V{4B} + \V{2C} \\
+    &\quad +2\Big( \cov(2A, 4B) + \cov(2A, 2C) + \cov(4B, 2C) \Big) \\
+    &= 4\V{A} + 16\V{B} + 4\V{C}\\
+    &\quad +2\Big( 8\cov(A, B) + 4\cov(A, C) + 8\cov(B, C) \Big) \\
+    &= 4\sigma_A^2 + 16\sigma_B^2 + 4\sigma_C^2 \\
+    &\quad +2\Big( 8\rho_{AB}\sigma_A \sigma_B + 4\rho_{AC}\sigma_A \sigma_C + 8\rho_{BC}\sigma_B \sigma_C \Big) \\
+    &= 4(0.07)^2 + 16(0.12)^2 + 4(0.17)^2 \\
+    &\quad +2\Big( 8(0.7)(0.07) (0.12) + 4(-0.8)(0.07)(0.17) + 8(-0.3)(0.12) (0.17)\Big) \\
+    &= 0.2856.
+\end{align}
+So
+\begin{align}
+    \sigma_X = \sqrt{0.2856} = 0.5344.
+\end{align}
+So $X$ has a standard deviation of $\$534$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+John does not like losing money. What is his probability of having made a net loss after a year?
+\begin{solution}
+We need to compute the probability $\P{X \leq 10}$. We have
+\begin{align}
+    \P{X \leq 10}
+ &= \P{ X - \mu_X \leq 10 - 10.95} \\
+    &= \P{ \frac{X - \mu_X}{\sigma_X} \leq \frac{10 - 10.95}{0.5344} } \\
+    &= \P{ Z \leq \frac{10 - 10.95}{0.5344} } \\
+    &= \P{ Z \leq -1.9625 } \\
+    &= 0.0377.
+\end{align}
+So John has a probability of $3.77\%$ of losing money with his investment.
+\end{solution}
+\end{exercise}
+
+John has a friend named Mary, who is a first-year EOR student. She has never invested money herself, but she is paying close attention during the course Probability Distributions. She tells her friend: ``John, your investment plan does not make a lot of sense. You can easily get a higher expected return at a lower level of risk!''
+
+\begin{exercise}
+Show that Mary is right. That is, make a portfolio with a higher expected return, but with a lower standard deviation. \\
+\textit{Hint: Make use of the \textbf{negative correlation} between $C$ and the other two stocks!}
+\begin{solution}
+Observe that $C$ has the highest expected return \textit{and} it is negatively correlated with the other two stocks. We will use these facts to our advantage.
+
+Starting out with portfolio $X$, we construct a portfolio $Y$ by splitting the investment in stock B in two halves, which we add to our investments in stock A and C. Since the average expected return of A and C is higher than that of B, we must have that $\E{Y} > \E{X}$. Moreover, the fact that A and C are negatively correlated will mitigate the level of risk. If one stock goes up, we expect the other to go down, so the stocks cancel out each others variability. This is the idea behind the investment principle of \textit{diversification}.
+
+Mathematically, we define
+\begin{align}
+    Y &:= 4(1 + A) + 4(1 + C) + 2 \\
+    &= 10 + 4A + 4C.
+\end{align}
+Then,
+\begin{align}
+    \E{Y} &= \E{10 + 4A + 4C} \\
+    &= 10 + 4\E{A} + 4\E{C} \\
+    &= 10 + 4(0.075) + 4(0.20) \\
+    &= 11.1
+\end{align}
+Moreover,
+\begin{align}
+    \V{Y} &= \V{10 + 4A + 4C} \\
+    &= \V{4A} + \V{4C} + 2 \cov(4A, 4C)\\
+    &= 4^2\V{A} + 4^2 \V{C} +2 \cdot  4 \cdot 4 \cdot \cov(A,C) \\
+    &= 16 (.07)^2 + 16 (.17)^2  + 32 (-.8)(.07)(.17) \\
+    &= 0.23616,
+\end{align}
+which corresponds to a standard deviation of
+\begin{align}
+    \sigma_Y = \sqrt{\V Y} = \sqrt{0.23616} = 0.4860
+\end{align}
+So indeed, $\E{Y} > \E{X}$, while $\sigma_Y < \sigma_X$. Clearly, portfolio $Y$ is more desirable.
+\end{solution}
+\end{exercise}
+\end{document}

@@ -1,0 +1,33 @@
+\input{header}
+
+\subsection{BH.8.1}
+\label{sec:bh-8.1}
+
+\begin{exercise}
+Here is the code to solve BH.8.1. Explain the relevant steps, i.e., the lines marked as `this'. Is the result according to your expectation?
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import expon
+import matplotlib.pyplot as plt
+
+X = expon(scale=1) # this
+Y = np.exp(-X.rvs(1000)) # this
+plt.hist(Y, density=True, label="sim")
+
+x = np.linspace(0, 1, 30)
+dxdy = np.exp(x)  # this
+pdf_y = X.pdf(x) * dxdy # this
+plt.plot(x, pdf_y, label="f_Y")
+plt.legend()
+plt.tight_layout()
+plt.savefig("figures/bh-8-1-fig.pdf")
+\end{minted}
+\end{exercise}
+
+\begin{exercise}
+What error would we make if we would use this code: \verb|dxdy = np.exp(-x)|?
+\end{exercise}
+
+
+
+\input{trailer}

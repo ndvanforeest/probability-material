@@ -1,0 +1,107 @@
+\input{header}
+
+\subsection{BH.9.50}
+
+This simulation exercise is based on BH.9.25.  Please read the exercise first. Do the exercise while thinking about the code.
+
+\begin{exercise}
+Here is some code to simulate $N$.  Explain the non-trivial steps. (By now you should have an idea about boiler-plate code and what code is specific for the problem.)
+
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import poisson, expon
+
+np.random.seed(3)
+
+num = 100
+N = np.zeros(num)
+Labda = expon(scale=1)
+labdas = Labda.rvs(num)
+for i in range(num):
+    labda = labdas[i]
+    N[i] = poisson(labda).rvs()
+
+print(N.mean(), N.var())
+adam = Labda.mean()
+eve = Labda.mean() + Labda.var()
+print(adam, eve)
+\end{minted}
+\end{exercise}
+
+\begin{exercise}
+Run the above code and compare the result to the theoretical value. What do you observe? Rerun the code with \mintinline{python}{num = 10000}. Does this result in a better estimate? What do you learn from this?
+\end{exercise}
+
+\begin{exercise}
+The next step is to estimate the mean and variance of the total claim size $S$.
+Here is the code, run it and explain the relevant parts.
+\begin{minted}{python}
+import numpy as np
+from scipy.stats import poisson, expon, lognorm
+
+np.random.seed(3)
+
+num = 100
+Labda = expon(scale=1)
+labdas = Labda.rvs(num)
+mu, sigma = 3, 1
+X = lognorm(loc=mu, s=sigma)
+S = np.zeros(num)
+for i in range(num):
+    N = poisson(labdas[i]).rvs()
+    S[i] = X.rvs(N).sum()
+
+print(f"{S.mean()=}")
+adam = X.mean() * Labda.mean()
+print("mean_theoretical: ", adam)
+print(f"{S.var()=}")
+eve = Labda.mean() * X.var() + X.mean() ** 2 * (Labda.mean() + Labda.var())
+print("var_theoretical: ", eve)
+\end{minted}
+\end{exercise}
+
+\begin{exercise}
+Here is the code to plot the distribution. Change $\lambda$ such that it is $\sim\Exp{1/2}$ and include the figure.
+\begin{minted}{python}
+import numpy as np
+from scipy.stats import poisson, expon
+import matplotlib.pyplot as plt
+
+np.random.seed(3)
+
+num = 100
+N = np.zeros(num)
+Labda = expon(scale=1)
+labdas = Labda.rvs(num)
+for i in range(num):
+    labda = labdas[i]
+    N[i] = poisson(labda).rvs()
+
+plt.hist(N, density=True)
+plt.savefig("figures/bh-9.50-fig.pdf")
+\end{minted}
+\end{exercise}
+
+\begin{exercise}
+Finally, let's do the integration numerically to compute $\P{N=3}$. Explain the code. Why, in particular, do I compare the result against \mintinline{python}{geom(1/2).pmf(4)}? (Hint, read the documentation of \mintinline{python}{scipy.stats.geom}  to understand why.)
+\begin{minted}{python}
+import numpy as np
+from scipy.integrate import quad
+from scipy.stats import expon, geom
+
+Labda = expon(scale=1)
+
+def integrand(labda):
+    return np.exp(-labda) * labda ** 3 / 6 * Labda.pdf(labda)
+
+res = quad(lambda labda: integrand(labda), 0, np.infty)
+print(res)
+print(geom(1 / 2).pmf(3))
+print(geom(1 / 2).pmf(4))
+\end{minted}
+
+\end{exercise}
+
+
+
+\input{trailer}

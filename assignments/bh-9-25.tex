@@ -1,0 +1,110 @@
+\input{header}
+
+\subsection{BH.9.25}
+
+This simulation exercise is based on BH.9.25.  Please read the exercise first, and then the code below.
+
+\begin{exercise}
+How does this code work? Use the print statements to find out what $S$ is, and explain why we multiply by 2 and subract 1 in one of the lines marked as `this'.
+
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import bernoulli
+
+np.random.seed(3)
+
+n = 5
+num = 10
+
+p = 0.5
+S = bernoulli(p).rvs([num, n]) * 2 - 1 # this
+# print(S)
+
+x = np.zeros([num, n])
+x[:, 0] = 100  # this
+# print(x)
+f = 0.25
+
+for i in range(1, n):
+    x[:, i] = x[:, i - 1] * (1 + f * S[:, i]) # this
+
+print(x.mean(axis=0), x.std(axis=0))
+\end{minted}
+
+\begin{minted}[]{R}
+set.seed(3)
+
+n = 5
+num = 10
+
+p = 0.5
+S = matrix(rbinom(n * num, size = 1, prob = p), num, n) * 2 - 1
+
+x = matrix(0, num, n)
+x[, 1] = 100
+f = 0.25
+
+for (i in 2:n) {
+  x[, i] = x[, i - 1] * (1 + f * S[, i])
+}
+
+print(colMeans(x))
+print(apply(x, MARGIN = 2, sd))
+\end{minted}
+\end{exercise}
+
+
+
+\begin{exercise}
+\begin{enumerate}
+\item Run the code below.
+\item Check the values of \mintinline{python}{x}. What do you notice?
+\item Then compare both figures. You should see that in \mintinline{python}{Kelly-no-jitter.pdf} many of the markes (the \mintinline{python}{x} below the $y$-axis)
+fall on top of each other.  To repair for this, we add some noise (jitter) to the $x$ and $y$ values of the markes. Explain how randomness is used here.
+\item  Jitter plots, like this one, are meant to give some more insight into the data to check whether we use the right number of bins. Change the number of bins to 2, include the plot with the jitters, and explain how the marks help to see that two bins is much too small.
+\end{enumerate}
+
+
+\begin{minted}{python}
+import numpy as np
+from scipy.stats import bernoulli, uniform
+import matplotlib.pyplot as plt
+
+
+np.random.seed(3)
+
+n = 10
+n_experiments = 50
+
+p = 0.4
+S = bernoulli(p).rvs([n, n_experiments]) * 2 - 1  # this
+# print(S)
+
+x = np.zeros([n, n_experiments])
+x[0, :] = 100  # this
+f = 0.25
+
+for i in range(1, n):
+    x[i, :] = x[i - 1, :] * (1 + f * S[i, :])  # this
+
+print(x[-1, :].mean(), x[-1, :].std())
+print(x[-1, :])
+
+plt.hist(x[-1, :], bins=20, density=True)
+plt.plot(x[-1, :], np.full_like(x[-1, :], -0.01), "xk", markeredgewidth=1)
+plt.savefig("figures/Kelly-no-jitter.pdf")
+
+
+x_jitter = x[-1, :] + uniform(loc=-3, scale=6).rvs(size=n_experiments)
+y_jitter = np.full_like(x[-1, :], -0.01) + uniform(loc=-0.01, scale=0.02).rvs(
+    size=n_experiments
+)
+plt.plot(x_jitter, y_jitter, "xk", markeredgewidth=1)
+plt.savefig("figures/Kelly-jitter.pdf")
+
+\end{minted}
+
+\end{exercise}
+
+
+\input{trailer}

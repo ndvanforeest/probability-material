@@ -1,0 +1,50 @@
+\subsection{BH.9.1.9}
+\label{sec:not-niet}
+
+This is a nice variation of one-step analysis of the coin throwing example of BH.9.1.9.
+
+We have a mouse that sits on one corner of a cube whose edges are made of wire, and  diagonally opposite the mouse there is some cheese.
+The mouse chooses at random (uniform) any edge and moves to the next corner.
+How many steps does it take, on average, for the mouse to reach the cheese (assuming the cheese does not move)?
+
+For ease, we label assemble  all edges with the same minimal number of edges into states. Thus, the starting corner will be called state 3, then we have a state 2, and 1, and finally state 0 is the corner with the cheese.
+
+\begin{exercise}
+Explain in the code below how the while loop simulates the moves of the mouse.  To understand the line marked as `this', read what is a, so-called, ternary operator.
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import uniform
+import matplotlib.pyplot as plt
+
+move = uniform()
+
+
+def do_run():
+    state = 3
+    n_steps = 0
+    while state != 0:
+        n_steps += 1
+        p = move.rvs()
+        if state == 3:
+            state = 2
+        elif state == 2:
+            state = 1 if p < 2 / 3 else 3 # this
+        elif state == 1:
+            state = 2 if p < 2 / 3 else 0
+    return n_steps
+
+
+n = 200
+steps = np.zeros(n)
+for i in range(n):
+    steps[i] = do_run()
+
+print(steps.mean(), steps.std())
+plt.hist(steps, density=True)
+plt.tight_layout()
+plt.savefig("figures/mouse.pdf")
+\end{minted}
+
+\begin{solution}
+\end{solution}
+\end{exercise}
