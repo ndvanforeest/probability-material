@@ -1,0 +1,83 @@
+\section{Question}
+\begin{exercise}[1.5]
+Let $U\sim\text{Unif}(-1,1)$. Find the PDF of $B = \left|U\right|$. What is its distribution? What is $\E{B}$?
+\begin{solution}
+Notice that the function $\abs{x}$ is not one-to-one on $(-1,1)$, hence we cannot use the transformation theorem here. We see that since $U\in(-1,1)$, $B\in[0,1)$. Then we see that
+\begin{align*}
+    F_B(y) = \P{B\leq y} = \P{\abs{X}\leq y} = \P{-y\leq X \leq y} = F_X(y) - F_X(-y)
+\end{align*}
+For $y\in[0,1]$. We know $F_X(y) = \frac{y+1}{2}$, so then $F_X(y) - F_X(-y) = \frac{y+1}{2} - \frac{-y+1}{2} = y$, and we conclude that $B\sim\text{Unif}(0,1)$. Then we  know $\E{B} = \frac12$.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Correct derivation with CDF 0.5pt
+    \item No mistakes in the above 0.5pt.
+    \item Expectation 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1.5]
+Let $X$ be a continuous random variable such that $M_X(t) = e^t M_X(-t)$. What is $\E{X}$? Can you conclude that $X$ is distributed in the same manner as $B$?
+\begin{solution}
+Using the given relation of $M_X$, we see that
+\begin{align*}
+    M_X(t) = e^t M_X(-t) = e^t\E{e^{-t X}} = \E{e^{t(1-X)}} = M_{1-X}(t)
+\end{align*}
+and since the MGF determines the distribution we can immediately say that $X\sim 1-X$. Then it must be that $\E{X} = \E{1-X}$ and then by linearity we have that $\E{X} = \frac12$. This is not enough information to conclude what distribution $X$ has, we can only see that it must be symmetric around $\frac12$.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Note $X\sim1-X$ 0.5pt.
+    \item Correct expectation 0.5pt.
+    \item Cannot conclude the same distribution 0.5pt.
+    \item \textbf{OR:} Correctly solved the differential equation/took the derivative and concluded the result 1pt.
+    \item Cannot conclude the same distribution 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1]
+Let $B$ be as you found it in part (a). Find the CDF of $X = \kappa + \lambda\ln{\left(\frac{B}{1-B}\right)}$.
+\begin{solution}
+As usual, we start with the CDF of $B$, this is known to be $F_B(y) = y$ for $y\in[0,1]$ (and 1 for $y>1$, 0 for $y<0$). Then we have that
+\begin{align*}
+    F_X(y) &= \P{X\leq y}\\
+    &= \P{\kappa + \lambda\ln{\left(\frac{B}{1-B}\right)}\leq y}\\
+    &= \P{\ln{\left(\frac{B}{1-B}\right)} \leq \frac{y-\kappa}{\lambda}}\\
+    &= \P{B\leq \frac{\exp{\frac{y-\kappa}{\lambda}}}{1+\exp{\frac{y-\kappa}{\lambda}}}}\\
+    &= F_B\left(\frac{\exp{\frac{y-\kappa}{\lambda}}}{1+\exp{\frac{y-\kappa}{\lambda}}}\right)\\
+    &= \frac{\exp{\frac{y-\kappa}{\lambda}}}{1+\exp{\frac{y-\kappa}{\lambda}}}
+\end{align*}
+for $y\in\bf{R}$.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item CDF technique derivation 0.5pt.
+    \item No mistakes 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1]
+Let $\kappa = 0$, $\lambda = 1$. The quantile function $Q_X(\cdot)$ is defined to be the function such that $Q_X(F_X(x)) = x$. Find $Q_X(\cdot)$ for the random variable $X$ as in part (c). You may assume $F_X(x)$ to be strictly increasing without proof. This function $Q_X$ is known as the `log-odds', or `logit' function, and is used often in regression analysis to model a binary random variable.
+\begin{solution}
+Notice that $F_X$ maps the real line onto the interval $(0,1)$. Then, $Q_X$ must map the interval $(0,1)$ onto $\bf{R}$. We find the inverse of the CDF of $X$ as follows:
+\begin{align*}
+    &z = F_X(y)\implies\\
+    &z = \frac{e^{y}}{1+e^{y}}\implies\\
+    &z = \frac{1}{1+e^{-y}}\implies\\
+    &e^{-y}z = 1-z\implies\\
+    &e^y = \frac{z}{1-z}\implies\\
+    &y = \ln{\frac{z}{1-z}} = Q_X(z)
+\end{align*}
+for $z\in(0,1)$.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Mention the idea to invert the CDF 0.5pt. (of course this includes the people who did so)
+    \item Correct inversion 0.5pt.
+    \item Correct bounds for the quantile function 0.5pt bonus.
+\end{itemize}
+\end{solution}
+\end{exercise}

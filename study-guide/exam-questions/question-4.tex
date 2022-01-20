@@ -1,0 +1,76 @@
+\section{Question}
+
+\begin{exercise}[1.5]
+Let $X\sim\mathcal{N}(\mu,\mu^2)$ and let $Y = e^X$. Showing your work, find the PDF of $Y$.
+\begin{solution}
+We start with finding the CDF of $Y$.
+\begin{align*}
+    F_Y(y) = \P{Y\leq y} = \P{e^X\leq y} = \P{X\leq \ln{y}} = F_X(\ln{y}).
+\end{align*}
+Then we differentiate this integral, and we obtain our PDF. Using the FTC, we get
+\begin{align*}
+    F_X(\ln{y}) &= \int_{-\infty}^{\ln{y}}{f_X(x)\d x}\implies\\
+    \frac{\d }{\d y}F_X(\ln{y}) &= \frac{\d }{\d y}\int_{-\infty}^{\ln{y}}{f_X(x)\d x}\\
+    &= f_X(\ln{y})\frac{\d \ln{y}}{\d y}\\
+    &= f_X(\ln{y})\frac1 y\\
+    &= \frac{1}{\sqrt{2\pi}\mu y}\exp{\left(-\frac{1}{2\mu^2}(\ln{y}-\mu)^2\right)}
+\end{align*}
+for $y>0$. Here $f_X(x)$ is the PDF of the normal random variable $X$.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item No deduction if second parameter is assumed to be std.dev instead of variance, even though the parametrization should be very clear in this course and other courses.
+    \item Noticing a suitable transformation 0.5pt.
+    \item Correctly applying the transformation theorem 0.5pt.
+    \item Most of: the correct bounds, no mistakes in calculation 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1]
+Consider now the independent random variables $X_1,X_2\sim\mathcal{N}(\mu,\sigma^2)$. Let $Y_1 = e^{X_1}$ and $Y_2 = e^{X_2}$. Are $Y_1Y_2$ and $\frac{Y_1}{Y_2}$ independent? You can use results from the book here.
+\begin{solution}
+They are independent. The book proves that $X_1+X_2$ and $X_1-X_2$ are independent. Then it must be that $e^{X_1+X_2} = Y_1Y_2$ and $e^{X_1-X_2} = \frac{Y_1}{Y_2}$ are also independent.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Noticing the independence of the sum and difference of the $X_i$'s 0.5pt.
+    \item Transformations of independent random variables preserve independence 0.5pt. (lenient)
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[2.5]
+Find the joint PDF of $U = Y_1Y_2$ and $V=\frac{Y_1}{Y_2}$.
+\begin{solution}
+Since $U = Y_1 Y_2$ and $V = \frac{Y_1}{Y_2}$, we can write the inverse functions $Y_1 = \sqrt{U V}$ and $Y_2 = \sqrt{\frac{U}{V}}$. These functions are one-to-one and $C^1$, so we can write the Jacobian matrix
+\begingroup
+\renewcommand*{\arraystretch}{1.5}
+\begin{align*}
+    J = \begin{pmatrix}
+    \frac{\sqrt{V}}{2\sqrt{U}} & \frac{\sqrt{U}}{2\sqrt{V}}\\
+    \frac{1}{2\sqrt{U V}} & -\frac{1}{2V\sqrt{U V}}
+    \end{pmatrix},
+\end{align*}
+\endgroup
+which has absolute determinant $\frac{1}{2V}$. Since $X_1$ and $X_2$ are independent, it must be that $Y_1$ and $Y_2$ are independent. Then
+\begin{align*}
+    f_{Y_1,Y_2}(y_1,y_2) = \frac{1}{2\pi\sigma^2 y_1 y_2}\exp{\left(-\frac{1}{2\sigma^2}\left((\ln{y_1}-\mu)^2 + (\ln{y_2}-\mu)^2\right)\right)}
+\end{align*}
+for $y_1,y_2\in\bf{R}_+$. Then, by the transformation theorem, we have that
+\begin{align*}
+    f_{U,V}(u,v) &= f_{{Y_1,Y_2}}\left(\sqrt{u v},\sqrt{\frac{u}{v}}\right)\frac{1}{2v}\\
+    &= \frac{1}{4\pi\sigma^2u v}\exp{\left(-\frac{1}{2\sigma^2}\left((\ln{\sqrt{u v}}-\mu)^2 + (\ln{\sqrt{\frac{u}{v}}}-\mu)^2\right)\right)}\\
+\end{align*}
+For $u,v\in\bf{R}_+$.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Correct inverses 0.5pt.
+    \item Correct absolute determinant of the Jacobian matrix 0.5pt.
+    \item Noticing independence of $Y_1$, $Y_2$ 0.5pt.
+    \item Correct application of transformation theorem 0.5pt.
+    \item Most of: the correct bounds, no mistakes in calculation, noticing the theorem is applicable, the inverses are 1-1 and $C^1$ 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}

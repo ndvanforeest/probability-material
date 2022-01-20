@@ -1,0 +1,147 @@
+\section{Question}
+
+Consider the following code:
+
+\begin{minted}{python}
+import numpy as np
+from scipy.stats import expon
+np.random.seed(42)
+
+n = 750
+N = 300
+
+X = expon(scale = 3).rvs([n, N])
+Y = X.mean(axis = 1)
+
+mu = 3
+sigma = 3
+Z = np.sqrt(N) * (Y - mu)/sigma
+
+print((Z ** 71).mean())
+\end{minted}
+
+\begin{minted}{R}
+set.seed(42)
+
+n <- 750
+N <- 300
+
+X <- matrix(rexp(n * N, rate = 1/3), nrow = n, ncol = N)
+Y <- rowMeans(X)
+
+mu <- 3
+sigma <- 3
+Z <- sqrt(N) * (Y - mu)/sigma
+
+print(mean(Z^71))
+\end{minted}
+
+\vspace*{20pt}
+
+
+\begin{exercise}[1.5]
+\texttt{Y} is a vector of i.i.d. random variables.
+
+\begin{itemize}
+\item[(i)] What is the length $\ell$ of \texttt{Y}?
+\item[(ii)] Each element of \texttt{Y} is a mean of $k$ i.i.d. $\Exp{\lambda}$ r.v.s.
+What are $k$ and $\lambda$?  
+\item[(iii)] What are the (theoretical) expectation and variance of an element of \texttt{Y}? 
+\end{itemize} 
+
+\begin{solution}
+The length of \texttt{Y} is $n = 750$;  Each element of \texttt{Y} is a mean of $k = N = 300$ i.i.d. $\Exp{1/3}$ r.v.s.
+The expectation is $\frac1\lambda = 3$ and the variance is $\frac1{k \lambda^2} = \frac1{300\cdot1/9} = 0.03$. \\ \\
+Grading scheme:
+\begin{itemize}
+\item 0.5 for getting both the length $n=750$ and  $k=300$ correct (no partial credit);
+\item 0.5 for $\lambda = 1/3$, expectation $3$ and the factor $\frac1{\lambda^2} = \frac{1}{1/9}$ in the variance (no partial credit);
+\item 0.5 for the factor $\frac1{k}$ in the variance.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\vspace*{20pt}
+
+
+Recall that each element of  \texttt{Y} is the mean of $k$ i.i.d. $\Exp{\lambda}$ r.v.s.
+
+\begin{exercise}[1]
+What is the exact distribution of an element of \texttt{Y}? 
+
+Give its name and its parameters, and explain the answer.
+\begin{solution}
+The sum of $k$ i.i.d.  $\Exp{\lambda}$ r.v.s. has the $\Gamm{k, \lambda}$ distribution.
+Hence, the mean of $k$ i.i.d.  $\Exp{\lambda}$ r.v.s. has the $\Gamm{k, k\lambda}$ distribution.
+In this exercise, $k=300$ and $k\lambda = 100$. \\ 
+Grading scheme:
+\begin{itemize}
+\item 0.5 for Gamma with first parameter $k$
+\item 0.5 for the second parameter
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+
+\vspace*{30pt}
+
+
+
+Let $(Y_1, \ldots, Y_{\ell})$ be the elements of \texttt{Y} and let $(Z_1, \ldots, Z_{\ell})$ be the elements of  \texttt{Z}. Recall that each $Z_i$ depends on $k$ because $Y_i$ is the mean of $k$ i.i.d. $\Exp{\lambda}$ r.v.s. Let $T$ be the random variable to which $Z_1$ converges in the limit  $k \to \infty$.
+
+\begin{exercise}[1]
+What is the distribution of $T$, and why? 
+
+Hence, what is an approximate distribution of an element of \texttt{Y} (e.g. $Y_1$) and why?
+\begin{solution}
+By the CLT, $Z_1 \;\dot{\sim}\; \Norm{0,1}$. Hence,  $Y_1 = \mu + \sigma/\sqrt{n}Z_1 \;\dot{\sim}\; \Norm{3,9/n}$. \\ 
+Grading scheme:
+\begin{itemize}
+\item 0.5 for mentioning CLT and the distribution of $Z_1$;
+\item 0.5 for the approximate distribution of $Y_1$.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+
+\vspace*{20pt}
+
+
+
+\begin{exercise}[0.5]
+In the last line of the code, we compute $S = \frac1{\ell}\sum_{i=1}^{\ell} Z_i^{71}$.
+
+ If $k \to \infty$ (for fixed $\ell$, e.g. $\ell=4$), does $S$ converge to a constant? 
+
+You do not have to give formal proofs in this subquestion, but you should give clear explanations using the appropriate theorem(s). 
+\begin{solution}
+In the limit $k \to \infty$, each $Z_i$ has the standard normal distribution by CLT, but the sum of $\ell$ powers of normal distributions has a non-trivial CDF. \\
+\begin{itemize}
+\item 0.5 for explaining that $S$ does not converge to a constant; no points for just CLT (unless previous question was not answered).
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+
+
+\vspace*{20pt}
+
+
+
+\begin{exercise}[1]
+In the last line of the code, we compute $S = \frac1{\ell}\sum_{i=1}^{\ell} Z_i^{71}$.
+
+If $\ell \to \infty$ (for fixed $k$), does $S$ converge to a constant? 
+If so, does it converge to $\E{T^{71}}$?
+
+You do not have to give formal proofs in this subquestion, but you should give clear explanations using the appropriate theorem(s). 
+\begin{solution}
+By LLN, $S$ does converge to a constant as  $\ell \to \infty$, however, it converges to $\E{Z_1^{71}}$ for that fixed value of $k$. By symmetry, we have  $\E{Z_1^{71}} = 0$. However, the gamma distribution is right-skewed, which implies $\E{T^{71}} > 0$. Hence, it does not converge to $\E{T^{71}}$. \\
+Grading scheme:
+\begin{itemize}
+\item 0.5 for concluding that $S$ converges to a constant using LLN.
+\item 0.5 for explaining why the constant is not equal to $\E{T^{71}}$.
+\end{itemize}
+\end{solution}
+\end{exercise}
+

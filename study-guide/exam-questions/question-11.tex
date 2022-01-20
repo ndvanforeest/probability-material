@@ -1,0 +1,75 @@
+\section{Question}
+
+An investor wants to keep track of the daily return of his portfolio.  Let $X_t$ be the portfolio daily return on day $t$, where $X_1, X_2, . . . $ are i.i.d. r.v.s from a continuous distribution. We say that day $t$ hits a \textit{record low} if the return on day $t$ is lower than on all previous $t-1$ days. Let $A_t$ be the event that day $t$ hits a \textit{record low}, and let $I_{t}$ be the indicator r.v. that is 1 if day $t$ hits a \textit{record low} and 0 otherwise.
+
+\begin{exercise}[0.5]
+ Find $\P{A_t}$, the probability that day $t$ hits the \textit{record low}.
+\begin{solution}
+Since all of the first $t$ days are equally likely to have the lowest return, by symmetry, $\P{A_t}=\frac{1}{t}$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1]
+Find $\P{A_t \cap A_{t+1}}$, the probability that the \textit{record low} is hit on both day $t$ and day $t+1$. Are $A_t$ and $A_{t+1}$ independent? 
+\begin{solution}
+To solve this exercise we use permutations. First notice that in $t+1$ days, there are in total $(t+1)!$ possible combination of the  daily returns. Since only the lowest 2 daily returns should be on day $t+1$ and day $t$, the order of the remaining $t-1$ daily returns does not matter. Thus, $ \P{A_t \cap A_{t+1}}=\frac{(t-1)!}{(t+1)!}=\frac{1}{t(t+1)}$.
+
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1.5]
+Show that $A_s$ and $A_t$ are independent if $s < t$. This means that whether day $s$ hits a \textit{record low} does not influence whether day $t$ hits a \textit{record low}, with $s<t$.
+\begin{solution}
+  To solve this exercise we use permutations. First notice that in $t$ days, there are in total $t!$ possible combination of the  daily returns. Since the lowest daily return should be on day $t$, we need to sort the rest $t-1$ daily returns. Further notice that between day $s+1$ and $t-1$ the daily returns only have to be higher than $X_{t+1}$, no other restrictions. So we need $t-(s+1)$ our of the remaining $t-1$ daily returns to fill the days between day $s+1$ and $t-1$, in total $\begin{pmatrix}t-1\\t-s-1\end{pmatrix}(t-s-1)!$ possible combinations. Finally, the lowest out of the remaining $s$ daily returns need to be on day $s$, and the order of the remaining does not matter. Thus we have:
+    \begin{align*}
+       \P{A_s \cap A_t}&=\frac{\begin{pmatrix}t-1\\t-s-1\end{pmatrix}(t-s-1)!(s-1)!}{t!}\\
+       &=\frac{(s-1)!(t-1)!}{s!t!}\\
+       &=\frac{1}{st}\\
+       &=\P{A_s}\P{A_t}.
+    \end{align*}
+\end{solution}
+\end{exercise}
+
+
+
+
+\begin{exercise}[2]
+Let $N$ be the number of \textit{record low} days from day 1 up to $t$. Find $\cov{N, I_t}$.
+\begin{solution}
+  First notice that $\cov{N, I_t}=\E{NI_t}-\E{N}\E{I_t}.$ Since $\E{I_t}=\P{A_t}=\frac{1}{t},$ we need to find out $\E{NI_t}$ and $\E{N}.$
+    Since $N=\sum_{k=1}^t I_k,$
+    \begin{align*}
+        \E{N} &= \E{\sum_{k=1}^t I_k}\\
+        &=\sum_{k=1}^t \E{I_k}\\
+        &= \sum_{k=1}^t \frac{1}{k}
+    \end{align*}
+    \begin{align*}
+        \E{NI_t}&=\E{\E{NI_t \given I_t}}\\
+        &=\E{\sum_{k=1}^t I_k I_t \given I_t=1}\P{I_t=1} \\
+        &=\E{\sum_{k=1}^{t-1} I_k+1} \P{I_t=1}\\
+        &=\frac1t \sum_{k=1}^{t-1} \frac{1}{k}+\frac1t
+    \end{align*}
+    Thus,
+    \begin{align*}
+        \cov{N, I_t}&=\E{NI_t}-\E{N}\E{I_t}\\
+        &=\frac1t\sum_{k=1}^{t-1} \frac{1}{k}+\frac1t- \frac{1}{t}\sum_{k=1}^t \frac{1}{k}\\
+        &=\frac1t - \frac1{t^2} = \frac{t-1}{t^2}.
+    \end{align*}
+    
+    Alternatively, note that $\cov{I_i, I_j} = 0$ if $i \neq j$ since $I_i$ and $I_j$ are independent if  $i \neq j$. Hence, 
+    
+    \begin{align*}
+        \cov{N, I_t} &= \cov{\sum_{k=1}^t I_k, I_t} \\
+        &=\sum_{k=1}^t  \cov{ I_k, I_t} \\
+        &= \cov{I_t, I_t} = \V{I_t} = \E{I_t^2} - \E{I_t}^2 \\
+        &= \frac1t - \frac1{t^2} = \frac{t-1}{t^2}.
+    \end{align*}
+\end{solution}
+\end{exercise}
+
+\noindent \textit{Remarks and grading scheme:}
+\begin{enumerate}
+    \item Ex 3.2: only full points if the permutation is well explained. 0.5 point for no or bad explanation.
+    \item Ex 3.4: 0.5 point for writing out the formula for covariance. 0.5 point for correctly calculated $\E{N}, \E{I_t}$.
+\end{enumerate}
+

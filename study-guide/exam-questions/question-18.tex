@@ -1,0 +1,72 @@
+\section{Question}
+
+\begin{exercise}[2]
+Let $\lambda>0$ be given. Let $X_1,X_2,\dots,X_n \sim\text{Expo}(\lambda)$ be independent. Let $Y_i = 2\lambda X_i$ for $i=1,2,\dots,n$. Using theorems, not results (so show all calculations), what is the PDF of $S = Y_1 + Y_2$?
+\begin{solution}
+We first find the distribution of $Y_1$.
+\begin{align*}
+    F_{Y_1}(y) = \P{Y_1\leq y} = \P{2\lambda X_1\leq y} = \P{X_1\leq \frac{y}{2\lambda}} = F_{X_1}\left(\frac{y}{2\lambda}\right).
+\end{align*}
+We can easily find that
+\begin{align*}
+    F_{X_1}(y) = \int_0^y{\lambda e^{-\lambda x} \d x} = 1- e^{-\lambda y}
+\end{align*}
+for $y>0$, and 0 elsewhere. Then $F_{Y_1} = 1- e^{- y/2}$, and we conclude $Y_1\sim\text{Expo}(\frac12)$. By symmetry, $Y_2\sim\text{Expo}(\frac12)$. Note $Y_1$ and $Y_2$ are independent. By the convolution theorem, we know that
+\begin{align*}
+    f_{Y_1+Y_2}(t) &= \int_0^t{f_{Y_1}(t-s)f_{Y_2}(s) \d s}\\
+    &= \int_0^t{\frac12 e^{-\frac{t-s}{2}}\frac12 e^{-\frac s 2} \d s}\\
+    &= \frac14\int_0^t{e^{-\frac t 2} \d s}\\
+    &= \frac14 t e^{-\frac t 2}
+\end{align*}
+for $t>0$, and 0 elsewhere.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Derived the correct distribution of $Y_i$ 0.5pt.
+    \item Noticed that $Y_i$ are independent to apply convolution theorem 0.5pt.
+    \item Convolution theorem correctly applied 0.5pt.
+    \item Most of: the correct bounds, no mistakes in calculation 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1]
+What is the difference between the PDF of $\sum\limits_{i=1}^{n}{X_i}$ and that of $n X_i$? Why are they different? What distributions do they follow? You can use results from the book here, so keep it brief.
+\begin{solution}
+B.H. show that $\sum\limits_{i=1}^{n}{X_i}\sim\text{Gamma}(n, \lambda)$, whereas $n X_i\sim\text{Expo}\left(\frac{\lambda}{n}\right)$. The distributions are different since the first one is a sum of independent random variables, whereas the latter is one random variable that is scaled.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Correct distributions given 0.5pt.
+    \item Reason why 0.5pt. (very very lenient here)
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[2]
+Let $Z\sim\chi^2(2n)$ and let $S$ be as in part (a). Assume that $Z$ and $S$ are independent. Showing all calculations, what is the PDF of $W = S + Z$? What is its distribution?
+\begin{solution}
+We know the PDF of $Z$ is given by
+\begin{align*}
+    f_Z(x) = \frac{1}{2^n\Gamma(n)}x^{n-1}e^{-\frac{x}{2}}
+\end{align*}
+for $x>0$, and 0 elsewhere. In (a) we have shown the PDF of $S$. Then, by the convolution formula we get
+\begin{align*}
+    f_W(w) &= \int_0^w{\frac14 (w-x) e^{-\frac{(w-x)}{2}}\frac{1}{2^n\Gamma(n)}x^{n-1}e^{-\frac{x}{2}} \d x}\\
+    &=\frac{e^{-\frac{w}{2}}}{2^{n+2}\Gamma(n)}\left(\int_0^w{w x^{n-1} \d x}-\int_0^w{ x^{n} \d x}\right)\\
+    &= \frac{e^{-\frac{w}{2}}}{2^{n+2}\Gamma(n)}\left(\frac{w^{n+1}}{n}-\frac{w^{n+1}}{n+1}\right)\\
+    &= \frac{w^{n+1}e^{-\frac{w}{2}}}{2^{n+2}\Gamma(n)}\left(\frac{1}{n(n+1)}\right)\\
+    &= \frac{w^{n+1}e^{-\frac{w}{2}}}{2^{n+2}\Gamma(n+2)}
+\end{align*}
+for $t>0$ and 0 elsewhere. This is the Gamma$\left(n+2,\frac12\right)$ distribution.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Noting $Z$ follows a Gamma distribution with correct parameters 0.5pt. (to be lenient)
+    \item Applying the convolution theorem 0.5pt.
+    \item Recognition of final distribution 0.5pt.
+    \item Most of: the correct bounds, no mistakes in calculation 0.5pt.
+    \item No recognition that a sum of Gamma distributions with different rate parameters does not work as you want it to -0.5pt (if applicable).
+\end{itemize}
+\end{solution}
+\end{exercise}

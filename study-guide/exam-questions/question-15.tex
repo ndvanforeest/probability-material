@@ -1,0 +1,81 @@
+\section{Question}
+
+Let $Z \sim \Norm{0,1}$. 
+In this exercise, we find an upper bound for $\P{|Z| > 2}$.
+
+\begin{exercise}[1.5]
+ Let $f$ be a positive and increasing function, and let $X$ be a r.v. 
+
+Consider the following inequality:
+$$\P{X \geq a} = \P{f(X) \geq f(a)}   \leq \frac{\E{f(X)}}{f(a)}.$$
+\begin{enumerate}
+\item[(i)] Explain why $\P{X \geq a} = \P{f(X) \geq f(a)}$ holds. 
+\item[(ii)] Explain why $\P{f(X) \geq f(a)}   \leq \frac{\E{f(X)}}{f(a)}$ holds. 
+\end{enumerate}
+Make sure to clearly indicate where you use that  $f$ is positive and increasing. \\
+\begin{solution}
+(i). Since $f$ is increasing, we have $X \geq a$ if and only if $f(X) \geq f(a)$, so $\{X \geq a\}$ and $\{f(X) \geq f(a)\}$ are the same event. Hence,  $\P{X \geq a} = \P{f(X) \geq f(a)}$.  \\
+(ii). Since $f$ is positive, we have $|f(X)| = f(X)$ and $f(a) > 0$. Hence, the inequality follows directly from Markov's inequality with r.v. $f(X)$ and constant $f(a) > 0$. \\ \\ 
+\noindent Remarks and grading scheme:
+\begin{itemize}
+\item In part (ii), it is not sufficient to just say that it holds by Markov's inequality, also explain how you apply Markov's inequality. 
+\item Since it was asked to indicate \textbf{clearly} where you use that  $f$ is positive and increasing, don't just say "since $f$ is positive and increasing" twice. For part (i) the positivity is not needed, it is only needed that $f$ is increasing. For part (ii), it is not needed that $f$ is increasing, only the positivity is needed. Moreover, some explanation should be given how it is used.
+\item $f$ is not necessarily a linear transformation, as some of you claimed.
+\item Not every positive and increasing function is convex or concave. \\ 
+And using Jensen's inequality certainly doesn't work in (i): you are asked to prove an equality of probabilities, not an inequality of expectations. 
+\item In part (i), the \textbf{if and only if} is really important. If you just mention that $f(X) \geq f(a)$ if $X \geq a$, then you are only proving that $\P{X \geq a} \leq \P{f(X) \geq f(a)}$, because if you just say "$f(X) \geq f(a)$ if $X \geq a$",  $f(X) \geq f(a)$ could still be true in cases where $X \geq a$ is not, and hence  $f(X) \geq f(a)$  can still have a larger probability. (I've not been strict on this when grading.)
+\item Grading: 0.5 for a sufficient explanation for (i), 0.5 for a sufficient explanation for (ii) and 0.5 for clearly indicating where it is used that $f$ is positive and increasing and writing a clear answer overall. 
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+
+
+
+\begin{exercise}[1]
+Prove that $\P{|Z| > 2} \leq e^{-4t}\E{e^{t Z^2}}$ for $t>0$. \\
+\begin{solution}
+Note that $f(x) = e^{t x^2}$ is positive and increasing on $(0,\infty)$ for $t>0$. By applying the inequality of the first question with $a=2$ we find 
+$$\P{|Z| > 2} \leq e^{-4t}\E{e^{t |Z|^2}} = e^{-4t}\E{e^{t Z^2}}.$$
+
+\noindent Remarks and grading scheme:
+\begin{itemize}
+\item Most of you did not apply the inequality from the previous part to solve this question, but instead used Chernoff's inequality as follows:
+$$\P{|Z| > 2} = \P{Z^2 > 4} \leq e^{-4t}\E{e^{t |Z|^2}} = e^{-4t}\E{e^{t Z^2}},$$
+where the first equality holds since $|Z| > 2$ if and only if $\P{Z^2 > 4}$. This is also correct, but takes a bit more time. 
+\item Don't write nonsense like $e^{-2t}\E{e^{t |Z|}} = e^{-4t}\E{e^{t Z^2}}$, just to make it look like you solved the exercise although you didn't. 
+\item Grading scheme: 1 point for solving the exercise. Partial credit (0.5) for a correct and relevant application of Chernoff's inequality.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}[2.5]
+For which $t$ do we find the best upper bound for  $\P{|Z| > 2}$? Also calculate the upper bound for this value of $t$.
+
+\textit{Hint 1}. You may use that if $Y \sim \chi^2_1$, then the MGF of $Y$ is given by $M_Y(t) = (1-2t)^{-1/2}$ for $t < 1/2$. However, you should explain clearly how you use this fact.
+
+\textit{Hint 2}. Do not forget to check the second order condition of minimization. \\
+\begin{solution}
+Since $Z^2 \sim \chi^2_1$, we have $\E{e^{t Z^2}}  = \E{e^{t Y}} = M_Y(t) =  (1-2t)^{-1/2}$. 
+
+So we minimize $ e^{-4t}\E{e^{t Z^2}} = e^{-4t}(1-2t)^{-1/2}$. It is easier if we take the logarithm first and minimize $-4t - \tfrac12 \log(1-2t)$. Its derivative to $t$ is $-4 + \frac1{1-2t}$, so setting the derivative to 0 yields $t = 3/8$. The second derivative to $t$ is  $\frac{2}{(1-2t)^2} > 0$ (the value at $t=3/8$ is $32$), so the second order condition holds.
+
+%Without logarithm, the first derivative is $ e^{-4t} \left(-4(1-2t)^{-1/2} + (1-2t)^{-3/2} \right)$ and the second derivative is $ e^{-4t} \left(16(1-2t)^{-1/2} -8(1-2t)^{-3/2} + 3(1-2t)^{-5/2} \right)$; the value of the second derivative at $t=3/8$ is $e^{-3/2} \cdot 64 \approx 14.28 > 0$.
+
+This yields $\P{|Z| > 2} \leq e^{-3/2}(1-3/4)^{-1/2} \approx 0.446$. \\
+
+\noindent Remarks and grading scheme:
+\begin{itemize}
+\item Unless explicitly noted, you have to give an analytical answer and derive everything using just pen and paper. 
+\item It is essential that you include some derivations for computing the (second) derivative. 
+\item It is not necessary to take the logarithm first, but it makes the derivation easier, and hence it is less likely that you make errors. 
+\item Grading scheme: 0.5 for arguing that $\E{e^{t Z^2}}  =  (1-2t)^{-1/2}$ with sufficient explanation; \\ 
+1 for taking the derivative and calculating that it is 0 at $t=3/8$; (0.5 if small mistake is made but resulting $t$ satisfies $0 < t < 1/2$, or if it is remarked that this should be the case); \\ 
+0.5 for calculating the second derivative and checking the second order condition; \\
+0.5 for filling in $t=3/8$ to provide the upper bound (if an incorrect value of $t$ is found, this point can be given only if the resulting bound is between 0.01 and 1, or if it is explicitly noted that the answer does not make sense). 
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+

@@ -1,0 +1,65 @@
+Let $\{X_{k}\}$ be a set of iid demands at a shop, distributed as the common rv $X$, with mean $\mu = \E X$ and std $\sigma = \sqrt{\V X}$.  A random number $N$ of people visit the shop on some day. Let $D_{N} = \sum_{i=1}^{N} X_{k}$.
+
+\begin{exercise}[1]
+When the rvs $X$ and $Y$ are independent, then $\E{Y|X} = \E Y$.
+It is clear that $\E Y$ is a number.
+Now BH say that $\E{Y|X}$ is a rv.
+But a rv is not a number. Explain how it can be that $\E{Y|X} = \E Y$.
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Use the definition of $\E{Y\given A}$ to show that $\E{X\given X=x} = x$.
+\begin{solution}
+  \end{solution}
+\end{exercise}
+
+
+
+
+We break a stick of length 1 at a uniformly distributed point $X$. Then we choose the smallest of the two parts. Let the length of this be $Y$.
+
+\begin{exercise}[1]
+Find an expression for $\E{Y|X=x}$.
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[0.5]
+Find an expression for $\E{Y|X}$.
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1.5]
+Compute $\V{Y}$?
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1]
+What does the  code below compute?
+\begin{solution}
+\end{solution}
+
+\begin{minted}{python}
+import random
+
+random.seed(3)
+
+num = 5
+tot = 0
+for i in range(num):
+    X = random.uniform(0, 1)
+    Y = random.uniform(0, 1)
+    tot += abs(Y - X)
+
+print(tot / num)
+\end{minted}
+
+\begin{minted}{R}
+x = 3
+\end{minted}
+
+\end{exercise}

@@ -1,0 +1,81 @@
+\section{Question}
+
+
+We have a queue of people served by a potentially infinite number of servers. Let $L(t)$ be the number of people present in the system at time $t$.
+For any time $t\geq 0$ the time to the next arriving person is $X\sim\Exp{\lambda}$, and given $L(t)=n$ customers in the system at time $t$, the time to the next departing customer is $S\sim\Exp{\mu n}$. The rvs $S$ and $X$ are independent, and $\lambda, \mu > 0$. Write $B(h)$ for the number of arrivals during an interval of length $h$, and $D(h)$ for the number of departures. (Hint: recall the relation between the Poisson distribution and the exponential distribution.)
+
+In the sequel, take $h$ positive, but very, very small, i.e, $h\ll 1$. With this, we use the shorthand $o(h)$ to capture all terms of a polynomial in $h$ with a power higher than $1$, for instance,
+\begin{equation}
+  2h + 3 h^2+ 44 h^{21} = 2h + o(h).
+\end{equation}
+Like this we can hide all nonlinear terms of a polynomial  in the $o(h)$ function. This is easy when we want to take limits, for example,
+\begin{equation}
+  \lim_{h\to 0} \frac{2h + 3h^{2} + 44 h^{21}} h
+= 2 +  \lim_{h\to 0} \frac{o(h)} h  = 2 + 0.
+\end{equation}
+In other words, when computing this limit for $h\to 0$, we don't care about the details in $o(h)$ because $o(h)/h\to0$ anyway.
+
+\begin{exercise}[1]
+Explain that
+\begin{equation}
+\P{B(h)=1, D(h)=0|L(0) = n } = \lambda h e^{-\lambda h} e^{-\mu n h}.
+\end{equation}
+\begin{solution}
+  Since job interarrival and departure times are exponentially distributed, we can use that $B(h) \sim \Pois{\lambda h}$ and $D(h) = 0 \implies S > h$, hence $\P{S>h|L(0) = n} = e^{-\mu n h}$.
+
+Mentioning that both are Poisson is also fine, but see the next question.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1]
+Use the first degree Taylor's expansion, $f(h) \approx f(0) + hf'(0) + o(h)$, to motivate  that
+\begin{equation}
+\P{B(h)=0, D(h)=1|L(0) = n} = n \mu h + o(h).
+\end{equation}
+\begin{solution}
+\begin{align}
+\P{B(h)=0, D(h)=1|L(0) = n } &=  e^{-\lambda h} \mu n h e^{-\mu n h} +o(h() \\
+  &= (1 - \lambda h) \mu n h (1-\mu n h) + o(h) = \mu n h + o(h).
+\end{align}
+Note that $X>h \implies B(h) = 0$. We also know that for $h<<1$, the rv $D(h)$ is nearly Poisson distributed with mean $\mu n h$.
+The first $o(h)$ is necessary because during the time $h$ also two departures can occur and then the departure rates are not the same.
+Before the departure, people leave at rate $\mu n$, but after the first departure they leave at rate $\mu (n-1)$. However, since two or more departures have very small, in fact have $o(h)$ probability, we can capture all such details in the $o(h)$ terms.
+
+I don't require the explanation about this subtle point.
+
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[2]
+Explain that
+\begin{equation}
+\E{L(t+h) | L(t) =n }   = n  + (\lambda  - \mu n )h + o(h).
+\end{equation}
+\begin{solution}
+Use conditional expectation and the above results to see that
+\begin{align}
+\E{L(t+h) | L(t)=n }
+  &= n \P{B(h)=0, D(h) = 0} + (n+1)\P{B(h)=1, D(h) = 0} \\
+  &\quad + (n-1)\P{B(h)=0, D(h) = 1}  + o(h) \\
+ &= n e^{-\lambda h} e^{-\mu n h} + (n+1) \lambda h + (n -1)\mu n h + o(h) \\
+ &= n (1-\lambda h) (1-\mu n h)  + (n +1) \lambda h + (n -1)\mu n h + o(h) \\
+ &= n  - n (\lambda + \mu n) h  + (n +1) \lambda h + (n -1)\mu n h + o(h) \\
+ &= n + (\lambda - \mu n) h + o(h).
+\end{align}
+\end{solution}
+\end{exercise}
+
+Write $M(t) = \E{L(t)}$.
+\begin{exercise}[1]
+Derive that
+\begin{equation}
+M(t+h)  =  M(t) + (\lambda  - \mu M(t))h + o(h).
+\end{equation}
+\begin{solution}
+  Replace $n$ by $L(t)$ in $\E{L(t+h)|L(t)}$ to see that
+\begin{equation}
+\E{L(t+h) | L(t) }   = L(t)  + (\lambda  - \mu L(t) )h + o(h).
+\end{equation}
+Take expectations left and right and use Adam's law.
+\end{solution}
+\end{exercise}

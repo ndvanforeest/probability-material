@@ -1,0 +1,72 @@
+\section{Question}
+
+A random point $(X,Y)$ is chosen in the following square:
+\begin{align*}
+    \{(x, y) : x^2 < \pi^2,  y^2 < \pi^2 \}
+\end{align*}
+All points are equally likely to be chosen. Let $N$ be the scaled Euclidean norm of $(X,Y)$. So $N = c\sqrt{X^2 + Y^2}$, where $c > 0$.
+\begin{exercise}[1]
+Find the joint PDF $f(x,y)$ of $X$ and $Y$.
+\begin{solution}
+The random vector $(X,Y)$ is uniformly distributed on $(-\pi, \pi)^2$. Hence, the joint pdf is given by
+\begin{align*}
+    f(x,y) =& \Big(\frac{1}{\pi - (-\pi))} \Big) \Big(\frac{1}{(\pi - (-\pi))} \Big) \\
+    =& \frac{1}{4 \pi^2}
+\end{align*}\\
+for $-\pi < x < \pi$ and $-\pi < x < \pi$.
+\textit{0.5 points for the correct solution, 0.5 points for the boundaries.}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[3]
+Find the value for $c$ such that $\E{N^2} = 1$.
+\begin{solution}
+Note that $N^2 = c^2 (X^2 + Y^2)$. Using LOTUS:
+\begin{align*}
+    \E{N^2} =& \E{c^2 (X^2 + Y^2)} \\
+      =& \int_{-\infty}^\infty \int_{-\infty}^\infty c^2 \Big(x^2 + y^2 \Big) f(x,y) \; dx \; dy\\
+      =& c^2 \int_{-\pi}^{\pi} \int_{-\pi}^{\pi}  \Big(x^2 + y^2 \Big) \Big(\frac{1}{4\pi^2} \Big) \; dx \; dy \\
+      =& c^2 \int_{-\pi}^{\pi} \int_{-\pi}^{\pi} \frac{x^2 + y^2}{4\pi^2} \; dx \; dy \\
+      =& \frac{c^2}{4\pi^2} \int_{-\pi}^{\pi} \int_{-\pi}^{\pi} x^2 + y^2 \; dx \; dy \\
+      =& \frac{c^2}{4\pi^2} \int_{-\pi}^{\pi} \Big[\frac{x^3}{3} + y^2x \Big]_{-\pi}^{\pi} \; dy \\
+      =& \frac{c^2}{4\pi^2} \int_{-\pi}^{\pi} \Big( \big(\frac{\pi^3}{3} + y^2 \pi \big)- \big(\frac{(-\pi)^3}{3} - y^2 \pi\big ) \Big)\; dy \\
+        =& \frac{c^2}{4\pi^2} \int_{-\pi}^{\pi} \Big(\frac{2\pi^3}{3} + 2 y^2\pi \Big)\; dy \\
+        =& \frac{c^2}{4\pi^2} \int_{-\pi}^{\pi} \frac{2}{3} \pi^3 + 2\pi y^2 \; dy \\
+        =& \frac{c^2}{4\pi^2} \Big[ \frac{2}{3} \pi^3 y + \frac{2}{3} \pi y^3 \Big]_{-\pi}^{\pi}\\
+        =& \frac{c^2}{4\pi^2} \Big( \frac{2}{3} \pi^4 + \frac{2}{3} \pi^4 + \frac{2}{3} \pi^4 + \frac{2}{3} \pi^4 \Big) \\
+        =& \frac{c^2}{4\pi^2} \frac{8}{3} \pi^4 = c^2 \frac{2\pi^2}{3}
+\end{align*} \\
+So then since $c^2 \frac{2\pi^2}{3} = 1 \implies c^2 = \frac{3}{2\pi^2}$. We have that $c = \sqrt{\frac{3}{2\pi^2}} = \frac{\sqrt{\frac{3}{2}}}{\pi} = \frac{\sqrt{1 \frac{1}{2}}}{\pi} > 0$. Where you should use $c > 0 $. \\
+\\
+\textit{1 point for $N = c^2(X^2+Y^2)$ and writing down the integral correctly using LOTUS. 1 point for the calculations to find the expectation. 1 point for finding the correct value of c. }
+\end{solution}
+\end{exercise}
+\noindent
+Consider the following code:
+\begin{minted}{python}
+import math
+from scipy.integrate import quad
+
+def f(x):
+    return 1/(math.pi*(1+x**2))
+
+print(quad(f, -math.inf, math.inf))
+\end{minted}
+
+\begin{minted}{R}
+f = function(x){
+  return(1/(pi*(1+x^2)))
+}
+integrate(f, -Inf, Inf)
+\end{minted}
+
+\begin{exercise}[1]
+What will the code above return? You may use the fact that the pdf of a Cauchy random variable is given by
+\begin{align*}
+    f(x) = \frac{1}{\pi(1 + x^2)}, \quad x \in (-\infty, \infty).
+\end{align*}
+\begin{solution}
+The code computes the integral over the entire domain of a Cauchy random variable. Hence, it returns a value of one.\\
+\textit{0.5 points for explaining what the code does. 0.5 points for mentioning the correct output.}
+\end{solution}
+\end{exercise}

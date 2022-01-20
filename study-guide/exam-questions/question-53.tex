@@ -1,0 +1,100 @@
+\section{Question}
+
+\begin{exercise}[0.5]
+Consider a random variable $X\sim\mathcal{N}(\mu,\sigma^2)$. Write down the PDF of the random variable $Y=e^X$. You do not have to elaborate on your answer, but make sure to get everything correct.
+\begin{solution}
+The PDF of $Y$ is given by
+\begin{align*}
+    &= \frac{1}{\sqrt{2\pi}\sigma y}\exp{\left(-\frac{1}{2\sigma^2}(\ln{y}-\mu)^2\right)}
+\end{align*}
+for $y>0$.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Correct 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1.5]
+Consider now the random variable $W_k = \frac{k}{5Y^2}$. What is the distribution of $W_k$? You can use results from the book here.
+\begin{solution}
+Notice that, since $Y$ is a normal rv, the log of $Y$ is log-normal. Then, taking the $\ln$ on both sides, we get that
+\begin{align*}
+    \ln{W_k} = \ln{k}-\ln{5}-2\ln{Y_k}.
+\end{align*}
+From the book, we know that if $\ln{Y}\sim\mathcal{N}(\mu,\sigma^2)$, then it must be that
+\begin{align*}
+    -2\ln{Y}\sim\mathcal{N}(-2\mu, 4\sigma^2),
+\end{align*}
+and that
+\begin{align*}
+    \ln{W_k} = \ln{k}-\ln{5}-2\ln{Y}\sim\mathcal{N}(\ln{k}-\ln{5}-2\mu, 4\sigma^2).
+\end{align*}
+Thus, $W_k\sim\mathcal{L}\mathcal{N}(\ln{k}-\ln{5}-2\mu, 4\sigma^2)$
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item The idea to take logs 0.5pt.
+    \item The rest correct 1pt.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}[1]
+Calculate $\P{\frac{W_k}{W_l}=\frac{k}{l}}$ for some $l>k>0$. Are $W_kW_l$ and $\frac{W_k}{W_l}$ independent?
+\begin{solution}
+Clearly, $W_k=\frac{k}{l}W_l$, and thus we can see that
+\begin{align*}
+    W_kW_l &= \frac kl W_k^2,\\
+    \frac{W_k}{W_l} &= \frac kl.
+\end{align*}
+These are independent, since one is a constant.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Correct probability 0.5pt.
+    \item Correct conclusion 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}[2]
+Let $X_1,X_2\sim X$ be IID random variables, where $X$ has PDF
+\begin{align*}
+    f_X(x) = \frac{1}{\sqrt{2\pi x}}\exp{\left(-\frac{x}{2}\right)}
+\end{align*}
+for $x>0$. Find the joint PDF of the random variables $U = X_1+X_2$ and $V = X_1-X_2$.
+\begin{solution}
+Since $U = X_1 +X_2$ and $V = X_1-X_2$, we can write the inverse functions $X_1 = \frac12(U+V)$ and $X_2 = \frac12(U-V)$. These functions are one-to-one and $C^1$, so we can write the Jacobian matrix
+\begingroup
+\renewcommand*{\arraystretch}{1.5}
+\begin{align*}
+    J = \begin{pmatrix}
+    \frac12 & \frac12\\
+    \frac12 & -\frac12
+    \end{pmatrix},
+\end{align*}
+\endgroup
+which has absolute determinant $\frac12$. Since $X_1$ and $X_2$ are independent,
+\begin{align*}
+    f_{X_1,X_2}(x_1,x_2) = \frac{1}{2\pi\sqrt{x_1x_2}}\exp{\left(-\frac{x_1+x_2}{2}\right)}
+\end{align*}
+for $x_1,x_2\in\bf{R}_+$. Then, by the transformation theorem, we have that
+\begin{align*}
+    f_{U,V}(u,v) &= f_{{X_1,X_2}}\left(\frac12(u+v),\frac12(u-v)\right)\frac{1}{2}\\
+    &= \frac{1}{2\pi \sqrt{u^2-v^2}}\exp{\left(-\frac{u}{2}\right)}\\
+\end{align*}
+For $-\infty<v<u<\infty$.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Correct inverses 0.5pt.
+    \item Correct absolute determinant of the Jacobian matrix 0.5pt.
+    \item Correct application of transformation theorem 0.5pt.
+    \item Most of: the correct bounds, no mistakes in calculation, noticing the theorem is applicable, the inverses are 1-1 and $C^1$, independence of $X_1$ and $X_2$ etc. 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}

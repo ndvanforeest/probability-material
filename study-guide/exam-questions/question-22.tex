@@ -1,0 +1,91 @@
+\section{Question}
+
+Let $X$ and $Y$ be i.i.d and Unif(1,3) distributed.
+\begin{exercise}[0.5]
+Find the joint PDF $f(x,y)$ of $X$ and $Y$.
+\begin{solution}
+    Since $X$ and $Y$ are independent, their joint PDF is the product of their marginal PDFs. This gives:
+    \begin{align*}
+        f(x,y) = \Big(\frac{1}{(3-1)}\Big) \Big(\frac{1}{(3-1)}\Big) = \frac{1}{4}
+    \end{align*}
+    For $1<x<3$ and $1<y<3$ and 0 otherwise. \\
+    \textit{One mistake, zero points.}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[0.5]
+Show that $\int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y) \; dx \; dy = 1$
+\begin{solution}
+    Calculating this integral gives:
+    \begin{align*}
+      \int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y) \; dx \; dy =& \int_1^3 \int_1^3
+      \frac{1}{4} \; dx \; dy \\
+      =& 1
+    \end{align*} \\
+    \textit{One mistake, zero points.}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[3]
+Find $SD(|X-Y|)$, the standard deviation of the distance between $X$ and $Y$.
+\begin{solution}
+Step 1. Find the expectation $E(|X-Y|)$. Using LOTUS.
+\begin{align*}
+    E(|X-Y|) =& \int_1^3 \int_1^3 |x-y| \; \Big(\frac{1}{4}\Big) \; dx \; dy \\
+      =& \int_1^3 \int_y^3 (x-y) \; \Big(\frac{1}{4}\Big) \; dx \; dy + \int_1^3 \int_1^y (y-x) \; \Big(\frac{1}{4}\Big) \; dx \; dy \\
+      =& \frac{1}{3} + \frac{1}{3} \\
+      =& \frac{2}{3}
+\end{align*}
+Step 2. Find the squared expectation $|X-Y|^2$. Using LOTUS.
+\begin{align*}
+    E(|X-Y|^2) =& \int_1^3 \int_1^3 |x-y|^2 \; \Big(\frac{1}{4}\Big) \; dx \; dy \\
+    =& \int_1^3 \int_1^3 (x-y)^2 \; \Big(\frac{1}{4}\Big) \; dx \; dy \\
+    =& \int_1^3 \int_1^3 (x^2- 2xy + y^2) \; \Big(\frac{1}{4}\Big) \; dx \; dy \\
+    =& \frac{2}{3}
+\end{align*}
+Step 3. Find the variance of $|X-Y|$.
+\begin{align*}
+    \V{|X-Y|} =& E(|X-Y|^2) - E(|X-Y|)^2 \\
+        =& \frac{2}{3} - \Big(\frac{2}{3}\Big)^2 \\
+        =& \frac{2}{9}
+\end{align*}
+Step 4. Find the standard deviation of $|X-Y|$.
+\begin{align*}
+    SD(|X-Y|) =& \sqrt{\V{|X-Y|}} \\
+    =& \sqrt{\frac{2}{9}}\\
+    =& 0.4714
+\end{align*} \\
+\textit{One point for writing down the integral for $E|X-Y|$ and splitting it up correctly. One point for $E|X-Y|^2$. One point for finding $SD(|X-Y|)$ in the correct way.}
+\end{solution}
+\end{exercise}
+\noindent Consider the following code:
+\begin{minted}{python}
+import numpy as np
+np.random.seed(3)
+
+num = 100000
+
+x = np.random.normal(loc = 50, scale = 200, size = num)
+
+result1 = np.zeros(num)
+for i in range(0,num):
+    result1[i] = abs(x[i]-50)<2*200)
+
+print(np.sum(result1)/num)
+\end{minted}
+
+\begin{exercise}[0.5]
+What does the code above do?
+\begin{solution}
+It loads the required packages and creates one sample with 100000 observations from a $\mathcal{N}(50, 200)$-distribution. Then for all observations it subtracts its mean and tests if the new value is within 2 standard deviations of the mean. \\
+\textit{0.5 points for mentioning the mean is subtracted and it is checked if the value found is smaller than 2 times the s.d.}
+\end{solution}
+\end{exercise}
+\begin{exercise}[0.5]
+The code gives as output 0.95429.
+Explain why you would expect to get this output from the code. \textit{Hint:} use Theorem 5.4.5 in the book.
+\begin{solution}
+By Theorem 5.4.5 we get that $P(|X-\mu|<2\sigma) \approx 0.95$, this is also shown in the code. \\
+\textit{0.5 points for making a comparison between the theorem and the answer in the code. Conclusion should be that they give similar results.}
+\end{solution}
+\end{exercise}

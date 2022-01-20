@@ -1,0 +1,72 @@
+\section{Question}
+\begin{exercise}[1]
+Let $U\sim\text{Unif}\{-n,-n+1,\dots,n-1,n\}$ for some $n\in\mathbb{N}$. Find the PMF of $B = \left|U\right|$. What is $\E{B}$?
+\begin{solution}
+Since we are dealing with discrete uniform, we see that $\P{B=k}=\P{U=k}+\P{U=-k}$ for $k=1,2,\dots,n$, and $\P{B=0}=\P{U=0}$. Hence, we can immediately say that
+\begin{align*}
+    f_B(b)=\begin{cases}
+    \frac{2}{2n+1}\quad 0<b\leq n\\
+    \frac{1}{2n+1}\quad b=0
+    \end{cases}.
+\end{align*}
+Then,
+\begin{align*}
+    \E{B} = 0\frac{1}{2n+1}+\sum_{i=1}^n{\frac{2i}{2n+1}} = \frac{n(n+1)}{2}\frac{2}{2n+1} = \frac{n^2+n}{2n+1}
+\end{align*}
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Correct PMF 0.5pt.
+    \item Correct expectation 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[2]
+Now, consider a random variable $X$ distributed according to a $\text{Beta}(p,q)$ distribution. Since this distribution is only defined on $(0,1)$, we will transform it to be more general. Consider the random variable $Z = b X + a (1-X)$, for some $a,b\in\mathbb{R}$ such that $a<b$, and find its PDF.
+\begin{solution}
+First, note that $Z = a + (b-a)X$. Then, we know that
+\begin{align*}
+    F_Z(y) = \P{X(b-a)+a\leq y} = \P{X\leq \frac{y-a}{b-a}} = \int_0^{\frac{y-a}{b-a}}{f_X(s)\d s}.
+\end{align*}
+Then, by the FTC, we get
+\begin{align*}
+    f_Z(y) = f_X(\frac{y-a}{b-a})\frac{1}{b-a} = \frac{(y-a)^{p-1}(b-y)^{q-1}}{\beta(p,q)(b-a)^{p+q-1}}
+\end{align*}
+for $a<y<b$.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Correct rewriting of $Z$ 0.5pt.
+    \item Correct CDF 0.5pt.
+    \item Correct PDF 0.5pt.
+    \item No mistakes, correct bounds etc. 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[2]
+Consider again $Z$ as in the previous exercise. Assume that $a=-b$, that $b>0$, and that $p=q=2$. What is the PDF of $\left|Z\right|$?
+\begin{solution}
+We start as usual by considering the CDF of $Q=\left|Z\right|$. This shows us that
+\begin{align*}
+    F_Q(y) = \P{Q\leq y} = \P{\left|Z\right|\leq y} = \P{-y\leq Z \leq y} = F_Z(y) - F_Z(-y).
+\end{align*}
+We see that
+\begin{align*}
+    F_Z(y) = \int_{-b}^y{\frac{3}{4b^3}(b^2-s^2)\d s} = \frac{3}{4b}y-\frac{1}{4b^3}y^3+\frac12
+\end{align*}
+after filling all values given and integrating. This holds for $0<y<b$, the CDF is 1 for $y\geq b$, and 0 for $y\leq 0$. Then it must be that
+\begin{align*}
+    f_Q(y) = \frac{\d}{\d y} (F_Z(y) - F_Z(-y)) = \frac{3}{2b}-\frac{3}{2b^3}y^2
+\end{align*}
+for $0< y< b$.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Difference of CDF 0.5pt.
+    \item Difference of CDF of $Z$ correct, and derivative 1pt.
+    \item Most of: no mistakes, correct bounds etc. 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}

@@ -1,0 +1,54 @@
+\section{Question}
+
+A portfolio manager wants to investigate the monthly return of a particular portfolio, starting from an arbitrary month in history.  Let $X_t$ be the portfolio monthly return on month $t$, with $X_1, X_2, . . . $ i.i.d. We say that month $t$ is  \textit{worst in a year} if the return in month $t$ is lower than all previous 11 months. Let $A_t$ be the event that month $t$ is the \textit{worst in a year}, and let $I_{t}$ be the indicator r.v. that is 1 if month $t$ hits a \textit{worst in a year} an 0 otherwise.
+
+\begin{exercise}[0.5]
+Find $\P{A_t}$, the probability that month $t$ is the \textit{worst in a year}, $t\geq 12$.
+\begin{solution}
+ Since the current month and all previous 11 months are equally likely to have the lowest return, by symmetry, $\P{A_t}=\frac{1}{12}$.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}[2]
+ Let $N$ be the number of \textit{worst in a year} months from the month 12 to month $t$. Find $\E{N}$ and $\cov{N, I_t}$.
+\begin{solution}
+  Since $N=\sum_{k=12}^t I_k$ and $\E{I_t}=\P{A_t}=\frac{1}{12}$, $$\E{N}=\E{\sum_{k=12}^t I_k}=\sum_{k=12}^t \E{I_k}=\frac{t-11}{12}.$$
+    Then notice that $\cov{N, I_t}=\E{NI_t}-\E{N}\E{I_t}.$ Since $\E{I_t}=\P{A_t}=\frac{1}{12}$ and $\E{N}=\frac{t-11}{12}$ we need to find$\E{NI_t}$.
+     \begin{align*}
+        \E{NI_t}&=\E{\E{NI_t \given I_t}}\\
+        &=\E{\sum_{k=12}^t I_k I_t \given I_t=1}\P{I_t=1} \\
+         &=\E{\sum_{k=12}^{t-1} I_k+1} \P{I_t=1}\\
+         &=\left(\frac{t-12}{12}+1\right)\frac{1}{12} =\frac{t}{144}
+    \end{align*}
+    Thus:
+    \begin{align*}
+        \cov{N, I_t}&=\E{NI_t}-\E{N}\E{I_t}\\
+        &=\frac{t}{144}-\frac{t-11}{12}\frac{1}{12} =\frac{11}{144}.
+    \end{align*}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}[1.5]
+Find $\P{A_t \cap A_{t+1}}$, the probability that two consecutive months are both \textit{worst in a year}. Are $A_t$ and $A_{t+1}$ independent?
+\begin{solution}
+  To solve this exercise we use permutations. First notice that since we involve 2 months, there are in total 12+1=13 possible combination of the  monthly returns. Since only the lowest 2 monthly returns should be on month $t+1$ and month $t$, the order of the remaining 13-2=11 monthly returns does not matter. Thus, $ \P{A_t \cap A_{t+1}}=\frac{(13-2)!}{13!}=\frac{1}{12*13}=\frac{1}{156}$.\\
+    Since $\P{A_t}=\P{A_{t+1}}=\frac{1}{12}, \P{A_t \cap A_{t+1}}\neq \P{A_t}\P{A_{t+1}},$ and $A_t$ and $A_{t+1}$ are not independent.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}[1]
+Let $B_t$ be the event that return in month $t$ is lower than all previous months. Find $\P{B_t \cap B_{t+1}}$.
+\begin{solution}
+ To solve this exercise we use permutations. First notice that in $t+1$ months, there are in total $(t+1)!$ possible combination of the  monthly returns. Since only the lowest 2 monthly returns should be on month $t+1$ and month $t$, the order of the remaining $t-1$ monthly returns does not matter. Thus, $ \P{B_t \cap B_{t+1}}=\frac{(t-1)!}{(t+1)!}=\frac{1}{t(t+1)}$. 
+\end{solution}
+\end{exercise}
+
+\noindent \textit{Remarks and grading scheme:}
+\begin{enumerate}
+    \item First notice that  $A_t$ and $A_{t+1}$ are not independent. This is illustrated in Exercise 3.3. Many students wrongly assumed their independence. 
+    \item Ex 3.2: 0.5 point for correctly calculated $\E{N}, \E{I_t}$. 0.5 point for writing out the formula for covariance. 
+    \item Ex 3.3: No point if you assume them to be independent before solving the question. Even though you might have also got the same answer in the end by accident.
+\end{enumerate}

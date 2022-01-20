@@ -1,0 +1,117 @@
+\section{Question}
+
+
+A server  spends a random amount $T$ on a job.
+While the server works on the job, it sometimes gets interrupted to do other tasks $\{R_{i}\}$.
+Such tasks need to be repaired before the machine can continue working again.
+It is clear that such interruptions can only occur when the server is working.
+Assume that the interruptions arrive according to a Poisson process with rate $\lambda$, i.e., the number of failures $N(t) \sim\Pois{\lambda t}$.
+The interruptions $\{R_{i}\}$ are independent of $N$ and of $T$ and form an iid sequence with common mean $\E R$ and variance $\V R$.
+The  duration $S$ of a job  is its own service time $T$ plus all interruptions, hence $S = T+ \sum_{i=1}^{N(T)} R_{i}$.
+
+\begin{exercise}[1.5]
+The computation below consists of a number of steps, a, b, \ldots. Explain for each step which property is used to ensure the step is true.
+\begin{align}
+\E{\sum_{i=1}^{N(t)} R_{i}\given N(t)= n} &\is{a} \E{\sum_{i=1}^{n} R_{i}} \\
+  &\is{b} n \E R \\
+\E{\sum_{i=1}^{N(t)} R_{i}\given N(t)} &\is{c} N(t) \E R
+\end{align}
+\begin{solution}
+  We can use the result of part 1.
+  \begin{enumerate}[a.]
+  \item  On the set $\{N(t)=n\}$ $N(t)=n$. Hence we can replate  $N(t)$ by $n$.
+  \item  Linearity of expectation
+  \item  definition of conditional expectation.
+  \end{enumerate}
+Each  property missed, e.g, linearity of expectation, minus 0.5.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[2]
+  Suppose $R$ is equal to the constant $r$ and $T\sim\Exp{\mu}$, compute $\E S$.
+\begin{solution}
+    \begin{align*}
+      \E S &= \E T  + \E{N(T)}\E R= 1/\mu+ r \lambda \E T = 1/\mu + r \lambda /\mu.
+    \end{align*}
+Typically, 0.5 point for each correct line, but I subtracted points If you say that $\E{N(T) \E R} = \E R$, or write $n\E R$ as final answer (apparently you did not get the idea that $N$ is an rv.)
+
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}[1.5]
+Explain what  this code computes.
+  \begin{minted}{python}
+import numpy as np
+
+labda = 0.5
+size = 10
+num_runs = 50
+
+
+def do_run():
+    T = np.random.uniform(0, 20)
+    N = np.random.poisson(labda * T)
+    R = np.random.uniform(1, 5, size=N)
+    S = T + R.sum()
+    return S
+
+
+samples = np.zeros(num_runs)
+for i in range(num_runs):
+    samples[i] = do_run()
+
+
+print(samples[samples > 4].var())
+  \end{minted}
+
+ \begin{minted}{R}
+labda <- 0.5
+size <- 10
+num_runs <- 50
+
+do_run <- function() {
+  bigT <- runif(n = 1, min = 0, max = 20)
+  N <- rpois(n = 1, labda * bigT)
+  R <- runif(n = N, min = 1, max = 5)
+  S <- bigT + sum(R)
+  return(S)
+}
+
+samples <- rep(0, num_runs)
+for (i in 1:num_runs) {
+  samples[i] <- do_run()
+}
+
+print(var(samples[samples > 4]))
+\end{minted}
+
+
+Hint, you should know that in P.21 (R18) the string \verb|samples > 4| collects only the samples with value larger than 4.
+
+\begin{solution}
+Here is an EXPLANATION:
+  \begin{enumerate}
+  \item T is a simulated service time of a job without interruptions.
+  \item N is is the simulated number of failures that occur during the service of the job
+  \item R is then a vector of simulated durations of each of the interruptions
+  \item Hence, S is the total time the job spends at the server
+  \item We sample the total service time a number of times, and count how often (mean or variance) this exceeds a threshold.
+  \end{enumerate}
+The points earned depends on how clear you explanation is.
+
+
+Quite a few of you don't seem to understand what it means to \emph{explain} something. Here are some answers that I saw that certainly don't explain what the code does:
+  \begin{enumerate}
+  \item `The code does what's stated in the exercise.'.
+    What's the explanation here?
+    The question is also not: do you understood what the code does?
+  \item  `T is uniform rv, N is a Poisson rv, R is a also a uniform rv. We repeat this a few times.' Like this you just read the code, but I know you can read, so this type of answer is quite useless.
+  \item `We collect  a subset of the samples and print that.' This answer is just a repition of the hint.
+  \end{enumerate}
+
+  So, next time, when you are asked to explain something, explain it.
+  In your professional carreer, if you read out loud to your customer what s/he can read for him/herself, you'll be fired pretty soon.
+\end{solution}
+
+\end{exercise}

@@ -1,0 +1,108 @@
+\section{Question}
+\begin{exercise}[1]
+Let $X$ follow the student's $t$ distribution with $\nu$ degrees of freedom. Consider the random variable $Y = \frac{1}{X}$. Find the CDF of $Y$, $F_Y(y)$, in terms of $\P{X\leq\frac{1}{y}}$.
+\begin{solution}
+We start by trying to find a formula for $F_Y(y)$. After drawing the function $y=\frac{1}{x}$ in the $x,y$-plane, it becomes obvious that
+\begin{align*}
+    F_Y(y) = \P{Y\leq y} = \begin{cases}
+    \P{X\leq 0} + \P{X\geq\frac{1}{y}}&\quad\text{if}\;y>0\\
+    \P{\frac{1}{y}\leq X\leq 0}&\quad\text{if}\;y<0
+    \end{cases}.
+\end{align*}
+Draw it if this is not clear!\\
+To calculate less, we notice that $\P{X\leq 0}=\frac12$, by symmetry. Then,
+\begin{align*}
+    F_Y(y) = \begin{cases}
+    \frac12 + \P{X\geq\frac{1}{y}}&\quad\text{if}\;y>0\\
+    \frac12&\quad\text{if}\;y=0\\
+    \frac12 - \P{X\leq\frac1y}&\quad\text{if}\;y<0
+    \end{cases}.
+\end{align*}
+See also exercise 8.9.11.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Correct cases 0.5pt.
+    \item No mistakes etc. 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1]
+Show that $f_Y(y) = \frac{1}{y^2}f_X(\frac{1}{y})$ for all $y\neq0$.
+\begin{solution}
+\begin{align*}
+    f_Y(y) = \frac{\d}{\d y} F_Y(y) &= \begin{cases}
+    \frac{\d}{\d y}(\frac12 + \P{X\geq\frac{1}{y}})&\quad\text{if}\;y>0\\
+    \frac{\d}{\d y}(\frac12 - \P{X\leq\frac1y})&\quad\text{if}\;y<0
+    \end{cases}\\
+    &=\begin{cases}
+    -\frac{\d}{\d y}\P{X\leq\frac{1}{y}}&\quad\text{if}\;y>0\\
+    -\frac{\d}{\d y}\P{X\leq\frac{1}{y}}&\quad\text{if}\;y<0
+    \end{cases}.
+\end{align*}
+We can write, by definition:
+\begin{align*}
+    \P{X\leq\frac{1}{y}} = \int_{-\infty}^{\frac1y}{f_X(s)\d s},
+\end{align*}
+such that by the FTC,
+\begin{align*}
+    -\frac{\d}{\d y}\P{X\leq\frac{1}{y}} = \frac{1}{y^2}f_X(\frac1y)
+\end{align*}
+for $y\neq0$.\\
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Correct calculations 0.5pt.
+    \item No mistakes etc. 0.5pt.
+    \item Alternatively, use the transformation theorem to show this, if you didn't use the result from part (a). Be careful to correctly apply it.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1]
+Let $Y$ be as in the previous question. What distribution does $Y$ follow when $\nu=1$?
+\begin{solution}
+When $\nu=1$, $X$ follows a Cauchy distribution. Then, $Y$ must also be Cauchy.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Correct 1pt.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[0.5]
+What happens to the $t$ distribution when $\nu\rightarrow\infty$?
+\begin{solution}
+It converges to the standard normal distribution.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Correct 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1.5]
+Let $\nu>1$. For what value(s) of $y$ is $f_Y(y)$ maximal? You may neglect the possibility that $y=0$.
+\begin{solution}
+For $\nu>1$, we have that
+\begin{align*}
+    f_Y(y)\propto \left(y+\frac{1}{\nu y}\right)^{\frac{\nu}{2}+\frac12}.
+\end{align*}
+The FOC tells us that the mode is at
+\begin{align*}
+    &\frac{\d}{\d y} \left(y+\frac{1}{\nu y}\right)^{\frac{\nu}{2}+\frac12} = \left(y+\frac{1}{\nu y}\right)^{\frac{\nu}{2}-\frac12}\left(1-\frac{1}{\nu y^2}\right) = 0\implies\\
+    &1-\frac{1}{\nu y^2} = 0\implies\\
+    &y=\pm\frac{\sqrt{\nu}}{\nu}.
+\end{align*}
+Clearly, these must be the maximum values $f_Y$ takes on; if they were minima the PDF would not integrate to unity, and they cannot be saddle points (the only other option as the PDF is symmetric) since then there would be a different maximum, which the FOC would show. Alternatively, you could look at the second derivative.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Correct FOC 1pt.
+    \item Something about it being a maximum (lenient) 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}

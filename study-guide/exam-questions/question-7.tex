@@ -1,0 +1,46 @@
+\section{Question}
+
+
+John likes to spend his time watching trains pass by on the railway near his house. John is interested in the \textit{interarrival times} of the trains: the time between the arrivals of two subsequent trains. John knows that the interarrival times $X_i$, $i=1,\ldots,n$, are i.i.d. Exponentially distributed with a rate parameter $\lambda$. Hence, given the value of $\lambda$, the pdf of interarrival time $X_i$ is
+\begin{align}
+    f_{X_i|\lambda}(x|\lambda) = \lambda e^{-\lambda x}, \qquad x > 0.
+\end{align}
+John is interested in the value of $\lambda$. His prior belief about the distribution of $\lambda$ is that it follows a $\text{Gamma}(a,b)$ distribution with some particular choices for $a$ and $b$ (the exact values of $a$ and $b$ are not relevant for this question).
+
+\begin{exercise}[2.5]
+Suppose that John observes a first interarrival time of $X_1 = x_1$. Derive John's \textit{posterior} distribution of $\lambda$.
+\begin{solution}
+By Bayes' rule we have
+\begin{align}
+    f_1(\lambda|X_1 = x_1) &= \frac{f_{X_1|\lambda}(x_1|\lambda) f_0(\lambda)}{f_{X_1}(x_1)} \\
+    &\propto f_{X_1|\lambda}(x_1|\lambda) f_0(\lambda) \\
+    &= \frac{b^a}{\Gamma(a)}\lambda^{a-1} e^{-b\lambda} \lambda e^{-\lambda x_1} \\
+    &\propto \lambda^{a} e^{-(b + x_1)\lambda},
+\end{align}
+in which we recognize the pdf of a $\text{Gamma}(a+1,b+x_1)$ distribution (up to a scaling constant). Hence, the posterior distribution $\lambda$ given $X_1 = x_1$ is $\text{Gamma}(a+1,b+x_1)$.
+
+Applying Bayes' rule: 1 point.\\
+Finding the expression for the posterior: 1 point.\\
+recognizing a $Gamma(a+1,b+x_1)$ dist: 0.5 point.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1]
+Is John's prior distribution a \textit{conjugate} prior?
+\begin{solution}
+Yes. The posterior distribution is in the same family of distributions  (Gamma) as the prior. Hence, John has a conjugate prior.
+
+Correct answer and motivation: 1 point.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1.5]
+Suppose John observes the first $n$ interarrival times, with values $X_1 = x_1, \ldots, X_n = x_n$. What is John's posterior distribution after these observations? \\
+\textit{Hint: you don't need to redo all the math here!}
+\begin{solution}
+The posterior after observing $X_1 = x_1$ becomes our new prior. Hence, our new prior is a $\text{Gamma}(a+1,b+x_1)$ distribution. From question 1 it follows that the prior after observing $X_2 = x_2$ then is a $\text{Gamma}(a+2,b+x_1 + x_2)$ distribution. Hence, iterating this process, we find that the posterior distribution of $\lambda$ after observing $X_1 = x_1, \ldots, X_n = x_n$ is a $\text{Gamma}(a+n,b+ \sum_{i=1}^n x_i)$ distribution.
+
+Noting that the posterior becomes the new prior: 0.5 point.\\
+Correct derivation and answer: 1 point.
+\end{solution}
+\end{exercise}

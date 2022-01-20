@@ -1,0 +1,83 @@
+\section{Question}
+
+A random point $(X,Y)$ is chosen in the following square:
+\begin{align*}
+    \{(x, y) : -\sqrt{\pi} < x < \sqrt{\pi}, -\sqrt{\pi} < y < \sqrt{\pi} \}.
+\end{align*}
+All points are equally likely to be chosen. Let $R$ be its distance from the origin.
+\begin{exercise}[0.5]
+Find the joint PDF $f(x,y)$ of $X$ and $Y$.
+\begin{solution}
+So we can see that both $X$ and $Y$ are uniformly distributed on $(-\sqrt{\pi}, \sqrt{\pi})$. Then their joint PDF is simply:
+\begin{align*}
+    f(x,y) =& \Big(\frac{1}{\sqrt{\pi} - (-\sqrt{\pi}))} \Big) \Big(\frac{1}{(\sqrt{\pi} - (-\sqrt{\pi}))} \Big) \\
+    =& \frac{1}{4 \pi}
+\end{align*} \\
+\textit{One mistake, zero points.}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[0.5]
+Show that $\int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y) \; dx \; dy = 1$
+\begin{solution}
+ \begin{align*}
+      \int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y) \; dx \; dy =& \int_{-\sqrt{\pi}}^{\sqrt{\pi}} \int_{-\sqrt{\pi}}^{\sqrt{\pi}} \frac{1}{4\pi} \; dx \; dy \\
+      =& 1
+    \end{align*} \\
+    \textit{One mistake, zero points}
+\end{solution}
+
+\end{exercise}
+
+\begin{exercise}[3]
+Find the expectation of $R^2$, i.e., the expected squared difference from the origin.
+\begin{solution}
+Note that $R = \sqrt{X^2 + X^2}$, so then $R^2 = X^2 + Y^2$. Using LOTUS:
+\begin{align*}
+      \int_{-\infty}^\infty \int_{-\infty}^\infty \Big(x^2 + y^2 \Big) f(x,y) \; dx \; dy =& \int_{-\sqrt{\pi}}^{\sqrt{\pi}} \int_{-\sqrt{\pi}}^{\sqrt{\pi}}  \Big(x^2 + y^2 \Big) \Big(\frac{1}{4\pi} \Big) \; dx \; dy \\
+      =& \int_{-\sqrt{\pi}}^{\sqrt{\pi}} \int_{-\sqrt{\pi}}^{\sqrt{\pi}} \frac{x^2 + y^2}{4\pi} \; dx \; dy \\
+      =& \frac{1}{4\pi} \int_{-\sqrt{\pi}}^{\sqrt{\pi}} \int_{-\sqrt{\pi}}^{\sqrt{\pi}} x^2 + y^2 \; dx \; dy \\
+      =& \frac{1}{4\pi} \int_{-\sqrt{\pi}}^{\sqrt{\pi}} \Big[\frac{x^3}{3} + y^2x \Big]_{-\sqrt{\pi}}^{\sqrt{\pi}} \; dy \\
+      =& \frac{1}{4\pi} \int_{-\sqrt{\pi}}^{\sqrt{\pi}} \Big( \frac{\pi^{\frac{3}{2}}}{3} + \sqrt{\pi}y^2 - \frac{(-\pi)^{\frac{3}{2}}}{3} + \sqrt{\pi}y^2 \Big)\; dy \\
+        =& \frac{1}{4\pi} \int_{-\sqrt{\pi}}^{\sqrt{\pi}} \Big( \frac{\pi^{\frac{3}{2}}}{3} + \sqrt{\pi}y^2 + \frac{\pi^{\frac{3}{2}}}{3} + \sqrt{\pi}y^2 \Big)\; dy \\
+        =& \frac{1}{4\pi} \int_{-\sqrt{\pi}}^{\sqrt{\pi}} \frac{2\pi^{\frac{3}{2}}}{3} + 2\sqrt{\pi}y^2 \; dy \\
+        =& \frac{1}{4\pi} \Big[ \frac{2\pi^{\frac{3}{2}}}{3}y + \frac{2\sqrt{\pi}y^3}{3} \Big]_{-\sqrt{\pi}}^{\sqrt{\pi}}\\
+        =& \frac{1}{4\pi} \Big( \frac{2 \pi^2}{3} + \frac{2 \pi^2}{3} + \frac{2 (-\pi)^2}{3} + \frac{2 (-\pi)^2}{3} \Big) \\
+        =& \frac{1}{4\pi} \frac{8 \pi^2}{3} = \frac{2 \pi}{3}
+\end{align*} \\
+\textit{One point for finding that $R^2 = X^2 + Y^2$ and writing down the integral correctly using LOTUS. 2 points for the remaining calculations.}
+\end{solution}
+\end{exercise}
+\noindent
+Consider the following code:
+\begin{minted}{python}
+import numpy as np
+np.random.seed(3)
+
+num = 100000
+
+x = np.random.normal(loc = 50, scale = 200, size = num)
+y = np.random.normal(loc = 20, scale = 100, size = num)
+
+result = np.zeros(num)
+for i in range(0,num):
+    result[i] = x[i]*y[i]
+
+print(np.mean(result))
+\end{minted}
+
+\begin{exercise}[0.5]
+What does the code above do?
+\begin{solution}
+It loads the required packages and creates two samples with 100000 observations from respectively a $\mathcal{N}(50, 200)$- and $\mathcal{N}(20,100)$-distribution. Then for all paired observations it computes the product and takes the mean to estimate $E(XY)$. \\
+\textit{0.5 points if it is mentioned a product is taken and an average is computed/estimated.}
+\end{solution}
+\end{exercise}
+\begin{exercise}[0.5]
+The code gives as output 1008.99966. \\
+Explain why you would expect to get this output from the code.
+\begin{solution}
+As the samples are generated independently we would expect $E(XY) = E(x)E(Y) = 50*20 \approx 1000$. This is indeed shown by the code. \\
+\textit{0.5 points if independence is mentioned. Which would then result in $E(XY) = E(X)E(Y)$}
+\end{solution}
+\end{exercise}

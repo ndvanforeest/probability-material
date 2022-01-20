@@ -1,0 +1,133 @@
+\section{Question}
+
+
+A server  spends a random amount $T$ on a job.
+While the server works on the job, it sometimes gets interrupted to do other tasks $\{R_{i}\}$.
+Such tasks need to be repaired before the machine can continue working again.
+It is clear that such interruptions can only occur when the server is working.
+Assume that the interruptions arrive according to a Poisson process with rate $\lambda$, i.e., the number of failures $N(t) \sim\Pois{\lambda t}$.
+The interruptions $\{R_{i}\}$ are independent of $N$ and of $T$ and form an iid sequence with common mean $\E R$ and variance $\V R$.
+The  duration $S$ of a job  is its own service time $T$ plus all interruptions, hence $S = T+ \sum_{i=1}^{N(T)} R_{i}$.
+
+\begin{exercise}[1.5]
+In the computation of $\V S$ we encounter the following steps.
+%So we need to use Eve's law again, but now condition on $N(t)$.
+\begin{align}
+\V{\sum_{i=1}^{N(t)} R_{i}} &= \E{\V{\sum_{i=1}^{N(t)} R_{i}\given N(t)}} + \V{\E{\sum_{i=1}^{N(t)} R_{i}\given N(t)}}.
+\end{align}
+
+The computation below consists of a number of steps, a, b, \ldots. Explain for each step which property is used to ensure the step is true.
+\begin{align}
+\V{\sum_{i=1}^{N(t)} R_{i}\given N(t)=n} &\is{a} \V{\sum_{i=1}^{n} R_{i}}  \\
+  &\is{b} n \V R \\
+%\V{\sum_{i=1}^{N(t)} R_{i}\given N(t)} &= N(t) \V R \\
+\E{\V{\sum_{i=1}^{N(t)} R_{i}\given N(t)}} &  \is{c} \E{N(t) \V R} \\
+&  \is{d}  \lambda t \V R.
+\end{align}
+\begin{solution}
+  \begin{enumerate}[a.]
+  \item  On the set $\{N(t)=n\}$ $N(t)=n$. Hence we can replate  $N(t)$ by $n$.
+  \item  Variance of sum of iid rvs is sum of variance of rv.
+  \item  Use a and b, substitute $N(t)$ for $n$ and use the definition of conditional expectation.
+  \item  Since $\V R$ is a constant, we can take out of the expectation. Expectation of Poisson rv is $\lambda t$
+  \end{enumerate}
+Each  property missed, e.g, linearity of expectation, minus 0.5.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}[2]
+  Suppose $R$ is equal to the constant $r$ and $T\sim\Unif{[0, a]}$, compute $\E S$.
+\begin{solution}
+    Since $T=t$ a.s.,
+    \begin{align*}
+      \E S &= \E T  + \E{N(T)}\E R= a/2+ r \lambda \E T = a/2 + r \lambda a/2.
+    \end{align*}
+We know that $\E T = a/2$, Hence writing $\E{N(t)} = \lambda t$, is not ok. Some other strange things that I saw:
+\begin{align}
+  \label{}
+ R &\neq r T\\
+\E R &\neq ra/2\\
+\end{align}
+Typically, 0.5 point for each correct line, but I subtracted points If you say that $\E{N(T) \E R} = \E R$, or write $n\E R$ as final answer (apparently you did not get the idea that $N$ is an rv.)
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}[1.5]
+Explain what  this code computes.
+  \begin{minted}{python}
+import numpy as np
+
+labda = 0.5
+size = 10
+num_runs = 50
+
+
+def do_run():
+    T = np.random.uniform(0, 20)
+    N = np.random.poisson(labda * T)
+    R = np.random.uniform(1, 5, size=N)
+    S = T + R.sum()
+    return S
+
+
+samples = np.zeros(num_runs)
+for i in range(num_runs):
+    samples[i] = do_run()
+
+
+print((samples > 8).sum())
+  \end{minted}
+
+ \begin{minted}{R}
+labda <- 0.5
+size <- 10
+num_runs <- 50
+
+do_run <- function() {
+  bigT <- runif(n = 1, min = 0, max = 20)
+  N <- rpois(n = 1, labda * bigT)
+  R <- runif(n = N, min = 1, max = 5)
+  S <- bigT + sum(R)
+  return(S)
+}
+
+samples <- rep(0, num_runs)
+for (i in 1:num_runs) {
+  samples[i] <- do_run()
+}
+
+print(sum(samples > 8))
+\end{minted}
+
+
+Hint, you should know that in P.21 (R18) the string \verb|samples > 8| collects only the samples with value larger than 8.
+
+
+\begin{solution}
+Here is an EXPLANATION:
+  \begin{enumerate}
+  \item T is a simulated service time of a job without interruptions.
+  \item N is is the simulated number of failures that occur during the service of the job
+  \item R is then a vector of simulated durations of each of the interruptions
+  \item Hence, S is the total time the job spends at the server
+  \item We sample the total service time a number of times, and count how often (mean or variance) this exceeds a threshold.
+  \end{enumerate}
+The points earned depends on how clear you explanation is.
+
+
+Quite a few of you don't seem to understand what it means to \emph{explain} something. Here are some answers that I saw that certainly don't explain what the code does:
+  \begin{enumerate}
+  \item `The code does what's stated in the exercise.'.
+    What's the explanation here?
+    The question is also not: do you understood what the code does?
+  \item  `T is uniform rv, N is a Poisson rv, R is a also a uniform rv. We repeat this a few times.' Like this you just read the code, but I know you can read, so this type of answer is quite useless.
+  \item `We collect  a subset of the samples and print that.' This answer is just a repition of the hint.
+  \end{enumerate}
+
+  So, next time, when you are asked to explain something, explain it.
+  In your professional carreer, if you read out loud to your customer what s/he can read for him/herself, you'll be fired pretty soon.
+\end{solution}
+
+\end{exercise}

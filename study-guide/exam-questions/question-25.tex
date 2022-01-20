@@ -1,0 +1,53 @@
+\section{Question}
+
+
+Suppose you received a collection of books as your birthday gift. You already read 2 of them and there are still 4 books left. Let $X_1, X_2$ be the number of pages (in hundreds of pages) of the first 2 books you read, and let $X_3, ..., X_6$ be the number of pages (in hundreds of pages) of the remaining books. Assume that $X_i\sim \Norm{4, 1}$ for $i=1,...,6$. 
+
+
+\begin{exercise}[1.5]
+ First assume that the number of pages of the books are all independent. What is the expected number of remaining books that have more pages than each of the 2 books you have already read?
+\begin{solution}
+Let $I_i$ be the indicator r.v. for the $i$th book having more page than each of book 1 and book 2. Then:
+    \begin{align*}
+        \P{I_i=1}&=\P{X_i>X_1, X_i>X_2}\\
+        &=\P{X_i = \max\{X_1, X_2, X_i\}} \\
+        &=\frac13,
+    \end{align*}
+    by symmetry.
+    Then $\E{\Sigma_{i=3}^{6}I_i}=\frac{1}{3}\cdot 4=\frac43$.
+\end{solution}
+\end{exercise}
+
+
+For the next two exercises, suppose that $(X_1,...,X_6)$ is now Multivariate Normal distributed with $\mathsf{Corr}\left[X_1,X_j\right]=\frac{1}{2}$ for $3 \leq j\leq 6$.
+
+\begin{exercise}[2.5]
+ On average, how many of the remaining books are at least 100 pages longer than the first book you read? 
+\begin{solution}
+  In order to answer this question, we want to know $P(X_i-X_1>1)$, for $i=3,...,6$.
+   We first consider $i=3$. Since $X_3$ and $X_1$ are jointly normal distributed, $X_3-X_1$ is also normally distributed, with $\E{X_3-X_1}=\E{X_3}-\E{X_1}=0$ and 
+    \begin{align*}
+        \V{X_3-X_1}&=\V{X_3}+\V{-X_1}+2\cov{X_3,-X_1}\\
+        &=1+1-2\cdot\frac{1}{2}\cdot 1\cdot 1\\
+        &=1
+    \end{align*}
+    Then we know $X_3-X_1$ follows a standard normal distribution and $P(X_3-X_1>1)=0.16$\\
+    Similarly,  $P(X_4-X_1>1)=P(X_5-X_1>1)=P(X_6-X_1>1)=0.16$. So the average number of the remaining books that has 100 pages more than the first book is $0.16\cdot4=0.64.$
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}[1]
+Show that there exists a constant $c$ such that $X_1 - c X_3$ and $X_3$ are independent, and determine the value of $c$. 
+\begin{solution}
+  $\cov{X_1 - c X_3, X_3} = \cov{X_1 - c X_3, X_3} = \cov{X_1, X_3} - c\V{X_3} = \tfrac12- c$, so for $c = \tfrac12$, we have that $X_1 - c X_3$ and $X_3$ are uncorrelated. Since $(X_1,...,X_6)$ has the multivariate normal distribution, it follows that $X_1 - c X_3$ and $X_3$ are independent.
+\end{solution}
+\end{exercise}
+
+\noindent \textit{Remarks and grading scheme:}
+\begin{enumerate}
+    \item Ex 3.1: Many students assume that $X_i>X_1$ and $X_i>X_2$ is independent. This is not the case. In fact,  If $X_i > X_1$, then it's more likely that $X_i$ is large. In consequence, it is also more likely that $X_i > X_2$.
+    \item Ex 3.1: 0.5 point for multiply your probability with 4 (even if it is calculated wrongly). Full point(1.5) for correct answer.
+    \item Ex 3.2: 0.5 point for mentioning that $X_3-X_1$ is normally distributed ,0.5 point for correctly calculated $\E{X_3-X_1}$ and 0.5 point for correctly calculated $Var(X_3-X_1)$.
+    \item Ex 3.3: 0.5 point for writing out the formula for covariance.
+\end{enumerate}

@@ -1,0 +1,82 @@
+\section{Question}
+
+A random point $(X,Y)$ is chosen in the following square:
+\begin{align*}
+    \{(x, y) : x^2 < 7,  y^2 < 7 \}
+\end{align*}
+All points are equally likely to be chosen. Let $S$ be the squared norm of $(X,Y)$.
+\begin{exercise}[0.5]
+Find the joint PDF $f(x,y)$ of $X$ and $Y$.
+\begin{solution}
+So we can see that both $X$ and $Y$ are uniformly distributed on $(-\sqrt{7}, \sqrt{7})$. Then their joint PDF is simply:
+\begin{align*}
+    f(x,y) =& \Big(\frac{1}{\sqrt{7} - (-\sqrt{7}))} \Big) \Big(\frac{1}{(\sqrt{7} - (-\sqrt{7}))} \Big) \\
+    =& \frac{1}{28}
+\end{align*}\\
+\textit{One mistake, zero points.}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[0.5]
+Show that $\int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y) \; dx \; dy = 1$
+\begin{solution}
+ \begin{align*}
+      \int_{-\infty}^\infty \int_{-\infty}^\infty f(x,y) \; dx \; dy =& \int_{-\sqrt{7}}^{\sqrt{7}} \int_{-\sqrt{7}}^{\sqrt{7}} \frac{1}{28} \; dx \; dy \\
+      =& 1
+    \end{align*} \\
+    \textit{One mistake, zero points.}
+\end{solution}
+
+\end{exercise}
+
+\begin{exercise}[3]
+Find the expectation of $S$, i.e., the squared norm of $(X,Y)$.
+\begin{solution}
+Note that $S = X^2 + Y^2$. Using LOTUS:
+\begin{align*}
+      \int_{-\infty}^\infty \int_{-\infty}^\infty \Big(x^2 + y^2 \Big) f(x,y) \; dx \; dy =& \int_{-\sqrt{7}}^{\sqrt{7}} \int_{-\sqrt{7}}^{\sqrt{7}}  \Big(x^2 + y^2 \Big) \Big(\frac{1}{28} \Big) \; dx \; dy \\
+      =& \int_{-\sqrt{7}}^{\sqrt{7}} \int_{-\sqrt{7}}^{\sqrt{7}} \frac{x^2 + y^2}{28} \; dx \; dy \\
+      =& \frac{1}{28} \int_{-\sqrt{7}}^{\sqrt{7}} \int_{-\sqrt{7}}^{\sqrt{7}} x^2 + y^2 \; dx \; dy \\
+      =& \frac{1}{28} \int_{-\sqrt{7}}^{\sqrt{7}} \Big[\frac{x^3}{3} + y^2x \Big]_{-\sqrt{7}}^{\sqrt{7}} \; dy \\
+      =& \frac{1}{28} \int_{-\sqrt{7}}^{\sqrt{7}} \Big( \frac{7^{\frac{3}{2}}}{3} + \sqrt{7}y^2 - \frac{(-7)^{\frac{3}{2}}}{3} + \sqrt{7}y^2 \Big)\; dy \\
+        =& \frac{1}{28} \int_{-\sqrt{7}}^{\sqrt{7}} \Big( \frac{7^{\frac{3}{2}}}{3} + \sqrt{7}y^2 + \frac{7^{\frac{3}{2}}}{3} + \sqrt{7}y^2 \Big)\; dy \\
+        =& \frac{1}{28} \int_{-\sqrt{7}}^{\sqrt{7}} \frac{2}{3} 7^{\frac{3}{2}} + 2\sqrt{7}y^2 \; dy \\
+        =& \frac{1}{28} \Big[ \frac{2}{3} 7^{\frac{3}{2}}y + \frac{2}{3} \sqrt{7}y^3 \Big]_{-\sqrt{7}}^{\sqrt{7}}\\
+        =& \frac{1}{28} \Big( \frac{2}{3} 7^2 + \frac{2}{3} 7^2 + \frac{2}{3} (-7)^2 + \frac{2}{3} (-7)^2 \Big) \\
+        =& \frac{1}{28} \frac{8}{3} 7^2 = \frac{14}{3} = 4 \frac{2}{3}
+\end{align*} \\
+\textit{One point for finding $S^2 = X^2 + Y^2$ and writing down the integral correctly using LOTUS. Two points for the remaining calculations.}
+\end{solution}
+\end{exercise}
+\noindent
+Consider the following code:
+\begin{minted}{python}
+import numpy as np
+import math
+np.random.seed(3)
+
+num = 100000
+distances = np.zeros(num)
+for i in range(0,num):
+    angle = 2*math.pi*np.random.uniform(0,1,1)
+    position = np.sqrt(np.random.uniform(0,1,1))
+    x = np.cos(angle)*position
+    y = np.sin(angle)*position
+    distances[i] = np.sqrt(x**2 + y**2)
+
+print(np.mean(distances))
+\end{minted}
+
+\begin{exercise}[0.5]
+What does the code above do? \textit{Hint:} unit circle.
+\begin{solution}
+It loads the required packages and defines a vector of zeros of length \texttt{N}. Then in the for-loop it creates a random point in the unit circle. It computes the distance from this point to the origin and stores it in \texttt{distances}. Finally, it takes the mean to estimate the mean distance from a randomly chosen point in the unit circle to the origin. \\
+\textit{0.5 points for mentioning an average distance is between a random point and the origin is estimated. This point has an x-coordinate and a y-coordinate.}
+\end{solution}
+\end{exercise}
+\begin{exercise}[0.5]
+The output of the code is 0.66629. Explain this result.\begin{solution}
+The mean distance from a randomly selected point in the unit circle to the origin is $\approx \frac{2}{3}$.\\
+\textit{Trivial}
+\end{solution}
+\end{exercise}

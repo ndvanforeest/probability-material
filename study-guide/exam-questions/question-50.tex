@@ -1,0 +1,41 @@
+\section{Question}
+
+
+\begin{exercise}
+Let $Z \sim \Norm{0,1}$.
+In this exercise, we try to find yet another bound for $\P{|Z| > 3}$ not yet presented in BH Example 10.1.3.
+\begin{enumerate}
+\item Prove that $\P{|Z| > 3} \leq e^{-9t}\E{e^{t Z^2}}.$
+\item If $X \sim \Gamm{n, \lambda}$ then the MGF of $X$ is given by $M_X(t) = (1-t/\lambda)^{-n}$.
+
+Use this to derive the MGF of the chi-square distribution with 1 degree of freedom.
+\item Determine which $t$ yields the best upper bound of  $\P{|Z| > 3}$, and give this bound.
+\item Argue that $\P{|Z| > 3} = \P{Z^4 > 81}$, and use this to prove that $\P{|Z| > 3} \leq \frac1{27}$.
+\item Recall from BH Example 6.5.2. that $\E{Z^{2n}} = \frac{(2n)!}{2^n n!}$ for all positive integers $n$.
+
+Use this (in a way similar to the previous part) to give yet another bound for $\P{|Z| > 3}$.
+
+ For what value(s) of $n$ do we obtain the strongest  bound for   $\P{|Z| > 3}$?
+\end{enumerate}
+\begin{solution}
+
+1. This follows from the inequality $\P{X \geq a} \leq \E{f(X)}/f(a)$ with $f(x) = e^{tX^2}$. \\
+
+2. The chi-square distribution with 1 degree of freedom is the Gamma distribution with $n = 1/2$ and $\lambda = 1/2$, so $M_{Z^2}(t) = (1-2t)^{-1/2}$. \\
+
+3. We find $\P{|Z| > 3} \leq e^{-9t}(1-2t)^{-1/2}$. So we want to minimize $e^{-9t}(1-2t)^{-1/2}$. It is easier if we take the logarithm first and minimize $-9t -1/2 \log(1-2t)$. Its derivative to $t$ is $-9 + \frac1{1-2t}$, so setting the derivative to 0 yields  $t = 4/9$.
+This gives us the bound $\P{|Z| > 3} \leq e^{-4}(1-2t)^{-1/2} \approx 0.055$. \\
+
+4. We have $\P{|Z| > 3} = \P{Z^4 > 81}$ since $|Z| >3$ if and only if $Z^4 > 81$. The inequality now directly follows from Markov's inequality. \\
+
+5. By Markov's inequality,
+\begin{equation*}
+\P{|Z| > 3} = \P{Z^{2n} > 9^n} \leq \frac{\E{Z^{2n}}}{9^n} = \frac{1}{9^n}\frac{(2n)!}{2^{n} n!}.
+\end{equation*}
+From the formula for $\E{Z^{2n}}$ we see that $\E{Z^{2(n+1)}} = (2n+1)\E{Z^{2n}}$. We now consider what happens when incrementing $n$. If $n < 4$ then $2n+1 < 9$, so then incrementing $n$ improves the bound, for $n=4$ incrementing $n$ doesn't change the bound and for $n >4$ the bound becomes weaker. So we get the best possible bound for $n=4$ and $n=5$, which yields the bound
+\begin{equation*}
+\P{|Z| > 3} \leq \frac{1 \cdot 3 \cdot 5 \cdot 7}{9^4} \approx 0.016,
+\end{equation*}
+which is the best bound obtained so far.
+\end{solution}
+\end{exercise}

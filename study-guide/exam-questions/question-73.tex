@@ -1,0 +1,84 @@
+\section{Question}
+
+Let $X$ and $Y$ be independent and $\mathcal{N}(0,1)$ distributed.
+\begin{exercise}[1]
+Show that $X-Y = \sqrt{2}Z$, where $Z \sim \mathcal{N}(0,1)$.
+\begin{solution}
+    We know by independence of $X$ and $Y$ that $X-Y \sim \mathcal{N}(0,2)$. By the fact that $cZ \sim \mathcal{N}(0,c^2)$ for all $c \in \mathbb{R}$, using $c = \sqrt{2}$ we get the same distribution. \\
+    \textit{One point for the fact $X-Y \sim \mathcal{N}(0,2)$, one point for a correct conclusion that this equals the density of Z.}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[2]
+Consider the expectation $E|X-Y|$. Show that
+\begin{align*}
+    E|X-Y| &= 2 \sqrt{2} \int_{0}^\infty z \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2}z^2} dz.
+\end{align*}
+You may use the result in the previous exercise and the fact that by the Fundamental Theorem of Calculus, $\int_b^a f(x) \;dx = -\int_a^b f(x) \;dx$, if $b > a$.
+\begin{solution}
+    Using 2D LOTUS, substitution, and the integral equation above, we obtain
+    \begin{align*}
+     E|X-Y| =& \int_{\infty}^\infty |\sqrt{2}z| \phi(z) dz \\
+     =& \int_{-\infty}^\infty |\sqrt{2}z| \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2}z^2} dz \\
+     =& \sqrt{2} \int_{-\infty}^\infty |z| \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2}z^2} dz \\
+     =& \sqrt{2} \int_{0}^\infty z \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2}z^2} dz + \sqrt{2} \int_{-\infty}^0 (-z) \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2}z^2} dz \\
+     =& \sqrt{2} \int_{0}^\infty z \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2}z^2} dz - \sqrt{2} \int_{\infty}^0 u \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2}u^2} du \\
+     =& \sqrt{2} \int_{0}^\infty z \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2}z^2} dz + \sqrt{2} \int_{0}^\infty u \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2}u^2} du \\
+     =& 2 \sqrt{2} \int_{0}^\infty z \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2}z^2} dz
+    \end{align*} \\
+    \textit{0.5 points for the first integral, 1 point for splitting up correctly, 0.5 points for simplifying correctly.}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1]
+Solve the integral in the previous question. \textit{Hint: use integration by substitution}
+\begin{solution}
+Integration by substitution yields:
+\begin{align*}
+    E(|X-Y|) =& 2\sqrt{2} \int_{0}^\infty z \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2}z^2} dz \\
+    =& 2 \sqrt{2} \int_{0^2}^{\infty^2} \frac{1}{\sqrt{2 \pi}} e^{-u} du \\
+    =& 2 \sqrt{2} \int_{0}^{\infty^2} \frac{1}{\sqrt{2 \pi}} e^{-u} du\\
+    =& \frac{2}{\sqrt{\pi}} \Big(1-e^{-\infty^2} \Big) = \frac{2}{\sqrt{\pi}}
+\end{align*}
+\textit{0.5 points for the right substitution, 0.5 points for the rest of the computations.}
+\end{solution}
+\end{exercise}
+
+\noindent Consider the following code:
+\begin{minted}{python}
+import numpy as np
+np.random.seed(3)
+
+num = 10000
+
+y = np.random.normal(loc = 1, scale = np.sqrt(2), size = num)
+
+result = np.zeros(num)
+for i in range(0, len(result)):
+    result[i] = np.exp(y[i])
+
+print(np.mean(result))
+\end{minted}
+
+\begin{minted}{R}
+set.seed(3)
+
+num = 10000
+
+y = rnorm(num, mean = 1, sd = sqrt(2))
+
+result = rep(0, num)
+for (i in 1:length(result)) {
+  result[i] = exp(y[i])
+}
+
+print(mean(result))
+\end{minted}
+
+\begin{exercise}[1]
+What does the code above do?
+\begin{solution}
+It loads the required packages and creates one sample with 10000 observations from a r.v. $Y \sim \mathcal{N}(1, 2)$. Then for all observations $y_i$ it calculates $e^{y_i}$ and stores it into a vector. Finally, it estimates the mean of a log-normal r.v. $X = e^Y$. \\
+\textit{0.5 points for mentioning that for observations of a normal r.v. the exponent is taken. 0.5 points for stating a mean of $X$ is estimated.}
+\end{solution}
+\end{exercise}

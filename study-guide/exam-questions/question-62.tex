@@ -1,0 +1,80 @@
+\section{Question}
+$X$ number of people will get vaccinated for Covid-19. There are currently two types of vaccines, Vaccine A and Vaccine B. Each person independently choose vaccine A with probability $p$, and vaccine B with probability $1-p.$
+% covariance, multivariate normal
+\begin{exercise}[2]
+ Suppose $X\sim\text{Poi}(\lambda).$ Let $X_A$ be the number of people that choose Vaccine A and $X_B=X-X_A$ be the number of people that choose Vaccine B. Find $Var(X_A-X_B)$ and $\rho_{X_A,X}.$
+%Find $\cov{2N_1+N_2, 2N_1-N_2}.$
+
+\begin{solution}
+First notice that $X_A|X \sim \text{Bin}(X, p)$ and $X_B |X \sim \text{Bin}(X, 1-p)$. By the chicken-egg theory, $X_A\sim\text{Pois}(\lambda p)$ and $X_B \sim \text{Pois}(\lambda (1-p))$ are independent. (0.5 points)\\
+Then it follows
+\begin{align*}
+    Var(X_A-X_B)=Var(X_A)+Var(X_B)=\lambda p+\lambda(1-p)=\lambda  \cdot \cdot \cdot \text{ (0.5 points)}
+\end{align*}
+And
+\begin{align*}
+    &\cov{X_A,X}\\
+    =&\cov{X_A,X_A+X_B}\\
+    =&\cov{X_A,X_A}+\cov{X_A,X_B}\\
+    =&Var(X_A)\\
+    =&\lambda p  \cdot \cdot \cdot \text{ (0.5 points)}\\
+\end{align*}
+Then $$  \rho_{X_A,X}
+    =\frac{\cov{X_A,X}}{sd(X_A)sd(X)}
+    =\frac{\lambda p}{\sqrt{\lambda p}\sqrt{\lambda}}
+    =\sqrt{p}\cdot \cdot \cdot \text{ (0.5 points)}$$
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[2]
+Suppose $X=1000.$ A new vaccine is now available, called Vaccine C. Each of the 1000 people now independently chooses one of the three vaccines with equal probabilities $\frac{1}{3}.$  Let $X_A$ be the number of people that choose Vaccine $i$, i=A,B,C and $\sum_{i}X_i=X=1000$. \\
+Calculate $\cov{X_A,X_C}$ and $\rho_{X_A,X_C}.$
+\begin{solution}
+First notice that $X_j \sim \text{Bin}(1000,\frac{1}{3}), j=A, B, C.$ \text{ (0.5 points)}\\
+Then we know $\boldsymbol{X}=(X_A,X_B,X_C) \sim Mult_3(1000,\frac{1}{3}).$  \text{ (0.5 points)}\\
+Using the property of a Multinomial distribution,
+\begin{align*}
+    \cov{X_A,X_C}=-\frac{1000}{3^2},  \cdot \cdot \cdot \text{ (0.5 points)}
+\end{align*}
+\begin{align*}
+       \rho_{X_A,X_C}=\frac{ \cov{X_A,X_C}}{sd(X_A)sd(X_C)}=-\frac{1000/3^2}{1000(1/3)(2/3)}=-\frac{1}{2}.  \cdot \cdot \cdot \text{ (0.5 points)}
+\end{align*}
+\end{solution}
+\end{exercise}
+
+\noindent Consider the following codes:
+\begin{minted}{R}
+library(mvtnorm)
+set.seed(888)
+A<-c(1,2,1)
+B<-c(2,3,1)
+C<-c(1,1,8)
+D<-cbind(A,B,C)
+X<-rmvnorm(200,mean=A,sigma=D)
+output=cor(X[,1]+X[,2],X[,3])
+\end{minted}
+
+\begin{minted}{python}
+import random
+import numpy as np
+random.seed(888)
+A = [1,2,1]
+B = [2,3,1]
+C = [1,1,8]
+D = np.transpose([A,B,C])
+X = np.random.multivariate_normal(A, D, size = 200)
+output = np.corrcoef(X[:,0]+X[:,1]+X[:,2])
+\end{minted}
+
+
+\begin{exercise}[1]
+Explain in detail the purpose of \textbf{Line 1,2, 6,7,8} of the above codes.
+\begin{solution}
+Line 1: Load the package "mvtnorm" so that we can use the function \textit{rmvnorm}.\\
+Line 2: Set a random seed to reproduce the same results.\\
+Line 6: Combine vector A, B, C to generate a matrix D=$\begin{pmatrix}1&2&1\\2&3&1\\1&1&8\end{pmatrix}$\\
+Line 7: Generate 200 multivariate normally distributed variables $\textbf{X}={x_1,x_2,x_3}$ with mean equal to $(1,2,1)$ and variance equal to matrix D.\\
+Line 8: Calculate the correlation of the sum of column 1-2 of matrix $X$ and the 3rd column of matrix X.\\
+\textbf{(0.5 points for correct answer of at least 3 of the above.)}
+\end{solution}
+\end{exercise}

@@ -1,0 +1,84 @@
+\section{Question}
+
+Let $Z \sim \Norm{0,1}$. 
+In this exercise, we find an upper bound for $\P{|Z| > 3}$.
+
+\begin{exercise}[1.5]
+If $X \sim \Gamm{a, \lambda}$ then the $r$th moment of $X$ is given by $\frac{\Gamma(a+r)}{\lambda^r\Gamma(a)}$. 
+Use this to prove that  $\E{Z^{2n+2}} = (2n+1)\E{Z^{2n}}$ for all positive integers $n$.
+
+\textit{Hint}. Use the chi-square distribution. \\
+\begin{solution}
+Let $Y = Z^2$, then  $Y \sim \chi^2_1$, so $Y  \sim \Gamm{\tfrac12, \tfrac12}$. We have 
+\begin{align*} \E{Z^{2n+2}} &= \E{Y^{n+1}} =  \frac{\Gamma(n+3/2)}{(1/2)^{n+1}\Gamma(1/2)} = \frac{2^{n+1}\Gamma(n+3/2)}{\Gamma(1/2)} \\ 
+  \E{Z^{2n}} &= \E{Y^n}  =  \frac{\Gamma(n+1/2)}{(1/2)^n\Gamma(1/2)} = \frac{2^n\Gamma(n+1/2)}{\Gamma(1/2)}. \end{align*}
+
+Since $\Gamma(n+3/2) = (n+1/2) \Gamma(n+1/2)$ we conclude $$\E{Z^{2n+2}} =  \frac{2^{n+1}\Gamma(n+3/2)}{\Gamma(1/2)} = 2(n+1/2)\frac{2^n\Gamma(n+1/2)}{\Gamma(1/2)} = (2n+1)\E{Z^{2n}}.$$  
+
+\noindent Remarks and grading scheme:
+
+\begin{itemize}
+\item It is NOT true that $\E{Z^{2n+2}} = \E{Z^{2}}\E{Z^{2n}}$. This would only be true if $Z^2$ and $Z^{2n}$ would be uncorrelated. But clearly, they are positively correlated: if $Z^2$ is large, then so is $Z^{2n}$.
+\item While induction is a good strategy to try when you have to prove a statement for all $n \in \mathbb N$, it is certainly not the only option. 
+\item Grading: 0.5 for introducing $Y = Z^2$ and arguing $Y  \sim \Gamm{\tfrac12, \tfrac12}$ with some explanation, 0.5 for using the given expression to calculate  $\E{Z^{2n+2}}$ and $\E{Z^{2n}}$ and 0.5 for using a property of the Gamma function to finish the answer. 
+% If neither of the first two points is given, 0.5 can be given for introducing  $Y = Z^2$ and rewriting $\E{Z^{2n+2}} = \E{Y^{n+1}}$ or  $\E{Z^{2n}} = \E{Y^n}$.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[0.5]
+Use the previous exercise to calculate $\E{Z^4}$. \\
+\begin{solution}
+By using the previous exercise with $n=1$, we get $\E{Z^4} = 3\E{Z^2} = 3$. 
+\end{solution}
+
+\noindent Remarks and grading scheme:
+\begin{itemize}
+\item If the exercise explicitly asks to use the previous exercise, don't do it in a different way. 
+\item You should really know that $\E{Z^2} = 1$ for $Z \sim \Norm{0,1}$. 
+\item Grading: 0.5 for a correct solution.
+\end{itemize}
+\end{exercise}
+
+
+\begin{exercise}[1]
+We now provide a bound for $\P{|Z| > 3}$.
+\begin{enumerate}
+\item[(i)] Prove that  $\P{|Z| > 3} = \P{Z^4 > 81}$.
+\item[(ii)] Use this to prove that $\P{|Z| > 3} \leq \frac1{27}$.
+\end{enumerate} 
+\begin{solution}
+We have $\P{|Z| > 3} = \P{Z^4 > 81}$ since $|Z| >3$ if and only if $Z^4 > 81$. The inequality now directly follows from Markov's inequality. \\
+
+\noindent Remarks and grading scheme:
+\begin{itemize}
+\item This exercise was made quite well.
+\item Grading scheme: 0.5 for (i) and 0.5 for (ii).
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}[2]
+Prove that $\P{|Z| > 3} \leq \frac{\E{Z^{2n}}}{9^n}$ for all $n \in \mathbb N$. 
+For what value(s) of $n$ do we obtain the strongest bound for $\P{|Z| > 3}$? Also provide this upper bound. \\
+\begin{solution}
+ By Markov's inequality,
+\begin{equation*}
+\P{|Z| > 3} = \P{Z^{2n} > 9^n} \leq \frac{\E{Z^{2n}}}{9^n}.
+\end{equation*}
+From the formula for $\E{Z^{2n}}$ we see that $\E{Z^{2(n+1)}} = (2n+1)\E{Z^{2n}}$. We now consider what happens when incrementing $n$. If $n < 4$ then $2n+1 < 9$, so then incrementing $n$ improves the bound, for $n=4$ incrementing $n$ doesn't change the bound and for $n >4$ the bound becomes weaker. So we get the best possible bound for $n=4$ and $n=5$.
+We have $\E{Z^8} = 7\E{Z^6} = 7\cdot 5\E{Z^4} = 105$. Hence,
+$$\P{|Z| > 3} \leq \frac{105}{9^4} \approx 0.016.$$
+
+\noindent Remarks and grading scheme:
+
+\begin{itemize}
+\item Many people tried to use induction in this exercise, but that doesn't work. While it is good to think of induction when you have to prove a statement for all $n \in \mathbb N$, it is certainly not the only option. 
+\item In fact, following a similar strategy as in the previous exercise would have helped here. 
+\item Grading scheme: 0.5 for $\P{|Z| > 3} \leq \frac{\E{Z^{2n}}}{9^n}$, 1 for showing that the best bound is obtained for $n=4$ and $n=5$, and 0.5 for calculating the resulting bound. 
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+

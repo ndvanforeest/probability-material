@@ -1,0 +1,83 @@
+\section{Question}
+
+
+An insurance company offers a theft insurance for electric bikes. When a claim is filed, the insurer pays out the size of the claim, with a maximum of 1000 euros. So a claim of 500 euros is paid out completely, while a claim of 1500 euros yields a payout of 1000 euros.
+
+Let $X$ denote the size of the claim in thousands of euros. We assume that $X$ has the following pdf:
+\begin{align}
+    f_X(x) = \frac{3}{4}x(2-x), \quad 0 \leq x \leq 2.
+\end{align}
+Let $Y$ denote the size of the payout. Note that $Y = \min\{X,1\}$.
+
+\begin{exercise}[1]
+What is the probability that the claim is at most 1000 euros?
+\begin{solution}
+We have
+\begin{align}
+    \P{X \leq 1} &= \int_0^1 \frac{3}{4} x (2-x) dx \\
+    &=  \frac{3}{4}\left[ x^2 - \frac{1}{3} x^3 \right]_0^1 dx \\
+    &=  \frac{3}{4}\left( 1 - \frac{1}{3} \right) \\
+    &= 1/2.
+\end{align}
+An argument based on the fact that $f_X$ is a parabola centered around 1 is also fine.
+
+Correct initial integral: 0.5 point.\\
+Correct solution: 0.5 point.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1.5]
+What is the expected payout given the information that the claim is at most 1000 euros?
+\begin{solution}
+Let $Y$ denote the payout in thousands of euros. Then, $Y = \min\{X,1\}$. We find
+\begin{align}
+    \E{Y|X\leq 1} &= \E{X|X\leq 1} \\
+    &= \int_0^1 x f_X(x|X\leq 1) dx \\
+    &= \int_0^1 x \frac{f_X(x)}{\P{X \leq 1}} dx \\
+    &= 2 \int_0^1 x \frac{3}{4} x (2-x)  dx \\
+    &= \frac{3}{2} \int_0^1 (2x^2 - x^3)  dx \\
+    &= \frac{3}{2} \left[ \frac{2}{3} x^3 - \frac{1}{4} x^4\right]_0^1 \\
+    &= \frac{3}{2} \left( \frac{2}{3} - \frac{1}{4} \right) \\
+    &= \frac{5}{8}.
+\end{align}
+
+Writing down $\E{X|X\leq 1}$: 0.5 point.\\
+Correct derivation and solution: 1 point.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1.5]
+What is the (unconditional) expected payout?
+\begin{solution}
+By the law of total expectation,
+\begin{align}
+    \E{Y} &= \P{X \leq 1} \E{Y | X \leq 1} + \P{X > 1} \E{Y | X > 1} \\
+    &= \frac{1}{2} \frac{5}{8} + \frac{1}{2} \cdot 1 \\
+    &= \frac{13}{16}.
+\end{align}
+
+Mentioning law of total expectation: 0.5 point.\\
+Correctly using law of total expectation: 0.5 point.\\
+Correct solution: 0.5 point.
+\end{solution}
+\end{exercise}
+
+The time $T$ (in hours) it takes for the company to process a payout of size $Y=y$ is uniformly distributed on the interval $[y,2y]$.
+
+\begin{exercise}[1]
+Compute the (unconditional) expected value of $T$.
+\begin{solution}
+By Adam's law,
+\begin{align}
+    \E{T} &= \E{\E{T|Y}} \\
+    &= \E{\frac{3}{2}Y} \\
+    &= \frac{3}{2}\E{Y} \\
+    &= \frac{3}{2} \cdot \frac{13}{16} = \frac{39}{32}.
+\end{align}
+
+Mentioning and using Adam's law: 0.5 point.\\
+Correct solution: 0.5 point.
+
+Note: if in your interpretation, $Y=y$ is actually given (I realized that the question is ambiguous), then $\frac{3}{2}y$ (lowercase!) will also be regarded as correct.
+\end{solution}
+\end{exercise}

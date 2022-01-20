@@ -1,0 +1,79 @@
+\section{Question}
+
+\begin{exercise}[0.5]
+Let $\lambda>0$ be some parameter. Let $X_1,X_2,\dots,X_n \sim\text{Expo}(\lambda)$ be independent. Find the distribution of $\min{\{X_1,X_2,\dots,X_n\}}$. You can use results from the book here.
+\begin{solution}
+By the book, we know that $\min{\{X_1,X_2,\dots,X_n\}}\sim\text{Expo}(n\lambda)$.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Correct 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[2]
+From here on, consider the random variables $X,Y\sim\text{Expo}(\lambda)$, again for $\lambda>0$. Assume $X,Y$ are independent. We will in steps show the distribution of $\left|X-Y\right|$.\\ To start, consider the PDF of a random variable $W$, which is as follows:
+\begin{align*}
+    f_W(w) = \frac{\lambda}{2}e^{-\lambda\left|w\right|},
+\end{align*}
+for $w\in\mathbf{R}$. Find the moment-generating function of $W$. As a hint, be careful of what assumptions are necessary to make sure the required integral(s) converge.
+\begin{solution}
+We start with the definition:
+\begin{align*}
+    M_W(t) &= \E{e^{W t}}\\%check
+    &= \int_{-\infty}^\infty{e^{w t}\frac{\lambda}{2}e^{-\lambda\left|w\right|}\d w}\\
+    &= \frac{\lambda}{2}\int_{-\infty}^0{e^{(t+\lambda) w}\d w} + \frac{\lambda}{2}\int_{0}^\infty{e^{(t-\lambda) w}\d w}\\
+    &= \frac{\lambda}{2}\frac{1}{\lambda+t}+\frac{\lambda}{2}\frac{1}{\lambda-t}\\
+    &= \frac{\lambda^2}{\lambda^2-t^2},
+\end{align*}
+where we used the assumptions $t>-\lambda$ and $t<\lambda$ to make the first and second integral converge respectively. Hence, this MGF is defined only for $\left|t\right|<\lambda$.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Definition 0.5pt.
+    \item Split the integral 0.5pt.
+    \item Correct integral calculation 0.5pt.
+    \item Correct bounds 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1]
+Show that $X-Y\sim W$. You may use any known results from \emph{previous} courses.
+\begin{solution}
+We know that $M_{X-Y}(t)=M_X(t)M_Y(-t)$, and that $M_X(t)=M_Y(t)=\frac{\lambda}{\lambda-t}$ for $t<\lambda.$ Then, we show that
+\begin{align*}
+    \frac{\lambda}{\lambda-t}\frac{\lambda}{\lambda+t} = \frac{\lambda^2}{\lambda^2-t^2},
+\end{align*}
+for $t<\lambda$ \emph{and} $-t<\lambda$, or $\left|t\right|<\lambda$. Since the MGF uniquely determines the distribution, we know that $X-Y\sim W$.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Correct MGF and bounds 1pt.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1.5]
+Finally, calculate the MGF of the random variable $\left|X-Y\right|$. Do you recognize it?
+\begin{solution}
+Let $Q = \left|X-Y\right| \sim \left|W\right|$.
+We start with the definition:
+\begin{align*}
+    M_Q(t) &= \E{e^{Q t}}\\
+    &= \E{e^{\left|W\right| t}}\\
+    &= \int_{-\infty}^\infty{e^{\left|w\right| t}\frac{\lambda}{2}e^{-\lambda\left|w\right|}\d w}\\
+    &= \frac{\lambda}{2}\int_{-\infty}^0{e^{(\lambda-t)w}\d w}+\frac{\lambda}{2}\int_0^\infty{e^{(t-\lambda)w}\d w}\\
+    &= \frac{\lambda}{2}\left(\frac{1}{\lambda-t}-\frac{1}{t-\lambda}\right)\\
+    &= \frac{\lambda}{\lambda-t},
+\end{align*}
+where we need $t<\lambda$ to make both integrals converge. This is again an exponential MGF!
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Correct integration 1pt.
+    \item Correct bounds 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}

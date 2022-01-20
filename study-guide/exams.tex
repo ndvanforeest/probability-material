@@ -7,6 +7,10 @@
 
 \chapter{Old  exam questions}
 
+
+\section{Question}
+\label{sec:question-1}
+
 \begin{exercise}
 Inspired by BH.7.3.6, compute $\V M$ and $\V L$ by first computing $\E{M^{2}}$ and $\E{L^{2}}$.
 \begin{hint}
@@ -25,7 +29,8 @@ The first integral is just 2 times $\E{X^{2}}$, the second is $\E{L^2}$. Hence, 
 
 
 
-
+\section{Question}
+\label{sec:question-2}
 
 \begin{exercise}
 Let $(X,Y)$ follow a Bivariate Normal distribution, with $X$ and $Y$ marginally following $\mathcal{N}(\mu,\sigma^2)$ and with correlation $\rho$ between $X$ and $Y$.
@@ -68,7 +73,8 @@ Let $(X,Y)$ follow a Bivariate Normal distribution, with $X$ and $Y$ marginally 
 \end{solution}
 \end{exercise}
 
-
+\section{Question}
+\label{sec:question-3}
 
 
 \begin{exercise}
@@ -163,7 +169,7 @@ The sum of two uniform random variables is not uniform. For example, think of th
 \end{exercise}
 
 
-
+\section{Question}
 
 
 \begin{exercise}
@@ -183,6 +189,7 @@ Yes, for instance, take $X \sim \Unif{\{0,1\}}$. Then,
 \end{exercise}
 
 
+\section{Question}
 
 \begin{exercise}
 We have a machine that consists of two components.
@@ -219,6 +226,8 @@ Let $X_i$ be the lifetime of component $i$.
 \end{enumerate}
 \end{solution}
 \end{exercise}
+
+\section{Question}
 
 \begin{exercise}
 We have two rvs X and Y with the joint PDF $f_{X,Y}(x,y) = \frac{6}{7}(x+y)^2$ for $x, y \in (0,1)$ and 0 else. Also we consider the two rvs U and V with the joint PDF $f_{U,V}(u,v) = 2$ for $u, v \in [0,1], u+v \leq 1$ and 0 else.
@@ -278,6 +287,7 @@ We have two rvs X and Y with the joint PDF $f_{X,Y}(x,y) = \frac{6}{7}(x+y)^2$ f
 \end{solution}
 \end{exercise}
 
+\section{Question}
 
 
 
@@ -304,6 +314,8 @@ So $0 \leq (u+v)/2 \leq 1$ and $0 \leq (u-v)/2 \leq 1$, which simplifies to $-v 
 \end{solution}
 \end{exercise}
 
+\section{Question}
+
 \begin{exercise}
 Let $X$ and $Y$ have PDF $f_{X,Y}$. Take $g(x,y) = (\min\{x,y\}, \max\{x,y\})$.
 Why is
@@ -325,6 +337,8 @@ If $(U,V) = g(X,Y)$, then $g^{-1}(u,v) = \{(u,v), (v,u)\}$, i.e., a set of two p
 If $X,Y$ iid with PDF, then $f_{X,Y}(x,y) = f(x)f(y)$.
 \end{solution}
 \end{exercise}
+
+\section{Question}
 
 \begin{exercise}
 Let $X, Y$ be continuous rvs with CDF $F_{X,Y}(x,y) = (x-1)^{2}(y-2)/8$ for $x \in (1, 3)$.
@@ -397,6 +411,7 @@ The rest is for you.
 \end{solution}
 \end{exercise}
 
+\section{Question}
 
 
 \begin{exercise}
@@ -426,8 +441,9 @@ f_{U}(u) &= \frac{f_{V}(-u^{1/4})}{4 (-u)^{3/4}} \1{-u^{1/4}\in (-3, 0)} + \frac
 f_{U}(u) &= \frac{1}{20 (-u)^{3/4}} \1{u\in (0, 81)} + \frac{1}{20 (u)^{3/4}} \1{u \in [0,16)}.
 \end{align}
 \end{solution}
-
 \end{exercise}
+
+\section{Question}
 
 \begin{exercise}
 Let $U \sim  \Unif{0, \pi}$.
@@ -446,9 +462,9 @@ f_{X}(x) &= f_{U}(u) \frac{\d u}{\d x} = \frac{1}{\pi}\1{u\in (0, \pi)} \frac{1}
 \end{solution}
 \end{exercise}
 
+\section{Question}
 
-
-\new{You walk into} a bar and you find two people, Amy and Bob, playing a game of darts. Their game consists of several rounds, called \textit{legs}, and the first person to win 7 legs wins the match. You have never seen Amy or Bob play before, so you don't know their strength. Denoting by $p$ the probability that Amy wins a leg, your prior belief can be modeled by a uniform distribution: $p \sim \Unif{0,1}$.  (Note: we assume that $p$ remains constant during the entire match; even though your \textit{beliefs} about $p$ might change.)
+You walk into a bar and you find two people, Amy and Bob, playing a game of darts. Their game consists of several rounds, called \textit{legs}, and the first person to win 7 legs wins the match. You have never seen Amy or Bob play before, so you don't know their strength. Denoting by $p$ the probability that Amy wins a leg, your prior belief can be modeled by a uniform distribution: $p \sim \Unif{0,1}$.  (Note: we assume that $p$ remains constant during the entire match; even though your \textit{beliefs} about $p$ might change.)
 
 Denoting by $A$ a leg won by Amy and by $B$ a leg won by Bob, the result of the first 10 legs is: $AAABBAABAB$. Your friend Charles is very confident that Amy will win the match and he offers you a bet: if Amy wins the match, you must pay €10 to Charles; if Bob wins the match, he must pay you €300. You are tempted to take the bet, but you want to do some calculations first.
 \begin{exercise}
@@ -542,6 +558,8 @@ So we expect to make a profit of €19.81. Hence, you should take the bet.
 \end{exercise}
 
 
+\section{Question}
+
 \begin{exercise}
 On BH.9.5.4. With $Z$ and $W$ as given in the example, show that $\E{Z|W} = \rho$ and $\V{Z|W} = 1-\rho^{2}$.
 \begin{hint}
@@ -569,8 +587,8 @@ Since $\E{(h(X))^2} \geq 0$, we conclude that $\E{(Y - \E{Y|X} - h(X))^2} \geq \
 \end{exercise}
 
 
-
-\new{In the next} couple of problems we derive Eve's law in a slightly different way then BH.
+\section{Question}
+In the next couple of problems we derive Eve's law in a slightly different way then BH.
 
 Define $\hat X = \E{X\given Y}$ as an \emph{estimator} of $X$ and $\tilde X = X - \hat X$ as the estimation error.
 
@@ -683,5 +701,57 @@ Where would this proof break down if we try to apply it to e.g. the Cauchy distr
 The Cauchy distribution has no mean to converge to.
 \end{solution}
 \end{exercise}
+
+\subfile{exam-questions/question-50.tex}
+\subfile{exam-questions/question-20.tex}
+\subfile{exam-questions/question-1.tex}
+\subfile{exam-questions/question-10.tex}
+\subfile{exam-questions/question-5.tex}
+\subfile{exam-questions/question-59.tex}
+\subfile{exam-questions/question-70.tex}
+\subfile{exam-questions/question-73.tex}
+\subfile{exam-questions/question-61.tex}
+\subfile{exam-questions/question-18.tex}
+\subfile{exam-questions/question-19.tex}
+\subfile{exam-questions/question-74.tex}
+\subfile{exam-questions/question-64.tex}
+\subfile{exam-questions/question-3.tex}
+\subfile{exam-questions/question-67.tex}
+\subfile{exam-questions/question-60.tex}
+\subfile{exam-questions/question-2.tex}
+\subfile{exam-questions/question-23.tex}
+\subfile{exam-questions/question-7.tex}
+\subfile{exam-questions/question-63.tex}
+\subfile{exam-questions/question-13.tex}
+\subfile{exam-questions/question-4.tex}
+\subfile{exam-questions/question-69.tex}
+\subfile{exam-questions/question-72.tex}
+\subfile{exam-questions/question-75.tex}
+\subfile{exam-questions/question-21.tex}
+\subfile{exam-questions/question-51.tex}
+\subfile{exam-questions/question-53.tex}
+\subfile{exam-questions/question-6.tex}
+\subfile{exam-questions/question-52.tex}
+\subfile{exam-questions/question-55.tex}
+\subfile{exam-questions/question-66.tex}
+\subfile{exam-questions/question-11.tex}
+\subfile{exam-questions/question-62.tex}
+\subfile{exam-questions/question-12.tex}
+\subfile{exam-questions/question-9.tex}
+\subfile{exam-questions/question-25.tex}
+\subfile{exam-questions/question-14.tex}
+\subfile{exam-questions/question-65.tex}
+\subfile{exam-questions/question-15.tex}
+\subfile{exam-questions/question-71.tex}
+\subfile{exam-questions/question-17.tex}
+\subfile{exam-questions/question-8.tex}
+\subfile{exam-questions/question-58.tex}
+\subfile{exam-questions/question-22.tex}
+\subfile{exam-questions/question-57.tex}
+\subfile{exam-questions/question-68.tex}
+\subfile{exam-questions/question-56.tex}
+\subfile{exam-questions/question-54.tex}
+\subfile{exam-questions/question-24.tex}
+
 
 \input{trailer.tex}

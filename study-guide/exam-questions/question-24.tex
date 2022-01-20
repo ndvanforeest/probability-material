@@ -1,0 +1,42 @@
+\section{Question}
+
+Denise is the proud owner of a small supermarket. In order to gain some insight into the behavior of her customers, she analyzes their arrival times. In particular, she is interested in the customers' \textit{interarrival times}. Denise knows that the interarrival times $Y_i$, $i=1,\ldots,n$, are i.i.d. Exponentially distributed with a rate parameter $\lambda$ (i.e., with a mean value of $1/\lambda$). However, Denise does not know the value of $\lambda$. Her prior belief about $\lambda$ is captured by a $\text{Gamma}(a,b)$ distribution, with some particular values of $a,b > 0$.
+
+\begin{exercise}[2.5]
+Denise starts observing the customers' interarrival times. For the first customer she observes $Y_1 = y_1$. What is Denise's \textit{posterior} distribution of $\lambda$ after this observation?
+\begin{solution}
+By Bayes' rule we have
+\begin{align}
+    f_1(\lambda|Y_1 = y_1) &= \frac{f_{Y_1|\lambda}(y_1|\lambda) f_0(\lambda)}{f_{Y_1}(y_1)} \\
+    &\propto f_{Y_1|\lambda}(y_1|\lambda) f_0(\lambda) \\
+    &= \frac{b^a}{\Gamma(a)}\lambda^{a-1} e^{-b\lambda} \lambda e^{-\lambda x_1} \\
+    &\propto \lambda^{a} e^{-(b + x_1)\lambda},
+\end{align}
+in which we recognize the pdf of a $\text{Gamma}(a+1,b+y_1)$ distribution (up to a scaling constant). Hence, the posterior distribution $\lambda$ given $Y_1 = y_1$ is $\text{Gamma}(a+1,b+y_1)$.
+
+Applying Bayes' rule: 1 point.\\
+Finding the expression for the posterior: 1 point.\\
+recognizing a $Gamma(a+1,b+x_1)$ dist: 0.5 point.
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}[1.5]
+After an hour Denise has observed $n$ interarrival times $Y_1 = y_1, \ldots, Y_N = y_n$. Without redoing all the math, determine Denise's posterior distribution.
+\begin{solution}
+The posterior after observing $Y_1 = y_1$ becomes our new prior. Hence, our new prior is a $\text{Gamma}(a+1,b+y_1)$ distribution. From question 1 it follows that the prior after observing $Y_2 = y_2$ then is a $\text{Gamma}(a+2,b+y_1 + y_2)$ distribution. Iterating this process (i.e., by mathematical induction), we find that the posterior distribution of $\lambda$ after observing $Y_1 = y_1, \ldots, Y_n = y_n$ is a $\text{Gamma}(a+n,b+ \sum_{i=1}^n y_i)$ distribution.
+
+Noting that the posterior becomes the new prior: 0.5 point.\\
+Correct derivation and answer: 1 point.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1]
+Does Denise have a \textit{conjugate} prior?
+\begin{solution}
+Yes. The posterior distribution is in the same family of distributions  (Gamma) as the prior. Hence, John has a conjugate prior.
+
+Correct answer and motivation: 1 point.
+\end{solution}
+\end{exercise}

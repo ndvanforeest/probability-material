@@ -1,0 +1,78 @@
+\section{Question}
+There are three cheese shops in town, shop A, shop B and shop C. $N_1$ customers enter shop A per hour, $N_1\sim \text{Poisson}(\lambda_1)$; $N_2$ customers enter shop B per hour, $N_2\sim \text{Poisson}(\lambda_2)$; $N_3$ customers enter shop C per hour, $N_3\sim \text{Poisson}(\lambda_3)$. $N_1, N_2, N_3$ are independent of each other. Each customer that enters in any of the three shops, buys cheese with probability $p$, independently. Let $X$ be the total number of customers that buys cheese per hour.
+% covariance, multivariate normal
+\begin{exercise}[1]
+ Show that $N_1+N_2$ and $N_2-2N_3$ are \textbf{not} independent of each other.
+%Find $\cov{2N_1+N_2, 2N_1-N_2}.$
+
+\begin{solution}
+\begin{align*}
+   & \cov{N_1+N_2, N_2-2N_3}\\
+  = & \cov{N_1,N_2}-\cov{N_1,2N_3}+\cov{N_2,N_2}-\cov{N_2,2N_3}\cdot \cdot \cdot \text{(0.5 point)}\\
+  = &  Var(N_2)\\
+  =& \lambda_2 > 0.\cdot \cdot \cdot \text{(0.5 point)}
+\end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1]
+Let $N=N_1+N_2+N_3$. What is the distribution of  $N$? What is the distribution of $X|N$?  What is the distribution of $X$?
+\begin{solution}
+Since $N_1, N_2$ and $N_3$ are independent, $N\sim Pois(\lambda_1+\lambda_2+\lambda_3).$(0.5 point)\\
+$X|N\sim Bin(N,p),$ and $X\sim Pois((\lambda_1+\lambda_2+\lambda_3) p)$ by the Chicken-egg theory. (0.5 point)
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}[2]
+Calculate $\rho_{X,N},$ the correlation between $X$ and $N$.
+\begin{solution}
+ Let $Y=N-X$ be the number of customers that do not buy cheese. Then we know $Y\sim Pois((\lambda_1+\lambda_2+\lambda_3) q)$ with $q=1-p,$ and $X$ and $Y$ are independent. (0.5 point)
+ \begin{align*}
+     \cov{N,X}&=\cov{X+Y,X}\\
+     &=\cov{X,X}+\cov{Y,X}\\
+     &=Var(X)\cdot \cdot \cdot\text{(0.5 point)}\\
+     &=(\lambda_1+\lambda_2+\lambda_3)p \cdot \cdot \cdot \text{(0.5 point)}
+ \end{align*}
+ Then it follows that
+ \begin{align*}
+     \rho_{X,N}&=\frac{\cov{N,X}}{sd(N)\cdot sd(X)}\\
+     &=\frac{(\lambda_1+\lambda_2+\lambda_3)p}{\sqrt{\lambda_1+\lambda_2+\lambda_3}\cdot \sqrt{(\lambda_1+\lambda_2+\lambda_3)p} }\\
+     &=\sqrt{p}.\cdot \cdot \cdot\text{(0.5 point)}
+ \end{align*}
+\end{solution}
+\end{exercise}
+
+\noindent Consider the following codes:
+\begin{minted}{R}
+library(mvtnorm)
+set.seed(777)
+A<-matrix(c(1,2,2,4),nrow = 2)
+B<-c(1,2)
+X<-rmvnorm(50,mean=B,sigma=A)
+output=cor(X[3,],X[41,])
+\end{minted}
+
+
+\begin{minted}{python}
+import random
+import numpy as np
+random.seed(777)
+A = [[1,2],[2,4]]
+B = [1,2]
+X = np.random.multivariate_normal(B, A, size = 50)
+output = np.corrcoef(X[[3,41],:].reshape(4))
+\end{minted}
+
+\begin{exercise}[1]
+Explain in detail the purpose of \textbf{each line} of the above codes.
+\begin{solution}
+Line 1: Load the package "mvtnorm" so that we can use the function \textit{rmvnorm}.\\
+Line 2: Set a random seed to reproduce the same results.\\
+Line 3: Generate a 2$\times$2 identity matrix A=$\begin{pmatrix}1&2\\2&4\end{pmatrix}$.\\
+Line 4: Generate a vector $B=(1,2)$.\\
+Line 5: Generate 50 multivariate normally distributed variables $\textbf{X}={x_1,x_2}$ with mean equal to $B$ and variance equal to A.\\
+Line 6: Calculate the correlation of the 3rd and 41th rows of matrix $X$.\\
+\textbf{(0.5 points for mentioning at least 3 of the above.)}
+\end{solution}
+\end{exercise}

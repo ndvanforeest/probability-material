@@ -1,0 +1,69 @@
+\section{Question}
+
+
+Catherine and Denny are playing a game. Each player throws a single (fair) die. The die has three pairs of identical sides: a pair of ones, a pair of twos and a pair of threes. Let $X$ and $Y$ denote the outcome of Catherine and Denny's throw, respectively. The person that throws the highest number wins. If both throw the same number, they have a draw. The final score $C$ of Catherine is determined as follows:
+\begin{itemize}
+    \item If Catherine loses, then she gets zero points.
+    \item If Catherine and Denny draw, then she gets 0.5 point.
+    \item If Catherine wins, then her score is the difference $X -Y$ in the numbers they threw.
+\end{itemize}
+The final score $D$ for Denny is determined analogously. Assume that the dice are fair and that all throws are independent.
+
+\begin{exercise}[1]
+Find the joint distribution of $X$ and $Y$ conditional on Catherine winning.
+\begin{solution}
+The initial distribution is $\P{X = x, Y = y} = 1/9$, $x,y = 1,2,3$. Catherine wins iff $X>Y$, i.e., iff $(X,Y) \in \{(2,1), (3,1), (3,2)\}$. So we have
+\begin{align}
+    \P{X=x,Y=y | X>Y} &= \frac{\P{X=x,Y=y,X>Y}}{\P{X>Y}} \\
+    &= \frac{1/9}{1/3} = 1/3,
+\end{align}
+for $(x,y) \in \{(2,1), (3,1), (3,2)\}$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1.5]
+What is Catherine's expected score conditional on Catherine winning?
+\begin{solution}
+We have
+\begin{align}
+    C = \begin{cases}
+    0 &X < Y \\
+    1/2 &X = Y \\
+    X - Y &X > Y.
+    \end{cases}
+\end{align}
+Hence,
+\begin{align}
+    \E{C|X>Y} &= \E{X-Y|X>Y} \\
+    &= \frac{1}{3} (2-1) + \frac{1}{3} (3-1) + \frac{1}{3} (3-2) \\
+    &= 4/3.
+\end{align}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1.5]
+Determine Catherine's (unconditional) expected score.
+\begin{solution}
+We have, by the law of total expectation,
+\begin{align}
+    \E{C} &= \P{X<Y}\E{C|X<Y} + \P{X=Y}\E{C|X=Y} + \P{X>Y}\E{C|X>Y} \\
+    &= 0 + \frac{1}{3} \cdot \frac{1}{2} + \frac{1}{3} \frac{4}{3} \\
+    &= 11/18.
+\end{align}
+\end{solution}
+\end{exercise}
+
+To spice things up, Catherine and Denny decide to play for money. After playing the dice game and scoring $C$ points, Catherine receives an amount of $S$ euros, where $S$ is determined randomly. Here, conditional on the outcome of $C$, $S$ follows a uniform distribution on $[C,2C]$.
+\begin{exercise}[1]
+What is the (unconditional) expected reward for Catherine? That is, compute $\E{S}$.
+\begin{solution}
+By Adam's law,
+\begin{align}
+    \E{S} &= \E{\E{S|C}} \\
+    &= \E{\frac{3}{2}C} \\
+    &= \frac{3}{2}\E{C} \\
+    &= \frac{3}{2} \frac{11}{18} \\
+    &= \frac{33}{36}.
+\end{align}
+\end{solution}
+\end{exercise}

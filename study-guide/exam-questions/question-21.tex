@@ -1,0 +1,85 @@
+\section{Question}
+
+Let $Y \sim \Norm{0,1}$. 
+In this exercise, we find an upper bound for $\P{|Y| > 4}$.
+
+\begin{exercise}[1.5]
+If $X \sim \Gamm{a, \lambda}$ then the $r$th moment of $X$ is given by $\frac{\Gamma(a+r)}{\lambda^r\Gamma(a)}$. 
+Use this to prove that  $\E{Y^{2n+2}} = (2n+1)\E{Y^{2n}}$ for all positive integers $n$.
+
+\textit{Hint}. Use the chi-square distribution. \\
+\begin{solution}
+Let $V = Y^2$, then  $V \sim \chi^2_1$, so $V  \sim \Gamm{\tfrac12, \tfrac12}$. We have 
+\begin{align*} \E{Y^{2n+2}} &= \E{V^{n+1}} =  \frac{\Gamma(n+3/2)}{(1/2)^{n+1}\Gamma(1/2)} = \frac{2^{n+1}\Gamma(n+3/2)}{\Gamma(1/2)} \\ 
+  \E{Y^{2n}} &= \E{V^n}  =  \frac{\Gamma(n+1/2)}{(1/2)^n\Gamma(1/2)} = \frac{2^n\Gamma(n+1/2)}{\Gamma(1/2)}. \end{align*}
+
+Since $\Gamma(n+3/2) = (n+1/2) \Gamma(n+1/2)$ we conclude that $$\E{Y^{2n+2}}  = \frac{2^{n+1}\Gamma(n+3/2)}{\Gamma(1/2)} = 2(n+1/2)\frac{2^n\Gamma(n+1/2)}{\Gamma(1/2)} = (2n+1)\E{Y^{2n}}.$$  \\ \\
+
+\noindent Remarks and grading scheme:
+
+\begin{itemize}
+\item It is NOT true that $\E{Y^{2n+2}} = \E{Y^{2}}\E{Y^{2n}}$. This would only be true if $Y^2$ and $Y^{2n}$ would be uncorrelated. But clearly, they are positively correlated: if $Y^2$ is large, then so is $Y^{2n}$.
+\item While induction is a good strategy to try when you have to prove a statement for all $n \in \mathbb N$, it is certainly not the only option. 
+\item Grading: 0.5 for introducing $V = Y^2$ and arguing $V  \sim \Gamm{\tfrac12, \tfrac12}$ with some explanation, \\ 0.5 for using the given expression to calculate  $\E{Y^{2n+2}}$ and $\E{Y^{2n}}$, \\
+ 0.5 for using a property of the Gamma function to finish the answer.
+% If neither of the first two points is given, 0.5 can be given for introducing $V = Y^2$ and rewriting $\E{Y^{2n+2}} = \E{V^{n+1}}$ or  $\E{Y^{2n}} = \E{V^n}$.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1]
+Use the previous exercise to calculate $\E{Y^4}$ and $\E{Y^8}$. \\
+\begin{solution}
+By applying  the previous exercise with $n=1$, we obtain that 
+$\E{Y^4} = 3\E{Y^2} = 3$. By applying  the previous exercise with $n=3$ and $n=2$, we obtain that  $\E{Y^8} = 7\E{Y^6} = 7 \cdot 5\E{Y^4} = 7 \cdot 5 \cdot 3  = 105$. \\
+
+\noindent Remarks and grading scheme:
+\begin{itemize}
+\item If the exercise explicitly asks to use the previous exercise, don't do it in a different way. 
+\item You should really know that $\E{Y^2} = 1$ for $Y \sim \Norm{0,1}$. 
+\item Grading: 0.5 for a correct solution for  $\E{Y^4}$ and 0.5 for a correct solution for $\E{Y^8}$.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}[1]
+We now provide a bound for $\P{|Y| > 4}$.
+\begin{enumerate}
+\item[(i)] Prove that  $\P{|Y| > 4} = \P{Y^4 > 256}$.
+\item[(ii)] Use this to prove that $\P{|Y| > 4} \leq \frac3{256}$. 
+\end{enumerate} 
+\begin{solution}
+We have $\P{|Y|> 4} = \P{Y^4 > 256}$ since $|Y| > 4$ if and only if $Y^4 > 256$. The inequality now directly follows from Markov's inequality. \\
+
+
+\noindent Remarks and grading scheme:
+\begin{itemize}
+\item This exercise was made quite well.
+\item Grading scheme: 0.5 for (i) and 0.5 for (ii).
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}[1.5]
+Prove that $\P{|Y| > 4} \leq \frac{\E{Y^{2n}}}{16^n}$ for all $n \in \mathbb N$. 
+
+For what value(s) of $n$ do we obtain the strongest bound for $\P{|Y| > 4}$?  \\
+\begin{solution}
+ By Markov's inequality,
+\begin{equation*}
+\P{|Y| > 4} = \P{Y^{2n} > 16^n} \leq \frac{\E{Y^{2n}}}{16^n}.
+\end{equation*}
+From the formula for $\E{Y^{2n}}$ we see that $\E{Y^{2(n+1)}} = (2n+1)\E{Y^{2n}}$. We now consider what happens when incrementing $n$. If $n < 8$ then $2n+1 < 16$, so then incrementing $n$ improves the bound, but for $n \geq 8$ the bound becomes weaker. So we get the best possible bound for $n=8$.
+
+\noindent Remarks and grading scheme:
+\begin{itemize}
+\item Many people tried to use induction in this exercise, but that doesn't work. While it is good to think of induction when you have to prove a statement for all $n \in \mathbb N$, it is certainly not the only option. 
+\item In fact, following a similar strategy as in the previous exercise would have helped here. 
+\item Grading scheme: 0.5 for $\P{|Y| > 4} \leq \frac{\E{Y^{2n}}}{16^n}$, 1 for showing that the best bound is obtained for $n=8$. 
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+

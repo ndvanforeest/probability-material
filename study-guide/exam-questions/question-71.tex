@@ -1,0 +1,69 @@
+\section{Question}
+
+
+Amy and Bob are playing a dice game. Every (fair) die has three pairs of identical sides: a pair of ones, a pair of twos and a pair of threes. Each player throws a single die. Let $X$ and $Y$ denote the outcome of Amy and Bob's throw, respectively. The person that throws the highest number wins. If both throw the same number, they have a draw. The final score $A$ of Amy is determined as follows:
+\begin{itemize}
+    \item If Amy loses, then she gets zero points.
+    \item If Amy and Bob draw, then she gets 0.5 point.
+    \item If Amy wins, then her score is the difference $X -Y$ in the numbers they threw.
+\end{itemize}
+The final score $B$ for Bob is determined analogously. Assume that the dice are fair and that all throws are independent.
+
+\begin{exercise}[1]
+Determine the joint distribution of $X$ and $Y$ conditional on Amy winning.
+\begin{solution}
+The initial distribution is $\P{X = x, Y = y} = 1/9$, $x,y = 1,2,3$. Amy wins iff $X>Y$, i.e., iff $(X,Y) \in \{(2,1), (3,1), (3,2)\}$. So we have
+\begin{align}
+    \P{X=x,Y=y | X>Y} &= \frac{\P{X=x,Y=y,X>Y}}{\P{X>Y}} \\
+    &= \frac{1/9}{1/3} = 1/3,
+\end{align}
+for $(x,y) \in \{(2,1), (3,1), (3,2)\}$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1.5]
+Find Amy's expected score conditional on Amy winning.
+\begin{solution}
+We have
+\begin{align}
+    A = \begin{cases}
+    0 &X < Y \\
+    1/2 &X = Y \\
+    X - Y &X > Y.
+    \end{cases}
+\end{align}
+Hence,
+\begin{align}
+    \E{A|X>Y} &= \E{X-Y|X>Y} \\
+    &= \frac{1}{3} (2-1) + \frac{1}{3} (3-1) + \frac{1}{3} (3-2) \\
+    &= 4/3.
+\end{align}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1.5]
+Find Amy's (unconditional) expected score.
+\begin{solution}
+We have, by the law of total expectation,
+\begin{align}
+    \E{A} &= \P{X<Y}\E{A|X<Y} + \P{X=Y}\E{A|X=Y} + \P{X>Y}\E{A|X>Y} \\
+    &= 0 + \frac{1}{3} \cdot \frac{1}{2} + \frac{1}{3} \frac{4}{3} \\
+    &= 11/18.
+\end{align}
+\end{solution}
+\end{exercise}
+
+To make the game more interesting, Amy and Bob decide to play for money. After playing the dice game and scoring $A$ points, Amy receives an amount of $T$ euros, where $T$ is determined randomly. Here, conditional on the outcome of $A$, $T$ follows a uniform distribution on $[A,2A]$.
+\begin{exercise}[1]
+What is the (unconditional) expected reward for Amy? That is, compute $\E{T}$.
+\begin{solution}
+By Adam's law,
+\begin{align}
+    \E{T} &= \E{\E{T|A}} \\
+    &= \E{\frac{3}{2}A} \\
+    &= \frac{3}{2}\E{A} \\
+    &= \frac{3}{2} \frac{11}{18} \\
+    &= \frac{33}{36}.
+\end{align}
+\end{solution}
+\end{exercise}

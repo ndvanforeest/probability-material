@@ -1,0 +1,55 @@
+\section{Question}
+
+Suppose it is now Sinterklaas and everyone in your family writes and reads poems for each other for celebration. You are in a family of 5 (including you) and you have already heard 3 poems, which means there are still 2 poems left. Let $X_1, X_2, X_3$ be the time (in minutes) spent on each of the first 3 poems, and $X_4, X_5$ be that of the remaining poems. Assume that $X_i\sim \Norm{3, 1}$ for $i=1,...,5$.
+
+\begin{exercise}[1.5]
+ First assume that the times spent on each poem are all independent. What is the expected number of remaining poems that take more time to read than each of the 3 poems you have already heard?
+\begin{solution}
+ Let $I_i$ be the indicator r.v. for the $i$th poem taking more time to read than each of poem 1, 2 and 3. Then:
+    \begin{align*}
+        \P{I_i=1}&=\P{X_i>X_1, X_i>X_2, X_i>X_3}\\
+        &=\P{X_i = \max\{X_1, X_2,X_3, X_i\}} \\
+        &=\frac14,
+    \end{align*}
+    by symmetry.
+    Then $\E{\Sigma_{i=4}^{5}I_i}=\frac{1}{4}\cdot 2=\frac12$.
+\end{solution}
+\end{exercise}
+
+For the next two exercises, suppose that $(X_1,...,X_5)$ is now Multivariate Normal distributed with $\mathsf{Corr}\left[X_1,X_j\right]=\frac{1}{2}$ for $j=4, 5$
+
+
+\begin{exercise}[2.5]
+On average, how many of the remaining poems take at least 1 minutes more to read compared to the 1st poem? 
+%For example, the 1st poem took 3 minutes and the 5th poem took more than 4 minutes. 
+\begin{solution}
+ In order to answer this question, we want to know $P(X_i-X_1>1)$, for $i=4, 5$. We first consider $i=4$. Since $X_4$ and $X_1$ are jointly normal distributed, $X_4-X_1$ is also normally distributed, with $\E{X_4-X_1}=\E{X_4}-\E{X_1}=0$ and 
+    \begin{align*}
+        \V{X_4-X_1}&=\V{X_4}+\V{-X_1}+2\cov{X_4,-X_1}\\
+        &=1+1-2\cdot\frac{1}{2}\cdot 1\cdot 1\\
+        &=1
+    \end{align*}
+    Then we know $X_4-X_1$ follows a standard normal distribution and $P(X_4-X_1>1)=0.16$\\
+    Similarly,  $P(X_5-X_1>1)=0.16$. So the average number of the remaining poems that take 1 minute more to read than the first poem is $0.16\cdot2=0.32.$
+ 
+\end{solution}
+\end{exercise}
+
+
+
+
+\begin{exercise}[1]
+Show that there exists a constant $c$ such that $X_1 - c X_4$ and $X_4$ are independent, and determine the value of $c$. 
+\begin{solution}
+  $\cov{X_1 - c X_4, X_4} = \cov{X_1 - c X_4, X_4} = \cov{X_1, X_4} - c\V{X_4} = \tfrac12- c$, so for $c = \tfrac12$, we have that $X_1 - c X_4$ and $X_4$ are uncorrelated. Since $(X_1,...,X_5)$ has the multivariate normal distribution, it follows that $X_1 - c X_4$ and $X_4$ are independent.
+\end{solution}
+\end{exercise}
+
+
+\noindent \textit{Remarks and grading scheme:}
+\begin{enumerate}
+    \item Ex 3.1: Many students assume that $X_i>X_1$ and $X_i>X_2$ is independent. This is not the case. In fact,  If $X_i > X_1$, then it's more likely that $X_i$ is large. In consequence, it is also more likely that $X_i > X_2$.
+    \item Ex 3.1: 0.5 point for multiply your probability with 2 (even if it is calculated wrongly). Full point(1.5) for correct answer.
+    \item Ex 3.2: 0.5 point for mentioning that $X_4-X_1$ is normally distributed ,0.5 point for correctly calculated $\E{X_4-X_1}$ and 0.5 point for correctly calculated $Var(X_4-X_1)$.
+    \item Ex 3.3: 0.5 point for writing out the formula for covariance.
+\end{enumerate}

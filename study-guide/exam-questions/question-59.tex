@@ -1,0 +1,78 @@
+\section{Question}
+
+
+Let $X$ be Unif(1,3) distributed and $Y$ be exponentially distributed with rate $\lambda = 2$. $X$ and $Y$ are independent.
+\begin{exercise}[1]
+Find the joint PDF $f(x,y)$ of $X$ and $Y$.
+\begin{solution}
+    Since $X$ and $Y$ are independent, their joint PDF is the product of their marginal PDFs. This gives:
+    \begin{align*}
+        f(x,y) &= \Big(\frac{1}{3-1}\Big)(2e^{-2y}) \\
+        &= \Big(\frac{1}{2}\Big)(2e^{-2y}) \\
+        &= e^{-2y}, \; \; \text{for} \; y > 0 \; \text{and} \; x \in [1,3]
+    \end{align*} \\
+    \textit{0.5 points for the correct expression, 0.5 points for the boundary}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[2]
+Find $\P{X \leq Y}$.
+\begin{solution}
+    We have
+    \begin{align*}
+        \P{Y \leq X} &= \int_1^3 \int_0^x e^{-2y} dy dx \\
+        &= \int_1^3 [-\frac{1}{2} e^{-2y} ]_0^x dx \\
+        &= \int_1^3 (-\frac{1}{2} e^{-2x} + \frac{1}{2}) dx \\
+        &= -\frac{1}{2}  \int_1^3 e^{-2x} dx + 1 \\
+        &= -\frac{1}{2}  [ -\frac{1}{2} e^{-2x} ]_1^3 + 1 \\
+        &= \frac{1}{4} (e^{-6} - e^{-2}) + 1 \\
+        &= 1 - \frac{e^{-2} - e^{-6}}{4}.
+    \end{align*}\\
+    So $\P{X \leq Y} = 1 - P(X \leq Y) = \frac{e^{-2} - e^{-6}}{4}$.\\
+\textit{One point for writing down an integral with the correct bounds. One point for the computations.}
+\end{solution}
+\end{exercise}
+\noindent Consider the following code:
+\begin{minted}{python}
+import numpy as np
+np.random.seed(3)
+
+num = 10000
+
+# Lambda = 1/1 = 1
+x = np.random.exponential(scale = 1, size = num)
+# Lambda = 1/2
+y = np.random.exponential(scale = 2, size = num)
+
+result = np.zeros(num)
+for i in range(0, len(result)):
+    result[i] = min(x[i],y[i])
+
+print(np.mean(result))
+\end{minted}
+
+\begin{minted}{R}
+set.seed(3)
+
+num = 10000
+
+# Lambda= = 1
+x = rexp(num, 1)
+# Lambda = 1/2
+y = rexp(num,0.5)
+
+result = rep(0, num)
+for (i in 1:length(result)) {
+  result[i] = min(x[i], y[i])
+}
+
+print(mean(result))
+\end{minted}
+
+\begin{exercise}[2]
+The output of the code above is approximately $\frac{2}{3}$. Why would you expect to get this output? Explicitly mention which convergence result you are using in your reasoning.
+\begin{solution}
+The code computes the sample mean for the minimum of $X \sim \Exp1$ and $Y \sim \Exp{\frac{1}{2}}$. Since $X$ and $Y$ are independent, we have $\min(X,Y) \sim \Exp{1+\frac{1}{2}}$. So then $\E{\min(X,Y)} = \frac{1}{1\frac{1}{2}} = \frac{2}{3}$. By the law of large numbers, the sample mean converges to the population mean for large enough samples. Hence, we expect the output to be approximately 2/3.
+\textit{0.5 points for explaining what the code does. 1 points for  computing the population mean (with correct argumentation). 0.5 points for mentioning the (strong/weak/any) law of large numbers.}
+\end{solution}
+\end{exercise}

@@ -1,0 +1,38 @@
+\section{Question}
+
+John is an archer who likes to shoot at small targets. To find out his skill level, John plays the following game. He shoots arrows at a target and counts the number of times he successfully hits the target. He keeps counting until he has missed $r$ times, at which moment the current round of the game stops. His score for the round is the total number of successful shots in the round. John plays $n$ rounds in total and we assume that all shots are independent and have the same (unknown) success probability $p$. John is interested in finding out his skill level. That is, he is interested in learning the value of $p$.
+
+Given the value of $p$, John's score $Y_i$ for the $i$th round of the game follows a negative binomial distribution with parameters $r$ and $p$. That is, for every $i=1,\ldots,n$, we have that $Y_i|p \sim \text{NB}(r,p)$, with a corresponding pmf defined by
+\begin{align}
+    \P{Y_i = y_i | p} &= {y_i + r - 1 \choose y_i} (1 - p)^r p^{y_i},
+\end{align}
+for $y_i = 0,1,2,\ldots$. John's prior belief about the distribution of $p$ is that it follows a $\text{Beta}(a,b)$ distribution with given values for $a$ and $b$ (the exact values of $a$ and $b$ are not relevant for this question).
+
+\begin{exercise}[2.5]
+In the first round, John gets a score of $Y_1 = y_1$. What is John's \textit{posterior} distribution of $p$, given this first observation?
+\begin{solution}
+Using Bayes' rule we have
+\begin{align}
+    f_1(p|Y_1 = y_1) &= \frac{\P{Y_1 = y_1 | p} f_0(p)}{\P{Y_1 = y_1}} \\
+    &\propto \P{Y_1 = y_1 | p} f_0(p) \\
+    &= {y_1 + r - 1 \choose y_1} (1 - p)^r p^{y_1} \frac{1}{B(a,b)} p^{a-1} (1-p)^{b-1} \\
+    &\propto (1 - p)^{r+b-1} p^{a+y_1-1},
+\end{align}
+in which we recognize the pdf of a $\text{Beta}(a+y_1, b + r)$ distribution (up to a constant factor). Hence, the posterior distribution of $p$ given $Y_1 = y_1$ is a $\text{Beta}(a+y_1, b + r)$ distribution.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1]
+Is John's prior distribution a \textit{conjugate} prior?
+\begin{solution}
+Yes. The posterior distribution is in the same family of distributions (Beta) as the prior. Hence, Amy has a conjugate prior.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1.5]
+Suppose John plays $n$ rounds and observes the scores $Y_1 = y_1, \ldots, Y_n = y_n$. What is his posterior distribution after these observations? \\
+\textit{Hint: you don't need to do a lot of math here! Instead, use the result of the first question above and a logical argument.}
+\begin{solution}
+The posterior after observing $Y_1 = y_1$ becomes our new prior. Hence, our new prior is a $\text{Beta}(a+y_1,b+r)$ distribution. From question 1 it follows that the prior after observing $Y_2 = y_2$ then is a $\text{Beta}(a+y_1 + y_2,b+ 2r)$ distribution. Hence, iterating this process, we find that the posterior distribution of $p$ after observing $Y_1 = y_1, \ldots, Y_n = y_n$ is a $\text{Beta}(a+\sum_{i=1}^n y_i,b+ rn)$ distribution.
+\end{solution}
+\end{exercise}

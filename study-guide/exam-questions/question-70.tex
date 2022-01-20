@@ -1,0 +1,77 @@
+\section{Question}
+Tom and Jerry are the only two clerks at a local bank. Tom serves $N_1$ customers per hour, $N_1\sim \text{Poisson}(\lambda_1)$; Jerry serves $N_2$ customers per hour, $N_2\sim \text{Poisson}(\lambda_2)$ such that $\lambda_1>\lambda_2>0$. Each customer that gets served has a probability $p$ of applying for a credit card, independently. Let $X$ be the number of customers that apply for credit cards per hour.
+% covariance, multivariate normal
+\begin{exercise}[1]
+ Show that $2N_1+N_2$ and $2N_1-N_2$ are \textbf{not} independent of each other.
+%Find $\cov{2N_1+N_2, 2N_1-N_2}.$
+
+\begin{solution}
+\begin{align*}
+   & \cov{2N_1+N_2, 2N_1-N_2}\\
+  = & \cov{2N_1,2N_1}-\cov{2N_1,N_2}+\cov{N_2,2N_1}-\cov{N_2,N_2}\cdot \cdot \cdot \text{(0.5 point)}\\
+  = & 4\cdot Var(N_1)-Var(N_2)\\
+  =& 4\lambda_1-\lambda_2 \neq 0.\cdot \cdot \cdot \text{(0.5 point)}
+\end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1]
+Let $N=N_1+N_2$. Suppose $N_1$ and $N_2$ are independent, what is the distribution of  $N$? What is the distribution of $X|N$?  What is the distribution of $X$?
+\begin{solution}
+Since $N_1$ and $N_2$ are independent, $N\sim Pois(\lambda_1+\lambda_2).$(0.5 point)\\
+$X|N\sim Bin(N,p)$ and $X\sim Pois((\lambda_1+\lambda_2) p)$ by the Chicken-egg theory. (0.5 point)
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}[2]
+Calculate $\rho_{X,N},$ the correlation between $X$ and $N$.
+\begin{solution}
+ Let $Y=N-X$ be the number of customers that do not apply for a credit card. Then we know $Y\sim Pois((\lambda_1+\lambda_2) q)$ with $q=1-p,$ and $X$ and $Y$ are independent. (0.5 point)
+ \begin{align*}
+     \cov{N,X}&=\cov{X+Y,X}\\
+     &=\cov{X,X}+\cov{Y,X}\\
+     &=Var(X)\cdot \cdot \cdot\text{(0.5 point)}\\
+     &=(\lambda_1+\lambda_2)p \cdot \cdot \cdot \text{(0.5 point)}
+ \end{align*}
+ Then it follows that
+ \begin{align*}
+     \rho_{X,N}&=\frac{\cov{N,X}}{sd(N)\cdot sd(X)}\\
+     &=\frac{(\lambda_1+\lambda_2)p}{\sqrt{\lambda_1+\lambda_2}\cdot \sqrt{(\lambda_1+\lambda_2)p} }\\
+     &=\sqrt{p}.\cdot \cdot \cdot\text{(0.5 point)}
+ \end{align*}
+\end{solution}
+\end{exercise}
+
+\noindent Consider the following codes:
+\begin{minted}{R}
+library(mvtnorm)
+set.seed(444)
+A<-diag(x=1,nrow = 3)
+B<-rep(0,3)
+X<-rmvnorm(100,mean=B,sigma=A)
+output=cov(X[,-3])
+\end{minted}
+
+\begin{minted}{python}
+import random
+import numpy as np
+random.seed(444)
+A = np.diag([1,1,1])
+B = np.zeros(3)
+X = np.random.multivariate_normal(B, A, size = 100)
+output = np.cov(X, rowvar = False)[0:2,0:2]
+\end{minted}
+
+\begin{exercise}[1]
+Explain in detail the purpose of each line of the above codes.
+\begin{solution}
+Line 1: Load the package "mvtnorm" so that we can use the function \textit{rmvnorm}.\\
+Line 2: Set a random seed to reproduce the same results.\\
+Line 3: Generate a 3$\times$3 identity matrix.\\
+Line 4: Generate a vector of 0's.\\
+Line 5: Generate 100 multivariate normally distributed variables $\textbf{X}={x_1,x_2,x_3}$ with mean equal to $(0,0,0)$ and variance equal to an identity matrix.\\
+Line 6: Calculate the covariance matrix of the first 2 columns of matrix $X$.\\
+\textbf{(0.5 points for mentioning at least 3 of the above.)}
+\end{solution}
+\end{exercise}

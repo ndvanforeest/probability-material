@@ -1,0 +1,70 @@
+\section{Question}
+
+
+
+We have a queue of people served by a single server. Let $L(t)$ be the number of people present in the system at time $t$.
+For any time $t\geq 0$ the time to the next arriving person is $X\sim\Exp{\lambda}$ and, when $L(t)>0$, the time to the next departing customer is $S\sim\Exp{\mu}$. Assume that $\lambda < \mu$.
+
+Suppose $L(0)=n\geq 0$. Then let $T$ be the first time until the system becomes empty, i.e., $T=\inf\{t\geq 0 : L(t) = 0\}$.
+
+
+\begin{exercise}[1]
+Explain that $\lambda/(\lambda+\mu)$ is the probability an arrival occurs before a departure.
+\begin{solution}
+  Standard consequence of exponential rvs.
+
+Grading:
+\begin{itemize}
+\item The time to the next arrival is not $\lambda$. -0.5.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+For the moment, assume that $\E T < \infty$.
+
+\begin{exercise}[1]
+Explain that  for $n>0$:
+\begin{equation}
+\E{T|L(0)=n}   = \E{T|L(0)=n+1} \frac{\lambda}{\lambda + \mu} +\E{T|L(0)=n-1} \frac{\mu}{\lambda + \mu} +\frac{1}{\lambda + \mu}.
+\end{equation}
+\begin{solution}
+Use the memoryless property of the exp distribution. When a job arrives first, we can model this as if we start from $n+1$ until we hit $0$. Likewise, when a job leaves first, we start from $n-1$. The last term is the expected time until an event happens.
+
+Grading:
+\begin{itemize}
+\item Some people write $P(S=X)$ and give this a positive probability. That is a grave mistake: -0.5.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1]
+Show that $\E{T|L(0)=n} = n/(\mu-\lambda)$.
+\begin{solution}
+Just fill in the expression in the previous exercise and check that the RHS and LHS match.
+\end{solution}
+\end{exercise}
+
+
+
+
+Define $\rho=\lambda/\mu$. Assume that $L(0)\sim \Geo{1-\rho}$.
+\begin{exercise}[1]
+Find a simple expression for $\E{T}$.
+\begin{solution}
+Use conditioning on $L$.
+  \begin{align*}
+\E{T}
+= \E{\E{T|L(0)}} = \E{L(0)/(\mu-\lambda)}  = \frac{\rho}{1-\rho} \frac{1}{\mu-\lambda} = \frac{\lambda}{\mu^2(1-\rho)^{2}}.
+  \end{align*}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}[1]
+Up to now we simply  assumed that $\E T < \infty$.   Motivate  intuitively that the condition $\lambda<\mu$ ensures that $\E T < \infty$.
+\begin{solution}
+If $\lambda>\mu$, jobs arrive faster than they can be served. In such cases the queueing process drifts to infinity, in expectation.
+
+The case $\lambda=\mu$ is difficult, and I don't expect you to discuss this.
+\end{solution}
+\end{exercise}

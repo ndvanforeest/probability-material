@@ -1,0 +1,97 @@
+\section{Question}
+\begin{exercise}[1]
+Let $U_1,U_2\sim\text{Unif}(0,1)$. Find the PDF of $X_1 = (U_1)^{1/a}$ and then immediately give the PDF of $X_2 = (U_2)^{1/b}$ for $a,b>0$.
+\begin{solution}
+For $y\in(0,1)$:
+\begin{align*}
+    F_{X_1}(y) = \P{X_1\leq y} = \P{(U_1)^{1/a}\leq y} = \P{U_1\leq y^a} = F_{U_1}(y^a).
+\end{align*}
+We know that $F_{U_1}(y) = y$ for $y\in(0,1)$. Hence $F_{X_1}(y) =  F_{U_1}(y^a) = y^a$. Then
+\begin{align*}
+    f_{X_1}(y) = \frac{\partial y^a}{\partial y} = a y^{a-1}\quad\forall y\in(0,1).
+\end{align*}
+Now we can say $f_{X_2}(y) = b y^{b-1}$ for all $y\in(0,1)$. Both PDFs are 0 outside of this region.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Correct application of transformation theorem or CDF technique 0.5pt.
+    \item Most of: the correct bounds, the verification the theorem is applicable, no mistakes in calculation 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[0.5]
+What distributions do $X_1$ and $X_2$ have? Also give the corresponding parameters.
+\begin{solution}
+$X_1\sim\text{Beta}(a,1)$ and $X_2\sim\text{Beta}(b,1)$.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Correct 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[2]
+Let $B\sim\text{Beta}(p,q)$ for some $p,q>0$. Show that $1-B\sim\text{Beta}(q,p)$.
+\begin{solution}
+For $y\in(0,1)$ we have that
+\begin{align*}
+    F_{1-B}(y) = \P{1-B\leq y} = \P{B\geq 1-y} = 1-\P{B\leq 1-y} = 1-F_{B}(1-y).
+\end{align*}
+We can write this as
+\begin{align*}
+    1-F_{B}(1-y) &= 1-\int_{0}^{1-y}{\frac{x^{p-1}(1-x)^{q-1}}{\beta(p,q)}\d x}\\
+    &= 1-\int_{1}^{y}{\frac{(1-x)^{p-1}(x)^{q-1}}{\beta(p,q)}\d (1-x)}\\
+    &= 1-\int_{y}^{1}{\frac{(1-x)^{p-1}(x)^{q-1}}{\beta(p,q)}\d x}\\
+    &= 1-\int_{y}^{1}{\frac{(1-x)^{p-1}(x)^{q-1}}{\beta(q,p)}\d x}\\
+    &= \int_{0}^{y}{\frac{(1-x)^{p-1}(x)^{q-1}}{\beta(q,p)}\d x}\\
+    &= F_D(y)
+\end{align*}
+For $D\sim\text{Beta}(q,p)$.
+Since both r.v.s have support $(0,1)$ and have the same CDF on this support we conclude $1-B\sim\text{Beta}(q,p)$.
+\textit{Remark.} This can also be shown by looking at the PDF, using a similar derivation.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Noting the Beta function is symmetric 0.5pt.
+    \item Calculating the correct inverse transformation 0.5pt.
+    \item Correct application transformation theorem 0.5pt.
+    \item Most of: the correct bounds, the verification the theorem is applicable, no mistakes in calculation 0.5pt.
+    \item \textbf{OR:} The derivation as above correct 2pt.
+    \item \textbf{OR:} A reasonable attempt at a story proof 1pt.
+\end{itemize}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1.5]
+Let $Z$ be a random variable on $(0,1)$. The PDF of $Z$ is given by
+\begin{align*}
+    f_Z(z) = \begin{cases}
+    f_{X_1}(z)&\text{if}\,\,z\in (0,\frac12]\\
+    f_{1-X_2}(z)&\text{if}\,\,z\in(\frac12,1)\\
+    0 &\text{elsewhere}.
+    \end{cases}
+\end{align*}
+\begin{enumerate}
+\item[(i)] Does there exist \emph{more than one} combination of $a,b>0$ (and $a,b\in\bf{R}$) such that this is a valid PDF? 
+\item[(ii)] Does there exist \emph{at least one} combination of $a,b$ as above and $a=b$ such that $Z$ follows a Beta distribution? 
+\end{enumerate}
+Explain your answers clearly.
+\begin{solution}
+For a PDF to be valid it needs to be non-negative and integrate to 1. Clearly $f_Z$ is non-negative, so let's check the other condition. We know from parts (b) and (c) that $1-X_2\sim\text{Beta}(1,b)$. Then,
+\begin{align*}
+    \int_{0}^{1}{f_Z(y)\d y} &= \int_{0}^{\frac12}{f_{X_1}(y)\d y} + \int_{\frac12}^{1}{f_{1-X_2}(y)\d y}\\
+    &= \int_{0}^{\frac12}{a y^{a-1}\d y} + \int_{\frac12}^{1}{b (1-y)^{b-1}\d y}\\
+    &= \left(\frac12\right)^a + \left(\frac12\right)^b.
+\end{align*}
+This should equal 1. The easy solution is $a=b=1$. The above can also be solved to obtain $b = -\frac{\ln{(1-2^{-a})}}{\ln{2}}$, hence there are infinitely many solutions for $a,b>0$. For $a=b$, $a=b=1$ is the only solution and $Z$ then follows the Beta(1,1) distribution.
+\\\\
+Grading scheme:
+\begin{itemize}
+    \item Correct integration 0.5pt.
+    \item Found at least one other combination or showed such a combination must exist 0.5pt.
+    \item Noticing that for $a=b=1$ there is a Beta distribution 0.5pt.
+\end{itemize}
+\end{solution}
+\end{exercise}

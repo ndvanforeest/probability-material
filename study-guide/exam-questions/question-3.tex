@@ -1,0 +1,81 @@
+\section{Question}
+
+Bob and his father argue about tomorrow's weather. Bob thinks it will rain, but his father doesn't agree. They make the following deal. Bob will put down a glass in the back yard. At the end of the day, dad will give Bob one euro for every inch of water in the glass. To be safe, dad gives Bob a shot glass with a height of only one inch to put down in the back yard.
+
+Let $X$ denote the amount of rainfall tomorrow (in inches) and let $Y$ denote the amount of rain collected in the shot glass (in inches). We assume that $X$ has the following pdf:
+\begin{align}
+    f_X(x) = \frac{3}{4}x(2-x), \quad 0 \leq x \leq 2.
+\end{align}
+
+\begin{exercise}[1]
+Compute the probability that the amount of rainfall tomorrow is at most one inch.
+\begin{solution}
+We have
+\begin{align}
+    \P{X \leq 1} &= \int_0^1 \frac{3}{4} x (2-x) dx \\
+    &=  \frac{3}{4}\left[ x^2 - \frac{1}{3} x^3 \right]_0^1 dx \\
+    &=  \frac{3}{4}\left( 1 - \frac{1}{3} \right) \\
+    &= 1/2.
+\end{align}
+An argument based on the fact that $f_X$ is a parabola centered around 1 is also fine.
+
+Correct initial integral: 0.5 point.\\
+Correct solution: 0.5 point.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1.5]
+Determine the expected amount of rain collected in the shot glass conditional on the amount of rainfall $X$ being at most one inch.
+\begin{solution}
+Note that $Y = \min\{X,1\}$. We find
+\begin{align}
+    \E{Y|X\leq 1} &= \E{X|X\leq 1} \\
+    &= \int_0^1 x f_X(x|X\leq 1) dx \\
+    &= \int_0^1 x \frac{f_X(x)}{\P{X \leq 1}} dx \\
+    &= 2 \int_0^1 x \frac{3}{4} x (2-x)  dx \\
+    &= \frac{3}{2} \int_0^1 (2x^2 - x^3)  dx \\
+    &= \frac{3}{2} \left[ \frac{2}{3} x^3 - \frac{1}{4} x^4\right]_0^1 \\
+    &= \frac{3}{2} \left( \frac{2}{3} - \frac{1}{4} \right) \\
+    &= \frac{5}{8}.
+\end{align}
+
+Writing down $\E{X|X\leq 1}$: 0.5 point.\\
+Correct derivation and solution: 1 point.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[1.5]
+What is the (unconditional) expected amount of rain collected in the shot glass?
+\begin{solution}
+By the law of total expectation,
+\begin{align}
+    \E{Y} &= \P{X \leq 1} \E{Y | X \leq 1} + \P{X > 1} \E{Y | X > 1} \\
+    &= \frac{1}{2} \frac{5}{8} + \frac{1}{2} \cdot 1 \\
+    &= \frac{13}{16}.
+\end{align}
+
+Mentioning law of total expectation: 0.5 point.\\
+Correctly using law of total expectation: 0.5 point.\\
+Correct solution: 0.5 point.
+\end{solution}
+\end{exercise}
+
+To make things more interesting, dad decides to randomize the amount of euros he will give to Bob. Given an amount $Y=y$ collected in the cup, he will pay Bob an amount $Z$ that is uniformly distributed on $[y,2y]$.
+
+\begin{exercise}[1]
+What is the (unconditional) expected value of the payout $Z$?
+\begin{solution}
+By Adam's law,
+\begin{align}
+    \E{Z} &= \E{\E{Z|Y}} \\
+    &= \E{\frac{3}{2}Y} \\
+    &= \frac{3}{2}\E{Y} \\
+    &= \frac{3}{2} \cdot \frac{13}{16} = \frac{39}{32}.
+\end{align}
+
+Mentioning and using Adam's law: 0.5 point.\\
+Correct solution: 0.5 point.\\
+
+Note: if in your interpretation, $Y=y$ is actually given (I realized that the question is ambiguous), then $\frac{3}{2}y$ (lowercase!) will also be regarded as correct.
+\end{solution}
+\end{exercise}
