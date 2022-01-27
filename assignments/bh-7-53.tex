@@ -51,11 +51,41 @@ print(f"{cov(Ss,Ts)=}") # *
 \end{minted}
 \caption{BH.7.53, python code.}
 \label{BH.7.53.p}
+
+
 \end{listing}
 
 \begin{listing}[!ht]
 \begin{minted}[]{R}
-a <- 3;
+set.seed(3)
+
+num = 4
+steps = sample(0:4, num, replace = TRUE)
+print(steps)
+X = (2 * steps - 1) * (steps < 2) # *
+Y = (2 * steps - 5) * (steps >= 2) # *
+print(X)
+print(Y)
+R2 = X * X + Y * Y
+print(paste0("num= ", num, " R2.sum() = ", sum(R2) ))
+
+cov = function (X, Y){
+  return (mean(X * Y) - mean(X)-mean(Y)) # *
+}
+
+num = 10
+runs = 300
+Ss = replicate(runs, 0) # *
+Ts = replicate(runs, 0)
+for (i in runs){
+  steps = sample(0:4, num, replace = TRUE)
+  X = (2 * steps - 1) * (steps < 2)
+  Y = (2 * steps - 5) * (steps >= 2)
+  Ss[i] = sum(X) # *
+  Ts[i] = sum(Y) # *
+}
+
+print(paste0("cov(Ss, Ts) = ", cov(Ss, Ts)))
 \end{minted}
 \caption{BH.7.53, R code.}
 \label{BH.7.53.r}
@@ -69,6 +99,12 @@ The line for the $x$-steps becomes
 \begin{minted}[]{python}
 X = (4 * steps - 2) * (steps < 2)  # *
 \end{minted}
+
+
+\begin{minted}[]{R}
+X = (4 * steps - 2) * (steps < 2) # *
+\end{minted}
+
 \end{solution}
 \end{exercise}
 
