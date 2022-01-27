@@ -15,9 +15,9 @@ labda, mu = 3, 5
 n = 1000
 X = expon(scale=1 / labda)
 Y = expon(scale=1 / mu)
-Z = X.rvs(n) + Y.rvs(n)          # this
-G1 = gamma(2, scale=1 / labda)   # this
-G2 = gamma(2, scale=1 / mu)      # this
+Z = X.rvs(n) + Y.rvs(n)
+G1 = gamma(2, scale=1 / labda)
+G2 = gamma(2, scale=1 / mu)
 
 support = np.arange(0, 5, 0.03)
 
@@ -27,6 +27,39 @@ plt.plot(support, G2.pdf(support), label="G2")
 plt.legend()
 plt.tight_layout()
 plt.savefig("figures/gamma1.pdf")
+\end{minted}
+
+\begin{minted}[]{R}
+library(ggplot2)
+
+labda = 3
+mu = 5
+
+n = 1000
+X = rexp(n, labda)
+Y = rexp(n, mu)
+Z = X + Y
+
+support = seq(0, 5, 0.03)
+
+G1 = dgamma(support, 2, scale=1 / labda)
+G2 = dgamma(support, 2, scale=1 / mu)
+
+df1 = data.frame(Z)
+df2 = data.frame(support,G1, G2)
+
+pdf(file="figures/gamma1.pdf", width = 8, height = 7, 
+    bg = "white", colormodel = "cmyk", paper = "A4")   
+
+ggplot()+
+geom_histogram(df1, mapping = (aes(x = Z, y = ..density.., fill = "Z")), bins = 20)+
+geom_line(df2, mapping = (aes(x = support, y = G1, color="G1")))+
+geom_line(df2, mapping = (aes(x = support, y = G2, color = "G2")))+
+scale_fill_manual(name = " ", values = c("Z" = "blue"))  +
+scale_color_manual(name = " ", values = c( "G1" = "orange", "G2" = "green"))+
+theme(axis.title.x=element_blank(),axis.title.y = element_blank())
+
+dev.off()
 \end{minted}
 \end{exercise}
 
