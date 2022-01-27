@@ -22,6 +22,32 @@ plt.legend()
 plt.tight_layout()
 plt.savefig("figures/bh-8-1-fig.pdf")
 \end{minted}
+
+\begin{minted}[]{R}
+library(ggplot2)
+
+X = rexp(1000, 1) #this
+Y = exp(-X) #this
+df1 = data.frame(Y)
+
+x = seq(0,1,length.out = 30)
+dxdy = exp(x) #this
+pdf_y = dexp(x,1) * dxdy #this
+df2 = data.frame(x,pdf_y)
+
+pdf(file="figures/bh-8-1-fig.pdf", width = 8, height = 7, 
+    bg = "white", colormodel = "cmyk", paper = "A4")   
+
+ggplot()+
+geom_histogram(df1, mapping = (aes(x = Y, y = ..density.., fill = "sim")), bins = 20)+
+geom_line(df2, mapping =(aes(x=x,y=pdf_y, color = "f_y")))+
+scale_fill_manual(name = " ", values = c("sim" = "blue"))  +
+scale_color_manual(name = " ", values = c( "f_y" = "orange"))+
+theme(axis.title.x=element_blank(),axis.title.y = element_blank())
+
+dev.off()
+\end{minted}
+
 \end{exercise}
 
 \begin{exercise}
