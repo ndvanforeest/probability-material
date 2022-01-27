@@ -37,6 +37,47 @@ plt.legend()
 plt.savefig("figures/bh-10-30.pdf")
 \end{minted}
 
+\begin{minted}[]{R}
+library(cubature)   
+set.seed(3)
+
+num = 100
+p = 0.5
+alpha = 0.5
+revenue = 0.5 + 1.2 * rbinom(num, 1, p)
+
+Y = rep(1, num)
+Y[1] = 1
+for(i in 2:num){
+  Y[i] = (1 - alpha + (alpha * revenue[i])) * Y[i - 1]
+}
+
+print(log(Y[length(Y)]) / num)
+
+# plot(Y, type = "l")
+
+g = function(alpha){
+  return(0.5*log((1 + 0.7 * alpha)*(1 - 0.5 *alpha)))
+}
+
+pdf(file="figures/bh-10-30.pdf",
+    width = 8, height = 7, bg = "white",          
+    colormodel = "cmyk", paper = "A4")
+
+df = data.frame(log(Y)/(1:num))
+colnames(df) = c("lnY")
+p = ggplot()+
+    geom_hline(mapping = aes(yintercept = g(alpha), color = "g"), size = 2)+
+    geom_line(df,mapping=aes(x = 1:num, y =lnY, color = '(log Yn)/n')) +
+    scale_color_manual( name = " ", values = c("g" = "red", "(log Yn)/n" = "blue"))+
+    ylim(-10* g(alpha), 10 * g(alpha)) + #this
+    theme(axis.title.x = element_blank(), axis.title.y = element_blank())
+p    
+
+dev.off()
+\end{minted}
+
+
 \begin{exercise}
 Uncomment the relevant line to obtain a plot of $Y_{n}$ as a function $n$. Make the plot and include it in your assigment.
 \end{exercise}
