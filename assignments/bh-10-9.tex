@@ -38,6 +38,34 @@ p = sum(np.abs(X_sample + Y_sample) > 3) / n_sample
 print(p, X.mean())
 \end{minted}
 
+\begin{minted}[]{R}
+library(cubature)   
+set.seed(3)
+
+expectation = adaptIntegrate(function(x){exp(-(x[1]+2)) * exp(-x[1]) },
+              lowerLimit = c(0), upperLimit = c(Inf))
+print(paste(exp(-mean(rexp(10000,1)+2)), expectation$integral))
+
+n_sample = 1000
+X_sample = rexp(n_sample, 1) + 2
+Y_sample = rexp(n_sample, 1) + 2
+p1 = sum(X_sample > Y_sample +  3) / n_sample
+p2 = sum(Y_sample > X_sample + 3) / n_sample
+print(paste(p1, p2))
+
+p3 = sum(X_sample > Y_sample - 3) / n_sample
+print(paste(p1, p3))
+
+EXY = X_sample %*% Y_sample / n_sample
+expectation2 = adaptIntegrate(function(x){((x[1]+2) ** 4) * exp(-x[1]) }, 
+              lowerLimit = c(0), upperLimit = c(Inf))
+
+print(paste(expectation2$integral, EXY * EXY))
+
+p = sum(abs(X_sample + Y_sample) > 3) / n_sample
+print(paste(p, mean(X_sample)))
+\end{minted}
+
 
 \begin{exercise}
 Now make the plot and  explain what is wrong.
@@ -47,6 +75,11 @@ Now make the plot and  explain what is wrong.
 The line  marked as `this' should be replaced with
 \begin{minted}{python}
 plt.plot(supp, pmf * np.sqrt(n))
+\end{minted}
+
+\textcolor{red}{XXX Arpan: This two questions below do not look related. It seems to be copied from the next question. XXX}
+\begin{minted}[]{R}
+TBD
 \end{minted}
 Explain why.  (You should memorize  that comparing PMFs and PDFs is not straightforward.)
 \end{exercise}
