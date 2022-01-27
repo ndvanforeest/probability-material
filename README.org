@@ -12,15 +12,14 @@ Here is all the material you need for the course on probability distributions.
 ** Relevant for students
 
 - =2122/Course_overview.pdf=:  still to be made, all information about the course, schedule, grading, and so on
-- =assigments/assignments.pdf=: the assignments.
+- =pdf-files=: all relevant pdf files.
 - =assignments/assignment-answer-template.tex=:  a  basic LaTeX  document that you  have to use as a template for your assignments.
-- =lectures/lectures-questions.pdf=: The questions (plus hints)  that we discuss during the lectures.
-- =lectures/lectures-solutions.pdf=: The questions,  hints and solutions that we discuss during the lectures.
-- =study-guide/study-guide.pdf=: Questions,  old exam problems, hints and solutions to help study the material.
 
 
 ** Irrelevant for students
 
 - =common/abbreviations.sty=: abbreviations used in the tex files
 - =common/preamble.sty=: necessary if you want to compile the files yourself.
-- =lectures/lectures-demo.pdf=:  reformat the lecture material into slides, but no extra material.
+- =lectures/=: sources for the lectures.
+- =assignments=: sources for the assignments.
+- =study-guide=: source material
