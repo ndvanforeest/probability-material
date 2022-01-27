@@ -25,6 +25,16 @@ p_D_g_T  = sensitivity * p_D/p_T
 p_D_g_T
 \end{minted}
 
+\begin{minted}[]{R}
+sensitivity = 0.95
+specificity = 0.95
+p_D = 0.01
+
+p_T = sensitivity * p_D + (1-specificity)*(1-p_D)
+p_D_g_T  = sensitivity * p_D/p_T
+p_D_g_T
+\end{minted}
+
 \begin{enumerate}
 \item Make a plot of \(\P{D\given T}\) in which you vary the sensitivity from 0.9 to 0.99. Explain what you see.
 \item Make a plot of \(\P{D\given T}\) in which you vary the specificity from 0.9 to 0.99.
