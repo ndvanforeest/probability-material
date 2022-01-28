@@ -23,6 +23,23 @@ h += outcomes[1] == H
 t += outcomes[1] == T
 print(f"{h=}, {t=}")
 \end{minted}
+
+\begin{minted}[]{R}
+H = 1
+T = 0
+outcomes = c(Head,Tail)
+
+h = 1 #this
+t = 1 #this
+h = h + as.numeric(outcomes[1] == H)
+t = t + as.numeric(outcomes[1]== T)
+print(paste0("h=", h, ", t=", t))
+
+h = h + as.numeric(outcomes[2] == H)
+t = t + as.numeric(outcomes[2]== T)
+print(paste0("h=", h, ", t=", t))
+\end{minted}
+
 \end{exercise}
 
 
@@ -50,6 +67,44 @@ for i, ax in enumerate(axes.flatten()):  # this
 plt.tight_layout()
 plt.savefig("beta.pdf")
 \end{minted}
+
+\begin{minted}[]{R}
+library(ggplot2)
+library(gridExtra)
+
+support = seq(0, 1, 0.03)
+
+H = 1
+T = 0
+outcomes = c(H, H, T, H, H, H, T, H, H)
+h = 1 #this
+t = 1 #this
+
+pdf(file="beta.pdf", width = 8, height = 7, 
+	bg = "white", colormodel = "cmyk", paper = "A4")          
+    
+plots <-list()
+par(oma= c(0,0,0,0))
+
+i = 1
+while (i <= length(outcomes)){    #this
+  h = h + (outcomes[i] == H)
+  t = t + (outcomes[i] == T)
+  X = dbeta(support, h, t)
+  df = data.frame(support,X)
+  plots[[i]] = ggplot(data=df, aes(x=support, y=X, group=1)) +
+               geom_line()+
+               ylim(0,3.5)+  
+               labs(title=paste0("h=", h-1, ", t=", t-1),x=" ", y = " ")
+  i = i+1
+}
+
+do.call("grid.arrange", c(plots, ncol=3))
+
+dev.off()
+\end{minted}
+
+
 \end{exercise}
 
 \begin{exercise}
