@@ -36,6 +36,37 @@ plt.axvline(np.percentile(medians, 97.5), c='r', lw=2)
 plt.savefig("figures/bootstrap.pdf")
 \end{minted}
 
+\begin{minted}[]{R}
+library(ggplot2)
+library(matrixStats)
+
+np.random.seed(3)
+
+sample = sample(1:200,100, replace=TRUE)
+n_boot = 5000
+bootstrap = matrix(0,n_boot,length(sample))
+for(i in 1:nrow(bootstrap)){
+  bootstrap[i,] = sample(sample, length(sample), replace = TRUE)
+}
+
+medians = rowMedians(bootstrap)
+#print(paste(mean(medians), sd(medians)))
+#print(quantile(medians, c(.025, 0.975)))
+
+pdf(file="figures/bootstrap.pdf",
+    width = 8, height = 7, bg = "white",          
+    colormodel = "cmyk", paper = "A4")
+
+df1 = data.frame(medians)
+ggplot()+
+  geom_histogram(df1, mapping = (aes(x = medians, y = ..density..)), bins = 100)+
+  geom_vline(xintercept = quantile(medians, c(0.025)), color = "red", size=2) +
+  geom_vline(xintercept = quantile(medians, c(0.9725)), color = "red", size=2)+
+  geom_vline(xintercept = mean(medians), color = "red", size=2)
+
+dev.off()
+\end{minted}
+
 \begin{exercise}
 Finally, let us compare the information we obtained from bootstrapped to the medians we would obtain when we would sample from the real population.
 \begin{enumerate}
@@ -54,6 +85,29 @@ samples = np.random.randint(200, size=(500, 100))
 medians = np.median(samples, axis=1)
 plt.hist(medians, bins=100, density=True)
 plt.savefig("figures/real_medians.pdf")
+\end{minted}
+
+\begin{minted}[]{R}
+library(ggplot2)
+library(matrixStats)
+
+set.seed(3)
+
+sample = matrix(0, 500, 100)
+for(i in 1:nrow(sample)){
+  sample[i,] = sample(1:200, 100, replace = TRUE)
+}
+medians = rowMedians(bootstrap)
+
+pdf(file="figures/real_medians.pdf",
+    width = 8, height = 7, bg = "white",          
+    colormodel = "cmyk", paper = "A4")
+
+df1 = data.frame(medians)
+ggplot()+
+  geom_histogram(df1, mapping = (aes(x = medians, y = ..density..)), bins = 100)
+
+dev.off()
 \end{minted}
 \end{exercise}
 

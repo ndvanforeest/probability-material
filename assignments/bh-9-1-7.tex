@@ -22,6 +22,19 @@ accepted = bid > alpha * V
 gain = (V - bid) * accepted
 print(gain.mean())
 \end{minted}
+
+\begin{minted}[]{R}
+set.seed(3)
+
+alpha = 2 / 3
+n = 100
+V = runif(n, 0, 1)
+
+bid = 0.5
+accepted =  bid > alpha * V
+gain = (V - bid) * accepted
+print(mean(gain))
+\end{minted}
 \end{exercise}
 
 
@@ -54,6 +67,24 @@ for b in np.arange(0.1, 1, 0.1):
     gain = (V - b) * accepted
     print(f"{f(b)}, {f(gain.mean())}")
 \end{minted}
+
+\begin{minted}[]{R}
+f = function(x) # format floating point numbers
+    # return(x) # unquote this line
+    return(signif(x, digits = 3))
+   
+set.seed(3)
+
+alpha = 2 / 3
+n = 100
+V = runif(n, 0, 1)
+
+for (b in seq(0.1, 0.9, 0.1)){
+    accepted = b > alpha * V
+    gain = (V - b) * accepted
+    print(paste0(f(b), ", " ,f(mean(gain))))
+}
+\end{minted}
 \end{exercise}
 
 
@@ -75,6 +106,18 @@ b = 0.5
 res = quad(lambda v: (v - b) * (b > alpha * v), 0, 1)
 print(res)
 \end{minted}
+
+\begin{minted}[]{R}
+library(cubature) 
+
+alpha = 2 / 3
+n = 100
+b = 0.5
+
+res = adaptIntegrate(function(v){(v - b) * (b > alpha * v)}, 
+	  lowerLimit = c(0), upperLimit = c(1))
+print(paste(res$integral, res$error))
+\end{minted}
 \end{exercise}
 
 \begin{exercise}
@@ -92,6 +135,19 @@ prior = beta(8, 2)
 
 res = quad(lambda v: (v - b) * (b > alpha * v) * prior.pdf(v), 0, 1)
 print(res)
+\end{minted}
+
+\begin{minted}[]{R}
+library(cubature) 
+
+alpha = 2 / 3
+n = 100
+b = 0.5
+
+res = adaptIntegrate(function(v){(v - b) * (b > alpha * v) * dbeta(v, 8, 2)}, 
+	  lowerLimit = c(0), upperLimit = c(1))
+print(paste(res$integral, res$error))
+
 \end{minted}
 \end{solution}
 \end{exercise}

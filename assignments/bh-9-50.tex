@@ -26,6 +26,29 @@ adam = Labda.mean()
 eve = Labda.mean() + Labda.var()
 print(adam, eve)
 \end{minted}
+
+\begin{minted}[]{R}
+library(ggplot2)
+library(matrixStats)
+
+set.seed(3)
+
+num = 100
+N = rep(0,num)
+labdas = rexp(num, 1) 
+
+for(i in 1:num){
+  labda = labdas[i]
+  N[i] = rpois(1,labda)
+}
+
+Labda = rexp(10000,1)
+print(paste(mean(N),var(N)))
+adam = mean(Labda)
+eve = mean(Labda) + var(Labda)
+print(paste(adam, eve))
+\end{minted}
+
 \end{exercise}
 
 \begin{exercise}
@@ -60,6 +83,31 @@ print("var_theoretical: ", eve)
 \end{minted}
 \end{exercise}
 
+\begin{minted}[]{R}
+set.seed(3)
+
+num = 100
+labdas = rexp(num, 1) 
+mu = 3
+sigma = 1
+S = rep(0,num)
+
+for(i in 1:num){
+  N = rpois(1,labdas[i])
+  S[i] = sum(rlnorm(N, mean = 0, sd = sigma)+ mu)
+}
+
+Labda = rexp(100000,1)
+X = rlnorm(100000, mean = 0, sd= sigma) + mu
+
+print(paste("S.mean()=", mean(S)))
+adam = mean(X) * mean(Labda)
+print(paste("mean_theoretical: ", adam))
+print(paste("S.var()=", var(S)))
+eve = mean(Labda) * var(X) + mean(X) ** 2 * (mean(Labda)+var(Labda))
+print(paste("var_theoretical: ", eve))
+\end{minted}
+
 \begin{exercise}
 Here is the code to plot the distribution. Change $\lambda$ such that it is $\sim\Exp{1/2}$ and include the figure.
 \begin{minted}{python}
@@ -82,6 +130,28 @@ plt.savefig("figures/bh-9.50-fig.pdf")
 \end{minted}
 \end{exercise}
 
+\begin{minted}[]{R}
+set.seed(3)
+
+num = 100
+N = rep(0,num)
+labdas = rexp(num, 1)
+for(i in 1:num){
+  labda = labdas[i]
+  N[i] = rpois(1,labda)
+}
+
+pdf(file="figures/bh-9.50-fig.pdf",
+    width = 8, height = 7, bg = "white",          
+    colormodel = "cmyk", paper = "A4")
+
+df1 = data.frame(N)
+ggplot()+
+  geom_histogram(df1, mapping = (aes(x = N, y = ..density..)))
+
+dev.off()
+\end{minted}
+
 \begin{exercise}
 Finally, let's do the integration numerically to compute $\P{N=3}$. Explain the code. Why, in particular, do I compare the result against \mintinline{python}{geom(1/2).pmf(4)}? (Hint, read the documentation of \mintinline{python}{scipy.stats.geom}  to understand why.)
 \begin{minted}{python}
@@ -100,7 +170,22 @@ print(geom(1 / 2).pmf(3))
 print(geom(1 / 2).pmf(4))
 \end{minted}
 
+\begin{minted}[]{R}
+library(cubature)  
+
+integrand = function(labda){
+  return (exp(-labda) * labda ** 3 / 6 * exp(-labda) )
+}
+
+res = adaptIntegrate(function(x){integrand(x[1])}, lowerLimit = c(0), upperLimit = c(Inf))
+print(res)
+print(dgeom(3 - 1, 1 / 2))
+print(dgeom(4 - 1, 1 / 2))
+\end{minted}
+
 \end{exercise}
+
+
 
 
 
