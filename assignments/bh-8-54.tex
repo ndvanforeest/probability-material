@@ -49,6 +49,37 @@ plt.plot(s, m, label="MY")
 plt.tight_layout()
 plt.savefig("figures/moments.pdf")
 \end{minted}
+
+
+\begin{minted}[]{R}
+set.seed(3)
+
+p = 0.1
+q = 1 - p
+n = 100000
+
+M = function(s){
+    X = rgeom(n,p) - 1
+    Y = p * X / q
+    return (mean((exp(s * Y))))
+}
+
+
+num = 30
+m = rep(0,num)
+s = seq(0,0.8,length.out = num)
+for (i in 1:num){
+    m[i] = M(s[i]) * (1 - s[i]) # this
+}
+
+pdf(file="figures/moments.pdf",
+    width = 8, height = 7, bg = "white",          
+    colormodel = "cmyk", paper = "A4")   
+
+plot(s,m, type = "l", ann = FALSE, col = "blue")
+
+dev.off()
+\end{minted}
 \end{exercise}
 
 \begin{exercise}
@@ -60,6 +91,10 @@ The problem asks for the general $r$. What lines of code have to change to deal 
 \begin{solution}
 The limiting mgf is the mgf of the gamma distribution. This is $(1/(1-s)^{r}$. Also the mgf of the geom must be raised to the power $r$.
 \begin{minted}[]{python}
+    m[i] = (M(s[i]) * (1 - s[i]))**r
+\end{minted}
+
+\begin{minted}[]{R}
     m[i] = (M(s[i]) * (1 - s[i]))**r
 \end{minted}
 \end{solution}
