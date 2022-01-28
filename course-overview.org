@@ -70,7 +70,7 @@ All material, including the \LaTeX\ sources, is available on [[https://github.co
 
 * Assignments
 
-- See the intro of = assignments.pdf=
+- See the intro of =assignments.pdf=
 - You have to work in a group of two members.
 - The due dates are simple: turn in the assignment of week $n$ on Wednesday 18.00h of week $n+1$, for $n=1,\ldots,7$.
 - We provide a document =sources/assignment-answer-template.tex=, see  [[https://github.com/ndvanforeest/probability-distributions][Github]],  that you should use as starting point for your assignments.
@@ -106,10 +106,10 @@ Some remarks:
 
 * Grading
 
-Each of the seven assignments will be graded as 1, 4, 7, 9, or 10. All assignments have the same grade.
+Each of the seven assignments will be graded as 1, 4, 7, 9, or 10. All assignments have the same weight.
 If you skip the challenges, the highest grade you can get is a 9.
 If you don't turn in an assignment, the grade will default to 1.
-For the assignment grade, if $a_i$ is the grade of your  \(i\)th assignment, then $a$ is the number obtained after rounding $\sum_{i=1}^6 a_{i}/6$ to one decimal.
+For the assignment grade, if $a_i$ is the grade of your  \(i\)th assignment, then $a$ is the number obtained after rounding $\sum_{i=1}^7 a_{i}/7$ to one decimal.
 
 For the exam (resit), we add up all the points you earned and divide that by the total amount of points of the exam. Round this to one decimal, and let this be $e$.
 
@@ -194,7 +194,7 @@ There are a number of books that you might like too. (From experience I can tell
 2. [[https://math.dartmouth.edu/~prob/prob/prob.pdf][C.M. Grinsted and J. Laurie Snell]]: Introduction to probability, also free online
 3. F.M. Dekking, et al.: A Modern Introduction to Probability and Statistics, Understanding Why and How.
 
-After the course you might be interested in the following two books that I liked a lot.
+After the course you might be interested in the following books that I liked a lot.
 1. D.V. Lindley, Understanding Uncertainty. This book explains why probability theory is the way it is. There are three rules that any coherent system of probabilities has to satisfy.
    1. For any event $E$, $\P{E} \in [0,1]$;
    2. $\P{E \text{ or } F} = \P{E} + \P{F} - \P{E F}$;
