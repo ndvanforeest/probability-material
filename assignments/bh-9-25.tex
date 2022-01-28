@@ -104,6 +104,63 @@ plt.savefig("figures/Kelly-jitter.pdf")
 
 \end{minted}
 
+\begin{minted}[]{R}
+library(ggplot2)
+
+set.seed(3)
+
+n = 10
+n_experiments = 50
+
+p = 0.4
+S = matrix(0, n, n_experiments)
+for(i in 1:n){
+  S[i,1:n_experiments] = rbinom(n_experiments, 1, p) * 2 -1 # this
+}
+#print(S)
+
+x = matrix(0, n, n_experiments)
+x[1,] = 100
+f = 0.25
+
+for(i in 2:n){
+  x[i,] = x[i-1,] * (1 + f * S[i,])  # this
+}
+
+pdf(file="figures/Kelly-no-jitter.pdf",
+    width = 8, height = 7, bg = "white",          
+    colormodel = "cmyk", paper = "A4")
+
+df1 = data.frame(x[nrow(x),])
+colnames(df1) = c("X")
+df1$Y = -0.01
+
+p = ggplot()+
+  geom_histogram(df1, mapping = (aes(x = X, y = ..density..)), bins = 20)+
+  geom_point(df1, mapping =(aes(x=X, y = Y)))+
+  theme(axis.title.x=element_blank(),axis.title.y = element_blank())
+p 
+
+dev.off()
+
+pdf(file="figures/Kelly-jitter.pdf",
+    width = 8, height = 7, bg = "white",          
+    colormodel = "cmyk", paper = "A4")
+
+x_jitter = x[nrow(x),] + runif(n_experiments,-3, 3)
+df2 = data.frame(x_jitter)
+colnames(df2) = c("x_jitter")
+df2$y_jitter = -0.01 + runif(n_experiments,-0.01, 0.01)
+
+p + geom_histogram(df2, mapping = (aes(x = x_jitter, y = ..density..)), bins = 20)+
+  geom_point(df2, mapping =(aes(x=x_jitter, y = y_jitter)))+
+  theme(axis.title.x=element_blank(),axis.title.y = element_blank())
+p
+
+dev.off()
+\end{minted}
+
+
 \end{exercise}
 
 

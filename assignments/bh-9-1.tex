@@ -30,6 +30,25 @@ for i in range(num):
 print(times.mean(), times.var())
 \end{minted}
 
+\begin{minted}[]{R}
+mus = c(2, 5, 8)
+stds = c(0.1, 0.5, 1)
+
+m2 = stds ** 2 + mus ** 2 #this
+v = mean(m2) - (mean(mus)) ** 2 #this
+print(paste(mean(mus), v))
+
+num = 200
+options = sample(1:3, num, replace = TRUE) #this
+
+times = rep(0, num)
+for(i in 1:num){
+  times[i] = rnorm(1, mus[options[i]],stds[options[i]]) # this
+}
+
+print(paste(mean(times),var(times)))
+\end{minted}
+
 \begin{exercise}
 Explain the lines marked as `this', i.e., how does the program work?
 \end{exercise}
