@@ -9,7 +9,7 @@ What is the distribution of the inter-arrival times of these people?
 It turns out to be exponential!
 
 You might want to compare your final result to Figure BH.13.1 (It is not forbidden to read the book beyond what you have to do for this course!).
-In this exercise we use simulation to see that clustering of arrival times.
+In this exercise, we use simulation to see that clustering of arrival times.
 
 
 \begin{minted}[]{python}
@@ -24,7 +24,7 @@ labda = num / (end - start)  # per minute
 print(1 / labda)
 
 A = np.sort(np.random.uniform(start, end, size=num))
-print(A)
+print(A) #this
 print(A[1:])
 print(A[:-1])
 X = A[1:] - A[:-1]
@@ -45,7 +45,7 @@ labda = num / (end - start)
 print(1 / labda)
 
 A = sort(runif(num, min = start, max = end))
-print(A)
+print(A) #this
 print(A[-1])
 print(A[-length(A)])
 X = A[-1] - A[-length(A)]
@@ -56,7 +56,7 @@ print(sd(X))
 \end{minted}
 
 \begin{exercise}
-Explain the result of line P.12 (R.13)
+Explain the result of line P. 12 (R.12) marked as 'this'.
 \begin{solution}
 This are the arrival times of 5 passengers within the time interval of 3 minutes (sorted increasingly).
 \end{solution}
@@ -77,7 +77,7 @@ Compare the result of  line P.12 and P.14 (R.11 and R.13);  explain what is \tex
 \end{exercise}
 
 \begin{exercise}
- Explain what is \texttt{X} in P.15 (R.14)
+ Explain what is \texttt{X} in P.15 (R.14).
 \begin{solution}
 \verb|X| consists of the interarrival times.
 \end{solution}

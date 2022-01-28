@@ -4,7 +4,7 @@
 First read and solve BH.7.9. Here we provide a simulation.
 
 \begin{exercise}
-Run this code, and use the documentation of scipy.stats.geom to explain why it fails. Perhaps you can also use the wikipedia page on the geometric distribution. (Hint: is the first success distribution of the geometric distribution?)
+Run this code, and use the documentation of scipy.stats.geom in Python ( rgeom() function in R) to explain why it fails. Perhaps you can also use the wikipedia page on the geometric distribution. (Hint: is this the first success distribution a geometric distribution?)
 \begin{minted}[]{python}
 import numpy as np
 from scipy.stats import randint, geom
@@ -79,7 +79,7 @@ print(Xn)
 \end{exercise}
 
 \begin{exercise}
-Explain the lines marked with `this in the code of listing~\cref{BH.7.9.p} or listing~\cref{BH.7.9.r}. You already explained the other parts so you don't have to do that again.
+Explain the lines marked with `this in the code of ~\cref{BH.7.9.p} or ~\cref{BH.7.9.r}. You already explained the other parts so you don't have to do that again.
 \end{exercise}
 
 
@@ -110,7 +110,7 @@ for ax in axes.flatten():  # this
     ax.set_ylim(0) # this
     n += 1
 \end{minted}
-\caption{BH.7.9, python code.}
+\caption{BH.7.9, Python code.}
 \label{BH.7.9.p}
 \end{listing}
 

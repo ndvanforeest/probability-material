@@ -1,9 +1,9 @@
 \subsection{BH.5.6.5}
 Read this example of BH first.
-We chop up the exercise in many small exercises..
+We chop up the exercise in many small exercises.
 
 
-For the python code below, run it for a small number of samples; here I choose \texttt{samples=2}. Read the print statements, and use that to answer the questions below.
+For the Python code below, run it for a small number of samples; here, I choose \texttt{samples=2}. Read the print statements, and use that to answer the questions below.
 
 \begin{minted}[]{python}
 import numpy as np
@@ -16,7 +16,7 @@ num = 3
 samples = 2
 
 X = expon(scale=labda).rvs((samples, num))
-print(X)
+print(X) #this
 T = np.sort(X, axis=1)
 print(T)
 print(T.mean(axis=0))
@@ -35,7 +35,7 @@ num = 3
 samples = 2
 
 X = matrix(rexp(samples * num, rate = 1 / labda), nrow = samples, ncol = num)
-print(X)
+print(X) #this
 bigT = X
 for (i in 1:samples) {
   bigT[i,] = sort(bigT[i,])
@@ -54,9 +54,9 @@ print(cumsum(expected))
 
 
 \begin{exercise}
-In line P.11\footnote{Line P.x refers to line x of the Python code.
+In line P.11 (R.8),\footnote{Line P.x refers to line x of the Python code.
   Line R.x refers to line x of the R code.}
-we print the value of \texttt{X} in line P.10, R.7 and R.8, respectively.
+also marked as 'this', we print the value of \texttt{X} in line P.10 (R.7), respectively.
 What is the meaning of \texttt{X}?
 \begin{solution}
 $X$ is a matrix of i.i.d. draws from an exponential distribution with parameter $\lambda$.
@@ -72,7 +72,7 @@ $T$ is a sorted version of $X$, where we sort each row increasingly.
 
 
 \begin{exercise}
-What do we print in line P.14, R.14?
+What do we print in line P.14 (R.14)?
 \begin{solution}
 We print the mean value of each column of $T$.
 \end{solution}
@@ -81,7 +81,7 @@ We print the mean value of each column of $T$.
 \begin{exercise}
 What is meaning of the variable \texttt{expected}?
 \begin{solution}
-This is an array with expected values of the $i$th order statistic $X_{(i)}$ (see B.H.5.6.5 afor a proof of this result).
+This is an array with expected values of the $i$th order statistic $X_{(i)}$ (see B.H.5.6.5 for a proof of this result).
 \end{solution}
 \end{exercise}
 

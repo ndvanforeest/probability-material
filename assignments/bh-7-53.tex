@@ -9,8 +9,8 @@ Read and solve BH.7.53.
 
 
 \begin{exercise}
-The code in \cref{BH.7.53.p} or~\cref{BH.7.53.r}   simulates this exercise.
-Run the code. (To improve your understanding, just change some parameters here and there, and check the output.) Explain the lines marked with $\# *$. (In particular, why do we do a \verb|runs| number of runs to estimate the covariance?) Finally, explain the output.
+The code in \cref{BH.7.53.p} or~\cref{BH.7.53.r} simulates this exercise.
+Run the code. (To improve your understanding, just change some parameters here and there, and check the output.) Explain the lines marked with $\# \, *$. (In particular, why do we do a \verb|runs| number of runs to estimate the covariance?) Finally, explain the output.
 \end{exercise}
 
 \begin{listing}[!ht]
@@ -92,7 +92,7 @@ print(paste0("cov(Ss, Ts) = ", cov(Ss, Ts)))
 \end{listing}
 
 \begin{exercise}
-Modify the code so that the drunkard makes steps of size $2$ in when moving left or right; the stepsizes up or down remain the same. What happes with $\E{R^{2}_n}$?
+Modify the code such that the drunkard makes steps of size $2$ when moving left or right; the stepsizes up or down remain the same. What happes with $\E{R^{2}_n}$?
 \begin{solution}
 The line for the $x$-steps becomes
 

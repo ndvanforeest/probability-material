@@ -120,7 +120,7 @@ from sigfig import round
 tot = 25
 
 def grade(a, e):
-    a = round(sum(a) / 6, sigfigs=2)
+    a = round(sum(a) / len(a), sigfigs=2)
     e = round(10 * e / tot, sigfigs=2)
     if e < 5:
         g = max(e, 1)
@@ -133,15 +133,15 @@ def grade(a, e):
 
 
 # some tests
-print(grade(a=[10, 10, 10, 10, 10, 10], e=5))
-print(grade(a=[10, 10, 10, 10, 10, 10], e=12))
-print(grade(a=[10, 10, 10, 10, 10, 10], e=13))
-print(grade(a=[8, 8, 8, 8, 10, 1], e=11))
-print(grade(a=[8, 8, 8, 8, 10, 1], e=12))
-print(grade(a=[8, 8, 8, 8, 10, 1], e=23))
-print(grade(a=[1, 1, 1, 1, 10, 1], e=25))
-print(grade(a=[7, 7, 8, 8, 9, 10], e=15))
-print(grade(a=[7, 7, 7, 7, 7, 6], e=25))
+print(grade(a=[10, 10, 10, 10, 10, 10, 10], e=5))
+print(grade(a=[10, 10, 10, 10, 10, 10, 10], e=12))
+print(grade(a=[10, 10, 10, 10, 10, 10, 10], e=13))
+print(grade(a=[8, 8, 8, 8, 10, 1, 1], e=11))
+print(grade(a=[8, 8, 8, 8, 10, 1, 2], e=12))
+print(grade(a=[8, 8, 8, 8, 10, 1, 1], e=23))
+print(grade(a=[1, 1, 1, 1, 10, 1, 10], e=25))
+print(grade(a=[7, 7, 8, 8, 9, 10, 6], e=15))
+print(grade(a=[7, 7, 7, 7, 7, 6, 4], e=25))
 #+end_src
 
 #+RESULTS:
@@ -152,7 +152,7 @@ print(grade(a=[7, 7, 7, 7, 7, 6], e=25))
 : 5.0
 : 9.0
 : 8.0
-: 7.0
+: 6.0
 : 10.0
 
 

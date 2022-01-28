@@ -12,19 +12,19 @@ Sketch, on paper, the 2D area that corresponds to the event that Alice and Bob m
 Write $A$ and $B$ for the rvs corresponding to the arrival times of Alice and Bob.
 Explain  you have to compute the expectation of  $\1{A<B+0.25}\cdot\1{B-0.25 < A}$
 to compute the probability that Alice and Bob meet.
-Then,  explain that is this equal to
+Then,  explain that is equal to
 \begin{equation}
-\int_0^1\int_{}^1 \1{a<b+0.25}\cdot \1{b-0.25 < a} \d a \d b.
+\int_0^1\int_0^1 \1{a<b+0.25}\cdot \1{b-0.25 < a} \d a \d b.
 \end{equation}
 \end{exercise}
 
 \begin{exercise}
-What is the probability that they meet (i.e., solve the integral by hand).
+What is the probability that they meet (i.e., solve the integral by hand)?
 \end{exercise}
 
 \begin{exercise}
-Explain this code to compute numerically the probability of overlap. Check the web on what is an anonymous function in python or R, and explain why we use that here.
-(Hint: anonymous functions are useful "when it’s not worth the effort to give it a name". Do we use elswhere the anonymous function we define here?)
+Explain this code to compute numerically the probability of overlap. Check the web on what is an anonymous function in Python or R, and explain why we use that here.
+(Hint: anonymous functions are useful "when it’s not worth the effort to give it a name". Do we use elsewhere the anonymous function we define here?)
 \begin{minted}[]{python}
 from scipy.integrate import dblquad
 
@@ -116,7 +116,7 @@ bob = uniform(0, 1).rvs(n)
 overlap = (bob - 0.1 < alice) * (alice < bob + 0.1)
 print(alice)
 print(bob)
-print(overlap)  # this line
+print(overlap)  # this
 \end{minted}
 
 \begin{minted}[]{R}
@@ -128,13 +128,13 @@ bob = runif(n,0,1)
 overlap = (bob - 0.1 < alice) * (alice < bob + 0.1)
 print(alice)
 print(bob)
-print(overlap) #this line
+print(overlap) #this
 \end{minted}
 
 \end{exercise}
 
 \begin{exercise}
-To find the probability of overlap, we have to modify in the code above the line marked as `this line' to
+To find the probability of overlap, we have to modify the code above the line marked as `this' to
 \begin{minted}[]{python}
 print(overlap.mean())
 \end{minted}
@@ -148,16 +148,16 @@ Change this in your code and explain what it does.
 
 
 \begin{exercise}
-Modify the  code of the previous exercise so that you sample 1000 times an appointment between Alice and Bob, and such that they only meet when 15 minutes appart. Include your code and show the output.
+Modify the  code of the previous exercise so that you sample 1,000 times an appointment between Alice and Bob, and such that they only meet when 15 minutes apart. Include your code and show the output.
 \end{exercise}
 
 
 \begin{exercise}
-Contrary to~\cref{ex:ab} suppose Bob is not prepared to wait longer than 5 minutes, while Alice is still prepared to wait for 15 minutes. Write down the integral that corresponds to the proability that they meet.  Solve it by hand. Modify the above code such that you can evaluate it numerically. Include your code in the answers.
+Contrary to~\cref{ex:ab} suppose Bob is not prepared to wait longer than 5 minutes, while Alice is still prepared to wait for 15 minutes. Write down the integral that corresponds to the probability that they meet.  Solve it by hand. Modify the above code such that you can evaluate it numerically. Include your code in the answers.
 \end{exercise}
 
 \begin{exercise}
-Contrary to~\cref{ex:ab} suppose Bob is prepared to wait for 20 minutes when he arrives before 1230, but just 10 when he arrives after 1230, while Alice is still prepared to wait for 15 minutes. Write down the integral that corresponds to the proability that they meet. Explain that this is the code to compute this.
+Contrary to~\cref{ex:ab} suppose Bob is prepared to wait for 20 minutes when he arrives before 1230, but just 10 when he arrives after 1230, while Alice is still prepared to wait for 15 minutes. Write down the integral that corresponds to the probability that they meet. Explain that this is the code to compute this.
 
 \begin{minted}[]{python}
 from scipy.integrate import dblquad
@@ -232,7 +232,7 @@ print(mean(bob))
 \end{exercise}
 
 \begin{exercise}
-Changing the value of the variable \verb|end| to 10 0 in the code above, and run it again. Then chang  it to 50, and finally to 1000.  When I do this, I get a very strange answers for 50 and 1000. Try to explain what goes wrong.
+Changing the value of the variable \verb|end| to 100 in the code above, and run it again. Then change it to 50, and finally to 1,000.  When I do this, I get a very strange answers for 50 and 1,000. Try to explain what goes wrong.
 \end{exercise}
 
 

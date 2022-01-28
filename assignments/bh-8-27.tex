@@ -1,6 +1,6 @@
 \subsection{BH.8.27}
 
-We start from BH.8.27 (which you have to read now).  We are interested in the difference between the distribution of $X+Y+Z$ and the normal distribution. But why the normal distribution? As it turns out, the central limit law, see BH.10, states that the distribution of sums of r.v.s converge to the normal distribution (in a specific sense)
+We start from BH.8.27 (which you have to read now).  We are interested in the difference between the distribution of $X+Y+Z$ and the normal distribution. But why the normal distribution? As it turns out, the central limit law, see BH.10, states that the distribution of sums of r.v.s converge to the normal distribution (in a specific sense).
 
 Here is some code to simulate.
 
@@ -36,6 +36,7 @@ Zexact <- dnorm(X, mean = k / 2, sd = sqrt(k / 12))
 
 
 XYZ <- matrix(NA, 4000, k)
+# print(XYZ)  # if you want to see it.
 for (i in 1:k) {
   XYZ[,i] <- runif(4000, min = 0, max = 1)
 }
@@ -57,8 +58,8 @@ What is the shape (rows and columns) of \verb|Z|?
 \end{exercise}
 
 \begin{exercise}
-Explain the values for \verb|loc|~ and \verb|shape| in \verb|Zexact|.
-  (Read the documentation of scipy.stats.norm on the web is necessary.)
+Explain the values for \verb|loc|~ and \verb|shape| in \verb|Zexact| ( and corresponding \verb|mean| and \verb|sd|).
+  (Read the documentation of scipy.stats.norm (or norm() for R) on the web if necessary.)
   To which definition in BH does this loc-scale transformation relate?
 \end{exercise}
 
@@ -118,7 +119,7 @@ legend("topright", legend = "conv", bty = "n",
 \end{minted}
 
 \begin{exercise}
-Read the documentation of ~np.convolve~. Why is it called like this?
+Read the documentation of ~np.convolve~ (or convolve() in R). Why is it called like this?
 \end{exercise}
 
 \begin{exercise}
@@ -134,7 +135,7 @@ Why do we set \texttt{k=3}?
 \end{exercise}
 
 \begin{exercise}
-A bit harder, why do we plot \texttt{N*f3}, i.e., why do have to multiply with \texttt{N}? Relate this to the meaning of $f(x)\d x$, where $f$ the density of some random variable.
+A bit harder, why do we plot \texttt{N*f3}, i.e., why do we have to multiply with \texttt{N}? Relate this to the meaning of $f(x)\d x$, where $f$ the density of some random variable.
 (To understand why is very important. Think hard, and read the solution when it becomes available.)
 \begin{solution}
   Suppose we chop up the area under some arbitrary  function $g$ in blocks of height $g(x)$ and length $\Delta x$.
@@ -150,7 +151,7 @@ A bit harder, why do we plot \texttt{N*f3}, i.e., why do have to multiply with \
 \end{exercise}
 
 \begin{exercise}
-Yet a tiny bit harder, consider \texttt{f4 = np.convolve(f3, fx)} and \texttt{g4 = np.convolve(f2, f2)}. Why are they, numerically speaking,  equal?
+Yet a tiny bit harder, consider \texttt{f4 = np.convolve(f3, fx)} (\texttt{f4 = convolve(f3, fx, type = "open")} in R) and \texttt{g4 = np.convolve(f2, f2)} (\texttt{g4 = convolve(f2, f2, type = "open")} in R). Why are they, numerically speaking,  equal?
 \begin{solution}
 Take four r.v.s $U, V, X, Y$. Then
   \begin{equation}
@@ -163,7 +164,7 @@ Thus the density of $(U+V+X) + Y$ must be the same as the density of $(U+V) + (X
 
 
 \begin{exercise}
-When you would compute the maximum of \texttt{np.abs(f4 -g4)} you would see that this is about $10^{-10}$, or so.
+When you would compute the maximum of \texttt{np.abs(f4 -g4)} (abs(f4 - g4) in R) you would see that this is about $10^{-10}$, or so.
 Hence, a small number.
 This is not equal to 0, but we know that this is due to rounding effects.
 
