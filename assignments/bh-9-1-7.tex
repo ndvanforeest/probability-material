@@ -72,7 +72,7 @@ for b in np.arange(0.1, 1, 0.1):
 f = function(x) # format floating point numbers
     # return(x) # unquote this line
     return(signif(x, digits = 3))
-   
+
 set.seed(3)
 
 alpha = 2 / 3
@@ -108,14 +108,14 @@ print(res)
 \end{minted}
 
 \begin{minted}[]{R}
-library(cubature) 
+library(cubature)
 
 alpha = 2 / 3
 n = 100
 b = 0.5
 
-res = adaptIntegrate(function(v){(v - b) * (b > alpha * v)}, 
-	  lowerLimit = c(0), upperLimit = c(1))
+res = adaptIntegrate(function(v){(v - b) * (b > alpha * v)},
+      lowerLimit = c(0), upperLimit = c(1))
 print(paste(res$integral, res$error))
 \end{minted}
 \end{exercise}
@@ -138,21 +138,21 @@ print(res)
 \end{minted}
 
 \begin{minted}[]{R}
-library(cubature) 
+library(cubature)
 
 alpha = 2 / 3
 n = 100
 b = 0.5
 
-res = adaptIntegrate(function(v){(v - b) * (b > alpha * v) * dbeta(v, 8, 2)}, 
-	  lowerLimit = c(0), upperLimit = c(1))
+res = adaptIntegrate(function(v){(v - b) * (b > alpha * v) * dbeta(v, 8, 2)},
+      lowerLimit = c(0), upperLimit = c(1))
 print(paste(res$integral, res$error))
 
 \end{minted}
 \end{solution}
 \end{exercise}
 
-\subsection{BH.9.1.7.The mystery box}
+\subsection{BH.9.1.7}
 
 We use  simulation to solve  BH.9.7.
 Read it now, i.e., before reading the text below, then read the code below.

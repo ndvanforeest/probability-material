@@ -1,0 +1,212 @@
+#+title:   Probability distributions: Course manual
+#+SUBTITLE: EBP038A05, 2021-2022
+#+author: Nicky D. van Foreest
+#+date: {{{time(%Y-%m-%d)}}}
+
+#+STARTUP: indent
+#+STARTUP: overview
+#+OPTIONS:  toc:nil num:t
+#+OPTIONS: H:5
+#+PROPERTY: header-args:shell :exports both
+
+#+LATEX_HEADER: \usepackage{a4wide}
+#+LATEX_HEADER: \usepackage[english]{babel}
+#+LATEX_HEADER: \usepackage{fourier}
+#+LaTeX_HEADER: \usepackage{mathtools,amsthm,amssymb,amsmath}
+#+LaTeX_HEADER: \renewcommand{\P}[1]{\,\mathsf{P}\left[#1\right]}
+#+LaTeX_HEADER: \newcommand{\E}[1]{\,\mathsf{E}\/\left[#1\right]}
+#+LaTeX_HEADER: \newcommand{\V}[1]{\,\mathsf{V}\left[#1\right]}
+#+LaTeX_HEADER: \newcommand{\cov}[1]{\,\mathsf{Cov}\left[#1\right]}
+#+LaTeX_HEADER: \renewcommand{\l}[1]{\fbox{#1}}
+
+
+* Schedule
+
+The schedule appears on top to facilitate look ups.
+
+#+name: schedule
+#+CAPTION: schedule
+| Week | Lecture | Section    |           Video | Exercises of BH                  | Assignment |
+|------+---------+------------+-----------------+----------------------------------+------------|
+|    1 |       1 | 7.1        |              19 | *7.1*, *7.9*, 7.11               |          1 |
+|      |       2 | 7.2        |               - | *7.13*, 7.15, *7.24*             |            |
+|------+---------+------------+-----------------+----------------------------------+------------|
+|    2 |       3 | 7.3        |              21 | *7.29*, *7.38*, 7.53             |          2 |
+|      |       4 | 7.4, 7.5   |              20 | 7.58, *7.59*, 7.71               |            |
+|------+---------+------------+-----------------+----------------------------------+------------|
+|    3 |       5 | 8.1        |              22 | *7.86*, *7.10*, *8.11*           |          3 |
+|      |       6 | 8.2        |               - | *8.15*, *8.18*, *8.23*           |            |
+|------+---------+------------+-----------------+----------------------------------+------------|
+|    4 |       7 | 8.3        |              23 | 8.31, 8.36, 8.40                 |          4 |
+|      |       8 | 8.4, 8.5   |          24, 25 | *8.52*, *8.54*                   |            |
+|------+---------+------------+-----------------+----------------------------------+------------|
+|    5 |       9 | 9.1, 9.2   |              26 | *9.1*, 9.25, 9.28, *9.32*        |          5 |
+|      |      10 | 9.2, 9.3   | 27 (until 0:30) | *9.37*, 9.39                     |            |
+|------+---------+------------+-----------------+----------------------------------+------------|
+|    6 |      11 | 9.5, 9.6   |       27 (rest) | *9.50*, 9.52, 9.55, *9.57*       |          6 |
+|      |      12 | 10.1       |              28 | *9.58*, *10.2*, 10.3, *10.6*     |            |
+|------+---------+------------+-----------------+----------------------------------+------------|
+|    7 |      13 | 10.2, 10.3 |              29 | *10.9*, *10.23*, *10.26*         |          7 |
+|      |      14 | 10.3, 10.4 |              30 | *10.28*, *10.30*, *10.36*, 10.39 |            |
+|------+---------+------------+-----------------+----------------------------------+------------|
+
+- The video column refers to the  [[https://projects.iq.harvard.edu/stat110/youtube][video's]] of Blitzstein.
+- The *boldface* exercises will be explained below.
+
+* Course goals
+
+See [[https://www.rug.nl/ocasys/feb/vak/show?code=EBP038A05][Ocasys]].
+
+* Material
+
+1. We use [[https://projects.iq.harvard.edu/stat110/home][Introduction to Probability]] by Blitzstein and Hwang (BH) as the main material. The [[https://projects.iq.harvard.edu/stat110/home][book's homepage]] provides an electronic copy of the book, video lectures by Blitzstein, and a solution manual for part of the problems. I advise you to buy the book as it makes studying easier, and a physical book is much more practical than an ebook when working on the material and solving problems.
+2. =pdf-files/lectures-questions.pdf=: We will illustrate the material during the lectures by solving problems. Before our lectures, we expect  you to have watched the relevant lectures of Blitzstein for overview and general background of the book. =lectures.pdf= contains the problems per lecture. We expect that you have read, and thought about, them. However, you don't have to solve the problems before the lecture.
+3. =pdf-files/lectures-solutions.pdf=: We will make the solutions progressively available after the lecture. Our lectures will be given online. As all lecture material (plus solutions) are available, we will not record the lectures.
+4. =pdf-files/study-guide.pdf=: many questions, hints and solutions. See its intro.
+5. =pdf-files/assignments.pdf=: the material for the assignments. See its intro.
+6. =pdf-files/course-overview.pdf=: this document.
+
+All material, including the \LaTeX\ sources, is available on [[https://github.com/ndvanforeest/probability-distributions][Github]].
+
+* Assignments
+
+- See the intro of = assignments.pdf=
+- You have to work in a group of two members.
+- The due dates are simple: turn in the assignment of week $n$ on Wednesday 18.00h of week $n+1$, for $n=1,\ldots,7$.
+- We provide a document =sources/assignment-answer-template.tex=, see  [[https://github.com/ndvanforeest/probability-distributions][Github]],  that you should use as starting point for your assignments.
+
+* Obligatory parts and exercises of BH
+
+At the exam we will ask simple variations of:
+- BH 7.3.8, 7.5.9
+- BH 8.1.3 (proof), 8.1.4, 8.1.9, 8.2.4, 8.3.3
+- BH 9.6.1, 9.6.2
+- BH 10.1.10 (proof), 10.3.2 (proof), 10.3.4, 10.3.5, 10.3.6
+- The exercises marked in *boldface* in Table [[schedule]].
+
+You have to learn these examples and exercises by heart since you will encounter these topics and techniques many times after this course. Since you can prepare this, we will be very critical on the exam on your answers.
+
+
+
+* Exam
+
+The exam will have the following format:
+1. Two or three questions selected at random from (small variations of) the obligatory parts and exercises of BH. Weight: 40 %
+2. A question based on the  code of the assignments in which you have to explain how it works or you have to find small bugs and explain why these are bugs and how to correct them. Weight:  20 %
+3. One question selected at random from the simple questions of the study guide. Weight: 10 %
+4. One or two questions that are (larger) variations of the exercises of BH, the material of the study guide, and the lecture slides. Weight: 30 %
+Like this, if you study hard on the code of the assignments and the obligatory parts and exercises of BH you can pass the course.
+
+
+Some remarks:
+- The exam is closed book and has a duration of 3h.
+- You will be provided with a list of distributions at the exam.
+- We will plan a perusal after the grades of the exam (resit) have been communicated. This will be the only moment in which you can check your exam.
+
+
+* Grading
+
+Each of the seven assignments will be graded as 1, 4, 7, 9, or 10. All assignments have the same grade.
+If you skip the challenges, the highest grade you can get is a 9.
+If you don't turn in an assignment, the grade will default to 1.
+For the assignment grade, if $a_i$ is the grade of your  \(i\)th assignment, then $a$ is the number obtained after rounding $\sum_{i=1}^6 a_{i}/6$ to one decimal.
+
+For the exam (resit), we add up all the points you earned and divide that by the total amount of points of the exam. Round this to one decimal, and let this be $e$.
+
+Then we compute your final grade $g$ for the course like this (supposing for the moment that the number of points of the exam is 25):
+#+begin_src python :results output :exports both
+from sigfig import round
+
+tot = 25
+
+def grade(a, e):
+    a = round(sum(a) / 6, sigfigs=2)
+    e = round(10 * e / tot, sigfigs=2)
+    if e < 5:
+        g = max(e, 1)
+    elif a >= 6:
+        g = max(0.75 * e + 0.25 * a, e)
+    else:
+        g = 0.75 * e + 0.25 * a
+
+    return round(g, sigfigs=1)
+
+
+# some tests
+print(grade(a=[10, 10, 10, 10, 10, 10], e=5))
+print(grade(a=[10, 10, 10, 10, 10, 10], e=12))
+print(grade(a=[10, 10, 10, 10, 10, 10], e=13))
+print(grade(a=[8, 8, 8, 8, 10, 1], e=11))
+print(grade(a=[8, 8, 8, 8, 10, 1], e=12))
+print(grade(a=[8, 8, 8, 8, 10, 1], e=23))
+print(grade(a=[1, 1, 1, 1, 10, 1], e=25))
+print(grade(a=[7, 7, 8, 8, 9, 10], e=15))
+print(grade(a=[7, 7, 7, 7, 7, 6], e=25))
+#+end_src
+
+#+RESULTS:
+: 2.0
+: 5.0
+: 6.0
+: 4.0
+: 5.0
+: 9.0
+: 8.0
+: 7.0
+: 10.0
+
+
+
+* Estimated work load
+
+The estimated (!) work load is as in the table. The lectures of Blitzstein vary in length, hence the amount of hours spent on his lectures is just a rough estimate.
+
+
+| Activity               | Load           | Hours |
+|------------------------+----------------+-------|
+| Lectures by Blitzstein | $14\times 1.5$ |    21 |
+| Lectures by us         | $14\times 1$   |    14 |
+| Tutorial               | $7\times 2$    |    14 |
+| Study book             | $14\times 2$   |    28 |
+| Assignments            | $7\times 3$    |    21 |
+| Exercises              | $14\times 2.5$ |    35 |
+| Exam                   |                |     3 |
+|------------------------+----------------+-------|
+| Total                  |                |   136 |
+#+TBLFM: @9$3=vsum(@2..@-1)
+
+* Contact info
+
+- [[https://www.rug.nl/staff/n.d.van.foreest/][Nicky van Foreest]] (coordinator, lecturer)
+- Arpan Rijal (lecturer)
+- Joost Doornbos (TA)
+- Wietze Koops (TA)
+- Machiel Kroon (TA)
+- Mikael Makonnen (TA)
+
+In case some parts of this course guide are unclear, please mail =n.d.van.foreest@rug.nl= or =a.rijal@rug.nl=.
+
+
+* Interesting other literature for now and later
+
+There are a number of books that you might like too. (From experience I can tell that reading different types of explanation can be very helpful.)
+1. [[https://faculty.math.illinois.edu/~r-ash/BPT.html][R.B. Ash]]: Basic probability theory, free online
+2. [[https://math.dartmouth.edu/~prob/prob/prob.pdf][C.M. Grinsted and J. Laurie Snell]]: Introduction to probability, also free online
+3. F.M. Dekking, et al.: A Modern Introduction to Probability and Statistics, Understanding Why and How.
+
+After the course you might be interested in the following two books that I liked a lot.
+1. D.V. Lindley, Understanding Uncertainty. This book explains why probability theory is the way it is. There are three rules that any coherent system of probabilities has to satisfy.
+   1. For any event $E$, $\P{E} \in [0,1]$;
+   2. $\P{E \text{ or } F} = \P{E} + \P{F} - \P{E F}$;
+   3. $\P{E\cap F} = \P{F \mid E} \P{E}$.
+   If you want to understand probability in terms of betting, any sensible strategy you can imagine should satisfy   these rules, for otherwise people can use arbitrage (an essential idea in the financial theory and asset and option pricing) to consistently make  money from you.
+2. E.T. Jaynes, Probability Theory: The Logic of Science. It is hard at times, but very interesting. it discusses  applications and ideas behind probability and statistics, and how to think about these topics as a sensible person (not just as a theoretician).
+3. [[https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf][C. Bishop, Pattern Recognition and Machine Learning]]. This is a really nice book on data analysis and  machine learning. After the course, you can read the first two chapters. At the end of the master, you can read most of the book.
+
+* write file to pdf folder                                         :noexport:
+
+#+begin_src shell
+mv course-overview.pdf pdf-files/
+#+end_src
+
+#+RESULTS:

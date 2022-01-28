@@ -1,4 +1,4 @@
-\subsection{BH-8-4-3. Sum of two gamma rvs}
+\subsection{BH-8-4-3}
 \label{sec:sum-two-gamma}
 
 Let us investigate BH.8.4.3. The rvs $X$ and $Y$ are independent, $X\sim\Exp{\lambda}$ and $Y\sim\Exp{\mu}$. We want to compare $X+Y$ to $\Gamma{2, \mu}$ and $\Gamma{2, \lambda}$, just to see what happens.
@@ -48,8 +48,8 @@ G2 = dgamma(support, 2, scale=1 / mu)
 df1 = data.frame(Z)
 df2 = data.frame(support,G1, G2)
 
-pdf(file="figures/gamma1.pdf", width = 8, height = 7, 
-    bg = "white", colormodel = "cmyk", paper = "A4")   
+pdf(file="figures/gamma1.pdf", width = 8, height = 7,
+    bg = "white", colormodel = "cmyk", paper = "A4")
 
 ggplot()+
 geom_histogram(df1, mapping = (aes(x = Z, y = ..density.., fill = "Z")), bins = 20)+
