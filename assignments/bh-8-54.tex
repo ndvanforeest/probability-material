@@ -73,8 +73,8 @@ for (i in 1:num){
 }
 
 pdf(file="figures/moments.pdf",
-    width = 8, height = 7, bg = "white",          
-    colormodel = "cmyk", paper = "A4")   
+    width = 8, height = 7, bg = "white",
+    colormodel = "cmyk", paper = "A4")
 
 plot(s,m, type = "l", ann = FALSE, col = "blue")
 
@@ -88,14 +88,4 @@ The match is not terrric when $p=0.1$. Rerun the code, but now with $p=1/1000$. 
 
 \begin{exercise}
 The problem asks for the general $r$. What lines of code have to change to deal with general $r$? Modify the code appropriately, and explain why your code is correct.
-\begin{solution}
-The limiting mgf is the mgf of the gamma distribution. This is $(1/(1-s)^{r}$. Also the mgf of the geom must be raised to the power $r$.
-\begin{minted}[]{python}
-    m[i] = (M(s[i]) * (1 - s[i]))**r
-\end{minted}
-
-\begin{minted}[]{R}
-    m[i] = (M(s[i]) * (1 - s[i]))**r
-\end{minted}
-\end{solution}
 \end{exercise}

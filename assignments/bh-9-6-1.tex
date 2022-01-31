@@ -8,7 +8,7 @@ Read BH.9.6.1 first. We will redo the computations and check the results with si
 
 \begin{exercise}
 We need to model the distribution of an individual demand $X$.
-As an example, we can use the beta distribution. In the example  $\mu$ and $\sigma$ are assumed as given, but for the beta distribution we need an $a$ and $b$. One way is to solve by hand for $a$ and $b$ for given $\mu$ and $\sigma$. However, we can also be lazy and let the computer do the work. Here is the code to do that.
+As an example, we can use the beta distribution. In the example, $\mu$ and $\sigma$ are assumed as given, but for the beta distribution we need an $a$ and a $b$. One way is to solve by hand for $a$ and $b$ for given $\mu$ and $\sigma$. However, we can also be lazy and let the computer do the work. Here is the code to do that.
 
 Explain how this code works. (You can use the relevant documentation on the web on how the function fsolve works.) Why do I use $\mu=1/2$ and $\sigma^{2}=1/12$ as test case? Are the $a$ and $b$ that comes out of the solver correct? What does the final check do?
 \begin{minted}[]{python}
@@ -123,17 +123,17 @@ print(paste(labda * mu, var * labda + mu * mu * labda)) # this
 \begin{exercise}
 Here is the code to compute the mean and variance with Adam and Eve's laws. Explain how it works. In particular:
 \begin{enumerate}
-\item explain the `this' lines;
+\item explain the lines marked as `this';
 \item what are the contents of the demand matrix;
 \item what is the $P$;
-\item  how are $EX, EV$ and $VE$  computed;
-\item Note in particular the difference between $EXn$ and $EXN$, and similarly for the variance.  Use BH.9.2.1 to explain why I use a small $n$ and a large $N$ in the naming of the variables.
+\item how are $EX, EV$ and $VE$  computed;
+\item Note in particular the difference between $EXn$ and $EXN$, and similarly for the variance. Use BH.9.2.1 to explain why I use a small $n$ and a large $N$ in the naming of the variables.
 \end{enumerate}
 
-Remark: I realize that this is a hard piece of code, but your understanding of Eve's law will increase by a lot. Some  subtle points about the code that you \emph{don't} have to explain:
+Remark: I realize that this is a hard piece of code, but your understanding of Eve's law will increase by a lot. Some subtle points about the code that you \emph{don't} have to explain:
 \begin{enumerate}
 \item Suppose the largest amount of customers (jobs) that we saw during the simulation is $7$. Then on any day we can have $0, \ldots, 7$ demands, i.e, 8 possible outcomes. Thus, per row in the demands matrix we need to have 8 columns.
-\item The numpy function that computes the mean gives a warning when it is applied to an empty array. (Just try it to see how it works.)  We prevent this by computing the histogram (i.e., the empirical PDF) for $n=0$ separately. The same reasoning applies to the case when idx has zero length.
+\item The numpy function (mean() function in R) that computes the mean gives a warning when it is applied to an empty array. (Just try it to see how it works.) We prevent this by computing the histogram (i.e., the empirical PDF) for $n=0$ separately. The same reasoning applies to the case when idx has zero length.
 \end{enumerate}
 
 

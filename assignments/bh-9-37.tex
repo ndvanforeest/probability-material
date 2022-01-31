@@ -1,11 +1,11 @@
 \input{header}
 \subsection{BH.9.37}
 
-With this exercise we illustrate why (and how) to use bootstrapping. At first it appears a bit strange: we have a set of observations (samples) $X=\{X_{1}, X_2, \ldots, X_{n}\}$. For this we can compute the mean, std, and the empirical distribution with standard procedures, so why sample (bootstrap) from $X$?
+With this exercise we illustrate why (and how) to use bootstrapping. At first it appears a bit strange: we have a set of observations (samples) $X=\{X_{1}, X_2, \ldots, X_{n}\}$. For this we can compute the mean, standard deviation, and the empirical distribution with standard procedures, so why sample (bootstrap) from $X$?
 
-One type of question that seems hard to answer by classical means is to characterize the median, in particular the std and distribution of the median, of the population (that is, the population from which we took the sample $X$).
+One type of question that seems hard to answer by classical means is to characterize the median, in particular the standard deviation and distribution of the median, of the population (that is, the population from which we took the sample $X$).
 
-Bootstrapping is nowadays used a lot in datascience.
+Bootstrapping is nowadays used a lot in data science.
 
 \begin{exercise}
 Run the code below, and then explain what is \mintinline{python}{sample}, \mintinline{python}{bootstrap} and \mintinline{python}{medians}. Why do we use \mintinline{python}{axis=1}?
@@ -59,16 +59,16 @@ pdf(file="figures/bootstrap.pdf",
 
 df1 = data.frame(medians)
 ggplot()+
-  geom_histogram(df1, mapping = (aes(x = medians, y = ..density..)), bins = 100)+
-  geom_vline(xintercept = quantile(medians, c(0.025)), color = "red", size=2) +
-  geom_vline(xintercept = quantile(medians, c(0.9725)), color = "red", size=2)+
-  geom_vline(xintercept = mean(medians), color = "red", size=2)
+geom_histogram(df1, mapping = (aes(x = medians, y = ..density..)), bins = 100)+
+geom_vline(xintercept = quantile(medians, c(0.025)), color = "red", size=2) +
+geom_vline(xintercept = quantile(medians, c(0.9725)), color = "red", size=2)+
+geom_vline(xintercept = mean(medians), color = "red", size=2)
 
 dev.off()
 \end{minted}
 
 \begin{exercise}
-Finally, let us compare the information we obtained from bootstrapped to the medians we would obtain when we would sample from the real population.
+Finally, let us compare the information we obtained from bootstrap to the medians we would obtain when we would sample from the real population.
 \begin{enumerate}
 \item What is here the real population?
 \item In a real life situation, what is less costly: real sampling or bootstrapping?
@@ -105,7 +105,7 @@ pdf(file="figures/real_medians.pdf",
 
 df1 = data.frame(medians)
 ggplot()+
-  geom_histogram(df1, mapping = (aes(x = medians, y = ..density..)), bins = 100)
+geom_histogram(df1, mapping = (aes(x = medians, y = ..density..)), bins = 100)
 
 dev.off()
 \end{minted}

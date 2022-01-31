@@ -42,11 +42,11 @@ pdf(file="figures/bh-10-28.pdf",
     colormodel = "cmyk", paper = "A4")
 
 df1 = data.frame(supp)
-df1$pmf = pmf # this
+df1$pmf = pmf 
 df1$norm_pdf = dnorm(supp,0,1)
 
 p = ggplot(df1) +
-    geom_line(mapping =(aes(x=supp, y = pmf)), color = "blue")+
+    geom_line(mapping =(aes(x=supp, y = pmf)), color = "blue")+ # this
     geom_line(mapping =(aes(x=supp, y = norm_pdf)), color = "orange")+
     theme(axis.title.x=element_blank(),axis.title.y = element_blank())
 p
@@ -72,7 +72,7 @@ Explain why.  (You should memorize  that comparing PMFs and PDFs is not straight
 
 
 \begin{exercise}
-Make the plot of $n=2$ and $n=20$, include both plots and explain the results.
+Make the plot of $n=2$ and $n=20$. Include both plots and explain the results.
 \end{exercise}
 
 \begin{exercise}
@@ -146,11 +146,11 @@ Why do we stop the computation of the PMF at 100?
 
 
 \begin{exercise}
-In the code below, one of the for loop is removed.
+In the code below, one of the for loops is removed.
 \begin{enumerate}
 \item What is the change?
 \item Will this change have an effect on the speed of the computation?
-\item Which of the two alternatives do you find more readible?
+\item Which of the two alternatives do you find more readable?
 \end{enumerate}
 \end{exercise}
 

@@ -71,7 +71,7 @@ All material, including the \LaTeX\ sources, is available on [[https://github.co
 * Assignments
 
 - See the intro of =assignments.pdf=
-- You have to work in a group of two members.
+- Each group consists of two members. Each group turns in an \LaTeX\ document with the answers for the assignment. You can choose your group member when we open the groups.  We form random groups for the remaining students.
 - The due dates are simple: turn in the assignment of week $n$ on Wednesday 18.00h of week $n+1$, for $n=1,\ldots,7$.
 - We provide a document =sources/assignment-answer-template.tex=, see  [[https://github.com/ndvanforeest/probability-distributions][Github]],  that you should use as starting point for your assignments.
 

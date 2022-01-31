@@ -93,19 +93,6 @@ print(paste0("cov(Ss, Ts) = ", cov(Ss, Ts)))
 
 \begin{exercise}
 Modify the code such that the drunkard makes steps of size $2$ when moving left or right; the stepsizes up or down remain the same. What happes with $\E{R^{2}_n}$?
-\begin{solution}
-The line for the $x$-steps becomes
-
-\begin{minted}[]{python}
-X = (4 * steps - 2) * (steps < 2)  # *
-\end{minted}
-
-
-\begin{minted}[]{R}
-X = (4 * steps - 2) * (steps < 2) # *
-\end{minted}
-
-\end{solution}
 \end{exercise}
 
 \begin{exercise}

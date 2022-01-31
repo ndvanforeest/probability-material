@@ -58,7 +58,7 @@ What is the shape (rows and columns) of \verb|Z|?
 \end{exercise}
 
 \begin{exercise}
-Explain the values for \verb|loc|~ and \verb|shape| in \verb|Zexact| ( and corresponding \verb|mean| and \verb|sd|).
+Explain the values for \verb|loc|~ and \verb|shape| in \verb|Zexact| ( and corresponding \verb|mean| and \verb|sd| in R).
   (Read the documentation of scipy.stats.norm (or norm() for R) on the web if necessary.)
   To which definition in BH does this loc-scale transformation relate?
 \end{exercise}
@@ -136,8 +136,8 @@ Why do we set \texttt{k=3}?
 
 \begin{exercise}
 A bit harder, why do we plot \texttt{N*f3}, i.e., why do we have to multiply with \texttt{N}? Relate this to the meaning of $f(x)\d x$, where $f$ the density of some random variable.
-(To understand why is very important. Think hard, and read the solution when it becomes available.)
-\begin{solution}
+(Think hard about this problem; the ideas are important to understand how numerical integration works. )
+\begin{hint}
   Suppose we chop up the area under some arbitrary  function $g$ in blocks of height $g(x)$ and length $\Delta x$.
   Then the area of such a block is $g(x) \Delta x$.
 
@@ -145,21 +145,14 @@ A bit harder, why do we plot \texttt{N*f3}, i.e., why do we have to multiply wit
   In our case, we chop up the interval in parts with length $\Delta x = 1/N$.
   The elements of $f3$ are such that $f3[i] = f_{3}(x_{i}) \Delta x$, where $x_{i}$ lies in the $i$th interval and $f_{3}$ is the density of the sum of the three r.v.s. But then, $f_{3}(x_{i}) = f3[i]/\Delta x = N f3[i]$.
 
-  Forgetting to scale with $\Delta x = 1/N$ is a common error when dealing with densities.
-  Hence, recall that, notationally, $f(x) \d x$ means a block of height $f(x)$ and length $\d x$. Don't forget to deal with the $\d x$!
-\end{solution}
+So, why should we  scale with $\Delta x = 1/N$? (Forgetting this step is a common error when dealing with densities.)
+
+To memorize, $f(x) \d x$ is the area of a block of height $f(x)$ and length $\d x$.
+\end{hint}
 \end{exercise}
 
 \begin{exercise}
 Yet a tiny bit harder, consider \texttt{f4 = np.convolve(f3, fx)} (\texttt{f4 = convolve(f3, fx, type = "open")} in R) and \texttt{g4 = np.convolve(f2, f2)} (\texttt{g4 = convolve(f2, f2, type = "open")} in R). Why are they, numerically speaking,  equal?
-\begin{solution}
-Take four r.v.s $U, V, X, Y$. Then
-  \begin{equation}
-    \label{eq:15}
-(U+V+X) + Y = (U+V) + (X+Y).
-  \end{equation}
-Thus the density of $(U+V+X) + Y$ must be the same as the density of $(U+V) + (X+Y)$.
-\end{solution}
 \end{exercise}
 
 

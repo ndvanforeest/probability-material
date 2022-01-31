@@ -38,14 +38,16 @@ n = 5
 num = 10
 
 p = 0.5
-S = matrix(rbinom(n * num, size = 1, prob = p), num, n) * 2 - 1
+S = matrix(rbinom(n * num, size = 1, prob = p), num, n) * 2 - 1 # this
+# print(S)
 
 x = matrix(0, num, n)
-x[, 1] = 100
+x[, 1] = 100 # this
+#print(x)
 f = 0.25
 
 for (i in 2:n) {
-  x[, i] = x[, i - 1] * (1 + f * S[, i])
+  x[, i] = x[, i - 1] * (1 + f * S[, i]) # this
 }
 
 print(colMeans(x))

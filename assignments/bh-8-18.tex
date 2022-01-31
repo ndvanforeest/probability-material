@@ -1,10 +1,10 @@
 \subsection{BH.8.18}
 
 
-Use Python uncertainties module.\footnote{\url{https://pythonhosted.org/uncertainties/}}.
+% Use Python uncertainties module.\footnote{\url{https://pythonhosted.org/uncertainties/}}.
 
 
-We can demonstrate the use of Taylor's equation to see how uncertaintly should propagate\footnote{\url{https://en.wikipedia.org/wiki/Propagation_of_uncertainty}}.
+% We can demonstrate the use of Taylor's equation to see how uncertaintly should propagate\footnote{\url{https://en.wikipedia.org/wiki/Propagation_of_uncertainty}}.
 
 
 
@@ -73,11 +73,6 @@ print(paste(mean(N), sd(N)))
 Contrary to BH.7.1.25 if you run the code above, you'll see that $\E N < \infty$, and is very near to the deterministic answer.
 But isn't this strange: we divide two normal random variables, just like BH.7.1.25, but there the expectation is infinite.
 Explain why it works for the Beluga case, but not for the case discussed in BH.7.1.25.
-\begin{solution}
-If we divide two $\sim \Norm{0,1}$ r.v.s we obtain a Cauchy distributed rv.
-Note that here both rvs have a mean of $0$.
-In contrast, in the Beluga case, the normally distributed rvs have positive expectation.
-\end{solution}
 \end{exercise}
 
 \begin{exercise}

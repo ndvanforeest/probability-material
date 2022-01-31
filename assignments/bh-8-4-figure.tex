@@ -80,9 +80,9 @@ outcomes = c(H, H, T, H, H, H, T, H, H)
 h = 1 #this
 t = 1 #this
 
-pdf(file="beta.pdf", width = 8, height = 7, 
-	bg = "white", colormodel = "cmyk", paper = "A4")          
-    
+pdf(file="beta.pdf", width = 8, height = 7,
+    bg = "white", colormodel = "cmyk", paper = "A4")
+
 plots <-list()
 par(oma= c(0,0,0,0))
 
@@ -94,7 +94,7 @@ while (i <= length(outcomes)){    #this
   df = data.frame(support,X)
   plots[[i]] = ggplot(data=df, aes(x=support, y=X, group=1)) +
                geom_line()+
-               ylim(0,3.5)+  
+               ylim(0,3.5)+
                labs(title=paste0("h=", h-1, ", t=", t-1),x=" ", y = " ")
   i = i+1
 }
@@ -117,8 +117,6 @@ Which conjugacy relation between prior and data do we use here to update the pri
 
 \begin{exercise}
 Adapt the  code above such that the prior is $a=3.5, b= 1.5$, the outcomes are T, H, T, H, T, H, and the output is a figure with 3 x 2 subfigures. Besides the explanation, include the figure.
-\begin{solution}
-\end{solution}
 \end{exercise}
 
 

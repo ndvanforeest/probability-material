@@ -1,7 +1,10 @@
+\subsection{BH.8.36}
+\label{sec:bh.8.36}
+
 We simulate the post office part of BH.8.36.
 Read it now, i.e., before reading the text below.
 Then read the code below.
-In the questions we ask you to explain what the code does.
+In the questions, we ask you to explain what the code does.
 There are lots of print statements that have been commented out, but we left them in for you to include while experimenting with the code to see how the code works.
 (I often use print statements of intermediate results when writing a program, just to see whether I am still on track.
 Once I checked, I remove them, because they clutter the looks of the code.)
@@ -31,7 +34,7 @@ print((server == 1).mean())
 
 # BH.8.36.c
 # print(labdas[server])
-S = expon(scale=1).rvs(N) / labdas[server]
+S = expon(scale=1).rvs(N) / labdas[server] # this
 # print(S)
 
 D = np.min(T, axis=0) + S
@@ -49,24 +52,30 @@ N = 10
 
 T1 = rexp(N, rate = labdas[1])
 T2 = rexp(N, rate = labdas[2])
-
+#print(mean(T1)
 
 bigT = matrix(0, nrow = 2, ncol = N)
 bigT[1,] = T1
 bigT[2,] = T2
+#print(T)
 
 server = rep(0, ncol(bigT))
 
 for (i in 1:ncol(bigT)) {
   server[i] = which.min(bigT[,i])
-}
 
+#print(server)
+
+#BH.8.36.b
 print(mean((server == 1)))
 
-S = rexp(N, rate = 1) / labdas[server]
-print(S)
+#BH.8.36.c
+#print(labdas[server])
+S = rexp(N, rate = 1) / labdas[server] #this
+#print(S)
 
 D = apply(bigT, MARGIN = 2, FUN = min) + S
+#print(D)
 
 print(mean(D))
 print(sd(D))
@@ -85,18 +94,18 @@ What is the content of \texttt{server}? Why do we compute this?
 \end{exercise}
 
 \begin{exercise}
-Explain how we use the fundamental bridge in line P.21 (R.21) to answer BH.8.36.b.
+Explain how we use the fundamental bridge in line P.21 (R.24) to answer BH.8.36.b.
 \end{exercise}
 
 
 \begin{exercise}
 Alice is taken into service by the server that finishes first.
 We need to simulate the service time that Alice needs at that server.
-Explain how we do this in line P.25 (R.23). Hint, reread BH.5.5 on the exponential. BTW, this is a good time to reread BH.5.3.
+Explain how we do this in line P.25 (R.28). Hint, reread BH.5.5 on the exponential. BTW, this is a good time to reread BH.5.3.
 \end{exercise}
 
 \begin{exercise}
-Why is \texttt{np.min(T, axis=0)} in the python code (\texttt{apply(bigT, MARGIN=2, FUN=min)} in  R) the time Alice spends waiting in queue, i.e., the time Alice spends in the post office before her service starts?
+Why is \texttt{np.min(T, axis=0)} in the Python code (\texttt{apply(bigT, MARGIN=2, FUN=min)} in  R) the time Alice spends waiting in queue, i.e., the time Alice spends in the post office before her service starts?
 \end{exercise}
 
 
@@ -116,4 +125,4 @@ Run the code for $\lambda_{1}=1$ fixed, and take $\lambda_{2}$ equal to $0.5, 1,
 
 There is an important lesson to learn here.
 With simulation it is, often, reasonably simple to get numerical answers, but it requires many simulations to see a pattern in the numbers.
-For patterns we can better use theory, as theory gives us formulas that show how the output of some model depends on the input.
+For patterns, we can better use theory, as theory gives us formulas that show how the output of some model depends on the input.
