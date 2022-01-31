@@ -1,0 +1,92 @@
+\subsection{BH.9.7}
+\label{sec:bh.9.7}
+
+We use  simulation to solve  BH.9.7.
+Read it now, i.e., before reading the text below, then read the code below.
+Note how short  this code is;  amazing, isn't it?
+
+
+
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import uniform
+import matplotlib.pyplot as plt
+
+np.random.seed(3)
+
+
+N = 1000
+a, b = 0, 1000000
+V = uniform(a, b).rvs(N)
+
+x_range = np.linspace(b / 5, b / 2, num=50)
+y = np.zeros_like(x_range)
+
+for i, b in enumerate(x_range):
+    payoff = (V - b) * (b >= V / 4)
+    y[i] = payoff.mean()
+
+
+plt.plot(x_range, y)
+plt.show()
+\end{minted}
+
+\begin{minted}[]{R}
+set.seed(3)
+
+N = 1000
+a = 0
+b = 1000000
+V = runif(N, min = a, max = b)
+
+x_range = seq(b / 5, b / 2, length.out = 50)
+y = rep(0, length(x_range))
+
+
+i = 1
+for (b in x_range) {
+  payoff = (V - b) * (b >= V / 4)
+  y[i] = mean(payoff)
+  i = i + 1
+}
+
+plot(x_range, y, type = "l", col = "blue")
+\end{minted}
+
+
+\begin{exercise}
+For the Python code, use the scipy documentation to explain why $V\sim\Unif{[0,10^{6}]}$. For R, explain the function \texttt{runif()}.
+\end{exercise}
+
+
+
+\begin{exercise}
+What are the smallest and the largest value of \verb|x_range|?
+\end{exercise}
+
+\begin{exercise}
+Run the code above and make a graph. Include the graph in your report, and explain what you see in the graph. For instance, is there a maximum? If so, can you explain where the maximum occurs? Can you explain how the maximum should be?
+\end{exercise}
+
+
+\begin{exercise}
+Suppose after seeing the graph of the payoffs, and this graph would only increase, or decrease, how would you change \verb|x_range|? Do you expect to see a maximum?
+\end{exercise}
+
+
+
+
+\begin{exercise}
+For small N, e.g. N=10, you can get quite strange values. Why is that?
+\end{exercise}
+
+
+\begin{exercise}
+Change the acceptance threshold from to $V/4$ to $V/5$ (or $V/6$, or some other value you like), and make a graph of the payoffs.
+Include the graph in your report.
+\end{exercise}
+
+\begin{exercise}
+Change the payoff function to e.g $\sqrt{V-b}$, or some weird function that you like particularly such as $\sin |V-b|$ (any non-trivial function goes).
+Make a graph of the  mean and the standard deviation of the payoff. Can you explain your graph?
+\end{exercise}

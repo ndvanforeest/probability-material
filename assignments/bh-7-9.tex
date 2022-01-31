@@ -141,8 +141,8 @@ while (i <= 9){  #this
   df = data.frame(Xn)
   plots[[i]] =  ggplot()+
                 geom_histogram(df, mapping = (aes(x = Xn)), 
-				bins = n + 1, color = "blue")+ #this
-                ylim(0,600)+  
+				bins = n + 1, color = "blue")+ # this
+                ylim(0,600)+  # this
                 labs(title=paste0("n=", n, ", (", length(Xn) ,")"))+
                 theme(axis.title.x=element_blank(),
 				axis.title.y = element_blank())
