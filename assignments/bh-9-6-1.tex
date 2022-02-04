@@ -50,8 +50,10 @@ a = output[1]
 b = output[2]
 print(paste(a, b))
 
-X = rbeta(1000,a, b)
-print(paste(mean(X), var(X)))
+X_mean = a / (a + b)
+X_var = (X_mean * (1-X_mean )) / (a + b + 1)
+print(paste(X_mean, X_var)) # final check
+
 \end{minted}
 
 \end{exercise}
@@ -107,9 +109,10 @@ labda = 3
 days = 1000
 demands = rep(0, days)
 
-X = rbeta(1000, 1, 2)
-mu = mean(X)
-var = var(X)
+a = 1
+b = 2
+mu = a / (a + b)
+var = (mu * (1 - mu)) / (a + b + 1)
 
 for (i in 1:days){
   demands[i] = sum(rbeta(rpois(1,labda), 1, 2)) # this
@@ -188,18 +191,19 @@ set.seed(3)
 
 labda = 3
 
-X = rbeta(1000, 1, 2)
-mu = mean(X)
-var = var(X)
+a = 1
+b = 2
+mu = a / (a + b)
+var = (mu * (1 - mu)) / (a + b + 1)
 
-days = 20
+days = 1000
 n_jobs = rpois(days,labda)
 n_max = max(n_jobs) + 1 # see the comments
-demands = matrix(0,days, n_max)
+demands = matrix(0,days, n_max) # this
 for (day in 1:days){
   n = n_jobs[day]
   if(n == 0) next
-  demands[day, 1:n] = rbeta(n, 1, 2) 
+  demands[day, 1:n] = rbeta(n, 1, 2) # this
 }
 
 P = rep(0, n_max)
@@ -207,23 +211,23 @@ EXn = rep(0, n_max)
 VXn = rep(0, n_max)
 P[1] = length(n_jobs[which(n_jobs == 0)])/days
 for(n in 1:n_max){
-  idx = which(n_jobs == n)
+  idx = which(n_jobs == n - 1)
   if (length(idx) == 0){
     next
   }
   P[n] = length(idx) / days # this
   m = 
-  EXn[n] = mean(demands[idx, c(1:n)]) * n #this
-  VXn[n] = sd(demands[idx, c(1:n)]) * sd(demands[idx, c(1:n)])* n #this
+  EXn[n] = mean(demands[idx, c(1:n)]) * (n - 1)  #this
+  VXn[n] = sd(demands[idx, c(1:n)]) * sd(demands[idx, c(1:n)])* (n - 1) #this
 }
 
 EXN = RV(outcomes = EXn, probs = P) # this
-print(paste("mean:", labda * mu, mean(EXN) ))
+print(paste("mean:", labda * mu, E(EXN) ))
 
 VXN = RV(outcomes = VXn, probs = P) # this
-print(paste("EV: ", var * labda, VXN.mean()))
+print(paste("EV: ", var * labda, E(VXN)))
 
-VE = var(EXN)
+VE = V(EXN)
 print(paste("VE: ", mu * mu * labda, VE))
 \end{minted}
 

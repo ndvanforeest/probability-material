@@ -42,10 +42,8 @@ for(i in 1:num){
   N[i] = rpois(1,labda)
 }
 
-Labda = rexp(10000,1)
-print(paste(mean(N),var(N)))
-adam = mean(Labda)
-eve = mean(Labda) + var(Labda)
+adam = 1/1
+eve = 1/1 + 1/(1 * 1)
 print(paste(adam, eve))
 \end{minted}
 
@@ -97,14 +95,14 @@ for(i in 1:num){
   S[i] = sum(rlnorm(N, mean = 0, sd = sigma)+ mu)
 }
 
-Labda = rexp(100000,1)
-X = rlnorm(100000, mean = 0, sd= sigma) + mu
+theta = exp(sigma * sigma / 2) 
+var = (theta * theta) * (exp(sigma * sigma) - 1)
 
 print(paste("S.mean()=", mean(S)))
-adam = mean(X) * mean(Labda)
+adam = (theta + mu) * (1/1)
 print(paste("mean_theoretical: ", adam))
 print(paste("S.var()=", var(S)))
-eve = mean(Labda) * var(X) + mean(X) ** 2 * (mean(Labda)+var(Labda))
+eve = (1/1) * var + (theta + mu) ** 2 * (1/1 + 1/1/1)
 print(paste("var_theoretical: ", eve))
 \end{minted}
 
