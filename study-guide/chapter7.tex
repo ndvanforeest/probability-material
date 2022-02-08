@@ -364,11 +364,11 @@ Take $c$ the normalization constant (why is $c=1/4$), then using the previous ex
 &=\E{\1{Y\leq 2X}} \\
 &=c \int_{1}^{3}\int_{2}^{4} \1{y\leq 2x} \d y \d x \\
 &=c \int_{1}^{3}\int \1{2\leq y\leq \min\{4,2x\}}  \d y \d x \\
-&=c \int_{1}^{3} [\min\{4, 2x\} -2]^{+} \d x
+&=c \int_{1}^{3} (\min\{4, 2x\} -2) \d x
 \end{align}
-Now make a drawing of the function $[\min\{4, 2x\} - 2]^{+}$ on the interval $[1,3]$ to see that
+Now make a drawing of the function $(\min\{4, 2x\} - 2)$ on the interval $[1,3]$ to see that
 \begin{equation}
-\int_{1}^{3} [\min\{4, 2x\} -2]^{+} \d x = \int_{1}^{2} (2x -2) \d x + \int_{2}^{3} (4 -2) \d x.
+\int_{1}^{3} (min\{4, 2x\} -2) \d x = \int_{1}^{2} (2x -2) \d x + \int_{2}^{3} (4 -2) \d x.
 \end{equation}
 I leave the rest of the computation to you.
 \end{solution}
