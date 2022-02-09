@@ -53,7 +53,7 @@ Here, we deal with two rvs, and we have to specify how they depend. In the prese
 
 
 \begin{exercise}
-We have two rvs $X, Y \in [0,1]^{2}$ (here $[0,1]^{2} = [0,1]\times [0,1]$) with the joint PDF $f_{X,Y}(x,y) = 2 \1{x\leq y}$.
+We have the random vector $(X, Y) \in [0,1]^{2}$ (here $[0,1]^{2} = [0,1]\times [0,1]$) consisting of the rvs X and Y with the joint PDF $f_{X,Y}(x,y) = 2 \1{x\leq y}$.
 \begin{enumerate}
 \item Are $X$ and $Y$ independent?
 \item Compute $F_{X,Y}(x,y)$.
@@ -73,7 +73,7 @@ F_{X,Y}(x,y)
 &= 2\int_{0}^{x}\int  \1{u\leq v \leq y}\d v \d u \\
 &= 2\int_{0}^{x} [y-u]^{+} \d u,
 \end{align}
-because $u\geq y \implies \1{u\leq v \leq y} = 0$. Now, if $y>x$,
+because $u > y \implies \1{u\leq v \leq y} = 0$. Now, if $y>x$,
 \begin{align}
   2\int_{0}^{x} [y-u]^{+} \d u &=
   2\int_{0}^{x} (y-u) \d u = 2 y x - x^{2},
