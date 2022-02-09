@@ -455,7 +455,7 @@ When $X$ and $Y$ are independent, then $\E{XY} = \E X \E Y$, and then $\cov{X,Y}
 
 \begin{exercise}
 Let $U, V$ be two rvs and let $a,b\in \R$.
-Using the previous question to express $\cov{a(U+V), b(U-V)}$ in terms of $\V{U}$, $\V{V}$ and $\cov{U,V}$.
+Use the previous question to express $\cov{a(U+V), b(U-V)}$ in terms of $\V{U}$, $\V{V}$ and $\cov{U,V}$.
 \begin{solution}
 By linearity of the covariance wea have
 \begin{align}
@@ -465,6 +465,7 @@ By linearity of the covariance wea have
     &= a b \Big( \V{U} - \cov{U, V} + \cov{V, U} - \V{V} \Big) \\
     &= a b \Big( \V{U} - \V{V} \Big).
 \end{align}
+Alternatively one can also use the result from Ex.7.1.26, according to which $\cov{X,Y} = \E{XY}-\E{X}\E{Y}$.
 \end{solution}
 \end{exercise}
 
