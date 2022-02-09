@@ -55,7 +55,7 @@ To get the derivative of $g^{-1}$, consider the equality $g(g^{-1}(y)) = y$. The
 \begin{align*}
 g(g^{-1}(y)) = y \implies \frac{\d}{\d y} g(g^{-1}(y)) =1 \iff g'(g^{-1}(y)) \frac{\d}{\d y} g^{-1}(y) = 1 \implies  \frac{\d}{\d y} g^{-1}(y)  = 1 /g'(x),
 \end{align*}
-where we use that $g^{-1}(y)=x$.
+where we use that $g^{-1}(y)=x$. Notice why $g$ is assumed increasing: now we know that $g'(x)\neq0$.
 \end{solution}
 \end{exercise}
 
@@ -71,6 +71,8 @@ With PDFs  we only have to require \emph{locally} that $g$ is one-to-one, and we
 
 In 2D,  functions can have saddle points, i.e., points in which the function increases in one direction and decreases in another.
 Then finding the set of points $x$ such that\footnote{} $g(x,y)\leq (u,v)$ (which we need if we want to express $\P{g(X, Y) \leq (u,v)}$ in terms of the distribution $F_{X,Y}$) is not a particularly attractive task, to say the least.
+
+See also the inverse function theorem, which will be covered in more detail next block.
 \end{solution}
 \end{exercise}
 
@@ -148,7 +150,7 @@ Use the change of variable formula to relate the $\Geo{p}$ and the $\FS{p}$ dist
 \end{exercise}
 
 \begin{exercise}
-BH.8.1.1 write that `The support of $Y$ is all $g(x)$ with $x$ in the support of $X$.' Do they say that $\supp{Y} = \{x : g(x) \in \supp{X}$? BTW, with is the difference between $\supp{X}$ and $\sup{X}$?
+BH.8.1.1 write that `The support of $Y$ is all $g(x)$ with $x$ in the support of $X$.' Do they say that $\supp{Y} = \{x : g(x) \in \supp{X}$? BTW, what is the difference between $\supp{X}$ and $\sup{X}$?
 \begin{hint}
 \end{hint}
 \begin{solution}
@@ -193,7 +195,7 @@ f_{Z}(z) &= f_{X}(x) \frac{\d x}{\d z},\\
 \frac{\d z}{\d x} &= 3 x^{2} = 3 z^{2/3},\\
 f_{Z}(z) &= f_{X}(z^{1/3}) \frac{1}{3z^{2/3}}.
  \end{align}
-When $F_{Z}(u) = 1$ for $u\leq 125$ and $F_{Z}(u) = 0$ for $u\leq 0$. When $0\leq u \leq 125$,
+When $F_{Z}(u) = 1$ for $u\geq 125$ and $F_{Z}(u) = 0$ for $u\leq 0$. When $0\leq u \leq 125$,
  \begin{align}
  F_{Z}(u) &= \int_{0}^{u} f_{X}(z^{1/3}) \frac{1}{3z^{2/3}} \d z = \frac{1}{5}\int_{0}^{u} \1{0\leq  z^{1/3}\leq 5}  \frac{1}{3z^{2/3}} \d z \\
 &= \frac{1}{5}\int_{0}^{u} \1{0\leq z\leq 125}  \frac{1}{3z^{2/3}} \d z \\
@@ -317,7 +319,7 @@ Explain in your own words.
 \begin{solution}
 If we would not add this extra variable, we cannot use the change of variables theorem. We also need a function to deal with the scaling. In the change of variables theorem, this is the Jacobian.
 
-nThere is also another problem.
+There is also another problem.
 Consider the function $g(x, y)$ that maps $\R^{2}$ to $\R$.
 The inverse set $\{ (x,y) : g(x,y) =z \}$ can be quite complicated, while the set $\{y : g(x, y) = z\}$ for a fixed $x$ is hopefully just one point.
 Hence, the mapping $(x, y) \to (x, g(x,y))$ is, at least locally, one-to-one.
@@ -425,7 +427,7 @@ BH.8.3.3. The authors write that $X$ is not marginally Binomial, but is conditio
 \begin{exercise}
 BH.8.3.3. The authors use a smart trick to find an expression for the posterior distribution $f_{p|X=k}$ of $p$. Use this posterior to derive an expression for $\P{X=k}$ by using the fact that
 \begin{equation*}
-\P{X=k} = \frac{{n\choose k} p^{k}(1-p)^{n-k} \Beta{a,b}}{\Beta{a+k, b+n-k}},
+\P{X=k} = \frac{{n\choose k} p^{k}(1-p)^{n-k} \Beta{p;a,b}}{\Beta{p;a+k, b+n-k}},
 \end{equation*}
 and simplyfing the RHS.
 \begin{hint}
@@ -537,7 +539,7 @@ Let $X$ denote the number of heads.
 
 
 \begin{exercise}
-We have an urn with 1000 coins. One of those is biased such that $\P{H} = 99/100 = 1-\P{T}$, all others are fair. You select at random a coin, i.e., with probability $1/1000$ you select the biased one, and start throwing. You see 10 heads in row.
+We have an urn with 1000 coins. One of those is biased such that $\P{H} = 99/100 = 1-\P{T}$, all others are fair. You select at random a coin, i.e., with probability $1/1000$ you select the biased one, and start throwing. You see 10 heads in row. What is the probability you picked the biased coin?
 \begin{hint}
 \end{hint}
 \begin{solution}
