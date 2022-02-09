@@ -585,8 +585,9 @@ $\V X = n/\lambda^{2}$, $\E X = n/\lambda$, SCV $=1/n$.
 \end{exercise}
 
 \begin{exercise}
-We have a machine that has temperature $x_0e^{-\alpha t}$ after a time $t$. We switch it on when $q$ jobs arrive. Job interarrival times are $\Exp{\lambda}$. Why  does the temperature at the moment the $q$th job arrives have the distribution $x_0\exp{-\alpha Y}$, with $Y\sim \Gamm{q-1, \lambda}$?
+We have a machine that has temperature $x_0e^{-\alpha t}$ after a time $t\geq 0$. We switch the machine on after the arrival of~$q$ jobs. Job interarrival times are iid $\sim\Exp{\lambda}$. The temperature at the moment the $q$th job arrives has the distribution $x_0\exp\{-\alpha Y\}$, with $Y\sim \Gamm{q, \lambda}$. Explain why this is so.
 \begin{solution}
+We have to wait for $q$ exponentially distributed interarrival times. The sum of these interarrival times is $\Gamm{1, \lambda}$.
 \end{solution}
 \end{exercise}
 
