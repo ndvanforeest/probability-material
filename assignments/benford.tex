@@ -1,0 +1,132 @@
+\subsubsection{Challenge: Benford's law}
+
+
+
+In this exercise, we discuss Benford's law. Recall that the first step towards this law was taken in Lecture 5, Exercise 3. In this exercise, we showed that if $X,Y$ are iid uniform on $[1, 10)$, that then the density of $Z = XY$ is given by $$f_Z(z) = \frac{\log(\min\{10,z\}) - \log(\max\{1, z/10\})}{81} I_{1 \leq z \leq 100}.$$
+Note that $\log$ denotes the natural logarithm. \\
+Benford's law is a statement about the distribution of the first digit of the product of sufficiently many variables that are iid uniform on $[1, 10)$. We first consider the first digit of the product of two such variables, i.e. the first digit of $Z$.
+
+
+\begin{exercise}
+Let $K$ be the first digit of $Z$. Show that the PMF of $K$ is given by
+$$P(K = k)  = \frac{9k\log(k) - 9(k+1)\log(k+1) + 9+ 10 \log(10)}{81}$$
+for $k \in \{1, 2, \ldots, 9\}$.
+
+\end{exercise}
+
+
+\begin{exercise}
+Check that $\sum_{k=1}^9 P(K = k) = 1$. This can be done nicely by recognizing a \textit{telescoping sum}: many terms cancel because they appear once with a minus and once with a plus.
+\end{exercise}
+
+
+Another way to derive the first digit of $Z$ is to first divide $Z$ by 10 if $Z \geq 10$. This yields a random variable $W$ with support $[1, 10)$. Clearly, the division doesn't affect the first digit.  The next exercise asks to derive the resulting density. This can be a bit tricky; you should check your answer by verifying that the distribution of the first digit of $W$ matches the distribution of the first digit of $Z$.
+
+\begin{exercise}
+Let $W = Z$ if $1 \leq Z < 10$ and $W = \tfrac{Z}{10}$ if $10 \leq Z < 100$. Derive the density of $W$.
+\end{exercise}
+
+
+We now turn to the product of more than two (independent) random variables. It would be very tedious to do this analytically, so we will instead use some code. However, to do this we have to approximate the continuous uniform variable by a discrete random variable. We use the discrete uniform distribution on $\{1+ 0.5 \cdot \frac{9}{s}, 1 + 1.5 \cdot \frac{9}{s}, 1 + 2.5 \cdot \frac{9}{s}, \ldots, 1 + (s-0.5) \cdot \frac{9}{s}\}$; in total this set has $s$ elements. However, a product of two elements from this set may not again be an element of this set. To solve this, we identify all elements of the interval $\left(1+ k \cdot \frac{9}{s}, 1+ (k+1)\cdot \frac{9}{s}\right)$ with $1+ (k+0.5)\cdot \frac{9}{s}$. We now use a loop to approximate the distribution of the product of $p+1$ random variables by looking at  all possible values of the product of $p$ random variables and one additional uniformly distributed random variable. Note that in the code, $s$ is called \texttt{steps} and $p$ is  called \verb|p_idx|.
+
+Executing the code may take a while. If it takes more than 1 minute, you may decrease \texttt{steps}, but please do note that you did so.
+
+\begin{minted}[]{python}
+import math
+
+steps = 900
+products = 15
+p_unif = [1.0/steps] * steps
+p_mat = [p_unif]
+
+for p_idx in range(1, products):
+    p_vec = [0] * steps
+        for s1 in range(steps):
+            for s2 in range(steps):
+                product = (1 + (s1 + 0.5)*9/steps) * (1 + (s2 + 0.5)*9/steps)
+                prod_probability = p_mat[p_idx - 1][s1] * 1/steps
+
+                if product > 10:
+                    product = product/10
+
+                prod_idx = math.floor((product-1)/9 * steps)
+                p_vec[prod_idx] += prod_probability
+
+    p_mat.append(p_vec)
+
+
+p_digits = []
+for p_idx in range(products):
+    vec = []
+    for digit in range(1, 10):
+        pd = sum(p_mat[p_idx][((digit-1)*steps//9):(digit*steps//9)])
+        vec.append(round(pd, 6))
+    p_digits.append(vec)
+
+print(p_digits)
+\end{minted}
+
+
+\begin{minted}[]{R}
+steps <- 900
+products <- 15
+p_unif <- rep(1/steps, steps)
+p_mat <- matrix(0, nrow = steps, ncol = products)
+p_mat[, 1] <- p_unif
+
+for (p_idx in 2:products) {
+  p_vec <- rep(0, steps)
+  for (s1 in 1:steps) {
+    for (s2 in 1:steps) {
+      product <- (1 + (s1 - 0.5)*9/steps) * (1 + (s2 - 0.5)*9/steps)
+      prod_probability <- p_mat[s1, p_idx - 1] *  1/steps
+
+      if (product > 10) {
+        product <- product/10
+      }
+
+      prod_idx <- ceiling((product-1)/9 * steps)
+      p_vec[prod_idx] <- p_vec[prod_idx] + prod_probability
+    }
+  }
+  p_mat[, p_idx] = p_vec
+}
+
+p_digits <- matrix(0, nrow = 9, ncol = products)
+for (p_idx in 1:products) {
+  for (digit in 1:9) {
+    pd = sum(p_mat[((digit-1)*(steps/9)+1):(digit*(steps/9)), p_idx])
+    p_digits[digit, p_idx] = round(pd, 6)
+  }
+}
+p_digits
+\end{minted}
+
+\vspace{5pt}
+
+\begin{exercise}
+Explain line P.13 (R.12) of the code.
+\end{exercise}
+
+\begin{exercise}
+Briefly comment on the results for $p=2$ compared the exact result derived in the first exercise. Why is it important to make this comparison?
+\end{exercise}
+
+When looking at the results for larger $p$, it seems that the probabilities converge. The limit random variable $B$ then satisfies the property that the first digit of $B$ and the first digit of $BU$ (where $U \sim \Unif{1,10}$) are identically distributed.  Proving this is quite challenging (even for the challenge). In addition, we first need to know what the distribution of $B$ is.
+
+To guess the  distribution of the first digit of $B$, we look at the results of our code and try some transformations to see if this yields familiar numbers. It turns out that the first digit $M$ of $B$ has the following distribution:
+\begin{equation*}
+P(M=k) = \log_{10}\left(\frac{k+1}{k}\right),
+\end{equation*}
+for $k \in \{1,2,\ldots, 9\}$.
+
+\begin{exercise}
+Briefly comment on these exact values of $P(M=k)$ compared to the values for $p=15$ that result from the code. Give two reasons why the code results are not exact. Which reason do you think is the most important?
+\end{exercise}
+
+\begin{exercise}
+Check that $\sum_{k=1}^9 P(M = k) = 1$. You can again use a telescoping sum.
+\end{exercise}
+
+
+Besides the theoretical aspects covered in this challenge, Benford's law states that the first digit of numbers of naturally occurring sets that span several orders of magnitude, such as  vote counts by county (or municipality), transaction sizes, etc., approximately follow this distribution. Initially this was just seen as an interesting curiosity of no practical value, but recently it has been used in fraud detection. If you're interested, you might check out this YouTube video by Numberphile: \url{https://www.youtube.com/watch?v=XXjlR2OK1kM&ab_channel=Numberphile}

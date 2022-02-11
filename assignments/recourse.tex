@@ -1,0 +1,75 @@
+\subsubsection{Challenge: Recourse models}
+
+
+This exercise will given an example of how probability theory can pop up in OR problems, in particular in linear programs. It introduces you to the concept of \textit{recourse models}, which you will learn about in the master course Optimization Under Uncertainty. Disclaimer: the story is quite lengthy, but the concepts introduced and questions asked are in fact not very hard. We just added the story to make things more intuitive.
+
+\new{We consider a} pastry shop that only sells one product: chocolate muffins.
+Every morning at 5:00 a.m., the shop owner bakes a stock of fresh muffins, which he sells during the rest of the day.
+Making one muffin comes at a cost of $c = \$ 1$ per unit.
+Any leftover muffins must be discarded at the end of the day, so every morning he starts with an empty stock of muffins.
+
+The owner has one question for you: determine the amount $x$ of muffins that he should make in the morning to minimize his production cost. Note that the owner never wants to disappoint any customer, i.e., he requires that $x \geq d$, where $d$ is the daily demand for muffins.
+
+The problem can be formulated as a linear program (LP):
+\begin{align}
+    \min_{x \geq 0} \{ cx \ : \ x \geq d \}.
+\end{align}
+For simplicity, we ignore the fact that $x$ should be integer-valued.
+
+\begin{exercise}
+Determine the optimal value $x^*$ for $x$ and the corresponding objective value in case $d$ is deterministic.
+\end{exercise}
+
+Of course, in practice $d$ is not deterministic. Instead, $d$ is a random variable with some distribution. However, note that the LP above is ill-defined if $d$ is a random variable. We cannot guarantee that $x \geq d$ if we do not know the value of $d$.
+
+You explained the issue to the shop owner and he replies: ``Of course, you're right! You know, whenever I've run out of muffins and a customer asks for one, I make one on the spot. I never disappoint a customer, you know! It does cost me $50 \%$ more money to produce them on the spot, though, you know.''
+
+Mathematically speaking, the shop owner just gave you all the (mathematical) ingredients to build a so-called \textit{recourse model}. We introduce a \textit{recourse variable} $y$ in our model, representing the amount of muffins produced on the spot. Production comes at a unit cost of $q = 1.5 c = \$ 1.5$. Assuming that we know the distribution of $d$, we can then minimize the \textit{expected total cost}:
+
+\begin{align}
+    \min_{x \geq 0} \big\{ cx + \E{v(d,x)} \big\},
+\end{align}
+where $v(d,x)$ is the optimal value of another LP, namely the \textit{recourse problem}:
+\begin{align}
+    v(d,x) := \min_{y \geq 0} \{ qy \ : \ x + y \geq d \},
+\end{align}
+for given values of $d$ and $x$. The recourse problem can easily be solved explicitly: we get $y=d-x$ if $d \geq x$ and $y=0$ if $d < x$. So we obtain
+\begin{align}
+    v(d,x) = q (d - x)^+,
+\end{align}
+where the operator $(\cdot)^+$ represents the \textit{positive value} operator, defined as
+\begin{equation}
+    (s)^+ = \begin{cases}
+    s &\text{if } s \geq 0,\\
+    0 &\text{if } s < 0.
+    \end{cases}
+\end{equation}
+
+\begin{exercise}
+To get some more insight into the model, suppose (for now) that $d \sim U\{10, 20\}$.
+Solve the model, i.e., find the optimal amount $x^*$.
+\begin{hint}
+First, compute the value of $\E{v(d,x)}$ as a function of $x$. Then find the optimal value of $x$.
+\end{hint}
+\end{exercise}
+
+\begin{exercise}
+ What is the expected recourse cost (expected cost of on-the-spot production) at the optimal solution $x^*$, i.e., compute $\E{v(d,x^*)}$?
+\end{exercise}
+
+To solve the model correctly, we need the true distribution of $d$. We learn the following from the shop owner: ``My granddaughter, who's always running around in my shop, is a bit data-crazy, you know, so she's been collecting some data. I remember her saying that `the demand from male and female customers are both approximately normally distributed, with mean values both equal to $10$ and standard deviations of $5$'. She also mentioned something about correlation, but I don't remember exactly, you know. It was either almost $1$ or almost $-1$. I hope this helps!''
+
+Mathematically, we've learned that $d = d_m + d_f$, with $(d_m, d_f) \sim \mathcal{N}(\mu, \Sigma)$, where $\mu = (\mu_m, \mu_f) = (10,10)$ and $\Sigma_{11} = \sigma_m^2 = \Sigma_{22}  = \sigma_f^2 = 5^2 = 25$. Finally, $\Sigma_{12} = \Sigma_{21} = \cov{d_m, d_f} = \rho \sigma_m \sigma_f = 25 \rho$. Also, we know that either $\rho \approx 1$ or $\rho \approx -1$.
+
+\begin{exercise}
+ Calculate $x^*$ and the corresponding objective value for the case $\rho = -1$. (Do not read  $\rho=1$, this case is not simple.)
+\end{exercise}
+
+\begin{exercise}
+Consider the two extreme cases $\rho = 1$ and $\rho = -1$.
+In which case will the shop owner have lower expected total costs?
+Provide a short, intuitive explanation.
+\begin{hint}
+You don't have to compute $x^*$ for the case where $\rho = 1$; this is not easy!
+\end{hint}
+\end{exercise}

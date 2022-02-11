@@ -1,0 +1,99 @@
+\subsubsection{Challenge: Ping pong balls ina Beluga}
+
+This challenge is a continuation of the simulation we did for the Beluga case, and we discuss some ways to check whether $\V {N} \approx \V V \V v$ holds in general, and then we try to find a better approximation. We chopped up the challenge into many exercises, to help you organize the ideas.
+
+
+Recall that earlier we have been a bit sloppy about the units, measuring the volumes of the airplane in $\m^{3}$ and a ping pong ball in $\cm^{3}$, so actually $N$ is in millions of ping pong balls.
+Note that using different units can easily lead to  confusion; as a take-away , choose one unit.
+
+One way to check the correctness of $\V N \approx \V V \V v$ is to change the scale. In fact, memorize that changing scale is an easy way to check laws.
+
+\begin{exercise}
+Suppose we instead measure the size of a ping pong ball in meters and the size of the airplane in hectometers.
+Explain that $N$ is still in millions of ping pong balls.
+What happens to $\V{N}$ and what happens to $\V V \V v$ (theoretically)?
+\end{exercise}
+
+
+Another way to check a statement is to consider some extreme cases.
+
+\begin{exercise} Suppose that we would know the size of a ping pong ball very accurately, i.e.  we consider the extreme case where $\V v \rightarrow 0$. Explain that the approximation is not a good approximation in this limit.
+\end{exercise}
+
+
+\begin{exercise}
+Which of these two checks convinces you most that something is wrong with this approximation, and why?
+\end{exercise}
+
+We now turn to the task of trying to find a good approximation.
+
+\begin{exercise} Assume that $X$ and $Y$ are independent. Show that
+\begin{equation*}
+\V {X Y} = \V {X} \V {Y} + \V{X} \E {Y}^2 + \E {X}^2 \V{Y}.
+\end{equation*}
+\end{exercise}
+
+\begin{exercise} \label{ex:beluga5}
+Assume in addition that we know at least one of $X$ and $Y$ quite precisely. Argue that the following is then a good approximation:
+\begin{equation*}
+\V {X Y} \approx \V{X} \E {Y}^2 + \E {X}^2 \V{Y}.
+\end{equation*}
+\end{exercise}
+
+
+So far we have only considered the variance of a product, but we would like to know the variance of a ratio.
+For this we can use Taylor expansions to  make accurate approximations.
+
+\begin{exercise}  \label{ex:beluga6}
+Find the first order Taylor expansion of $\frac{1}{Z}$ around $a=  \E {Z}$. By taking the expectation and the variance of this expansion, show that
+\begin{align*}
+\E{\frac{1}{Z}} &\approx \frac{1}{\E{Z}}, & \V{\frac{1}{Z}} &\approx \frac{\V{Z}}{\E{Z}^4}.
+\end{align*}
+\end{exercise}
+
+\begin{exercise}
+Combine all of the above to derive the following approximation for the variance of the ratio of two independent random variables $X$ and $Z$:
+\begin{equation*}
+\V {\frac{X}{Z}} \approx \frac{\V{X}}{\E{Z}^2} + \E {X}^2\frac{\V{Z}}{\E{Z}^4}.
+\end{equation*}
+\end{exercise}
+
+
+\begin{exercise}
+Check this approximation in the ways of the first two exercises.
+\end{exercise}
+
+
+
+After doing all this work, we would of course like to know how well this approximation does.
+When comparing the approximation to the sample standard deviation found in~\cref{ex:2a} for \texttt{num=500}, the result may be a bit disappointing.
+However, this is just because the sample standard deviation is also an estimate of the actual standard deviation of $N$, so by chance the result may be closer to $\V V \V v$ than to our new approximation.
+
+ In Chapter 10, you will learn something about the distribution of the sample variance. For now, just increase  \texttt{num}. We know this decreases the variance of the sample mean and it also decreases the variance of the sample variance, so we get a more accurate estimate.
+
+\begin{exercise} Use the result of the previous exercise to compute an approximation for $\V {N}  = \V {V/v}$. Also use the code with a (much) higher value of \texttt{num}, to show that the approximation $\V {N}  \approx \V V \V v$ is likely to be worse, even in the setting of~\cref{ex:2} where it was quite good.
+\end{exercise}
+
+The following two exercises are really optional, but I found them very neat and insightful.
+
+
+
+\begin{exercise}
+Recall that for a non-negative random variable $X$ with finite variance, we define the squared coefficient of variation as $ \mathrm{SCV}(X) = \V {X} /\E {X}^2$.
+Using the SCV, show that the approximations of~\cref{ex:beluga5} and~\cref{ex:beluga6} can be rewritten in the following neat way:
+\begin{align*}
+\mathrm{SCV}(XY) &\approx \mathrm{SCV}(X) + \mathrm{SCV}(Y). \\
+\mathrm{SCV}\left(1/Z \right) &\approx \mathrm{SCV}(Z). \\
+\end{align*}
+\end{exercise}
+
+
+In BH.10, you will learn Jensen's inequality, which implies that $\E{\frac{1}{Z}} \geq \frac{1}{\E{Z}}$ for all positive random variables $Z$. In the following exercise, we reflect on this by finding a more accurate approximation based on the second order Taylor expansion.
+
+\begin{exercise} Find the second order Taylor expansion of $\frac{1}{Z}$ around $a=  \E {Z}$.
+By taking the expectation, show that
+\begin{align*}
+\E{\frac{1}{Z}} \approx \frac{1}{\E{Z}} + \frac{2\V{Z}}{\E{Z}^3}.
+\end{align*}
+Note that this is always at least $\dfrac{1}{\E{Z}}$.
+\end{exercise}

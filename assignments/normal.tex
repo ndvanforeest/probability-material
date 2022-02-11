@@ -1,0 +1,15 @@
+\subsubsection{Challenge: Proof about independence of normal rvs}
+
+Consider two iid rvs $X, Y$ such that $X+Y$ and $X-Y$ are independent. In BH 7.5.8, it is claimed that this implies that $X$ and $Y$ are normally distributed.
+
+This challenge asks to give a proof of this claim. Throughout this problem, you may assume that $X$ and $Y$ have a MGF that is defined for all $t \in \mathbb R$.\footnote{This may seem like a big restriction, but this argument can easily be adapted to work with the \textit{characteristic function} instead of the MGF, and the characteristic function does always exist. You will learn the characteristic function in the second year courses Statistical Inference and Linear Models in Statistics.} You may also use without proof the fact that MGFs that are defined everywhere are infinitely often continuously differentiable.
+
+\begin{exercise}
+Let $M_X$ be the MGF of $X$ (and hence of $Y$).
+\begin{enumerate}
+\item Prove that $M_X(2t) = (M_X(t))^3(M_X(-t))$.
+\item Define $f(t) = \log M_X(t)$. Prove that $8f'''(2t) = 3f'''(t) - f'''(-t)$.
+\item Let $R > 0$ be arbitrary. Use Weierstrass' theorem to prove that $f'''$ attains a minimum $m$ and a maximum $M$ on the interval $[-R, R]$, and then prove that $m = M = 0$.
+\item Prove that $X$ is normally distributed.
+\end{enumerate}
+\end{exercise}

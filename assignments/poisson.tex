@@ -1,0 +1,46 @@
+\subsubsection{Challenge: A uniqueness property of the Poisson distribution}
+
+Consider  the chicken-egg story (BH 7.1.9): A chicken lays a random number of eggs $N$ an each egg independently hatches with probability $p$ and fails to hatch with probability $q = 1-p$.
+Formally, $X|N\sim\Bin{N,p}$.
+Assume also that $X|N\sim\Bin{N,p}$ and that $N-X$ is independent of $X$.
+For $N \sim \Pois{\lambda}$ it is shown in BH 7.1.9 that $X$ and $Y$ are independent.
+This exercise asks for the converse: showing that the independence of $X$ and $Y$ implies that $N \sim \Pois{\lambda}$ for some $\lambda$.
+Hence, the Poisson distribution is quite special: it is the only distribution for which the number of hatched eggs doesn't tell you anything about the number of unhatched eggs.
+
+Let $0 < p < 1$. Let $N$ be an rv. taking non-negative integer values with $P(N > 0) > 0$.
+Assume also that  $X|N\sim\Bin{N,p}$ and that $N-X$ is independent of $X$.
+
+\begin{exercise}
+ Use the assumption that $\P{N>0}>0$ to prove that $N$ has support $\mathbb N$, i.e. $\P{N=n} > 0$ for all $n \in \mathbb N$. Note: $0 \in \mathbb N$.
+\begin{hint}
+In this exercise we want to prove that $N$ is Poisson distributed. So you cannot assume this in your solution.
+\end{hint}
+\end{exercise}
+
+
+
+\begin{exercise}
+Write $Y = N-X$. Prove that
+\begin{equation}
+\label{eq:1}
+\P{X=x}\P{Y=y} = {x+y \choose x} p^x (1-p)^y \P{N=x+y}.
+\end{equation}
+\end{exercise}
+
+
+
+\begin{exercise}
+Prove that $N$ is Poisson distributed.
+\begin{hint}
+Use the relation of the previous exercise to show that
+\begin{equation}
+  \label{eq:3}
+P(N=n+1) = \frac{\lambda}{1+n} P(N=n).
+\end{equation}
+\textit{Bigger hint:} Fill in $y=0$ in the LHS and RHS of~\cref{eq:1}; call this expression 1. Then fill in $y=1$ to a obtain a second expression. Divide these two expressions and note that $\P{X=x}$ cancels. Finally,  define
+\begin{equation}
+\label{eq:2}
+\lambda = \frac{\P{Y=1}}{(1-p)\P{Y=0}}.
+\end{equation}
+\end{hint}
+\end{exercise}

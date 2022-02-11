@@ -1,0 +1,68 @@
+\subsubsection{Challenge: Records}
+\label{sec:records}
+
+
+In BH.7.48 you looked at the number of records in high jumping.
+Let $X_j$ be how high the $j$th jumper jumped.
+As in that exercise, we assume that $X_1, X_2, \ldots$ are iid.
+with a continuous distribution and say that the $j$th jumper sets a record if $X_j$ is larger than $X_i$ for all $1\leq i \leq j-1$.
+Let $X_i^*$ denote the $i$th record, i.e., the height of highest jump for the first $i$ jumps.
+We write $f_X$ and $F_X$ for the PDF and CDF of the iid
+jumping heights, and $X$ for a random variable with density $f_X$.
+Finally, we write $G_X$ for the survivor function of $X$, i.e.
+$G_X(x) = 1-F_X(x)$.
+
+It is not necessary to know the solution of BH.7.48 to do the challenge. In the challenge, we instead look at the distribution of the $i$th record, the expectation of the $i$th record and the expected improvement of the record: $\E{X_{n+1}^* - X_n^*}$.
+
+
+\begin{exercise}
+Let $f_{X_{i+1}^*, X_i^*}$ be the joint PDF of the $(i+1)$th and the $i$th record.
+Prove that $$f_{X_{i+1}^*, X_i^*}(u,v) = \frac{f_X(u)}{G_X(v)} f_{X_i^*}(v) \1{u >v}.$$
+\end{exercise}
+
+Note that $X_1^* = X_1$. We now derive the density of $X_2^*$, and then proceed with the general case. These are challenging problems, be sure to check out the hints if you are stuck.
+
+\begin{exercise}
+Prove that $$f_{X_2^*}(u) = - f_X(u) \log(G_X(u)).$$
+\begin{hint}
+Use a substitution. What is the derivative of the survivor function?
+\end{hint}
+\end{exercise}
+
+\begin{exercise}
+Prove that $$f_{X_n^*}(u) = f_X(u) \cdot \frac{(-\log(G_X(u)))^{n-1}}{\Gamma(n)}.$$
+\begin{hint}
+If you need to prove something for all natural numbers $n$, it is always good to try using mathematical induction, especially since we already know something relating $X_{n+1}^*$ and $X_n^*$.
+Note that you can again use the same substitution as in the previous exercise. After that, you need another substitution.
+\end{hint}
+\end{exercise}
+
+In general case, it is hard to compute the integral of $u f_{X_n^*}(u)$ which is required to compute $\E{X_n^*}$.
+For the exponential distribution however, it is still possible to find the result analytically.
+
+\begin{exercise}
+Assume that $X \sim \Exp{\lambda}$. Determine $\E{X_n^*}$, and hence the expected improvement of the record: $\E{X_{n+1}^* - X_n^*}$, using the PDF from the previous exercise.
+\begin{hint}
+Do you recognize the PDF of $X_n^*$ for $X \sim \Exp{\lambda}$?
+\end{hint}
+\end{exercise}
+
+
+When $X$ is exponentially distributed, we can also use directly use the properties of the exponential distribution to determine  $\E{X_{n+1}^* - X_n^*}$.
+
+\begin{exercise}
+In Exercise 6 of Assignment 5 you found an expression for $\E{X \given X \geq a}$ if $X \sim \Exp{\lambda}$. Use this expression and Adam's law to determine  $\E{X_{n+1}^* - X_n^*}$  if $X \sim \Exp{\lambda}$.
+\end{exercise}
+
+\begin{exercise}
+Is the exponential distribution a realistic model for record improvements? Why (not)? If not, why is it still good to look at this case? Explain briefly.
+\end{exercise}
+
+We now consider this model for other distributions as well. Although for many distributions finding analytical results is very difficult or impossible, it can still be interesting to make a plot for the record improvements for other distributions.
+
+
+
+
+\begin{exercise}
+Assume that $X$ has PDF $f_X(x) = 2xe^{-x^2}$ for $x>0$, and $f_X(x) = 0$ otherwise. Plot $\E{X_{n+1}^* - X_n^*}$ as a function of $n$. You may use code for computing the survival function and the expectation, although it is possible (but not recommended) to do it analytically.
+\end{exercise}

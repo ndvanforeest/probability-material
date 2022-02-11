@@ -28,7 +28,7 @@ I  like this example as it  shows how to make optimal decisions under uncertaint
 \begin{hint}
   There is no need to start conditioning, the only reasonable approach would lead to the same result in the book. Use LOTUS.
 \end{hint}
-  
+
 \begin{solution}
 \begin{enumerate}
   \item The indicator function is zero when the bid is rejected, hence there is a zero payoff. When the bid is accepted the indicator function is one and the resulting payoff is $V-b$, the prize value minus the offer.
@@ -41,8 +41,8 @@ I  like this example as it  shows how to make optimal decisions under uncertaint
 \end{align*}
 Clearly, $\alpha<1/2$ to ensure that $\E X > 0$.
 
-If, $b>\alpha$ the expected payout is $\E{W} = 1/2 -b $, as any bid is accepted (why?). Thus, again if alpha were bigger than $1/2$ the expected payout would be negative. 
-(You can split the cases up like we did here, or work with a min operator in the upper limit of the integral. The second option is probably less prone to mistakes, but here there is an intu\"itive answer for the second case.) 
+If, $b>\alpha$ the expected payout is $\E{W} = 1/2 -b $, as any bid is accepted (why?). Thus, again if alpha were bigger than $1/2$ the expected payout would be negative.
+(You can split the cases up like we did here, or work with a min operator in the upper limit of the integral. The second option is probably less prone to mistakes, but here there is an intu\"itive answer for the second case.)
 \end{solution}
 \end{exercise}
 
@@ -55,7 +55,7 @@ But is there another $\alpha$ (smaller or larger than $2/3$) at which entering t
  \begin{align*}
    \E W &= (1/2 - b) \1{b>\alpha} + \frac{1-2\alpha}{2\alpha^2}b^2 \1{b\leq \alpha} \\
   \end{align*}
-  The expected payoff is continuous, $\lim_{b\uparrow \alpha} \E W  = 1/2 - \alpha = \lim_{b\downarrow \alpha} \E W$. We can consider both ranges separately for $b \in [0,\alpha]$ and $b \in (\alpha, \inf)$. We assume $0<\alpha<1/2$. Then in the first case the co\"efficient of $b^2$ is positive, so we should consider the boundary condition, $b=\alpha$ is the maximizer. In the second case $b$ is negative, so we should make it as small as possible, i.e., choose $b = lim_{x \downarrow \alpha} x$. In conclusion, the optimal betting amount would be $\alpha$ and would result in an expected payoff of $1-\alpha$. 
+  The expected payoff is continuous, $\lim_{b\uparrow \alpha} \E W  = 1/2 - \alpha = \lim_{b\downarrow \alpha} \E W$. We can consider both ranges separately for $b \in [0,\alpha]$ and $b \in (\alpha, \inf)$. We assume $0<\alpha<1/2$. Then in the first case the co\"efficient of $b^2$ is positive, so we should consider the boundary condition, $b=\alpha$ is the maximizer. In the second case $b$ is negative, so we should make it as small as possible, i.e., choose $b = lim_{x \downarrow \alpha} x$. In conclusion, the optimal betting amount would be $\alpha$ and would result in an expected payoff of $1-\alpha$.
 \end{solution}
 \end{exercise}
 
@@ -741,47 +741,6 @@ d. Shanille scores the first and missed the second. Hence, there are 98 shots le
 \end{exercise}
 
 
-\section{Challenge: Betting}
-\label{sec:betting}
-
-Consider the setting of BH.9.25, which you also studied in the coding section. We use the notation from that exercise.
-In this exercise we will discuss how to set $f$, the betting fraction. In particular, we will discuss the \textit{Kelly criterion}, which states that the betting fraction should be $f = 2p-1$ if $p > \tfrac12$ is the winning probability.
-
-We discuss its relationship to expected utility theory, which you will also study in Introduction to Mathematical Economics. Expected utility theory states that bets should be chosen to maximize expected utility. So we solve $\max\limits_{0 \leq f \leq 1} \E{U(X_{n+1}) \given X_n}$.
-
-
-
-\begin{exercise}
-Show that solving the maximization problem for the utility function $U(x) = \log(x)$ yields the betting fractions from the Kelly criterion, $f = 2p-1$ if $p > \tfrac12$ and $f=0$ if $p \leq \tfrac12$.
-\end{exercise}
-
-Other people may have a different utility function, which yields a different betting fraction.
-
-\begin{exercise}
-Calculate the utility maximizing betting fraction $f$ if $U(x) = \sqrt{x}$.
-\end{exercise}
-
-Note that for both of these utility functions, the betting fraction $f$ does not depend on the wealth $X_n$ before the gamble, but in general $f$ does depend on $X_n$.
-
-Now that we have two different betting fractions, we compare them. For that, we first need the following result:
-
-\begin{exercise}
-Assume that $f$ does not depend on $X_n$. Let $x_0 = 1$. Show that there exist constants $a, b$ such that $\log (X_n) = a W + b$ and $W  \sim \Bin{n, p}$, and determine $a$ and $b$ in terms of $f$.
-\end{exercise}
-
-Theorem 10.3.6. states that (for sufficiently large $n$) we can approximate a random variable with the binomial distribution $W  \sim \Bin{n, p}$ by a random variable with the normal distribution $\Norm{np, np(1-p)}$. While you will only learn about the proof of this next week, we are already going to use this approximation here.
-
-\begin{exercise}
-Two people (Carl and Daria) participate in $n$ rounds of this betting game. Their games are independent. Carl's initial wealth is $x_0 = 1$ and Daria's initial wealth is $y_0 = 1$. We denote Carl's wealth after $n$ rounds by $X_n$ and Daria's wealth after $n$ rounds by $Y_n$. Carl chooses $f$ according to the Kelly criterion, i.e. $f = 2p-1$.  Daria chooses $f$ to be the  utility maximizing betting fraction for  $U(x) = \sqrt{x}$.
-Use the previously mentioned normal approximation to derive an approximation for the difference $\log(Y_n) - \log(X_n)$.
-\end{exercise}
-
-Kelly's criterion does not mention utility functions, it just recommends to set $f = 2p-1$ regardless of one's utility function. The next exercise is meant to give some insight why.
-
-
-\begin{exercise}
-Use \texttt{pnorm} in R, or \texttt{norm.cdf} in Python, to approximate $P(X_n > Y_n)$ for some chosen values for $n$ and $p$. What do you think that happens if $n \to \infty$ for a fixed $p$? Explain why this is an argument to use the Kelly criterion  regardless of one's utility function. Also, explain why maximizing utility suggests a different $f$ in spite of this result.
-\end{exercise}
 
 
 \input{trailer.tex}
