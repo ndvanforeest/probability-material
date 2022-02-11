@@ -19,26 +19,43 @@ Skip BH.9.1.6.
 \begin{exercise}
 BH.9.1.7. We will also simulate this in an assignment.
 
-I  like this example as it  shows how to make optimal decisions under uncertainty, but I have to admit that I don't understand the reasoning, or the use of conditional probablity to solve this problem. Here is how I would solve the problem.
+I  like this example as it  shows how to make optimal decisions under uncertainty, but I have to admit that I don't understand the reasoning, or the use of conditional probability to solve this problem. Here is how I would solve the problem.
 \begin{enumerate}
 \item Explain that $X=(V-b)\1{b \geq \alpha V}$, with $\alpha=2/3$, is the rv that models our payoff.
 \item Why is this wrong: $\E X = \E{(V-b)\1{b \geq \alpha V}} = V \E{\1{b \geq \alpha V}} -b \E{\1{b \geq \alpha V}}$?
 \item Compute $\E X$, and provide a bound on $\alpha$ to ensure that $\E X > 0$.
 \end{enumerate}
+\begin{hint}
+  There is no need to start conditioning, the only reasonable approach would lead to the same result in the book. Use LOTUS.
+\end{hint}
+  
 \begin{solution}
+\begin{enumerate}
+  \item The indicator function is zero when the bid is rejected, hence there is a zero payoff. When the bid is accepted the indicator function is one and the resulting payoff is $V-b$, the prize value minus the offer.
+  \item It is immediately obvious $X$ is a rv and shouldn't have an stochastic expectation. There is no justification for taking $V$ out of the expectation, as it is a rv and unknown when we make our offer.
+  \item Since $X$ is a function of $V$ we can apply LOTUS and find the expectation by integration. First we assume $b/\alpha < 1$.
+\end{enumerate}
 \begin{align*}
 \E X &= \int_0^1 (v-b) \1{b\geq \alpha v} \d v = \int_0^{b/\alpha} v \d v - b \int_0^{b/\alpha}  \d v \\
   &= b^2/2\alpha^2 - b^2/\alpha = \frac{b^{2}}{\alpha^{2}} \frac{1-2\alpha}{2}.
 \end{align*}
-Clearly, $\alpha>1/2$ to ensure that $\E X > 0$.
+Clearly, $\alpha<1/2$ to ensure that $\E X > 0$.
+
+If, $b>\alpha$ the expected payout is $\E{W} = 1/2 -b $, as any bid is accepted (why?). Thus, again if alpha were bigger than $1/2$ the expected payout would be negative. 
+(You can split the cases up like we did here, or work with a min operator in the upper limit of the integral. The second option is probably less prone to mistakes, but here there is an intu\"itive answer for the second case.) 
 \end{solution}
 \end{exercise}
 
 \begin{exercise}
-BH.9.1.7. Suppose $b<\alpha V$, for some $\alpha\in(0,1)$ the bid is rejected.
+  BH.9.1.7. Suppose when $b<\alpha V$, for some $\alpha\in(0,1)$, the bid is rejected.
 By the solution of BH.9.1.7, if $\alpha=2/3$, you should not enter this game.
 But is there another $\alpha$ (smaller or larger than $2/3$) at which entering the game is interesting?
 \begin{solution}
+  When $\alpha < 1/2$ the expected payoff is positive so it becomes interesting. We can write the total payout as:
+ \begin{align*}
+   \E W &= (1/2 - b) \1{b>\alpha} + \frac{1-2\alpha}{2\alpha^2}b^2 \1{b\leq \alpha} \\
+  \end{align*}
+  The expected payoff is continuous, $\lim_{b\uparrow \alpha} \E W  = 1/2 - \alpha = \lim_{b\downarrow \alpha} \E W$. We can consider both ranges separately for $b \in [0,\alpha]$ and $b \in (\alpha, \inf)$. We assume $0<\alpha<1/2$. Then in the first case the co\"efficient of $b^2$ is positive, so we should consider the boundary condition, $b=\alpha$ is the maximizer. In the second case $b$ is negative, so we should make it as small as possible, i.e., choose $b = lim_{x \downarrow \alpha} x$. In conclusion, the optimal betting amount would be $\alpha$ and would result in an expected payoff of $1-\alpha$. 
 \end{solution}
 \end{exercise}
 
