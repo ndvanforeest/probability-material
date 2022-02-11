@@ -36,10 +36,10 @@ print(X.mean(), X.std())
 set.seed(3)
 
 
-num = 5
+num = 5  # small sample at first, for checking.
 start = 0
 end = 3
-labda = num / (end - start)
+labda = num / (end - start)  # per minute
 print(1 / labda)
 
 A = sort(runif(num, min = start, max = end))
@@ -54,12 +54,12 @@ print(sd(X))
 \end{minted}
 
 \begin{exercise}
-Explain the result of line P. 12 (R.11) marked as 'this'.\footnote{Line P.x refers to line x of the Python code.
+Explain the result of line P.12 (R.11) marked as 'this'.\footnote{Line P.x refers to line x of the Python code.
   Line R.x refers to line x of the R code.}
 \end{exercise}
 
 \begin{exercise}
-Compare the result of  line P.13 and P.14 (R.12, R.13);  explain what is \texttt{A[1:]} (\texttt{A[-1]})
+Compare the result of  line P.13 and P.14 (R.12, R.13);  explain what is \texttt{A[1:]} (\texttt{A[-1]}).\footnote{When two pieces of code are given and one is in parentheses, the first one is the Python code and the one in parentheses is the R code. So if you use Python you have to explain what  \texttt{A[1:]} does; if you use R you have to explain what \texttt{A[-1]} does.}
 \end{exercise}
 
 \begin{exercise}
