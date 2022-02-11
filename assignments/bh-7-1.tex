@@ -12,18 +12,18 @@ Sketch, on paper, the 2D area that corresponds to the event that Alice and Bob m
 Write $A$ and $B$ for the rvs corresponding to the arrival times of Alice and Bob.
 Explain  you have to compute the expectation of  $\1{A<B+0.25}\cdot\1{B-0.25 < A}$
 to compute the probability that Alice and Bob meet.
-Then,  explain that is equal to
+Then,  explain that it is equal to
 \begin{equation}
 \int_0^1\int_0^1 \1{a<b+0.25}\cdot \1{b-0.25 < a} \d a \d b.
 \end{equation}
 \end{exercise}
 
 \begin{exercise}
-What is the probability that they meet (i.e., solve the integral by hand)?
+Solve the integral by hand to compute  the probability that they meet.
 \end{exercise}
 
 \begin{exercise}
-Explain this code to compute numerically the probability of overlap. Check the web on what is an anonymous function in Python or R, and explain why we use that here.
+Explain the  code below to compute numerically the probability of overlap. Check the web on what is an anonymous function in Python or R, and explain why we use that here.
 (Hint: anonymous functions are useful "when it’s not worth the effort to give it a name". Do we use elsewhere the anonymous function we define here?)
 \begin{minted}[]{python}
 from scipy.integrate import dblquad
@@ -33,10 +33,10 @@ print(area)
 \end{minted}
 
 \begin{minted}[]{R}
-library(cubature)   
+library(cubature)
 
-area = adaptIntegrate(function(x){ (x[2] - 0.25 < x[1]) * (x[1] < x[2] + 0.25)}, 
-		lowerLimit = c(0, 0), upperLimit = c(1, 1))
+area = adaptIntegrate(function(x){ (x[2] - 0.25 < x[1]) * (x[1] < x[2] + 0.25)},
+        lowerLimit = c(0, 0), upperLimit = c(1, 1))
 print(area$integral)
 print(area$error)
 \end{minted}
@@ -70,7 +70,7 @@ print(bob)
 print(alice<bob)
 \end{minted}
 
-I tend to set the seed of the random number generator so that I always get the same results. This helps a lot when debugging, because the numbers don't change time and again.
+It is useful to set the seed of the random number generator so that we always get the same results. This helps a lot when debugging, because the numbers don't change time and again. (You can remove the line that sets the seed, and then rerun the program a few times. You should get different numbers for each run.)
 \end{exercise}
 
 \begin{exercise}
@@ -167,12 +167,12 @@ print(area1[0] + area2[0])
 \end{minted}
 
 \begin{minted}[]{R}
-library(cubature)   
+library(cubature)
 
 area1 = adaptIntegrate(function(x){(x[2] - 1 / 3.0 < x[1]) * (x[1] < x[2] + 0.25)},
-		lowerLimit = c(0, 0), upperLimit = c(1, 0.5))
-area2 = adaptIntegrate(function(x){(x[2] - 1 / 6.0 < x[1]) * (x[1] < x[2] + 0.25)}, 
-		lowerLimit = c(0, 0.5), upperLimit = c(1, 1))
+        lowerLimit = c(0, 0), upperLimit = c(1, 0.5))
+area2 = adaptIntegrate(function(x){(x[2] - 1 / 6.0 < x[1]) * (x[1] < x[2] + 0.25)},
+        lowerLimit = c(0, 0.5), upperLimit = c(1, 1))
 print(area1$integral+ area2$integral)
 \end{minted}
 
@@ -207,14 +207,14 @@ print(overlap.mean())
 \end{minted}
 
 \begin{minted}[]{R}
-library(cubature)   
+library(cubature)
 set.seed(3)
 
 labda = 1.0/2
 end = 5
 
 value = adaptIntegrate(function(x){(x[2] - 0.25 < x[1]) * (x[1] < x[2] + 0.25) *
-		exp(-labda * x[2])}, lowerLimit = c(0, 0), upperLimit = c(1, end))
+        exp(-labda * x[2])}, lowerLimit = c(0, 0), upperLimit = c(1, end))
 print(value)
 
 area = value$integral * labda

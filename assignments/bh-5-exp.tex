@@ -5,11 +5,9 @@
 At the Paris metro, a train arrives every 3 minutes on a platform.
 Suppose that 50 people arrive between the departure of a train and an arrival.
 It seems entirely reasonable to me to model the arrival times of the individual people as distributed on the interval \([0,3]\).
-What is the distribution of the inter-arrival times of these people?
-It turns out to be exponential!
+What is the distribution of the inter-arrival times of these people? Amazingly, this turns out to be nearly exponential. To check this fact, we use simulation in this question.
 
 You might want to compare your final result to Figure BH.13.1 (It is not forbidden to read the book beyond what you have to do for this course!).
-In this exercise, we use simulation to see that clustering of arrival times.
 
 
 \begin{minted}[]{python}
@@ -56,7 +54,8 @@ print(sd(X))
 \end{minted}
 
 \begin{exercise}
-Explain the result of line P. 12 (R.11) marked as 'this'.
+Explain the result of line P. 12 (R.11) marked as 'this'.\footnote{Line P.x refers to line x of the Python code.
+  Line R.x refers to line x of the R code.}
 \end{exercise}
 
 \begin{exercise}
