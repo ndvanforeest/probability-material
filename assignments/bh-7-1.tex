@@ -213,8 +213,8 @@ set.seed(3)
 labda = 1.0/2
 end = 5
 
-value = adaptIntegrate(function(x){(x[2] - 0.25 < x[1]) * (x[1] < x[2] + 0.25) *
-        exp(-labda * x[2])}, lowerLimit = c(0, 0), upperLimit = c(1, end))
+value = pcubature(function(x){(x[2] - 0.25 < x[1]) * (x[1] < x[2] + 0.25) * 
+		exp(-labda * x[2])}, lowerLimit = c(0, 0), upperLimit = c(1, end), tol = 0.0001)
 print(value)
 
 area = value$integral * labda

@@ -5,7 +5,7 @@
 
 * Overview
 
-Here is all the material you need for the course on probability distributions.
+On this github page you can find all the material you need for the course on probability distributions.
 
 *  Files
 
@@ -18,6 +18,8 @@ The directory =pdf-files= contains all relevant pdf files.
 
 ** Irrelevant for students
 
+You might be interested in the LaTeX sources of the study guide, or the other documents. If you're not, then just skip all this material.
+
 - =common/abbreviations.sty=: abbreviations used in the tex files
 - =common/preamble.sty=: necessary if you want to compile the files yourself.
 - =lectures/=: sources for the lectures.
@@ -27,3 +29,7 @@ The directory =pdf-files= contains all relevant pdf files.
 * Updates of the material
 
 -<2022-02-14 ma>, study guide: Added missing solutions to ch 7 and ch 9.
+
+* Python
+
+If you plan to use python, the best installation is perhaps [[https://www.anaconda.com/][anaconda]].
