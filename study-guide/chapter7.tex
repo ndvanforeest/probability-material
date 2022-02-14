@@ -1,6 +1,7 @@
 % arara: pdflatex: { shell: yes }
 % arara: pythontex: {verbose: yes, rerun: modified }
 % arara: pdflatex: { shell: yes }
+% arara: move: {  files: ['chapter7.pdf'], target: ['..'] }
 
 
 \input{header}
@@ -1139,12 +1140,15 @@ a. $\P{X=i, Y=j, N=n} = \P{X=i, Y=j} \1{i+j=n}$.
 c. $\P{X=i\given N=n} = 1/(n+1)$. Why is this uniform?
 \end{hint}
 \begin{solution}
-Use the hint. For $k=0, 1, \ldots, n$,
+a. The hint is the solution.
+
+b. Use the hint for a. Then, for $k=0, 1, \ldots, n$,
 \begin{equation*}
 \P{X=k, N=n} = \P{X=k, Y=n-k} = pq^k p q^{n-k} = p^2 q^{n}.
 \end{equation*}
 (Have we used independence somewhere?)
-Now observe that the right hand side does not depend on $k$. This implies that $\P{X=k|N=n}$  also does not depend on $k$. (Why?) But, since $\P{X=k|N=n}$ is a true PMF,  is must be that $\sum_{k=0}^{n}\P{X=k|N=n}$ adds up to $1$. These two ideas put together imply that
+
+c. Observe that the right hand side does not depend on $k$. This implies that $\P{X=k|N=n}$  also does not depend on $k$. (Why?) But, since $\P{X=k|N=n}$ is a true PMF,  is must be that $\sum_{k=0}^{n}\P{X=k|N=n}$ adds up to $1$. These two ideas put together imply that
 $\P{X=k|N=n} = 1/(n+1)$.
 
 With Bayes' expression, and using that  $\P{X=k|N=n} = 1/(n+1)$,
@@ -1219,11 +1223,17 @@ BH.7.11
 \begin{hint}
 a.
 First find $f_{Y|X}$ and $f{Z|X}$. Then, given $X$, $Z$ and $Y$ are iid. Hence $f_{X,Y,Z} = f_{Y, Z |X} f_{X}$. Use independence to split $f_{Y,Z|X}$ into a product.
+
+
 b.
-Suppose that $Y$ is really big. Since $Y$ is dependent on $X$, $X$ must be dependent on $Y$. But $Z$ is in turn dependent on $X$. What are the consequences?
+Suppose that  a realization of $Y$ is really big. Since $Y$ is dependent on $X$, $X$ must be dependent on $Y$. But $Z$ is in turn dependent on $X$. What are the consequences?
 
 \end{hint}
 \begin{solution}
+a. Use the hint. Next, $f_{Y|X}(y|x) \propto e^{-(y-x)^{2}}$, and a similar expression holds for $f_{Z|X}(z|x)$. Now follow the steps of the hint.
+
+b. Read the hint. When $Y$ is really big, $X$ must be big (with large probability), so $Z$ must be big too.
+
  c.
 Here is the answer. The ideas are important, you'll need them during nearly any course in statistics, given the importance of the normal distribution.
 \begin{align*}
@@ -1243,9 +1253,24 @@ f_{Y,Z}(y, z) = \frac 1 {2\pi} \frac 1 {\sqrt{3}} e^{-y^2/2 - z^2/2 + (y+z)^2/6}
 \begin{exercise}
 BH.7.13
 \begin{hint}
-\cref{sec:memoryl-exerc-conf}
+\cref{sec:memoryl-exerc-conf} contains all the explanations.
 \end{hint}
 \begin{solution}
+Read the material of \cref{sec:memoryl-exerc-conf} for many detailed explanations on the exponential. As we will not repeat that, here are just the results.
+$\P{X<Y} = 1/2$. Hence, $\P{X\leq x|X<Y} = 2\P{X\leq x, X<Y}$.
+\begin{align*}
+2\P{X\leq x, X<Y}
+  &= 2\lambda^2\int_0^{\infty}\int_0^{\infty}   \1{u\leq x} \1{u<v} e^{-\lambda u} e^{-\lambda v} \d v \d u \\
+  &= 2\lambda^2\int_0^{\infty}   \1{u\leq x} e^{-\lambda u} \int_0^{\infty} \1{u<v}  e^{-\lambda v} \d v \d u\\
+  &= 2\lambda\int_0^{\infty}   \1{u\leq x} e^{-\lambda u} e^{-\lambda u}  \d u \\
+  1 - e^{-2\lambda x}.
+\end{align*}
+
+b. If $X<Y$, then we know that $X=\min\{X, Y\}$. But,
+\begin{align*}
+  \{\min\{X,Y\}\leq x\} =  \{X\leq x, X<Y\} \cup \{Y\leq x, Y\leq X\},
+\end{align*}
+and the two sets on the RHS are disjoint. Hence, $\P{\min\{X,Y\}\leq x}$ is the sum of the probabilities on the RHS. By symmetry, these are equal.
 \end{solution}
 \end{exercise}
 
@@ -1255,7 +1280,7 @@ BH7.15.
 Make a drawing.
 \end{hint}
 \begin{solution}
-Using the hint: $F(x,y)$ is the area of an (infinite) square lying  south west of the point $(x,y)$. Add and subtract such (infinite) squares until the square $[a_1,a_2] \times [b_{1},b_2]$ is covered exactly once. Realize that in the process, the square $(-\infty, a_1] \times (-\infty, b_1]$ is subtracted twice.
+Use the hint, that is, really make the drawing of the rectangle mentioned in the exercise. (If you refuse to to this, then nothing can  help you to understand the rest of the answer.) Then, in the drawing, note that $F(x,y)$ is the area of an (infinite) square lying  south west of the point $(x,y)$. Add and subtract such (infinite) squares until the square $[a_1,a_2] \times [b_{1},b_2]$ is covered exactly once. Realize that in the process, the square $(-\infty, a_1] \times (-\infty, b_1]$ is subtracted twice.
 \end{solution}
 \end{exercise}
 
@@ -1269,7 +1294,7 @@ Check BH.7.1.24 and BH.7.1.25
 First draw the area over which we have to integrate. Then use an indicator function over which to integrate. What is the joint PDF  $f_{Y_1, Y-2}$?
 \end{hint}
 \begin{solution}
-From the hint,
+a. From the hint,
 \begin{align*}
 \P{Y_1<c Y_2}
   &= \int \int \1{x<c y}\lambda_1 e^{-\lambda_1 x} \lambda_2e^{-\lambda_2 y}\d x \d y
@@ -1289,6 +1314,8 @@ I prefer to use conditioning, like this:
 and the rest goes as before. Actually, I tend to use conditioning as it helps to make the reasoning easier. In this case, suppose that I know that $Y_1=x$, what can I say about $\P{Y_2 > c x}$?
 
 BTW, conditioning does not always make things simpler. When rvs are dependent, then you have to watch out.
+
+b. See the solutions of BH on the web.
 \end{solution}
 \end{exercise}
 
