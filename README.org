@@ -23,3 +23,7 @@ The directory =pdf-files= contains all relevant pdf files.
 - =lectures/=: sources for the lectures.
 - =assignments=: sources for the assignments.
 - =study-guide=: source material
+
+* Updates of the material
+
+-<2022-02-14 ma>, study guide: Added missing solutions to ch 7 and ch 9.
