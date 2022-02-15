@@ -143,26 +143,26 @@ f_{Y}(g(x)) g'(x) = f_{X}(x).
 
 \begin{exercise}
 Use the change of variable formula to relate the $\Geo{p}$ and the $\FS{p}$ distributions.
-\begin{hint}
-\end{hint}
 \begin{solution}
+If $X$ follows a geometric distribution and we have $Y=X+1$, then $Y$ follows a first success distribution. This is just re-indexing, as you will also find with the change of variables formula.
 \end{solution}
 \end{exercise}
 
 \begin{exercise}
 BH.8.1.1 write that `The support of $Y$ is all $g(x)$ with $x$ in the support of $X$.' Do they say that $\supp{Y} = \{x : g(x) \in \supp{X}$? BTW, what is the difference between $\supp{X}$ and $\sup{X}$?
 \begin{hint}
+$\sup$ stands for supremum, $\supp$ stands for support.
 \end{hint}
 \begin{solution}
+They say that $\supp{Y} = \{g(x):x\in\supp{X}\}$. The support of a function $f$ is defined as $\supp{f} = \{\omega:f(\omega)\neq0\}$. The supremum of a set is the least upper bound of that set, and the supremum of a function would be the supremum of its range.
 \end{solution}
 \end{exercise}
 
 
 \begin{exercise}
 BH.8.1.3. Check how all moments were found.
-\begin{hint}
-\end{hint}
 \begin{solution}
+See page 284 of BH.
 \end{solution}
 \end{exercise}
 
@@ -382,26 +382,23 @@ The expectation of a Cauchy distributed r.v. $X$ is not well-defined because $\E
 
 \begin{exercise}
 If $a=b=1$, why is $\Beta{a,b}=\Unif{[0,1]]}$?
-\begin{hint}
-\end{hint}
 \begin{solution}
+When $a=b=1$, the probability distribution functions are the same, hence the distributions are the same.
 \end{solution}
 \end{exercise}
 
 
 \begin{exercise}
 If $a=b$, why is $\Beta{a,b}$ symmetric?
-\begin{hint}
-\end{hint}
 \begin{solution}
+Because $\beta(a,b)$ and $x^a(1-x)^b$ are (around $\frac12$).
 \end{solution}
 \end{exercise}
 
 \begin{exercise}
 If $a>b$ and  $X\sim\Beta{a,b}$, is $\E X > 1/2$?
-\begin{hint}
-\end{hint}
 \begin{solution}
+$\E{X} = \frac{a}{a+b}$.
 \end{solution}
 \end{exercise}
 
@@ -410,17 +407,15 @@ BH.8.3.2, last equation. How do the authors get to the equation
 \begin{equation*}
 \beta(a,b) = \frac{1}{(a+b-1) {a+b-2\choose a-1}}?
 \end{equation*}
-\begin{hint}
-\end{hint}
 \begin{solution}
+They notice that $\int_0^1\binom n k p^k(1-p)^{n-k}\d p = \frac1{n+1}$ for all $0\leq k\leq n$. Then filling in $k=a-1,n=b-1$, the claim follows.
 \end{solution}
 \end{exercise}
 
 \begin{exercise}
 BH.8.3.3. The authors write that $X$ is not marginally Binomial, but is conditionally Binomial. What is the difference?
-\begin{hint}
-\end{hint}
 \begin{solution}
+A marginal distribution is simply a distribution, called marginal to emphasize is was marginalized out from another, joint, distribution. A conditional distribution is a distribution given some restrictions from another random variable.
 \end{solution}
 \end{exercise}
 
@@ -430,25 +425,30 @@ BH.8.3.3. The authors use a smart trick to find an expression for the posterior 
 \P{X=k} = \frac{{n\choose k} p^{k}(1-p)^{n-k} \Beta{p;a,b}}{\Beta{p;a+k, b+n-k}},
 \end{equation*}
 and simplyfing the RHS.
-\begin{hint}
-\end{hint}
 \begin{solution}
+This is just some algebra, look up the beta-binomial distribution to see if you got it right.
 \end{solution}
 \end{exercise}
 
 \begin{exercise}
 BH.8.3.3. Why does $a-1$ correspond to  the number of prior successes, in other words, why is it not $a$, but $a-1$?
-\begin{hint}
-\end{hint}
 \begin{solution}
+If we have no prior successes, it makes most sense for our prior to be uniform. Similarly for failures. Since the uniform distribution corresponds to $a=b=1$, we need $a-1$ to represent the number of successes.
 \end{solution}
 \end{exercise}
 
 \begin{exercise}
 BH.8.3.4.b. Given that the first patient is cured, what is the probability that the rest of the patients, i.e., the other $n-1$, will also be cured?
-\begin{hint}
-\end{hint}
 \begin{solution}
+Let $X_{1,\dots,n}$ denote the random variable counting how many of the first $n$ people are cured, with similar notation for other subsets. Then, we calculate:
+\begin{align*}
+    \P{X_{2,\dots,n}=n-1|X_1=1} &= \frac{\P{X_{2\dots,n}=n-1, X_1=1}}{\P{X_1=1}}\\
+    &= \frac{\int_0^1 \P{X_{2\dots,n}=n-1, X_1=1|p}\d p}{\int_0^1 \P{X_1=1|p}\d p}\\
+    &= \frac{\int_0^1 \P{X_{2\dots,n}=n-1|p}\P{X_1=1|p}\d p}{\int_0^1 \P{X_1=1|p}\d p}\\
+    &= \frac{\int_0^1 p^n\d p}{\int_0^1 p \d p}\\
+    &= \frac{2}{n+1},
+\end{align*}
+where we use the definition of conditional probability, the law of total probability, independence given $p$, and some easy integration, in that order.
 \end{solution}
 \end{exercise}
 
@@ -540,18 +540,21 @@ Let $X$ denote the number of heads.
 
 \begin{exercise}
 We have an urn with 1000 coins. One of those is biased such that $\P{H} = 99/100 = 1-\P{T}$, all others are fair. You select at random a coin, i.e., with probability $1/1000$ you select the biased one, and start throwing. You see 10 heads in row. What is the probability you picked the biased coin?
-\begin{hint}
-\end{hint}
 \begin{solution}
+Of course, this should depend on when we see this string of outcomes: if it happens for the first time after a thousand throws then we can still confidently claim the coin is fair. Assuming this happens in the first 10 throws however, we use Bayes' theorem to find the following:
+\begin{align*}
+    \P{B|H_{10}} &= \frac{\P{H_{10}|B}\P{B}}{\P{H_{10}|B}\P{B}+\P{H_{10}|B^c}\P{B^c}}\\
+    &= \frac{(99/100)^{10}/1000}{(99/100)^{10}/1000+(1/2)^{10}\cdot999/1000}\\
+    &\approx 0.48.
+\end{align*}
 \end{solution}
 \end{exercise}
 
 
 \begin{exercise}
 BH.8.3.5. write that $X_j$ is an indicator of the $j$th throw beind made. Can this be the formal definition: $X_j = \1{N\geq j}$?
-\begin{hint}
-\end{hint}
 \begin{solution}
+No, of course not. She gets $N$ free throws, but her getting e.g. two tries in a game is not equivalent to her scoring the first one.
 \end{solution}
 \end{exercise}
 
