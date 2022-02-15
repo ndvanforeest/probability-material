@@ -213,8 +213,9 @@ set.seed(3)
 labda = 1.0/2
 end = 5
 
-value = pcubature(function(x){(x[2] - 0.25 < x[1]) * (x[1] < x[2] + 0.25) * 
-		exp(-labda * x[2])}, lowerLimit = c(0, 0), upperLimit = c(1, end), tol = 0.0001)
+value = pcubature(function(x){(x[2] - 0.25 < x[1]) * (x[1] < x[2] + 0.25) *
+        exp(-labda * x[2])}, lowerLimit = c(0, 0), upperLimit = c(1, end),
+      tol = 0.0001)
 print(value)
 
 area = value$integral * labda
@@ -232,7 +233,7 @@ print(mean(bob))
 \end{exercise}
 
 \begin{exercise}
-Changing the value of the variable \verb|end| to 100 in the code above, and run it again. Then change it to 50, and finally to 1,000.  When I do this, I get a very strange answers for 50 and 1,000. Try to explain what goes wrong.
+Changing the value of the variable \verb|end| to 100 in the code above, and run it again. Then change it to 50.  When I do this, I get a very strange answer for 50. Try to explain what goes wrong. (In python you can also try the value 1000; then the answer is also not correct. R doesn't seem to give an answer at all.)
 \end{exercise}
 
 

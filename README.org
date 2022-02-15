@@ -28,7 +28,9 @@ You might be interested in the LaTeX sources of the study guide, or the other do
 
 * Updates of the material
 
--<2022-02-14 ma>, study guide: Added missing solutions to ch 7 and ch 9.
+- <2022-02-14 ma>, study guide: Added missing solutions to ch 7 and ch 9.
+- <2022-02-15 di>: assignment ex 1.26: removed the 1000 because R fails to give an answer.
+
 
 * Python
 
