@@ -161,17 +161,17 @@ Contrary to~\cref{ex:ab} suppose Bob is prepared to wait for 20 minutes when he 
 
 \begin{minted}[]{python}
 from scipy.integrate import dblquad
-area1 = dblquad(lambda a, b: (b - 1 / 3.0 < a) * (a < b + 0.25), 0, 1, 0, 0.5)
-area2 = dblquad(lambda a, b: (b - 1 / 6.0 < a) * (a < b + 0.25), 0, 1, 0.5, 1)
+area1 = dblquad(lambda a, b: (a - 1 / 3.0 < b) * (b < a + 0.25), 0, 1, 0, 0.5)
+area2 = dblquad(lambda a, b: (a - 1 / 6.0 < b) * (b < a + 0.25), 0, 1, 0.5, 1)
 print(area1[0] + area2[0])
 \end{minted}
 
 \begin{minted}[]{R}
 library(cubature)
 
-area1 = adaptIntegrate(function(x){(x[2] - 1 / 3.0 < x[1]) * (x[1] < x[2] + 0.25)},
+area1 = adaptIntegrate(function(x){(x[1] - 1 / 3.0 < x[2]) * (x[2] < x[1] + 0.25)},
         lowerLimit = c(0, 0), upperLimit = c(1, 0.5))
-area2 = adaptIntegrate(function(x){(x[2] - 1 / 6.0 < x[1]) * (x[1] < x[2] + 0.25)},
+area2 = adaptIntegrate(function(x){(x[1] - 1 / 6.0 < x[2]) * (x[2] < x[1] + 0.25)},
         lowerLimit = c(0, 0.5), upperLimit = c(1, 1))
 print(area1$integral+ area2$integral)
 \end{minted}
