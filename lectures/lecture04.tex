@@ -1,4 +1,4 @@
-\documentclass[lectures]{subfiles}
+\documentclass[lectures-questions]{subfiles}
 \begin{document}
 
 \section{Lecture 4}
@@ -6,7 +6,7 @@
 
 
 
-\begin{exercise} BH.7.65 Let $(X_1, \ldots, X_k)$ be Multinomial with parameters $n$ and $(p_1, \ldots, p_k)$. Use indicator r.v.s to show that $\cov(X_i, X_j) = -n p_i p_j$ for $i \neq j$.
+\begin{exercise} BH.7.65 Let $(X_1, \ldots, X_k)$ be Multinomial with parameters $n$ and $(p_1, \ldots, p_k)$. Use indicator rvs to show that $\cov{X_i, X_j} = -n p_i p_j$ for $i \neq j$.
 
 \begin{solution}
 See solution manual.
@@ -38,17 +38,17 @@ Next, we have
 \end{align}
 and
 \begin{align}
-    \V{W} &= \V{X + Y} = \V{X} + \V{Y} + 2\cov(X,Y)\\
+    \V{W} &= \V{X + Y} = \V{X} + \V{Y} + 2\cov{X,Y}\\
     &= 1 + 1 + 2 \rho_{XY} \sigma_X \sigma_Y = 2(1 + \rho_{XY}).
 \end{align}
 Finally,
 \begin{align}
-    \cov(V,W) &= \cov(X, X + Y) = \cov(X, X) + \cov(X, Y) \\
+    \cov{V,W} &= \cov{X, X + Y} = \cov{X, X} + \cov{X, Y} \\
     &= \sigma_X^2 + \rho_{XY} \sigma_X \sigma_Y = 1 + \rho_{XY},
 \end{align}
 and hence,
 \begin{align}
-    \rho_{VW} := \cor(V,W) &= \frac{\cov(V,W)}{\sqrt{\V{V}\V{W}}} \\
+    \rho_{VW} := \cor(V,W) &= \frac{\cov{V,W}}{\sqrt{\V{V}\V{W}}} \\
     &= \frac{1 + \rho_{XY}}{\sqrt{1 \cdot 2(1 + \rho_{XY})}} \\
     &= \sqrt{\frac{1 + \rho_{XY}}{2}}.
 \end{align}
@@ -101,9 +101,9 @@ We have
 \begin{align}
     \V{X} &= \V{ 10 + 2A + 4B + 2C} \\
     &= \V{2A} + \V{4B} + \V{2C} \\
-    &\quad +2\Big( \cov(2A, 4B) + \cov(2A, 2C) + \cov(4B, 2C) \Big) \\
+    &\quad +2\Big( \cov{2A, 4B} + \cov{2A, 2C} + \cov{4B, 2C} \Big) \\
     &= 4\V{A} + 16\V{B} + 4\V{C}\\
-    &\quad +2\Big( 8\cov(A, B) + 4\cov(A, C) + 8\cov(B, C) \Big) \\
+    &\quad +2\Big( 8\cov{A, B} + 4\cov{A, C} + 8\cov{B, C} \Big) \\
     &= 4\sigma_A^2 + 16\sigma_B^2 + 4\sigma_C^2 \\
     &\quad +2\Big( 8\rho_{AB}\sigma_A \sigma_B + 4\rho_{AC}\sigma_A \sigma_C + 8\rho_{BC}\sigma_B \sigma_C \Big) \\
     &= 4(0.07)^2 + 16(0.12)^2 + 4(0.17)^2 \\
@@ -127,7 +127,7 @@ We need to compute the probability $\P{X \leq 10}$. We have
  &= \P{ X - \mu_X \leq 10 - 10.95} \\
     &= \P{ \frac{X - \mu_X}{\sigma_X} \leq \frac{10 - 10.95}{0.5344} } \\
     &= \P{ Z \leq \frac{10 - 10.95}{0.5344} } \\
-    &= \P{ Z \leq -1.9625 } \\
+    &= \P{ Z \leq -1.7777 } \\
     &= 0.0377.
 \end{align}
 So John has a probability of $3.77\%$ of losing money with his investment.
@@ -159,8 +159,8 @@ Then,
 Moreover,
 \begin{align}
     \V{Y} &= \V{10 + 4A + 4C} \\
-    &= \V{4A} + \V{4C} + 2 \cov(4A, 4C)\\
-    &= 4^2\V{A} + 4^2 \V{C} +2 \cdot  4 \cdot 4 \cdot \cov(A,C) \\
+    &= \V{4A} + \V{4C} + 2 \cov{4A, 4C}\\
+    &= 4^2\V{A} + 4^2 \V{C} +2 \cdot  4 \cdot 4 \cdot \cov{A,C} \\
     &= 16 (.07)^2 + 16 (.17)^2  + 32 (-.8)(.07)(.17) \\
     &= 0.23616,
 \end{align}

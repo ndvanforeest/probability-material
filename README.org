@@ -28,8 +28,10 @@ You might be interested in the LaTeX sources of the study guide, or the other do
 
 * Updates of the material
 
+Most of the assignments are new for this year. Hence there will be  mistakes. Please let us know, so that we can improve them.
+
 - <2022-02-14 ma>, study guide: Added missing solutions to ch 7 and ch 9.
-- <2022-02-15 di>: assignment ex 1.26: removed the 1000 because R fails to give an answer.
+- <2022-02-15 di>: assignment ex 1.26: reformulation so that it is (hopefully) clear what you have to learn from this exercise.give an answer.
 
 
 * Python

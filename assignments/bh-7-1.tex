@@ -233,13 +233,10 @@ print(mean(bob))
 \end{exercise}
 
 \begin{exercise}
-Changing the value of the variable \verb|end| to 100 in the code above, and run it again. Then change it to 50.  When I do this, I get a very strange answer for 50. Try to explain what goes wrong. (In python you can also try the value 1000; then the answer is also not correct. R doesn't seem to give an answer at all.)
+Changing the value of the variable \verb|end| to 100 in the code above, and run it again. Then change it to 50, and see what happens.  When I do this in python, I get a very strange answer. Then try 1000: in python you should also get some strange value, and R doesn't seem to give an answer at all.
+
+In this exercise you don't have to explain anything; you just have to see that things can go wrong easily. You should memorize from this exercise that numerical integration in multiple dimensions quickly becomes unmanageable. In fact, most 2D (and higher dimensional) ntegrals are approximated with simulation, like we do here.
 \end{exercise}
 
 
-Hopefully you got by now the point: modeling is an interesting, but  quite difficult, activity. Once you have the model, the computer can help solve the problem.
-
-
-You should memorize that integration in multiple dimensions quickly becomes unmanageable. In fact, most higher D integrals are approximated with simulation, like we do here in the simulation part.
-
-You should also memorize that computers are extremely dumb, and that they can live with any answer that comes out of a computation. Here, since we compare a simulation with a direct integration, we see a difference, and that makes us suspicious about the correctness of both. Mind, we humans can do pretty smart things, and we should typically distrust the output of computers. (That is why I often include tests.)
+Hopefully you got by now the point: modeling is an interesting, but  quite difficult, activity. Once you have the model, the computer can help solve the problem. However,  computers are extremely dumb, and they can live with any answer whatsoever. Mind, we humans can do pretty smart things, and we should not automatically  trust the output of computers. That is the reason why we have to include many tests and checks.
