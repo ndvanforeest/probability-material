@@ -99,9 +99,10 @@ We conclude that $\E{X\given A} = 4$.
   BH.9.1.10.  Let $p_i$, $0\leq i\leq b$, be the probability to hit $b$ before $0$, with $i$ being the current position of the drunkard.
 \begin{enumerate}
 \item Why is $p_0=p_1/2$?
+\item Why is $p_1=p_2/2$?
 \item Why is $p_{b}=1$?
-\item Explain the recursion $p_i=p_{i-1}/2 + p_{i+1}/2$ for $0 < i <b$?
-\item Show that the previous point implies that $p_i =  \alpha i$ for $0<i<b$ for any $\alpha$ we like.
+\item Explain the recursion $p_i=p_{i-1}/2 + p_{i+1}/2$ for $1 < i <b$?
+\item Show that the previous points imply that $p_i =  \alpha i$ for $0<i<b$ for any $\alpha$ we like.
 \item Combine the fact that $p_{b}=1$ with $p_{i} = \alpha i$ for all $0<i<b$ to see that $\alpha=1/b$.
 \item Conclude that $p_0=1/2b$.
 \end{enumerate}
@@ -113,18 +114,19 @@ We conclude that $\E{X\given A} = 4$.
   \begin{enumerate}
     \item As in BH, condition on the first step. If the drunkard starts at zero, and makes a step to the left, he is at position $-1$. To get to $b$, with $b>0$, requires to pass $0$ again. Hence, in this case, the drunkard did not reach $b$ before 0.
 
-    When the drunkard makes a step to the right, which occurs with probability 1/2, brings the drunkard to position $1$. Writing $p_{1}$ for the probability to reach $b$ before $0$, it must be that $p_0 = p_1/2$.
-      % \[p_0 = \P{B \given L} \P{L} + \P{B\given L^C} \P{L^C} = 0/2 +p_1/2 \]
+    When the drunkard makes a step to the right, which occurs with probability 1/2, then the drunkard moves to position $1$. Writing $p_{1}$ for the probability to reach $b$ before $0$, it must be that $p_0 = p_1/2$.
+
+    Written in another way: $p_0=p_{-1}\cdot 1/2 + p_1\cdot 1/2$, but $p_{-1}=0$, hence $p_0=p_1/2$.
+    \item The reasoning is the same as in the  previous step. When the drunkard is in state $1$ and moves to the left, he hits 0 before $b$ so the process stops. If he moves to the right, then the process continues. Therefore $p_1=p_2/2$.
     \item If the drunkard starts in $b$, the probability to hit $b$ before $0$ is 1. (In other words, what is the probability to be in $b$ when the drunkard starts in $b$?)
-    \item Again condition on whether the inebriate moves to the left or to the right.  The probability $p_{i}$ of reaching $b$ before 0, starting in $i$ with $1\leq i \leq b-1$, is $p_{i+1}$ when he makes a step to the right and $p_{i-1}$ when he moves to the left.  Since a step in both directions is equally likely, the equation of the problem follows.
-    \item Plug in $p_i = \alpha i$ in the right hand side:
+    \item In some state $i$, $2\leq i < b$, condition again on whether the inebriate moves to the left or to the right.  The probability $p_{i}$ of reaching $b$ before 0 is $p_{i+1}$ when he makes a step to the right and $p_{i-1}$ when he moves to the left.  Since a step in both directions is equally likely, the equation of the problem follows.
+    \item Plug in $p_i = \alpha i$ in the RHS:
       \begin{equation*}
     \frac{\alpha(i-1)}{2} + \frac{\alpha(i+1)}{2} = \alpha i - \frac{\alpha}{2} + \frac{\alpha}{2} = \alpha i = p_i
       \end{equation*}
     This shows $p_i = \alpha i$ is a solution to this recursive equation for any choice of $\alpha$.
-    \item Use the boundary condition $ p_b = 1$ in the expression $p_{i}\alpha = i$ for $i=b-1$. Solving for $\alpha$ in $\alpha(b-1) = \alpha(b-2)/2+1/2$,
-     gives $\alpha=1/b$.
-    \item Since $p_1=1/b$ and $p_0 = p_1 / 2$, we get that $p_{0}=1/2b$.x  \end{enumerate}
+    \item Use the boundary condition $ p_b = 1$ in the expression $p_{i}\alpha = i$ for $i=b-1$. Solving for $\alpha$ in $\alpha(b-1) = \alpha(b-2)/2+1/2$,      gives $\alpha=1/b$.
+    \item Since $p_1=p-2/2 = 2/b\cdot 1/2 = 1/b$ and $p_0 = p_1 / 2$, we get that $p_{0}=1/2b$.  \end{enumerate}
 
   Another way you might have found $p_0$ is by noticing the following pattern when plugging in the previous values in the equation in $3$.
 \begin{align*}
