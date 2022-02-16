@@ -78,10 +78,27 @@ must be wrong.
 \end{exercise}
 
 
+\begin{exercise}
+$n$ people throw their hat in a box. After shuffling, each of them takes out a hat at random. How many people do you expect to take out their own hat (i.e., the hat they put in the box); what is the variance?
+\begin{hint}
+Take $\1{X_i=i}$. When this is 1, person $i$ picks its own hat, and if 0, the person picks somebody else's hat. What is the meaning of $S=\sum_{i=1}^n \1{X_i=i}$?
+\end{hint}
+\begin{solution}
+Use the hint.
+\end{solution}
+\begin{align*}
+\E{\1{X_i=i}} &= 1/n, \quad \text{for all } i. \\
+  \E{S} &= \sum_{i=1}^n \E{\1{X_{i}=i}} = \sum_{i=1}^n 1/n = 1. \\
+  \E{S^{2}} &= \sum_{i=1}^n \E{\1{X_{i}=i}} + \sum_{i \neq j} \E{\1{X_{i}=i}\1{X_{j}=j}} = 1 + n(n-1)\cdot \frac{1}{n}\frac{1}{n-1} = 1 + 1 =2.\\
+  \V S &= \E{S^{2}}  - (\E S)^{2} = 2 - 1 = 1.
+\end{align*}
+
+\end{exercise}
+
 
 
 \begin{exercise}
-$N$ people throw their hat in a box. After shuffling, each of them takes out a hat at random. How many people do you expect to take out their own hat (i.e., the hat they put in the box); what is the variance? In BH.7.46 you have to solve this analytically. In the exercise here you have to write a simulator for compute the expectation and variance.
+Continuation of the previous exercise. Write a simulator for compute the expectation and variance.
 \begin{solution}
 Let us first do one run.
 \begin{pyblock}[][numbers=left,frame=lines]
@@ -89,15 +106,15 @@ import numpy as np
 
 np.random.seed(3)
 
-N = 4
-X = np.arange(N)
+n = 4
+X = np.arange(n)
 np.random.shuffle(X)
 print(X)
-print(np.arange(N))
-print((X == np.arange(N)))
-print((X == np.arange(N)).sum())
+print(np.arange(n))
+print((X == np.arange(n)))
+print((X == np.arange(n)).sum())
 \end{pyblock}
-Here are the results of the print statements: $X = \py{X}$. The matches are \py{(X == np.arange(N))}; we see that $X[1] = 1$ (recall, python arrays start at index 0, not at 1, so $X[1]$ is the second element of $X$, not the first), so that the second person picks his own hat. The number of matches is therefore 1 for this simulation.
+Here are the results of the print statements: $X = \py{X}$. The matches are \py{(X == np.arange(n))}; we see that $X[1] = 1$ (recall, python arrays start at index 0, not at 1, so $X[1]$ is the second element of $X$, not the first), so that the second person picks his own hat. The number of matches is therefore 1 for this simulation.
 
 Now put the people to work, and let them pick hats for $50$ times.
 \begin{pyblock}[][numbers=left,frame=lines]
@@ -106,13 +123,13 @@ import numpy as np
 np.random.seed(3)
 
 num_samples = 50
-N = 5
+n = 5
 
 res = np.zeros(num_samples)
 for i in range(num_samples):
-    X = np.arange(N)
+    X = np.arange(n)
     np.random.shuffle(X)
-    res[i] = (X == np.arange(N)).sum()
+    res[i] = (X == np.arange(n)).sum()
 
 print(res.mean(), res.var())
 \end{pyblock}
@@ -126,7 +143,7 @@ set.seed(42)
 
 # number simulations and people
 numSamples <- 50
-N <- 5
+n <- 5
 
 # initialize empty result vector
 res <- c()
@@ -134,13 +151,13 @@ res <- c()
 # for loop to simulate repeatedly
 for (i in 1:numSamples) {
 
-  # shuffle the N hats
-  x <- sample(1:N)
+  # shuffle the n hats
+  x <- sample(1:n)
 
   # number of people picking own hat (element by element the vectors x and
-  # 1:N are compared, which yields a vector of TRUE and FALSE, TRUE = 1 and
+  # 1:n are compared, which yields a vector of TRUE and FALSE, TRUE = 1 and
   # FALSE = 0)
-  correctPicks <- sum(x == 1:N)
+  correctPicks <- sum(x == 1:n)
 
   # append the result vector by the result of the current simulation
   res <- append(res, correctPicks)
