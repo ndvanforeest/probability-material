@@ -1,5 +1,3 @@
-% arara: clean: { files: [blg, idx, ilg, ind, log, out, pytxcode, rel, toc ]}
-% arara: clean: {files: [ ans.tex, hint.tex] }
 % arara: pdflatex: { shell: yes, interaction: nonstopmode }
 % arara: pythontex: {verbose: yes, rerun: modified }
 % arara: pdflatex: { shell: yes, interaction: nonstopmode }
@@ -14,8 +12,8 @@
 
 \input{header.tex}
 
-\usepackage[a5paper,landscape]{geometry}
-\usepackage{fouriernc}
+%\usepackage[a5paper,landscape]{geometry}
+\usepackage{fourier}
 
 \AtEndEnvironment{exercise}{\clearpage} %  each exercise on a new page
 
