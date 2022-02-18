@@ -33,6 +33,7 @@ Most of the assignments are new for this year. Hence there will be  mistakes. Pl
 - <2022-02-14 ma>, study guide: Added missing solutions to ch 7 and ch 9.
 - <2022-02-15 di>: assignment ex 1.26: reformulation so that it is (hopefully) clear what you have to learn from this exercise.give an answer.
 - <2022-02-16 wo>: assignment ex 1.24: reversed the arrival times of Alice and Bob in the code.
+- <2022-02-18 vr>: updated the formulation of a few assignments here and there, but nothing major.
 
 
 * Python
