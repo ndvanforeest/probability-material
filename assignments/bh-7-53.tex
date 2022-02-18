@@ -70,14 +70,14 @@ R2 = X * X + Y * Y
 print(paste0("num= ", num, " R2.sum() = ", sum(R2) ))
 
 cov = function (X, Y){
-  return (mean(X * Y) - mean(X)-mean(Y)) # *
+  return (mean(X * Y) - mean(X)*mean(Y)) # *
 }
 
 num = 10
 runs = 300
 Ss = replicate(runs, 0) # *
 Ts = replicate(runs, 0)
-for (i in runs){
+for (i in 1:runs){
   steps = sample(0:4, num, replace = TRUE)
   X = (2 * steps - 1) * (steps < 2)
   Y = (2 * steps - 5) * (steps >= 2)
