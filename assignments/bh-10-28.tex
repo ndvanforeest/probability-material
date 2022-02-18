@@ -39,11 +39,11 @@ pdf(file="figures/bh-10-28.pdf",
     colormodel = "cmyk", paper = "A4")
 
 df1 = data.frame(supp)
-df1$pmf = pmf 
+df1$pmf = pmf # this
 df1$norm_pdf = dnorm(supp,0,1)
 
 p = ggplot(df1) +
-    geom_line(mapping =(aes(x=supp, y = pmf)), color = "blue")+ # this
+    geom_line(mapping =(aes(x=supp, y = pmf)), color = "blue")+
     geom_line(mapping =(aes(x=supp, y = norm_pdf)), color = "orange")+
     theme(axis.title.x=element_blank(),axis.title.y = element_blank())
 p
