@@ -22,7 +22,7 @@ np.random.seed(3)
 
 
 num = 4
-steps = randint(0, 4).rvs(num) # *
+steps = randint(0, 3).rvs(num) # *
 print(steps)
 X = (2 * steps - 1) * (steps < 2) # *
 Y = (2 * steps - 5) * (steps >= 2) # *
@@ -41,7 +41,7 @@ runs = 300
 Ss = np.zeros(runs)  # *
 Ts = np.zeros(runs)
 for i in range(runs):  # *
-    steps = randint(0, 4).rvs(num)
+    steps = randint(0, 3).rvs(num)
     X = (2 * steps - 1) * (steps < 2)
     Y = (2 * steps - 5) * (steps >= 2)
     Ss[i] = X.sum() # *
@@ -60,7 +60,7 @@ print(f"{cov(Ss,Ts)=}") # *
 set.seed(3)
 
 num = 4
-steps = sample(0:4, num, replace = TRUE)
+steps = sample(0:3, num, replace = TRUE)
 print(steps)
 X = (2 * steps - 1) * (steps < 2) # *
 Y = (2 * steps - 5) * (steps >= 2) # *
@@ -78,7 +78,7 @@ runs = 300
 Ss = replicate(runs, 0) # *
 Ts = replicate(runs, 0)
 for (i in runs){
-  steps = sample(0:4, num, replace = TRUE)
+  steps = sample(0:3, num, replace = TRUE)
   X = (2 * steps - 1) * (steps < 2)
   Y = (2 * steps - 5) * (steps >= 2)
   Ss[i] = sum(X) # *
