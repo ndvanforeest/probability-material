@@ -59,9 +59,9 @@ pdf(file="figures/bootstrap.pdf",
 
 df1 = data.frame(medians)
 ggplot()+
-geom_histogram(df1, mapping = (aes(x = medians, y = ..density..)), bins = 100)+
-geom_vline(xintercept = quantile(medians, c(0.025)), color = "red", size=2) +
-geom_vline(xintercept = quantile(medians, c(0.9725)), color = "red", size=2)+
+geom_histogram(df1, mapping = aes(x = medians, y = ..density..), bins = 100)+
+geom_vline(xintercept = quantile(medians, 0.025), color = "red", size=2) +
+geom_vline(xintercept = quantile(medians, 0.9725), color = "red", size=2)+
 geom_vline(xintercept = mean(medians), color = "red", size=2)
 
 dev.off()
@@ -93,11 +93,8 @@ library(matrixStats)
 
 set.seed(3)
 
-sample = matrix(0, 500, 100)
-for(i in 1:nrow(sample)){
-  sample[i,] = sample(1:200, 100, replace = TRUE)
-}
-medians = rowMedians(bootstrap)
+sample = matrix(sample(200, 500 * 100, replace = T), nrow = 500, ncol = 100)
+medians = rowMedians(sample)
 
 pdf(file="figures/real_medians.pdf",
     width = 8, height = 7, bg = "white",          
@@ -105,7 +102,7 @@ pdf(file="figures/real_medians.pdf",
 
 df1 = data.frame(medians)
 ggplot()+
-geom_histogram(df1, mapping = (aes(x = medians, y = ..density..)), bins = 100)
+geom_histogram(df1, mapping = aes(x = medians, y = ..density..), bins = 100)
 
 dev.off()
 \end{minted}
