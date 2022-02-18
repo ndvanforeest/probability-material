@@ -93,11 +93,8 @@ library(matrixStats)
 
 set.seed(3)
 
-sample = matrix(0, 500, 100)
-for(i in 1:nrow(sample)){
-  sample[i,] = sample(1:200, 100, replace = TRUE)
-}
-medians = rowMedians(bootstrap)
+sample = matrix(sample(200, 500 * 100, replace = T), nrow = 500, ncol = 100)
+medians = rowMedians(sample)
 
 pdf(file="figures/real_medians.pdf",
     width = 8, height = 7, bg = "white",          
