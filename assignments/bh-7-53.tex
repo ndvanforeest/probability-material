@@ -70,7 +70,7 @@ R2 = X * X + Y * Y
 print(paste0("num= ", num, " R2.sum() = ", sum(R2) ))
 
 cov = function (X, Y){
-  return (mean(X * Y) - mean(X)-mean(Y)) # *
+  return (mean(X * Y) - mean(X)*mean(Y)) # *
 }
 
 num = 10
