@@ -59,9 +59,9 @@ pdf(file="figures/bootstrap.pdf",
 
 df1 = data.frame(medians)
 ggplot()+
-geom_histogram(df1, mapping = (aes(x = medians, y = ..density..)), bins = 100)+
-geom_vline(xintercept = quantile(medians, c(0.025)), color = "red", size=2) +
-geom_vline(xintercept = quantile(medians, c(0.9725)), color = "red", size=2)+
+geom_histogram(df1, mapping = aes(x = medians, y = ..density..), bins = 100)+
+geom_vline(xintercept = quantile(medians, 0.025), color = "red", size=2) +
+geom_vline(xintercept = quantile(medians, 0.9725), color = "red", size=2)+
 geom_vline(xintercept = mean(medians), color = "red", size=2)
 
 dev.off()
@@ -105,7 +105,7 @@ pdf(file="figures/real_medians.pdf",
 
 df1 = data.frame(medians)
 ggplot()+
-geom_histogram(df1, mapping = (aes(x = medians, y = ..density..)), bins = 100)
+geom_histogram(df1, mapping = aes(x = medians, y = ..density..), bins = 100)
 
 dev.off()
 \end{minted}
