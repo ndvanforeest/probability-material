@@ -175,7 +175,7 @@ integrand = function(labda){
   return (exp(-labda) * labda ** 3 / 6 * exp(-labda) )
 }
 
-res = adaptIntegrate(function(x){integrand(x[1])}, lowerLimit = c(0), upperLimit = c(Inf))
+res = adaptIntegrate(function(x){integrand(x[1])}, lowerLimit = 0, upperLimit = Inf)
 print(res)
 print(dgeom(3 - 1, 1 / 2))
 print(dgeom(4 - 1, 1 / 2))
