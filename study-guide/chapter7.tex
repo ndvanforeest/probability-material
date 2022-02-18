@@ -1322,18 +1322,8 @@ b. See the solutions of BH on the web.
 
 \begin{exercise}
 BH.7.29
-\begin{hint}
-\cref{sec:memoryl-exerc-conf}
-\end{hint}
 \begin{solution}
-  \begin{align*}
-    &\P{\min(X,Y) = a, \max(X,Y) = b} = \E{\1{\min(X,Y) = a, \max(X,Y) = b}} \\
-    &= \sum_{x=0}^\infty \sum_{y=0}^\infty \1{\min(x,y) = a, \max(x,y) = b} \P{X=x, Y=x}\\
-    &= p^2 \sum_{x=0}^\infty \sum_{y=0}^\infty \1{\min(x,y) = a, \max(x,y) = b} q^{x+y} \\
-    &= p^2 \sum_{x=0}^\infty \Big(\sum_{y=0}^{x-1} \1{\min(x,y) = a, \max(x,y) = b} q^{x+y} + \sum_{y=x+1}^\infty \1{\min(x,y) = a, \max(x,y) = b} q^{x+y} + \1{\min(x,x) = a, \max(x,x) = b} p^{2x} \Big) \\
-    &= p^2q^{2a}\1{a=b} + p^2  \sum_{x=0}^\infty \sum_{y=0}^{x-1} \1{y = a, x = b} q^{x+y} \1{a<b} + \sum_{x=0}^\infty \sum_{y=x+1}^\infty \1{x = a, y = b} q^{x+y} \1{a<b}  \\ 
-    &= p^2q^{a+b}\1{a=b} + 2p^2 q^{a+b} \1{a<b}\\ 
-  \end{align*}
+All is covered here in~\cref{sec:memoryl-exerc-conf}.
 \end{solution}
 \end{exercise}
 
