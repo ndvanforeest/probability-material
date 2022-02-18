@@ -108,9 +108,7 @@ plt.savefig("figures/Kelly-jitter.pdf")
 
 \begin{minted}[]{R}
 library(ggplot2)
-
 set.seed(3)
-
 n = 10
 n_experiments = 50
 
@@ -138,11 +136,10 @@ colnames(df1) = c("X")
 df1$Y = -0.01
 
 p = ggplot()+
-  geom_histogram(df1, mapping = (aes(x = X, y = ..density..)), bins = 20)+
-  geom_point(df1, mapping =(aes(x=X, y = Y)))+
+  geom_histogram(df1, mapping = aes(x = X, y = ..density..), bins = 20)+
+  geom_point(df1, mapping =aes(x=X, y = Y))+
   theme(axis.title.x=element_blank(),axis.title.y = element_blank())
-p 
-
+p
 dev.off()
 
 pdf(file="figures/Kelly-jitter.pdf",
@@ -154,11 +151,10 @@ df2 = data.frame(x_jitter)
 colnames(df2) = c("x_jitter")
 df2$y_jitter = -0.01 + runif(n_experiments,-0.01, 0.01)
 
-p + geom_histogram(df2, mapping = (aes(x = x_jitter, y = ..density..)), bins = 20)+
-  geom_point(df2, mapping =(aes(x=x_jitter, y = y_jitter)))+
+p + geom_histogram(df2, mapping = aes(x = x_jitter, y = ..density..), bins = 20)+
+  geom_point(df2, mapping =aes(x=x_jitter, y = y_jitter))+
   theme(axis.title.x=element_blank(),axis.title.y = element_blank())
 p
-
 dev.off()
 \end{minted}
 
