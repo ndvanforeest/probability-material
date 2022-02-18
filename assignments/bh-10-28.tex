@@ -31,10 +31,7 @@ library(ggplot2)
 
 n = 10
 
-pmf = rep(0, 2 * n)
-for(i in 1:length(pmf)){
-  pmf[i] = dpois(i, n)
-}
+pmf = dpois(1:(2 * n), n)
 supp = (seq(0, length(pmf), length.out = length(pmf)) - n) / sqrt(n)
 
 pdf(file="figures/bh-10-28.pdf",
