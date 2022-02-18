@@ -157,10 +157,10 @@ Yet a tiny bit harder, consider \texttt{f4 = np.convolve(f3, fx)} (\texttt{f4 = 
 
 
 \begin{exercise}
-When you would compute the maximum of \texttt{np.abs(f4 -g4)} (abs(f4 - g4) in R) you would see that this is about $10^{-10}$, or so.
+When you would compute the maximum of \texttt{np.abs(f4 -g4)} (\texttt{abs(f4 - g4)} in R) you would see that this is about $10^{-10}$, or so.
 Hence, a small number.
 This is not equal to 0, but we know that this is due to rounding effects.
 
-How can we use the function \texttt{np.isclose()} to get around this problem?
+How can we use the function \texttt{np.isclose()} (\texttt{all.equal()} in R) to get around this problem?
 (You should memorize from this question that you should take care when testing on whether floating point numbers are the same or not.)
 \end{exercise}
