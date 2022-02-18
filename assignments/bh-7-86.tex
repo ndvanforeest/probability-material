@@ -1,19 +1,18 @@
-\subsection{BH 7.86}
+\subsection{BH.2.3.9}
 
-In line with Exercise BH.8.33, we are now going to analyze the effect on \(\P{D\given T}\) when the sensitivity is not known exactly.
+In line with Exercise BH.7.86, we are now going to analyze the effect on \(\P{D\given T}\) when the sensitivity is not known exactly.
 So, why is this interesting?
 In Example 2.3.9 the sensitivity is given, but in fact, in `real' experiments, this is not always known as accurately as assumed in this example.
 For example, in this paper: \href{https://www.thelancet.com/journals/lanres/article/PIIS2213-2600(20)30453-7/fulltext}{False-positive COVID-19 results: hidden problems and costs} it is claimed that `The current rate of operational false-positive swab tests in the UK is unknown; preliminary estimates show it could be somewhere between 0·8\% and 4·0\%.'.
 Hence, even though it is claimed that PCR tests `have analytical sensitivity and specificity of greater than 95\%', it may be 4\% lower.
 Simply put, the specificity and sensitivity are not precisely known, hence this must affect \(\P{D\given T}\).
 
-To help you, we show how to make one graph. Then we ask you to make a few on your own, and comment on them.
+%To help you, we show how to make one graph. Then we ask you to make a few on your own, and comment on them.
 
 
 
-\subsection{BH.2.3.9}
 
-I write \texttt{p\_D\_g\_T} for \(\P{D\given T}\). Here is how this can be implemented in python.
+I write \texttt{p\_D\_g\_T} for \(\P{D\given T}\). Here is how  Example 2.3.9 can be implemented.
 
 \begin{minted}[]{python}
 sensitivity = 0.95
@@ -35,8 +34,11 @@ p_D_g_T  = sensitivity * p_D/p_T
 p_D_g_T
 \end{minted}
 
+
+\begin{exercise}
 \begin{enumerate}
 \item Make a plot of \(\P{D\given T}\) in which you vary the sensitivity from 0.9 to 0.99. Explain what you see.
 \item Make a plot of \(\P{D\given T}\) in which you vary the specificity from 0.9 to 0.99.
 \item Make a plot of \(\P{D\given T}\) in which you vary \(\P{D}\) from 0.01 to 0.5. Explain what you see.
 \end{enumerate}
+\end{exercise}
