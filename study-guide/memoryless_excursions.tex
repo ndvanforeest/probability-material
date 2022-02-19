@@ -6,9 +6,9 @@
 \input{header}
 %\refcheckxrdoc[a]{memoryless_excursions}
 
-\section{Memoryless exercursions: A confusing problem with memoryless rvs}
+\section{Memoryless excursions: A confusing problem with memoryless rvs}
 \label{sec:memoryl-exerc-conf}
-BY give a quick argument to compute $\E M$ and $\E L$ where
+BH give a quick argument to compute $\E M$ and $\E L$ where
 $M=\max\{X,Y\}$  and $L=\min\{X,Y\}$ are the maximum and minimum of two iid exponential rvs $X$ and $Y$.
 Since  $X$ and $Y$  have the same distribution,
 \begin{equation*}
@@ -33,11 +33,11 @@ Adding these two equations and noting that $\E L$ cancels we get $2\E M = 3 \E X
 \E M &= \frac 3 2 \E X, & \E L &= \E M - \E X = \frac 1 2 \E X. \label{eq:35}
 \end{align}
 
-This argument seems general enough, so it must hold for discrete memoryless rvs too, i.e., when $X, Y \sim \Geo{p}$. But that is not the case: it is only true when $X, Y \sim \Exp{\lambda}$ and independent. To see what is wrong I tried as many different approaches to this problem I could think of, which  resulted in this text.\footnote{Part of this material was born out of annoyance.  The  book uses one of those typical probability arguments:  slick, half complete, and wrong as soon as one tries it in other situations. In other words, the type of argumnent beginner books should stay clear of. I admit that I was quite irritated about the argument offered by the book.} In~\cref{sec:set-1} we'll derive~\cref{eq:6}  for geometric rvs in multiple  different ways.
-Hence, the culprit must be~\cref{eq:7}. Then, in \cref{sec:exerc-expon-distr} we'll show that both equations \emph{are true} for exponenial rvs.
+This argument seems general enough, so it must hold for discrete memoryless rvs too, i.e., when $X, Y \sim \Geo{p}$. But that is not the case: it is only true when $X, Y \sim \Exp{\lambda}$ and independent. To see what is wrong I tried as many different approaches to this problem I could think of, which  resulted in this text.\footnote{Part of this material was born out of annoyance.  The  book uses one of those typical probability arguments:  slick, half complete, and wrong as soon as one tries it in other situations. In other words, the type of argument beginner books should stay clear of. I admit that I was quite irritated about the argument offered by the book.} In~\cref{sec:set-1} we'll derive~\cref{eq:6}  for geometric rvs in multiple  different ways.
+Hence, the culprit must be~\cref{eq:7}. Then, in \cref{sec:exerc-expon-distr} we'll show that both equations \emph{are true} for exponential rvs.
 Finally, in~\cref{sec:solution} we find a formula that is similar to $\E M = \E L + \E X$ but that holds for both types of memoryless rvs, whether they are discrete or continuous.
 
-\new{The analysis of} the above problem illustrates many general and useful probability concepts such as  joint CDF, joint PMF/PDF, the fundamental bridge, integration over 2D areas, 2D LOTUS, conditional PMF/PDF, MGFs, and the change of variables formula. It pays off to do the exercises yourself and then study the hinta and solutions carefully.
+\new{The analysis of} the above problem illustrates many general and useful probability concepts such as  joint CDF, joint PMF/PDF, the fundamental bridge, integration over 2D areas, 2D LOTUS, conditional PMF/PDF, MGFs, and the change of variables formula. It pays off to do the exercises yourself and then study the hints and solutions carefully.
 
 \new{You'll notice}, hopefully, that I use many different methods to the same problem, and that I take pains to see how the answers of these methods relate. There are at least two reasons for this. Often, a problem can be solved in multiple ways, and one method is not necessarily better than another; better yet,  different methods may augment the understanding of the problem. The second reason is that it is easy to make a mistake in probability. If  different methods give the same answer, the probability of having made a mistake becomes smaller.
 
@@ -427,13 +427,13 @@ for any set\footnote{If you like maths, you should be quite a bit more careful a
 = \iint_{\{(x,y): g(x,y) \in A\}} f_{X,Y}(x,y) \d x \d y.
     \end{split}
   \end{equation*}
-The jpoint CDF $F_{X,Y}$ then follows because $F_{X,Y}(x,y) = \P{X\leq x, Y\leq y} = \E{\1{X\leq x, Y\leq y}}$.
+The joint CDF $F_{X,Y}$ then follows because $F_{X,Y}(x,y) = \P{X\leq x, Y\leq y} = \E{\1{X\leq x, Y\leq y}}$.
 A warning is in place: conceptually this approach is easy, but doing  the integration can be very challenging (or impossible).  However, this expression is very important as this is the preferred way to compute distributions by numerical methods and simulation.
 
 
 
 \begin{exercise}
-Use the fundamental bridge to rederive the above expression for $F_M(v)$.
+Use the fundamental bridge to re-derive the above expression for $F_M(v)$.
 \begin{solution}
 \begin{align*}
 \P{M\leq v}
@@ -542,7 +542,7 @@ Let  $X\sim \Geo{\lambda/n}$ for some $\lambda>0$ and $n\gg 0$. Then take  some 
 \begin{exercise}
 Show that
 \begin{equation}\label{eq:53}
-\P{X/n \approx x} \approx \frac{\lambda} n \left(1-\frac \lambda n\right)^{xn}.
+\P{X/n \approx x} \approx \frac{\lambda} n \left(1-\frac \lambda n\right)^{Zion}.
 \end{equation}
 \begin{solution}
 First,
@@ -689,7 +689,7 @@ Use~\cref{ex:2} to see that
 \P{L=i, M-L=j} = 2p^2q^{2i+j} \1{j\geq 1} + p^2q^{2i}\1{j=0}.
 \end{equation*}
 \begin{hint}
-Realize that $\P{L=i, M-L=j}=  \P{L=i, M=i+j}$. Now fill in the formala of~\cref{ex:2}.
+Realize that $\P{L=i, M-L=j}=  \P{L=i, M=i+j}$. Now fill in the formula of~\cref{ex:2}.
 \end{hint}
 \end{exercise}
 
@@ -713,7 +713,7 @@ Suppose $j>0$ (for $j=0$ the maths is the same). Then,
 
 
 Recalling that $\P{L=i} = (1-q^2)q^{2i}$, it follows right away from~\cref{eq:34} that $L$  and $M-L$ are independent.
-Interestingly, from~\cref{ex:27} we see $M-L\sim Y$ for the continuous case. However, here, for the geometric case, $\P{M-L=j} \neq pq^{j} = \P{Y=j}$.  This explains why $\E M \neq \E L + \E X$ for geometric rvs: we should be more carefull in how to split $M$ in terms of $L$ and $X$.
+Interestingly, from~\cref{ex:27} we see $M-L\sim Y$ for the continuous case. However, here, for the geometric case, $\P{M-L=j} \neq pq^{j} = \P{Y=j}$.  This explains why $\E M \neq \E L + \E X$ for geometric rvs: we should be more careful in how to split $M$ in terms of $L$ and $X$.
 
 
 
