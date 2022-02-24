@@ -13,10 +13,10 @@ import matplotlib.pyplot as plt
 labda, mu = 3, 5
 
 n = 1000
-X = expon(scale=1 / labda)
+X = expon(scale=1 / labda) # this
 Y = expon(scale=1 / mu)
-Z = X.rvs(n) + Y.rvs(n)
-G1 = gamma(2, scale=1 / labda)
+Z = X.rvs(n) + Y.rvs(n) # this
+G1 = gamma(2, scale=1 / labda) # this
 G2 = gamma(2, scale=1 / mu)
 
 support = np.arange(0, 5, 0.03)
@@ -36,13 +36,13 @@ labda = 3
 mu = 5
 
 n = 1000
-X = rexp(n, labda)
+X = rexp(n, labda) # this
 Y = rexp(n, mu)
-Z = X + Y
+Z = X + Y # this
 
 support = seq(0, 5, 0.03)
 
-G1 = dgamma(support, 2, scale=1 / labda)
+G1 = dgamma(support, 2, scale=1 / labda) # this
 G2 = dgamma(support, 2, scale=1 / mu)
 
 df1 = data.frame(Z)

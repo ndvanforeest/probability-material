@@ -34,6 +34,7 @@ Most of the assignments are new for this year. Hence there will be  mistakes. Pl
 - <2022-02-15 di>: assignment ex 1.26: reformulation so that it is (hopefully) clear what you have to learn from this exercise.give an answer.
 - <2022-02-16 wo>: assignment ex 1.24: reversed the arrival times of Alice and Bob in the code.
 - <2022-02-18 vr>: updated the formulation of a few assignments here and there, but nothing major.
+- <2022-02-24 do>: assignment 3: added #this to an exercise relating to BH-8.4.3.
 
 
 * Python
