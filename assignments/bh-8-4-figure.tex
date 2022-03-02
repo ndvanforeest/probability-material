@@ -8,35 +8,35 @@ We throw a coin a number of times. We take some beta distribution as prior for t
 \begin{exercise}
 Run the follow code and explain the output.
 
-We define the variables H and T as these outcomes are easier to memorize than 1 and 0. Like this, there is less possibility for confusion, hence less bugs.
+We define the variables HEADS and TAILS as these outcomes are easier to memorize than 1 and 0. Like this, there is less possibility for confusion, hence less bugs.
 
 \begin{minted}[]{python}
-H, T = 1, 0
-outcomes = [H, T]
+HEADS, TAILS = 1, 0
+outcomes = [HEADS, TAILS]
 
 h, t = 1, 1  # this
-h += outcomes[0] == H
-t += outcomes[0] == T
+h += outcomes[0] == HEADS
+t += outcomes[0] == TAILS
 print(f"{h=}, {t=}")
 
-h += outcomes[1] == H
-t += outcomes[1] == T
+h += outcomes[1] == HEADS
+t += outcomes[1] == TAILS
 print(f"{h=}, {t=}")
 \end{minted}
 
 \begin{minted}[]{R}
-H = 1
-T = 0
-outcomes = c(H,T)
+HEADS = 1
+TAILS = 0
+outcomes = c(HEADS, TAILS)
 
 h = 1 #this
 t = 1 #this
-h = h + as.numeric(outcomes[1] == H)
-t = t + as.numeric(outcomes[1]== T)
+h = h + as.numeric(outcomes[1] == HEADS)
+t = t + as.numeric(outcomes[1]== TAILS)
 print(paste0("h=", h, ", t=", t))
 
-h = h + as.numeric(outcomes[2] == H)
-t = t + as.numeric(outcomes[2]== T)
+h = h + as.numeric(outcomes[2] == HEADS)
+t = t + as.numeric(outcomes[2]== TAILS)
 print(paste0("h=", h, ", t=", t))
 \end{minted}
 
@@ -53,13 +53,13 @@ import matplotlib.pyplot as plt
 support = np.arange(0, 1, 0.03)
 
 H, T = 1, 0
-outcomes = [H, H, T, H, H, H, T, H, H]
+outcomes = [HEADS, HEADS, TAILS, HEADS, HEADS, HEADS, TAILS, HEADS, HEADS]
 h, t = 1, 1  # this
 
 fig, axes = plt.subplots(3, 3, sharey="all", figsize=(6, 3))  # this
 for i, ax in enumerate(axes.flatten()):  # this
-    h += outcomes[i] == H
-    t += outcomes[i] == T
+    h += outcomes[i] == HEADS
+    t += outcomes[i] == TAILS
     X = beta(h, t).pdf(support)
     ax.plot(support, X)
     ax.set_title(f'h={h-1}, t={t-1}')
@@ -74,9 +74,9 @@ library(gridExtra)
 
 support = seq(0, 1, 0.03)
 
-H = 1
-T = 0
-outcomes = c(H, H, T, H, H, H, T, H, H)
+HEADS = 1
+TAILS = 0
+outcomes = c(HEADS, HEADS, TAILS, HEADS, HEADS, HEADS, TAILS, HEADS, HEADS)
 h = 1 #this
 t = 1 #this
 
@@ -116,7 +116,7 @@ Which conjugacy relation between prior and data do we use here to update the pri
 \end{exercise}
 
 \begin{exercise}
-Adapt the  code above such that the prior is $a=3.5, b= 1.5$, the outcomes are T, H, T, H, T, H, and the output is a figure with 3 x 2 subfigures. Besides the explanation, include the figure.
+Adapt the  code above such that the prior is $a=3.5, b= 1.5$, the outcomes are TAILS, HEADS, TAILS, HEADS, TAILS, HEADS, and the output is a figure with 3 x 2 subfigures. Besides the explanation, include the figure.
 \end{exercise}
 
 
