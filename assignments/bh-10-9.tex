@@ -4,6 +4,11 @@
 
 
 \begin{exercise}
+Include your hand written solution for this problem here. Read the instructions of the announcement if you don't know what to do.
+\end{exercise}
+
+
+\begin{exercise}
 In the code below we compute or simulate the various expressions of BH.10.9. Check the results and compare it to the analytical results. Are both results in line? If not, do you know why that might be the case? What can you do about that?
 
 I don't know how to build $\E{\V{Y|X}}$ in any sensible way. Since $Y$ is independent of $X$, the conditioning does not have any influence. Thus, this numerical exercise is skipped.
@@ -39,7 +44,7 @@ print(p, X.mean())
 \end{minted}
 
 \begin{minted}[]{R}
-library(cubature)   
+library(cubature)
 set.seed(3)
 
 expectation = adaptIntegrate(function(x){exp(-(x[1]+2)) * exp(-x[1]) },
@@ -57,7 +62,7 @@ p3 = sum(X_sample > Y_sample - 3) / n_sample
 print(paste(p1, p3))
 
 EXY = X_sample %*% Y_sample / n_sample
-expectation2 = adaptIntegrate(function(x){((x[1]+2) ** 4) * exp(-x[1]) }, 
+expectation2 = adaptIntegrate(function(x){((x[1]+2) ** 4) * exp(-x[1]) },
               lowerLimit = c(0), upperLimit = c(Inf))
 
 print(paste(expectation2$integral, EXY * EXY))

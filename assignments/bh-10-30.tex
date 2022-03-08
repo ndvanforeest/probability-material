@@ -3,6 +3,10 @@
 \subsection{BH.10.30}
 
 \begin{exercise}
+Include your hand written solution for this problem here. Read the instructions of the announcement if you don't know what to do.
+\end{exercise}
+
+\begin{exercise}
 Explain how the code below implements the solution of parts a and b BH.10.30. (Of course we skip the proof of the convergence to $g(\alpha)$ here.)
 \end{exercise}
 
@@ -38,7 +42,7 @@ plt.savefig("figures/bh-10-30.pdf")
 \end{minted}
 
 \begin{minted}[]{R}
-library(cubature)   
+library(cubature)
 set.seed(3)
 
 num = 100
@@ -61,7 +65,7 @@ g = function(alpha){
 }
 
 pdf(file="figures/bh-10-30.pdf",
-    width = 8, height = 7, bg = "white",          
+    width = 8, height = 7, bg = "white",
     colormodel = "cmyk", paper = "A4")
 
 df = data.frame(log(Y)/(1:num))
@@ -72,7 +76,7 @@ p = ggplot()+
     scale_color_manual( name = " ", values = c("g" = "red", "(log Yn)/n" = "blue"))+
     ylim(-10* g(alpha), 10 * g(alpha)) + #this
     theme(axis.title.x = element_blank(), axis.title.y = element_blank())
-p    
+p
 
 dev.off()
 \end{minted}

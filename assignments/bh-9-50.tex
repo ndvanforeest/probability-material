@@ -2,7 +2,10 @@
 
 \subsection{BH.9.50}
 
-This simulation exercise is based on BH.9.50. Please read the exercise first. Do the exercise while thinking about the code.
+
+\begin{exercise}
+Include your hand written solution for this problem here. Read the instructions of the announcement if you don't know what to do.
+\end{exercise}
 
 \begin{exercise}
 Here is some code to simulate $N$.  Explain the non-trivial steps. (By now you should have an idea about boiler-plate code and what code is specific for the problem.)
@@ -35,7 +38,7 @@ set.seed(3)
 
 num = 100
 N = rep(0,num)
-labdas = rexp(num, 1) 
+labdas = rexp(num, 1)
 
 for(i in 1:num){
   labda = labdas[i]
@@ -85,7 +88,7 @@ print("var_theoretical: ", eve)
 set.seed(3)
 
 num = 100
-labdas = rexp(num, 1) 
+labdas = rexp(num, 1)
 mu = 3
 sigma = 1
 S = rep(0,num)
@@ -95,7 +98,7 @@ for(i in 1:num){
   S[i] = sum(rlnorm(N, mean = 0, sd = sigma)+ mu)
 }
 
-theta = exp(sigma * sigma / 2) 
+theta = exp(sigma * sigma / 2)
 var = (theta * theta) * (exp(sigma * sigma) - 1)
 
 print(paste("S.mean()=", mean(S)))
@@ -140,7 +143,7 @@ for(i in 1:num){
 }
 
 pdf(file="figures/bh-9.50-fig.pdf",
-    width = 8, height = 7, bg = "white",          
+    width = 8, height = 7, bg = "white",
     colormodel = "cmyk", paper = "A4")
 
 df1 = data.frame(N)
@@ -169,7 +172,7 @@ print(geom(1 / 2).pmf(4))
 \end{minted}
 
 \begin{minted}[]{R}
-library(cubature)  
+library(cubature)
 
 integrand = function(labda){
   return (exp(-labda) * labda ** 3 / 6 * exp(-labda) )

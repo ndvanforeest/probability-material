@@ -3,6 +3,10 @@
 \subsection{BH.10.28}
 
 \begin{exercise}
+Include your hand written solution for this problem here. Read the instructions of the announcement if you don't know what to do.
+\end{exercise}
+
+\begin{exercise}
 Let us first plot the PMF of the standardized version of $X_{n}$ for $n=10$. Explain the code below BEFORE making the plot.
 \end{exercise}
 
@@ -27,7 +31,7 @@ plt.savefig("figures/bh-10-28.pdf")
 \end{minted}
 
 \begin{minted}[]{R}
-library(ggplot2)  
+library(ggplot2)
 
 n = 10
 
@@ -35,7 +39,7 @@ pmf = dpois(1:(2 * n), n)
 supp = (seq(0, length(pmf), length.out = length(pmf)) - n) / sqrt(n)
 
 pdf(file="figures/bh-10-28.pdf",
-    width = 8, height = 7, bg = "white",          
+    width = 8, height = 7, bg = "white",
     colormodel = "cmyk", paper = "A4")
 
 df1 = data.frame(supp)
@@ -62,7 +66,7 @@ plt.plot(supp, pmf * np.sqrt(n))
 \end{minted}
 
 \begin{minted}[]{R}
-df1$pmf = pmf * sqrt(n) 
+df1$pmf = pmf * sqrt(n)
 \end{minted}
 Explain why.  (You should memorize  that comparing PMFs and PDFs is not straightforward.)
 \end{exercise}
@@ -104,7 +108,7 @@ plt.savefig("figures/bh-10-28-mgf1.pdf")
 \end{minted}
 
 \begin{minted}[]{R}
-library(ggplot2)  
+library(ggplot2)
 
 n = 10
 num = 50
@@ -119,7 +123,7 @@ for(i in 1:num){
 }
 
 pdf(file="figures/bh-10-28-mgf1.pdf",
-    width = 8, height = 7, bg = "white",          
+    width = 8, height = 7, bg = "white",
     colormodel = "cmyk", paper = "A4")
 
 df1 = data.frame(S)
@@ -174,7 +178,7 @@ plt.savefig("figures/bh-10-28-mgf2.pdf")
 \end{minted}
 
 \begin{minted}[]{R}
-library(ggplot2)  
+library(ggplot2)
 
 n = 10
 num = 50
@@ -188,7 +192,7 @@ for(i in 1:num){
 }
 
 pdf(file="figures/bh-10-28-mgf2.pdf",
-    width = 8, height = 7, bg = "white",          
+    width = 8, height = 7, bg = "white",
     colormodel = "cmyk", paper = "A4")
 
 df1 = data.frame(S)
