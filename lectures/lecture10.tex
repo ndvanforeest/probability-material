@@ -1,4 +1,5 @@
-\documentclass[lectures-questions]{subfiles}
+%\documentclass[lectures-questions]{subfiles}
+\documentclass[lectures-demo]{subfiles}
 \begin{document}
 
 \section{Lecture 10}
@@ -25,42 +26,12 @@ Hence, we end up with a stick of expected length 25 cm.
 \begin{exercise}
 Now we change the story slightly. Every time we break a stick, we keep the \textit{longest} part. What is the expected length of the remaining stick?
 \begin{solution}
-Let $X$ denote the point where the initial stick gets broken; let $Y$ denote the length of the first remaining stick; let $Z$ denote the point where the first remaining stick gets broken; let $S$ denote the length of the final remaining stick. We have
-\begin{align}
-    &X \sim \Unif{0,100}, \\
-    &Y = \max\{X,100 - X\}, \\
-    &Z \sim \Unif{0,Y}, \\
-    &S = \max\{Z, Y-Z\}.
-\end{align}
-We have
-\begin{align}
-    \E{S} = \E{\E{S|Y}},
-\end{align}
-where
-\begin{align}
-    \E{S|Y=y} &= \E{\max\{Z, Y-Z\}|Y=y} \\
-    & = \E{\max\{Z, y-Z\}|Y=y} \\
-    & = \P{Z \geq y|Y=y}\E{Z|Z \geq y, Y=y} + \P{Z < y|Y=y}\E{y - Z|Z < y, Y=y} \\
-    & = \frac{1}{2}\cdot \frac{3y}{4} + \frac{1}{2}\cdot \frac{3y}{4} \\
-    & = \frac{3y}{4}.
-\end{align}
-Hence,
-\begin{align}
-    \E{S} &= \E{\E{S|Y}} \\
-    &= \E{\frac{3Y}{4}}  \\
-    &= \frac{3}{4}\E{Y}.
-\end{align}
-We have
-\begin{align}
-    \E{Y} &= \E{\max\{X,100 - X\}} \\
-    &= \frac{3}{4} \cdot 100 = 75,
-\end{align}
-by symmetry with $\E{S|Y=y}$ above. Hence,
-\begin{align}
-    \E{S} &= \frac{3}{4}\E{Y} \\
-     &= \frac{3}{4}\cdot 75 = 56.25 \\
-\end{align}
-So we expect to end up with a stick of length 56.25 cm.
+By symmetry we can assume that the point of the first break is $Y\sim\Unif{1/2, 1}$, in meters. By the same reasoning, the point of the second break, conditional on $Y=y$, is $Z|Y=y \sim \Unif{y/2, y}$. Then, $\E{Z|Y=y} = 3y/4$. Replacing $y$ by the rv $Y$, we have that $\E{Z|Y} = 3 Y/4$. With this, and Adam's law,
+\begin{equation}
+\E Z = \E{\E{Z|Y}} = \E{3Y/4} = 3/4\cdot \E{Y}= 3/4\cdot (1/2+1)/2 = (3/4)^{2},
+\end{equation}
+in meters.
+
 \end{solution}
 \end{exercise}
 
