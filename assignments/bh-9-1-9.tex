@@ -63,7 +63,7 @@ do_run = function(){
       state = ifelse(p < 2 / 3, 1, 3) # this
     }
     else if (state == 1){
-      state = ifelse(p < 2 / 3, 3, 0) # this
+      state = ifelse(p < 2 / 3, 2, 0) # this
     }
   }
   return (n_steps)
