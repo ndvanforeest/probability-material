@@ -1,0 +1,257 @@
+\documentclass[12pt]{article}
+
+\usepackage{a4wide}
+\usepackage{titlesec}
+\newcommand{\sectionbreak}{\clearpage}
+
+\usepackage[english]{babel}
+\usepackage{mathtools,amsthm,amssymb,amsmath}
+
+\usepackage{fourier}
+\usepackage{hyperref}
+\usepackage[capitalize]{cleveref}
+
+\usepackage{minted}
+\setminted[python]{numbers=left, frame=lines, label=\fbox{Python Code}, xleftmargin=5mm,framesep=2mm}
+\setminted[R]{numbers=left, frame=lines, label=\fbox{R Code}, xleftmargin=5mm,framesep=2mm}
+
+\usepackage{enumerate}
+\usepackage[nosolutionfiles]{answers}
+
+
+\theoremstyle{definition}
+\newtheorem{exercise}{Ex}[section]
+%\AtEndEnvironment{exercise}{\clearpage} %  each exercise on a new page
+\AtEndEnvironment{exercise}{\vfill} %  each exercise on a new page
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\cm}{\,\mathrm{cm}}
+\newcommand{\m}{\,\mathrm{m}}
+\newcommand{\given}{\,\middle|\,}
+\newcommand{\Beta}[1]{\mathrm{Beta}(#1)}
+\newcommand{\Bern}[1]{\mathrm{Bern}(#1)}
+\newcommand{\Bin}[1]{\mathrm{Bin}(#1)}
+\newcommand{\Exp}[1]{\mathrm{Exp}(#1)}
+\newcommand{\FS}[1]{\mathrm{FS}(#1)}
+\newcommand{\Gamm}[1]{\mathrm{Gamma}(#1)}
+\newcommand{\Geo}[1]{\mathrm{Geo}(#1)}
+\newcommand{\Norm}[1]{\mathrm{Norm}(#1)}
+\newcommand{\Pois}[1]{\mathrm{Pois}(#1)}
+\newcommand{\Unif}[1]{\mathrm{Unif}(#1)}
+\renewcommand{\P}[1]{\,\mathsf{P}\left\{#1\right\}}
+\newcommand{\E}[1]{\,\mathsf{E}\left[#1\right]}
+\newcommand{\EE}[2]{\,\mathsf{E}_{#1}\left[#2\right]}
+\newcommand{\V}[1]{\,\mathsf{V}\left[#1\right]}
+\newcommand{\cov}[1]{\,\mathsf{Cov}\left[#1\right]}
+\renewcommand{\d}[1]{\,\textrm{d}#1}
+\newcommand{\1}[1]{\,I_{#1}} % indicator
+\newcommand{\iid}{\ensuremath{\mathrm{iid.}\,}}
+\newcommand{\is}[1]{\stackrel{#1}{=}}
+
+\title{
+Probability Distributions \\
+EBP038A05, 2021-2022.2A\\
+Mock exam, April 4 2022\\
+Student id: {} \\
+Student name: {} \\
+}
+
+\author{dr. N.D. van Foreest c.s.
+FEB, University of Groningen
+}
+\date{}
+
+\begin{document}
+\maketitle
+{\LARGE Read-me}
+
+\begin{enumerate}
+\item The exam is closed book.
+\item The exam duration is 2 hours
+\item Each exam question contains one or more sub-questions. For each sub-question you can earn 0 (no answer, or completely wrong), 1, 2 or 3 (perfect) points.
+%is indicated in brackets.
+\item Write your answer below the question. (If you need scrap paper, just use the backside of the pages.)
+\item For numerical answers, rounding to 3 significant digits is sufficient. However, stating answers like $11/19$ is preferred. Actually, you don't need a calculator at all.
+\end{enumerate}
+
+For this mock exam, we don't include solutions here.
+You can find problems in  the book, and look up the solutions in the study guide. For the code questions, use the assignments.
+
+
+\section{Question}
+
+Customers arrive at a shop in accordance to a Poisson process with rate \(\lambda\) per hour. Each customer buys an item with probability \(p\), independent of other customers.  The purchase price of an item has mean \(\mu\) and variance \(\sigma^{2}\).
+
+
+\begin{exercise}
+What is the amount spent by a random customer (including the customers that don't buy)?
+\end{exercise}
+
+\begin{exercise}
+What is the mean and the variance of the revenue of the shop received during a morning of \(4\) hours long?
+\end{exercise}
+
+
+\section{Question}
+
+Let \(U\) and \(V\) be iid and geometrically distributed with success probability \(p\). Take \(N=U+V\).
+
+\begin{exercise}
+Find \(\E N\).
+\end{exercise}
+
+\begin{exercise}
+Write down the joint distribution  of \(U\) and \(V\).
+\end{exercise}
+
+\begin{exercise}
+Find an expression for \(\P{U=i|N=n}\).
+\end{exercise}
+
+
+\section{Question}
+Let \(\{X_i\}\)  be a sequence of iid rvs such that \(X_i\sim\) Unif(0,1). Suppose that \(Y_i = -\lambda^{-1}\log(1/X_i)\) for all \(i\).
+
+\begin{exercise}
+How is \(Y_{1}\times \cdots \times Y_{n}\) distributed, and what are the parameters?
+\end{exercise}
+
+
+\section{Question}
+
+This simulation exercise is based on BH.9.25. For the the exam we will copy the text of the question, but for the mock exam we expect you to look it up in BH.
+
+
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import bernoulli
+
+np.random.seed(3)
+
+n = 5
+num = 10
+
+p = 0.5
+S = bernoulli(p).rvs([num, n]) * 2 - 1 # this 1
+
+x = np.zeros([num, n])
+x[:, 0] = 100
+f = 0.25
+
+for i in range(1, n):
+    x[:, i] = x[:, i - 1] +  (1 - f * S[:, i]) # this 2
+
+print(x.mean(axis=0), x.std(axis=0))
+\end{minted}
+
+\begin{minted}[]{R}
+set.seed(3)
+
+n = 5
+num = 10
+
+p = 0.5
+S = matrix(0, num, n)
+for(i in 1:num){
+  S[i,1:n] = rbinom(n, 1, p) * 2 -1 #this 1
+}
+
+x = matrix(0, num, n)
+x[,1] = 100
+f = 0.25
+
+for(i in 2:n){
+  x[,i] = x[,i-1] + (1 - f * S[,i])  # this 2
+}
+
+print(colMeans(x))
+print(apply(x, MARGIN = 2, sd))
+\end{minted}
+
+\begin{exercise}
+\begin{enumerate}
+\item  Line `this 1': explain why we multiply by 2 and subtract 1.
+\item Line `this 2': this line contains errors. How should it be repaired so the code correctly computes the answer for the question.
+\end{enumerate}
+\end{exercise}
+
+\section{Question}
+
+Let $X$ and $Y$ be iid continuous rvs. We use the code below
+\begin{enumerate}
+\item to get an indication of whether $\P{X>Y+3} \geq \P{Y>X+3}$;
+\item to estimate $\E{XY}$.
+\end{enumerate}
+
+\begin{minted}{python}
+import numpy as np
+from scipy.stats import expon
+
+np.random.seed(3)
+
+X = expon(2)
+Y = expon(3)
+
+n_sample = 1000
+X_sample = X.rvs(n_sample)
+Y_sample = Y.rvs(n_sample)
+p1 = sum(X.rvs(n_sample) - Y.rvs(n_sample) + 3) / n_sample
+p2 = sum(Y_sample  X_sample > 3) / n_sample
+print(p1-p2)
+
+EXY = X_sample @ Y_sample / n_sample # this
+\end{minted}
+
+\begin{minted}[]{R}
+library(cubature)
+set.seed(3)
+
+n_sample = 1000
+X_sample = rexp(n_sample, 1) + 2
+Y_sample = rexp(n_sample, 1) + 3
+p1 = sum((rexp(n_sample, 1) + 2) - (rexp(n_sample, 1) + 3) + 3) / n_sample
+p2 = sum(Y_sample  X_sample > 3) / n_sample
+print(p1 - p2)
+
+EXY = X_sample %*% Y_sample / n_sample #this
+\end{minted}
+
+
+\begin{exercise}
+\begin{enumerate}
+\item This code does not print $\P{X>Y+3} - \P{Y>X+3}$. What is wrong? Explain how to repair it (or provide the correct code).
+\item  In the `this' line we use simulation to estimate $\E{XY}$. What is the problem of using  a numerical integrator for  this task?
+\end{enumerate}
+\end{exercise}
+
+
+\section*{List of distributions}
+
+For the following distributions, you have to know by heart the form and the parameters, and either learn (or be able to derive at the exam) the mean and variance: Bernoulli, Binomial, First success, Geometric, Poisson, Uniform (discrete and continuous) and Exponential.
+
+For the hypergeometric distribution you have to know the pmf and the parameters, but not the mean and variance. If necessary, we will provide the mean and variance at the exam.
+
+We will not ask any question that involves calculus (e.g., integration) with (the cdf or pmf of):
+Negative hyper geometric, Weibull, Log normal, Chi-square or Student-t.
+
+\begin{align*}
+\text{name} && \text{pmf} && \mu && \sigma^{2} \\
+\text{NBin} && {r+k-1 \choose r-1}p^r q^k && rq/p && rq/p^2\\
+\text{Normal} && \frac{e^{-(x-\mu)^2/2\sigma^{2}}}{\sqrt{2\pi\sigma^{2}}} && \mu && \sigma^{2}\\
+\text{Gamma} &&  \frac{(\lambda x)^a e^{-\lambda x}}{x \Gamma(a)} && a/\lambda && a/\lambda^2\\
+\text{Beta} && \frac{\Gamma(a+b)}{\Gamma(a) \Gamma(b)} x^{a-1} (1-x)^{b-1} && \mu=\frac a{a+b} && \frac{\mu(1-\mu)}{a+b+1},
+\end{align*}
+where \(\Gamma(a) = (a-1)!\) if \(a\) is a positive integer.
+
+
+\vfill
+\begin{center}
+LAST PAGE OF THE EXAM
+\end{center}
+
+\end{document}
