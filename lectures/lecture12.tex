@@ -90,14 +90,14 @@ We consider the height of a certain population of people (e.g., all students at 
 \begin{exercise}
 One measure of reliability of our estimator $\bar{X}_n$ is its standard deviation. Let's say we find our estimator reliable if its standard deviation is at most 1 cm. Give a lower bound for $n$ for which we can guarantee that our esitmator is reliable in this sense.
 \begin{solution}
-We want to guarante that $sd(\bar{X}_n) \geq 1$, which is equivalent to $\V{\bar{X}_n} \geq 1$. We have
+We want to guarante that $sd(\bar{X}_n) \leq 1$, which is equivalent to $\V{\bar{X}_n} \leq 1$. We have
 \begin{align}
     \V{\bar{X}_n} &= \V{\frac{1}{n}\sum_{i=1}^n X_i} \\
     &= \frac{1}{n^2} \sum_{i=1}^n \V{X_i} \\
     &= \frac{1}{n^2} \cdot n \cdot \sigma^2 \\
     &= \frac{100}{n}.
 \end{align}
-So to guarantee we have a reliable estimator, we need $\frac{100}{n} \geq 1$, which is equivalent to $n \geq 100$.
+So to guarantee we have a reliable estimator, we need $\frac{100}{n} \leq 1$, which is equivalent to $n \geq 100$.
 \end{solution}
 \end{exercise}
 
