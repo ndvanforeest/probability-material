@@ -47,7 +47,7 @@ plt.savefig("figures/bootstrap.pdf")
 library(ggplot2)
 library(matrixStats)
 
-np.random.seed(3)
+set.seed(3)
 
 sample = sample(1:200,100, replace=TRUE)
 n_boot = 5000
