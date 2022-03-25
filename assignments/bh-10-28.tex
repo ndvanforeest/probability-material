@@ -35,7 +35,7 @@ library(ggplot2)
 
 n = 10
 
-pmf = dpois(1:(2 * n), n)
+pmf = dpois(0:(2 * n), n)
 supp = (seq(0, length(pmf), length.out = length(pmf)) - n) / sqrt(n)
 
 pdf(file="figures/bh-10-28.pdf",
@@ -118,7 +118,7 @@ pmf = dpois(0:99,n) #this
 
 for(i in 1:num){
   for(j in 1:length(pmf)){
-    M[i] = M[i] + exp(S[i] * (j - n)/sqrt(n)) * pmf[j]
+    M[i] = M[i] + exp(S[i] * (j - 1 - n)/sqrt(n)) * pmf[j]
   }
 }
 
@@ -186,7 +186,7 @@ S = seq(-1, 1, length.out = num)
 M = rep(1, num)
 
 for(i in 1:num){
-  j = 1:10000
+  j = 0:10000
   X = exp(S[i] * (j-n) / sqrt(n))
   M[i] = weighted.mean(X,dpois(j,n))
 }
