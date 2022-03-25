@@ -22,7 +22,7 @@ N = norm()
 pmf = np.zeros(2 * n)
 for i in range(len(pmf)):
     pmf[i] = X.pmf(i)
-supp = (np.linspace(0, len(pmf), num=len(pmf)) - n) / np.sqrt(n)
+supp = (np.linspace(0, len(pmf) - 1, num=len(pmf)) - n) / np.sqrt(n)
 
 
 plt.plot(supp, pmf)  # this
@@ -36,7 +36,7 @@ library(ggplot2)
 n = 10
 
 pmf = dpois(0:(2 * n), n)
-supp = (seq(0, length(pmf), length.out = length(pmf)) - n) / sqrt(n)
+supp = (seq(0, length(pmf)-1, length.out = length(pmf)) - n) / sqrt(n)
 
 pdf(file="figures/bh-10-28.pdf",
     width = 8, height = 7, bg = "white",
