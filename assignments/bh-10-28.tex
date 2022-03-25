@@ -114,7 +114,7 @@ n = 10
 num = 50
 S = seq(-1, 1, length.out = num)
 M = rep(0, num)
-pmf = dpois(1:100,n) #this
+pmf = dpois(0:99,n) #this
 
 for(i in 1:num){
   for(j in 1:length(pmf)){
