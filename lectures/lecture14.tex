@@ -7,16 +7,16 @@
 We shoot an arrow at a target. We aim at the center of the target. Our aim is not perfect though. We model our horizontal and vertical deviation from the target (in inches) by two independent standard normal random variables $X$ and $Y$, respectively. (So $X<0$ if we shoot to far to the left, for example.)
 
 \begin{exercise}
-Compute the density function of the (Euclidean) distance from our arrow to the center of the target. Compare the result to the pdf of a standard normal random variable.
+Compute the density function of the (Euclidean) distance from our arrow to the center of the target. %Compare the result to the pdf of a standard normal random variable.
 \begin{solution}
 Let $W$ denote the distance in question. That is, $W = \| (X,Y) \|_2 = \sqrt{X^2 + Y^2}$. Write $V = X^2 + Y^2$. Then, $V$ has a $\chi^2_2$ distribution and $W = \sqrt{V}$. Note that for $v \geq 0$, the function $w = g(v) = \sqrt{v}$ is invertible, with $v = g^{-1}(w) = w^2$. Hence, using the pdf of a $\chi^2_2$ distribution and the change of variables technique from chapter 8, we obtain
 \begin{align}
     f_W(w) &=  |\frac{dv}{dw}| f_V(v) \\
     &= 2w f_V(w^2) \\
-    &= 2w \frac{1}{\sqrt{2\pi (w^2)}} e^{-(w^2)/2} \\
-    &= \frac{2}{\sqrt{2\pi}} e^{-(w^2)/2},
+    &= 2w \frac{1}{2} e^{-(w^2)/2} \\
+    &= w e^{-(w^2)/2},
 \end{align}
-for $w \geq 0$. Observe that this looks a lot like the pdf of a standard normal distribution. In fact, it is twice the standard normal pdf, but on half of its domain.
+for $w \geq 0$. 
 \end{solution}
 \end{exercise}
 
@@ -24,13 +24,18 @@ for $w \geq 0$. Observe that this looks a lot like the pdf of a standard normal 
 \begin{exercise}
 What is the expected distance from the center of the target?
 \begin{solution}
+
+Let $s = w^2/2$ and $w = \sqrt{2s}$
 We have
 \begin{align}
-    \E{W} &= \int_{0}^{\infty} w \frac{2}{\sqrt{2\pi}} e^{-(w^2)/2} dw \\
-    &= \left[ - \frac{2}{\sqrt{2\pi}} e^{-(w^2)/2} \right]_0^\infty \\
-    &= 0 + \frac{2}{\sqrt{2\pi}}.
+    \E{W} &= \int_{0}^{\infty} w w e^{-(w^2)/2} dw \\
+    &= \int_{0}^{\infty} \sqrt{2s} e^{-s} ds \\
+    &= \sqrt{2}\int_{0}^{\infty} s^{\frac{3}{2}-1} e^{-s} ds \\
+    &= \sqrt{2}\Gamma\big(\frac{3}{2}\big) \\
+    &= \sqrt{2} \frac{1}{2}\Gamma\big(\frac{1}{2}\big) \\
+    &= \sqrt{\frac{\pi}{2}}.
 \end{align}
-So $\E{W} = \frac{2}{\sqrt{2\pi}}$.
+So $\E{W} = \sqrt{\frac{\pi}{2}}$.
 \end{solution}
 \end{exercise}
 
@@ -46,11 +51,11 @@ Define $Y_n$ as the number of times I step in dog poo in $n$ subsequent days. Th
 Let $Z \sim \mathcal{N}(0,1)$. Then, for the probability that I will move we get
 \begin{align}
     \P{Y_n > 5} &= \P{\frac{Y_n - np}{\sqrt{np(1-p)}} > \frac{5 - np}{\sqrt{np(1-p)}} } \\
-    &\approx \P{Z > \frac{5 - 50\cdot 0.05}{\sqrt{100 \cdot 0.05 \cdot 0.95}} } \\
-    &= \P{Z > \frac{2.5}{\sqrt{4.75}} } \\
-    &= 1 - \Phi(\frac{2.5}{\sqrt{4.75}}) =  1 - 0.87 = 0.13.
+    &\approx \P{Z > \frac{5 - 50\cdot 0.05}{\sqrt{50 \cdot 0.05 \cdot 0.95}} } \\
+    &= \P{Z > \frac{2.5}{\sqrt{2.375}} } \\
+    &= 1 - \Phi(\frac{2.5}{\sqrt{2.75}}) =  1 - 0.9473 = 0.0527.
 \end{align}
-So the probability I will move is approximately 13\%.
+So the probability I will move is approximately 5.3\%.
 \end{solution}
 \end{exercise}
 
