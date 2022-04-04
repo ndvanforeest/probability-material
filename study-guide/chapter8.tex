@@ -756,18 +756,18 @@ BH. 8.18. Here we deal with division of rvs.
 \end{hint}
 \begin{solution}
 I always start with this line: $f_{T,U}(t,u) \d t \d u = f_{X,Y}(x,y) \d x \d y$.
-Then,
+Then, since $x=u$, $y=u/t$.
 \begin{align*}
 \frac{\partial (t, u)}{\partial (x,y)} =
   \begin{pmatrix}
 1/y & -x/y^{2} \\
     1 & 0
-  \end{pmatrix} = x/y^{2}.
+  \end{pmatrix} = \frac{x}{y^{2}} = \frac{u}{(u/t)^{2}} = \frac{t^{2}}{u},
 \end{align*}
 We don't need to take absolute signs in the last expression because $X, Y$ are positive rvs.
-Next, $x=u$, $y=u/t$. With this,
+With this,
 \begin{align*}
-  f_{T,U}(t,u) = f_{X,Y}(x,y) \left(\frac{\partial (t, u)}{\partial (x,y)}\right)^{-1} = f_{X,Y}(u,u/t) y^{2}/x = f_X(u)f_Y(u/t) u/t^{2}.
+  f_{T,U}(t,u) = f_{X,Y}(x,y) \left(\frac{\partial (t, u)}{\partial (x,y)}\right)^{-1} = f_{X,Y}(u,u/t) = f_X(u)f_Y(u/t) u/t^{2}.
 \end{align*}
 
 b. Use part a.
