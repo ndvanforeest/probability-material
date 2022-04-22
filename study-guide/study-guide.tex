@@ -8,14 +8,12 @@
 
 %\usepackage[nosolutions]{optional}
 %\usepackage[justhints]{optional}
-%\usepackage[check]{optional}
-\usepackage[all-solutions-at-end]{optional}
+\usepackage[check]{optional}
+%\usepackage[all-solutions-at-end]{optional}
 
 \usepackage{../common/preamble}
 %\newcommand{\sectionbreak}{} %\clearpage}
 
-\Opensolutionfile{hint}
-\Opensolutionfile{ans}
 
 \setcounter{tocdepth}{1}
 \usepackage{a4wide}
@@ -28,6 +26,10 @@
 \title{Probability distributions EBP038A05\\
 Study Guide}
 
+\opt{all-solutions-at-end}{
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+}
 
 \begin{document}
 \maketitle
@@ -45,6 +47,7 @@ Study Guide}
 \subfile{chapter10.tex}
 \subfile{exams.tex}
 
+\opt{all-solutions-at-end}{
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}
 \clearpage
@@ -52,8 +55,7 @@ Study Guide}
 \input{hint}
 \clearpage
 \chapter{Solutions}
-
 \input{ans}
-
+}
 
 \end{document}
