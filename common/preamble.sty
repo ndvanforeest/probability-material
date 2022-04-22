@@ -1,5 +1,11 @@
 \usepackage{classicthesis}
 
+\titleformat{\chapter}[display]%
+  {\relax}{\vspace*{-3\baselineskip}\makebox[\linewidth][r]{\color{halfgray}\chapterNumber\thechapter}}{0pt}%
+  {\raggedright\spacedallcaps}[\normalsize\vspace*{.8\baselineskip}\titlerule]%
+
+\newcommand{\sectionbreak}{\clearpage}
+
 \usepackage[english]{babel}
 \usepackage{mathtools,amsthm,amssymb,amsmath}
 
@@ -9,7 +15,7 @@
 \usepackage[capitalize]{cleveref}
 
 \usepackage{subfiles}
-\usepackage{tikz}
+%\usepackage{tikz}
 
 \usepackage{pythontex}
 \setpythontexfv[]{numbers=left, frame=lines, label=\fbox{Python Code}, xleftmargin=5mm,framesep=2mm}
@@ -24,12 +30,8 @@
 \usepackage{enumerate}
 \usepackage{xr}
 
-\usepackage{titlesec}
-%\newcommand{\subsectionbreak}{\clearpage}
-
 
 \numberwithin{equation}{section}
-
 
 
 \opt{all-solutions-at-end}{
@@ -44,10 +46,15 @@
 \usepackage[nosolutionfiles]{answers}
 \Newassociation{solution}{Solution}{ans}
 \Newassociation{hint}{Hint}{hint}
-\renewcommand{\Hintlabel}[1]{\textbf{h.#1.}}
-\renewcommand{\Solutionlabel}[1]{\textbf{s.#1.}}
+\renewcommand{\Hintlabel}[1]{\emph{h.#1.}}
+\renewcommand{\Solutionlabel}[1]{\emph{s.#1.}}
+%\renewcommand{\Hintlabel}[1]{\textbf{h.#1.}}
+%\renewcommand{\Solutionlabel}[1]{\textbf{s.#1.}}
 %\AtEndEnvironment{exercise}{\clearpage} %  each exercise on a new page
-%\AtBeginEnvironment{solution}{\clearpage} %  each exercise on a new page
+% \BeforeBeginEnvironment{hint}{\clearpage} %  each exercise on a new page
+% \BeforeBeginEnvironment{solution}{\clearpage} %  each exercise on a new page
+%\AtBeginEnvironment{hint}{\clearpage} %  each exercise on a new page
+%\AtEndEnvironment{exercise}{\clearpage} %  each exercise on a new page
 }
 
 \opt{justhints}{
@@ -68,9 +75,9 @@
 % \newtheorem{theorem}{Theorem}[section]
 % \newtheorem{exercise}{Ex}[section]
 % \newtheorem{remark}{Remark}[section]
-\makeatletter
-\def\@endtheorem{~\newline \noindent\rule[8pt]{2.5cm}{0.4pt}\@endpefalse}
-\makeatother
+% \makeatletter
+% \def\@endtheorem{~\newline \noindent\rule[8pt]{2.5cm}{0.4pt}\@endpefalse}
+% \makeatother
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{exercise}[theorem]{Ex}
 \newtheorem{remark}[theorem]{Remark}

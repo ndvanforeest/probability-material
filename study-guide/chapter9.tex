@@ -6,12 +6,9 @@
 \input{header.tex}
 
 
-\chapter{Chapter 9: Questions and remarks}
+\chapter{Chapter 9: Exercises and remarks}
 
-\section{Simple questions}
-
-
-\subsection*{Section 9.1}
+\section{Section 9.1}
 
 \begin{remark}
 Skip BH.9.1.6.
@@ -146,7 +143,7 @@ We conclude that $\E{X\given A} = 4$.
 
 
 
-\subsection*{Section 9.2}
+\section{Section 9.2}
 \label{sec:section-9.2}
 
 \begin{remark} About BH. 9.2.1. This definition is subtle, and it takes time to understand.
@@ -178,7 +175,29 @@ BH.9.2.2. Is $\E{Y\given \1{A}}$ a number or a rv?
 \end{exercise}
 
 
-\subsection*{Section 9.3}
+\begin{exercise}
+BH.9.25. We tackle this problem also in an assignment with simulation.  Check out \url{https://en.wikipedia.org/wiki/Kelly_criterion} you're interested.
+\begin{hint}
+Use Adam's law to express $\E{X_{n+1}}$ in terms of $\E{X_{n}}$, then use recursion.
+\end{hint}
+\begin{solution}
+\begin{align*}
+  \E{X_{n+1} |X_n=100} &= 100 + pf 100 - (1-p)f 100  = 100(1-f + 2pf) \\
+  \E{X_{n+1} |X_n} &= X_{n}( 1- f + 2pf) \\
+  \E{X_{n+1} } &= ( 1- f + 2pf) \E{X_{n}} \\
+  \E{X_{n+1} } &= ( 1- f + 2pf)^{2} \E{X_{n-1}} =  ( 1- f + 2pf)^{n+1}X_{0}.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+BH.9.28.
+\end{exercise}
+
+
+
+\section{Section 9.3}
 \label{sec:section-9.3}
 
 \begin{remark}
@@ -193,7 +212,7 @@ We have that $\E{Y-\E{Y|X}}=0$. Hence, $\E{Y-\E{Y|X}}\E X = 0$. Then define $h(X
 \end{exercise}
 
 
-\subsection*{Section 9.4}
+\section{Section 9.4}
 \label{sec:section-9.4}
 
 
@@ -398,7 +417,7 @@ Hence, $\E{N\given X}= \lambda(1-p) + X$. Since $\E X = \lambda p$, we get $\E N
 \end{solution}
 \end{exercise}
 
-\subsection*{Section 9.5}
+\section{Section 9.5}
 \label{sec:section-9.5}
 
 \begin{exercise}
@@ -468,7 +487,6 @@ Define $g(X) = \E{Y|X}$. Then,
 
 \begin{exercise}
 Let $X\sim \mathcal{N}(\mu,\sigma^2)$ and $W|X \sim \mathcal{N}(0,X^2)$. Find $\V{W}.$
-
 \begin{solution}
 Using Eve's Law we have
 \begin{align}
@@ -479,10 +497,9 @@ Using Eve's Law we have
 \end{exercise}
 
 
-\section{BH exercises: hints and solutions}
 
 \begin{exercise}
-BH.9.1. 2022-03-11: in hindsight, it is better to solve this problem once we have dealt with EVE's law.
+BH.9.1. It is best to solve this problem with EVE's law.
 \begin{solution}
 a.
 \begin{align*}
@@ -513,26 +530,6 @@ For b., use a. And then,
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
-BH.9.25. We tackle this problem also in an assignment with simulation.  Check out \url{https://en.wikipedia.org/wiki/Kelly_criterion} you're interested.
-\begin{hint}
-Use Adam's law to express $\E{X_{n+1}}$ in terms of $\E{X_{n}}$, then use recursion.
-\end{hint}
-\begin{solution}
-\begin{align*}
-  \E{X_{n+1} |X_n=100} &= 100 + pf 100 - (1-p)f 100  = 100(1-f + 2pf) \\
-  \E{X_{n+1} |X_n} &= X_{n}( 1- f + 2pf) \\
-  \E{X_{n+1} } &= ( 1- f + 2pf) \E{X_{n}} \\
-  \E{X_{n+1} } &= ( 1- f + 2pf)^{2} \E{X_{n-1}} =  ( 1- f + 2pf)^{n+1}X_{0}.
-\end{align*}
-\end{solution}
-\end{exercise}
-
-
-\begin{exercise}
-BH.9.28.
-\end{exercise}
-
 
 \begin{exercise}
 BH.9.32. The results of this exercise are (or should be) used by nearly all software packages to control inventory levels of companies such as supermarkets and bol.com.
@@ -550,7 +547,7 @@ Use that $P^{2}=P$ (indicator funtion), Adam and Eve, and that $N\sim \Pois{8\la
   \E{S|N} &= N \E Y, & \V{S|N} &= N \V Y \\
   \E N &= 8 \lambda, & \V N &=  8\lambda.
 \end{align*}
-Now use BH.9.6.1. It's just a matter of filling in how.
+Now use BH.9.6.1. It's just a matter of filling in.
 \end{solution}
 \end{exercise}
 

@@ -3,15 +3,9 @@
 % arara: pdflatex: { shell: yes }
 
 \input{header.tex}
-\chapter{Chapter 8: Questions and remarks}
+\chapter{Chapter 8: Exercises and remarks}
 
-\section{Simple questions}
-
-
-
-
-
-\subsection*{Section 8.1}
+\section{Section 8.1}
 
 
 \begin{exercise}
@@ -307,7 +301,119 @@ Moreover, the function $g$ is not locally one-to-one.
 \end{exercise}
 
 
-\subsection*{Section 8.2}
+\begin{exercise} BH.8.11. With convolution we know how to  add and subtract independent rvs. Now we make a start with division. You'll see that this operator is not as simple as you always thought.
+
+Before solving the problem, let's take a step back.
+You learned arithmetic at primary school.
+In all those problems, the numbers you had to add, subtract, etc.
+where supposed to be known precisely.
+At secondary school, you learned how to arithmetic with symbols.
+And now, at university, your next step is learn how to do arithmetic with rvs.
+
+Here is an example to show you the relevance of this.
+In a paint factory at which a couple of my students did their master's thesis, the inventory level of dyes and other raw materials is often not known exactly.
+There are plenty of simple explanations for this.
+Raw materials are kept in big bags, and personnel uses shovels to take it out of the bags.
+Of course, occasionally, there is some spillage on the floor, and this extra `demand' is not reported.
+The demand side is also not exact.
+A customer orders for example 500 kg of red paint.
+To make this, the operators follow a recipe, but dyes (in certain combinations) do not always give the same  result. Therefore, the paint for each order is checked, and when it does not meet the quality level, the batch has to be adjusted by adding a bit more of certain dyes or solvents, or other chemical products.
+
+When the planner has to make a decision on when to reorder a certain raw material, s/he divides the total amount of raw material by the average demand size. And this leads to occasional stock outs. When the stock level and the demands are treated as a rvs, such stock outs may be prevented, but this requires to be capable of determining the distribution of the something like $Y/X$.
+
+\begin{hint}
+Start with the case $v=0$. Use the proof of BH.8.1.1. Reason carefully; corner cases as simple to miss.
+
+Then, make a graph of the two branches of the hyperbola's $1/t$, one branch for $t>0$, the other for $t<0$.
+Then draw a horizontal line to indicate the level $V=v$; this shows with part(s) of the hyperbola's lie below $v$.
+Then compute the probability for each branch. This will give the answer of the  book immediately.
+\end{hint}
+\begin{solution}
+
+From the hint, we first focus on a set $\{V\leq 0\} = \{1/T \leq 0\}$. Now,  $1/T\leq 0 \iff T\leq 0$. And therefore $\P{V\leq 0} = \P{T\leq 0} = F_T(0)$.
+
+If $v<0$, then $1/T \leq v \leq 0\iff 1/v \leq T \leq 0$. Therefore
+$F_V(v) = F_T(0) - F_T(1/v)$.
+
+If $v>0$, then $1/T \leq v$ when $T<0$ or $T\geq 1/v$. Hence,
+$F_V(v) = F_T(0) + 1- F_T(1/v)$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise} BH.8.15. We'll use this exercise in a lecture to show how the normal distribution originates from astronomy (or dart throwing).
+
+The notation is a bit clumsy for the angle coordinate. Write $\Theta$ for the rv and $\theta$ for its value.
+\begin{hint}
+a. See BH.8.1.9.
+
+b. If $(X,Y)$ are uniform on the disk, then the function $g(x,y)$ must be constant on this disk. Use an indicator to ensure that $X^2+Y^2\leq 1$. Finally, normalize.
+
+c. What are the densities of $X$ and $Y$ when they are $N(0,1)?$
+\end{hint}
+
+\begin{solution}
+a.  I remember this: $f_{X,Y}(x,y) \d x \d y = f_{R, \Theta}(r, \theta) \d r \d \theta$. From this,
+\begin{align*}
+f_{R, \Theta}(r, \theta)  = f_{X,Y}(x,y) \left| \frac{\partial (x,y)}{\partial(r, \theta)} \right|.
+\end{align*}
+Now, since $x=r\cos \theta$ and $y=r \sin \theta$,
+\begin{align*}
+\frac{\partial (x,y)}{\partial(r, \theta)} =
+  \begin{pmatrix}
+    \cos \theta & -r \sin \theta \\
+ \sin \theta & r \cos \theta
+  \end{pmatrix},
+\end{align*}
+which has determinant equal to $r$.
+It is given that $f_{X,Y}(x,y)=g(x^2+y^2) = g(r^2)$. Hence,
+\begin{align*}
+f_{R, \Theta}(r, \theta)  = f_{X,Y}(x,y) r = g(r^2)r,
+\end{align*}
+with $r\geq 0, \theta\in[0, 2\pi$.
+The RHS  does not  depend on $\theta$. Hence, $f_{\Theta}(\theta)$ must be a constant.
+
+b. Use the hint. Since $g$ is a constant, $f_{R, \Theta}(r, \theta) \propto r$. Thus,
+\begin{align*}
+  \int_{0}^{1}\int_{0}^{2\pi} r \d r \d \theta = 2\pi (1/2) r^{2}|_0^{1} = \pi.
+\end{align*}
+So, $1/\pi$ is the normalization constant.
+
+c. $f_{X,Y}(x,y) = \exp{-x^2}/\sqrt{2\pi}\exp{-y^{2}}/\sqrt{2\pi} = \exp{-(x^2+y^2)/2\pi} = \exp{-r^{2}}/2\pi$. Indeed, $f_{X,Y}(x,y)$ has the form $g(x^2+y^2)$. The rest is as in part b.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH. 8.18. Here we deal with division of rvs.
+\begin{hint} We can make a transform $T, U$ such that $T=X/Y$ and $U=X$  to use a 2D transformation. Compute $x$ and $y$ as functions of $t$ and $u$. Then the Jacobian.
+\end{hint}
+\begin{solution}
+I always start with this line: $f_{T,U}(t,u) \d t \d u = f_{X,Y}(x,y) \d x \d y$.
+Then, since $x=u$, $y=u/t$.
+\begin{align*}
+\frac{\partial (t, u)}{\partial (x,y)} =
+  \begin{pmatrix}
+1/y & -x/y^{2} \\
+    1 & 0
+  \end{pmatrix} = \frac{x}{y^{2}} = \frac{u}{(u/t)^{2}} = \frac{t^{2}}{u},
+\end{align*}
+We don't need to take absolute signs in the last expression because $X, Y$ are positive rvs.
+With this,
+\begin{align*}
+  f_{T,U}(t,u) = f_{X,Y}(x,y) \left(\frac{\partial (t, u)}{\partial (x,y)}\right)^{-1} = f_{X,Y}(u,u/t) = f_X(u)f_Y(u/t) u/t^{2}.
+\end{align*}
+
+b. Use part a.
+\begin{align*}
+f_{T} = \frac 1{t^2} \int_0^{\infty} x f_X(x) f_Y(x/t) \d x.
+\end{align*}
+Since $f_X$ and $f_Y$ are not given explicitly, we cannot make further progress.
+
+All and all, division of rvs is not so simple.
+\end{solution}
+\end{exercise}
+
+
+\section{Section 8.2}
 \label{sec:section-8.2}
 
 
@@ -377,7 +483,7 @@ The expectation of a Cauchy distributed r.v. $X$ is not well-defined because $\E
 \end{exercise}
 
 
-\subsection*{Section 8.3}
+\section{Section 8.3}
 \label{sec:section-8.3}
 
 \begin{exercise}
@@ -577,7 +683,7 @@ Plugging this in gives the result.
 
 
 
-\subsection*{Section 8.4}
+\section{Section 8.4}
 \label{sec:section-8.4}
 
 \begin{exercise}
@@ -642,7 +748,7 @@ $X+Y \sim \text{Gamm}(11,2)$ and $\frac{X}{X+Y} \sim \text{Beta}(4,7)$.
 
 
 
-\subsection*{Section 8.6}
+\section{Section 8.6}
 \label{sec:section-8.6}
 
 Read the definition of an order statistic. Skip the rest of BH.8.6.
@@ -661,122 +767,6 @@ Let $X_1,X_2,\ldots,X_9$ be a collection of random variables. Fill in the gaps (
     \item Maximum
     \item Median
 \end{enumerate}
-\end{solution}
-\end{exercise}
-
-
-
-\section{BH exercises: hints and solutions}
-
-
-\begin{exercise} BH.8.11. With convolution we know how to  add and subtract independent rvs. Now we make a start with division. You'll see that this operator is not as simple as you always thought.
-
-Before solving the problem, let's take a step back.
-You learned arithmetic at primary school.
-In all those problems, the numbers you had to add, subtract, etc.
-where supposed to be known precisely.
-At secondary school, you learned how to arithmetic with symbols.
-And now, at university, your next step is learn how to do arithmetic with rvs.
-
-Here is an example to show you the relevance of this.
-In a paint factory at which a couple of my students did their master's thesis, the inventory level of dyes and other raw materials is often not known exactly.
-There are plenty of simple explanations for this.
-Raw materials are kept in big bags, and personnel uses shovels to take it out of the bags.
-Of course, occasionally, there is some spillage on the floor, and this extra `demand' is not reported.
-The demand side is also not exact.
-A customer orders for example 500 kg of red paint.
-To make this, the operators follow a recipe, but dyes (in certain combinations) do not always give the same  result. Therefore, the paint for each order is checked, and when it does not meet the quality level, the batch has to be adjusted by adding a bit more of certain dyes or solvents, or other chemical products.
-
-When the planner has to make a decision on when to reorder a certain raw material, s/he divides the total amount of raw material by the average demand size. And this leads to occasional stock outs. When the stock level and the demands are treated as a rvs, such stock outs may be prevented, but this requires to be capable of determining the distribution of the something like $Y/X$.
-
-\begin{hint}
-Start with the case $v=0$. Use the proof of BH.8.1.1. Reason carefully; corner cases as simple to miss.
-
-Then, make a graph of the two branches of the hyperbola's $1/t$, one branch for $t>0$, the other for $t<0$.
-Then draw a horizontal line to indicate the level $V=v$; this shows with part(s) of the hyperbola's lie below $v$.
-Then compute the probability for each branch. This will give the answer of the  book immediately.
-\end{hint}
-\begin{solution}
-
-From the hint, we first focus on a set $\{V\leq 0\} = \{1/T \leq 0\}$. Now,  $1/T\leq 0 \iff T\leq 0$. And therefore $\P{V\leq 0} = \P{T\leq 0} = F_T(0)$.
-
-If $v<0$, then $1/T \leq v \leq 0\iff 1/v \leq T \leq 0$. Therefore
-$F_V(v) = F_T(0) - F_T(1/v)$.
-
-If $v>0$, then $1/T \leq v$ when $T<0$ or $T\geq 1/v$. Hence,
-$F_V(v) = F_T(0) + 1- F_T(1/v)$.
-\end{solution}
-\end{exercise}
-
-\begin{exercise} BH.8.15. We'll use this exercise in a lecture to show how the normal distribution originates from astronomy (or dart throwing).
-
-The notation is a bit clumsy for the angle coordinate. Write $\Theta$ for the rv and $\theta$ for its value.
-\begin{hint}
-a. See BH.8.1.9.
-
-b. If $(X,Y)$ are uniform on the disk, then the function $g(x,y)$ must be constant on this disk. Use an indicator to ensure that $X^2+Y^2\leq 1$. Finally, normalize.
-
-c. What are the densities of $X$ and $Y$ when they are $N(0,1)?$
-\end{hint}
-
-\begin{solution}
-a.  I remember this: $f_{X,Y}(x,y) \d x \d y = f_{R, \Theta}(r, \theta) \d r \d \theta$. From this,
-\begin{align*}
-f_{R, \Theta}(r, \theta)  = f_{X,Y}(x,y) \left| \frac{\partial (x,y)}{\partial(r, \theta)} \right|.
-\end{align*}
-Now, since $x=r\cos \theta$ and $y=r \sin \theta$,
-\begin{align*}
-\frac{\partial (x,y)}{\partial(r, \theta)} =
-  \begin{pmatrix}
-    \cos \theta & -r \sin \theta \\
- \sin \theta & r \cos \theta
-  \end{pmatrix},
-\end{align*}
-which has determinant equal to $r$.
-It is given that $f_{X,Y}(x,y)=g(x^2+y^2) = g(r^2)$. Hence,
-\begin{align*}
-f_{R, \Theta}(r, \theta)  = f_{X,Y}(x,y) r = g(r^2)r,
-\end{align*}
-with $r\geq 0, \theta\in[0, 2\pi$.
-The RHS  does not  depend on $\theta$. Hence, $f_{\Theta}(\theta)$ must be a constant.
-
-b. Use the hint. Since $g$ is a constant, $f_{R, \Theta}(r, \theta) \propto r$. Thus,
-\begin{align*}
-  \int_{0}^{1}\int_{0}^{2\pi} r \d r \d \theta = 2\pi (1/2) r^{2}|_0^{1} = \pi.
-\end{align*}
-So, $1/\pi$ is the normalization constant.
-
-c. $f_{X,Y}(x,y) = \exp{-x^2}/\sqrt{2\pi}\exp{-y^{2}}/\sqrt{2\pi} = \exp{-(x^2+y^2)/2\pi} = \exp{-r^{2}}/2\pi$. Indeed, $f_{X,Y}(x,y)$ has the form $g(x^2+y^2)$. The rest is as in part b.
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-BH. 8.18. Here we deal with division of rvs.
-\begin{hint} We can make a transform $T, U$ such that $T=X/Y$ and $U=X$  to use a 2D transformation. Compute $x$ and $y$ as functions of $t$ and $u$. Then the Jacobian.
-\end{hint}
-\begin{solution}
-I always start with this line: $f_{T,U}(t,u) \d t \d u = f_{X,Y}(x,y) \d x \d y$.
-Then, since $x=u$, $y=u/t$.
-\begin{align*}
-\frac{\partial (t, u)}{\partial (x,y)} =
-  \begin{pmatrix}
-1/y & -x/y^{2} \\
-    1 & 0
-  \end{pmatrix} = \frac{x}{y^{2}} = \frac{u}{(u/t)^{2}} = \frac{t^{2}}{u},
-\end{align*}
-We don't need to take absolute signs in the last expression because $X, Y$ are positive rvs.
-With this,
-\begin{align*}
-  f_{T,U}(t,u) = f_{X,Y}(x,y) \left(\frac{\partial (t, u)}{\partial (x,y)}\right)^{-1} = f_{X,Y}(u,u/t) = f_X(u)f_Y(u/t) u/t^{2}.
-\end{align*}
-
-b. Use part a.
-\begin{align*}
-f_{T} = \frac 1{t^2} \int_0^{\infty} x f_X(x) f_Y(x/t) \d x.
-\end{align*}
-Since $f_X$ and $f_Y$ are not given explicitly, we cannot make further progress.
-
-All and all, division of rvs is not so simple.
 \end{solution}
 \end{exercise}
 

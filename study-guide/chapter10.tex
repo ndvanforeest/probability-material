@@ -7,10 +7,7 @@
 \chapter{Chapter 10: Questions and remarks}
 
 
-\section{Simple questions}
-
-
-\subsection*{Section 10.1}
+\section{Section 10.1}
 
 
 \begin{exercise}
@@ -143,163 +140,6 @@ In this (pathological) example we get from Markov's inequality that $P(X\geq 2) 
 \end{exercise}
 
 
-
-
-\subsection*{Section 10.2}
-\label{sec:section-10.2}
-
-\begin{exercise}
-Is the following statement equivalent to the strong or the weak law of large numbers?
-Fix $\epsilon>0$. For all $\delta>0$, there is an $n$ so large that $\P{|\bar X_n-\mu|>\epsilon} \leq \delta$.
-\begin{hint}
-\end{hint}
-\begin{solution}
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-Which of the two following statements correctly represents the strong law: $\lim_{n\to\infty} \P{|X_n-\mu|>\epsilon} = 1$ for all $\epsilon>0$, or $\P{\lim_{n\to\infty} |X_n-\mu|=0} = 1$.
-\begin{hint}
-\end{hint}
-\begin{solution}
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-On BH.10.2.5. Where have we applied this idea earlier?
-\begin{hint}
-\end{hint}
-\begin{solution}
-\end{solution}
-\end{exercise}
-
-
-
-\subsection*{Section 10.3}
-\label{sec:section-10.3}
-
-\begin{exercise}
-On BH.10.3.1. I prefer to write $\frac{\bar X_n-\mu}{\sigma/\sqrt n}$. Why could that be?
-\begin{solution}
-Divide by the std corresponds to the standard transformation $(X-\mu)/\sigma$. Like this, I don't have to remember anything new. Algebra gives the formula of the book.
-\end{solution}
-\end{exercise}
-
-
-\begin{exercise}
-On BH.10.3.7. $\E{\log Y_n}=\log 100 - 0.081n$. Explain the $0.081$. Think also about the paradoxical outcome. (Once again, probability theory \emph{is} hard.)
-\begin{hint}
-\end{hint}
-\begin{solution}
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-On BH.10.3.7. The stock rises $\alpha$ \% and decreases $\beta$ \%. Find a relation between  $\alpha, \beta$  such that $\lim Y_{n}\geq 1$.
-\begin{hint}
-\end{hint}
-\begin{solution}
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-On BH.10.3.7. Note that $\E{\log Y_n} \sim -0.081 n$, i.e., has has negative drift, but $\log \E{Y_n} \sim n \log 1.1$. Check that this is not in conflict with Jensen's inequality.
-\begin{hint}
-\end{hint}
-\begin{solution}
-\end{solution}
-\end{exercise}
-
-\subsection*{Section 10.4}
-\label{sec:section-10.4}
-
-\begin{exercise}
-On BH.10.4.3. Why is $n \bar Z_n^2\sim \chi_1^2$?
-\begin{hint}
-\end{hint}
-\begin{solution}
-Here is the reason.
-$\bar Z_n$ is the sum of $n$ normal rvs $Z_j$, hence normal itself.
-As each of these $Z_j$ is standard normal, $\E{\bar Z_n}=0$, and $\V{\bar Z_n}=n^{-2}\sum_{j} \V{Z_{j}}=1/n$, by independence.
-Therefore, $\sqrt{n} \bar Z_{n} \sim N(0,1) \implies (\sqrt{n}\bar Z_n)^2 \sim \chi_1^2$, where we use Definition 10.4.1 and Theorem 10.4.2 in the last step.
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-On BH.10.4.3. Show that $\sum_j^n (Z_j-\bar Z_n)^2$ and $\bar Z_n^2$ are independent.
-\begin{hint}
-\end{hint}
-\begin{solution}
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-A fair coin is tossed 100 times. We are interested in the probability that the number of heads that turn up is at most 40. What is the tightest upper bound on this probability that we can find by using Chebyshev's inequality? Hint: use a symmetry argument.
-\begin{solution}
-Let $X$ be the r.v. corresponding to the number of heads. Then $X\sim \text{Binomial}\left(100,\frac12\right)$, which has moments $\E{X} = 100 \cdot \frac{1}{2} = 50$ and $\V{X} = 100 \cdot \frac{1}{2} \cdot \frac{1}{2} = 25$. By symmetry of the $\text{Binomial}\left(100,\frac12\right)$ distribution,
-\begin{align}
-    \P{ X \leq 40} = \P{ X \geq 60 }.
-\end{align}
-Hence, using Chebyshev's inequality,
-\begin{align}
-    \P{ X \leq 40} &= \frac{1}{2}  \P{ |X - 50| \geq 10 } \\
-    &= \frac{1}{2} \P{ |X - 50| \geq 10 } \\
-    &\leq \frac{1}{2} \frac{\V{X}}{10^2} \\
-    &= \frac{1}{2} \frac{25}{100} = \frac{1}{8}.
-\end{align}
-Hence,
-\begin{align}
-    \P{ X \leq 40} &\leq \frac{1}{8}.
-\end{align}
-\end{solution}
-\end{exercise}
-
-
-\begin{exercise}
-Here is inequality from which all inequalities in BH 10.1.3 immediately follow. It's worth memorizing.
-Take any rv $X$ and a function $f$ that is non-negative and non-decreasing.
-\begin{enumerate}
-\item Why is this true for any $a$: $f(a) \1{X\geq a} \leq f(X) \1{X\geq a} \leq f(X)$?
-\item Take expectations in the inequality of the previous step and use the fundamental bridge to show that $\P{X\geq a} \leq \E{f(X)}/f(a)$.
-\item What part of the proof goes wrong if  $f$ can also be negative?
-\item Show that Markov's inequality follows by taking $Y=|X|$ and  $f(x)=x$. Why don't we take $f(x) = |x|$?
-\item Show that Chebyshev's inequality follows by taking $Y=|X-\mu|$ and $f(x)=x^2$.
-\item Show that Chernoff's inequality follows by taking $f(x)=e^{x}$.
-\end{enumerate}
-\end{exercise}
-
-\begin{exercise}\label{ex:13-1}
-Let the set of r.v.s $\{X_{k}, k\geq 1\}$ be the outcomes of throws of a biased coin. We take $X_{j}=1$ if the outcome is heads, and $X_{j}=0$ if tails. Suppose $\E{X_{k}} = \mu$ and $\V{X_{k}} = \sigma^{2}$.
-Let $Y_{j} = \sum_{i=n j + 1}^{(n+1)j} X_{i}/n$, i.e., $Y_{j}$ is the sample mean of the $j$ batch of throws. Since $\{Y_{j}, j\geq 1\}$ are iid, take $Y$ as the common r.v., i.e., $Y_{j} \sim Y$.
-What is a (frequentist) explanation of the statement $\P{|Y-\mu|>\epsilon} \leq \sigma^{2}/n \epsilon$?
-\begin{solution}
-  We assemble $m$ observations of $Y_{j}$ (hence, we throw the coin $n m$ times).
-  Suppose we see $M$ times that $|Y_{j} - \mu|> \epsilon$. Then we expect that $M/m < \sigma^{2}/n\epsilon$.
-
-Thus,  Chebyshev's inequality makes a statement about sample means of size $n$, say.
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-Interpret the WLLN in terms of the previous exercise.
-\begin{solution}
-  First fix some $\epsilon>0$.
-  Now take some $n$ and determine the fraction of outliers, that is, count how many of the sample means $Y_{1}=\sum_{i=1}^{n} X_{i}/n, Y_{2}=\sum_{i=n+1}^{2n} X_{i}/n, \ldots$ lie outside the interval $[\mu-\epsilon, \mu + \epsilon]$ and divide by the number of samples taken.
-  The WLLN says this: If the sample averages $Y_{1}, Y_{2}$ are taken over larger sets of the $X_{j}$, i.e., $n$ is larger so that we put more throws in a batch, then the fraction of outliers become smaller.
-\end{solution}
-\end{exercise}
-
-
-\begin{exercise}
-In the setting of~\cref{ex:13-1}, the probability of a sequence of outcomes like this: $H, T, H, T, H, T,\ldots$, i.e., a sequence in which the heads and tails alternate, has probability zero. However, $\sum_{i=1}^{n}\1{X_{i}=H}/n \to 1/2$. So, we have a sequence that occurs with probability zero, but still the average along the sequence has the proper limit. Doesn't this violate the SLLN?
-\begin{solution}
-The SLLN says nothing about individual sample paths, i.e.,  strings of outcomes like $H, T, H, T, \ldots$. In fact, the probability of obtaining any particular sample path has zero probability. Instead, the SLLN makes a statement about sets of sample paths. For the coin it says that it is virtually impossible to pick a path from the set of paths whose  long-run fraction of heads is not equal to $1/2$.
-\end{solution}
-\end{exercise}
-
-
-\section{BH exercises: hints and solutions}
-
 \begin{exercise}
 BH.10.2
 \end{exercise}
@@ -362,6 +202,86 @@ e. $=$: since $X$ and $Y$ are independent, $\V{Y|X} = \V Y$.
 f. From the hint,  $\P{|X+Y|>3} \leq \E{|X+Y|}/3 \leq \E{|X|}/3 + \E{|Y|}/3 = 2\E{|X|}/3 \leq \E{|X|}$. Why is there not an $<$ in the last step?
 \end{solution}
 \end{exercise}
+
+\begin{exercise}
+Here is inequality from which all inequalities in BH 10.1.3 immediately follow. It's worth memorizing.
+Take any rv $X$ and a function $f$ that is non-negative and non-decreasing.
+\begin{enumerate}
+\item Why is this true for any $a$: $f(a) \1{X\geq a} \leq f(X) \1{X\geq a} \leq f(X)$?
+\item Take expectations in the inequality of the previous step and use the fundamental bridge to show that $\P{X\geq a} \leq \E{f(X)}/f(a)$.
+\item What part of the proof goes wrong if  $f$ can also be negative?
+\item Show that Markov's inequality follows by taking $Y=|X|$ and  $f(x)=x$. Why don't we take $f(x) = |x|$?
+\item Show that Chebyshev's inequality follows by taking $Y=|X-\mu|$ and $f(x)=x^2$.
+\item Show that Chernoff's inequality follows by taking $f(x)=e^{x}$.
+\end{enumerate}
+\end{exercise}
+
+
+
+\section{Section 10.2}
+\label{sec:section-10.2}
+
+\begin{exercise}
+Is the following statement equivalent to the strong or the weak law of large numbers?
+Fix $\epsilon>0$. For all $\delta>0$, there is an $n$ so large that $\P{|\bar X_n-\mu|>\epsilon} \leq \delta$.
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Which of the two following statements correctly represents the strong law:
+\begin{itemize}
+\item $\lim_{n\to\infty} \P{|X_n-\mu|>\epsilon} = 1$ for all $\epsilon>0$,
+\item $\P{\lim_{n\to\infty} |X_n-\mu|=0} = 1$.
+\end{itemize}
+\begin{solution}
+Check the book. It's the second option.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+On BH.10.2.5. Where have we applied this idea earlier?
+\end{exercise}
+
+
+
+\section{Section 10.3}
+\label{sec:section-10.3}
+
+\begin{exercise}
+On BH.10.3.1. I prefer to write $\frac{\bar X_n-\mu}{\sigma/\sqrt n}$. Why could that be?
+\begin{solution}
+Divide by the std corresponds to the standard transformation $(X-\mu)/\sigma$. Like this, I don't have to remember anything new. Algebra gives the formula of the book.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+On BH.10.3.7. $\E{\log Y_n}=\log 100 - 0.081n$. Explain the $0.081$. Think also about the paradoxical outcome. (Once again, probability theory \emph{is} hard.)
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+On BH.10.3.7. The stock rises $\alpha$ \% and decreases $\beta$ \%. Find a relation between  $\alpha, \beta$  such that $\lim Y_{n}\geq 1$.
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+On BH.10.3.7. Note that $\E{\log Y_n} \sim -0.081 n$, i.e., has has negative drift, but $\log \E{Y_n} \sim n \log 1.1$. Check that this is not in conflict with Jensen's inequality.
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
 
 \begin{exercise}
 BH.10.23.
@@ -451,6 +371,82 @@ n^{-1}\log Y_n \to 0.5 \log(1+0.7\alpha) + 0.5\log(1-0.5\alpha) = 0.5 \log( (1+0
 For the maximum, take the derivative with respect to $\alpha$. This gives $\alpha=2/7$.
 \end{solution}
 \end{exercise}
+
+
+\section{Section 10.4}
+\label{sec:section-10.4}
+
+\begin{exercise}
+On BH.10.4.3. Why is $n \bar Z_n^2\sim \chi_1^2$?
+\begin{hint}
+\end{hint}
+\begin{solution}
+Here is the reason.
+$\bar Z_n$ is the sum of $n$ normal rvs $Z_j$, hence normal itself.
+As each of these $Z_j$ is standard normal, $\E{\bar Z_n}=0$, and $\V{\bar Z_n}=n^{-2}\sum_{j} \V{Z_{j}}=1/n$, by independence.
+Therefore, $\sqrt{n} \bar Z_{n} \sim N(0,1) \implies (\sqrt{n}\bar Z_n)^2 \sim \chi_1^2$, where we use Definition 10.4.1 and Theorem 10.4.2 in the last step.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+On BH.10.4.3. Show that $\sum_j^n (Z_j-\bar Z_n)^2$ and $\bar Z_n^2$ are independent.
+\begin{hint}
+\end{hint}
+\begin{solution}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+A fair coin is tossed 100 times. We are interested in the probability that the number of heads that turn up is at most 40. What is the tightest upper bound on this probability that we can find by using Chebyshev's inequality? Hint: use a symmetry argument.
+\begin{solution}
+Let $X$ be the r.v. corresponding to the number of heads. Then $X\sim \text{Binomial}\left(100,\frac12\right)$, which has moments $\E{X} = 100 \cdot \frac{1}{2} = 50$ and $\V{X} = 100 \cdot \frac{1}{2} \cdot \frac{1}{2} = 25$. By symmetry of the $\text{Binomial}\left(100,\frac12\right)$ distribution,
+\begin{align}
+    \P{ X \leq 40} = \P{ X \geq 60 }.
+\end{align}
+Hence, using Chebyshev's inequality,
+\begin{align}
+    \P{ X \leq 40} &= \frac{1}{2}  \P{ |X - 50| \geq 10 } \\
+    &= \frac{1}{2} \P{ |X - 50| \geq 10 } \\
+    &\leq \frac{1}{2} \frac{\V{X}}{10^2} \\
+    &= \frac{1}{2} \frac{25}{100} = \frac{1}{8}.
+\end{align}
+Hence,
+\begin{align}
+    \P{ X \leq 40} &\leq \frac{1}{8}.
+\end{align}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}\label{ex:13-1}
+Let the set of r.v.s $\{X_{k}, k\geq 1\}$ be the outcomes of throws of a biased coin. We take $X_{j}=1$ if the outcome is heads, and $X_{j}=0$ if tails. Suppose $\E{X_{k}} = \mu$ and $\V{X_{k}} = \sigma^{2}$.
+Let $Y_{j} = \sum_{i=n j + 1}^{(n+1)j} X_{i}/n$, i.e., $Y_{j}$ is the sample mean of the $j$ batch of throws. Since $\{Y_{j}, j\geq 1\}$ are iid, take $Y$ as the common r.v., i.e., $Y_{j} \sim Y$.
+What is a (frequentist) explanation of the statement $\P{|Y-\mu|>\epsilon} \leq \sigma^{2}/n \epsilon$?
+\begin{solution}
+  We assemble $m$ observations of $Y_{j}$ (hence, we throw the coin $n m$ times).
+  Suppose we see $M$ times that $|Y_{j} - \mu|> \epsilon$. Then we expect that $M/m < \sigma^{2}/n\epsilon$.
+
+Thus,  Chebyshev's inequality makes a statement about sample means of size $n$, say.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Interpret the WLLN in terms of the previous exercise.
+\begin{solution}
+  First fix some $\epsilon>0$.
+  Now take some $n$ and determine the fraction of outliers, that is, count how many of the sample means $Y_{1}=\sum_{i=1}^{n} X_{i}/n, Y_{2}=\sum_{i=n+1}^{2n} X_{i}/n, \ldots$ lie outside the interval $[\mu-\epsilon, \mu + \epsilon]$ and divide by the number of samples taken.
+  The WLLN says this: If the sample averages $Y_{1}, Y_{2}$ are taken over larger sets of the $X_{j}$, i.e., $n$ is larger so that we put more throws in a batch, then the fraction of outliers become smaller.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+In the setting of~\cref{ex:13-1}, the probability of a sequence of outcomes like this: $H, T, H, T, H, T,\ldots$, i.e., a sequence in which the heads and tails alternate, has probability zero. However, $\sum_{i=1}^{n}\1{X_{i}=H}/n \to 1/2$. So, we have a sequence that occurs with probability zero, but still the average along the sequence has the proper limit. Doesn't this violate the SLLN?
+\begin{solution}
+The SLLN says nothing about individual sample paths, i.e.,  strings of outcomes like $H, T, H, T, \ldots$. In fact, the probability of obtaining any particular sample path has zero probability. Instead, the SLLN makes a statement about sets of sample paths. For the coin it says that it is virtually impossible to pick a path from the set of paths whose  long-run fraction of heads is not equal to $1/2$.
+\end{solution}
+\end{exercise}
+
 
 \begin{exercise}
 BH.10.36.
