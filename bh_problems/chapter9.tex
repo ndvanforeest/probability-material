@@ -1,0 +1,337 @@
+% arara: pdflatex: { shell: yes }
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex: { shell: yes }
+% arara: move: {  files: ['chapter9.pdf'], target: ['..'] }
+
+\input{header.tex}
+
+
+\chapter{Chapter 9}
+
+
+
+\setcounter{theorem}{0}
+\begin{exercise}
+BH.9.1. It is best to solve this problem with EVE's law.
+\begin{solution}
+a.
+\begin{align*}
+\E{T\given R=j} &= \mu_{j} \\
+\E{T\given R} &= \mu_{R} = \sum_j \mu_j \1{R=j},\\
+\E{T} &= \E{\E{T\given R}} = \E{\sum_j \mu_{j}\1{R=j}} = \sum_j\mu_{j}p_{j} \\
+&=(\mu_{1}+\mu_2+\mu_3)/3.
+\end{align*}
+For b., use a. And then,
+\begin{align*}
+\V{T|R=j} &= \sigma_j^2 \\
+\V{T|R} &= \sum_j\sigma_j^2\1{R=j} \\
+\E{V{T|R}} &= (\sigma_1^2+\sigma_2^2+\sigma_3^3)/3,\\
+\V{\E{T\given R}}
+&= \E{(\E{T\given R})^{2}}  - (\E{\E{T|R}})^2 \\
+(\E{T\given R})^{2}
+&= \left(\sum_j \mu_j \1{R=j}\right)^{2}
+= \sum_j \mu_j^{2} \1{R=j} + 2\mu_1 \mu_2\1{R=1}\1{R=2} + \cdot\\
+&= \sum_j \mu_j^{2} \1{R=j}.\\
+\E{(\E{T\given R})^{2}} &= \sum_j\mu_j^{2}p_j= (\mu_1^2+\mu_2^2+\mu_{3}^2)/3\\
+\V{\E{T\given R}}
+&= \E{(\E{T\given R})^{2}}  - (\E{\E{T|R}})^2 \\
+&=(\mu_1^2+\mu_2^2+\mu_{3}^2)/3 - (\mu_1+\mu_2+\mu_3)^2/9.  \\
+\V T
+ &= \V{\E{T|R}} + \E{\V{T|R}} \\
+&=(\mu_1^2+\mu_2^2+\mu_{3}^2)/3 - (\mu_1+\mu_2+\mu_3)^2/9 + (\sigma_1^2+\sigma_2^2+\sigma_3^3)/3.
+ \end{align*}
+\end{solution}
+\end{exercise}
+
+\setcounter{theorem}{24}
+
+\begin{exercise}
+BH.9.25. We tackle this problem also in an assignment with simulation.  Check out \url{https://en.wikipedia.org/wiki/Kelly_criterion} you're interested.
+\begin{hint}
+Use Adam's law to express $\E{X_{n+1}}$ in terms of $\E{X_{n}}$, then use recursion.
+\end{hint}
+\begin{solution}
+\begin{align*}
+  \E{X_{n+1} |X_n=100} &= 100 + pf 100 - (1-p)f 100  = 100(1-f + 2pf) \\
+  \E{X_{n+1} |X_n} &= X_{n}( 1- f + 2pf) \\
+  \E{X_{n+1} } &= ( 1- f + 2pf) \E{X_{n}} \\
+  \E{X_{n+1} } &= ( 1- f + 2pf)^{2} \E{X_{n-1}} =  ( 1- f + 2pf)^{n+1}X_{0}.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+
+\setcounter{theorem}{27}
+\begin{exercise}
+BH.9.28.
+\end{exercise}
+
+
+
+
+\setcounter{theorem}{31}
+\begin{exercise}
+BH.9.32. The results of this exercise are (or should be) used by nearly all software packages to control inventory levels of companies such as supermarkets and bol.com.
+\begin{hint}
+a. Let $Y$ be the amount purchased by the first customer that comes along, let $P$ be the rv that is 1 if the customer does indeed purchase, and 0 otherwise, and let $X$ be the size of the purchase. Why is $Y=XP$? What is $\E{P}$? What is $\E{Y\given P}$? What is $\E{Y^{2}\given P}$. You might want to use BH.9.1.
+
+
+b. Let $N\sim\Pois{8\lambda}$ be the number of customers that pass by. Given $N=n$, what is $\E{S\given N}$, where $S=\sum_{i=1}^N X_iP_{i}$ is the total sales. Now use the law of total expectation. What is $\V{S\given N}$? Use Eve's law  to compute $\V S$. Bigger hint, read Example 9.6.1.
+\end{hint}
+\begin{solution}
+Use that $P^{2}=P$ (indicator funtion), Adam and Eve, and that $N\sim \Pois{8\lambda}$,
+\begin{align*}
+  \E{Y|P}&= \E{PX|P} = \E{X}\E{P|P} = \mu P, &\V{Y|P} &= \V{XP|P} = P^{2} \V{X|P} = P \sigma^2 \\
+  \E Y &= \mu p, & \V Y &= \E{\V{Y|P}} + \V{\E{Y|P}} = \sigma^2 p + \mu^{2}p(1-p), \\
+  \E{S|N} &= N \E Y, & \V{S|N} &= N \V Y \\
+  \E N &= 8 \lambda, & \V N &=  8\lambda.
+\end{align*}
+Now use BH.9.6.1. It's just a matter of filling in.
+\end{solution}
+\end{exercise}
+
+\setcounter{theorem}{36}
+\begin{exercise}
+BH.9.37.
+
+Bootstrapping is used in statistics to, for instance, construct confidence intervals. It is a much used and intuitive technique.
+
+Extra exercise to  help you recall some ideas of Ch 1. How many different bootstrap samples are possible?
+
+I used some extra ideas to save some time. We say that the rvs $\{X_i\}$ are independent and  distributed as the common rv~$X$ when $X_i\sim F_X$ where $F_X$ is the CDF of the rv $X$. Then $\E{X_{i}}=\E X$, and so on.  Next,  I prefer to write $Y_{j}= X_j^{*}$, as this writes (and types) faster. Finally,  it is easy to define
+$Y_j = \sum_{i=1}^n X_i\1{S_j = i}$, where $S_{j}\sim \DUnif{\{1, \ldots, n\}}$ is the \(j\)th sample of the $\{X_{i}\}$.
+ \begin{solution}
+
+a. Here you should assume that the $X_i$ are not yet known. Thus, the expectation over $X_i$ is taken with respect to the CDF $F_X$. Using the independence of $X_j$ and $S_j$, $\1{S_j=i}\1{S_j=k} = 0$ if $i\neq k$, and that $\E{\1{S_j=k}} = 1/n$,
+\begin{align*}
+\E{Y_j} &= \sum_i \E{X_i}\E{\1{S_{j}=i}} = \mu, \\
+\E{Y_j^2}  &= \E{\sum_k\sum_{l} X_k X_{l} \1{S_j=k}\1{S_{j}=l}}
+= \E{\sum_k X_k^{2}  \1{S_j=k}} =\sum_{k} \E{X^{2}} n^{-1} = \E{X^{2}}, \\
+\V{Y_j}&= \E{Y_j^{2}}- (\E{Y_{j}})^{2} = \sigma^{2}.
+\end{align*}
+
+b. Now we are given the outcomes (samples) $X_i=x_i$ of $n$ experiments.
+I prefer to write $D = X_{1}, \ldots, X_{n}$ as it is shorter.
+Noting that $S_j$ and $D$ are independent, and that $\E{X_{k}|D} = X_{k}$,
+\begin{align*}
+  \E{Y_{j}|D} = \sum_k X_k \E{\1{S_j=k}|D} = \frac 1 n \sum_k X_k := \bar X
+\end{align*}
+Observe that this average  need  not be the same as $\mu$!
+
+The conditional variance. Since $S_j$ and $S_k$ are independent when $j\neq k$, it must be that $Y_j|D$ and $Y_k|D$ are also conditionally independent. Moreover, $\{Y_j|D\}$ are conditionally iid. Therefore,
+\begin{align*}
+\E{Y_{j}^{2}|D}
+&= \E{\sum_k\sum_l X_kX_l\1{S_j=k}\1{S_j=l}|D} \\
+&= \E{\sum_kX_k^{2}\1{S_j=k}|D}  = \sum_kX_k^{2}\E{\1{S_j=k}|D} \\
+&= \frac 1 n \sum_{k} X_k^{2}, \\
+\V{Y_j| D} &= \frac 1 n \sum_{k} X_k^{2} - (\bar X)^{2} = \frac 1 n \sum_{k} (X_k - \bar X)^{2} = \frac{n-1}n \sigma^{2},\\
+\V{\bar Y|D} &= \V{\frac 1 n\sum_{j}Y_{j}|D} = \frac 1{n^{2}} \sum_j \V{Y_j|D} = \frac 1 n \V{Y_1|D}.
+\end{align*}
+
+
+c. For $\E{\bar Y}$ use linearity and Adam's law:
+\begin{align*}
+\E{\bar Y} = \E{\E{\bar Y|D}} = \frac 1 n \sum_{k}\E{X_{k}} = \E X = \mu.
+\end{align*}
+
+
+Here are the details for $\V{\bar Y}$. Using  BH.6.3.3 and BH.6.3.4,
+\begin{align*}
+\E{\V{\bar Y|D}} &=  \frac 1 n \E{\V{Y_{1}|D}} =
+\frac 1 {n^2} \E{ \sum_{i=1}^n (X_i-\bar X)^2} \\
+&= \frac{n-1} {n^2} \E{\frac 1 {n-1} \sum_{i=1}^n (X_i-\bar X)^2}
+= \frac{n-1} {n^2} \E{S_{n}^2} = \frac{(n-1)\sigma^{2}} {n^2} \\
+\V{\E{\bar Y|D}} &= \V{\bar X}= \frac 1{n^{2}} \sum_{i} \V{X_{i}} = \frac 1 n \sigma^{2}.
+\end{align*}
+Now use Eve's law to add both terms to get $V{\bar Y}$.
+
+
+d. We add randomness twice, first we draw  samples to get $D$, and then we draw randomly from $D$.
+
+The extra exercise: immediate from Example 1.4.22. We are not interested in the sequence of the bootstrap sample. BTW, the story that goes for me with this example is the `balls and bars story'. I have $n$ balls to distribute over $k$ boxes. Hence, there are $k-1$ bars to separate the boxes. For the bootstrap sample, I have to distribute $n$ bootstrap samples (the $X^*_{i}$) over $n$ boxes (the initial sample $X_i$.)
+
+If $n$ is small, say $n=4$. Does it make sense to take more than 1000 bootstrap samples?
+\end{solution}
+\end{exercise}
+
+\setcounter{theorem}{38}
+\begin{exercise}
+BH.9.39. There are numerous examples of rvs with  non-zero kurtosis, for instance,  claim sizes of car accidents, the time patients spend in hospital beds, finance. This exercise helps to understand how a positive kurtosis may originate.
+\end{exercise}
+
+
+\setcounter{theorem}{49}
+\begin{exercise} BH.9.50.  We will also simulate this in an assignment.
+\begin{hint}
+a.
+$N | \lambda \sim \Pois{\lambda}$.
+
+b. Analogous to BH.9.6.1
+
+c. and d. See BH.8.4.5.
+\end{hint}
+\begin{solution}
+a. Using the hint gives us $\E{N\given \lambda} = \lambda$ and $\V{N\given \lambda}= \lambda$.
+
+Now use Adam and Eve.
+
+b. Just copy the formulas of BH.9.6.1
+
+c. With the hint, observe that $\Exp(1)=\Gamma{1,1}$. In the relevant formula of BH.8.4.5 ($\P{Y=y}$), take $t=r_0=b_0=1$ and conclude that $\P{N=n}=2^{-n-1}$. Hence, $N\sim\Geo{1/2}$.
+
+d. Same story. The relevant formula is $f_1(\lambda|y)$.
+\end{solution}
+\end{exercise}
+
+\setcounter{theorem}{51}
+\begin{exercise}
+BH.9.52
+\end{exercise}
+
+\setcounter{theorem}{54}
+
+\begin{exercise}
+BH.9.55.  Suppose first you draw just one number per day, what is then the recursion? Then suppose you draw 2 numbers per day.
+
+An interesting variation is to find a recursion for the number of \emph{draws} instead of \emph{days} are needed until all  numbers have been seen.
+\end{exercise}
+
+\setcounter{theorem}{55}
+\begin{exercise}
+BH.9.56.
+\begin{hint}
+Refresh your  knowledge of the Beta distributions.
+
+a. Since we include the win, the number of games $T|p$ (since we assume $p$ given) must be $\sim\FS{p}$. Hence, $\E{T|p} = 1/p$
+
+To get $\E T$ use Adam's law. Realize that you have to take the integral with respect to $p$!
+
+b. $1+\E G$ is smaller than the expected time as computed in a. Why is this so?
+
+c. The number of wins, conditional on $p$, out of $n$ is $X|p\sim\Bin{n,p}$. Then use Beta-Binomial conjugacy.
+
+BTW, I find it easier to think about $f(p, X=k)$ instead of $f(p|X=k)$, since on the event $(p, X=k)$.
+\begin{equation*}
+f(p, X=k) \propto p^{a-1} q^{b-1} {n \choose k} p^k q^{n-k} \propto p^{a-1+k}q^{b-1+n-k}.
+\end{equation*}
+Then, as  $f(p|X=k) = f(p, X=k)/\P{X=k} \sim f(p, X=k)$ (because $\P{X=k}$ is just a constant) we get the same result op to a scaling factor. But we can use the reasoning of BH.8.3.3 to get the correct constant.
+\end{hint}
+\begin{solution}
+a. From the hint,
+\begin{align*}
+\E{T}
+&=\E{\E{T|p}} = \frac{1}{\beta(a,b)}\int_0^{1}\frac 1 p p^{a-1}(1-p)^{b-1} \d p \\
+&= \frac{1}{\beta(a,b)}\int_0^{1} p^{a-2}(1-p)^{b-1} \d p
+= \frac{\beta(a-1, b)}{\beta(a,b)} \\
+&= \frac{a+b-1}{a-1} = 1 + \frac b {a-1}.
+\end{align*}
+To get the last equation,  use the definition of $\beta(a,b)$ in terms of factorials (see the Bayes' billiards story) to simplify. This is easy, many terms cancel.
+
+
+b. Take $Y=1+G$, then $Y$ has the first success distribution since $G$ is geometric. Hence, $\E Y = (a+b)/a= 1 + b/a$. Clearly, this is smaller than $1+b/(a-1) = \E T$.
+
+But why is this so?
+
+
+I must miss something here.
+The prior is $\Beta{a, b}$.
+Then Beta-Binomial conjugacy story, we assume that Vishy won $a-1$ games, and lost $b-1$ games.
+My guess for Vishy winning the next game would be $(a-1)/(a+b-2)$, not $a/(a+b)$.
+But I make an error here. Check the BH problem 9.57. You'll see that we should indeed use $a/(a+b)$!  Tricky!
+
+c.  Immediate from BH.8.3.3: $p|X=7 \sim\Beta{a+7, b+3}$.
+\end{solution}
+\end{exercise}
+
+
+
+\setcounter{theorem}{56}
+\begin{exercise}
+BH.9.57
+\begin{hint}
+a. The prior of $p$ is uniform on $[0,1]$. But this is equal to $\Beta{1,1}$. Now use  Beta-Binomial conjugacy.
+
+b. Write $S_n=\sum_{i=1}^nX_{i}$. What are $\P{X_{n+1}=1|p}$ and $\P{S_n=k|p}$?
+\end{hint}
+\begin{solution}
+a. By  the hint,
+\begin{equation*}
+f(p|X_1=x_{1}) \propto f(p, X_1=x_{1}) \propto
+p^{a-1} q^{b-1} p^{x_1}q^{1-x_1}
+\propto p^{a+x_1-1} q^{b+(1-x_{1})-1}.
+\end{equation*}
+Hence, $p|X_1=x_1 \sim \Beta{a+x_1, b+(1-x_{1})}$. We can now use this as prior to see that  $p|X_1=x_{a}, X_{2}=x_{2} \sim \Beta{1+x_1+x_2, 1+ (1-x_1) + (1-x_2)}$, and so on. Hence, $p|X_{1}, \ldots X_{n} \sim \Beta{1+S_k, 1+n-S_{k}}$.
+
+b. With the hint, $\P{X_{n+1}=1|p} = p$ and $\P{S_n=k|p} ={n \choose k} p^{k}q^{n-k} \propto p^{k}q^{n-k}$. Also $X_{n_+1}|p$ and $S_n|p$ are conditionally independent.
+Therefore,
+\begin{equation*}
+\P{X_{n+1}=1, S_n=k | p} \propto p p^kq^{n-k} = p^{k+1} q^{n-k},
+\end{equation*}
+which in turn implies that
+\begin{equation*}
+\P{X_{n+1}=1| S_n=k, p} \propto = p^{k+1} q^{n-k}.
+\end{equation*}
+Hence, $X_{n+1}| S_n=k, p \sim \Beta{k+2, n-k+1}$.
+Now, $X_{n+1}\in \{0, 1\}$, so that $\P{X_{n+1}=1| S_n=k, p} = \E{X_{n+1}| S_n=k, p} = (k+2)/(n+3)$, since $X_{n+1}| S_n=k, p \sim \Beta{k+2, n-k+1}$.
+
+The last step is to realize that $\E{X_{n+1}|S_{n}=k} = \E{\E{X_{n+1}|S_{n}=k, p}|S_{n=k}}$.
+
+Here is another way to get the same result.
+\begin{align*}
+\P{S_n=k} &= \frac 1 {n+1},\text{ by Bayes' billiard}, \\
+\P{X_{n+1}=1,S_n=k} &=  \int_0^1 \P{X_{n+1}=1,S_n=k\given p} f(p) \d p
+= \int_0^1 p {n \choose k} p^{k} (1-p)^{n-k} f(p) \d p \\
+&= \frac{k+1}{n+1}\int_0^1  {n+1 \choose k+1} p^{k+1} (1-p)^{n-k} f(p) \d p \\
+&= \frac{k+1}{n+1} \frac 1 {n+2}, \text{ again with Bayes' billiard}, \\
+\P{X_{n+1}=1 \given S_n=k} &= \P{X_{n+1}=1,S_n=k}/\P{S_{n}=k}.
+\end{align*}
+Now simplify.
+\end{solution}
+\end{exercise}
+
+\setcounter{theorem}{57}
+\begin{exercise}
+BH.9.58. In part c.\/ the prior is the uniform distribution. What would happen if you would take the prior of part b, i.e., $a$ out of $j$ wins?
+\begin{hint}
+a. Recall that the uniform distribution on $[0,1]$ is $\Beta{a,b}$ with $a=b=1$. I prefer to write $S_n=\sum_{j=1}^n X_j$. First compute $\E{S_n\given p}$. Then compute $\E{\E{S_n| p}}$. Note that the outer expectation is an integral with respect to $p$ and the density of $\Beta{1,1}$.
+
+For the variance, use Eve's law.
+
+b. Use Beta-Binomial conjugacy. Or use the insights of BH.9.56 and BH.9.57.
+
+c. Bayes Billiards.
+\end{hint}
+
+\begin{solution}
+\begin{align*}
+\E{S_n|p} &= np \\
+\E{p} &= \frac 1{\beta(a,b)}\int_0^1pp^{a-1}q^{b-1}\d p = \frac{\beta(a+1,b)}{\beta(a,b)} = \frac a{a+b} = 1/2\\
+\E{\E{S_n|p}} &= n\E{p} = n/2. \\
+\V{S_n|p}  &= np q\\
+\E{\V{S_n|p}}  &= n\E{p q} = n \E p - n \E{p^{2}} = n/2 - n\E{p^{2}}\\
+\E{p^2} &=  \frac 1{\beta(a,b)}\int_0^1p^{2}p^{a-1}q^{b-1}\d p =
+\frac{\beta(a+2,b)}{\beta(a,b)} = \frac{a(a+1)}{(a+b)(a+b+1)} = \frac 2{2\cdot 3} = 1/3\\
+\V{\E{S_{n}|p}} &= \V{n p} = n^{2} \V p = n^{2}/12.
+\end{align*}
+The rest of Eve's law is now trivial.
+
+b. We start with a $\Beta{1,1}$ prior on $p$. After the first win, the prior gets updated to $\Beta{1+1, 1}$, after a loss to $\Beta{1, 1+1}$. Reasoning like this, after $a$ wins and $j-a$ losses, the distribution for a win becomes $\Beta{1+a, a+ j-1}$. Therefore, by using the hint in the book,  $\E{p | S_j=a } = (a+1)/(j+2)$.
+
+c. When somebody doesn't give me any information about what team can win, then any outcome must be equally likely. (What else can it be?)
+This is also my way to understand the expression in BH.8.3.2. Hence, $\P{X=k} = 1/(n+1)$. Observe that we use the prior $p\sim\Beta{1,1}$.
+
+When the prior is $\Beta{a, j-a}$, we should get the negative hypergeometric distribution, see the remark  in BH.8.3.3.
+
+d. Shanille scores the first and missed the second. Hence, there are 98 shots left, out which she has to score $49$.  Thus, we ask for $\P{S_{98}=49|p}$, where $p\sim \Beta{a=1,b=1}$ is the prior since she hit $a=1$  out of $a+b=2$ shots. This places us in the situation of part c above, with $n=98$. Hence, $\P{S_{98}=49|p} = 1/99$.
+\end{solution}
+\end{exercise}
+
+
+
+
+\input{trailer.tex}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "study-guide.tex"
+%%% End:

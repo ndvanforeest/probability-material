@@ -1,0 +1,203 @@
+% arara: pdflatex: { shell: yes }
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex: { shell: yes }
+\input{header.tex}
+
+
+\chapter{Chapter 10}
+
+
+\setcounter{theorem}{1}
+\begin{exercise}
+BH.10.2
+\end{exercise}
+
+\setcounter{theorem}{2}
+\begin{exercise}
+BH.10.3
+This is just a funny exercise, but I wonder whether it has a practical value.
+\begin{hint}
+First check the assumption that $Y\neq a X$, for some $a>0$; why is it there?
+Then, take a suitable $g$ in Jensen's inequality.
+Bigger hint: $g(x)=1/x$.
+
+In the solution guide, the authors do not explain the $>$, while in Jensen's inequality there is a $\leq$. To see why the $>$ is allowed here, rethink the assumption in the exercise, and reread Theorem 10.1.5.
+
+Finally, at what $p$ is $p(1-p)$ maximal?
+\end{hint}
+\end{exercise}
+
+\setcounter{theorem}{5}
+\begin{exercise}
+BH.10.6
+\begin{hint}
+Apple the idea of BH.10.1.3 to $W=(X-\mu)^2$.
+\end{hint}
+\begin{solution}
+Take $W$ as in the hint and $Z=1$. By the inequality of Cauchy-Schwarz, $(\E{W})^2 \geq \E{W^2}$. The LHS is $\sigma^{4}$, the RHS is $\E{(X-\mu)^4}$. The rest  follows right away from the definition of kurtosis.
+\end{solution}
+\end{exercise}
+
+\setcounter{theorem}{8}
+\begin{exercise}
+BH.10.9
+\begin{hint}
+a. Jensen's inequality, $g(x)=e^x$
+
+b. Use symmetry: $X$ and $Y$ are iid.
+
+c. Which set of events is larger?
+
+d.
+Use Jensen's inequality and Cauchy-Schwarz.
+
+e. Eve's law.
+
+f. Use Markov's inequality and  the triangle inequality
+\end{hint}
+\begin{solution}
+a. $\leq$ Immediate from the hint.
+
+b. $=$: immediate from the hint
+
+c.
+\begin{align*}
+\P{X>Y-3} =  \P{X>Y+3} + \P{Y-3\leq X \leq Y+3}.
+\end{align*}
+Both terms on the RHS are non-negative.
+
+d. Use the hint. $(\E{XY})^{2} \leq \E{X^2}\E{Y^2} =(\E{X^2})^{2} \leq \E{X^4}$, where we use that  $X$ and $Y$ are iid, so that $\E{X^2}$ and $\E{Y^2}$ are equal.
+
+e. $=$: since $X$ and $Y$ are independent, $\V{Y|X} = \V Y$.
+
+f. From the hint,  $\P{|X+Y|>3} \leq \E{|X+Y|}/3 \leq \E{|X|}/3 + \E{|Y|}/3 = 2\E{|X|}/3 \leq \E{|X|}$. Why is there not an $<$ in the last step?
+\end{solution}
+\end{exercise}
+
+
+\setcounter{theorem}{22}
+\begin{exercise}
+BH.10.23.
+\end{exercise}
+
+\setcounter{theorem}{25}
+\begin{exercise}
+BH.10.26.
+\begin{solution}
+a.
+I did things a bit differently than in the book. Take $S_n=\sum_{i=1}^n X_i$ with $X_i\sim\Bern{p}$. Then I know this:
+\begin{align*}
+\P{S_n=k} = {n \choose k} p^k(1-p)^{n-k} \to e^{-\lambda} \lambda^k/k! = \P{N=k}, \quad\text{if } N\sim\Pois{\lambda},
+\end{align*}
+for $n\to \infty$, $p\to0$ but such that $p n = \lambda$.
+I also know from the CTL that $S_n\sim N(n p, n p(1-p))$ if $n$ becomes large.
+But, $N(n p, n p(1-p)) \to N(\lambda, \lambda)$ in the above limit.
+Now take $\lambda=n$ to see that $\Pois{\lambda} \sim N(n,n)$.
+
+b.
+Check the solution manual. Then, with $\mu=\sigma=\lambda=n$, and $n\gg 1$,
+\begin{align*}
+\Phi(n+1/2) - \Phi(n-1/2)
+&= \frac 1 {\sqrt{2\pi \sigma^{2}}}\int_{n-1/2}^{n+1/2} e^{-(x-\mu)/2\sigma^{2}} \d x\\
+&= \frac 1 {\sqrt{2\pi n }}\int_{-1/2}^{1/2} e^{-x^{2}/2n} \d x\\
+&= \frac 1 {\sqrt{2\pi n }}\int_{-1/2}^{1/2} (1 - x^{2}/2n) \d x\\
+&= \frac 1 {\sqrt{2\pi n }} (1- 1/(24 n)).
+\end{align*}
+So, we found another term to approximate $n!$ yet better.
+\end{solution}
+\end{exercise}
+
+
+
+\setcounter{theorem}{27}
+\begin{exercise}
+BH.10.28. Note that standardized version of a rv $X$ is $Y=(X-\mu)/\sigma$ where $\E X = \mu$ and $\V X = \sigma$.
+\begin{hint}
+The idea is to prove that the MGF of $X_n$ converges to the MGF of a $N(\mu, \sigma^{2})$ rv as $n\to\infty$. Thus, read and follow the proof of the CTL, BH.10.3.1.
+
+What are  $\E{X_n}$ and $\V{X_n}$ if $X\sim \Pois{n}$?  Once you know that, explain that the MGF of the standardized version of $X_n$ is equal to  $\exp\{-n+s \sqrt n + n e^{-s/\sqrt n}\}$.
+
+Perhaps you should do BH.10.27 first.
+\end{hint}
+\begin{solution}
+Since $X_n\sim \Pois{n}$, $\E{X_n}=n$, $\V{X_n}=n$. Using the hints, with $Y_{n}$ the standardized version of $X_n$:
+\begin{align*}
+M_{Y_n}(s) &= \sum_{i=0}^{\infty} e^{-n} n^i/i!\cdot e^{s (i-n)/\sqrt n}
+= e^{-n} e^{s\sqrt n} \sum_{i=0}^{\infty}  (ne^{s/\sqrt n})^i/i!\\
+&= \exp\{-n+s \sqrt n + n e^{-s/\sqrt n}\}.
+\end{align*}
+With Taylor's expansion for $e^x$ to second order,
+\begin{align*}
+-n+s \sqrt n + n e^{-s/\sqrt n} \approx -n+s \sqrt n + n \left(1 -s/\sqrt n + s^{2}/2 n\right) =   s^2/2.
+\end{align*}
+Now follow the proof of the CTL, BH.10.3.1.
+\end{solution}
+\end{exercise}
+
+
+\setcounter{theorem}{29}
+\begin{exercise}
+BH.10.30. The problem demonstrates a simple investment strategy.
+If you plan to work as a quant in finance or as an actuary, or if you play poker, or some similar game, such strategies should interest you naturally.
+
+\begin{hint}
+a. See BH.10.3.7. Try to convert the recursion for $Y_n$ to a form as in that example.
+
+b. Just substitute $\alpha$ in the relevant formula of part a.
+\end{hint}
+\begin{solution}
+a. Define $I_n$ as the success indicator: it is 1 if I win, and 0 if I loose.  For round 1, suppose I win, then $Y_{1} = Y_0/2 + 1.7 Y_0/2= 1.35 Y_{0}$. If I lose,
+$Y_{1} = Y_0/2 + 0.5 Y_0/2= 0.75 Y_{0}$. Therefore,
+\begin{align*}
+Y_n = Y_{n-1} (1.35)^{I_{n}}(0.75)^{1-I_{n}}.
+\end{align*}
+With this expression, the rest  is simple, just  follow  BH.10.3.7.
+It turns out that $Y_n\to\infty$ as $n\to\infty$.
+
+b. Use the hint.
+\begin{align*}
+Y_n &= Y_{n-1} (1+0.7\alpha)^{I_{n}}(1-0.5\alpha)^{1-I_{n}} \implies \\
+\log Y_n &= \log Y_{n-1}  + I_{n} \log(1+0.7\alpha) + (1-I_{n})\log (1-0.5\alpha)  \\
+& = \log Y_{0}  + \log(1+0.7\alpha) \sum_{i=1}^{n}I_{i}  + \log(1-0.5\alpha).\sum_{i=1}^{n} (1-I_{i})
+\end{align*}
+By the strong law, $\sum I_i/n \to 1/2$ and $\sum (1-I_{i})/n \to 1/2$. Therefore
+\begin{align*}
+n^{-1}\log Y_n \to 0.5 \log(1+0.7\alpha) + 0.5\log(1-0.5\alpha) = 0.5 \log( (1+0.7\alpha)(1-0.5\alpha)) = g(\alpha)
+\end{align*}
+For the maximum, take the derivative with respect to $\alpha$. This gives $\alpha=2/7$.
+\end{solution}
+\end{exercise}
+
+\setcounter{theorem}{35}
+\begin{exercise}
+BH.10.36.
+\begin{solution}
+See the solution manual of BH.
+\end{solution}
+\end{exercise}
+
+
+\setcounter{theorem}{38}
+\begin{exercise}
+BH.10.39.
+\begin{solution}
+a.
+ $\P{N=n} = \P{X_1 < 1, X_2<1, \cdots X_{n-1}<1, X_n>1}$. But, then $N$ must have the  first success distribution, and $N-1$ be geometric.
+
+
+b.
+Let $X_i$ be the inter-arrival time between jobs $i-1$ and $i$. Then $S_n=\sum_i^n X_i$ is the arrival time of job $n$. We want that $S_{M-1} < 10 \leq S_M$. Since the $X_i$ are $\sim \Exp{\lambda}$, $S_n \sim \Pois{\lambda t}$.
+
+c.  The sum of $n$ iid $\Exp{1}$ rvs is $\Gamm{n,1}$. Since $\bar X_{n}$ has mean $1$, $X_{n} \sim \Gamm{n,n}$. Then $\V{X_n} = 1/n$ (I just looked it up in the back of the book).  By the CLT, $\bar X_n$ is approximated well by a $\Norm{\mu, \sigma^{2}}$ rv with $\mu=1, \sigma^2=1/n$.
+
+\end{solution}
+\end{exercise}
+
+
+
+\input{trailer.tex}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "study-guide.tex"
+%%% End:
