@@ -1,0 +1,346 @@
+% arara: pdflatex: { shell: yes }
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex: { shell: yes }
+
+\input{header.tex}
+\chapter{Chapter 8}
+
+
+\setcounter{theorem}{10}
+\begin{exercise} BH.8.11. With convolution we know how to  add and subtract independent rvs. Now we make a start with division. You'll see that this operator is not as simple as you always thought.
+
+Before solving the problem, let's take a step back.
+You learned arithmetic at primary school.
+In all those problems, the numbers you had to add, subtract, etc.
+where supposed to be known precisely.
+At secondary school, you learned how to arithmetic with symbols.
+And now, at university, your next step is learn how to do arithmetic with rvs.
+
+Here is an example to show you the relevance of this.
+In a paint factory at which a couple of my students did their master's thesis, the inventory level of dyes and other raw materials is often not known exactly.
+There are plenty of simple explanations for this.
+Raw materials are kept in big bags, and personnel uses shovels to take it out of the bags.
+Of course, occasionally, there is some spillage on the floor, and this extra `demand' is not reported.
+The demand side is also not exact.
+A customer orders for example 500 kg of red paint.
+To make this, the operators follow a recipe, but dyes (in certain combinations) do not always give the same  result. Therefore, the paint for each order is checked, and when it does not meet the quality level, the batch has to be adjusted by adding a bit more of certain dyes or solvents, or other chemical products.
+
+When the planner has to make a decision on when to reorder a certain raw material, s/he divides the total amount of raw material by the average demand size. And this leads to occasional stock outs. When the stock level and the demands are treated as a rvs, such stock outs may be prevented, but this requires to be capable of determining the distribution of the something like $Y/X$.
+
+\begin{hint}
+Start with the case $v=0$. Use the proof of BH.8.1.1. Reason carefully; corner cases as simple to miss.
+
+Then, make a graph of the two branches of the hyperbola's $1/t$, one branch for $t>0$, the other for $t<0$.
+Then draw a horizontal line to indicate the level $V=v$; this shows with part(s) of the hyperbola's lie below $v$.
+Then compute the probability for each branch. This will give the answer of the  book immediately.
+\end{hint}
+\begin{solution}
+
+From the hint, we first focus on a set $\{V\leq 0\} = \{1/T \leq 0\}$. Now,  $1/T\leq 0 \iff T\leq 0$. And therefore $\P{V\leq 0} = \P{T\leq 0} = F_T(0)$.
+
+If $v<0$, then $1/T \leq v \leq 0\iff 1/v \leq T \leq 0$. Therefore
+$F_V(v) = F_T(0) - F_T(1/v)$.
+
+If $v>0$, then $1/T \leq v$ when $T<0$ or $T\geq 1/v$. Hence,
+$F_V(v) = F_T(0) + 1- F_T(1/v)$.
+\end{solution}
+\end{exercise}
+
+\setcounter{theorem}{14}
+\begin{exercise} BH.8.15. We'll use this exercise in a lecture to show how the normal distribution originates from astronomy (or dart throwing).
+
+The notation is a bit clumsy for the angle coordinate. Write $\Theta$ for the rv and $\theta$ for its value.
+\begin{hint}
+a. See BH.8.1.9.
+
+b. If $(X,Y)$ are uniform on the disk, then the function $g(x,y)$ must be constant on this disk. Use an indicator to ensure that $X^2+Y^2\leq 1$. Finally, normalize.
+
+c. What are the densities of $X$ and $Y$ when they are $N(0,1)?$
+\end{hint}
+
+\begin{solution}
+a.  I remember this: $f_{X,Y}(x,y) \d x \d y = f_{R, \Theta}(r, \theta) \d r \d \theta$. From this,
+\begin{align*}
+f_{R, \Theta}(r, \theta)  = f_{X,Y}(x,y) \left| \frac{\partial (x,y)}{\partial(r, \theta)} \right|.
+\end{align*}
+Now, since $x=r\cos \theta$ and $y=r \sin \theta$,
+\begin{align*}
+\frac{\partial (x,y)}{\partial(r, \theta)} =
+  \begin{pmatrix}
+    \cos \theta & -r \sin \theta \\
+ \sin \theta & r \cos \theta
+  \end{pmatrix},
+\end{align*}
+which has determinant equal to $r$.
+It is given that $f_{X,Y}(x,y)=g(x^2+y^2) = g(r^2)$. Hence,
+\begin{align*}
+f_{R, \Theta}(r, \theta)  = f_{X,Y}(x,y) r = g(r^2)r,
+\end{align*}
+with $r\geq 0, \theta\in[0, 2\pi$.
+The RHS  does not  depend on $\theta$. Hence, $f_{\Theta}(\theta)$ must be a constant.
+
+b. Use the hint. Since $g$ is a constant, $f_{R, \Theta}(r, \theta) \propto r$. Thus,
+\begin{align*}
+  \int_{0}^{1}\int_{0}^{2\pi} r \d r \d \theta = 2\pi (1/2) r^{2}|_0^{1} = \pi.
+\end{align*}
+So, $1/\pi$ is the normalization constant.
+
+c. $f_{X,Y}(x,y) = \exp{-x^2}/\sqrt{2\pi}\exp{-y^{2}}/\sqrt{2\pi} = \exp{-(x^2+y^2)/2\pi} = \exp{-r^{2}}/2\pi$. Indeed, $f_{X,Y}(x,y)$ has the form $g(x^2+y^2)$. The rest is as in part b.
+\end{solution}
+\end{exercise}
+
+\setcounter{theorem}{17}
+
+\begin{exercise}
+BH. 8.18. Here we deal with division of rvs.
+\begin{hint} We can make a transform $T, U$ such that $T=X/Y$ and $U=X$  to use a 2D transformation. Compute $x$ and $y$ as functions of $t$ and $u$. Then the Jacobian.
+\end{hint}
+\begin{solution}
+I always start with this line: $f_{T,U}(t,u) \d t \d u = f_{X,Y}(x,y) \d x \d y$.
+Then, since $x=u$, $y=u/t$.
+\begin{align*}
+\frac{\partial (t, u)}{\partial (x,y)} =
+  \begin{pmatrix}
+1/y & -x/y^{2} \\
+    1 & 0
+  \end{pmatrix} = \frac{x}{y^{2}} = \frac{u}{(u/t)^{2}} = \frac{t^{2}}{u},
+\end{align*}
+We don't need to take absolute signs in the last expression because $X, Y$ are positive rvs.
+With this,
+\begin{align*}
+  f_{T,U}(t,u) = f_{X,Y}(x,y) \left(\frac{\partial (t, u)}{\partial (x,y)}\right)^{-1} = f_{X,Y}(u,u/t) = f_X(u)f_Y(u/t) u/t^{2}.
+\end{align*}
+
+b. Use part a.
+\begin{align*}
+f_{T} = \frac 1{t^2} \int_0^{\infty} x f_X(x) f_Y(x/t) \d x.
+\end{align*}
+Since $f_X$ and $f_Y$ are not given explicitly, we cannot make further progress.
+
+All and all, division of rvs is not so simple.
+\end{solution}
+\end{exercise}
+
+
+\setcounter{theorem}{22}
+\begin{exercise}
+BH.8.23. We already analyzed how to handle addition, subtraction and division. It remains to deal with multiplication.
+\begin{hint}
+You might want to follow the approach of BH.8.18.
+\end{hint}
+\begin{solution}
+a.
+\begin{align*}
+f_{X,T}(x,t) &= f_{X,Y}(x,y) |\frac{\partial (x,y)}{\partial (x, t)}|, \\
+\frac{\partial (x,t)}{\partial (x,y)} &=
+  \begin{pmatrix}
+    1 & 0 \\
+y & x
+  \end{pmatrix} = x. \\
+&\implies \\
+f_{X,T}(x,t) &= f_{X,Y}(x,y)/x= f_{X,Y}(x,t/x)/x,
+\end{align*}
+since $y=t/x$. Finally, for $f_T$, marginalize $x$ out by integration.
+
+b. Just do the algebra. With part a. you have the answer, so you can check.
+\end{solution}
+\end{exercise}
+
+\setcounter{theorem}{30}
+\begin{exercise}
+BH.8.31
+\begin{hint}
+Use the bank-post office Story 8.5.1 to see that $T$ and $W$ are independent.
+\end{hint}
+\end{exercise}
+
+
+\setcounter{theorem}{35}
+\begin{exercise}
+BH.8.36.
+\begin{hint}
+a. See BH.8.5.1. The exponential is a special case of the gamma distribution. See also BH.8.34.c. $T_1/T_2$ is a function of $T_1/(T_1+T_2)$.
+
+b. This can be solved with a joint distribution function and integration over the event $\{T_1<T_2\}$. However, we can use Exercise BH.7.10 or BH.7.1.24.
+
+c. First she has to wait for the first server to become free. This is the minimum of the two exponentials.
+With $\P{T_1<T_2}$ server 1 is the first.
+What is the probability that the other server is empty first? Then, once she is at a server, what is her expected service time? The total time in the system is the time in queue plus the service time.
+\end{hint}
+\begin{solution}
+a. I did not attempt any smart tricks. Take as transform $u=s/t$ and $v=s+t$, where I associate $s$ to $T_{1}$ and $t$  to $T_2$. Then,
+\begin{align*}
+\frac{\partial (u,v)}{\partial (s,t)} &=
+  \begin{pmatrix}
+    1/t & -s/t^{2} \\
+1 & 1
+  \end{pmatrix} = \frac 1 t + \frac{s}{t^{2}} = \frac{t+s}{t^{2}} = \frac{v}{t^{2}}
+\end{align*}
+With a bit of algebra: $s=uv/(u+1)$ and $t=v/(u+1)$.
+Therefore the Jacobian we need becomes
+\begin{equation}
+\label{eq:12}
+\frac{\partial (s,t)}{\partial (u,v)} = \frac{v}{t^{2}} = v \frac{v^2}{(u+1)^2} = \frac{(u+1)^{2}}{v}.
+\end{equation}
+Next,
+\begin{align*}
+  f_{U, V}(u,v) &= f_{T_1,T_2}(s,t) \frac{\partial (s,t)}{\partial (u,v)}
+  =  f_{T_1}(uv/(u+1) f_{T_2}(v/(u+1)) \frac{(u+1)^{2}}{v} \\
+  &=  \lambda^{2} \exp(-\lambda uv/(u+1) - \lambda v/(u+1)) \frac{(u+1)^{2}}{v} \\
+  &=  \lambda^{2} \exp(-\lambda v) \frac{(u+1)^{2}}{v} \\
+  &=  \lambda^{2} \exp(-\lambda v)/v \cdot  (u+1)^{2}. \\
+\end{align*}
+Clearly, this is a product of a function $f_{V}(f)$ that depends only  $v$ and another function $f_U(u)$ that depends  only $u$. Hence, $U$ and $V$ are independent.
+
+b. With the hint,
+\begin{align*}
+\P{T_1<T_2}
+&= \int_0^{\infty} \P{T_1< T_2\given T_1=s} f_{T_1}(s)\d s \\
+&= \int_0^{\infty} \P{s< T_2\given T_1=s} \lambda_1e^{-\lambda_1 s} \d s \\
+&= \lambda_{1} \int_0^{\infty} e^{-\lambda_{2} s} e^{-\lambda_1 s} \d s = \frac{\lambda_1}{\lambda_1+\lambda_2}.
+\end{align*}
+
+c. See the hint. Alice first has to wait for the first server to become free. The expected time in queue is $1/(\lambda_1+\lambda_2)$. If server 1 is the first, then Alice spends a  time $1/\lambda_1$ in service. Thus, the total time is
+\begin{align*}
+  \frac{1}{\lambda_1+\lambda_2} +
+  \frac{\lambda_1}{\lambda_1+\lambda_2} \frac{1}{\lambda_{1}} +
+  \frac{\lambda_2}{\lambda_1+\lambda_2} \frac{1}{\lambda_{2}}  =
+\frac{3}{\lambda_1+\lambda_{2}}.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+\setcounter{theorem}{39}
+\begin{exercise}
+BH.8.40. A nice question on the exam could be to take another prior, e.g., $p$ uniform on $[1/3, 2/3]$. How would that affect the solution?
+\begin{hint}
+Apply beta-binomial conjugacy.
+\end{hint}
+\begin{solution}
+Let us solve the question from first principles. At the end, I'll give the short solution based on Beta-Binomial conjugacy.
+
+Let $f(p)$ be our prior density (In the exercise it is taken to be uniform). Then
+\begin{align*}
+\P{p>r}=\int \1{p>r}f(p) \d p = \int_{r}^{1} f(p) \d p
+\end{align*}
+is our belief that $p>r$. For this exercise, we are interested in the relation $\P{p>r} \geq c$. For instance, suppose we take $c=0.95$, then we like to know which value for $r$ achieves that $\P{p>r} \geq c$?
+
+We can start with one trial, i.e., $n=1$. Then we analyze the case for $n=2$, and so on, and hope to see a pattern.  Here are the standard steps of Bayesian reasoning.
+\begin{enumerate}
+\item I want to know the density $f_1(p | N= 1)$, i.e, the density of $p$ after having seen one  successful test.  (Note here that I am careful about notation. We do $n=1$ trials, and then the number of successes is given by the random variable $N$.)
+\item Now I use Bayes' rule:
+   \begin{align*}
+    f_1(p| N=1) &= \frac{f_1(p, N=1)}{\P{N=1}} = \frac{f_1( N=1| p)}{\P{N=1}} f(p).
+   \end{align*}
+   Here $f(p)$ acts as the prior density on $p$.
+\item It is clear that $f_1(N=1|p) = p$, because  we know that  an item passes a test with probability $p$, when $p$ is given.
+\item Perhaps I don't need $\P{N=1}$ if I can guess it (though see below), but here it is just for completeness' sake.
+   \begin{align*}
+   \P{N=1} = \int f(N=1|p) f(p) \d p = \int_0^{1} p \d p = 1/2,
+   \end{align*}
+   because the prior $f(p) = \1{p\in [0,1]}$, i.e., uniform on $[0,1]$, i.e, it is $\Beta{1,1}$.
+\item With this, $f_1(p|N=1) = \frac{p}{1/2} \1{p\in[0,1]} = 2p  \1{p\in[0,1]}$.
+\item Thus, $\P{p>r\given N=1} = \int_{0}^1 \1{p>r} f_1(p |N=1)\d p = \int_{r}^1 2p\d p = 1-r^2$.
+\end{enumerate}
+Sometimes we are lucky and we don't have to compute the denominator in Bayes' formula. We did this earlier, but let's show again how this works.
+   \begin{align*}
+    f_1(p| N=1) &= \frac{f_1(p, N=1)}{\P{N=1}} \propto f_1( N=1| p)f(p) = p \1{0\leq p \leq 1}.
+   \end{align*}
+Now $f_1(p| N=1)$ is a PDF, hence must integrate to 1. Thus, $\int_{0}^{1} p \d p = 1/2$, must be the normalization constant by which we have to divide to turn $f_1$ into a real PDf. In this case we don't save any work, but sometimes this really helps, in particular when dealing with integrals with Beta distributed rvs.
+
+Now generalize to larger $n$, compute $f_2(p|N=2)$, then for $n=3$, and so on, until you see the pattern.
+
+We can also directly use the ideas of the book. Starting with a prior $\Beta{1,1}$, after $n$ `wins', the distribution becomes $\Beta{1+n, 1}$.  Then,
+\begin{align*}
+  \P{p>r} = \frac{\Gamma(n+2)}{\Gamma(n+1)\Gamma(1)}\int_r^1 p^n \d p = 1-r^{n+1}.
+   = (n+1) p^{n+1}|_r^{1} = 1-r^{n+1}.
+\end{align*}
+
+\end{solution}
+\end{exercise}
+
+\setcounter{theorem}{51}
+\begin{exercise} BH.8.52. The concepts discussed here are useful to better understand how to generate exponential random numbers.
+\begin{hint}
+a.
+\begin{align*}
+\P{X_j\leq c} = \P{ \log U_{j} \geq -c} = \P{ U_{j} \geq e^{-c}} = \P{1-U_{j} \leq 1-e^{-c}}.
+\end{align*}
+What is the distribution of $1-U_{j}$?
+
+b. $\log \Pi_{j=1}^{n} U_{j} = \sum_{j=1}^n \log U_j = \sum_{j=1}^n (-X_{j})$.  But $-X_j\sim \Exp{1}$, hence the sum is just a sum of iid Exp rvs. What is the distribution of this sum?
+
+\end{hint}
+\begin{solution}
+a. By the  hint and  the fact that $U_j$ is uniform on $[0,1]$, so that $1-U_j$ is also uniform,  the last  equality of the hint implies  that
+$\P{ 1-U_{j} \leq 1- e^{-c}} = \P{ U_{j} \leq 1-e^{-c}} =  1-e^{-c}$.
+But then, $X_{j}\sim \Exp{1}$.
+
+b. The sum of $n$ iid exponentials is $\Gamm{n, \lambda}$. And so, if $S_n=\sum_i^n X_{i}$, then $\P{S_n\leq x} = \int_{0}^{x}f(y) \d y$, with $f(y)$ the gamma density with $n$ and $\lambda=1$.
+
+Just to test my skills, I used MGFs, because I know that the MGF of a sum of iid rvs is the product of the MGF of one them. Since $e^{\log u} = u$,
+\begin{align*}
+  \E{e^{-s \log U}} &= \int_{0}^1 e^{-s \log u}\d u = \int_{0}^{1} u^{-s}\d u.
+\end{align*}
+If $s\geq 1$ this does not converge (convince yourself that you understand this). With $s<1$,
+\begin{align*}
+  \E{e^{-s \log U}} &= \frac1 {-s+1} u^{-s+1}|_0^1 = \frac{1}{1-s}.
+\end{align*}
+Therefore,
+\begin{align*}
+  \E{e^{-s S_n}}
+  &=  \E{e^{-s \log U_1 -s \log U_2 - \cdots -s \log U_n}}
+  = \left(\E{e^{-s\log U}}\right)^n \\
+  &= \left(\frac{1}{1-s}\right)^{n},
+\end{align*}
+and this is the MGF of a $\Gamm{n, \lambda=1}$ rvs.
+\end{solution}
+\end{exercise}
+
+\setcounter{theorem}{53}
+
+\begin{exercise}
+BH.8.54.  We tackle this also with simulation in an assignment.
+
+I find it easier to consider $Y=pX$, rather than $pX/q$. Note that since $q=1-p\to 1$ as $p\to 0$, the factor $1/q$ is immaterial for the final result.
+
+Read my solution too, as I develop some nice ideas in passing.
+
+\begin{hint}
+Use BH.4.3.9. Then, start with a geometic rv, then extend to a negative binomial rv.
+\end{hint}
+\begin{solution}
+\begin{align*}
+M_{Y}(s) =\E{\exp{s Y}} = p \sum_{i=0}^{\infty} e^{s p i} q^{i} = p/(1-qe^{sp}).
+\end{align*}
+Now, use that $e^{s p)} \approx 1 + s p$ for $p\ll 1$. (This is easier than using l' Hopital's rule as BH do in their solution). Hence, the denominator becomes $\approx 1-(1-p)(1+sp) = p(1-s) - sp^{2} \approx p(1-s)$ when $p\ll 1$ Hence,
+\begin{align*}
+M_{Y}(s) \approx p/(p(1-s) =  1/(1-s).
+\end{align*}
+In the limit $p\to 0$ the LHS converges to the RHS, which is the MGF of an exponential rv. For the rest, follow the solution of BH.
+
+Here is another line of attack. Let us first use probability theory to find out what is $\sum_{i=0}^{\infty} q^{1}$ for some $|q|<1$. Take $X\sim\Geo{p}$, so that $X$ corresponds to the number of failures (tails say) until we see a success (heads say). So, $X$ corresponds to the number of tails until we see a heads. Now if we keep on throwing, then we know that eventually a heads will appear. Therefore $p + pq +pq^2 + \cdots = 1$, that, is $p\sum_i^{\infty} q^{i}=1$. But this implies that $\sum_{i=0}^{\infty}q^i = 1/ p = 1/(1-q)$.
+
+By similar reasoning, if we keep on throwing the coin until we see $r$ heads then we know that $p^r \sum_{i=0}^{\infty} {r+i-1 \choose r} q^{i} = 1$.  Therefore,
+\begin{align*}
+\sum_{i=0}^{\infty} {r+i-1 \choose r} q^{i} =  \frac{1}{p^{2}}= \frac{1}{(1-q)^{r}}.
+\end{align*}
+With this insight, for $X\sim\NBin{p,n}$
+\begin{align*}
+  M_X(s) &= p^r \sum_{i=0}^{\infty} {r+i-1 \choose r} q^{i} e^{si}
+ = p^r \sum_{i=0}^{\infty} {r+i-1 \choose r} (e^{s}q)^{i} \\
+  &= \frac{p^r}{(1-qe^{s})^{r}} \approx \left(\frac{p}{p(1-s)}\right)^{r},
+\end{align*}
+where we use again Taylor's expansion for $p\ll 1$.x
+\end{solution}
+\end{exercise}
+
+
+
+
+\input{trailer.tex}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "study-guide.tex"
+%%% End:
