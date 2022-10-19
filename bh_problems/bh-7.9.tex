@@ -1,0 +1,35 @@
+\input{header.tex}
+
+\setcounter{theorem}{8}
+\begin{exercise}[BH 7.9.]
+We'll develop a simulation for this in the assignments.
+\begin{hint}
+a. $\P{X=i, Y=j, N=n} = \P{X=i, Y=j} \1{i+j=n}$.
+
+c. $\P{X=i\given N=n} = 1/(n+1)$. Why is this uniform?
+\end{hint}
+\begin{solution}
+a. The hint is the solution.
+
+b. Use the hint for a. Then, for $k=0, 1, \ldots, n$,
+\begin{equation*}
+\P{X=k, N=n} = \P{X=k, Y=n-k} = pq^k p q^{n-k} = p^2 q^{n}.
+\end{equation*}
+(Have we used independence somewhere?)
+
+c. Observe that the right hand side does not depend on $k$. This implies that $\P{X=k|N=n}$  also does not depend on $k$. (Why?) But, since $\P{X=k|N=n}$ is a true PMF,  is must be that $\sum_{k=0}^{n}\P{X=k|N=n}$ adds up to $1$. These two ideas put together imply that
+$\P{X=k|N=n} = 1/(n+1)$.
+
+With Bayes' expression, and using that  $\P{X=k|N=n} = 1/(n+1)$,
+\begin{equation*}
+\P{X=k|N=n} = \frac{\P{X=k, N=n}}{\P{N=n}},
+\end{equation*}
+it follows that
+\begin{equation*}
+\P{N=n} = \frac{\P{X=k, N=n}}{\P{X=k|N=n}} = \frac{p^2q^n}{1/(n+1)} = (n+1) p^2q^{n}.
+\end{equation*}
+\end{solution}
+\end{exercise}
+
+
+\input{trailer.tex}
