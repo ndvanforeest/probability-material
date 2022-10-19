@@ -1,0 +1,205 @@
+\input{header}
+
+\section{7.1}
+
+
+\begin{exercise}
+In your own words, explain what is
+\begin{enumerate}
+\item a joint PMF, PDF, CDF;
+\item a conditional PMF, PDF, CDF;
+\item a marginal PMF, PDF, CDF.
+\end{enumerate}
+\begin{solution}
+Check the definitions of the book.
+
+Mistake: To say that $\P{X=x}$ is the PMF for a continuous random variable is wrong, because $\P{X=x}=0$ when $X$ is continuous.
+
+Why is $\P{1 < x \leq 4}$ wrong notation?
+hint: $X$ should be a capital.
+What is the difference between $X$ and $x$?
+
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Suppose the probability of obtaining a head twice out of two coin flips is $\P{X_1=H, X_2=H}$.
+What has this to do with joint PMFs? Can you generalize this idea to other examples?
+\begin{solution}
+This example shows why joint distributions are important!
+In any experiment that involves a sequence of measurements, such as multiple throws of a coin, or the weighing of a bunch of chimpanzees, we have to deal with joint CDFs and PMFs.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+In the previous exercise, suppose the outcome of the second throw is always equal to that of the first. Specify the joint PMF.
+\begin{solution}
+Here, we deal with two rvs, and we have to specify how they depend. In the present case $\P{X_1= H, X_2=H} = \P{X_1=H}$ and $\P{X_1= T, X_2=T} = \P{X_1=T}$, $\P{X_1= H, X_2=T} = \P{X_1= T, X_2=H} = 0$. Note that with this, we specified the joint PMF on all possible outcomes.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+We have the random vector $(X, Y) \in [0,1]^{2}$ (here $[0,1]^{2} = [0,1]\times [0,1]$) consisting of the rvs X and Y with the joint PDF $f_{X,Y}(x,y) = 2 \1{x\leq y}$.
+\begin{enumerate}
+\item Are $X$ and $Y$ independent?
+\item Compute $F_{X,Y}(x,y)$.
+\end{enumerate}
+\begin{solution}
+\begin{align}
+f_{X}(x) &= \int_{0}^{1} f_{X,Y}(x,y) \d y = 2\int_{0}^{1} \1{x\leq y} \d y = 2\int_{x}^{1} \d y = 2(1-x) \\
+f_{Y}(y) &= \int_{0}^{1} f_{X,Y}(x,y) \d x = 2\int_{0}^{1} \1{x\leq y} \d x = 2\int_{0}^{y} \d y = 2 y.
+\end{align}
+But $f_{X,Y}(x,y) \neq f_{X}(x)f_{Y}(y)$, hence $X,Y$ are dependent.
+
+\begin{align}
+F_{X,Y}(x,y)
+&= \int_{0}^{x}\int_{0}^{y} f_{X,Y}(u,v) \d v \d u \\
+&= 2\int_{0}^{x}\int_{0}^{y} \1{u\leq v} \d v \d u \\
+&= 2\int_{0}^{x}\int \1{u\leq v} \1{0\leq v \leq y}\d v \d u \\
+&= 2\int_{0}^{x}\int  \1{u\leq v \leq y}\d v \d u \\
+&= 2\int_{0}^{x} [y-u]^{+} \d u,
+\end{align}
+because $u > y \implies \1{u\leq v \leq y} = 0$. Now, if $y>x$,
+\begin{align}
+  2\int_{0}^{x} [y-u]^{+} \d u &=
+  2\int_{0}^{x} (y-u) \d u = 2 y x - x^{2},
+\end{align}
+while if $y\leq x$,
+\begin{align}
+  2\int_{0}^{x} [y-u]^{+} \d u &=
+  2\int_{0}^{y} (y-u) \d u = 2 y^{2} - y^{2} = y^{2}
+\end{align}
+
+Make a drawing of the support of $f_{X,Y}$ to help to understand this better.
+
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+We have two continuous rvs $X, Y$.
+Suppose the joint CDF factors into the product of the marginals, i.e., $F_{X,Y}(x,y) = F_X(x)F_Y(y)$. Can it still be possible in general that the joint PDF does not factor into a product of marginals PDFs of $X$ and $Y$, i.e., $f_{X,Y}(x,y) \neq f_X(x) f_Y(y)$?
+\begin{solution}
+\begin{align*}
+\partial_{x}\partial_{y}F_{X,Y}(x,y)
+=\partial_{x}\partial_{y}F_{X}(x) F_{Y}(y)
+=\partial_{x}F_{X}(x) \partial_{y} F_{Y}(y) = f_{X}(x) f_{Y}(y).
+\end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH define the conditional CDF given an event $A$ on page 416 as $F(y|A)$.
+Use this definition to write $F_{X,Y}(x,y)/F_{X}(x)$ as a conditional CDF.
+Is this equal to the conditional CDF of $X$ and $Y$?
+\begin{solution}
+\begin{align}
+\frac{F_{X,Y}(x,y)}{F_{X}(x)} = \frac{\P{X\leq x, Y\leq y}}{\P{X\leq x}}
+  = \P{Y\leq y, X\leq x|X\leq x} = \P{Y\leq y|X\leq x}.
+\end{align}
+It is a big mistake to write $F_{X,Y}(x,y) = \P{X=x, Y=y}$. If you wrote this, recheck the definitions of BH.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Let $X$ be uniformly distributed on the set $\{0,1,2\}$ and let $Y \sim \Bern{1/4}$; $X$ and $Y$ are independent.
+\begin{enumerate}
+\item Present a contingency table for $X$ and $Y$.
+\item What is the interpretation of the column sums of the table?
+\item What is the interpretation of the row sums of the table?
+\item Suppose you would change some of the entries in the table. Are $X$ and $Y$ still independent?
+\end{enumerate}
+\begin{solution}
+$\P{X=0, Y=0} = 1/3 \cdot 3/4$,
+$\P{X=0, Y=1} = 1/3 \cdot 1/4$, and so on.
+
+If we have one column with $Y=0$ and the other with $Y=1$, then the sum over the columns are $\P{Y=0}$ and $\P{Y=1}$. The row sum for row $i$ are  $\P{X=i}$.
+
+Changing the values will (most of the time) make $X$ and $Y$ dependent. But, what if we changes the values such that  $\P{X=0, Y=0} =1$? Are $X$ and $Y$ then again independent? Check the conditions again.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+A machine makes items on a day.
+Some items, independent of the other items, are failed (i.e., do not meet the quality requirements).
+What are $N$ and  $p$ in the context of the chicken-egg story of BH? What are the `eggs' in this context, and what is the meaning of `hatching'?
+What type of `hatching' do we have here?
+\begin{solution}
+  The number of produced items (laid eggs) is $N$. The probability of hatching is $p$, that is, an item is ok. The hatched eggs are the good items.
+\end{solution}
+\end{exercise}
+
+% \begin{exercise}
+% Apply the chicken-egg story. Families enter a zoo in a given hour. Some families have one child, other two, and so on.
+% What are the `eggs' in this context, and what is the meaning of `hatching'?
+% \end{exercise}
+
+
+\begin{exercise}
+We have two rvs $X$ and $Y$ on $\R^{+}$. It is given that $F_{X,Y}(x,y) = F_X(x)F_Y(y)$ for $x,y \leq 1/3$. It is true that then  $X$ and $Y$ are necessarily independent.
+\begin{solution}
+For $X, Y$ to be independent, it is necessary that  $F_{X,Y}(x,y) = F_X(x)F_Y(y)$ for all $x,y$, not just one particular choice. (This is an example that satisfying a necessary condition is not necessarily sufficient.)
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+I select a random guy from the street, his height $X\sim\Norm{1.8, 0.1}$, and I select a random woman from the street, her height is $Y\sim\Norm{1.7, 0.08}$.
+I claim that since I selected the man and the woman independently, their heights are independent.
+Briefly comment on this claim.
+
+
+\begin{solution}
+  Many answers are possible here, depending on extra assumptions you make.
+  Here is one.
+  Suppose, just by change, the fraction of taller guys in the street is a bit higher than the population fraction.
+  Assuming that taller (shorter) people prefer taller (shorter) spouses, there must be a dependence between the height of the men and the women. This is because when selecting a man, I can also select his wife.
+
+From this exercise you should memorize that \emph{independence is a property of the joint CDF, not of the rvs}.
+
+Mistake:   $\P{Y}$ is wrong notation wrong because we can only compute the probability of an event, such as $\{Y\leq y\}$. But $Y$ itself is not an event. \end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+For any two rvs $X$ and $Y$ on $\R^{+}$ with marginals $F_{X}$ and $F_{Y}$, can  it hold that $\P{X\leq x, Y\leq y} = F_{X}(x) F_{Y}(y)$?
+\begin{solution}
+Only when $X, Y$ are independent.
+
+Mistake:  independence of $X$ and $Y$ is not the same as the linear independence. Don't confuse these two types of dependene.
+\end{solution}
+
+\end{exercise}
+
+\begin{exercise}
+Theorem 7.1.11. What is the meaning of the notation $X|N=n$?
+\begin{solution}
+  Given $N=n$, the random variable $X$ has a certain distribution, here binomial.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Let $X, Y$ be two discrete rvs with CDF $F_{X,Y}$.  Can we compute the PDF as $\partial_{x}\partial_{y} F_{X,Y}(x,y)$?
+\begin{solution}
+This claim is incorrect, because $X, Y$ are discrete, hence they have a PMF, not a PDF.
+
+Mistake: Someone said that $\partial_{x}\partial_{y}$ is not correct notation; however, it is correct! It's a (much used) abbreviation of the much heaver $\partial^{2}/\partial x \partial y$. Next, the derivative of the PMF is not well-defined (at least, not within this course. If you object, ok, but then show that you passed a decent course on measure theory.)
+\end{solution}
+\end{exercise}
+
+\begin{exercise} Redo BH.7.1.24 with indicator functions and the  fundamental bridge (recall, $\P{A} = \E{\1{A}}$ for an event $A$).
+(Indicators are often  easy to use, and prevent many mistakes, as is demonstrated with this example.)
+\begin{solution}
+\begin{align*}
+\P{T_1 < T_2 } = \E{\1{T_1<T_2}} =
+&= \int_0^\infty \int_0^\infty \1{t_1<t_2} f_{T_1, T_2}(t_1, t_2)\d t_{1} \d{t_2} \\
+&= \int_0^\infty \int_{t_1}^{\infty}  \lambda_1 e^{-\lambda_1 t_1} \lambda_2 e^{-\lambda_2 t_2}  \d{t_2} \d{t_1}\\
+&= \int_0^\infty   \lambda_1 e^{-\lambda_1 t_1} \lambda_2 \int_{t_1}^{\infty} e^{-\lambda_2 t_2}  \d{t_2} \d{t_1}\\
+&= \int_0^\infty   \lambda_1 e^{-\lambda_1 t_1} e^{-\lambda_2 t_1}  \d{t_1}\\
+&= \int_0^\infty   \lambda_1 e^{-\lambda_1 t_1 - \lambda_2t_{1}} \d{t_1}\\
+&= \frac{\lambda_{1}}{\lambda_{1}+\lambda_2}.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+\input{trailer}
