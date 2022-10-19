@@ -1,0 +1,86 @@
+\input{header}
+
+\section{Our exercises on Section BH.7.1.1}
+
+\begin{exercise}
+In your own words, explain what is
+\begin{enumerate}
+\item a joint PMF, PDF, CDF;
+\item a conditional PMF, PDF, CDF;
+\item a marginal PMF, PDF, CDF.
+\end{enumerate}
+\begin{solution}
+Check the definitions of the book.
+
+Mistake: To say that $\P{X=x}$ is the PMF for a continuous random variable is wrong, because $\P{X=x}=0$ when $X$ is continuous.
+
+Why is $\P{1 < x \leq 4}$ wrong notation?
+hint: $X$ should be a capital.
+What is the difference between $X$ and $x$?
+
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+Suppose the probability of obtaining a head twice out of two coin flips is $\P{X_1=H, X_2=H}$.
+What has this to do with joint PMFs? Can you generalize this idea to other examples?
+\begin{solution}
+This example shows why joint distributions are important!
+In any experiment that involves a sequence of measurements, such as multiple throws of a coin, or the weighing of a bunch of chimpanzees, we have to deal with joint CDFs and PMFs.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+In the previous exercise, suppose the outcome of the second throw is always equal to that of the first. Specify the joint PMF.
+\begin{solution}
+Here, we deal with two rvs, and we have to specify how they depend. In the present case $\P{X_1= H, X_2=H} = \P{X_1=H}$ and $\P{X_1= T, X_2=T} = \P{X_1=T}$, $\P{X_1= H, X_2=T} = \P{X_1= T, X_2=H} = 0$. Note that with this, we specified the joint PMF on all possible outcomes.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Let $X$ be uniformly distributed on the set $\{0,1,2\}$ and let $Y \sim \Bern{1/4}$; $X$ and $Y$ are independent.
+\begin{enumerate}
+\item Present a contingency table for $X$ and $Y$.
+\item What is the interpretation of the column sums of the table?
+\item What is the interpretation of the row sums of the table?
+\item Suppose you would change some of the entries in the table. Are $X$ and $Y$ still independent?
+\end{enumerate}
+\begin{solution}
+$\P{X=0, Y=0} = 1/3 \cdot 3/4$,
+$\P{X=0, Y=1} = 1/3 \cdot 1/4$, and so on.
+
+If we have one column with $Y=0$ and the other with $Y=1$, then the sum over the columns are $\P{Y=0}$ and $\P{Y=1}$. The row sum for row $i$ are  $\P{X=i}$.
+
+Changing the values will (most of the time) make $X$ and $Y$ dependent. But, what if we changes the values such that  $\P{X=0, Y=0} =1$? Are $X$ and $Y$ then again independent? Check the conditions again.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+A machine makes items on a day.
+Some items, independent of the other items, are failed (i.e., do not meet the quality requirements).
+What are $N$ and  $p$ in the context of the chicken-egg story of BH? What are the `eggs' in this context, and what is the meaning of `hatching'?
+What type of `hatching' do we have here?
+\begin{solution}
+  The number of produced items (laid eggs) is $N$. The probability of hatching is $p$, that is, an item is ok. The hatched eggs are the good items.
+\end{solution}
+\end{exercise}
+
+% \begin{exercise}
+% Apply the chicken-egg story. Families enter a zoo in a given hour. Some families have one child, other two, and so on.
+% What are the `eggs' in this context, and what is the meaning of `hatching'?
+% \end{exercise}
+
+
+\begin{exercise}
+Theorem 7.1.11. What is the meaning of the notation $X|N=n$?
+\begin{solution}
+  Given $N=n$, the random variable $X$ has a certain distribution, here binomial.
+\end{solution}
+\end{exercise}
+
+\input{trailer}
