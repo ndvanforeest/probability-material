@@ -1,0 +1,92 @@
+\documentclass[poll_tutorial_format]{subfiles}
+\begin{document}
+
+\section{Week 1}
+
+\begin{exercise}
+Let $F(x) = e^{-x}$ for $x\in \R$? Can $F$ be a CDF?
+
+Choose one of these answers:
+\begin{enumerate}
+\item Yes, but we still need to compute the normalization constant.
+\item Yes, because it is an increasing function.
+\item No, because it is a decreasing function.
+\item No, because $\lim_{x\to\infty} e^{-x}=\infty$.
+\item No, because it's the PDF of an exponentially distributed rv.
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}
+If $X\sim  \Unif{[-5, 10]}$, what is $C$ in $f_{X}(x) = C \1{-5, 10}$?
+
+Choose one of these answers:
+\begin{enumerate}
+\item $C$ is not well defined because $f_{x}(x)$ does not have the right form for PDF.
+\item $C=15$
+\item $\int_0^{\infty} f_{X}(x) \d x = 10$, hence $C=1/10$.
+\item $C=1/15$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Take $f_X(x) = e^{-x}-1/2$ for $x\geq 0$.  Can $f$ be a PDF?
+
+Choose one of these answers:
+\begin{enumerate}
+\item No, because it's a PMF of a discrete rv.
+\item Yes, it's the PDF of the rv $X\sim\Exp{\lambda}$ with $\lambda = 1$.
+\item No, because $f(0)  = -1/2$.
+\item No, because $f(1000) < 0$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+The joint density of $X$ and $Y$ is given by $f_{X,Y}(x,y) = Ce^{-(x + 2y)}$.
+Are $X$ and $Y$ iid?
+Choose one of these answers:
+\begin{enumerate}
+\item Yes, because $f_{X,Y}(x, y) = C e^{-x}e^{-2y}$.
+\item No,  these rvs are identical, hence dependent.
+\item Yes, because $X$ and $Y$ are independent and identical.
+\item Yes, because $X$ and $Y$ are independent and identically distributed.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Suppose $X$ does not have a second moment, what is it's variance?
+Choose one of these answers:
+\begin{enumerate}
+\item It's variance can still be $0$ when $\E{X^2} = \infty$ and $(\E X)^2=-\infty$.
+\item $\V X=0$, because its second moment does not exist, hence $\E{X^2}=0$, hence $\E X=0$.
+\item $\V X = \infty$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Suppose the $X$ has  $\R$ as support. Take $g(x) = \log x$, and define $Y = g(X)$. What is the support of $Y$?
+Choose one of these answers:
+\begin{enumerate}
+\item The support of $Y$ is $\R$.
+\item The support of $Y$ is $\R^+$.
+\item The support of $Y$ is $(-\infty, 0]$.
+\item The support of $Y$ is $(0, \infty)$.
+\item $Y$ is not well defined.
+\end{enumerate}
+
+\end{exercise}
+
+\begin{exercise}
+Suppose the $X$ has  $\R$ as support. Take $g(x) = \log x$, and $h(x) = e^{x}$. Define $Y = h(g(X))$.
+Choose one of these answers:
+\begin{enumerate}
+\item Since $h$ and $g$ are each other's inverse, the support of $Y$ is $\R$.
+\item Even though $h$ and $g$ are each other's inverse, $Y$ is still not well defined.
+\item If $Y=g(h(X))$ then $Y$ has can have $\R$ as support.
+\end{enumerate}
+
+\end{exercise}
+
+
+
+\end{document}
