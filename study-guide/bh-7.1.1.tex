@@ -83,4 +83,98 @@ Theorem 7.1.11. What is the meaning of the notation $X|N=n$?
 \end{solution}
 \end{exercise}
 
+
+
+\begin{exercise}
+Consider 12 football players on a football field.
+Eleven of them are players of F.C. Barcelona, the other one is an arbiter.
+We select a random player, uniform.
+This player must take a penalty.
+The probability that a player of Barcelona scores is 70\%, for the arbiter it is 50\%.
+Let $P\in \{A, B\}$ be r.v that corresponds to the selected player, and $S\in\{0,1\}$ be the score.
+\begin{enumerate}
+\item What is the PMF? In other words, determine $\P{P = B, S=1}$ and so on for all possibilities.
+\item What is $\P{S=1}$? What is $\P{P=B}$?
+\item Show that $S$ and $P$ are dependent.
+\end{enumerate}
+\begin{solution}
+Here is the joint PMF:
+\begin{align}
+\P{P=A, S=1} &= \frac{1}{12}0.5 & \P{P=A, S=0} &= \frac{1}{12}0.5 \\
+\P{P=B, S=1} &= \frac{11}{12}0.7 & \P{P=B, S=0} &= \frac{11}{12}0.3.
+\end{align}
+Now the marginal PMFs
+\begin{align*}
+\P{S=1}  &= \P{P=A, S=1} + \P{P=B, S=1} = 0.042 + 0.64 = 0.683 = 1-\P{S=0}\\
+\P{P=B}  &= \frac{11}{12} = 1-\P{P=A}.
+\end{align*}
+For independence we take the definition.
+In general, for all outcomes $x,y$ we must have that $\P{X=x, Y=y} = \P{X=x}\P{Y=y}$.
+For our present example, let's check for  a particular outcome:
+\begin{align*}
+\P{P=B, S=1} &= \frac{11}{12}\cdot0.7 \neq \P{P=B}\P{S=1} = \frac{11}{12} \cdot 0.683
+\end{align*}
+The joint PMF is obviously not the same as the product of the marginals, which implies that $P$ and $S$ are not independent.
+\end{solution}
+\end{exercise}
+
+
+
+
+\begin{exercise}
+An insurance company receives on a certain day two claims $X, Y \geq 0$.
+We will find the PMF of the loss $Z=X+Y$ under different assumptions.
+
+Suppose $p_{X,Y}(i,j) = c \1{i=j}\1{1\leq i \leq 4}$.
+\begin{enumerate}
+\item  What is $c$?
+\item What is $F_{X}(i)$?
+\item What is $F_{Y}(j)$?
+\item  Are $X$ and $Y$ dependent?  If so, why, because $1=F_{X,Y}(4,4)= F_X(4)F_Y(4)$?
+\item What is $\P{Z=k}$?
+\item What is $\V Z$?
+\end{enumerate}
+
+
+\begin{solution}
+1. $c=1/4$ because there are just four possible values for $i$ and $j$.
+2. and 3. Use marginalization:
+\begin{align}
+F_X(k) &=  F_{X,Y}(k, \infty ) = \sum_{i\leq k} \sum_j p_{X,Y}(i,j) \\
+ &= \frac{1}{4}\sum_{i\leq k} \sum_j \1{i=j}\1{1\leq i \leq 4}\\
+ &= \frac{1}{4}\sum_{i\leq k} \1{1\leq i \leq 4} \\
+&=k/4,\\
+F_Y(j) &= j/4.
+\end{align}
+
+4.  The equality in the question must hold for all $i,j$, not only for $i=j=4$.
+  If you take $i=j=1$, you'll see immediately that $F_{X,Y}(1,1)\neq F_X(1)F_Y(1)$:
+  \begin{align}
+    \label{eq:823}
+    \frac{1}{4} = F_{X,Y}(1,1) \neq F_{X}(1) F_Y(1) = \frac{1}{4}\frac{1}{4}.
+  \end{align}
+
+5. $\P{Z=2} = \P{X=1, Y=1} = 1/4 = \P{Z=4}$, etc.
+$\P{Z=k} = 0$ for $k\not \in \{2, 4, 6, 8\}$.
+
+6.
+Here is one approach
+\begin{align}
+\label{eq:83}
+\V Z &= \E{Z^2} - (\E Z)^{2}\\
+\E{Z^2} &= \E{(X+Y)^{2}} = \E{X^{2}} + 2\E{XY} + \E{Y^{2}} \\
+(E{Z})^{2} &= (\E X + \E Y)^{2} \\
+ &= (\E X)^2 + 2\E X \E Y + (\E Y)^{2} \\
+&\implies \\
+\V Z &= \E{Z^2} - (\E Z)^{2}\\
+ &= \V X + \V Y + 2 (\E{XY} - (\E X \E Y))\\
+\E{XY} &= \sum_{ij} ijp_{X,Y}(i,j) = \frac 1 4 (1 + 4 + 9 + 16) = \ldots \\
+\E{X^{2}} &= \ldots
+\end{align}
+The numbers are for you to compute.
+\end{solution}
+\end{exercise}
+
+
+
 \input{trailer}
