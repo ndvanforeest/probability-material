@@ -1,0 +1,34 @@
+\input{header.tex}
+
+\setcounter{theorem}{0}
+\begin{exercise}[BH.7.1]
+We simulate this in one of the assignments.
+\begin{hint}
+Check BH 7.2.2. Bigger hint: Let $A$ the arrival time of Alice, and $B$ the time of Bob. Then we want to compute $\P{|A-B|\leq 1/4}$.  (15 minutes is 1/4 hour.)  Why is $f_{A,B}(x,y) = \1{x\in[0,1]}\1{y\in [0,1]}$? Now apply 2D-LOTUS to the function $g(x,y) = \1{|x-y|\leq 1/4}$.
+\end{hint}
+\begin{solution}
+Use the hint. If you make a drawing, then you'll see that Alice and Bob will not meet on the triangles
+$\{(x,y) : x\in [0, 3/4], y\in [1/4, 1], y>x+1/4]$ and $\{(x,y) : x\in [1/4, 1], y\in [0, 3/4], y<x-1/4]$. The area of each triangle is $(3/4)^{2}/2$, hence, the combined area is $9/16$. Therefore the probability to meet is $1-9/16=7/16$.
+
+We can also solve   a 2D integral by first integrating along $y$, and then along $x$. Let's focus on the integral over $y$ first.
+\begin{align*}
+\int_0^1 \1{x<y+1/4}\1{y<x+1/4} \d y
+&=\int_0^1 \1{x-1/4<y<x+1/4} \d y \\
+&=\int_0^1 \1{\max\{0, x-1/4\} <y < \min\{1,x+1/4\}} \d y \\
+&= \min\{1,x+1/4\} - \max\{0, x-1/4\}
+\end{align*}
+Now the integral over $x$:
+\begin{align*}
+  \int_0^1 (\min\{1,x+1/4\} - \max\{0, x-1/4\}) \d x
+&=  \int_0^1 \min\{1,x+1/4\}\d x - \int_0^{1}\max\{0, x-1/4\} \d x  \\
+&=  \int_0^{3/4}(x+1/4)\d x + \int_{3/4}^{1}1 \d x
+ - \int_{1/4}^{1}(x-1/4) \d x \\
+  &=0.5 x^2\Big|_{0}^{3/4} + 3/4\cdot 1/4 - 0.5x^2\Big|_{1/4}^1 + 3/4\cdot 1/4 \\
+  &= 1/2\cdot 9/16 + 3/16 - 1/2\cdot 15/16 + 3/16 = 7/16.
+\end{align*}
+
+\end{solution}
+\end{exercise}
+
+
+\input{trailer.tex}
