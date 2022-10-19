@@ -1,0 +1,111 @@
+% arara: pdflatex: { shell: yes }
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex: { shell: yes }
+% arara: move: {  files: ['study-guide.pdf'], target: ['../pdf-files/'] }
+
+\documentclass[a4paper,11pt]{book}
+
+
+%\usepackage[nosolutions]{optional}
+%\usepackage[justhints]{optional}
+%\usepackage[check]{optional}
+\usepackage[all-solutions-at-end]{optional}
+
+\usepackage{../common/preamble}
+%\newcommand{\sectionbreak}{} %\clearpage}
+
+
+\setcounter{tocdepth}{1}
+\usepackage{a4wide}
+\usepackage{../common/abbreviations}
+
+\author{Lecturers PT and PD
+}
+\date{\today}
+\title{Probability Distributions, Week 1}
+
+\opt{all-solutions-at-end}{
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+}
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{Week 1}
+\label{cha:week-1}
+
+
+
+\section{Lectures}
+\label{sec:lectures}
+
+\subsection{Lecture 1}
+\label{sec:lecture-1}
+
+\begin{enumerate}
+\item BH Book: Section 6.4, MGFs
+\item BH Book: Section 6.5, Generating moments with MGFs
+\item BH Book: Section 6.6,  sums of independent rvs with MGFs
+\item BH video: 18
+\item BH Exercises: 6.24
+\end{enumerate}
+
+
+\subsection{Lecture 2}
+\label{sec:lecture-1}
+\begin{enumerate}
+\item BH Book: Section 7.0 intro,
+\item BH Book: Section 7.1.1 joint, marginal, conditional for discrete rvs
+\item BH video: 19
+\item BH Exercises: 7.9, 7.29
+\end{enumerate}
+
+
+\section{Tutorial}
+\label{sec:tutorial}
+
+\begin{enumerate}
+\item Our exercises on Section bh.7.1.1
+\item BH Exercises: 6.22
+\end{enumerate}
+
+
+
+\section{Assignment}
+\label{sec:assignment}
+
+There is no assignment in week 1.
+
+
+\section{Homework}
+\label{sec:homework}
+
+\begin{enumerate}
+\item Redo the exercises of the lectures and the tutorial
+\item Our exercises on Section BH.7.1.1
+\item BH Exercises: 6.22
+\end{enumerate}
+
+\subfile{../study-guide/bh-7.1.1.tex}
+
+\section{Poleverywhere questions}
+\label{sec:polev-quest}
+
+To be included after the tutorial.
+
+
+\opt{nosolutions}{
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\clearpage
+\chapter{Hints}
+\input{hint}
+\clearpage
+\chapter{Solutions}
+\input{ans}
+}
+
+\end{document}
