@@ -3,7 +3,7 @@
 % arara: pdflatex: { shell: yes }
 % arara: move: {  files: ['study-guide.pdf'], target: ['../pdf-files/'] }
 
-\documentclass[a4paper,11pt]{book}
+\documentclass[a4paper,11pt]{article}
 
 
 %\usepackage[nosolutions]{optional}
@@ -14,6 +14,10 @@
 \usepackage{../common/preamble}
 %\newcommand{\sectionbreak}{} %\clearpage}
 
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{exercise}[theorem]{Ex}
+\newtheorem{remark}[theorem]{Remark}
 
 \setcounter{tocdepth}{1}
 \usepackage{a4wide}
