@@ -1,0 +1,30 @@
+\input{header.tex}
+\setcounter{theorem}{23}
+\begin{exercise} BH.6.24
+\begin{hint}
+Use that $X-Y = X+(-Y)$, and then that the mgf of the sum of two independent rvs  is equal to the product of the mgfs. Then solve the integrals.
+
+To solve the mgf of $L$, realize that the integral runs from $-\infty$ to $\infty$. Then split the integral into a part from $-\infty$ to 0, and a second from $0$ to $\infty$. Then solve each of the integrals and compare what you get from the mgf of $X+(-Y)$.
+\end{hint}
+
+\begin{solution}
+Check out the hint.
+
+I prefer to keep $\lambda$ general for the moment, because like this I can use pattern recognition during the computations.
+\begin{align*}
+  M_{X}(s) &= \int_0^{\infty} \lambda e^{sx} e^{-\lambda x}\d x = \frac{\lambda}{\lambda - s}\\
+  M_{-Y}(s) &= \int_0^{\infty} \lambda e^{-sx} e^{-\lambda x}\d x = \frac{\lambda}{\lambda +s}\\
+  M_{X-Y}(s) &= M_X(s) M_{-Y}(x) = \frac{\lambda^{2}}{(\lambda-s)(\lambda+s)} = \frac{\lambda^{2}}{\lambda^{2}-s^2}.
+\end{align*}
+Now fill in $\lambda=1$.
+
+\begin{align*}
+  M_L(s) &= \frac{1}{2}\int_{-\infty}^{\infty} e^{sx} e^{-|x|}\d x = \frac{1}{2} \int_{-\infty}^{0} e^{sx} e^{-|x|}\d x + \frac{1}{2} \int_{0}^{\infty} e^{sx} e^{-|x|}\d x  \\
+ &= \frac{1}{2} \int_{0}^{\infty} e^{-sx} e^{-x}\d x + \frac{1}{2} \int_{0}^{\infty} e^{sx} e^{-x}\d x  = \frac{1}{2} \frac{1}{1+s} + \frac{1}{2}\frac{1}{1-s} = \\
+&=\frac{1}{(1+s)(1-s)} = \frac{1}{1-s^{2}}.
+\end{align*}
+
+The  mgfs of $X-Y$, with $\lambda=1$, is the  same as the mgf of $L$, hence $X-Y$ has the Laplace distribution.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}
