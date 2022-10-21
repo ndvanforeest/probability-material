@@ -1,0 +1,1 @@
+This repo contains our material for the courses Probability Theory and Distributions
