@@ -1,7 +1,8 @@
 % arara: pdflatex: { shell: yes }
 % arara: pythontex: {verbose: yes, rerun: modified }
 % arara: pdflatex: { shell: yes }
-% arara: move: {  files: ['bh_problems.pdf'], target: ['../pdf-files/'] }
+
+% rara: move: {  files: ['bh_problems.pdf'], target: ['../pdf-files/'] }
 
 \documentclass[a4paper,12pt]{book}
 
@@ -13,6 +14,7 @@
 
 \usepackage{../common/preamble}
 %\newcommand{\sectionbreak}{} %\clearpage}
+
 
 \newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{exercise}[theorem]{Ex}
@@ -41,6 +43,7 @@ Solutions for problems of BH}
 
 %\subfile{intro.tex}
 \setcounter{chapter}{6}
+\subfile{chapter6.tex}
 \subfile{chapter7.tex}
 \subfile{chapter8.tex}
 \subfile{chapter9.tex}
