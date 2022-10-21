@@ -5,31 +5,219 @@
 
 * Overview
 
-On this github page you can find all the material you need for the course on probability distributions.
+On this github page you can find all the material you need for the course on probability theory and distributions.
 
-*  Files
-
-** Relevant for students
-
-The directory =pdf-files= contains all relevant pdf files.
-- Specifically, =pdf-file/course_overview.pdf= provides  all information about the organization of the course such as the schedule and grading
-- =assignments/assignment-answer-template.tex=:  a  basic LaTeX  document that you  have to use as a template for your assignments.
+Please use the abbreviations from common/abbreviations.sty, to ensure uniformity in notation.
 
 
-** Irrelevant for students
-
-You might be interested in the LaTeX sources of the study guide, or the other documents. If you're not, then just skip all this material.
-
-- =common/abbreviations.sty=: abbreviations used in the tex files
-- =common/preamble.sty=: necessary if you want to compile the files yourself.
-- =lectures/=: sources for the lectures.
-- =assignments=: sources for the assignments.
-- =study-guide=: source material
-
-* Updates of the material
+* Organization of PT and PD
 
 
+** Lectures
 
-* Python
+*** PT
 
-If you plan to use python, the best installation is perhaps [[https://www.anaconda.com/][anaconda]].
+- 1 time per week 2h lecture
+- 1 time per week training  session with exercises.
+
+*** PD
+
+1 2 times 2h lecture.
+Per lecture
+- 2-3 questions of BH in detail. Show how we approach a problem, our dead ends, how we use the ideas of the book to solve a problem.
+- 1 of these questions should relate to the assignment and explain the main ideas of how start simulating/coding
+- last 20 minutes: interesting extra background
+
+Some advantages of discussing exercises:
+- The average students like this a lot. Our worked solutions appear to be too hard at times
+- We can change exercises a bit every year (less boring)
+- We offer something that is really additional to BH video lectures (which the students also seem to like)
+- Material of the lecture is directly related to the exam questions (We discuss the exam questions!)
+- We can use answers of students of the exams as learning material (what was wrong with the student's answer?)
+
+** Tutorials
+
+Each PT and PD tutorial follows the same structure:
+1. In the very first tutorial we do a five minute poll everywhere test/pilot so that all students have the app installed.
+2. start with poll everywhere:  10 questions, one per minute. First ask students to think individually and fill in an answer, then let them discuss on the same question and fill in their final answer. We will only grade the second answer.
+3. Poll everywhere is closed book.
+4. TAs discuss the answers right after the test and tackle pitfalls and common mistakes.
+5. We put the questions on slides, so that we can present the slides in class, hence students have to come to class.
+6. After the tutorial we include the questions in the weekly document, so that students can check them later. We can also make one doc with all poll questions, if there is demand for it. With our structure of single files and the subfile package it's easy to adapt to what works best.
+7. Use  wrong answers of old  exams questions for inspiration for the poll everywhere questions.
+
+
+
+Aim of poll everywhere questions:
+1. test on knowledgde (e.g., what is the definition of...)
+2. very basic numerical and analytic skills
+3. Give direct feedback on student's knowledge.
+4. encourage discussions between students
+5. No hard questions,
+6. Mix of multiple choice, and numerical, e.g., what is $P(X>0)$ for X normal with mean 0.
+7. Include knowledge of math 1 (and math 2?), for instance, what is the support of the rv $\sqrt X$ if the support of $X is ...
+
+
+
+** Assignments
+
+
+Written part:
+- Problems are based on the exercises of BH.
+- Last (two) assignment(s) of pt will include some coding
+- for PD the problems include coding/simulation. We can ask for numerical output, and have the students interpret the numbers.
+- six assignments in total, we start in week 2.
+- Assignments of week n has dead line Wednesday (?) of week n+1
+- Since assignments are posted earlier, students can start earlier if they don't want to work in week 8.
+- Assignment problems are based on the problems of BH we choose for the exam. Hence, assignments directly relate to exam preparation. There is no problem working on them in week 8.
+- For pd we had challenging assignments. Put them in separate files too. For this year we will not use them, but perhaps I=nvf make a  file with extra material for the students that like a real challenge.
+- Students hand in assignments in latex, i.e.. pdf made from a latex file
+
+
+If students don't work, we can we ask for handwritten solutions? No scans, really hand written. The idea is this (kind of) guarantees that each and every student really reads the solution. (The aim is not to improve their handwriting :-)) This helps each  students to really read/think about the solutions of BH, and a bit how to organize  mathematical thinking. However, let's see how things develop during the course.
+
+** Grading
+
+Assignments in total 25%
+- 10 % pol everywhere. 10, say, questions per tutorial. Grade is points/70 * 10.
+- 15 % written assignment. By consequence the assignments can be quite small, like 2 problems.
+- hand written solution is just a tick mark of a task to do.
+
+Exam, 75%
+- 2h
+- closed book
+- 4 problems, based on the obligatory exercises (marked as bold face) of BH
+- Problems are samll variations on exercises of BH, or ask for numerical results, or combinations of BH exercises
+- Problems are in the order of the chapters of the book.
+
+* Tasks for TA
+
+- Fork this repo: https://github.com/ndvanforeest/probability-courses
+- Learn  how to use github, but don't go to far with this :-)
+- I'll make Lingwei, Arpan and me admins for this repo. Like this we can merge and organize our work in a good way.
+- Don't make large commits, just one topic at a time. For instance, you make a new solution file for some exercise of BH, and remove the solution from the existing solution document. Then  make one commit for this. Like this the merging process is smooth and easy.
+- Also try to make an agreement on who works on what: so you work on ch 7 say, and then the other ta on ch 8. Prevent overlap in work
+- In case of questions, don't hesitate to contact/phone Nicky: 06 459 239 57, or Lingwei 06 319 868 36. It's better to discuss a few times more and not make mistakes. If things work well, we'll benefit a lot during the course.
+
+
+https://github.com/ndvanforeest/probability-material/settings/access
+
+
+
+
+**  organization of tex files
+
+- I use the subfiles package to split material so that I have maximal combination potential later (per week, per lecture, per hour, all in one file, etc.).
+- I also use the options file to enable different switches that control what to include, e.g., solutions right below the problem, no solutions at all, all solutions at the end.
+- I have two different master files. One is the master file that it mentioned in the header file, something like bh_problem_check.tex. With the switches in this master file, you'll get the solutions right below the problem. This is easy when while your editing  a file and want to check the result.
+- The second master file is the one we use to make the documents for the students. The switches in this master file ensure that all solutions appear at the end of the pdf file.
+- Example format for bh-7.1.tex, see the directory bh_problems on github
+- Check the files in the ~common~ directory. This contains the preamble, but also the abbreviations we use in all docs. This is useful to keep in line with the notation of BH.
+
+
+** BH Problems
+
+
+Who: Wietze, Hans, Lars van der Laan
+
+todo:
+- Get files/material of Lingwei, merge this with the rest, one step at a time. Start with this material, because PT starts soon.
+- Make a separate file for each  problem.  Suggested file name convention: bh-7.1.tex
+- Include each problem file in the chapter file.
+- Include a setcounter in each problem file to ensure that when we make one solution document, we get the numbers right in the answers section.
+- For problems  that are no longer on our list of problems (see the planning below), still make a problem file. Perhaps we will include them in a later year. Include also a link in the chapter document, but put a % in front to comment it out.
+- put the stuff on github
+
+
+** STudy guide with simple questions
+
+who:  Mark, Chang,
+
+todo:
+- Get files/material of Lingwei, merge this with the rest, one step at a time. Start with this material, because PT starts soon.
+- Make a separate file for each sectioin of bh.  Suggested file name convention: bh-7.1.tex
+- Include each section file in the chapter file.
+- Include a setcounter in each file to ensure that when we make one document, we get the numbers right in the answers section.
+- For sections  that are no longer on our list of sections (see the planning below), still make a section file. Perhaps we will include them in a later year. Include also a link in the chapter document, but put a % in front to comment it out.
+- put the stuff on github
+- try to do a commit per problem file.
+- Todo Nicky on PD:  wha to do with the extra material such as old exams, 2d integrals, and other things.
+
+
+** Poll everywhere questions
+
+who: Floris, Max
+
+- Like the study guide, organize questions per section, use the same file structure as there
+- Use wrong answers of students on the exams and resits to get inspration for questions.
+- Make one master document,like the study guide, that contain all questions. Perhaps students like to have all questions organized in one document, for studying/resit
+- We don't need solutions in the files
+- Make also a master document that we can use per week. Eg PT_week1.tex, PD_week1.tex
+
+
+
+** Assignments
+
+who: Machiel, Max, Mattijn
+
+- Discuss with Lingwei about his material for pt.
+- make R and python code
+- split the files of PD into separate files, one per section.
+- make smaller assignments, more in line with the 15% load
+
+
+
+
+
+* PD Overview topics and sections of PD.
+
+
+
+   |  1 |   6.4 | MGF                     |   4 |    |
+   |    |   6.5 | generating moment       |   4 |    |
+   |    |   6.6 | sums of iid rvs         |   1 |  9 |
+   |----+-------+-------------------------+-----+----|
+   |  2 |   7.0 | intro                   |   1 |    |
+   |    | 7.1.1 | joint discrete          |   8 |  9 |
+   |----+-------+-------------------------+-----+----|
+   |  3 | 7.1.2 | joint continuous        |  10 |    |
+   |    | 7.1.3 | joint hybrid            |   3 | 13 |
+   |----+-------+-------------------------+-----+----|
+   |  4 |   7.2 | 2d lotus                |   2 |    |
+   |    |   7.3 | covariance, correlation |   6 |  8 |
+   |----+-------+-------------------------+-----+----|
+   |  5 |   8.0 | intro                   |   2 |    |
+   |    |   8.1 | change of variable      |   3 |  5 |
+   |----+-------+-------------------------+-----+----|
+   |  6 |   8.4 | gamma                   |   6 |    |
+   |    |   8.6 | order statistics        |   4 | 10 |
+   |----+-------+-------------------------+-----+----|
+   |  7 |   9.0 | intro                   |   1 |    |
+   |    |   9.1 | conditioning on event   |   7 |  8 |
+   |----+-------+-------------------------+-----+----|
+   |  8 |   9.2 | conditioning on rv      |   2 |  2 |
+   |----+-------+-------------------------+-----+----|
+   |    |   9.3 | prop cond exp           |   5 |    |
+   |  9 |   8.2 | convolution             |   3 |  8 |
+   |----+-------+-------------------------+-----+----|
+   | 10 |   9.5 | conditional var         |   3 |    |
+   |    |   9.6 | adam and eve            |   3 |  6 |
+   |----+-------+-------------------------+-----+----|
+   | 11 |  10.0 | intro                   |   1 |    |
+   |    |  10.1 | inequalities            |   7 |  8 |
+   |----+-------+-------------------------+-----+----|
+   | 12 |  10.2 | LLN                     |   5 |  5 |
+   |----+-------+-------------------------+-----+----|
+   | 13 |  10.3 | CLT                     |   5 |  5 |
+   |----+-------+-------------------------+-----+----|
+   | 14 |  10.4 | chi square, student     |   4 |  4 |
+   |----+-------+-------------------------+-----+----|
+   |    |       |                         | 100 |    |
+
+
+skip:
+- 6.7, 6.8. 6.9
+- 7.4, 7.5, 7.6, 7.7
+- 8.3, 8.5, 8.7, 8.8
+- 9.4, 9.7, 9.8
+- 10.5. 10.6
