@@ -1,0 +1,5 @@
+Files:
+
+- pt_poll_week1.tex, etc., questions per week for prob theory/prob dist
+- poll_tutorial_format.tex: Use this for the tutorials as this has a nice format for presentations. Include the relevant file for that week, and comment out the irrevelant files
+- poll_everywhere.tex: the week questions in one file, to be distributed as the end of the course, if there is demand for it. This is plain a4 format.
