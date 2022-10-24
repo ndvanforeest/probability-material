@@ -1,0 +1,17 @@
+% arara: pdflatex: { shell: yes }
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex: { shell: yes }
+
+
+\input{header}
+
+
+\setcounter{chapter}{0}
+\chapter{Chapter 1}
+
+\subfile{bh-1.1.tex}
+\subfile{bh-1.2.tex}
+\subfile{bh-1.3.tex}
+\subfile{bh-1.4.tex}
+\subfile{bh-1.5.tex}
+\input{trailer}
