@@ -1,0 +1,38 @@
+\input{header.tex}
+
+\setcounter{theorem}{20}
+\begin{exercise}
+	\textbf{[BH.50]} Calvin and Hobbes play a match consisting of a series of games, where Calvin has probability $p$ of winning each game (independently). They play with a ``win by two" rule: the first player to win two games more than his opponent wins the match. Find the probability that Calvin wins the match (in terms of $p$), in two different ways:
+	\begin{enumerate}
+		\item by conditioning, using the law of total probability.
+		\item by interpreting the problem as a gambler's ruin problem.
+	\end{enumerate}
+\begin{solution}
+	\begin{enumerate}
+		\item First use the LOTP where you condition on the outcome of the first match,
+		\begin{align*}
+			P(W)& = P(W|W_{1})p + P(W|W_{1}^{C})(1-p).\\
+		\end{align*}
+		Now use extra conditioning on the outcome of the second match
+		\begin{align*}
+			P(W|W_{1})& = P(W|W_{1},W_{2})P(W_{2}|W_{1}) + P(W|W_{1},W_{2}^C)P(W_{2}^C|W_{1})\\
+			&=1\cdot p + P(W)(1-p).
+		\end{align*}
+		Similarly, we find that
+		\begin{align*}
+			P(W|W_{1}^{C}) &= P(W|W_{1}^{C},W_{2})P(W_{2}|W_{1}^{C})+P(W|W_{1}^{C},W_{2}^C)P(W_{2}^C|W_{1}^{C})\\
+			&=P(W)p.
+		\end{align*}
+		Substituting the last two results into the first equation, we have
+		\begin{align*}
+			P(W) = p^2 + P(W)(1-p)p + P(W)p(1-p) = p^2 +2p(1-p)P(W).
+		\end{align*}
+		Solving for $P(W)$ gives
+		\begin{align*}
+			P(W) =\frac{p^2}{1-2p(1-p)}.
+		\end{align*}
+		\item Skip.
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}
