@@ -1,0 +1,23 @@
+\input{header.tex}
+
+\setcounter{theorem}{3}
+
+\begin{exercise}
+	\textbf{[BH.2.4]} A hat contains 100 coins, where 99 are fair but one is double-headed (always landing Heads). A coin is chosen uniformly at random. The chosen coin is flipped 7 times, and it lands Heads all 7 times. Given this information, what is the probability that the chosen coin is double-headed? (Of course, another approach here would be to \emph{look at both sides of the coin} - but this is a metaphorical coin.)
+\begin{solution}
+	Define as $DH$ the event that the chosen coin is double headed, by $H_{7}$ the event that the chosen coin lands heads 7 times. Then
+	\begin{align*}
+		P(DH) &= \frac{1}{100},\\
+		P(H_{7}|DH) & = 1,\\
+		P(H_{7}|DH^{C}) & = \frac{1}{2}^7.
+	\end{align*}
+	What is $P(DH|H_{7})$? Bayes' rule anyone?
+	\begin{align*}
+		P(DH|H_{7}) &= \frac{P(H_{7}|DH)P(DH)}{P(H_{7}|DH)P(DH) + P(H_{7}|DH^{C})P(DH^{C})}\\
+		& = \frac{\frac{1}{100}}{\frac{1}{100} + \frac{1}{2^7}\frac{99}{100}}\\
+		& = 0.5639
+	\end{align*}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
