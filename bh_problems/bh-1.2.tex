@@ -1,0 +1,21 @@
+\input{header.tex}
+
+\setcounter{theorem}{0}
+
+\begin{exercise} [BH2.1]
+A spam filter is designed by looking at commonly occurring phrases in spam. Suppose that 80\% of email is spam. In 10\% of the spam emails, the phrase ``free money" is used, whereas this phrase is only used in 1\% of non-spam emails. A new email has just arrived, which does mention "free money". What is the probability that it is spam?
+\begin{solution}
+	Define the events. $S$: message is spam. $F$: the phrase ``free money" appears. We are given that
+	\begin{align*}
+		P(S) &= 0.8,\\
+		P(F|S) & = 0.1,\\
+		P(F|S^{C}) & = 0.01.
+	\end{align*}
+	What is $P(S|F)$? Since we have $P(F|S)$ and are asked for $P(S|F)$, this immediately points you to Bayes' rule:
+	\begin{align*}
+		P(S|F) = \frac{P(F|S)P(S)}{P(F|S)P(S)+P(F|S^{C})P(S^{C})} = \frac{0.1\cdot 0.8}{0.1\cdot 0.8 + 0.01\cdot 0.2} = 0.9756
+	\end{align*}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
