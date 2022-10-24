@@ -1,0 +1,47 @@
+\input{header.tex}
+
+\setcounter{theorem}{12}
+\begin{exercise}[BH.2.13]
+A fair coin is flipped 3 times. The toss results are recorded on separate slips of paper (writing ``H" if Heads and ``T" if Tails), and the 3 slips of paper are thrown into a hat.
+	\begin{enumerate}
+		\item Find the probability that all 3 tosses landed Heads, given that at least 2 were Heads.
+		\item Two of the slips of paper are randomly drawn from the hat, and both show the letter H. Given this information, what is the probability that all 3 tosses landed Heads?
+	\end{enumerate}
+\begin{solution}~
+	\begin{enumerate}
+		\item Denote by $A_i$ the event that we toss $i$ heads. we are looking for
+		\begin{align*}
+			P(A_{3}|A_{2}\cup A_{3})& = \frac{P(A_{3}\cap (A_{2}\cup A_{3}))}{P(A_{2}\cup A_{3})}\tag*{(\text{Definition of Conditional Probability})}\\
+			& = \frac{P((A_{3}\cap A_{2})\cup(A_{3}\cap A_{3}))}{P(A_{2}\cup A_{3})}\tag*{(\text{Distributive law})}\\
+			& = \frac{P(A_{3})}{P(A_{2}\cup A_{3})}\\
+			& = \frac{P(A_{3})}{P(A_{2})+P(A_{3})-P(A_{2}\cap A_{3})}\tag*{(\text{Inclusion-exclusion})}\\
+			& = \frac{P(A_{3})}{P(A_{2})+P(A_{3})}\\
+			& =\frac{(1/2)^3}{3\cdot (1/2)^3 + (1/2)^3} \\
+			& = \frac{1}{4}.
+		\end{align*}
+		\item Denote by $C$ the event that the slips show heads. We are looking for 
+		\begin{align*}
+			P(A_{3}|C) &= \frac{P(C|A_{3})P(A_{3})}{P(C)}\\
+			&=\frac{P(C|A_{3})P(A_{3})}{P(C|A_{3})P(A_{3}) + P(C|A_{3}^{C})P(A_{3}^{C})}\\ 
+			& = \frac{1\cdot \frac{1}{2^3}}{1\cdot \frac{1}{2^3} + P(C|A_{3}^{C})(1-\frac{1}{2^3})}
+		\end{align*}
+		We now only need $P(C|A_{3}^C)$. Now using again the LOTP, we have
+		\begin{align*}
+			P(C|A_{3}^{C}) &= P(C|A_{3}^{C},A_{2})P(A_{2}|A_{3}^{C}) + P(C|A_{3}^{C},A_{2}^{C})P(A_{2}^{C}|A_{3}^{C})\\
+			&=P(C|A_{2})P(A_{2}|A_{3}^{C}) + 0\cdot P(A_{2}^{C}|A_{3}^{C})\\
+			&=\frac{{2\choose 2}}{{3 \choose 2}}\cdot \frac{3}{7}\\
+			& = \frac{1}{7},
+		\end{align*}
+		where on the second to last line, both probabilities are calculated using the naive definition of probability. For the first, conditional on $A_{2}$, we know there are two slips indicating $H$, from which we need to choose 2. There are ${2 \choose 2}$ ways to do so. The total number of ways to draw the 2 slips from 3 is ${3 \choose 2}=3$. To find the probability of $A_{2}|A_{3}^{C}$, simply list all 7 possible options (which are equally likely) and count the number of outcomes which contain 2 times an $H$.
+
+		Now we are ready to get the final answer
+		\begin{align*}
+			P(A_{3}|C)& =  \frac{1\cdot \frac{1}{2^3}}{1\cdot \frac{1}{2^3} + \frac{1}{7}(1-\frac{1}{2^3})}\\
+			&=\frac{1}{1+1}=\frac{1}{2}.
+		\end{align*}
+
+		Intuitively, in (a) we have information that there are at least two slips with heads, but we don't know which. There are 8 possible outcomes, 4 of which satisfy the criterion that at least two are heads. These are all equally likely, and only one outcome is three heads, so the answer to (a) has to be 1/4. In (b), consider randomly arranging the slips and then picking the first two. It is given that these two are heads. This leaves only two possible, equally likely, outcomes for the final slip. One of these two outcomes results in three heads, so the answer must be 1/2.
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}
