@@ -1,0 +1,23 @@
+\input{header.tex}
+
+\setcounter{theorem}{5}
+
+\begin{exercise} [BH.2.6] 
+ \begin{enumerate}
+		\item Show that if events $A_1$ and $A_2$ have the same prior probability $\P{A_1} = \P{A_2}$, $A_1$ implies $B$, and $A_2$ implies $B$, then $A_1$ and $A_2$ have the same posterior probability $\P{A_1|B} = \P{A_2|B}$ if it is observed that $B$ occurred.
+		\item Explain why (a) makes sense intuitively, and give a concrete example.
+	\end{enumerate}
+\begin{solution}~
+	\begin{enumerate}
+		\item The thing to realize is that $A_{1}$ implies $B$ in set notation is $A_{1}\subseteq B$. Therefore, $P(A_{1}\cap B) = P(A_1)$. The same is true for $A_{2}$. Then,
+		\begin{align*}
+			P(A_{1}|B) &= \frac{P(A_{1}\cap B)}{P(B)} = \frac{P(A_{1})}{P(B)},\\
+			P(A_{2}|B) &= \frac{P(A_{2}\cap B)}{P(B)} = \frac{P(A_{2})}{P(B)}.\\
+		\end{align*}
+		If $P(A_{1})=P(A_{2})$, then the right hand sides are equal, so the left hand sides must also be equal.
+		\item Suppose the probability of studying Econometrics $(A_{1})$ is the same as the probability of studying Mathematics $(A_{2})$. Denote by $B$ the probability of going to the university. Of course, $A_{1}$ and $A_{2}$ imply $B$. The problem is completely symmetric in $A_{1}$ and $A_{2}$. If I now observe that someone is going to the university, I have to update the probabilities for $A_{1}$ and $A_{2}$ in the same way. 
+	\end{enumerate}
+  \end{solution}
+\end{exercise}
+
+\input{trailer.tex}
