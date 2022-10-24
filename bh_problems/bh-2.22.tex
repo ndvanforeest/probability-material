@@ -1,0 +1,28 @@
+\input{header.tex}
+
+\setcounter{theorem}{21}
+\begin{exercise}[BH.2.22] 
+  Consider the following conversation from an episode of The Simpsons:
+	
+	\begin{verbatim}
+		Lisa:  Dad, I think he’s an ivory dealer! His boots are ivory, his hat
+		       is ivory, and I’m pretty sure that check is ivory.
+		Homer: Lisa, a guy who has lots of ivory is less likely to hurt Stampy 
+		       than a guy whose ivory supplies are low.
+	\end{verbatim}
+
+	Here Homer and Lisa are debating the question of whether or not the man (named Blackheart) is likely to hurt Stampy the Elephant if they sell Stampy to him. They clearly disagree about how to use their observations about Blackheart to learn about the probability (conditional on the evidence) that Blackheart will hurt Stampy.
+	\begin{enumerate}
+		\item Define clear notation for the various events of interest.
+		\item Express Lisa's and Homer's arguments (Lisa's is partly implicit) as conditional probability statements in terms of your notation from (a).
+		\item Assume it is true that someone who has a lot of a commodity will have less desire to acquire more of the commodity. Explain what is wrong with Homer's reasoning that the evidence about Blackheart makes it less likely that he will harm Stampy.
+	\end{enumerate}
+\begin{solution}~
+	\begin{enumerate}
+		\item Let $H$ be the event that the man will hurt Stampy, let $L$ be the event that a man has lots of ivory, and let $D$ be the event that the man is an ivory dealer.
+		\item Lisa observes that $L$ is true. She suggests (reasonably) that this evidence makes $D$ more likely, i.e., $P(D|L) > P(D)$. Implicitly, she suggests that this makes it likely that the man will hurt Stampy, i.e., $P(H|L) > P(H|L^C)$. Homer argues that $P(H|L) < P(H|L^C)$.
+		\item Homer does not realize that observing that Blackheart has so much ivory makes it much more likely that Blackheart is an ivory dealer, which in turn makes it more likely that the man will hurt Stampy. This is an example of Simpson’s paradox. It may be true that, controlling for whether or not Blackheart is a dealer, having high ivory supplies makes it less likely that he will harm Stampy: $P(H|L, D) < P(H|L^C,D)$ and $P(H|L, D^C) < P(H|L^C,D^C)$. However, this does not imply that $P(H|L) < P(H|L^{C})$.
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}
