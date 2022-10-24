@@ -1,0 +1,36 @@
+\input{header.tex}
+
+\setcounter{theorem}{11}
+\begin{exercise}[BH.2.12] 
+In deterministic logic, the statement ``$A$ implies $B$" is equivalent to its contrapositive, ``not $B$ implies not $A$". In this problem we will consider analogous statements in probability, the logic of uncertainty. Let $A$ and $B$ be events with probabilities not equal to 0 or 1.
+	\begin{enumerate}
+		\item Show that if $\P{B|A} = 1$, then $\P{A^c|B^c} = 1$. Hint: Apply Bayes' rule and LOTP.
+		\item Show however that the result in (a) does not hold in general if $=$ is replaced by $\approx$. In particular, find an example where $\P{B|A}$ is very close to 1 but $\P{A^c|B^c}$ is very close to 0.
+	\end{enumerate}
+\begin{hint}
+	What happens if $A$ and $B$ are independent?
+\end{hint}
+\begin{solution}~
+	\begin{enumerate}
+		\item We start with the definition of conditional probability.
+		\begin{align*}
+			P(B|A)& = \frac{P(B\cap A)}{P(A)}.
+		\end{align*}
+		Since $P(B|A)=1$, we have that $P(A) = P(B\cap A)$. We can split the event $A$ into the disjoint sets $B\cap A$ and $B^{C}\cap A$. Then, by the second Axiom of Probability
+		\begin{align*}
+			P(A) &= P(B\cap A) +P(B^{C}\cap A).
+		\end{align*}
+		Since  $P(A) = P(B\cap A)$, we infer that $P(B^{C}\cap A)=0$. Using again the definition of conditional probability
+		\begin{align*}
+			P(A|B^{C})=\frac{P(B^{c}\cap A)}{P(B^C)}.
+		\end{align*}
+		Since we found that $P(B^{C}\cap A)=0$, we see that $P(A|B^{C})=0$. Using that $P(A|B^{C}) + P(A^{C}|B^{C})=1$ (why?), we arrive at our conclusion that $P(A^{C}|B^{C})=1$. \newline\newline
+		\textbf{Alternatively (thanks to Wietze Koops for suggesting this solution.)}\\
+		Assume $P(B|A)=1$. Then, $P(B^{C}|A) = 1-P(B|A) = 0$. (The first equality [called the complement rule] follows from the conditional versions of the Axioms of Probability.)\\
+		Hence, $P(A|B^C) = \frac{P(B^{C}|A)P(A)}{P(B^{C})} = 0$. (Bayes' rule)\\
+		Hence, $P(A^{C}|B^{C}) = 1-P(A|B^{C}) = 1$. (Again the complement rule)
+		\item  Suppose you throw two $n$ sided die (with $i$ eyes on the $i$th side for $i=1,\ldots,n$). Let $A$ be the event that the number of eyes on the first die is strictly smaller than $n$. Let $B$ be the event that the number of eyes of the second die is strictly smaller than $n$. Now, $P(B|A)=P(B) = \frac{n-1}{n}$, and $P(A^{C}|B^{C})=P(A^{C})=\frac{1}{n}$. The reason that this does not contradict (a) is in the requirement that the events $A$ and $B$ cannot have probability equal to 0 or 1. Suppose we change the events $A$ and $B$ to the number of eyes smaller or equal than $n$. Clearly $P(B|A)=P(B)=1$. However, $P(A^{C}|B^{C})=...$ not defined, because the definition of conditional probability requires $P(B^C)>0$. 
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}
