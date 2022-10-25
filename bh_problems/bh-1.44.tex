@@ -1,0 +1,11 @@
+\input{header.tex}
+\setcounter{theorem}{21}
+
+\begin{exercise}[BH.1.44]
+	Let $A$ and $B$ be events. The difference $B - A$ is defined to be the set of all elements of $B$ that are not in $A$. Show that if $A \subseteq B$, then $\P{B - A} = \P{B} - \P{A}$, directly using the axioms of probability.
+\begin{solution}
+	The difference $\Delta = B-A=A^{C}\cap B$. We know that $B = (A\cap B)\cup ( A^{C}\cap B) = (A\cap B)\cup (\Delta)$, where $A\cap B$ is disjoint from $\Delta$. Since these are disjoint $P(B) = P(A\cap B) + P(\Delta)$. Using now that $A\subseteq B$, we have $A\cap B = A$. Hence, $P(B) = P(A) + P(\Delta)$. We conclude that $P(\Delta) = P(B)-P(A)$.
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
