@@ -1,0 +1,11 @@
+\input{header.tex}
+\setcounter{theorem}{13}
+
+\begin{exercise}[BH.3.28]
+  There are $n$ eggs, each of which hatches a chick with probability $p$ (independently). Each of these chicks survives with probability $r$, independently. What is the distribution of the number of chicks that hatch? What is the distribution of the number of chicks that survive? (Give the PMFs; also give the names of the distributions and their parameters, if applicable.)
+\begin{solution}
+	The probability of the number of chicks that hatch $H$ is binomial with parameters $n$ and $p$ ($H\sim \text{Bin}(n,p)$). Each chicken has probability $pr$ of hatching a chick that survives, so the number of surviving chicks is also binomial, now with parameters $n$ and $pr$.
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
