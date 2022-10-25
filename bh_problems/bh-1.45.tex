@@ -1,0 +1,26 @@
+\input{header.tex}
+\setcounter{theorem}{22}
+\begin{exercise}[BH.1.45]
+	Let $A$ and $B$ be events. The symmetric difference $A \Delta B$ is defined to be the set of all elements that are in A or B but not both. In logic and engineering, this event is also called the XOR (exclusive or) of A and B. Show that $\P{A \Delta B} = \P{A} + \P{B} - 2 \P{A \cap B}$, directly using the axioms of probability.
+\begin{solution}
+	Use a Venn diagram. Note that 
+	$$P(A \triangle B)=P\left(A \cap B^c\right)+P\left(A^c \cap B\right),$$
+	since $A \triangle B$ is the union of the disjoint events $A \cap B^c$ and $A^c \cap B$. Similarly, we have
+	$$
+	\begin{aligned}
+		&P(A)=P\left(A \cap B^c\right)+P(A \cap B) \\
+		&P(B)=P\left(B \cap A^c\right)+P(B \cap A)
+	\end{aligned}
+	$$
+	Hence,
+	$$
+	P(A)+P(B)=P\left(A \cap B^c\right)+P\left(A^c \cap B\right)+2 P(A \cap B) .
+	$$
+	Thus,
+	$$
+	P(A \triangle B)=P\left(A \cap B^c\right)+P\left(A^c \cap B\right)=P(A)+P(B)-2 P(A \cap B)
+	$$
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
