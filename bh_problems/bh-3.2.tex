@@ -1,0 +1,48 @@
+\input{header.tex}
+\setcounter{theorem}{1}
+\begin{exercise}[BH.3.2]
+	\begin{enumerate}
+		\item Independent Bernoulli trials are performed, with probability 1/2 of success, until there has been at least one success. Find the PMF of the number of trials performed.
+		\item Independent Bernoulli trials are performed, with probability 1/2 of success, until there has been at least one success and at least one failure. Find the PMF of the number of trials performed.
+	\end{enumerate}
+\begin{solution}~
+	\begin{enumerate}
+		\item Denote by $X$ the random variable that is equal to $i$ if the first success takes place on the $i$th trial. We need to find the PMF of $X$. Furthermore, denote by $F_{k-1}$ the number of failures up to the $k$th trial and by $S_{k}$ the event that there is a success on the $k$th trial. Notice that the trials are independent, so $F_{k-1}$ is independent of $S_{k}$. Since the probability of success is 1/2, a success on the first trial happens with probability
+		\begin{align*}
+			P(X=1) = \frac{1}{2}.
+		\end{align*}
+		For the first success to happen on the second trial, it cannot happen on the first trial, so
+		\begin{align*}
+			P(X=2) = P(F_{1}\cap S_{2}) = P(F_{1})P(S_{2}) = \frac{1}{2^2},
+		\end{align*}
+		where the second equality uses independence between $F_{1}$ and $S_{2}$.
+		Continuing in this fashion, we find
+		\begin{align*}
+			p_{X}(k)=	P(X=k) = \frac{1}{2^k}\quad k=1,\ldots,\infty,
+		\end{align*}
+		and $P(X=k)=0$ otherwise. We can quickly check whether this is a valid PMF. It is clear that $p_{X}(k)\geq 0$ for all $k$. Also,
+		\begin{align*}
+			\sum_{k=-\infty}^{\infty}p_{X}(k) &= \sum_{k=1}^{\infty}\frac{1}{2^k}\\
+			&= -1+\sum_{k=0}^{\infty}\frac{1}{2^k}\\
+			&= -1+\frac{1}{1-\frac{1}{2}}\\
+			&=-1+2 =1.
+		\end{align*}
+		We conclude that the provided PMF is a valid PMF.
+		\item Denote by $Y$ the random variable that is equal to $i$ if the missing event (success of failure) occurs on the $i$th trial. Notice that after the first trial, we are in the situation of a. Suppose the outcome of the first trial is success ($S_{1}$). Then $P(Y=2|S_{1}) = P(X=1), P(Y=3|S_{1}) = P(X=2)$, etcetera. Using the law of total probability,
+		\begin{align*}
+			P(Y=2) &= P(Y=2|S_{1})P(S_{1}) + P(Y=2|S_{1}^{C})P(S_{1}^{C})\\
+			&=\frac{1}{2}(P(X=1) + P(X=1)) = P(X=1) = \frac{1}{2}.
+		\end{align*}
+		This reasoning actually holds for all subsequent trials as well, so we find that 
+		\begin{align*}
+			p_Y(k)=P(Y=k) &= P(Y=k|S_{1})P(S_{1}) + P(Y=k|S_{1}^C)P(S_{1}^C)\\
+			& = \frac{1}{2}(P(X=k-1) + P(X=k-1))\\
+			& = P(X=k-1)\\
+			&= \frac{1}{2^{k-1}}\quad k = 2,3,\ldots		
+		\end{align*}
+		and $p_{Y}(k)=0$ otherwise.
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
