@@ -1,0 +1,15 @@
+\input{header.tex}
+\setcounter{theorem}{60}
+\begin{exercise} [BH.4.61] For $X \sim \text{Pois}(\lambda)$, find $E(X!)$ (the average factorial of $X$), if it is finite.
+%\begin{hint}
+%\end{hint}
+\begin{solution}
+    By LOTUS, 
+	\begin{align*}
+		\mathbb{E}X! = & \sum_{i=0}^\infty i! \lambda^i /i! e^{-\lambda} =e^{-\lambda} \sum_{i=0}^\infty \lambda^i  
+	\end{align*}
+	Notice $\sum_{i=0}^\infty \lambda^i $ only converges to $ 1/(1-\lambda)$ when $\lambda\in (0,1)$; for $\lambda\in [1,\infty)$, $\sum_{i=0}^\infty \lambda^i $ diverges to infinity.  \\~\\
+	Therefore, $\mathbb{E}X! =\frac{e^{-\lambda}}{1-\lambda}$ for $\lambda\in (0,1)$ otherwise infinite.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

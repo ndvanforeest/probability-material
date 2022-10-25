@@ -1,0 +1,14 @@
+\input{header.tex}
+\setcounter{theorem}{28}
+\begin{exercise} [BH.4.29] Let $X \sim ${Geom}$(p)$, and define the function $f$ by $f(x)=P(X=x)$, for all real $x$. Find $E(f(X))$. (The notation $f(X)$ means first evaluate $f(x)$ in terms of $p$ and $x$, and then plug in $X$ for $x$; it is not correct to say " $f(X)=P(X=X)=1$ ".)
+%\begin{hint}
+%\end{hint}
+\begin{solution}
+    Note that $f(x)=p q^x,$  { if } $x$   { is a nonnegative integer; } otherwise 0.
+	Then $f(X)=p q^X$ (since $X$ always takes on nonnegative integer values). By LOTUS,
+	$$
+	E(f(X))=\sum_{k=0}^{\infty} f(k) P(X=k)=\sum_{k=0}^{\infty} p^2 q^{2 k}=p^2 \sum_{k=0}^{\infty} q^{2 k}= \frac{p^2}{1-q^2}.
+	$$
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

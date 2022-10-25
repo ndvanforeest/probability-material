@@ -1,0 +1,28 @@
+\input{header.tex}
+\setcounter{theorem}{29}
+\begin{exercise} [BH.4.30] Use LOTUS to show that for $X \sim \text{Pois}(\lambda)$ and any function $g$, $E(X g(X)) = \lambda E(g(X + 1))$, assuming that both sides exist. This is called the Stein-Chen identity for the Poisson.
+%\begin{hint}
+%\end{hint}
+\begin{solution}
+    \begin{enumerate}
+        \item By LOTUS we know the expectation can be calculated as: 
+        $$	\sum_{i=0}^\infty ig(i) e^{-\lambda} \lambda^i/i! $$
+        Furthermore,
+        \begin{align*}
+            \sum_{i=0}^\infty ig(i) e^{-\lambda} \lambda^i/i! = 	\lambda \sum_{i=1}^\infty g(i) e^{-\lambda} \lambda^{i-1}/(i-1)!= 	 \sum_{i=0}^\infty \lambda g(i+1) e^{-\lambda} \lambda^{i}/(i)!  
+        \end{align*}
+        where the last term $ \sum_{i=0}^\infty \lambda g(i+1) e^{-\lambda} \lambda^{i}/(i)!  $ equals $\lambda \sum_{i=0}^\infty  g(i+1) \mathbb{P}(X=i)$, which is $\lambda\mathbb{E}\left(g(X+1)\right)$.\\~\\
+        \item First by the definition of variance  and $\mathbb{E}X=\lambda, \mathbb{V}X=\lambda$ we know:
+        \begin{align*}
+            \mathbb{E}X^2 = (\mathbb{E}X)^2 +\mathbb{V}X =\lambda^2 +\lambda
+        \end{align*}
+        Then we choose $g(x)=x^2$, the result from (a) implies that: 
+        \begin{align*}
+            \mathbb{E}X^3= \mathbb{E}\lambda (X+1)^2 = \lambda\left(\mathbb{E}X^2 +2\mathbb{E}X +1  \right)    
+        \end{align*}
+        and thus $\mathbb{E}X^3 = \lambda (\lambda^2+3\lambda +1).$\\~~\\
+        This is a smart way to calculate $\mathbb{E}X^3$, which is also doable by LOTUS and the computation would be much longer than the above.
+    \end{enumerate}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

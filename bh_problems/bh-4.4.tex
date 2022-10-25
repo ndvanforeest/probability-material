@@ -1,0 +1,24 @@
+\input{header.tex}
+\setcounter{theorem}{3}
+\begin{exercise} [BH.4.4]
+    A fair die is rolled some number of times. You can choose whether to stop after 1; 2; or
+    3 rolls, and your decision can be based on the values that have appeared so far. You
+    receive the value shown on the last roll of the die, in dollars. What is your optimal
+    strategy (to maximize your expected winnings)? Find the expected winnings for this
+    strategy. 
+\begin{hint}
+    Backward thinking. 
+\end{hint}
+\begin{solution}
+    The expected value for one roll is $3.5$ (as calculated in the previous problem). So if given the choice between 1 rolls and 2 rolls, you should continue for a second roll if the first roll is 1,2, or 3, and stop rolling if the first roll is 4,5 , or 6 . It follows that the expected value of the roll-at-most-twice game is
+    $$
+    \frac{1}{2} \cdot\left(\frac{4+5+6}{3}\right)+\frac{1}{2} \cdot 3.5=4.25 .
+    $$
+    So for the roll-at-most-thrice game, the optimal strategy is to stop after the first roll if it's a 5 or a 6 , and otherwise reroll and follow the strategy described above for the roll-at-most-twice game.
+    The expected winnings are then
+    $$
+    \frac{1}{3} \cdot\left(\frac{5+6}{2}\right)+\frac{2}{3} \cdot 4.25=\frac{14}{3} \approx 4.67 .
+    $$
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

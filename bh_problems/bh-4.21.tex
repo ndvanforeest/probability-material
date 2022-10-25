@@ -1,0 +1,138 @@
+\input{header.tex}
+\setcounter{theorem}{20}
+\begin{exercise} [BH.4.21] Let $X \sim \text{Bin}(n, 12)$ and $Y \sim \text{Bin}(n + 1, 12)$ be independent.
+	\begin{enumerate}
+		\item Let $V = \text{min}(X,Y)$ be the smaller of $X$ and $Y$, and let $W = \text{max}(X,Y)$ be the larger of $X$ and $Y$. So if $X$ crystallizes to $x$ and $Y$ crystallizes to $y$, then $V$ crystallizes to $\text{min}(x, y)$ and $W$ crystallizes to $\text{max}(x, y)$. Find $E(V) + E(W)$.
+		\item Show that $E|X - Y| = E(W) - E(V)$, with notation as in (a). 
+		\item Compute $V(n - X)$ in two different ways.
+	\end{enumerate}
+%\begin{hint}
+%\end{hint}
+\begin{solution}
+    \begin{enumerate}
+	    \item Note $V+W=X+Y$ (adding the smaller and the larger of two numbers
+		is the same as adding both numbers. Technically speaking, random variables are functions. As adding the smaller and the larger of two numbers
+		is the same as adding both numbers holds true for any realization of the sample space, we know the equality $V+W=X+Y$ holds), next step follows the linearity:\\
+		\begin{align*}
+			\mathbb{E}(V+W)=&\mathbb{E}(X+Y)\\
+			=&\mathbb{E}(X)+\mathbb{E}(Y)\\
+			=& n+1/2
+		\end{align*}
+		\item Note that $|X-Y|=W-V$ which is due to the fact that the absolute difference between two numbers is equal to subtracting the smaller numbers from the larger one, and thus  \\~\\
+		\begin{align*}
+			\mathbb{E}|X-Y|=&\mathbb{E}(W-V)\\
+			=&\mathbb{E}(W)-\mathbb{E}(V) 
+		\end{align*}
+		\textit{What we learn from the proofs of (a) and (b) is that when we want to see the relations of expectations, we could first look at the relations of the random variables present in these expectations. This is also the trick we use to prove the alternative way of calculating expectations (the one using survival function $G$). }\\~\\
+		\item  (c.1) The first approach we can use the facts: \begin{align*}
+			\mathbb{V}(a+bX)=b^2\mathbb{V}(X)
+		\end{align*} 
+		which (constant shift does not change the variance, and when moving a constant outside the variance operator it need to  be squared) holds true for all random variables because 
+		\begin{align*}
+			\mathbb{V}(a+bX)&=_{\textit{variance definition~}} \mathbb{E}\left( a+bX -\mathbb{E}(a+bX) \right)^2 \\&=_{\textit{linearity of expectation operator~}} \mathbb{E}\left( a+bX -a-b\mathbb{E}(X) \right)^2 \\ &=  \mathbb{E}\left(b^2\left( X -\mathbb{E}(X) \right)^2\right) \\ &=_{\textit{linearity of expectation operator~}} b^2\mathbb{E}\left(\left( X -\mathbb{E}(X) \right)^2\right) \\ 
+			&=_{\textit{variance definition~}} b^2\mathbb{V}(X) 
+		\end{align*} 
+		Then we know ($n$ is a constant, and $(-1)^2=1$)  $$\mathbb{V}(n-X)=\mathbb{V}(X)=np(1-p)$$ where we use the known result of the binomial distribution variance. For how to derive the the binomial distribution variance, take a look at (c.2) and (c.3).\\~\\ (c.2) For the second approach we derive the distribution of $n-X$, then with its distribution we can calculate the variance by its definition. Now we prove that  $(n-X)\sim$Bin($n$,1/2).  \\~\\
+		We do so by proving a more general result: if $X\sim$Bin($n,p$) then $(n-X)\sim$Bin($n,1-p$). We prove so by deriving the PMF function (you could also consider using MGF of course) for $0\leq k\leq n$ (notice the range of $n-X$ is also from 0 to $n$.)
+		\begin{align*}
+			\mathbb{P}\left(n-X= k \right)=& \mathbb{P}\left(X= n-k \right)\\=& 
+			\left(\begin{matrix}
+				n \\ n-k
+			\end{matrix} \right) (1-p)^kp^{(n-y)}\\=& 
+			\left(\begin{matrix}
+				n \\ k
+			\end{matrix} \right) (1-p)^kp^{(n-y)}
+		\end{align*}
+		where the last equation uses the equality (you can either think a story to prove it or simply check by expanding the choice function, very very simple algebra)
+		\begin{align*}
+			\left(\begin{matrix}
+				n \\ n-k
+			\end{matrix} \right)= 
+			\left(\begin{matrix}
+				n \\ k
+			\end{matrix} \right)
+		\end{align*}
+		We now have the PMF and we can use the PMF of $Y=n-X$, which follows Bin($n,1-p$), to derive the variance by LOTUS
+		\begin{align*}
+			\mathbb{E}(Y) =	 
+			& \sum_{y=0}^{n} y \mathbb{P}(Y=y) \\=& \sum_{y=0}^{n} y 	\left(\begin{matrix}
+				n \\ y
+			\end{matrix} \right) (1-p)^yp^{(n-y)} \\=& \sum_{y=1}^{n} y 	\left(\begin{matrix}
+				n \\ y
+			\end{matrix} \right) (1-p)^yp^{(n-y)} \\=& \sum_{y=1}^{n} n 	\left(\begin{matrix}
+				n-1 \\ y-1
+			\end{matrix} \right) (1-p)^yp^{(n-y)}  \\=& n (1-p)   \sum_{y=1}^{n}  	\left(\begin{matrix}
+				n-1 \\ y-1
+			\end{matrix} \right) (1-p)^{y-1}p^{(n-1-(y-1))}  \\
+			=& n(1-p)(p+(1-p))^{n-1} =n(1-p)~~ (*)
+		\end{align*}
+		\begin{align*}
+			\mathbb{E}(Y^2) =	 
+			& \sum_{y=0}^{n} y^2 \mathbb{P}(Y=y) \\=& \sum_{y=0}^{n} y^2 	\left(\begin{matrix}
+				n \\ y
+			\end{matrix} \right) (1-p)^yp^{(n-y)} \\=& \sum_{y=1}^{n} n 	(y-1 +1)\left(\begin{matrix}
+				n-1 \\ y-1
+			\end{matrix} \right) (1-p)^yp^{(n-y)}  \\=& \sum_{y=1}^{n} n 	(y-1)\left(\begin{matrix}
+				n-1 \\ y-1
+			\end{matrix} \right) (1-p)^yp^{(n-y)} + \sum_{y=1}^{n} n \left(\begin{matrix}
+				n-1 \\ y-1
+			\end{matrix} \right) (1-p)^yp^{(n-y)}\\
+			= &  \sum_{y=2}^{n} n 	(n-1)\left(\begin{matrix}
+				n-2 \\ y-2
+			\end{matrix} \right) (1-p)^yp^{(n-y)} + \sum_{y=1}^{n} n \left(\begin{matrix}
+				n-1 \\ y-1
+			\end{matrix} \right) (1-p)^yp^{(n-y)}\\
+			= &  \sum_{y=2}^{n} n 	(n-1)\left(\begin{matrix}
+				n-2 \\ y-2
+			\end{matrix} \right) (1-p)^yp^{(n-y)} + n(1-p) \sum_{y=1}^{n}  \left(\begin{matrix}
+				n-1 \\ y-1
+			\end{matrix} \right) (1-p)^{y-1}p^{(n-y)}\\
+			=& n(n-1) (1-p)^2 + n(1-p)\\ =& n^2(1-p)^2 + np(1-p)   ~~(**)
+		\end{align*}
+		and thus we know $V(Y)=\mathbb{E}(Y^2) -\left(\mathbb{E}(Y)\right)^2=np(1-p)$.\\~\\
+		We have used the following equations in 
+		the derivations of (c.2) and (c.3)
+		\begin{align*}
+			y	\left(\begin{matrix}
+				n \\ y
+			\end{matrix} \right) = n	\left(\begin{matrix}
+				n-1 \\ y-1
+			\end{matrix} \right)
+		\end{align*} 
+		and 
+		\begin{align*}
+			&\sum_{y=1}^{n}  \left(\begin{matrix}
+				n-1 \\ y-1
+			\end{matrix} \right) (1-p)^{y-1}p^{(n-y)}\\
+			=&\sum_{y=0}^{n-1}  \left(\begin{matrix}
+				n-1 \\ y
+			\end{matrix} \right) (1-p)^{y}p^{(n-1-y)} \\= &(1-p + p)^{n-1} =1
+		\end{align*} 
+		
+		~\\~~\\ 
+		(c.3) Third approach, we can use LOTUS directly:
+		\begin{align*}
+			\mathbb{E}(n-X) =& \sum_{y=0}^{n} (n-y) \mathbb{P}(X=y) \\=& \sum_{y=0}^{n} (n-y) 	\left(\begin{matrix}
+				n \\ y
+			\end{matrix} \right) p^y(1-p)^{(n-y)} \\=& n -\left(\sum_{y=0}^{n} y 	\left(\begin{matrix}
+				n \\ y
+			\end{matrix} \right) p^y(1-p)^{(n-y)} \right) \\
+			=& n- np =n(1-p)  
+		\end{align*}
+		where we use the equation $\left(\sum_{y=0}^{n} y 	\left(\begin{matrix}
+			n \\ y
+		\end{matrix} \right) p^y(1-p)^{(n-y)} \right) = np$ which is proved  by switching the position of $p$ and (1-p) in (c.2)(*). \\~\\
+		\begin{align*}
+			\mathbb{E}(n-X)^2 =& \sum_{y=0}^{n} (n-y)^2 \mathbb{P}(X=y) \\=& \sum_{y=0}^{n} (n^2-2ny +y^2) 	\left(\begin{matrix}
+				n \\ y
+			\end{matrix} \right) p^y(1-p)^{(n-y)} \\=& n^2  -2n *np + n^2p^2 + np(1-p) \\=& n^2(1-p)^2 + np(1-p)  
+		\end{align*}
+		where the second last equality uses (c.2)(**) by switching the position of $p$ and $1-p$
+		and thus  
+		\begin{align*}
+			\mathbb{V}(n-X)=\mathbb{E}(n-X)^2 -\left(\mathbb{E}(n-X)\right)^2 = np(1-p)
+		\end{align*}
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

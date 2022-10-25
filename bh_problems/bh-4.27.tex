@@ -1,0 +1,21 @@
+\input{header.tex}
+\setcounter{theorem}{26}
+\begin{exercise} [BH.4.27] Let $X$ and $Y$ be $\text{Pois}(\lambda)$ r.v.s, and $T = X + Y$. Suppose that $X$ and $Y$ are not independent, and in fact $X = Y$. Prove or disprove the claim that $T \sim \text{Pois}(2\lambda)$ in this scenario.
+%\begin{hint}
+%\end{hint}
+\begin{solution}
+    Note, $X+Y$ now only takes even numbers, why (because $X+Y=2X$ as $X=Y$)? Is it still Poisson? No, because Poisson random variable would also take odd numbers with positive probability....\\~\\
+	Alternatively, check the variance:
+	\begin{align*}
+		\mathbb{V}(X+Y) =\mathbb{V}(2X) =
+		4\mathbb{V}(X) =4\lambda
+	\end{align*}
+	while if $T\sim Pois(2\lambda)$ we should have
+	\begin{align*}
+		\mathbb{V}(T) =2\lambda \neq 4\lambda
+	\end{align*}
+	which also disproves the statement. \\~\\
+	\textit{Further comment: to prove the  claim in this exercise is incorrect, we only need to check that some features of the r.v. do not match with the ones of a Poisson distributed r.v. Well, in the lecture/textbook, we have results that \textbf{sum of independent Poisson is still Poisson}, where we prove by looking at the PMF or MGF (note these can determine the distribution, well in most cases only knowing variance/expectation is not enough to determine the distribution unless there is other restrictions). \\~\\This exercise also emphasizes the importance of \textbf{independence}, when it is missing we see that sum of Poisson may no longer be a Poisson distribution.}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

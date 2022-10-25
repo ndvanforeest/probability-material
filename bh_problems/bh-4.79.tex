@@ -1,0 +1,30 @@
+\input{header.tex}
+\setcounter{theorem}{78}
+\begin{exercise} [BH.4.79] A hacker is trying to break into a password-protected website by randomly trying to guess the password. Let $m$ be the number of possible passwords.
+	\begin{enumerate}
+		\item Suppose for this part that the hacker makes random guesses (with equal probability), with replacement. Find the average number of guesses it will take until the hacker guesses the correct password (including the successful guess).
+		\item Now suppose that the hacker guesses randomly, without replacement. Find the average number of guesses it will take until the hacker guesses the correct password (including the successful guess).
+	\end{enumerate}
+\begin{hint}
+    Use symmetry.
+\end{hint}
+\begin{solution}\begin{enumerate}
+    \item The number of wrong guesses before the success is distributed as Geom($1/m$), and thus the expectation would be the expectation of a Geom($1/m$)-distributed r.v. plus the last successful one: $m$.
+    \item The number of wrong guesses follows the NHgeom($1,m-1,1$), and thus the expectation would be the expectation of a NHgeom($1,m-1,1$)-distributed r.v. plus the last successful one: $\frac{m+1}{2}$. There are also other ways to solve this one: similar idea of deriving the expectation of NHGeom, we can also rely on the indicator function. 
+    \item If we sample with replacement, chances are that you pick one that has been proven to be wrong before.
+    \item Denote $X$ the number of total guesses.\\~\\ 
+    \textit{With replacement:}
+    \begin{align*}
+        & P(X=k)=\left(\frac{m-1}{m}\right)^{k-1} \frac{1}{m}; k=0,1,\dots,n-1;\\
+        & P(X=n)=\left(\frac{m-1}{m}\right)^{n-1} \frac{1}{m}+\left(\frac{m-1}{m}\right)^{n}.
+    \end{align*}
+    \textit{Without replacement:}
+    \begin{align*}
+    & P(X=k)= \frac{1}{m}; k=0,1,\dots,n-1;\\
+    & P(X=n)= \frac{1}{m}+\frac{m-n}{m}=\frac{m-n+1}{m}.
+    \end{align*}
+    The one without replacement is a bit harder to derive. But once you reconsider the game as: let all possible passwords line up in a random order, the correct password is equally likely to be anywhere in that line. Then $X=k<n$ only if the correct answer choose the $k$th position: $1/m$; and $X=n$ could be that the correct answer choose either the $n$th position or any positions other than the first $n$ positions.
+\end{enumerate}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

@@ -1,0 +1,37 @@
+\input{header.tex}
+\setcounter{theorem}{56}
+\begin{exercise} [BH.4.57] An urn contains red, green, and blue balls. Balls are chosen randomly with replacement (each time, the color is noted and then the ball is put back). Let $r$, $g$, $b$ be the probabilities of drawing a red, green, blue ball, respectively ($r + g + b = 1$).
+	\begin{enumerate}
+		\item Find the expected number of balls chosen before obtaining the first red ball, not including the red ball itself.
+		\item Find the expected number of different \emph{colors} of balls obtained before getting the first red ball.
+		\item Find the probability that at least 2 of $n$ balls drawn are red, given that at least 1 is red.
+	\end{enumerate}
+%\begin{hint}
+%\end{hint}
+\begin{solution}
+    \begin{enumerate}
+	    \item  Geom($r$): $(1-r)/r$. (The distribution is Geom(r) and the expectation is thus $(1-r)/r$.)\\~\\
+        \item %Hint: design an indicator for each color, and it equals 1 if that color appears before the red. You should be able to derive the result: $\frac{g}{g+r} + \frac{b}{b+r}$.\\~\\
+        Let $I_1=1$ denote the event that green is obtained before red; $I_2=1$ denote the event that blue is obtained before red. The expected number of colors before red would be 
+        \begin{align*}
+        	\mathbb{E} (I_1+I_2) 
+        \end{align*}  
+        Now I only discuss $\mathbb{E} (I_1) $ 
+        as $\mathbb{E} (I_2) $ can be calculated similarly. $I_1=1$ means there are green balls before red, and thus $I_1=0$ means before red either there is no ball or only blue balls:
+        \begin{align*}
+        	\mathbb{P}\left(I_1=0 \right) =& \sum_{i=0}^\infty \mathbb{P}\left( \textit{i blue balls before red} \right) = \sum_{i=0}^\infty b^i r = r/(1-b) 
+        \end{align*}
+        and thus
+        \begin{align*}
+        	\mathbb{P}\left(I_1=1 \right) =1-	\mathbb{P}\left(I_1=0 \right) = (1-b-r)/(1-b) = g/(g+r) 
+        \end{align*}
+        \item %Hint: conditional probability. ($\frac{1-(1-r)^n -nr(1-r)^{n-1}}{1-(1-r)^n}$)~\\
+        By definition of conditional probability (here I use bad notations...):
+        \begin{align*}
+        	\mathbb{P}(\textit{at least 2 red}| \textit{at least 1 red})=	\mathbb{P}(\textit{at least 2 red})/ \mathbb{P} (\textit{at least 1 red})
+        \end{align*}
+        where $\mathbb{P}(\textit{at least 2 red}) = 1-\mathbb{P}(\textit{only 0 red})-\mathbb{P}(\textit{only 1 red})=1-(1-r)^n -nr(1-r)^{n-1}$ (the number of red follows Bin(n,r)) and $\mathbb{P} (\textit{at least 1 red})=1- \mathbb{P} (\textit{0 red})=1-(1-r)^n.$ 
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

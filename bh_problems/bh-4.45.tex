@@ -1,0 +1,33 @@
+\input{header.tex}
+\setcounter{theorem}{44}
+\begin{exercise} [BH.4.45] Show that for any events $A_1$, $\ldots$, $A_n$, $\P{A_1 \cap A_2 \cap \hdots \cap A_n} \geq \sum_{j = 1}^n \P{A_j} - n + 1$.
+\begin{hint}
+    First prove a similar-looking statement about indicator r.v.s, by interpreting what the events $I(A_1 \cap A_2 \cap \hdots \cap A_n) = 1$ and $I(A_1 \cap A_2 \cap \hdots \cap A_n) = 0$ mean.
+\end{hint}
+\begin{solution}
+    Note that
+    \begin{align*}
+    	I\left(\cap_i A_i \right) \geq \sum_{i=1}^n I(A_i) -n +1
+    \end{align*}
+    (where we denote $\cap_i A_i=\cap_1 A_1 \cap_2 A_2 \cap \cdots \cap_n A_n$.) Why?  Use the hint given in the exercise!\\~\\
+    To verify the inequality, we consider two cases:\\ 
+    (a) one event \textbf{in} $\cap_i A_i$ happens; (b) one event \textbf{not in} $\cap_i A_i$ happens. (a) and (b) cover all possible events. 
+    ~\\~\\
+    Under case (a), we know $I\left(\cap_i A_i \right)=1$ and thus $I(A_i)=1$, thus is easy to check that $	I\left(\cap_i A_i \right) = \sum_{i=1}^n I(A_i) -n +1$ under case (a).
+    ~\\
+    Under case (b), we know $I\left(\cap_i A_i \right)=0$ and at least for one i we have $I(A_i)=0$, then we know 
+    \begin{align*}
+    	\sum_{i=1}^n I(A_i) -n +1 \leq n-1 -n+1 =0
+    \end{align*}
+    which shows that the inequality holds under case (b).\\~\\
+    Then we know 
+    \begin{align*}
+    	\mathbb{E}I\left(\cap_i A_i \right) \geq \mathbb{E}\left(\sum_{i=1}^n I(A_i) -n +1\right)
+    \end{align*} 
+    then with equalities $\mathbb{E}I\left(\cap_i A_i \right) = \mathbb{P}\left(\cap_i A_i \right)$, $\mathbb{E}I\left( A_i \right) = \mathbb{P}\left( A_i \right)$ and by linearity of expectation:
+    \begin{align*}
+    	\mathbb{P}\left(\cap_i A_i \right) \geq  \sum_{i=1}^n \mathbb{P}\left( A_i \right) -n +1 .
+    \end{align*}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

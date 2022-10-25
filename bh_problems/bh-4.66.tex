@@ -1,0 +1,31 @@
+\input{header.tex}
+\setcounter{theorem}{65}
+\begin{exercise} [BH.4.66] Let $X$ be a $\text{Pois}(\lambda)$ random variable, where $\lambda$ is fixed but unknown. Let $\theta = e^{-3 \lambda}$, and suppose that we are interested in estimating $\theta$ based on the data. Since $X$ is what we observe, our estimator is a function of $X$, call it $g(X)$. The bias of the estimator $g(X)$ is defined to be $E(g(X)) - \theta$, i.e., how far off the estimate is on average; the estimator is unbiased if its bias is 0.
+	\begin{enumerate}
+		\item For estimating $\lambda$, the r.v. $X$ itself is an unbiased estimator. Compute the bias of the estimator $T = e^{-3X}$. Is it unbiased for estimating $\theta$?
+		\item Show that $g(X) = (-2)^X$ is an unbiased estimator for $\theta$. (In fact, it turns out to be the only unbiased estimator for $\theta$.)
+		\item Explain intuitively why $g(X)$ is a silly choice for estimating $\theta$, despite (b), and show how to improve it by finding an estimator $h(X)$ for $\theta$ that is always at least as good as $g(X)$ and sometimes strictly better than $g(X)$. That is, $|h(X) - \theta| \leq |g(X) -\theta|$, with the inequality sometimes strict.
+	\end{enumerate}
+%\begin{hint}
+%\end{hint}
+\begin{solution}
+    \begin{enumerate}
+	    \item The estimator is biased:
+    	\begin{align*}
+    		\mathbb{E}T &= \sum_{i=0}^{\infty} e^{-3i} e^{-\lambda}\frac{\lambda^i}{i!}= e^{-\lambda} \sum_{i=0}^{\infty}  \frac{\left(\lambda e^{-3} \right)^i}{i!} \\
+    		&= e^{-\lambda} e^{\lambda/e^3} \neq \theta (=e^{-3\lambda})
+    	\end{align*}
+    	\item Is it unbiased:
+    	\begin{align*}
+    		\mathbb{E}(-2)^X  &= \sum_{i=0}^{\infty} {-2}^i e^{-\lambda}\frac{\lambda^i}{i!}= e^{-\lambda} \sum_{i=0}^{\infty}  \frac{\left(-2\lambda \right)^i}{i!} \\
+    		&= e^{-\lambda} e^{-2\lambda} = \theta 
+    	\end{align*} 
+    	\item (Solution from the online solution manual by Joseph K. Blitzstein and Jessica Hwang) \textit{The estimator $g(X)$ is silly in the sense that it is sometimes negative, whereas $e^{-\lambda}$
+    		is positive. One simple way to get a better estimator is to modify $g(X)$ to make it nonnegative, by letting $h(X)$ = 0 if $g(X)$ $<$ 0 and $h(X)$ = $g(X)$ otherwise.
+    		Better yet, note that $e^{-\lambda}$ is between 0 and 1 since $\lambda$ $>$ 0, so letting $h(X)$ = 0 if
+    		$g(X)$ $<$ 0 and $h(X)$ = 1 if $g(X)$ $>$ 0 is clearly more sensible than using $g(X)$.} \\~\\
+    	Notice here the estimator is based on one r.v., which is slightly different in common statistical setup where we usually assume $n$ observations. This case is more like one scenario where you have to make one educated guess based on one observation (something like look out though the window and say what the weather is like). 
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

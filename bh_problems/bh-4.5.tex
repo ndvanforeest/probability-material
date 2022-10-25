@@ -1,0 +1,16 @@
+\input{header.tex}
+\setcounter{theorem}{4}
+\begin{exercise} [BH.4.5] Find the mean and variance of a Discrete Uniform r.v. on $1, 2, \ldots, n$.
+%\begin{hint}
+%\end{hint}
+\begin{solution}
+    Check A.8.4 for the sums. 
+	\begin{align*}
+		&\mathbb{E}X=\frac{1}{n}\sum_{i=1}^{n} i= (n+1)/2\\
+		&\mathbb{E}X^2=\frac{1}{n}\sum_{i=1}^{n}i^2 = (n+1)(2n+1)/6 \\
+		&\mathbb{V}X= \mathbb{E}X^2 -(\mathbb{E}X)^2 =  (n+1)(n-1)/12
+	\end{align*}
+	Check what happens when n=1, we will see that $\mathbb{V}X=0$. Is this surprising? No, because when $n=1$, then X is only able to take one value, it is a constant (or in other words one degenerated random variable with all probability mass shrinking to a single point) and thus variance is of course zero (we also know if a random variable has zero variance, it has to be equal to its expectation with probability equal to one, and thus zero-variance random variable is a constant.)
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

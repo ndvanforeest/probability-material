@@ -1,0 +1,19 @@
+\input{header.tex}
+\setcounter{theorem}{33}
+\begin{exercise} [BH.4.34] Randomly, $k$ distinguishable balls are placed into $n$ distinguishable boxes, with all possibilities equally likely. Find the expected number of empty boxes.
+%\begin{hint}
+%\end{hint}
+\begin{solution}
+    Let the indicator $I_i=1$ being the box $i$ is empty, then no balls can choose box $i$ (all balls need to choose the other $n-1$ boxes) and thus 
+	\begin{align*}
+		\mathbb{P}(I_i=1) = (1-1/n)^k
+	\end{align*}
+	Therefore, let N denote the total expected empty box number which would be equal to $\sum_{i=1}^n I_i$, and thus   
+	\begin{align*}
+		\mathbb{E}N=\mathbb{E} \sum_{i=1}^n I_i =\sum_{i=1}^n \mathbb{E} I_i=\sum_{i=1}^n   (1-1/n)^k
+	\end{align*}
+	Therefore, the final result is 
+	$ n(1-1/n)^k$.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}
