@@ -1,0 +1,36 @@
+\input{header.tex}
+
+\setcounter{theorem}{3}
+\begin{exercise}[BH.1.4]
+	A round-robin tournament is being held with $n$ tennis players; this means that every player will play against every other player exactly once.
+	\begin{enumerate}
+		\item[(a)] How many possible outcomes are there for the tournament (the outcome lists out who won and who lost for each game)?
+		\item[(b)] How many games are played in total?
+	\end{enumerate}
+\begin{solution}~
+	\begin{enumerate}
+		\item[] To find the number of games that are played, you could make a roster of players
+		\begin{align*}
+			\begin{array}{ccccc}
+				&P_{1} & P_{2} &\ldots &P_{n}\\
+				P_{1} & \times \\
+				P_{2} & & \times \\
+				\vdots&&&\ddots\\
+				P_{n} & & & &\times\\
+				\end{array}
+		\end{align*}
+		\item[(a)] Now find the number of elements in the lower triangular: $\frac{n^2-n}{2}$. Put these matches in a long line. Now each of the matches can results in a Win or a Loss (doesn't matter for which player). So we can make $2^{\frac{n(n-1)}{2}}=2^{n\choose 2 }$ different strings of outcomes. Or you can see there are $n\choose 2$ combinations/game, for each combination/game there are 2 possible outcomes. 
+	\item[(b)] See also (a), $n\choose 2$.
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}\textbf{[BH.6]}
+	There are 20 people at a chess club on a certain day. They each find opponents and start playing. How many possibilities are there for how they are matched up, assuming that in each game it does matter who has the white pieces (in a chess game, one player has the white pieces and the other player has the black pieces)?
+\begin{solution}
+	Different solutions possible. The first player has 19 possible opponents and he can play white or black pieces, so $19\cdot 2$ options. The next player has 17 possible opponents and can again play with white or black pieces, so $17\cdot 2$ options. Continuing all the way down, we see that there are $N=(19\cdot 17\cdot 15\cdot\ldots\cdot 3\cdot 1)\cdot 2^{10}$ options.
+
+	Alternatively, picture 10 boards with pieces already up. There are 20 seats for the players. There are therefore $20!$ arrangement possible. However, once seated, we can change the order of the boards + players. So we overcount by $10!$ and the total number of options is $N=\frac{20!}{10!}$.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

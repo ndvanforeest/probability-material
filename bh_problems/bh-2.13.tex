@@ -1,0 +1,37 @@
+\input{header.tex}
+
+\setcounter{theorem}{8}
+\begin{exercise}[BH.2.13]
+  Company A has just developed a diagnostic test for a certain disease. The disease afflicts $1 \%$ of the population. As defined in Example 2.3.9, the sensitivity of the test is the probability of someone testing positive, given that they have the disease, and the specificity of the test is the probability that of someone testing negative, given that they don't have the disease. Assume that, as in Example 2.3.9, the sensitivity and specificity are both $0.95$.
+	
+	Company B, which is a rival of Company A, offers a competing test for the disease. Company B claims that their test is faster and less expensive to perform than Company A's test, is less painful (Company A's test requires an incision), and yet has a higher overall success rate, where overall success rate is defined as the probability that a random person gets diagnosed correctly.
+	\begin{enumerate}
+		\item It turns out that Company B's test can be described and performed very simply: no matter who the patient is, diagnose that they do not have the disease. Check whether Company B's claim about overall success rates is true.
+		\item Explain why Company A's test may still be useful.
+		\item Company A wants to develop a new test such that the overall success rate is higher than that of Company B's test. If the sensitivity and specificity are equal, how high does the sensitivity have to be to achieve their goal? If (amazingly) they can get the sensitivity equal to 1 , how high does the specificity have to be to achieve their goal? If (amazingly) they can get the specificity equal to 1, how high does the sensitivity have to be to achieve their goal?
+	\end{enumerate}  
+	\begin{solution}~
+		\begin{enumerate}
+			\item For Company B's test, the probability that a random person in the population is diagnosed correctly is $0.99$, since $99 \%$ of the people do not have the disease. For a random member of the population, let $C$ be the event that Company A's test yields the correct result, $T$ be the event of testing positive in Company A's test, and $D$ be the event of having the disease. Then
+			$$
+			\begin{aligned}
+				P(C) &=P(C \mid D) P(D)+P\left(C \mid D^c\right) P\left(D^c\right) \\
+				&=P(T \mid D) P(D)+P\left(T^c \mid D^c\right) P\left(D^c\right) \\
+				&=(0.95)(0.01)+(0.95)(0.99) \\
+				&=0.95,
+			\end{aligned}
+			$$
+			which makes sense intuitively since the sensitivity and specificity of Company A's test are both $0.95$. So Company B is correct about having a higher overall success rate.
+			\item  Despite the result of (a), Company A's test may still provide very useful information, whereas Company B's test is uninformative. If Fred tests positive on Company A's test, Example 2.3.9 shows that his probability of having the disease increases from $0.01$ to $0.16$ (so it is still fairly unlikely that he has the disease, but it is much more likely than it was before the test result; further testing may well be advisable). In contrast, Fred's probability of having the disease does not change after undergoing Company's B test, since the test result is a foregone conclusion.
+			\item Let $s$ be the sensitivity and $p$ be the specificity of A's new test. With notation as in the solution to (a), we have
+			$$
+			P(C)=0.01 s+0.99 p .
+			$$
+			If $s=p$, then $P(C)=s$, so Company A needs $s>0.99$.
+			If $s=1$, then $P(C)=0.01+0.99 p>0.99$ if $p>98 / 99 \approx 0.9899$.
+			If $p=1$, then $P(C)=0.01 s+0.99$ is automatically greater than $0.99$ (unless $s=0$, in which case both companies have tests with sensitivity 0 and specificity 1).
+		\end{enumerate}
+	\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

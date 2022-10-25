@@ -1,0 +1,35 @@
+\input{header.tex}
+
+\setcounter{theorem}{9}
+\begin{exercise}[BH.2.14]
+Consider the following scenario, from Tversky and Kahneman: ``Let $A$ be the event that before the end of next year, Peter will have installed a burglar alarm system in his home. Let $B$ denote the event that Peter's home will be burglarized before the end of next year.
+	\begin{enumerate}
+		\item Intuitively, which do you think is bigger, $\P{A|B}$ or $\P{A|B^c}$? Explain your intuition.
+		\item Intuitively, which do you think is bigger, $\P{B|A}$ or $\P{B|A^c}$? Explain your intuition.
+		\item Show that for any events $A$ and $B$ (with probabilities not equal to 0 or 1), the inequality $\P{A|B} > \P{A|B^c}$ is equivalent to $\P{B|A} > \P{B|A^c}$.
+		\item Tversky and Kahneman report that 131 out of 162 people whom they posed (a) and (b) to said that $\P{A|B} > \P{A|B^c}$ and $\P{B|A} < \P{B|A^c}$. What is a plausible explanation for why this was such a popular opinion despite (c) showing that it is impossible for these inequalities both to hold?
+	\end{enumerate}
+\begin{solution}~
+	\begin{enumerate}
+		\item If Peter's home is burglarized, he will probably install a burglar alarm system after. So $P(A|B)>P(A|B^{c})$.
+		\item If Peter installs an alarm system, he is less likely to be burglarized, so $P(B|A)<P(B|A^{c})$. 
+		\item By the LOTP
+		\begin{align*}
+			P(A)&= P(A|B)P(B)+P(A|B^{C})P(B^{C})\\
+			&<P(A|B)P(B) + P(A|B)P(B^{C})\\
+			&=P(A|B) \\&= \frac{P(B|A)P(A)}{P(B)}
+		\end{align*}
+		Rearranging gives $P(B|A)>P(B)$. 
+		Using this and again using the LOTP
+		\begin{align*}
+			P(B) &= P(B|A)P(A) + P(B|A^{C})P(A^{C}) \\
+			&>P(B)P(A)+P(B|A^{C})P(A^{C})
+		\end{align*}
+		Rearranging this, we find $P(B)>P(B|A^{C})$. Since we already got $P(B|A)>P(B)$, we now have $P(B|A)>P(B|A^{C})$.
+
+		Perhaps it's more intuitive to make a Venn diagram to see the symmetry that leads to the correct answer. $P(A|B)>P(A|B^c)$ is the same as saying that $P(A\cap B)\cdot P(A^{C}\cap  B^{C})>P(A\cap B^C)\cdot P(A^{C}\cap B)$.  Since this inequality is symmetric in $A$ and $B$ (if I change $A$ to $B$ it stays the same), this must also mean that $P(B|A)>P(B|A^{C})$.
+		\item In a, the argument is that Peter waits until he's burglarized before making a decision on the alarm system. If this were true, then in $B$, observing that he has an alarm system should increase the probability of the event that he was at some point burglarized. So the answers in a. and b. are inconsistent. You mind however flips the time ordering in the argument in a compared to b, and this leads to an inconsistency between the answers.
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

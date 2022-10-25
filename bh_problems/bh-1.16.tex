@@ -1,0 +1,25 @@
+\input{header.tex}
+\setcounter{theorem}{11}
+\begin{exercise}[BH.1.16]
+	Show that for all positive integers $n$ and $k$ with $n \geq k$, $\binom{n}{k} + \binom{n}{k - 1} = \binom{n + 1}{k}$. Do this in two ways: 
+	\begin{enumerate}
+		\item algebraically;
+		\item with a story, giving an interpretation for why both sides count the same thing.
+	\end{enumerate}
+\begin{hint}
+	Imagine an organization consisting of $n + 1$ people, with one of them pre-designated as the president of the organization.
+\end{hint}
+\begin{solution}~
+	\begin{enumerate}
+		\item \begin{align*}
+	 		{n \choose k} + {n \choose k-1} &= \frac{n!}{(n-k)!\cdot k!} + \frac{n!}{(n-k+1)!\cdot (k-1)!}\\
+	 		&= \frac{(n-k+1)\cdot n!}{(n-k+1)!\cdot k!} +  \frac{n!\cdot k}{(n-k+1)!\cdot k!}\\
+	 		& = \frac{(n+1)!}{(n-k+1)!\cdot k!}\\
+	 		& = {n+1\choose k}.
+	 	\end{align*}
+	 	\item I have a group of $n+1$ people and select $k$. We call one of these $n+1$ people president. Then there are two options: I do select the present and then select $k-1$ people from the remaining $n$, i.e. ${n \choose k-1}$, or I do not select the president and select $k$ people from the remaining $n$, i.e. ${n \choose k}$. Adding these two options gives the left hand side.
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

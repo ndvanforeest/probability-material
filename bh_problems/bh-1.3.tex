@@ -1,0 +1,19 @@
+\input{header.tex}
+
+\setcounter{theorem}{2}
+\begin{exercise} [BH.1.3]
+	Fred is planning to go out to dinner each night of a certain week, Monday through Friday, with each dinner being at one of his ten favorite restaurants.
+	\begin{enumerate}
+		\item How many possibilities are there for Fred’s schedule of dinners for that Monday through Friday, if Fred is not willing to eat at the same restaurant more than once?
+		\item How many possibilities are there for Fred’s schedule of dinners for that Monday through Friday, if Fred is willing to eat at the same restaurant more than once, but is not willing to eat at the same place twice in a row (or more)?
+	\end{enumerate}
+\begin{solution}~
+	\begin{enumerate}
+		\item If no restaurant can be the same, then on Monday Fred has 10 options, on Tuesday Fred has 9 options, on Wednesday Fred has 8 options, etc. So in total, there are $N=10\cdot 9\ldots\cdot 6$ options.
+		\item On Monday, Fred can choose 10 restaurants. Then on Tuesday, Fred only has 9 options, since he can't eat at the same restaurant as on Monday. On Wednesday, there are again 9 options, as the Monday restaurant is now fine, but the Tuesday restaurant is not. So we end up with $N=10\cdot 9^4$ options.
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+
+
+\input{trailer.tex}

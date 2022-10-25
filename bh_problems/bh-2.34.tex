@@ -1,0 +1,31 @@
+\input{header.tex}
+
+\setcounter{theorem}{15}
+
+\begin{exercise} [BH.2.34] 
+Suppose that there are two types of drivers: good drivers and bad drivers. Let $G$ be the event that a certain man is a good driver, $A$ be the event that he gets into a car accident next year, and $B$ be the event that he gets into a car accident the following year. Let $\P{G} = g$ and $\P{A|G} = \P{B|G} = p_1$, $\P{A|G^c} = \P{B|G^c} = p_2$, with $p_1 < p_2$. Suppose that given the information of whether or not the man is a good driver, $A$ and $B$ are independent (for simplicity and to avoid being morbid, assume that the accidents being considered are minor and wouldn’t make the man unable to drive).
+	\begin{enumerate}
+		\item Explain intuitively whether or not $A$ and $B$ are independent.
+		\item Find $\P{G|A^c}$.
+		\item Find $\P{B|A^c}$.
+	\end{enumerate}
+\begin{solution}~
+	\begin{enumerate}
+		\item Suppose you have an accident in year 1. Then, you are more likely to be a bad driver, and hence, also more likely to have an accident in year 2 as well. This means that $P(B|A)\neq P(B)$ and hence, $A$ and $B$ are not independent.
+		\item[34b.] We find this probability using Bayes' rule,
+		\begin{align*}
+			P(G|A^{C})& =\frac{P(A^{C}|G)P(G)}{P(A^{C})}\\ &=\frac{P(A^{C}|G)P(G)}{P(A^{C}|G)P(G) + P(A^{C}|G^C)P(G^C)}\\
+			&= \frac{(1-p_{1})g}{(1-p_{1})g + (1-p_{2})(1-g)}.
+		\end{align*}
+		\item[34c.] We are given that given $G$, the events $A$ and $B$ are independent. Then, using the LOTP,
+ 		\begin{align*}
+			P(B|A^{C})& = P(B|A^{C},G)P(G|A^{C}) + P(B|A^{C},G^{C})P(G^{C}|A^{C})\\
+			&=P(B|G)P(G|A^{C}) + P(B|G^{C})P(G^{C}|A^{C})\\
+			&=p_{1}\frac{(1-p_{1})g}{(1-p_{1})g + (1-p_{2})(1-g)} + p_{2}\left(1-\frac{(1-p_{1})g}{(1-p_{1})g + (1-p_{2})(1-g)}\right)\\
+			&=\frac{p_{1}(1-p_{1})g + p_{2}(1-p_{2})(1-g)}{(1-p_{1})g + (1-p_{2})(1-g)}.
+		\end{align*}
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

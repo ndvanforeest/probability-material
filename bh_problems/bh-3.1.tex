@@ -1,0 +1,36 @@
+\input{header.tex}
+
+\setcounter{theorem}{0}
+
+\begin{exercise}[BH.3.1]
+People are arriving at a party one at a time. While waiting for more people to arrive they entertain themselves by comparing their birthdays. Let $X$ be the number of people needed to obtain a birthday match, i.e., before person $X$ arrives no two people have the same birthday, but when person X arrives there is a match. Find the PMF of $X$.
+	\begin{solution}
+	Let $X$ be the number of people needed to obtain a birthday match. Of course $P(X=1)=0$. The event $X=2$ occurs when the second person has the same birthday as the first, so the second person has 365 birthday options, one of which is successful. Therefore $P(X=2)=\frac{1}{365}$. 
+
+	The event $X=3$ occurs when there are two persons in the room with a different birthday $(D_{2})$, and the third person entering the room has the same birthday as one of the persons already in the room $(S_3)$. For the first two persons to have a different birthday $X=2$ should not happen, so $P(D_{2})=1-P(X=2)$. The third person has 365 birthday options, two of which are successful. Therefore,
+	\begin{align*}
+		P(X=3) &= P(D_{2} \cap S_{3})\\
+		& = P(S_{3}|D_{2})P(D_{2})\\
+		& = \frac{2}{365}(1-P(X=2))\\
+		& = \frac{2}{365}\left(1-\frac{1}{365}\right).
+	\end{align*}
+
+	The event $X=4$ occurs when there are three persons in the room with a different birthday $(D_{3})$, and the fourth person entering the room has the same birthday as one of the persons already in the room $(S_{4})$. For the first three persons to have a different birthday $X=2$ \textit{and} $X=3$ should not happen. Notice that $X=2$ and $X=3$ are disjoint events. So, $P(D_{3}) = P((X=2\cup X=3)^{C}) = 1-P(X=2)-P(X=3)$.   The fourth person has 365 birthday options, three of which are successful. Therefore,
+	\begin{align*}
+		P(X=4) &= P(D_{3} \cap S_{4})\\
+		& = P(S_{4}|D_{3})P(D_{3})\\
+		& = \frac{3}{365}(1-P(X=2)-P(X=3))\\
+		& = \frac{3}{365}\left(1-\frac{2}{365}\right)\left(1-\frac{1}{365}\right).
+	\end{align*}
+	We can continue to find that 
+	\begin{align*}
+		p_{X}(k) = P(X=k) = \frac{k-1}{365}\prod_{m=1}^{k-2}\left(1-\frac{m}{365}\right), \quad \text{ for } k = 1,\ldots,366,
+	\end{align*}
+	and $p_{X}(k)= 0$ otherwise. Notice that we assume that $\prod_{m=1}^{j}(1-m/365)=1$ for $j=-1,0$.\\~\\
+	Solutions are not unique, alternatively, it is also to consider first choose $k-1$ different birthdays, and then take into the orderings into account $(k-1)!$ and only for the $k$th arrival to have a match there are $(k-1)$ choices (same result):
+	\begin{align*}
+	P(X=k)= \frac{{365\choose k-1}(k-1)!(k-1) }{365^k}.
+	\end{align*}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

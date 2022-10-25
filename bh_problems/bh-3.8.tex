@@ -1,0 +1,19 @@
+\input{header.tex}
+\setcounter{theorem}{3}
+
+\begin{exercise}[BH.3.8]
+  There are 100 prizes, with one worth \$1, one worth \$2, ..., and one worth \$100. There are 100 boxes, each of which contains one of the prizes. You get 5 prizes by picking random boxes one at a time, without replacement. Find the PMF of how much your most valuable prize is worth (as a simple expression in terms of binomial coefficients).
+\begin{solution}
+	Let $X$ be equal to $k$ if $k$ is your most valuable prize ($k=5,\ldots,100$). Suppose your most valuable price is \$27. Then you draw 4 out of the first 26 boxes and the 27th box. Using the naive definition of probability
+	\begin{align*}
+		P(X=27) = \frac{{26\choose 4}}{{100 \choose 5}}.
+	\end{align*}
+	In general,
+	\begin{align*}
+		p_{X}(k) = P(X=k) = \frac{{k-1\choose 4}}{{100 \choose 5}}\quad \text{for } k=5,\ldots,100,
+	\end{align*}
+	and $p_{X}(k)=0$ otherwise.
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

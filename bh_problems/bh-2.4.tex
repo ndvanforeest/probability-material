@@ -1,0 +1,31 @@
+\input{header.tex}
+\begin{exercise}[BH.2.4]
+\setcounter{theorem}{2}
+Fred is answering a multiple-choice problem on an exam, and has to choose one of $n$ options (exactly one of which is correct). Let $K$ be the event that he knows the answer, and $R$ be the event that he gets the problem right (either through knowledge or through luck). Suppose that if he knows the right answer he will definitely get the problem right, but if he does not know then he will guess completely randomly. Let $\P{K} = p$.
+	\begin{enumerate}
+		\item Find $\P{K|R}$ (in terms of $p$ and $n$).
+		\item Show that $\P{K|R} \geq p$, and explain why this makes sense intuitively. When (if ever) does $\P{K|R}$ equal $p$?
+	\end{enumerate}
+\begin{solution}~
+	\begin{enumerate}
+		\item We are given in the question that
+		\begin{align*}
+			P(R|K) &= 1,\\
+			P(R|K^{C})&=\frac{1}{n},\\
+			P(K) &= p.
+		\end{align*}
+		What is $P(K|R)$? What do you think, maybe Bayes' rule?
+		\begin{align*}
+			P(K|R)& = \frac{P(R|K)P(K)}{P(R|K)P(K)+P(R|K^{C})P(K^{C})}\\
+			&=\frac{p}{p + \frac{1-p}{n}}\\
+			& = \frac{n}{(n-1)p+1}p.
+		\end{align*}
+		\item  From (a)
+		\begin{align*}
+			P(K|R) = \frac{n}{(n-1)p+1}p.
+		\end{align*}
+		Since $\frac{n}{(n-1)p+1}\geq \frac{n}{(n-1)+1} = 1$, we have $P(K|R)\geq p$. Given the evidence that Fred has the right answer you update your belief that he actually knows the answer upwards. Of course, if $p=0$, then $P(K)=P(K|R)=0$. If we know that Fred can never know the answer, then any evidence that he got an answer right must be interpreted as due to random chance. (Thank Quinten Huisman for pointing this case out) Or if $p=1$, then Fred always knows the answer, so event $R$ does not update the probability of the event $K$ either. 
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

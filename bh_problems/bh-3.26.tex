@@ -1,0 +1,26 @@
+\input{header.tex}
+\setcounter{theorem}{12}
+\begin{exercise}[BH.3.26]
+  If $X \sim \text{HGeom}(w, b, n)$, what is the distribution of $n - X$? Give a short proof.
+\begin{solution}
+	If $X\sim \text{HGeom}(w,b,n)$, then 
+    \begin{align*}
+    	P(X=k) = \frac{{w \choose k}{b \choose n-k}}{{w+b \choose n}}.
+    \end{align*}
+    For $n-X$, we have
+    \begin{align*}
+    	P(n-X=k) & = P(X=n-k)\\
+    	& =   \frac{{w \choose n-k}{b \choose k}}{{w+b \choose n}}.
+    \end{align*}
+    We see that $X\sim\text{Hgeom}(b,w,n)$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+	\textbf{[BH.28]} There are $n$ eggs, each of which hatches a chick with probability $p$ (independently). Each of these chicks survives with probability $r$, independently. What is the distribution of the number of chicks that hatch? What is the distribution of the number of chicks that survive? (Give the PMFs; also give the names of the distributions and their parameters, if applicable.)
+\begin{solution}
+	The probability of the number of chicks that hatch $H$ is binomial with parameters $n$ and $p$ ($H\sim \text{Bin}(n,p)$). Each chicken has probability $pr$ of hatching a chick that survives, so the number of surviving chicks is also binomial, now with parameters $n$ and $pr$.
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

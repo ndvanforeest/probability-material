@@ -1,0 +1,30 @@
+\input{header.tex}
+
+\setcounter{theorem}{7}
+
+\begin{exercise}[BH.2.12]
+Alice is trying to communicate with Bob, by sending a message (encoded in binary) across a channel.
+	\begin{enumerate}
+		\item Suppose for this part that she sends only one bit (a 0 or 1 ), with equal probabilities. If she sends a 0 , there is a $5 \%$ chance of an error occurring, resulting in Bob receiving a 1 ; if she sends a 1 , there is a $10 \%$ chance of an error occurring, resulting in Bob receiving a 0 . Given that Bob receives a 1 , what is the probability that Alice actually sent a 1 ?
+		\item To reduce the chance of miscommunication, Alice and Bob decide to use a repetition code. Again Alice wants to convey a 0 or a 1 , but this time she repeats it two more times, so that she sends 000 to convey 0 and 111 to convey 1 . Bob will decode the message by going with what the majority of the bits were. Assume that the error probabilities are as in (a), with error events for different bits independent of each other. Given that Bob receives 110 , what is the probability that Alice intended to convey a 1 ?
+	\end{enumerate}  
+	\begin{solution}~
+		\begin{enumerate}
+			\item Let $A_1$ be the event that Alice sent a 1 , and $B_1$ be the event that Bob receives a 1. Then
+			$$
+			P\left(A_1 \mid B_1\right)=\frac{P\left(B_1 \mid A_1\right) P\left(A_1\right)}{P\left(B_1 \mid A_1\right) P\left(A_1\right)+P\left(B_1 \mid A_1^c\right) P\left(A_1^c\right)}=\frac{(0.9)(0.5)}{(0.9)(0.5)+(0.05)(0.5)} \approx 0.9474
+			$$
+			\item Now let $A_1$ be the event that Alice intended to convey a 1 , and $B_{110}$ be the event that Bob receives 110 . Then
+			$$
+			\begin{aligned}
+				P\left(A_1 \mid B_{110}\right) &=\frac{P\left(B_{110} \mid A_1\right) P\left(A_1\right)}{P\left(B_{110} \mid A_1\right) P\left(A_1\right)+P\left(B_{110} \mid A_1^c\right) P\left(A_1^c\right)} \\
+				&=\frac{(0.9 \cdot 0.9 \cdot 0.1)(0.5)}{(0.9 \cdot 0.9 \cdot 0.1)(0.5)+(0.05 \cdot 0.05 \cdot 0.95)(0.5)} \\
+				& \approx 0.9715 .
+			\end{aligned}
+			$$
+		\end{enumerate}
+	\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
+

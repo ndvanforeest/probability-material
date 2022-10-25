@@ -1,0 +1,16 @@
+\input{header.tex}
+\setcounter{theorem}{6}
+\begin{exercise}[BH.1.8]
+	\begin{enumerate}
+		\item How many paths are there from the point (0,0) to the point (110,111) in the plane such that each step either consists of going one unit up or one unit to the right?
+		\item How many paths are there from (0, 0) to (210, 211), where each step consists of going one unit up or one unit to the right, and the path has to go through (110, 111)?
+	\end{enumerate}
+\begin{solution}~
+	\begin{enumerate}
+		\item We need to set 221 steps, 110 are to the right and 111 are up. There are $N_{1}={221 \choose 111}$ ways to do so.
+		\item Use the multiplication rule. From (a), there are $N_{1}={221 \choose 111}$ to get to (110,111). Then, there are $N_{2}={200 \choose 100}$ ways to get to $(210,211)$. In total, there are $N= N_{1}\cdot N_{2} = {221 \choose 111}\cdot {200 \choose 100}$ ways to complete the stated path.
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

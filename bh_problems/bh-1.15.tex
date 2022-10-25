@@ -1,0 +1,10 @@
+\input{header.tex}
+\setcounter{theorem}{10}
+\begin{exercise}[BH.1.15]
+	Give a story proof that $\sum_{k = 0}^n \binom{n}{k} = 2^n$
+\begin{solution}
+	Consider $n$ people standing in a line (1.5m apart). Each person can be selected for some test or not. So there are 2 options for the first person, 2 options for the second person etcetera. There are then $2^n$ possible sequences (the right hand side of the question). This gives me all possible subgroups that can be selected for testing. This means that I can also select $k$ persons out of $n$ for the test, and then sum over $k$ from $0$ to $n$ (the left hand side).
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

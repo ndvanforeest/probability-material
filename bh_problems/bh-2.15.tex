@@ -1,0 +1,16 @@
+\input{header.tex}
+
+\setcounter{theorem}{10}
+
+\begin{exercise}[BH.2.15]
+Let $A$ and $B$ be events with $0 < \P{A \cap B} < \P{A} < \P{B} < \P{A \cup B} < 1$. You are hoping that both $A$ and $B$ occurred. Which of the following pieces of information would you be happiest to observe: that $A$ occurred, that $B$ occurred, or that $A \cup B$ occurred?
+\begin{solution}
+	You want to maximize $P(A\cap B|I)$, so the probability that both $A$ and $B$ occur given some information $I$. Now $I$ can be $A$, $B$, or $A\cup B$. By the definition of conditional probability
+	\begin{align*}
+		P(A\cap B|I) =\frac{P(A\cap B\cap I)}{P(I)} = \frac{P(A\cap B)}{P(I)}.
+	\end{align*}
+	Think about the second equality sign. In order to maximize this probability, you want to minimize $P(I)$. Given the ordering of the probabilities in the question, you would like to know $A$ occurred.	
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

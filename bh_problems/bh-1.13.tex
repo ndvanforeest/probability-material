@@ -1,0 +1,17 @@
+\input{header.tex}
+\setcounter{theorem}{9}
+\begin{exercise}\textbf[BH.1.13]
+	A certain casino uses 10 standard decks of cards mixed together into one big deck, which we will call a \emph{superdeck}. Thus, the superdeck has $52 \cdot 10 = 520$ cards, with 10 copies of each card. How many different 10-card hands can be dealt from the superdeck? The order of the cards does not matter, nor does it matter which of the original 10 decks the cards came from. Express your answer as a binomial coefficient.
+\begin{hint}
+	Bose-Einstein.	
+\end{hint}
+\begin{solution}
+	Order the deck of cards by unique cards (there are 52 unique cards, with 10 replications). Then picture 52 boxes separated by 51 bars. Between each bar (as well as on the left side of the leftmost bar and the right side of the rightmost bar) we can put maximally 10 stars. So the problem is equivalent to the number of orderings of 51 bars and 10 stars. These can be ordered in $N={61 \choose 10}$ ways.\\~\\
+	
+	I usually got questions about this \textbf{[BH.13]} and the solution here could use a bit more explanations.\\ A first natural (\textbf{but incorrect}) thought for this question would be that we first choose one from the 520 cards and then 510 until 430 (520- (10-1)*10), because the order does not matter, we need to divide it by $10!$. However, this is not correct because \textbf{(1)} the question asks for the number of different 10-card hand without considering which or the original 10 decks the cards come from (so 7 (heart) from the first deck is regarded as the same card as the 7 (heart) from the 10th deck); \textbf{(2)} the question asks for the number of different 10-card hands, but it does not require that the 10 cards in a 10-card hand have to be different cards. Is it correct then we choose the first from 52 and then until 43 and divide by 10! ?  Unfortunately, it is incorrect again because point (2) mentioned above (Note that we are now having so many replications, we should have more choices for a 10-card hand, now we could even have 1111111111 all of the same suit.). \\~\\
+	 Then how do we proceed from there? Think about 51 bars (then with 51 bars we have 52 places to allocate 52 different cards each with 10 replications). Next, we can put stars to our selected cards, and the question essentially is to assign 10 stars to these 52 places, which is equivalent to select 10 positions out of (51 bars+10 stars) positions for the stars (the rest positions would be bars).\\~\\ 
+	 Once you draw an arbitrary figure for the bars and stars, you would determine one 10-card hand. Draw it and try to figure it out. You can do this.     
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

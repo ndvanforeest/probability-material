@@ -1,0 +1,38 @@
+\input{header.tex}
+
+\setcounter{theorem}{18}
+\begin{exercise}[BH.2.41]
+  The ratings of Monty Hall's show have dropped slightly, and a panicking executive producer complains to Monty that the part of the show where he opens a door lacks suspense: Monty always opens a door with a goat. Monty replies that the reason is so that the game is never spoiled by him revealing the car, but he agrees to update the game as follows.
+	
+	Before each show, Monty secretly flips a coin with probability $p$ of Heads. If the coin lands Heads, Monty resolves to open a door with a goat (with equal probabilities if there is a choice). Otherwise, Monty resolves to open a random door, with equal probabilities. Of course, Monty will not open the door that the contestant initially chooses. The contestant knows $p$ but does not know the outcome of the coin flip. When the show starts, the contestant chooses a door. Monty (who knows where the car is) then opens a door. If the car is revealed, the game is over; if a goat is revealed, the contestant is offered the option of switching. Now suppose it turns out that the contestant chooses door 1 and then Monty opens door 2, revealing a goat. What is the contestant's probability of success if they switch to door 3?
+\begin{solution}
+	\begin{enumerate}
+		\item It's annoying that we do not know whether Monty flipped Heads $H$ or Tails, so we are going to condition on this event.  
+	
+		Let $C_{i}$ be the event that the car is behind door $i$ and $G_{i}$ the event there is a goat behind door $i$. Denote by $D_j$ the event that Monty opens door $j$. We now apply the LOTP
+		\begin{align*}
+			P(C_{3}|D_{2},G_{2})& = P(C_{3}|H,D_{2},G_{2})P(H|D_{2},G_{2}) + P(C_{3}|H^{C},D_{2},G_{2})P(H^{C}|D_{2},G_{2})\\
+			& = \frac{2}{3}\cdot P(H|D_{2},G_{2}) + P(C_{3}|H^{C},D_{2},G_{2})P(H^{C}|D_{2},G_{2})
+		\end{align*}
+		The second line uses the result from the standard Monty Hall problem that the probability of winning the car given the switching strategy is $2/3$. Now, we use the definition of conditional probability
+		\begin{align*}
+			P(C_{3}|H^{C},D_{2},G_{2}) &=\frac{P(D_{2},G_{2}|C_{3},H^{C})P(C_{3}|H^{C})}{P(D_{2},G_{2}|H^{C})}=\frac{\frac{1}{2}\cdot \frac{1}{3}}{\frac{1}{2}\cdot \frac{2}{3}}=\frac{1}{2}.
+		\end{align*}
+		Here we used that $P(D_{2},G_{2}|C_{3},H^{C})=\frac{1}{2}$, since (1) if there is a car behind door 3, then there is a goat behind door 2, so $P(D_{2},G_{2}|C_{3},H^{C})=P(D_{2}|C_{3},H^{C})$ and (2) Monty is randomly opening one of the two doors, so $P(D_{2}|C_{3},H^{C})=P(D_{2}|H^{C})=\frac{1}{2}$. Also $P(C_{3}|H^{C})=P(C_{3})=\frac{1}{3}$, since the location of the car is independent of whether Monty opens doors at random or only opens doors with goats. Finally $P(D_{2},G_{2}|H^{C})=P(D_{2}|H^{C})P(G_{2}|H^{C})=\frac{1}{2}\cdot \frac{1}{3}$, since Monty randomly opens a door, this is independent of whether there is a goat there.
+
+		The only unknown quantity that remains is
+		\begin{align*}
+			P(H|D_{2},G_{2})& = \frac{P(D_{2},G_{2}|H)P(H)}{P(D_{2},G_{2}|H)P(H)+P(D_{2},G_{2}|H^C)P(H^C)} \\
+			&= \frac{(P(D_{2},G_{2}|C_{1},H)P(C_{1}|H)+P(D_{2},G_{2}|C_{3},H)P(C_{3}|H))P(H)}{P(D_{2},G_{2}|H)P(H)+P(D_{2},G_{2}|H^C)P(H^C)}\tag*{(LOTP)} \\
+			&= \frac{(\frac{1}{2}\cdot \frac{1}{3}+\frac{1}{3})p}{(\frac{1}{2}\cdot \frac{1}{3}+\frac{1}{3})p+(\frac{1}{2}\cdot \frac{2}{3})(1-p)}
+		\end{align*}
+		where we used that $P(D_{2},G_{2}|C_{1},H)=\frac{1}{2}$ (if there is a car behind door 1, Monty decides between the two remaining doors with probability $\frac{1}{2}$). Also, $P(C_{1}|H)=P(C_{3}|H)=P(C_{1})=\frac{1}{3}$, and $P(D_{2},G_{2}|C_{3},H)=P(D_{2}|C_{3},H)=1$ (note that the term involving $C_{2}$ not appearing when applying the LOTP, why?). 
+
+		Substituting all of this into the first equation of the answer gives
+		\begin{align*}
+			P(C_{3}|D_2,G_2) = \frac{1+p}{2+p}.
+		\end{align*}
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}
