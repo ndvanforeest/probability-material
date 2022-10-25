@@ -1,0 +1,24 @@
+\input{header.tex}
+\setcounter{theorem}{11}
+\begin{exercise}[BH.3.25]
+  Alice flips a fair coin $n$ times and Bob flips another fair coin $n + 1$ times, resulting in independent $X \sim \text{Bin}(n, 1/2)$ and $Y \sim  \text{Bin}(n+1, 1/2)$.
+	\begin{enumerate}
+		\item Show that $\P{X < Y} = \P{n - X < n + 1 - Y}$.
+		\item Compute $\P{X < Y}$.
+	\end{enumerate}
+\begin{hint}
+	For part (b), use (a) and the fact that $X$ and $Y$ are integer-valued.
+\end{hint}
+\begin{solution}~
+	\begin{enumerate}
+	    \item Assume that $X$ is the number of heads for Alice, then $V=n-X$ is the number of tails and $V=n-X\sim \text{Bin}(n,1/2)$. Similarly, assume that $Y$ is the number of heads for Bob, then $W=n+1-Y$ is the number of tails and $W=n+1-Y\sim \text{Bin}(n+1,1/2)$. Of course, $P(X<Y)=P(V<W)$ since $V$ has the same distribution as $X$ and $W$ has the same distribution as $Y$, $X$ and $Y$ are independent and $V$ and $W$ are independent.
+        \item Now
+        \begin{align*}
+        	P(X<Y) = P(n-X<n+1-Y) = P(X>Y-1) = P(X\geq Y).
+        \end{align*}
+        Also, since $X<Y$ and $X\geq Y$ are disjoint and their union has probability equal to one, we have $1=P(X<Y) + P(X\geq Y) = 2P(X<Y)$. We conclude that $P(X<Y)=1/2$. 
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
