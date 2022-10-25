@@ -1,0 +1,17 @@
+\input{header.tex}
+\setcounter{theorem}{12}
+\begin{exercise} [BH.6.13]
+    A fair die is rolled twice, with outcomes $X$ for the first roll and $Y$ for the second roll. Find the moment generating function $M_{X+Y}(t)$ of $X + Y$ (your answer should be a function of $t$ and can contain unsimplified finite sums).
+\begin{solution}
+    \begin{align*}
+		\left(\frac{1}{6}\sum_{i=1}^{6} e^{it} \right)^2
+	\end{align*}~\\
+	Note X and Y are i.i.d. (independent and identical distributed). By LOTUS, we calculate the MGF:
+	\begin{align*}
+		M_{X+Y}(t) &=_{\textit{definition of MGF}} \mathbb{E}e^{t(X+Y)} \\&=_{\textit{independence}} \mathbb{E}e^{t(X)}\mathbb{E}e^{t(Y)} \\&=_{\textit{LOTUS}} 	\left(\sum_{i=1}^{6} e^{it} \frac{1}{6}\right)	\left( \sum_{i=1}^{6} e^{it} \frac{1}{6}\right)  \\
+		&=  	\left(\frac{1}{6}\sum_{i=1}^{6} e^{it} \right)^2
+	\end{align*}~\\
+	which is well defined for all $t\in \mathbb{R}$. 
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

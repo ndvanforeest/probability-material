@@ -1,0 +1,15 @@
+\input{header.tex}
+\setcounter{theorem}{9}
+\begin{exercise} [BH.6.10]
+    A distribution is called symmetric unimodal if it is symmetric (about some point) and has a unique mode. For example, any Normal distribution is symmetric unimodal. Let $X$ have a continuous symmetric unimodal distribution for which the mean exists. Show that the mean, median, and mode of $X$ are all equal.
+\begin{solution}
+    Let $X$ be symmetric about $\mu$. As shown in the discussion after Definition 6.2.3, $\mu$ is the mean of the distribution and $\mu$ is also a median. The median is unique since the distribution of $X$ is continuous. Let $\mu+c$ be the unique mode. By symmetry, $\mu-c$ is also a mode. But the mode was assumed to be unique, so $\mu+c=\mu-c$, which shows that $c=0$. Thus, the mean, median, and mode all equal $\mu$.
+	
+    %Median: $(a+b)/2$. Mode: all points in the interval (a,b).\\~\\
+    %Median: U are equally likely to be larger or smaller than the midpoint of ( a, b), which is ( a + b ) / 2. This point satisfies the definition of Median. Therefore, ( a + b ) / 2 is the median of U. Notice for a value, $u_1$, smaller that ( a + b ) / 2, the probability of U being smaller than $u_1$ would be smaller than 1/2; while for a value, $u_2$, larger that ( a + b ) / 2, the probability of U being larger than $u_1$ would be smaller than 1/2. Therefore, $(a+b)/2$ is the unique median. \\~\\
+    %Unif(a,b)'s PDF takes positive constant on $(a,b)$, the rest parts zero. Therefore, Every
+    %point in ( a, b ) is a mode of U.\\~\\
+    %\textbf{It might be helpful to draw the graph of PDF, and all these values can be found directly from the PDF figure.} For example, here we have a symmetric PDF about the $\frac{a+b}{2}$, then the median and the mean coincides.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

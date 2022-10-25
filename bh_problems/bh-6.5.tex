@@ -1,0 +1,22 @@
+\input{header.tex}
+\setcounter{theorem}{4}
+\begin{exercise} [BH.6.5] Let $X$ be Discrete Uniform on $1, 2, \ldots, n$. Find all medians and all modes of $X$ (your answer can depend on whether $n$ is even or odd).
+
+\begin{solution}
+    The PMF is equal for all points in $\{1,2,\cdots,n \}$ and thus they are all modes. \\~\\
+	For n is odd, we have 
+	\begin{align*}
+		\mathbb{P}\left(X\leq (n+1)/2 \right) = 1/2 + 1/(2n) \geq 1/2;~
+		\mathbb{P}\left(X\geq (n+1)/2 \right) = 1/2 +1/(2n) \geq 1/2;~
+	\end{align*}
+	For $m<(n+1)/2$, $\mathbb{P}\left(X\leq m \right)\leq 1/2 + 1/(2n) -1/n <1/2 $; for $mm(n+1)/2$, $\mathbb{P}\left(X\geq m \right)\leq 1/2 + 1/(2n) -1/n <1/2 $. Therefore, $ (n+1)/2$ is the unique median. \\~\\
+	For n is even, we have 
+	\begin{align*}
+		\mathbb{P}\left(X\leq n/2 \right) = 1/2  \geq 1/2;~
+		\mathbb{P}\left(X\geq (n+2)/2 \right) = 1/2 + 1/(2n)  \geq 1/2;~
+	\end{align*}
+	which shows that any value between n/ 2 and ( n + 2) / 2 (inclusive) is also a median. \\~\\
+	For $m<n/2$, $\mathbb{P}\left(X\leq m \right)  <1/2 $; for $m>(n+2)/2$, $\mathbb{P}\left(X\geq m \right) <1/2 $. Therefore, there are no other medians.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

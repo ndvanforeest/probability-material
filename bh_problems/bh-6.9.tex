@@ -1,0 +1,22 @@
+\input{header.tex}
+\setcounter{theorem}{8}
+\begin{exercise} [BH.6.9]
+    Let $Y$ be Log-Normal with parameters $\mu$ and $\sigma^2$. So $Y=e^X$ with $X \sim \mathcal{N}\left(\mu, \sigma^2\right)$. Evaluate and explain whether or not each of the following arguments is correct.
+	\begin{enumerate}
+		\item Student A: "The median of $Y$ is $e^\mu$ because the median of $X$ is $\mu$ and the exponential function is continuous and strictly increasing, so the event $Y \leq e^\mu$ is the same as the event $X \leq \mu$."
+		\item Student B: "The mode of $Y$ is $e^\mu$ because the mode of $X$ is $\mu$, which corresponds to $e^\mu$ for $Y$ since $Y=e^X$."
+		\item Student C: "The mode of $Y$ is $\mu$ because the mode of $X$ is $\mu$ and the exponential function is continuous and strictly increasing, so maximizing the PDF of $X$ is equivalent to maximizing the PDF of $Y=e^X$."
+	\end{enumerate}  
+\begin{solution}
+    \begin{enumerate}
+        \item  right: $e^\mu$ is the median of $Y$, since
+        $$
+        P\left(Y \leq e^\mu\right)=P(X \leq \mu)=1 / 2 .
+        $$
+        \item  wrong. Figure $6.2$ from the textbook and the discussion of it give an example of a LogNormal where the mode is clearly less than the median. The mode of $Y$ is $e^{\mu-\sigma^2}$, which is less than $e^\mu$ for any $\sigma>0$.
+        If $Z$ is a discrete r.v. and $W=e^Z$, then $P(W=w)=P(Z=z)$, where $z=\log w$, so if $z_0$ maximizes $P(Z=z)$ then $w_0=e^{z_0}$ maximizes $P(W=w)$. But $X$ is a continuous r.v., and it's not true that $f_Y(y)=f_X(x)$, where $x=\log y$.
+        \item wrong. In fact, saying that the mode of $Y$ is $\mu$ is a category error, since $\mu$ could be negative, whereas $Y$ is always positive. It's true (and useful) that if a function $f(x)$ is maximized at $x=x_0$, then $g(x)=e^{f(x)}$ is also maximized at $x=x_0$. But the PDF of $Y$ is not the exponential of the PDF of $X$; Do not confuse a random variable with its PDF.
+    \end{enumerate}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

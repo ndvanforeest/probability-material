@@ -1,0 +1,94 @@
+\input{header.tex}
+\setcounter{theorem}{11}
+\begin{exercise} [BH.6.12]
+    Let $c$ be the speed of light in a vacuum. Suppose that $c$ is unknown, and scientist wish to estimate it. But even more so than that, they wish to estimate $c^2$, for use in the famous equation $E = mc^2$.
+	
+	Through careful experiments, they obtain i.i.d. measurements $X_1, \ldots, X_n \sim N(c, \sigma^2)$. Using these data, there are various possible ways to estimate $c^2$. Two natural ways are: (1) estimate $c$ using the average of the $X_j$'s and then square the estimated $c$, and (2) average the $X_j^2$'s. So let $\bar{X}_n = \frac{1}{n} \sum_{j = 1}^n X_j$ and consider the two estimators $T_1 = \bar{X}_n^2$ and $T_2 = \frac{1}{n} \sum_{j = 1}^n X_j^2$. Note that $T_1$ is the square of the first sample moment and $T_2$ is the second sample moment.
+	\begin{enumerate}
+		\item Find $\P{T_1 < T_2}$.
+		\item Then a random variable $T$ is used to estimate an unknown parameter $\theta$, the \emph{bias} of the estimator $T$ is defined to be $E(T) - \theta$. Find the bias of $T_1$ and the bias of $T_2$.
+	\end{enumerate}
+	\begin{hint}
+		\begin{enumerate}
+			\item Start by comparing $\left(\frac{1}{n} \sum_{j = 1}^n x_j\right)^2$ and $\frac{1}{n} \sum_{j = 1}^n x_j^2$ when $x_1, \ldots, x_n$ are \emph{numbers}, by considering a discrete random variable whose possible values are $x_1, \ldots, x_n$.
+			\item First find the distribution of $\bar{X}_n$. In general, for finding $E(Y^2)$ for a random variable, it is often useful to write it as $E(Y^2) = V(Y) + (E(Y))^2$.
+		\end{enumerate}
+	\end{hint}
+\begin{solution}
+    \begin{enumerate}
+		\item \textit{Discussions for how we tackle the problem: To prove 6.12.a (you may link this question with the relation between sample moments (random variables) and moments (constants, degenerate random variables) such that in large samples, sample  moments would be good approximations for moments) ({ this question links certainty (deterministic) with uncertainty (random) all together, and hope can enhance your understanding of r.v. which is nothing random but a special function from the outcomes in the sample space to numbers}), we consider the following two steps:
+		\begin{enumerate}
+			\item[(I).] prove the deterministic inequality (nothing random there, it just holds true for arbitrary fixed numbers): $$\frac{1}{n}\sum_{i=1}^n  x_i^2  -  ( \frac{1}{n}\sum_{i=1}^n  x_i )^2 \geq 0.$$ 
+			The above deterministic inequality, suggested by the hint, can also be proved by properties of r.v.: variance of the Dunif random variable, $X$, with support $\{x_1,\cdots, x_n\}$ and PMF $P(X=x_i)=1/n$ is always non-negative: $$V(X)=EX^2 -(EX)^2=\sum_{i=1}^n  x_i^2  \frac{1}{n}-   ( \sum_{i=1}^n  x_i \frac{1}{n})^2 \geq 0$$ (here $VX$ is only zero if $n=1$ such that $X$ is a degenerated random variable which equals one value. For an arbitrary r.v., $Y$, the variance is always non-negative since by definition it is the expected values of the non-negative random variable $(Y-EY)^2$ which always takes non-negative values).\\
+			{  This approach shows we can use "uncertainty" to prove some "certainty" results.}
+			We also prove the above inequality using traditional approach in this note (see equations (1) and (2) in the later discussions).
+			\item[(II).] If an inequality holds true for arbitrary numbers, then if we replace these numbers (constants) by r.v.'s, the resulted stochastic inequality also holds true with probability equal to one. This is not surprising as a r.v. is nothing but simply some functions (mapping from a sample space) into numbers.  If an inequality holds true for arbitrary numbers, then it always hold true for whatever values taken by these r.v.'s and thus  if we replace these numbers (constants) by r.v.'s, the resulted stochastic inequality also holds true with probability equal to one. (In step II, {  we use "certainty" inequality to prove some "uncertainty" result}).\\~\\
+			We explain the step (II): Suppose $\frac{1}{n}\sum_{i=1}^n  x_i^2  -  ( \frac{1}{n}\sum_{i=1}^n  x_i )^2 \geq 0$  holds true for any arbitrary constants $x_i$'s, then if now we replace constant $x_i$ with r.v. $X_i$, we would have $P\left(\frac{1}{n}\sum_{i=1}^n  X_i^2  -  ( \frac{1}{n}\sum_{i=1}^n  X_i )^2 \geq 0 \right)=1$.
+			Because for any arbitrary random events: $\cap \{X_i=s_i\}$ (suppose $X_i$ takes arbitrary real value $s_i$), we know $\frac{1}{n}\sum_{i=1}^n  s_i^2  -  ( \frac{1}{n}\sum_{i=1}^n  s_i )^2 \geq 0$. Notice we choose $s_i$ arbitrarily, so no matter what random events happen (or in other words, whatever elements from the underlying sample space and thus whatever numbers $X_i$'s map these elements into) we always have $\frac{1}{n}\sum_{i=1}^n  X_i^2  -  ( \frac{1}{n}\sum_{i=1}^n  X_i )^2 \geq 0$ conditional on these events.  Therefore, $\frac{1}{n}\sum_{i=1}^n  X_i^2  -  ( \frac{1}{n}\sum_{i=1}^n  X_i )^2 \geq 0$ holds true (no matter what random events occur) with probability one (you may also think about LOTP + Bayes'rule).
+		\end{enumerate}}
+	
+	\textbf{Now let's proceed to the proof}.\\~\\
+	For arbitrary real \textbf{numbers} $x_i$'s, \\~\\
+	{we first prove two deterministic equalities using classic approaches (the probability approach has been shown in the above discussions) (nothing random in these equalities, they just hold true for all different numbers)  (denote $\bar{x}=\frac{1}{n}\sum_{i=1}^n x_i/n$):\\
+		{ (1)} $$\frac{1}{n}\sum_{i=1}^n  x_i^2  -  ( \frac{1}{n}\sum_{i=1}^n  x_i )^2  = \frac{1}{n}\sum_{i=1}^n \left(x_i -\bar{x} \right)^2$$
+		\textbf{\scriptsize ({ (1)} is quite commonly used in your future studies.)} \\ 
+		{ (2)} $$\frac{1}{n}\sum x_i^2 - \left(\frac{1}{n} \sum x_i\right)^2 =\frac{1}{n^2} \sum_{i < j} (x_i-x_j)^2 $$	
+		~\\ We first prove 6.12.a.(1)	
+		\begin{align*}
+			& \frac{1}{n}\sum_{i=1}^n \left(x_i -\bar{x} \right)^2 \\
+			=& \frac{1}{n}\sum_{i=1}^n \left(x_i^2  -2x_i\bar{x} +(\bar{x} )^2 \right)\\
+			=& \frac{1}{n}\sum_{i=1}^n  x_i^2  -2\bar{x} \frac{1}{n}\sum_{i=1}^n x_i +\frac{1}{n}\sum_{i=1}^n (\bar{x} )^2  \\
+			=& \frac{1}{n}\sum_{i=1}^n  x_i^2  -2(\bar{x})^2   +  (\bar{x} )^2   \\
+			=& \frac{1}{n}\sum_{i=1}^n  x_i^2  -  (\bar{x} )^2\\
+			=& \frac{1}{n}\sum_{i=1}^n  x_i^2  -  ( \frac{1}{n}\sum_{i=1}^n  x_i )^2  
+		\end{align*}	
+		As for 6.12.a.(2)
+		\begin{align*}
+			& 	\frac{1}{n}\sum_{i=1}^n x_i^2 - \left(\frac{1}{n} \sum_{i=1}^n x_i\right)^2 \\
+			= & \frac{1}{n^2}\sum_{i=1}^n n^2 x_i^2 - \frac{1}{n^2} \left( \sum_{i=1}^n x_i\right)^2\\
+			= & \frac{1}{n^2}\left(\sum_{i=1}^n\sum_{j=1}^n x_i^2 -   \left( \sum_{i=1}^n x_i\right)^2\right)\\
+			= & \frac{1}{n^2}\left(\sum_{i=1}^n\sum_{j=1}^n x_i^2 -     \sum_{i=1}^n\sum_{j=1}^n x_i x_j \right) \\
+			= & \frac{1}{n^2}\left(\sum_{i<j} \left(x_i^2 + x_j^2\right)+ \sum_{i=j} \left(x_i^2\right) -     \sum_{i<j}  2 x_i x_j-\sum_{i=j} \left(x_i^2\right) \right) \\
+			= & \frac{1}{n^2}\sum_{i<j}\left(  \left(x_i^2 + x_j^2\right) -       2 x_i x_j  \right)  \\
+			= & \frac{1}{n^2}\sum_{i<j}\left(   x_i -x_j  \right)^2 
+		\end{align*}
+	}
+	Now we prove using 6.12.a.(2) (the arguments using 6.12.a.(1) are similar where $x_i=\bar{x}, \forall i$ implies again they are equal to each other): note that for arbitrary numbers	 
+	\begin{align*}
+		\frac{1}{n^2} \sum_{i < j} (x_i-x_j)^2 \geq 0   
+	\end{align*}
+	where the equality holds only when $x_i=x_j, \forall i,j$
+	and thus { (we replace $x_i$ with $X_i$) we know 
+		\begin{align*}
+			\frac{1}{n^2} \sum_{i < j} (X_i-X_j)^2 \geq 0;   
+		\end{align*}
+		and \begin{align*}
+			T_2\geq T_1; 
+		\end{align*}
+		where the equalities hold only when $X_i=X_j, \forall i,j$,                      
+		\begin{align*}
+			\mathbb{P}\left(T_1\leq T_2 \right) &= 1 
+	\end{align*}}
+	Note that 
+	\begin{align*}
+		\mathbb{P}\left(T_1 = T_2 \right) &= \mathbb{P}\left(X_1=\cdots =X_n \right) =0 	
+	\end{align*}
+	{  The last equality holds true because $X_1-X_2$ is still a continuous r.v. and for continuous r.v. the probability of it being equal to one exact number is zero, therefore,  $0\leq \mathbb{P}\left(X_1=\cdots =X_n \right) \leq \mathbb{P}\left(X_1 =X_n \right)= \mathbb{P}\left(X_1 -X_n =0\right)=0$ (\textbf{from a real line to one point, one dimension to zero dimension}). Interestingly, if we consider $(X_1, X_2)$ as a two dimensional r.v. with independent entries in a plane, then $X_1=X_2$ represents the event that the \textbf{two dimensional r.v. in a plane reduces to one dimensional line}, see the probability is always zero when high dimensional r.v. takes low dimensional values. }
+	\\	and thus by the second axiom of probability (recall the general definition of probability)
+	\begin{align*}
+		\mathbb{P}\left(T_1< T_2 \right)=\mathbb{P}\left(T_1\leq T_2 \right)-\mathbb{P}\left(T_1= T_2 \right)= 1 
+	\end{align*}~\\~\\
+	\item First use the sum of indepedent normal, $N(\mu_i,\sigma_i^2)$,  is still normal $N(\sum_i\mu_i,\sum_i\sigma_i^2)$: $\sum_i X_i \sim N(n c, n\sigma^2)$.\\~\\ Then the random varaible $\bar{X}_n$ is just a location-scale transformation of $\frac{1}{n}\sum_i X_i$, so it is still a normal distribution (a normal distribution is determined by two parameters: mean and variance, once you derive the mean, $E\frac{1}{n}\sum_i X_i=c$, and the variance, $V\frac{1}{n}\sum_i X_i=\sigma^2/n$, of $\bar{X}_n$ you will find its distribution) and thus $\bar{X}_n\sim N(c, \sigma^2/n)$. 
+	\begin{align*}
+		\mathbb{E}\bar{X}_n^2 = 	\mathbb{V}\bar{X}_n + 	(\mathbb{E}\bar{X}_n)^2 = c^2 +\frac{\sigma^2}{n}
+	\end{align*}
+	The bias of $T_1$: $ET_1-c^2$ (here we want to use the value taken by the random variable to approximate/estimate the unknown number $c^2$)  is $\frac{\sigma^2}{n}$ (getting smaller when $n$ is large). 
+	\begin{align*}
+		\mathbb{E}T_2  = \frac{1}{n}	\sum \mathbb{E}{X}_i^2 = \frac{1}{n}\sum (c^2 +{\sigma^2}) =c^2 +{\sigma^2}
+	\end{align*}
+	The bias of $T_2$ is ${\sigma^2}$. \\~\\
+	Note that the bias of $T_1$ is smaller and smaller (goes to zero) when the sample size is larger and larger (n increases), so if we can redraw values from the distribution of $T_1$ then the average would give a good approximation for the unknown number $c^2$.
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

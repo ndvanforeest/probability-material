@@ -1,0 +1,27 @@
+\input{header.tex}
+\setcounter{theorem}{13}
+\begin{exercise} [BH.6.14] Let $U_1, U_2, \ldots, U_{60}$ be i.i.d. $\text{Unif}(0,1)$ and $X = U_1 + U_2 + \ldots + U_{60}$. Find the MGF of $X$.
+\begin{solution}
+  \[\frac{\left(e^t -1 \right)^{60}}{t^{60}} \]~\\
+	We need to specify the value of t. \\~\\
+	Suppose $t\neq 0$ first,
+	for $U_i$,
+	\begin{align*}
+		M_{U_i}(t) &=_{\textit{MGF definition}}  \mathbb{E}e^{tU_i} \\
+		&=_{\textit{LOTUS}} \int_{0}^{1} e^{ta} da \\
+		&= (e^t-1)/t  
+	\end{align*}
+	Then 
+	\begin{align*}
+		M_{\sum_i U_i}(t) =_{\textit{independence}} \prod_i M_{ U_i}(t) =_{\textit{identical distribution}}  \prod_i (e^t-1)/t = \frac{\left(e^t -1 \right)^{60}}{t^{60}} 
+	\end{align*}
+	When $t=0$, follow the same step, you will find $M_{U_i}(0)$ and $M_{\sum_i U_i}(0)$ are both equal to one. \\~\\
+	Note that, for all $t\in \mathbb{R}$, $M_{\sum_i U_i}(t)$ takes finite values and thus is well-defined. 
+	\\~\\~\\
+	
+	\textit{Note that, the results are quite consistent as $\lim_{t\rightarrow 0} (e^t-1)/t =1  $  and $\lim_{t\rightarrow 0} \frac{\left(e^t -1 \right)^{60}}{t^{60}}  =1  $.\\ \textbf{Why we need to check 0? Notice MGF is only defined if the function is defined in some interval (-a,a) which contains 0!!} Therefore, to show that one MGF is well defined, we need show that the values taken by the function within some interval (-a,a) for $a >0$.}
+\end{solution}
+
+
+\end{exercise}
+\input{trailer.tex}

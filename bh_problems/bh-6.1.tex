@@ -1,0 +1,13 @@
+\input{header.tex}
+\setcounter{theorem}{0}
+\begin{exercise} [BH.6.1] Let $U \sim \text{Unif}(a, b)$. Find the median and mode of $U$.
+
+\begin{solution}
+    Median: $(a+b)/2$. Mode: all points in the interval $(a,b)$.\\~\\
+	Median: U are equally likely to be larger or smaller than the midpoint of ($a, b$), which is $( a + b ) / 2$. This point satisfies the definition of Median. Therefore, $( a + b ) / 2$ is the median of $U$. Notice for a value, $u_1$, smaller that $( a + b ) / 2$, the probability of U being smaller than $u_1$ would be smaller than $1/2$; while for a value, $u_2$, larger that $( a + b ) / 2$, the probability of $U$ being larger than $u_1$ would be smaller than $1/2$. Therefore, $(a+b)/2$ is the unique median. \\~\\
+	Unif$(a,b)$'s PDF takes positive constant on $(a,b)$, the rest parts zero. Therefore, Every
+	point in $( a, b )$ is a mode of U.\\~\\
+	\textbf{It might be helpful to draw the graph of PDF, and all these values can be found directly from the PDF figure.} For example, here we have a symmetric PDF about the $\frac{a+b}{2}$, then the median and the mean coincides.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}
