@@ -1,0 +1,19 @@
+\input{header.tex}
+\setcounter{theorem}{14}
+\begin{exercise}[BH.1.26]
+	A survey is being conducted in a city with 1 million residents. It would be far too expensive to survey all of the residents, so a random sample of size 1000 is chosen (in practice, there are many challenges with sampling, such as obtaining a complete list of everyone in the city, and dealing with people who refuse to participate). The survey is conducted by choosing people one at a time, with replacement and with equal probabilities.
+	\begin{enumerate}
+		\item Explain how sampling with vs. without replacement here relates to the birthday problem.
+		\item Find the probability that at least one person will get chosen more than once.
+	\end{enumerate}
+\begin{solution}~
+	\begin{enumerate}
+		\item In the birthday problem, birthdays enter the room with replacement. Here survey respondents enter with replacement.
+		\item From the analysis of the birthday problem, we know that it is much easier to look at the probability of no match ($A$).
+		$$P(A) = 1\cdot \left(1-\frac{1}{10^6}\right)\left(1-\frac{2}{10^6}\right)\ldots \left(1-\frac{999}{10^6}\right).$$
+		The probability that at least one person will be chosen more than once is equal to $1-P(A) \approx 0.393$.
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
