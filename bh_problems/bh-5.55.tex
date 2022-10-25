@@ -1,0 +1,37 @@
+\input{header.tex}
+
+\setcounter{theorem}{54}
+\begin{exercise}[BH.5.55] \begin{enumerate}
+    \item Let $X_1$, $X_2$, ... be independent $N(0,4)$ r.v.s., and let $J$ be the smallest value of $j$ such that $X_j > 4$ (i.e., the index of the first $X_j$ exceeding 4). In terms of $\Phi$, find $E(J)$.
+    \item Let $f$ and $g$ be PDFs with $f(x) > 0$ and $g(x) > 0$ for all $x$. Let $X$ be a random variable with PDF $f$. Find the expected value of the ratio $R = \frac{g(X)}{f(X)}$. Such ratios come up very often in statistics, when working with a quantity known as a \emph{likelihood ratio} and when using a computational technique known as \emph{importance sampling}.
+    \item Define $F(x) = e^{-e^{-x}}$. This is a CDF and is a continuous, strictly increasing function. Let $X$ have CDF $F$, and define $W = F(X)$. What are the mean and variance of $W$?
+\end{enumerate}
+\begin{solution}
+    \begin{enumerate}
+	    \item Hint: $J-1\sim$Geom($1-\Phi(2)$). Thus $1/(1-\Phi(2))$.\\~\\
+    	(Note that in this exercise, you are drawing $X_i$'s from a normal distribution, and each $X_i$ can be any values in $\mathbb{R}$, and you only succeed if you happen to draw one $X_i$ that is strictly larger than 4. For each draw you have a successful rate equal the probability of $X_i$ being strictly larger than 4.)\\
+    	
+    	Note that the successful rate for each draw is $\mathbb{P}\left(X_i >4 \right)=\mathbb{P}\left((X_i-0)/\sqrt{4} >(4-0)/\sqrt{4} \right) =1-\Phi(2)$, as $(X_i-0)/\sqrt{4}\sim N(0,1)$. The we know  $J-1\sim$Geom($1-\Phi(2)$) and thus $\mathbb{E}J=1/(1-\Phi(2))$ (we use the result of Example 4.3.7 to derive the expectation). 
+    	\item 1. (Simply integration)\\~\\
+    	By LOTUS,
+    	\begin{align*}
+    		\mathbb{E}\frac{g(X)}{f(X)} = \int_{-\infty}^{\infty} \frac{g(x)}{f(x)} f(x) ds= \int_{-\infty}^{\infty} {g(x)}  ds=1
+    	\end{align*}
+    	The last equality is true because g is one PDF (which needs to have integration over all values equal to 1 by definition). 
+    	
+    	~\\
+    	\textit{Further comment (beyond the scope of the course): now if we take a closer look at the R ratio, which is a ratio between f and g, by using this R, we can approximate $\mathbb{E}g(X)$ with $X$'s PDF being f, by independent N random draws $y_i$ from one arbitrary distribution $g$ as long as the support of $g$ is larger than $f$ we can have $\sum_i H(y_i)R(y_i)/N $. This is quite useful in practice, as computer can simulate random draws from certain distributions (unfortunately not all distributions, and that is why we have the ratio R here) quite easily.}
+    	 
+    	\item $W\sim$Unif(0,1). (The rest is easy.)\\~\\
+    	By universality of the uniform (theorem 5.3.1) we know $W\sim $Unif(0,1) since $F(x)$ is strictly increasing in $x$ with range equal to [0,1]. Thus we know mean is 1/2 and variance is 1/12 by properties of Unif(0,1) (we have also calculated these during lectures, you can also check example 5.2.4).\\~\\
+    	The alternative way is to derive the CDF of $F(X)$:
+    	for $x\in [0,1]$
+    	\begin{align*}
+    		\mathbb{P}(F(X)\leq x) = \mathbb{P}(X\leq F^{-1}(x)) =F\left( F^{-1}(x)\right) = x
+    	\end{align*}
+    	where the last equality is due to the fact  that $X$'s CDF function is $F$. Therefore, from $x=0$ to 1 $	\mathbb{P}(F(X)\leq x)$ increases linearly from 0 to 1, and this is the CDF of Unif(0,1). Thus we know mean is 1/2 and variance is 1/12 by properties of Unif(0,1) (we have also calculated these during lectures, you can also check example 5.2.4).
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

@@ -1,0 +1,27 @@
+\input{header.tex}
+
+\setcounter{theorem}{2}
+\begin{exercise}[BH.5.3] Let $F$ be the CDF of a continuous r.v., and $f=F^{\prime}$ be the PDF.
+    \begin{enumerate}
+        \item  Show that $g$ defined by $g(x)=2 F(x) f(x)$ is also a valid PDF.
+        \item   Show that $h$ defined by $h(x)=\frac{1}{2} f(-x)+\frac{1}{2} f(x)$ is also a valid PDF.
+    \end{enumerate}
+\begin{solution}
+    \begin{enumerate}
+        \item We have $g(x) \geq 0$ since both $F$ and $f$ are nonnegative. Making the substitution $u=F(x)$, so $d u=f(x) d x$, we have
+        $$
+        \int_{-\infty}^{\infty} g(x) d x=2 \int_{-\infty}^{\infty} F(x) f(x) d x=2 \int_0^1 u d u=1.
+        $$
+        \item  We have $h(x) \geq 0$ since $f$ is nonnegative. Then
+        $$
+        \int_{-\infty}^{\infty} h(x) d x=\frac{1}{2} \int_{-\infty}^{\infty} f(-x) d x+\frac{1}{2} \int_{-\infty}^{\infty} f(x) d x=\frac{1}{2}+\frac{1}{2}=1
+        $$
+        since
+        $$
+        \int_{-\infty}^{\infty} f(-x) d x=-\int_{\infty}^{-\infty} f(u) d u=\int_{-\infty}^{\infty} f(u) d u=1
+        $$
+    \end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

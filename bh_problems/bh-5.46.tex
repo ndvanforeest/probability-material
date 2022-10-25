@@ -1,0 +1,28 @@
+\input{header.tex}
+
+\setcounter{theorem}{45}
+\begin{exercise}[BH.5.46] Let $T$ be the lifetime of a certain person (how long that person lives), and let $T$ have CDF $F$ and PDF $f$. The hazard function of $T$ is defined by
+	$$
+	h(t)=\frac{f(t)}{1-F(t)} .
+	$$
+	\begin{enumerate}
+		\item   Explain why $h$ is called the hazard function and in particular, why $h(t)$ is the probability density for death at time $t$, given that the person survived up until then.
+		\item  Show that an Exponential r.v. has constant hazard function and conversely, if the hazard function of $T$ is a constant then $T$ must be $\operatorname{Expo}(\lambda)$ for some $\lambda$.
+	\end{enumerate} 
+\begin{solution}
+    \begin{enumerate}
+        \item The conditional CDF of $T$ given that $T>t_0$ is
+        $$
+        P\left(T \leq t \mid T \geq t_0\right)=\frac{P\left(t_0 \leq T \leq t\right)}{P\left(T \geq t_0\right)}=\frac{F(t)-F\left(t_0\right)}{1-F\left(t_0\right)}
+        $$
+        for $t \geq t_0$ (and 0 otherwise). So one version of conditional PDF of $T$ given $T \geq t_0$ is
+        $$
+        f\left(t \mid T \geq t_0\right)=\frac{f(t)}{1-F\left(t_0\right)}, \text { for } t \geq t_0 .
+        $$
+        The conditional PDF of $T$ at $t_0$, given that the person survived up until $t_0$, is then $f\left(t_0\right) /\left(1-F\left(t_0\right)\right)=h\left(t_0\right)$. $h(t)$ gives the probability density of death at time $t$ given that the person has survived up until then. This is a natural way to measure the instantaneous hazard of death at some time since it accounts for the person having survived up until that time.
+        \item Let $T \sim \operatorname{Expo}(\lambda)$. Then the hazard function is  a constant, $h(t)=\frac{\lambda e^{-\lambda t}}{e^{-\lambda t}}=\lambda$. Conversely, suppose that $h(t)=\lambda$ for all $t$, with $\lambda >0$. Let $ G(t)=1-F(t)$ (this is called the survival function). We have $G^{\prime}(t) / G(t)=d\ln G(t)/dt=-\lambda$, so $\ln G(t)=\int_t d\ln G(t)/dt ={-\lambda t+C}$ with $C$ a constant. Since $G(0)=1$, we know $C+0$ and thus $G(t) =e^{-\lambda t}$ Thus, $T \sim \operatorname{Expo}(\lambda)$ since its CDF $F(t)=1-e^{-\lambda t}$.
+    \end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

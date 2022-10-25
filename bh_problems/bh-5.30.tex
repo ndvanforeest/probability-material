@@ -1,0 +1,21 @@
+\input{header.tex}
+
+\setcounter{theorem}{29}
+\begin{exercise}[BH.5.30] Let $Z \sim N(0,1)$ and let $S$ be a random sign independent of $Z$, i.e., $S$ is 1 with probability 1/2 and -1 with probability 1/2. Show that $SZ \sim N (0, 1)$.
+\begin{solution}
+    To show $S\sim N(0,1)$ we only need to show its distribution is the same as the one of Z (whose distribution is N(0,1)):
+	\begin{align*}
+		\mathbb{P}\left(SZ\leq y \right) = \mathbb{P}\left(SZ\leq y|S=1 \right)\mathbb{P}(S=1)+\mathbb{P}\left(SZ\leq y|S=1 \right)\mathbb{P}(S=-1) =\mathbb{P}\left(Z\leq y\right) 
+	\end{align*}
+	(or use MGF)
+	\\~~\\
+	Alternatively, we can use MGF to check:
+	\begin{align*}
+		M_{SZ}(t) =& \mathbb{E}e^{tSZ} \\
+		=_{\textit{Independence}}&~ \mathbb{E}e^{-tZ} 1/2 + \mathbb{E}e^{tZ} 1/2 = e^{t^2/2} 
+	\end{align*}
+	which is a MGF of N(0,1). (The above calculation of MGF is slightly beyond the scope of this course, as it may require the concept of conditional expectation.)
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

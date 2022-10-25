@@ -1,0 +1,17 @@
+\input{header.tex}
+
+\setcounter{theorem}{47}
+\begin{exercise}[BH.5.48] Find $E\left(X^3\right)$ for $X \sim \operatorname{Expo}(\lambda)$, using LOTUS and the fact that $E(X)=1 / \lambda$ and $\operatorname{Var}(X)=1 / \lambda^2$, and integration by parts at most once. In the next chapter, we'll learn how to find $E\left(X^n\right)$ for all $n$.
+\begin{solution}
+    By LOTUS,
+    $$
+    \begin{aligned}
+        E\left(X^3\right)=& \int_0^{\infty} x^3 \lambda e^{-\lambda x} d x=-\left.x^3 e^{-\lambda x}\right|_0 ^{\infty}+\frac{3}{\lambda} \int_0^{\infty} x^2 \lambda e^{-\lambda x} d x \\
+        &=\frac{3}{\lambda} E\left(X^2\right)=\frac{3}{\lambda}\left(\operatorname{Var}(X)+(E X)^2\right)=\frac{6}{\lambda^3},
+    \end{aligned}
+    $$
+    where the second equality uses integration by parts, letting $u=x^3$ and $d v=\lambda e^{-\lambda x} d x$ and we multiply the second term by 1 written as $\lambda / \lambda$.
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
