@@ -1,0 +1,24 @@
+\input{header.tex}
+\setcounter{theorem}{24}
+\begin{exercise}[BH.1.52]
+	A certain class has 20 students, and meets on Mondays and Wednesdays in a classroom with exactly 20 seats. In a certain week, everyone in the class attends both days. On both days, the students choose their seats completely randomly (with one student per seat). Find the probability that no one sits in the same seat on both days of that week.
+\begin{solution}
+	If we define $A_{i}$ to be the event that student $i$ sits in the same seat on both days, then we are looking for
+	$P(\cup_{i=1}^{20}A_{i})$. We are going to calculate this probability using the inclusion-exclusion principle. First, the probability that student $i$ sits in the same place twice. The student can take any seat in the first lecture, but then in the second lecture must choose the same seat. Since in the second lecture, seating is assigned at random, the probability of sitting in the same seat in both lectures is $P(A_{i})=\frac{1}{20}$. Now consider the intersection $A_{i}\cap A_{j}$ for $i\neq j$. By the LOTP $$P(A_{i}\cap A_{j}) = P(A_{i}\cap A_{j}|A_{i})P(A_{i})=P(A_{j}|A_{i})P(A_{i}).$$ To calculate the conditional probability, note that if we know that student $i$ sits in the same seat in both lectures, student $i$ faces the same problem as when calculating the marginal probability, only now with 19 seats. So $P(A_{j}|A_{i}) = \frac{1}{19}$. We conclude that $P(A_{i}\cap A_{j})=\frac{1}{20}\frac{1}{19} = \frac{18!}{20!}$. The same strategy can be used to find the remaining intersections, for example $P(A_{i}\cap A_{j}\cap A_{k} =\frac{1}{20\cdot 19\cdot 18} = \frac{17!}{20!}$. For general $n$ ($n=20$ in the question), we now have
+	\begin{align*}
+		P(\cup A_{i}) &= n\cdot P(A_{i}) - {n \choose 2}P(A_{i}\cap A_{j}) + {n \choose 3}P(A_{i}\cap A_{j}\cap A_{k})-\ldots\\
+		& = 1 - \frac{n!}{(n-2)!\cdot 2!}\frac{(n-2)!}{n!} + \frac{n!}{(n-3)!\cdot 3!}\frac{(n-3)!}{n!} -\ldots\\
+		& = 1-\frac{1}{2!}+\frac{1}{3!}-\ldots
+		-\sum_{i=1}^{n} \frac{(-1)^{i}}{i!}\\
+		& \approx -\sum_{i=1}^{\infty} \frac{(-1)^{i}}{i!}\\ 
+		& = -\sum_{i=0}^{\infty} \frac{(-1)^{i}}{i!} +1 =1-e^{-1}
+	\end{align*}
+The last steps for approximating the summation when $n$ is large (in color red) would require knowledge from later weeks: the Taylor expansion of $e^x$. You do not have to write that line.\\~\\
+Then the final result (the above is calculating the probability of the  complement of the targeted event) would be 
+\begin{align*}
+1-P(\cup_{i=1}^{n} A_{i}) = 1+ \sum_{i=1}^{n} \frac{(-1)^{i}}{i!} { \approx \sum_{i=0}^{\infty} \frac{(-1)^{i}}{i!} =1/e. }
+\end{align*} 
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
