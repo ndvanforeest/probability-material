@@ -1,0 +1,27 @@
+\input{header.tex}
+\setcounter{theorem}{10}
+\begin{exercise}[BH.3.24]
+  Let $X$ be the number of Heads in 10 fair coin tosses.
+	\begin{enumerate}
+		\item Find the conditional PMF of $X$, given that the first two tosses both land Heads. 
+		\item Find the conditional PMF of X, given that at least two tosses land Heads.
+	\end{enumerate}
+\begin{solution}~
+	\begin{enumerate}
+	    \item Denote by $X_{8}$ the number of heads in $8$ tosses, so $X_{8}\sim \text{Bin}(8,0.5)$, and by $HH$ the event that the first two tosses are heads. Notice that we have $X=2$ if in the remaining 8 tosses we don't see any heads. Similarly, we have $X=3$ if in the remaining 8 tosses we have 1 heads. In general, 
+        \begin{align*}
+        	P(X=x|HH) = P(X_{8}=x-2) \text{  for } x=2,\ldots,10.
+        \end{align*}
+        \item Denote by $A$ the event that at least two heads are tossed. Then,
+        \begin{align*}
+        	P(A) = 1-{10 \choose 0}\frac{1}{2^{10}}-{10 \choose 1}\frac{1}{2^{10}}.
+        \end{align*} For $x=2,\ldots,10$, using the definition of conditional probability,
+        \begin{align*}
+        	P(X=x|A) &=\frac{P(X=x,A)}{P(A)} = \frac{P(X=x)}{P(A)} = \frac{{10 \choose x}\frac{1}{2^{10}}}{1-{10 \choose 0}\frac{1}{2^{10}}-{10 \choose 1}\frac{1}{2^{10}}}\\
+        	&={10 \choose x}\cdot \frac{1}{1024-1-10}.
+        \end{align*}
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
