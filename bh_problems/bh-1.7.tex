@@ -1,0 +1,39 @@
+\input{header.tex}
+\setcounter{theorem}{5}
+\begin{exercise}[BH.1.7]
+Two chess players, A and B, are going to play 7 games. Each game has three possible outcomes: a win for A (which is a loss for B), a draw (tie), and a loss for A (which is a win for B). A win is worth 1 point, a draw is worth $0.5$ points, and a loss is worth 0 points.
+\begin{enumerate}
+	\item How many possible outcomes for the individual games are there, such that overall player A ends up with 3 wins, 2 draws, and 2 losses?
+	\item How many possible outcomes for the individual games are there, such that A ends up with 4 points and B ends up with 3 points?
+	\item Now assume that they are playing a best-of-7 match, where the match will end when either player has 4 points or when 7 games have been played, whichever is first. For example, if after 6 games the score is 4 to 2 in favor of $A$, then A wins the match and they don't play a 7th game. How many possible outcomes for the individual games are there, such that the match lasts for 7 games and A wins by a score of 4 to 3 ?
+\end{enumerate} 
+	\begin{solution}
+\begin{enumerate}
+	\item   Writing W for win, D for draw, and L for loss (for player A), an outcome of the desired form is any permutation of WWWDDLL. So there are
+	$$
+	\frac{7 !}{3 ! 2 ! 2 !}=210
+	$$
+	possible outcomes of the desired form.
+	\item   To end up with 4 points, A needs to have one of the following results: (i) 4 wins and 3 losses; (ii) 3 wins, 2 draws, and 2 losses; (iii) 2 wins, 4 draws, and 1 loss; or (iv) 1 win and 6 draws. Reasoning as in (a) and adding up these possibilities, there are
+	$$
+	\frac{7 !}{4 ! 3 !}+\frac{7 !}{3 ! 2 ! 2 !}+\frac{7 !}{2 ! 4 ! 1 !}+\frac{7 !}{1 ! 6 !}=357
+	$$
+	possible outcomes of the desired form.
+	\item   For the desired outcomes, either (i) player A is ahead $3.5$ to $2.5$ after 6 games and then draws game 7, or (ii) the match is tied (3 to 3) after 6 games and then player A wins game 7 . Reasoning as in (b), there are
+	$$
+	\frac{6 !}{3 ! 1 ! 2 !}+\frac{6 !}{2 ! 3 ! 1 !}+\frac{6 !}{1 ! 5 !}=126
+	$$
+	possibilities of type (i) and
+	$$
+	\frac{6 !}{3 ! 3 !}+\frac{6 !}{2 ! 2 ! 2 !}+\frac{6 !}{1 ! 4 ! 1 !}+1=141
+	$$
+	possibilities of type (ii), so overall there are
+	$$
+	126+141=267
+	$$
+	possible outcomes of the desired form.
+\end{enumerate}
+	\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
