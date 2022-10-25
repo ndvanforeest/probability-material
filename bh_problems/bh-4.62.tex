@@ -1,0 +1,14 @@
+\input{header.tex}
+\setcounter{theorem}{61}
+\begin{exercise} [BH.4.62] For $X \sim \operatorname{Pois}(\lambda)$, find $E\left(2^X\right)$, if it is finite.  
+%\begin{hint}
+%\end{hint}
+\begin{solution}
+    By LOTUS,
+    $$
+    E\left(2^X\right)=e^{-\lambda} \sum_{k=0}^{\infty} \frac{(2 \lambda)^k}{k !}=e^{-\lambda} e^{2 \lambda}=e^\lambda,
+    $$
+    for all $\lambda>0$.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

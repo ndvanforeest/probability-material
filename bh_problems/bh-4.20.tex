@@ -1,0 +1,20 @@
+\input{header.tex}
+\setcounter{theorem}{19}
+\begin{exercise} [BH.4.20] Let $X \sim \text{Bin}(100, 0.9)$. For each of the following parts, construct an example showing that it is possible, or explain clearly why it is impossible. In this problem, $Y$ is a random variable on the same probability space as $X$; note that $X$ and $Y$ are not necessarily independent.
+	\begin{enumerate}
+		\item Is it possible to have $Y \sim \text{Pois}(0.01)$ with $\P{X \geq Y} = 1$?
+		\item Is it possible to have $Y \sim \text{Bin}(100,0.5)$ with $\P{X \geq Y} = 1$?
+		\item Is it possible to have $Y \sim \text{Bin}(100,0.5)$ with $\P{X \leq Y} = 1$?
+	\end{enumerate}
+%\begin{hint}
+%\end{hint}
+\begin{solution}
+    \begin{enumerate}
+        \item No. You may notice $X\leq 100$ with probability 1, while $Y$ could take values above 100 with positive probability.
+        \item Yes. Consider the following case, let $X_1, \cdots, X_{100}\sim$i.i.d. Bern(0.9), $Z_1, \cdots, Z_{100}\sim$i.i.d. Bern(5/9) and $Z_i$ are independent from $X_i$,  $X=\sum_{i=1}^{100} X_i, Y=\sum_{i=1}^{100}X_iZ_i$. You can check $\mathbb{P}(X\geq Y)=1$ and $X\sim$Bin(100,0.9), $Y\sim$Bin(100,0.5).
+        \item No. Prove by contradiction. Suppose $\mathbb{P}(X\geq Y) =1$ then we would have $\mathbb{E}(X-Y) \geq 0$ and thus 
+        $\mathbb{E}X\geq \mathbb{E}Y$ (linearity of expectation). However, $\mathbb{E}X\geq \mathbb{E}Y$ contradicts the fact that $\mathbb{E}X=90, \mathbb{E}Y=50$.
+    \end{enumerate}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

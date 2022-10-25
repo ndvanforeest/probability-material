@@ -1,0 +1,70 @@
+\input{header.tex}
+\setcounter{theorem}{47}
+\begin{exercise} [BH.4.48] Let $X$ be Hypergeometric with parameters $w$, $b$, $n$.
+	\begin{enumerate}
+		\item Find $E\binom{X}{2}$ by \emph{thinking}, without any complicated calculations.
+		\item Use (a) to find the variance of $X$. You should get $V(X) = \frac{N - n}{N - 1} npq$
+	\end{enumerate}
+%\begin{hint}
+%\end{hint}
+\begin{solution}\begin{enumerate}
+    \item Consider the story of draw $n$ times from a box with ($w$) white  balls and ($b$) black balls without replacement. Suppose these $w$ white balls are distinguishable, what is the expected number of pairs of two white balls (within $n$ draws, total pair combinations would be $\binom{matrix}{n}$)? Creating an indicator r.v. for each pair, we have the answer 
+    \begin{align*}
+        \binom{n}{2}\frac{w}{w+b}\frac{w-1}{w+b-1}
+    \end{align*}
+    ~\\ Now we give more details on how to construct the indicators (This would be a bit lengthy, and normally these discussions are not required in exams. I write a long story here in a hope that you may understand the whole procedures better.). \\~\\
+    Consider this game, you draw $n$ times without replacement from a box with $w$ white balls and $b$ black balls, and end up with $X$ (r.v.) white balls, and $n-X$ (r.v.) black balls. $\binom{X}{2}$ is the number of possible pair combinations of white balls out of the $n$ balls. It is easy to check that there are in total $\binom{n}{2}$ combinations, let's order these pair combinations in one arbitrary order from $i=1$ to $\binom{n}{2}$.  Let $I_i=1$ denote the ith pair to be a pair of two white balls (notice these indicator r.v.s are not independent from each other: e.g. if $n>w$ and the first $\binom{w}{2}$ indicators are all equal to 1, the rest indicators have to be zero.).We show that 
+    \begin{align}
+    \binom{X}{2} = \sum_{i=1}^{\binom{n}{2}} I_i \label{1}
+    \end{align}
+    To prove two r.v.s are equal to each other, is equivalent to showing that two functions are equal to each other with the domain of the functions being the same sample space. In this case, we only need to show that when an arbitrary event $\{X=k\}$ happens (or in other words, we consider one arbitrary element $s$ from the sample space $S$ such that $X(s)=k$. r.v.s are nothing but functions mapping sample space to numbers.), the right hand side equals the left hand side.   When $X=k$, we know there would be $\binom{k}{2}$ combinations of white ball pairs out of $\binom{n}{2}$ total combinations,  which means no matter how  we order the $\binom{n}{2}$ combinations there would be $\binom{k}{2}$ positions which have white combinations (and these indicators would be 1, here we do not know which indicator would be 1 but we know in total there would be $\binom{k}{2}$ 1's.) Therefore, we prove conditional on an arbitrary event $\{X=k\}$, the equation \eqref{1} holds true, and since the event (or the element from the sample space) is chosen arbitrarily, we know  the equation \eqref{1} holds true for all events (for all elements from the sample space, or in other words, holds true with probability equal to one, $\mathbb{P}\left(\binom{X}{2}= \sum_{i=1}^{\binom{n}{2}} I_i \right)=1$.)\\
+    Equation \eqref{1} implies that 
+    \begin{align}
+        \mathbb{E}\left(\binom{X}{2}\right) = \sum_{i=1}^{\binom{n}{2}}\mathbb{E} I_i \label{e}
+    \end{align}
+    To calculate the right hand side of equation \eqref{e} by symmetry we only need to look at $\mathbb{E} I_1$ which equals $\mathbb{P}(I_1=1)$. \\~\\
+    $\{I_1=1\}$  denotes the event that the first pair is a white pair. If we order all indicators by the Lexicographic order\footnote{The first ball drawn from the box is assigned the number 1, the second 2, ...  
+    The first indicator (or the first pair combination) is the pair combination (1,2). The the rest 
+    indicators follow this order (Lexicographic order): $(a,b)\leq (a',b')$ if and only if "$a<a'$" or "$a=a'$ and $b\leq b'$". Therefore, the second pair is a combination of the first and the third draws (1,3), $\cdots$, the $n-1$th indicator is about a pair of the first and the nth draws (1,n) and the $n$th indicator is about a pair of the second and the third draws (2,3) ...
+    
+    We could choose arbitrary order here by symmetry, and some order (like the order we choose here) leads to easier calculations.
+    }, then $\{I_1=1\}$ means the first two balls you draw from the box (w+b balls) is a white pair: 
+    \begin{align*}
+    \mathbb{P}\{I_1=1\} = \mathbb{P}(A_{1w}) \mathbb{P}(A_{2w}|A_{1w})=\frac{w}{w+b}\frac{w-1}{w+b-1}
+    \end{align*} 
+    where $A_{iw}$ denotes the $i$th ball drawn from the box is white. Therefore, we know 
+    \begin{align*}
+        \mathbb{E}\binom{X}{2} = \sum_{i=1}^{\binom{n}{2}} \frac{w}{w+b}\frac{w-1}{w+b-1} =\binom{n}{2}\frac{w}{w+b}\frac{w-1}{w+b-1}
+    \end{align*}
+    \item Note that 
+    \begin{align*}
+        \binom{X}{2}= X(X-1)/2
+    \end{align*}
+    then you should be able to derive the rest.\\~\\
+    The result from (a) implies that 
+    \begin{align*}
+        \mathbb{E}	\binom{X}{2}= n(n-1)/2 p \frac{w-1}{N-1}
+    \end{align*} 
+    Since
+    \begin{align*}
+        \mathbb{E}	\binom{X}{2} =& \mathbb{E} (X(X-1)/2) \\
+        =& \mathbb{E} X^2/2- \mathbb{E} X/2 
+    \end{align*}
+    we know 
+    \begin{align*}
+        \mathbb{E}X^2 - \mathbb{E}X=  n(n-1) p \frac{w-1}{N-1}
+    \end{align*}
+    Therefore, (given the mean is $\mathbb{E}X=np$) 
+    \begin{align*}
+        \mathbb{V} =& 	\mathbb{E}X^2 - (\mathbb{E}X)^2\\
+        =&  	\mathbb{E}X^2 -\mathbb{E}X +\mathbb{E}X- (\mathbb{E}X)^2\\
+        =&  	 n(n-1) p \frac{w-1}{N-1} + np -(np)^2 \\
+        =&  	 np \left((n-1)  \frac{w-1}{N-1} + 1 -(np)\right) \\
+        =&  	 np \left(  \frac{nw-w-n+N}{N-1}  -(np)\right) \\
+        =&  	 np \left(  \frac{nw-w-n+N}{N-1}  -(nw/N)\right) \\
+        =&  \frac{N-n}{N-1}npq
+    \end{align*}
+\end{enumerate}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}
