@@ -1,0 +1,45 @@
+\input{header.tex}
+\setcounter{theorem}{4}
+\begin{exercise}[BH.3.9]
+  Let $F_1$ and $F_2$ be CDFs, $0 < p < 1$, and $F(x) = p F_1(x)+ (1 - p) F_2(x)$ for all $x$.
+	\begin{enumerate}
+		\item Show directly that $F$ has the properties of a valid CDF (see Theorem 3.6.3). The distribution defined by $F$ is called a \emph{mixture} of the distributions defined by $F_1$ and $F_2$.
+		\item Consider creating an r.v. in the following way. Flip a coin with probability p of Heads. If the coin lands Heads, generate an r.v. according to $F_1$; if the coin lands Tails, generate an r.v. according to $F_2$. Show that the r.v. obtained in this way has CDF $F$.
+	\end{enumerate}
+\begin{solution}~
+	\begin{enumerate}
+		\item The properties of a valid CDF are
+		\begin{enumerate}
+			\item Increasing: If $x_{1}\leq x_{2}$, then $F(x_{1})\leq F(x_{2})$.
+			\item Right-continuous: $F(a)=\lim_{x\rightarrow a^{+}} F(x)$.
+			\item Convergence to 0 and 1 in the limits: $\lim_{x\rightarrow-\infty}F(x)=0$ and $\lim_{x\rightarrow\infty}F(x)=0$.
+		\end{enumerate}
+		To show (i), notice that $F(x_{1})= pF_{1}(x_{1}) + (1-p)F_{2}(x_{1})\leq  pF_{1}(x_{2}) + (1-p)F_{2}(x_{2})=F(x_{2})$, where the inequality holds because $F_{1}$ and $F_{2}$ are CDFs \textit{and} $0<p<1$. 
+		To show (ii) 
+		\begin{align*}
+			\lim_{x\rightarrow a^{+}} F(x) &= \lim_{x\rightarrow a^{+}}(pF_1(x) + (1-p)F_{2}(x))\\
+			&= p\cdot \lim_{x\rightarrow a^{+}}F_1(x) + (1-p)\cdot \lim_{x\rightarrow a^{+}}F_{2}(x)\tag*{(Algebraic Limit Theorem)}\\
+			& = p F_1(a) + (1-p)F_{2}(a)\\
+			& = F(a).
+		\end{align*}
+		To show (iii)
+		\begin{align*}
+			\lim_{x\rightarrow-\infty}F(x)& = \lim_{x\rightarrow-\infty} pF_1(x) + (1-p)F_{2}(x)\\
+			& =p\cdot  \lim_{x\rightarrow-\infty} F_1(x) + (1-p) \cdot  \lim_{x\rightarrow-\infty} F_{2}(x)\\
+			& = 0,\\
+			\lim_{x\rightarrow \infty}F(x)& = \lim_{x\rightarrow \infty} pF_1(x) + (1-p)F_{2}(x)\\
+			& =p\cdot  \lim_{x\rightarrow-\infty} F_1(x) + (1-p) \cdot  \lim_{x\rightarrow-\infty} F_{2}(x)\\
+			& = p + (1-p)\\
+			& = 1.
+		\end{align*}
+		\item This uses the definition of the CDF and the LOTP. Define $X_{1}$ as the the random variable with distribution $F_{1}$ and $X_{2}$ as the random variable with distribution $F_{2}$ and $X$ as the random variable with distribution $F$. Define $Y$ as the random variable equal to 1 if the coin lands heads and equal to 0 if the coin lands tails. Then,
+		\begin{align*}
+			F(x)=P(X\leq x)& = P(X\leq x|Y=1)P(Y=1) +  P(X\leq x|Y=0)P(Y=0)\tag*{(\text{LOTP})}\\
+			&= P(X_{1}\leq x)P(Y=1) + P(X_{2}\leq x)P(Y=0)\\
+			&= p\cdot F_{1}(x) + (1-p)\cdot F_{2}(x).
+		\end{align*} 
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
