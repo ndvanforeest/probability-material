@@ -1,13 +1,13 @@
 \input{header.tex}
 \setcounter{theorem}{15}
-begin{exercise}[BH.3.39]
+\begin{exercise}[BH.3.39]
   Give an example of two discrete random variables $X$ and $Y$ on the same sample space such that $X$ and $Y$ have the same distribution, with support $\{1,2, \ldots,10\}$, but the event $X = Y$ \emph{never} occurs. If $X$ and $Y$ are independent, is it still possible to construct such an example?
 \begin{solution}
-	Let $Y$ be discrete uniform over the support and let $X=Y+1$ when $Y<10$ and $X=1$ if $Y=10$. Then $P(X=i) = P(Y=i-1) = \frac{1}{10} = P(Y=i)$. If $X$ and $Y$ are independent, then
+    Let $Y$ be discrete uniform over the support and let $X=Y+1$ when $Y<10$ and $X=1$ if $Y=10$. Then $P(X=i) = P(Y=i-1) = \frac{1}{10} = P(Y=i)$. If $X$ and $Y$ are independent, then
     \begin{align*}
-    	P(X=Y) &= \sum_{y}P(X=Y|Y=y)P(Y=y) \tag*{(\text{LOTP})}\\
-    	&= \sum_{y}P(X=y)P(Y=y)>0,
-    \end{align*} 
+        P(X=Y) &= \sum_{y}P(X=Y|Y=y)P(Y=y) \tag*{(\text{LOTP})}\\
+        &= \sum_{y}P(X=y)P(Y=y)>0,
+    \end{align*}
     where the final inequality holds since $X$ and $Y$ have the same support.
 \end{solution}
 \end{exercise}

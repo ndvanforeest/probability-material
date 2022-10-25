@@ -1,36 +1,36 @@
 \input{header.tex}
 \setcounter{theorem}{14}
-begin{exercise}[BH.3.31]
+\begin{exercise}[BH.3.31]
   Once upon a time, a famous statistician offered tea to a lady. The lady claimed that she could tell whether milk had been added to the cup before or after the tea. The statistician decided to run some experiments to test her claim.
-	\begin{enumerate}
-		\item The lady is given 6 cups of tea, where it is known in advance that 3 will be milk-first and 3 will be tea-first, in a completely random order. The lady gets to taste each and then guess which 3 were milk-first. Assume for this part that she has no ability whatsoever to distinguish milk-first from tea-first cups of tea. Find the probability that at least 2 of her 3 guesses are correct.
-		\item Now the lady is given one cup of tea, with probability 1/2 of it being milk-first. She needs to say whether she thinks it was milk-first. Let $p_1$ be the lady's probability of being correct given that it was milk-first, and $p_2$ be her probability of being correct given that it was tea-first. She claims that the cup was milk-first. Find the \emph{posterior odds} that the cup is milk-first, given this information.
-	\end{enumerate}
+    \begin{enumerate}
+        \item The lady is given 6 cups of tea, where it is known in advance that 3 will be milk-first and 3 will be tea-first, in a completely random order. The lady gets to taste each and then guess which 3 were milk-first. Assume for this part that she has no ability whatsoever to distinguish milk-first from tea-first cups of tea. Find the probability that at least 2 of her 3 guesses are correct.
+        \item Now the lady is given one cup of tea, with probability 1/2 of it being milk-first. She needs to say whether she thinks it was milk-first. Let $p_1$ be the lady's probability of being correct given that it was milk-first, and $p_2$ be her probability of being correct given that it was tea-first. She claims that the cup was milk-first. Find the \emph{posterior odds} that the cup is milk-first, given this information.
+    \end{enumerate}
 \begin{solution}~
-	\begin{enumerate}
-	    \item Denote by $X$ the number of correct guesses. It is helpful to think for a moment about a particular ordering, for example: 
+    \begin{enumerate}
+        \item Denote by $X$ the number of correct guesses. It is helpful to think for a moment about a particular ordering, for example:
         \begin{align*}
-        	M,M,T,M,T,T
+            M,M,T,M,T,T
         \end{align*}
         Refer to these as the milk and tea locations. To get $k$ of the milk teas correct, the lady needs to select $k$ out of 3 milk locations and $3-k$ out of 3 tea locations. In total, she can select 3 out of 6 locations for her guess. So, we find that
         \begin{align*}
-        	P(X=k) = \frac{{3 \choose k}{3 \choose 3-k}}{{6 \choose 3}}.
+            P(X=k) = \frac{{3 \choose k}{3 \choose 3-k}}{{6 \choose 3}}.
         \end{align*}
         Notice that the particular ordering MMTMTT above is not material to the argument.
         \item  Denote by $L$ the claim of the lady and by $M$ the event that the cup is milk first. We are looking for the posterior odds, so
         \begin{align*}
-        	odds(M|L) = \frac{P(M|L)}{P(M^{C}|L)}.
+            odds(M|L) = \frac{P(M|L)}{P(M^{C}|L)}.
         \end{align*}
         We first calculate the numerator
         \begin{align*}
-        	P(M|L) = \frac{P(L|M)P(M)}{P(L|M)P(M) + P(L|M^{C})P(M^{C})} = \frac{p_{1}\frac{1}{2}}{p_1\frac{1}{2} + (1-p_{2})\frac{1}{2}}.
+            P(M|L) = \frac{P(L|M)P(M)}{P(L|M)P(M) + P(L|M^{C})P(M^{C})} = \frac{p_{1}\frac{1}{2}}{p_1\frac{1}{2} + (1-p_{2})\frac{1}{2}}.
         \end{align*}
         where we have $ P(L|M^{C})=1-p_{2}$ because the cup is tea first, which the lady would correctly identify with probability $p_{2}$. The probability that she mistakes this for milk first is then $1-p_{2}$. Some algebra now shows that
-        				\begin{align*}
+                        \begin{align*}
         odds(M|L) = \frac{P(M|L)}{1-P(M|L)} =\frac{p_{1}}{1-p_{2}}.
         \end{align*}
         where we use the axioms of probability and the fact that the conditional probability is also a probability.
-	\end{enumerate}
+    \end{enumerate}
 \end{solution}
 \end{exercise}
 
