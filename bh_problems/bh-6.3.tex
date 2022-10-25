@@ -1,0 +1,21 @@
+\input{header.tex}
+\setcounter{theorem}{2}
+\begin{exercise} [BH.6.3] Let $X$ have the Pareto distribution with parameter $a > 0$; this means that $X$ has PDF $f(x) = a/ x^{a+1}$ for $x \geq 1$ (and 0 otherwise). Find the median and mode of $X$.
+
+\begin{solution}
+    Median: $2^{1/\alpha}$ (CDF: $1-x^{-1\alpha}$). Mode: 1.\\~\\
+	\\~\\
+	Denote $F_X$ the CDF of continuous r.v. $X$, and if we check the definition of median, we know we need to find one value $x$ such that 
+	\begin{align}
+		\mathbb{P}(X\leq x)= F_X(x) \geq 1/2;~~ \mathbb{P}(X\geq x)=\mathbb{P}(X > x) =1-F_X(x) \geq 1/2
+	\end{align}
+	which implies that $F_X(x)=1/2$ \textit{(note this only holds for continuous r.v.s, as for discrete r.v.s $X'$, $\mathbb{P}(X'\geq x)=\mathbb{P}(X' > x)$ may not hold true if there is non-zero probability mass at $x$. See exercise 6.05 for example.)}. For one continuous r.v., to find its median, we only need to locate possible values of $x$ such that $$F_X(x)=1/2.$$  
+	Now using PDF, we can derive $F_X$ by integration (for $x>1$):
+	\begin{align*}
+		F_X(x)=\mathbb{P}\left(X\leq x\right) = \int_{1}^{x} a/x^{a+1} dx =1-x^{-a}
+	\end{align*}
+	Solve $F_X(x)=1-x^{-a}=1/2$ we have a unique solution (\textit{in some cases, if CDF is flat at 1/2 over some intervals, solutions are not unique}) $2^{1/\alpha}$ which is the median. \\~\\
+	The PDF given in the exercise is strictly decreasing over $[1,\infty)$, we know the mode is 1.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

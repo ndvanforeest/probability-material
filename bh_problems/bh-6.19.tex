@@ -1,0 +1,15 @@
+\input{header.tex}
+\setcounter{theorem}{18}
+\begin{exercise} [BH.6.19] Use MGFs to determine whether $X + 2Y$ is Poisson if $X$ and $Y$ are i.i.d. $\text{Pois}(\lambda)$.
+
+\begin{solution}
+    Not Poisson. $M_{X+2Y}(t)= e^{\lambda(e^\lambda+e^{2\lambda} -2) }$.\\~\\
+    First, derive MGF. For any $t$ from a real line (certainly the whole real line would contain one open interval around zero), we have:
+    \begin{align*}
+    	M_{X+2Y}(t) &=_{\textit{definition MGF}} \mathbb{E} e^{t(X+2Y)} \\&=_{\textit{independence}} \mathbb{E} e^{tX}\mathbb{E} e^{2tY} \\&=_{\textit{definition MGF}} M_{X}(t)M_{Y}(2t) \\&=_{\textit{Poisson MGF}}  e^{\lambda(e^t-1)}e^{\lambda(e^{2t}-1)} \\
+    	&= e^{\lambda(e^\lambda+e^{2\lambda} -2) }
+    \end{align*}
+    Now we know if X+2Y follows Poisson it should follow Pois($\mathbb{E}(X+2Y)$) as the arrival rate should be its expectation by Poisson property. However, this contradicts the above MGF we derive as it is not equal to $M_{\textit{Pois($\mathbb{E}(X+2Y)$)}}(t)=M_{\textit{Pois($3\lambda$)}}(t)= e^{3\lambda(e^t-1)}$.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

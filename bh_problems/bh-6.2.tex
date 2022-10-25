@@ -1,0 +1,21 @@
+\input{header.tex}
+\setcounter{theorem}{1}
+\begin{exercise} [BH.6.2] Let $X \sim \text{Expo}(\lambda)$. Find the median and mode of $X$.
+
+\begin{solution}
+    Median: $(\log2)/\lambda$. The mode is 0 if the PDF has support for all $x\geq 0$ and value of the PDF at zero is larger than $\lambda e^{-\lambda \times 0}$ otherwise if we use the specification for Expo in the textbook (Definition 5.5.1) there is no mode. 
+	Whether mode exists would depend on how we specify the PDF on $x=0$.\\~\\
+    \textbf{Notice we can change finitely 
+		many points of a function, which does not affect the integral (if it exists) of the function. This is also one reason why the textbook defines all continuous r.v.s by their PDFs, even though we only need to know CDFs (or MGFs if they exist) to know the corresponding continuous r.v.s.} By specifying the exact PDFs, the textbook avoid the confusions that different PDFs (PDFs that only differ at countably many points) can lead to the same CDFs and thus the same continuous r.v.s. Another reason could be looking at PDFs graphs gives us a better view of the probability  allocation.  
+	\\~\\
+	Median: Denote $F_X$ the CDF of $X$, then we find the only solution of $F_X(x)=1/2$ would be a unique solution $F^{-1}(1/2)= \log(2)/\lambda$, and thus 
+	the median is $\log(2)/\lambda$.
+	~\\~\\
+	This PDF function is strictly decreasing in $x$. The mode here is a bit tricky, its existence depends on how we define the PDF. Notice changing values of the PDF over countably many points does not affect its integration values and thus does not affect the associated probabilities (distributions, CDFs).  \\~\\
+	Therefore, there is no mode if the PDF is defined to be 0 at $x = 0$, and the mode is 0 if the PDF is defined to be any value larger than $\lambda e^{-\lambda \times 0}$ at 0. \textbf{If we use the specification for Expo in the textbook (Definition 5.5.1), then there is no mode.} This is also one of the reasons that we use PDF instead of CDF to define different continuous real-valued random variable.  \\
+	
+	~\\
+	\textit{Further comment: note another difference between the modes from discrete r.v.s and continuous r.v.s. If we observe data drawn from a discrete distribution, we would observe the mode many times (as its probability is large); while if data is drawn from a continuous one, we are not likely to observe the exact mode even for a single time as the probability of a continuous r.v. being equal to an exact number is always zero. However, for one continuous r.v. with uni-mode continuous PDF, we can expect to observe values from a neighborhood of the mode many many times as the integration of the PDF over an interval containing the mode is relatively larger, which means the probability of observing values from that neighborhood (an interval containing the mode) is relatively larger.}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

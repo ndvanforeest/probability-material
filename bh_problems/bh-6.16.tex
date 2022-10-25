@@ -1,0 +1,24 @@
+\input{header.tex}
+\setcounter{theorem}{15}
+\begin{exercise} [BH.6.16]
+    Let $X \sim \text{Expo}(\lambda)$. Find the skewness of $X$, and explain why it is positive and why it does not depend on $\lambda$.
+	\begin{hint}
+		Recall that $\lambda X \sim \text{Expo}(1)$ and the $n$th moment of an $\text{Expo}(1)$ r.v. is $n!$ for all $n$.
+	\end{hint}
+	\begin{solution}
+		Note that $Y=\lambda X\sim $Expo(1) (Intuition would be: if we normalize the weighting time by the arrival rate, then it is 1. For example, the arrival (service) rate is 2 per day and thus the weighting time would be half day on average, 2 times half is one.). The skewness  is the third standardized moment which in this case is the third moment of $\frac{X-1/\lambda}{1/\lambda} = Y-1$ (whose distribution now is free of $\lambda$, and thus of course Skewness has nothing to do with $\lambda$).
+		\begin{align*}
+			Skew(X) =\mathbb{E}(Y-1)^3= \mathbb{E}(Y^3-3Y^2+3Y-1)=3! -3*2! +3-1=2>0
+		\end{align*} 
+		\textbf{Right (positive) skewed. if you draw the graph, you will see that it has a long right tail, and thus could take some very large positive numbers, and the skewness is positive}.~\\~\\
+		Now to calculate the $i$th moment of $E(Y^i)$, you can use the definition of expectation and LOTUS $=\int_{0}^{\infty} y^i e^{-y}dy$.  Or you can make use of the moment generating function:
+		\begin{align*}
+			M_Y(t) = \int_{0}^{\infty} e^{ty} e^{-y}dy =\frac{1}{1-t},
+		\end{align*}
+		which is well defined since $\frac{1}{1-t}$ is finite for, e.g., $t\in(-0.5, 0.5)$ and thus 
+		\begin{align*}
+			E(Y^i) =\left.\left(M_Y(t)  \right)^{(i)}\right|_{t=0} = i!
+		\end{align*} 
+\end{solution}
+\end{exercise}
+\input{trailer.tex}
