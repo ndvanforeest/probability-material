@@ -1,0 +1,20 @@
+\input{header.tex}
+\setcounter{theorem}{8}
+
+\begin{exercise}[BH.12]
+	Four players, named $A$, $B$, $C$, and $D$, are playing a card game. A standard, well-shuffled deck of cards is dealt to the players (so each player receives a 13-card hand).
+	\begin{enumerate}
+		\item How many possibilities are there for the hand that player A will get? (Within a hand, the order in which cards were received doesn’t matter.)
+		\item How many possibilities are there overall for what hands everyone will get, assuming that it matters which player gets which hand, but not the order of cards within a hand?
+		\item Explain intuitively why the answer to Part (b) is not the fourth power of the answer to Part (a).
+	\end{enumerate}
+\begin{solution}~
+	\begin{enumerate}
+		\item There are 52 cards, 13 of which are dealt to Player A. The number of possible hands (when ordering within the hand is not important) is $N_{A}={52 \choose 13}$.
+	 	\item First deal to Player A. Following the answer to a., there are $N_{A}={52 \choose 13}$ options. Then deal to Player B. There are 39 cards left, of which this player will receive 13. This can be done in $N_{B} ={39 \choose 13}$ ways. Then deal to Player C. There are 26 cards left, of which this player will receive 13. This can be done in $N_{C}={26\choose 13}$ ways. We give the remaining 13 cards to Player D. In total, we have $$N = N_{A}N_{B}N_{C} = {52 \choose 13}{39 \choose 13}{26 \choose 13}$$ possibilities.
+	 	\item If we would put the 13 cards that Player A received back into the deck before dealing to Player B, then this would be the answer.
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
