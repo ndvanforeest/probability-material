@@ -1,0 +1,18 @@
+\input{header.tex}
+\setcounter{theorem}{18}
+\begin{exercise}[BH.1.37]
+	A deck of cards is shuffled well. The cards are dealt one by one, until the first time an ace appears.
+	\begin{enumerate}
+		\item Find the probability that no kings, queens, or jacks appear before the first ace.
+		\item Find the probability that exactly one king, exactly one queen, and exactly one jack appear (in any order) before the first ace.
+	\end{enumerate}
+\begin{solution}~
+	\begin{enumerate}
+		\item You can think of the deck as only containing kings, queens, jacks and aces, and the deck is symmetric in these four ranks. So the probability of seeing an ace first is 1/4.
+		\item To start, fix an order. So consider the event $KQJA$.  The probability of this event is $\frac{4}{16}\frac{4}{15}\frac{4}{14}\frac{4}{13}$. However, we can rotate KQJ in $3!$ ways and still have the desired event of exactly one king, one queens and one jack before the first ace ($D$). Therefore,
+			$$P(D) = 3!\frac{4}{16}\frac{4}{15}\frac{4}{14}\frac{4}{13}=\frac{16}{455}.$$
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
