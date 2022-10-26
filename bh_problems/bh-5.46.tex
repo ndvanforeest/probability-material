@@ -1,14 +1,7 @@
 \input{header.tex}
 
 \setcounter{theorem}{45}
-\begin{exercise}[BH.5.46] Let $T$ be the lifetime of a certain person (how long that person lives), and let $T$ have CDF $F$ and PDF $f$. The hazard function of $T$ is defined by
-	$$
-	h(t)=\frac{f(t)}{1-F(t)} .
-	$$
-	\begin{enumerate}
-		\item   Explain why $h$ is called the hazard function and in particular, why $h(t)$ is the probability density for death at time $t$, given that the person survived up until then.
-		\item  Show that an Exponential r.v. has constant hazard function and conversely, if the hazard function of $T$ is a constant then $T$ must be $\operatorname{Expo}(\lambda)$ for some $\lambda$.
-	\end{enumerate} 
+\begin{exercise}[BH.5.46]
 \begin{solution}
     \begin{enumerate}
         \item The conditional CDF of $T$ given that $T>t_0$ is
