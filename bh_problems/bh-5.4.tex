@@ -1,0 +1,29 @@
+\input{header.tex}
+
+\setcounter{theorem}{3}
+\begin{exercise}[BH.5.4] Let $X$ be a continuous r.v. with  {CDF} $F$ and {PDF} $f$.
+	\begin{enumerate}
+		\item Find the conditional CDF of $X$ given $X>a$ (where $a$ is a constant with $P(X>$ $a) \neq 0$ ). That is, find $P(X \leq x \mid X>a)$ for all $a$, in terms of $F$.
+		\item Find the conditional PDF of $X$ given $X>a$ (this is the derivative of the conditional CDF).
+		\item  Check that the conditional PDF from (b) is a valid PDF, by showing directly that it is nonnegative and integrates to 1.
+	\end{enumerate}  
+\begin{solution}
+    \begin{enumerate}
+        \item  $P(X \leq x \mid X>a)=0$ for $x \leq a$;  
+        $$
+        P(X \leq x \mid X>a)=\frac{P(a<X \leq x)}{P(X>a)}=\frac{F(x)-F(a)}{1-F(a)}; x\geq a .
+        $$
+        \item  $f(x) /(1-F(a))$ for $x>a$, and 0 otherwise.
+        \item 
+        \begin{enumerate}
+            \item $f(x) /(1-F(a)) \geq 0$ since $f(x) \geq 0$;
+            \item 	$$
+            \int_a^{\infty} \frac{f(x)}{1-F(a)} d x=\frac{1}{1-F(a)} \int_a^{\infty} f(x) d x=\frac{1-F(a)}{1-F(a)}=1 .
+            $$
+        \end{enumerate} 
+    
+    \end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
