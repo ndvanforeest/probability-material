@@ -1,17 +1,7 @@
 \input{header.tex}
 
 \setcounter{theorem}{36}
-\begin{exercise}[BH.5.37] Let $T$ be the time until a radioactive particle decays, and suppose (as is often done in
-	physics and chemistry) that $T\sim $   Expo$(\lambda)$.
-	\begin{enumerate}
-		\item  The half-life of the particle is the time at which there is a 50\% chance that the
-		particle has decayed (in statistical terminology, this is the median of the distribution of
-		$T$). Find the half-life of the particle.
-		\item Show that for $\epsilon$ a small, positive constant, the probability that the particle decays in the time interval $[t, t+\epsilon]$, given that it has survived until time $t$, does not depend on $t$ and is approximately proportional to $\epsilon$. (Use $e^x \approx 1+x$ if $x \approx 0$.)
-		\item Now consider $n$ radioactive particles, with i.i.d. times until decay $T_1, \ldots, T_n \sim$ $\operatorname{Expo}(\lambda)$. Let $L$ be the first time at which one of the particles decays. Find the CDF of $L$. Also, find $E(L)$ and $\operatorname{Var}(L)$.
-		\item Continuing (c), find the mean and variance of $M=\max \left(T_1, \ldots, T_n\right)$, the last time at which one of the particles decays, without using calculus.
-		Hint: Draw a timeline, apply (c), and remember the memoryless property.
-	\end{enumerate} 
+\begin{exercise}[BH.5.37] 
 \begin{solution}
     \begin{enumerate}
         \item  Setting $P(T>t)=e^{-\lambda t}=1 / 2$ and solving for $t$, we get that the half-life is
