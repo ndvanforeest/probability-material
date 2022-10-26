@@ -1,11 +1,7 @@
 \input{header.tex}
 
 \setcounter{theorem}{54}
-\begin{exercise}[BH.5.55] \begin{enumerate}
-    \item Let $X_1$, $X_2$, ... be independent $N(0,4)$ r.v.s., and let $J$ be the smallest value of $j$ such that $X_j > 4$ (i.e., the index of the first $X_j$ exceeding 4). In terms of $\Phi$, find $E(J)$.
-    \item Let $f$ and $g$ be PDFs with $f(x) > 0$ and $g(x) > 0$ for all $x$. Let $X$ be a random variable with PDF $f$. Find the expected value of the ratio $R = \frac{g(X)}{f(X)}$. Such ratios come up very often in statistics, when working with a quantity known as a \emph{likelihood ratio} and when using a computational technique known as \emph{importance sampling}.
-    \item Define $F(x) = e^{-e^{-x}}$. This is a CDF and is a continuous, strictly increasing function. Let $X$ have CDF $F$, and define $W = F(X)$. What are the mean and variance of $W$?
-\end{enumerate}
+\begin{exercise}[BH.5.55]
 \begin{solution}
     \begin{enumerate}
 	    \item Hint: $J-1\sim$Geom($1-\Phi(2)$). Thus $1/(1-\Phi(2))$.\\~\\
