@@ -1,0 +1,26 @@
+\input{header.tex}
+
+\setcounter{theorem}{33}
+\begin{exercise}[BH.5.34]
+\begin{solution}
+    By LOTUS,
+		$$
+		E(X)=\frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} I_{z>0} z e^{-z^2 / 2} d z=\frac{1}{\sqrt{2 \pi}} \int_0^{\infty} z e^{-z^2 / 2} d z .
+		$$
+		Letting $u=z^2 / 2$, we have
+		$$
+		E(X)=\frac{1}{\sqrt{2 \pi}} \int_0^{\infty} e^{-u} d u=\frac{1}{\sqrt{2 \pi}} .
+		$$
+		Note that
+		$$
+		E\left(X^2\right)=\frac{1}{\sqrt{2 \pi}} \int_0^{\infty} z^2 e^{-z^2 / 2} d z=\frac{1}{2} \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} z^2 e^{-z^2 / 2} d z=\frac{1}{2},
+		$$
+		since a $\mathcal{N}(0,1)$ r.v. has variance 1 . Thus, 
+		$$
+		\operatorname{Var}(X)=E\left(X^2\right)-(E X)^2=\frac{1}{2}-\frac{1}{2 \pi} .
+		$$
+		\textit{Remark:  Note that $X$ is neither purely discrete nor purely continuous, since $X=0$ with probability $1 / 2$ and $P(X=x)=0$ for $x \neq 0$. So $X$ has neither a PDF nor a PMF; but LOTUS still works (since we are working with $g(X)$ with $X$ being continuous), which actually works under very general conditions, allowing us to work with the PDF of $Z$ to study expected values of functions of $Z$.}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

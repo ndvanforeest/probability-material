@@ -1,0 +1,29 @@
+\input{header.tex}
+
+\setcounter{theorem}{34}
+\begin{exercise}[BH.5.35]
+\begin{hint}
+    Use LOTUS, and handle the max symbol by adjusting the limits of integration appropriately. As a check, make sure that your answer reduces to $1/ 2 \pi$ when $c = 0$; this must be the case since we showed in Example 5.4.7 that $E|Z| = \sqrt{2/\pi}$, and we have $|Z| = \text{max}(Z, 0) + \text{max}(-Z, 0)$ so by symmetry $E|Z| = E(\text{max}(Z, 0)) + E(\text{max}(-Z, 0)) = 2E(\text{max}(Z, 0))$.
+\end{hint}
+\begin{solution}
+    \begin{align*}
+    	\mathbb{E}\left(\max\{Z-c,0 \} \right) & = \int_\mathbb{R} \max\{z-c,0 \}\phi(z) dz\\
+    	&= \int_c^\infty (z-c)\phi(z) dz \\
+    	&= \int_c^\infty \phi(z)/2 dz^2 - c(1-\Phi(c)) \\
+    	&= \int_c^\infty -\frac{1}{\sqrt{2\pi}} de^{-z^2/2} - c(1-\Phi(c)) \\
+    	&= \phi(c)- c(1-\Phi(c))
+    \end{align*}\\~\\
+    \textit{If you fill in c=0, indeed we would have $1/\sqrt{2\pi}$ as suggested by the hint.}\\~\\
+    
+	\textit{Now in case you are not familiar with the integration, take a look of the followings:
+	\begin{itemize}
+		\item $ \int_c^\infty (z-c)\phi(z) dz =  \int_c^\infty z\phi(z) dz -  \int_c^\infty c\phi(z) dz$
+		\item $\int_c^\infty c\phi(z) dz = \int_{-\infty}^\infty c\phi(z) dz -  \int_{-\infty}^c c\phi(z) dz= c\int_{-\infty}^\infty \phi(z) dz -  c\int_{-\infty}^c \phi(z) dz= c-c\Phi(c)$ (by the fact that the integral of the PDF $\phi$  over the entire space is equal to one, and  
+		by definition of $\Phi$, the CDF of standard normal distribution)
+		\item $\int_c^\infty z\phi(z) dz=\int_c^\infty z \frac{1}{2\sqrt{2\pi}}e^{-z^2/2}  dz  = \int_c^\infty - \frac{1}{\sqrt{2\pi}}(e^{-z^2/2)'}  dz=\left.\left(-\frac{1}{\sqrt{2\pi}}(e^{-z^2/2})\right)\right|_c^\infty - \int_c^\infty (- \frac{1}{\sqrt{2\pi}})' (e^{-z^2/2})$ (integration by part).\\~ \\
+		Note that $(- \frac{1}{\sqrt{2\pi}})'=0$ and thus $- \int_c^\infty (- \frac{1}{\sqrt{2\pi}})' (e^{-z^2/2)}=0$; $\left(\frac{1}{\sqrt{2\pi}}(e^{-z^2/2})\right)= \phi(z)$, and thus  $\left.\left(\frac{1}{\sqrt{2\pi}}(e^{-z^2/2})\right)\right|_c^\infty= -\left.\phi(z)\right|_c^\infty=\lim\limits_{x\rightarrow\infty}(-\phi(x)) - (-\phi(c)) =0-(-\phi(c))=\phi(c)$.
+	\end{itemize}}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

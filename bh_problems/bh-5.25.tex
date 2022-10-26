@@ -1,0 +1,14 @@
+\input{header.tex}
+
+\setcounter{theorem}{24}
+\begin{exercise}[BH.5.25] 
+\begin{solution}
+    Write $P(X<Y)=P(X-Y<0)$ and then standardize $X-Y$. Check that your answer makes sense in the special case where $X$ and $Y$ are i.i.d.
+    Solution: Standardizing $X-Y$, we have
+    $$
+    P(X<Y)=P(X-Y<0)=P\left(\frac{X-Y-(a-c)}{\sqrt{b+d}}<\frac{-(a-c)}{\sqrt{b+d}}\right)=\Phi\left(\frac{c-a}{\sqrt{b+d}}\right) .
+    $$
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

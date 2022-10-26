@@ -1,0 +1,30 @@
+\input{header.tex}
+
+\setcounter{theorem}{11}
+\begin{exercise}[BH.5.12] 
+\begin{solution}
+    Denote the length of one piece as $L$, the other would be $1-L$, and $L\sim$Unif(0,1). This question is equivalent to deriving the distribution of $X=\max\{L,1-L\}$.
+	For $l\in [1/2,1)$
+	\begin{align*}
+		\mathbb{P}(X\leq l)=\mathbb{P}(L\leq l, 1-L<l)=\mathbb{P}(1-l<L\leq l) = \int_{1-l}^l 1/(1-0) dl = 2l-1 
+	\end{align*}
+	where for the last equality we use the PDF of Unif(0,1). To complete, for $l\geq 1, \mathbb{P}(X\leq l)=1;~ l<1/2,  \mathbb{P}(X\leq l)=0$. 
+	The distribution we derive is the same as a distribution of a Unif(1/2,1) as the CDF is linearly increasing from 0 to 1 over the interval (1/2,1), and thus  $X\sim$Unif(1/2,1), which then the properties of Uniform distribution tell us that $\mathbb{E}(X) = ((1/2)+1)/2 = 3/4$. \\~\\
+	Alternatively, we can check the PDF, by taking derivatives of $\mathbb{P}(X\leq l)$, denote $f(l)= \frac{\partial \mathbb{P}(X\leq l)}{\partial l}(l)$, then we know 
+	\begin{align}
+		f(l)= \left\{\begin{matrix}
+			2 & l\in (1/2,1) \\ 0 & \textit{otherwise}
+		\end{matrix}  \right.
+	\end{align} 
+	which is the PDF of Unif(1/2,1).
+	(technically, as a function of $l$, $\mathbb{P}(X\leq l)$ has kinks when $l=0, l=1$ and thus at these two points, the function is not differentiable. As one convention, we normally assign zero values \textbf{to its derivatives (PDF)} at these points. Technically speaking, you could assign any values you like \textbf{to its derivatives (PDF)} at these non-differentiable points for a continuous r.v., as that will not change the integration value and thus will not change the probability.)\footnote{Thank Moesen Tajik, whose questions help to polish the comments}\\~\\
+	
+	\textit{What we can learn from this exercise is to learn the type of a certain r.v., we only need to look at their CDFs (MGF is also one choice, or PDF, but to derive PDF, normally it is easy to derive CDF first). When you calculating the CDF, do complete the whole function by giving the function values along the whole real line. Furthermore, we also revisit some math knowledge:
+	\begin{itemize}
+		\item not differentiable does not imply not continuous, but not continuous does imply not differentiable
+		\item  What is more, is that you can have many PDFs (they can differ in at most countably many points) corresponding to the same distribution (CDF) and the PDFs of one continuous r.v. whose CDF is always continuous (but not necessarily differentiable at all points) can be discontinuous (can take arbitrary values at these points) at these non-differentiable points. By the properties of Riemann integration, you will notice these PDFs (they can differ in at these non-differentiable points  (at most countably many points)) will lead to the same integration values and thus the same probability. As one convention in the textbook, to avoid such confusion, you will see the textbook defines all continuous r.v.s by one given PDFs (instead of CDFs, some other books use CDFs and would lead to many PDFs associated with one same continuous r.v.)  and simply assigns zero values to the PDFs at these non-differentiable points (take the Definition 5.2.1 for example, look at the PDF values at a, and b).
+	\end{itemize}}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

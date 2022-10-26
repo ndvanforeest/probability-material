@@ -1,0 +1,43 @@
+\input{header.tex}
+
+\setcounter{theorem}{50}
+\begin{exercise}[BH.5.51]
+\begin{hint}
+	With probability 1, we have $X^2 \leq X$.
+\end{hint}
+\begin{solution}
+    \begin{enumerate}
+	    \item Use the hint we know $\mathbb{E}X^2\leq \mathbb{E}X$, and thus 
+    	\begin{align*}
+    		\mathbb{V}X= \mathbb{E}X^2-(\mathbb{E}X)^2\leq \mathbb{E}X-(\mathbb{E}X)^2=\mu(1-\mu) = -(\mu-1/2)^2 +1/4\leq  1/4 
+    	\end{align*} 
+    	~\\~\\
+    	First let's prove that the hint. we have seen one example already to prove one random inequality holds true with probability one in the tutorial (6.12.a). Here we prove $X^2\leq X$ similarly. \\~\\
+    	To derive $\mathbb{P}(X^2\leq X) =1$, we essentially are proving that for all possible numbers taken by $X$, for all possible outcomes of $X$, (in other words, for all elements in the sample space as $X$ maps these elements into numbers) the inequality holds. Namely, for an arbitrary number $x$ in the range of $X$ we need to have $x^2\leq x$. $X$ only takes values in the interval $(0,1)$, and for $x\in(0,1)$ we know $x^2\leq x$. Therefore, we know the even $\{X^2\leq X\}$ happens with probability equal to one.     \\~\\
+    	Then given $\mathbb{P}(X^2\leq X)=\mathbb{P}( X-X^2\geq 0)=1$,
+    	we know for any arbitrary large number $M>2$ (I use $M$ to control the bound of $X-X^2$ during the even $\{X-X^2\leq 0\}$, (note that $|X-X^2|\leq|X|+|X^2| \leq 1$ as $0\leq X\leq 1$), only for mathematical rigor, and normally you can also simply ignore what happens in these zero-probability events (would be zero anyway).)
+    	\begin{align*}
+    		\mathbb{E}(X-X^2) \geq 0 \times  \mathbb{P}( X-X^2\geq 0) - M \times  \mathbb{P}( X-X^2\leq 0)=0-M\times 0=0 
+    	\end{align*}
+    	Therefore, $\mathbb{E}X^2\leq \mathbb{E}X$ and thus 
+    	\begin{align*}
+    		\mathbb{V}X= \mathbb{E}X^2-(\mathbb{E}X)^2\leq \mathbb{E}X-(\mathbb{E}X)^2=\mu(1-\mu) \leq -(\mu-1/2)^2 +1/4\leq  1/4 
+    	\end{align*} 
+    	
+    	~\\~\\ \textit{Further comment: we should be so surprised to see random inequalities which may hold with certain probabilities (sometimes one, sometimes not). \\
+    		~\\	
+    		We have already seen other cases such that for $X,Y$ independent identical distributed continuous r.v.s we have $\mathbb{P}(X>Y)=1/2$ by symmetry. 
+    		~\\ We discuss $\mathbb{P}(X>Y)=1/2$ here again to enhance your understanding. We can partition sample space (or events) into three cases: $\{X>Y\}$ denotes elements in the sample space that result in $X>Y$; $\{Y<X\}$ and $\{X=Y\}$. We know $\mathbb{P}(X=Y)=0$ since X, Y are continuous r.v.s, while by symmetry we know $\{X>Y\}$ and $\{Y<X\}$ should occur with equal probability.}  
+    	\item Bern(1/2). Hint: The equality of ( $\mathbb{E}X^2-(\mathbb{E}X)^2\leq \mathbb{E}X-(\mathbb{E}X)^2$) holds only if $X^2=X$.\\~\\
+    	Based on the above discussion in (a),  we know $\mathbb{V}X=1/4$ needs $\mathbb{E}(X)=\mathbb{E}(X^2)$ (otherwise it is strictly smaller that 1/4) and  when $0\leq X \leq 1$, $X^2\leq X$ holds true with probability equal to one.\\ ~\\
+    	We decompose the $\{X^2 \leq X\}$ into two disjoint events: $\{X^2 < X\}$ and $\{X^2 = X\}$. If $\mathbb{P}(X^2< X)=c> 0$, then we know $\mathbb{E}(X)>\mathbb{E}(X^2)$
+    	\begin{align*}
+    		\mathbb{E}(X-X^2) > 0 \times  \mathbb{P}( X-X^2\geq 0) - M \times  \mathbb{P}( X-X^2\leq 0)=0\times c-M\times 0=0 
+    	\end{align*}
+    	Therefore, to have $\mathbb{E}(X)=\mathbb{E}(X^2)$ we must have $\mathbb{P}(X^2<X)=0$ and $\mathbb{P}(X^2= X)=1-\mathbb{P}(X^2< X)=1$.\\~\\ 
+    	The only non-degenerated r.v. X such that $X^2=X$ (so $X$ can only take 1 or 0) with probability equal to one would be Bern($p$). For Bern($p$) we know the variance is $p(1-p)$ and we know $p$ can only be 1/2 in order to have $p(1-p)=1/4$.
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

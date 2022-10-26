@@ -1,0 +1,28 @@
+\input{header.tex}
+
+\setcounter{theorem}{56}
+\begin{exercise}[BH.5.57]
+\begin{solution}
+    \begin{enumerate}
+        \item  Let $U=\Phi(Z)$. By Universality of the Uniform, $U \sim \operatorname{Unif}(0,1)$. The CDF of $W$ is
+        $$
+        F_W(w)=P(W \leq w)=P(U \leq \sqrt{w})=\sqrt{w}
+        $$
+        for $0<w<1$. For $w \leq 0, F_W(w)=0$; for $w \geq 1, F_W(w)=1$. One $\operatorname{PDF}$ of $W$ is
+        $$
+        f_W(w)=F_W^{\prime}(w)=\frac{1}{2} w^{-1 / 2}
+        $$
+        for $0<w<1$, and  otherwise 0.
+        \item  By LOTUS,
+        $$
+        E\left(W^3\right)=\int_0^1 w^3 f_W(w) d w=\int_{-\infty}^{\infty}(\Phi(z))^6 \varphi(z) d z .
+        $$
+        \item $X+2 Y-2 Z \sim \mathcal{N}(0,9)$.  
+        $$
+        P(X+2 Y<2 Z+3)=P\left(\frac{X+2 Y-2 Z}{3}<1\right)=\Phi(1)
+        $$
+    \end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
