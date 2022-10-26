@@ -1,0 +1,24 @@
+\input{header.tex}
+
+\setcounter{theorem}{3}
+\begin{exercise}[BH.5.4] 
+\begin{solution}
+    \begin{enumerate}
+        \item  $P(X \leq x \mid X>a)=0$ for $x \leq a$;  
+        $$
+        P(X \leq x \mid X>a)=\frac{P(a<X \leq x)}{P(X>a)}=\frac{F(x)-F(a)}{1-F(a)}; x\geq a .
+        $$
+        \item  $f(x) /(1-F(a))$ for $x>a$, and 0 otherwise.
+        \item 
+        \begin{enumerate}
+            \item $f(x) /(1-F(a)) \geq 0$ since $f(x) \geq 0$;
+            \item 	$$
+            \int_a^{\infty} \frac{f(x)}{1-F(a)} d x=\frac{1}{1-F(a)} \int_a^{\infty} f(x) d x=\frac{1-F(a)}{1-F(a)}=1 .
+            $$
+        \end{enumerate} 
+    
+    \end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

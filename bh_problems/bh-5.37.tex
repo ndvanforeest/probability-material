@@ -1,0 +1,34 @@
+\input{header.tex}
+
+\setcounter{theorem}{36}
+\begin{exercise}[BH.5.37] 
+\begin{solution}
+    \begin{enumerate}
+        \item  Setting $P(T>t)=e^{-\lambda t}=1 / 2$ and solving for $t$, we get that the half-life is
+        $$
+        t=\frac{\log 2}{\lambda} \approx \frac{0.693}{\lambda} .
+        $$
+        \item  
+        $$
+        P(T \in[t, t+\epsilon] \mid T \geq t)=\frac{P(T \in[t, t+\epsilon], T \geq t)}{P(T \geq t)}=\frac{P(t \leq T \leq t+\epsilon)}{P(T \geq t)}=\frac{e^{-\lambda t}-e^{-\lambda(t+\epsilon)}}{e^{-\lambda t}}=1-e^{-\lambda \epsilon},
+        $$
+        which does not depend on $t$. Alternatively, using the memoryless property: given that $T \geq t$,  $T-t|\{T \geq t\}$ starting from time $t$ again follows $\operatorname{Expo}(\lambda)$.
+        
+        For $\epsilon>0$ small, the above probability is approximately equal to $1-(1-\lambda \epsilon)=\lambda \epsilon$, which is proportional to $\epsilon$.
+        \item  $L \sim \operatorname{Expo}(n \lambda)$, since
+        $$
+        P(L>t)=P\left(T_1>t, \ldots, T_n>t\right)=e^{-n \lambda t},
+        $$
+     The CDF of $L$ is given by $F(t)=1-P(L>t)=1-e^{-n \lambda t}$ for $t>0$ and 0 for $t \leq 0$, which gives (once you derive the PDF from the CDF) $E(L)=\frac{1}{n \lambda}$ and $\operatorname{Var}(L)=\frac{1}{(n \lambda)^2}$.
+        \item Let $L_1$ be the first time at which a particle decays, $L_2$ be the additional time until another particle decays, $\ldots$, and $L_n$ be the additional time after $n-1$ particles have decayed until the remaining particle decays. Then $M=L_1+\cdots+L_n$. By the memoryless property and the previous part, $L_1, L_2, \ldots, L_n$ are independent with $L_j \sim$ $\operatorname{Expo}((n-j+1) \lambda)$. Thus,
+        $$
+        \begin{gathered}
+            E(M)=E\left(L_1\right)+\cdots+E\left(L_n\right)=\frac{1}{\lambda} \sum_{j=1}^n \frac{1}{j}, \\
+            \operatorname{Var}(M)=\operatorname{Var}\left(L_1\right)+\cdots+\operatorname{Var}\left(L_n\right)=\frac{1}{\lambda^2} \sum_{j=1}^n \frac{1}{j^2} .
+        \end{gathered}
+        $$
+    \end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

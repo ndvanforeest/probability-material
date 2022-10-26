@@ -1,0 +1,20 @@
+\input{header.tex}
+
+\setcounter{theorem}{35}
+\begin{exercise}[BH.5.36]
+\begin{hint}
+    Memoryless properties and symmetry. The result is 1/2.
+\end{hint}
+\begin{solution}
+    \begin{enumerate}
+	    \item Notice the probability that both Bob and Claire leave simultaneously has probability zero (as service time is continuous r.v.). 
+    	\\~\\
+    	Without loss of generality, we consider the case Bob leaves first compared with Claire (this happens with probability 1/2 by symmetry, you can discuss the case Claire leaves first similarly), then conditional on that we know it is now a comparison between Claire and Alice. By memoryless property, we know the further service time needed for Claire and Alice will all follow identical exponential distribution, and thus by symmetry we know Alice will leave after Claire with probability 1/2.    
+        \item \textbf{The expected  waiting time before the service $1/(2\lambda)$}, since the minimum of two independent Expo($\lambda$) follows Expo($2\lambda$) (Check Example 5.6.3 for a proof of this statement which proves the statement by checking the CDF.). \\~\\
+    	\textbf{Then the her own service's expected duration is $1/\lambda$ }as it follows Expo($\lambda$). \\~\\
+    	Result: $1/\lambda+1/(2\lambda)$.
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
