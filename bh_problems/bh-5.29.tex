@@ -1,0 +1,29 @@
+\input{header.tex}
+
+\setcounter{theorem}{28}
+\begin{exercise}[BH.5.29]
+\begin{solution}
+    \begin{enumerate}
+        \item The CDF of $Y$ is
+        $$
+        F(y)=P(|X| \leq y)=P(-y \leq X \leq y)=\Phi\left(\frac{y-\mu}{\sigma}\right)-\Phi\left(\frac{-y-\mu}{\sigma}\right),
+        $$
+        for $y \geq 0$ (and $F(y)=0$ for $y<0)$.
+        \item Let $\varphi(z)=\frac{1}{\sqrt{2 \pi}} e^{-z^2 / 2}$ be the $\mathcal{N}(0,1)$ PDF. By the chain rule, the PDF of $Y$ is
+        $$
+        \begin{aligned}
+            f(y) &=\frac{1}{\sigma} \cdot \varphi\left(\frac{y-\mu}{\sigma}\right)+\frac{1}{\sigma} \cdot \varphi\left(\frac{-y-\mu}{\sigma}\right) \\
+            &=\frac{1}{\sigma} \cdot \varphi\left(\frac{y-\mu}{\sigma}\right)+\frac{1}{\sigma} \cdot \varphi\left(\frac{y+\mu}{\sigma}\right)
+        \end{aligned}
+        $$
+        for $y \geq 0$ (and $f(y)=0$ for $y<0)$.
+        \item  The PDF $f$ is not continuous at 0 since $f(y) \rightarrow 0$ as $y \rightarrow 0$ from the left, whereas
+        $$
+        f(y) \rightarrow \frac{2}{\sigma} \varphi\left(\frac{\mu}{\sigma}\right)>0
+        $$
+        as $y \rightarrow 0$ from the right. This is not a problem for using the PDF to find probabilities, since changing a function at finitely many points does not affect its integral. Therefore, discontinuity does not matter that much, it is just an conventional choice to choose the PDF to be the derivative of the CDF, actually, by changing points of the derivative you have many different PDF candidates (the supports of the associated r.v.s would be different) that corresponds to the same CDF (thus same distribution name if the CDF has an associated distribution name). We have also already dealt with various PDFs that are discontinuous at a finite number of points, such as the $\operatorname{Unif}(0,1)$ $\mathrm{PDF}$, which is discontinuous at 0 and 1.
+    \end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

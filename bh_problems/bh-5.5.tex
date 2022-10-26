@@ -1,0 +1,28 @@
+\input{header.tex}
+
+\setcounter{theorem}{4}
+\begin{exercise}[BH.5.5] 
+\begin{solution}
+    \begin{enumerate}
+        \item $A=\pi R^2$. By LOTUS,
+        $$
+        \begin{aligned}
+            E(A) &=\pi \int_0^1 r^2 d r=\frac{\pi}{3} \\
+            E\left(A^2\right) &=\pi^2 \int_0^1 r^4 d r=\frac{\pi^2}{5} \\
+            \operatorname{Var}(A) &=\frac{\pi^2}{5}-\frac{\pi^2}{9}=\frac{4 \pi^2}{45} .
+        \end{aligned}
+        $$
+        \item  (b) The CDF of $A$ is
+        $$
+        P(A \leq a)=P\left(\pi R^2 \leq a\right)=P(R \leq \sqrt{a / \pi})=\sqrt{a / \pi},
+        $$
+        for $0<a<\pi$ (and the CDF is 0 for $a \leq 0$ and 1 for $a \geq \pi$ ). So the conventional PDF or one version of PDF (by taking derivative of $F$) of $A$ is
+        $$
+        f(a)=\frac{1}{2 \sqrt{\pi a}},
+        $$
+        for $0<a<\pi$ (and 0 otherwise).
+    \end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

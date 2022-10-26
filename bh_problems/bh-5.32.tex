@@ -1,0 +1,36 @@
+\input{header.tex}
+
+\setcounter{theorem}{31}
+\begin{exercise}[BH.5.32]
+\begin{solution}
+    \begin{enumerate}
+	    \item Symmetry of the normal implies:
+    	\begin{align*}
+    		\mathbb{P}\left(1\leq X\leq 4 \right) &= \mathbb{P}\left(1\leq Z\leq 2~\textit{or}~ -2\leq Z\leq -1 \right) \\ 
+    		& = 2\mathbb{P}\left(1\leq Z\leq 2\right)
+    	\end{align*}
+    	Note that $\mathbb{P}\left(1\leq Z\leq 2\right) = \mathbb{P}\left(-\infty\leq Z\leq 2\right) - \mathbb{P}\left(-\infty\leq Z\leq 1\right)=\Phi(2)-\Phi(1)$. Now make use the following 
+    	\begin{align*}
+    		\mathbb{P}\left(|X-\mu|<\sigma \right) \approx 0.68, 	\mathbb{P}\left(|X-\mu|<\sigma \right) \approx 0.95
+    	\end{align*}
+    	and thus (by symmetry) $\Phi(2) = 0.5 + \mathbb{P}\left(|Z|<2\right)/2 \approx 0.975$,
+    	$\Phi(1) = 0.5 + \mathbb{P}\left(|Z|<1\right)/2 \approx 0.84$. Final result is $0.975-0.84=0.135$.\\
+    	
+    	\noindent In general, notice 
+    	\begin{align*}
+    		\Phi(t)=0.5+ \mathbb{P}\left(|Z|<t\right)/2  
+    	\end{align*}
+     \item   Notice when $I_{Z>t}=1$, $Z/t>1$ and thus $I_{Z>t}\leq Z/t I_{Z>t}$ holds true. \\~\\
+    	$I_{Z>t}\leq Z/t I_{Z>t}$ implies that 
+    	\begin{align}
+    		\int_{-\infty}^{\infty}I_{z>t} \phi(z) dz \leq 	\int_{-\infty}^{\infty}z/tI_{z>t} \phi(z) dz  \label{eq532} 
+    	\end{align}
+    	Note that $	\int_{-\infty}^{\infty}I_{z>t} \phi(z) dz = 1-\Phi(t)$;~ $\int_{-\infty}^{\infty}z/tI_{z>t} \phi(z) dz = \int_{t}^{\infty}z/t \phi(z) dz = \int_{t}^{\infty}  -1/td\phi(z)=\phi(z)/t|^t_\infty= \phi(t)/t$ (we use the fact $(\lim\limits_{z\rightarrow \infty}\phi(z)=0$), and thus (\ref{eq532}) implies 
+    	\begin{align*}
+    		1-\Phi(t) \leq \phi(t)/t
+    	\end{align*}
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

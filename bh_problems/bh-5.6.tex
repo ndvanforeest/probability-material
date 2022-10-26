@@ -1,0 +1,34 @@
+\input{header.tex}
+
+\setcounter{theorem}{5}
+\begin{exercise}[BH.5.6] 
+\begin{solution}
+    \begin{enumerate}
+        \item Let $U \sim$  {Unif}$(0,1)$. The mean is $\mu=1 / 2$ and the standard deviation is $\sigma=\frac{1}{\sqrt{12}}$. So
+        $$
+        P(|U-\mu| \leq \sigma)=P(\mu-\sigma \leq U \leq \mu+\sigma)=2 \sigma \approx 0.5774 .
+        $$
+        But
+        $$
+        P(|U-\mu| \leq 2 \sigma)=1,
+        $$
+        since $\mu+2 \sigma>1$. Therefore, the analogous rule for the  {Unif}$(0,1)$ is a $58-100-100 \%$ rule.
+        \item Let $X \sim${Expo}(1). The mean is $\mu=1$ and the standard deviation is $\sigma=1$. So
+        $$
+        \begin{gathered}
+            P(|X-\mu| \leq \sigma)=P(X \leq 2)=1-e^{-2} \approx 0.8647, \\
+            P(|X-\mu| \leq 2 \sigma)=P(X \leq 3)=1-e^{-3} \approx 0.9502, \\
+            P(|X-\mu| \leq 3 \sigma)=P(X \leq 4)=1-e^{-4} \approx 0.9817 .
+        \end{gathered}
+        $$
+        So the analogous rule for the Expo(1) is an 86-95-98\% rule.
+        \item Let $Y \sim${Expo}$(\lambda)$ and $X=\lambda Y \sim${Expo}$(1)$. Then $Y$ has mean $\mu=1 / \lambda$ and standard deviation $\sigma=1 / \lambda$. For any real number $c \geq 1$, the probability of $Y$ being within $c$ standard deviations of its mean is
+        $$
+        P(|Y-\mu| \leq c \sigma)=P(|\lambda Y-\lambda \mu| \leq c \lambda \sigma)=P(|X-1| \leq c)=P(X \leq c+1)=1-e^{-c-1} .
+        $$
+        This probability does not depend on $\lambda$, so for any $\lambda$ the analogous rule for the   {Expo}$(\lambda)$ distribution is an $86-95-98 \%$ rule.
+    \end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

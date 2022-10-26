@@ -1,0 +1,22 @@
+\input{header.tex}
+
+\setcounter{theorem}{1}
+\begin{exercise}[BH.5.2] 
+\begin{solution}
+    \begin{enumerate}
+        \item You friend tell you he/she would phone you tomorrow morning, but does not leave a valid time slot and could happen arbitrarily from 0 to 1/2 (normalize 7am to 12 am). $f(x)=2, \forall x\in [0,1/2] $ and $f(x)=0$ otherwise. \\~\\
+        Verify this is a PDF:
+        \begin{itemize}
+            \item non-negative: $f(x)\geq 0$
+            \item integrates to 1: $\sum_\mathbb{R} f(x) dx=1$
+        \end{itemize}
+        \item  Consider one case such that $f(x)\geq 1, \forall x\in [a,b] $ and $f(x)=0$ otherwise. Then we know 
+        \begin{align*}
+            1= \int_{a}^{b} f(x)dx \geq \int_{a}^{b} 1dx = b-a
+        \end{align*}
+        so the length of the interval is less than 1.
+    \end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}

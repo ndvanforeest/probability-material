@@ -1,0 +1,32 @@
+\input{header.tex}
+
+\setcounter{theorem}{9}
+\begin{exercise}[BH.5.10]
+\begin{solution}
+    \begin{enumerate}
+        \item Uniform probability is proportional to the interval length $(2+4)/8$.\\~\\
+    	Here we can calculate using the fact that for a continuous r.v. X with given PDF $f(.)$ we can simply integrate over the region $A$ to calculate $\mathbb{P}(X\in A) = \int_A f(a) da$:
+    	\begin{align*}
+    		\mathbb{P}\left(U\in (0,2) \cup (3,7)  \right) = \int_{(0,2) \cup (3,7)} 1/(8-0) da= \int_{0}^2 1/8 da+ \int_{3}^7 1/8 da =3/4
+    	\end{align*}
+    	
+    	\item Unif(3 , 7). (Which proposition in the book?)
+    	~\\~~\\
+    	\textit{Take a look of the proposition 5.2.3.}\\~\\
+    	\textit{Conditional distribution is just one special case of conditional probability, where we look into the probability of a r.v. being smaller than a arbitrary constant (this part resembles the definition of CDF) conditional on certain events (take a look at page 46, the definition of conditional probability.)}
+    	Now we derive the conditional distribution using the definition of the conditional probability:  
+    	For an arbitrary constant $u\in (3,7)$
+    	\begin{align*}
+    		\mathbb{P}\left(U\leq u |U\in (3,7) \right) &= \mathbb{P}\left(\{U\leq u\} \cap \{U\in (3,7)\} \right)/ \mathbb{P}\left(U\in (3,7) \right)\\
+    		& = \mathbb{P}\left( U\in (3,u)  \right)/ \mathbb{P}\left(U\in (3,7) \right)\\
+    		& = \left(\int_{3}^{u}1/8 da\right) /\left(\int_{3}^{7}1/8 da\right)\\
+    		& =(u-3)/4
+    	\end{align*}
+    	To complete, 
+    	for $u\leq 3, 	\mathbb{P}\left(U\leq u |U\in (3,7) \right)=0 $; for $u\geq 7, 	\mathbb{P}\left(U\leq u |U\in (3,7) \right)=1$. \\~\\
+    	Note that $	\mathbb{P}\left(U\leq u |U\in (3,7) \right)$ is a function of $u$, and this function is equal to the CDF of Unif(3,7)!
+    \end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
