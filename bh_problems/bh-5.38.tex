@@ -1,15 +1,7 @@
 \input{header.tex}
 
 \setcounter{theorem}{37}
-\begin{exercise}[BH.5.38] Fred wants to sell his car, after moving back to Blissville (where he is happy with
-	the bus system). He decides to sell it to the first person to offer at least \$18,000 for
-	it. Assume that the offers are independent Exponential random variables with mean
-	\$12,000, and that Fred is able to keep getting offers until he obtains one that meets his
-	criterion.
-	\begin{enumerate}
-		\item Find the expected number of offers Fred will have.
-		\item  Find the expected amount of money that Fred will get for the car.
-	\end{enumerate} 
+\begin{exercise}[BH.5.38]
 \begin{solution}
     \begin{enumerate}
         \item Let $X_i \sim \operatorname{i.i.d.~ Expo}(1 / 12000)$ denote the $i$th offer. So the number of offers that are too low is $\operatorname{Geom}(p)$ with $p=P\left(X_i \geq 18000\right)=e^{-1.5}$. The expected number of offers (including the successful offer) is thus $(1-p) / p+1=1 / p=e^{1.5}$ using the properties of the Geometric distribution.
