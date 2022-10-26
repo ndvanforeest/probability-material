@@ -1,0 +1,21 @@
+\input{header.tex}
+
+\setcounter{theorem}{13}
+\begin{exercise}[BH.5.14] Let $U_1, \ldots, U_n$ be i.i.d. $\operatorname{Unif}(0,1)$, and $X=\max \left(U_1, \ldots, U_n\right)$. What is the PDF of $X$ ? What is $E X$?
+\begin{solution}
+    Note that $X \leq x$ holds if and only if all of the $U_j$ 's are at most $x$. So the CDF of $X$ is
+		$$
+		P(X \leq x)=P\left(U_1 \leq x, U_2 \leq x, \ldots, U_n \leq x\right)=\left(P\left(U_1 \leq x\right)\right)^n=x^n,
+		$$
+		for $0<x<1$ (and the CDF is 0 for $x \leq 0$ and 1 for $x \geq 1$ ), where we make use of the fact that $U_j$ 's are i.i.d. in the second last equality. The conventional PDF of $X$ thus is
+		$$
+		f(x)=n x^{n-1},
+		$$
+		for $0<x<1$ (and 0 otherwise). Then
+		$$
+		E X=\int_0^1 x\left(n x^{n-1}\right) d x=n \int_0^1 x^n d x=\frac{n}{n+1} .
+		$$ 
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
