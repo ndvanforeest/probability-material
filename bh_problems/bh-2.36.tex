@@ -10,7 +10,7 @@
 	\end{enumerate}
 \begin{solution}
 	This question will of course be super important for later in the studies when issues like selection bias are being discussed. Perhaps you have a nice alternative example as well. Also, Tom has written some $R$ code to illustrate what's going on.
-	{\scriptsize \begin{lstlisting}[language=R]
+	\begin{minted}[]{R}
 		# Author: Tom Boot
 		# Date: 22 October 2020
 		# Introduction to Probability Question 2.36
@@ -37,7 +37,7 @@
 		# Scatter plot of baseball and math skills for admitted students
 		ggplot(skills_admit,aes(x=skills_admit$baseball,y=skills_admit$math)) +
 		geom_point()+ geom_smooth(method="lm",formula=y~x)
-	\end{lstlisting}}
+	\end{minted}
 	\begin{enumerate}
 		\item Within the group admitted to the college, if you are bad at baseball, you must be good at math, otherwise you would not be admitted. This creates a negative association between baseball and math skills. See also the $R$ illustration provided:
 		\begin{figure}[htbp!]
