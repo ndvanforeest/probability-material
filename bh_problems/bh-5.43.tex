@@ -1,15 +1,7 @@
 \input{header.tex}
 
 \setcounter{theorem}{42}
-\begin{exercise}[BH.5.43] The Exponential is the analog of the Geometric in continuous time. This problem explores the connection between Exponential and Geometric in more detail, asking what happens to a Geometric in a limit where the Bernoulli trials are performed faster and faster but with smaller and smaller success probabilities.
-	
-	Suppose that Bernoulli trials are being performed in continuous time; rather than only thinking about first trial, second trial, etc., imagine that the trials take place at points on a timeline. Assume that the trials are at regularly spaced times $0$, $\Delta t$, $2 \Delta t$, ..., where $\Delta t$ is a small positive number. Let the probability of success of each trial be $\lambda \Delta t$, where $\lambda$ is a positive constant. Let $G$ be the number of failures before the first success (in discrete time), and $T$ be the time of the first success (in continuous time).
-	
-	\begin{enumerate}
-		\item Find a simple equation relating $G$ to $T$.
-		\item Find the CDF of $T$.
-		\item Show that as $\Delta t \to 0$, the CDF of $T$ converges to the $\text{Expo}(\lambda)$ CDF, evaluating all the CDFs at a fixed $t \geq 0$.
-	\end{enumerate}
+\begin{exercise}[BH.5.43]
 \begin{solution}
     \begin{enumerate}
 	    \item Assume the first trial happens at time position $0$, then the $j$th trial would occur at $(j-1)\Delta t$. Thus
