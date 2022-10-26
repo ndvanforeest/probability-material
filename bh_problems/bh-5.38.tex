@@ -1,0 +1,29 @@
+\input{header.tex}
+
+\setcounter{theorem}{37}
+\begin{exercise}[BH.5.38] Fred wants to sell his car, after moving back to Blissville (where he is happy with
+	the bus system). He decides to sell it to the first person to offer at least \$18,000 for
+	it. Assume that the offers are independent Exponential random variables with mean
+	\$12,000, and that Fred is able to keep getting offers until he obtains one that meets his
+	criterion.
+	\begin{enumerate}
+		\item Find the expected number of offers Fred will have.
+		\item  Find the expected amount of money that Fred will get for the car.
+	\end{enumerate} 
+\begin{solution}
+    \begin{enumerate}
+        \item Let $X_i \sim \operatorname{i.i.d.~ Expo}(1 / 12000)$ denote the $i$th offer. So the number of offers that are too low is $\operatorname{Geom}(p)$ with $p=P\left(X_i \geq 18000\right)=e^{-1.5}$. The expected number of offers (including the successful offer) is thus $(1-p) / p+1=1 / p=e^{1.5}$ using the properties of the Geometric distribution.
+        \item Let $N$ be the number of offers, so the sale price of the car is the $N$th offered price $X_N$ (unlike the $i$th in the above solution, here we have a random index $N$). Note that
+        $$
+        E\left(X_N\right)=E(X \mid X \geq 18000)
+        $$
+        for $X \sim \operatorname{Expo}(1 / 12000)$, since the successful offer is an Exponential for which our information is that the value is at least $\$ 18,000$. The memoryless property implies that the distribution of $X-a$ given $X>a$ is itself $\operatorname{Expo}(\lambda)$. So via the linearity of the expectation and the memoryless property of Expo:
+        $$
+        E(X \mid X \geq 18000)=	18000+		E(X-18000 \mid X \geq 18000)=18000+E(X)=30000,
+        $$
+        which shows that Fred's expected sale price is $\$ 30,000$.
+    \end{enumerate} 
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
