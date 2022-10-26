@@ -1,0 +1,14 @@
+\input{header.tex}
+
+\setcounter{theorem}{49}
+\begin{exercise}[BH.5.50] Explain intuitively why $P(X<Y)=P(Y<X)$ if $X$ and $Y$ are i.i.d., but equality may not hold if $X$ and $Y$ are not independent or not identically distributed.
+\begin{solution}
+    If $X$ and $Y$ are i.i.d., then $P(X<Y)=P(Y<X)$ by symmetry since the problem of finding $P(X < Y )$ has exactly the same structure as that of finding $P(Y < X)$. E.g., two fair coins, which one lands head should be equally likely.
+
+	If $X$ and $Y$ are dependent, then we also can't conclude that $P(X<Y)=P(Y<X)$, since then the structure of $P(X<Y)$ is different from the structure of $P(Y<X)$. For example, the dependence could be rigged so that $X$ is usually (or more likely) less than $Y$, even though they have the same distribution. See BH.42 in Chapter 3, $X,Y\sim$DUnif$\{1,2,3,4,5,6,7\}$, $Y=(X+1) \textit{mod} ~7$.  
+	
+	Furthermore,  $X$ and $Y$ are not interchangeable if they have different distributions, since then the symmetry is broken and it may be the case, for example, consider two unfair coins, coin $X$ always lands head and $Y$ tail.
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
