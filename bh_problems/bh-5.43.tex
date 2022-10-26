@@ -1,0 +1,43 @@
+\input{header.tex}
+
+\setcounter{theorem}{42}
+\begin{exercise}[BH.5.43] The Exponential is the analog of the Geometric in continuous time. This problem explores the connection between Exponential and Geometric in more detail, asking what happens to a Geometric in a limit where the Bernoulli trials are performed faster and faster but with smaller and smaller success probabilities.
+	
+	Suppose that Bernoulli trials are being performed in continuous time; rather than only thinking about first trial, second trial, etc., imagine that the trials take place at points on a timeline. Assume that the trials are at regularly spaced times $0$, $\Delta t$, $2 \Delta t$, ..., where $\Delta t$ is a small positive number. Let the probability of success of each trial be $\lambda \Delta t$, where $\lambda$ is a positive constant. Let $G$ be the number of failures before the first success (in discrete time), and $T$ be the time of the first success (in continuous time).
+	
+	\begin{enumerate}
+		\item Find a simple equation relating $G$ to $T$.
+		\item Find the CDF of $T$.
+		\item Show that as $\Delta t \to 0$, the CDF of $T$ converges to the $\text{Expo}(\lambda)$ CDF, evaluating all the CDFs at a fixed $t \geq 0$.
+	\end{enumerate}
+\begin{solution}
+    \begin{enumerate}
+	    \item Assume the first trial happens at time position $0$, then the $j$th trial would occur at $(j-1)\Delta t$. Thus
+    	\[T=((G+1) - 1)\Delta t\] 
+    	since the first success trial would be the $(G+1)$th trial.  
+    	\item For $t\geq 0$
+    	\begin{align*}
+    		\mathbb{P}\left(T>t\right) &= \mathbb{P}\left(G> \lfloor t /(\Delta t)\rfloor \right) = \left( 1-\lambda \Delta t \right)^{\lfloor t /(\Delta t)\rfloor +1 }
+    	\end{align*}
+    	where $\lfloor x \rfloor = \max\{n \in \mathbb{N}: n\leq x \}$. Thus for $t\geq 0$
+    	\begin{align*}
+    		\mathbb{P}\left(T\leq t\right) &= 1- \left( 1-\lambda \Delta t \right)^{\lfloor t /(\Delta t)\rfloor +1 }
+    	\end{align*}
+    	\textbf{For $t<0, \mathbb{P}\left(T\leq t\right)=0$.
+    	}
+        \item From 
+    	$\left(t /(\Delta t) -1 \right)\geq \lfloor t /(\Delta t)\rfloor \geq t /(\Delta t)$
+    	we know 
+    	\begin{align}
+    		\left( 1-\lambda \Delta t \right)^{  t /(\Delta t) }/\left( 1-\lambda \Delta t \right) \geq \left( 1-\lambda \Delta t \right)^{\lfloor t /(\Delta t)\rfloor +1 } \geq \left( 1-\lambda \Delta t \right)^{ t /(\Delta t) +1} \label{eq543}
+    	\end{align}
+    	Note that $\lim\limits_{\Delta t\rightarrow 0}\left( 1-\lambda \Delta t \right)=1$ and 
+    	\begin{align*}
+    		\lim\limits_{\Delta t\rightarrow 0}\left[\left( 1-\lambda \Delta t \right)^{ -1 /(\lambda \Delta t) }\right]^{-\lambda t} = e^{-\lambda t}
+    	\end{align*}
+    	Therefore, taking limits on the both sides of equation (\ref{eq543}) we know $ \left( 1-\lambda \Delta t \right)^{\lfloor t /(\Delta t)\rfloor +1 }$ converges to $e^{-\lambda t}$ and thus $\mathbb{P}(T\leq t)$ converges to $1-e^{-\lambda t}$ (the Expo($\lambda$) CDF). 
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
