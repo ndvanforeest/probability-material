@@ -1,0 +1,13 @@
+\input{header.tex}
+
+\setcounter{theorem}{14}
+\begin{exercise}[BH.5.15] Let $U \sim \operatorname{Unif}(0,1)$. Using $U$, construct $X \sim \operatorname{Expo}(\lambda)$. 
+\begin{solution}
+    The CDF of $X$ is $F(x)=1-e^{-\lambda x}$ for $x>0$. The inverse function is $F^{-1}(u)=$ $-\frac{1}{\lambda} \log (1-u)$, for $0<u<1$. So by universality of the Uniform,
+		$$
+		X=-\frac{1}{\lambda} \log (1-U) \sim \operatorname{Expo}(\lambda)
+		$$
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
