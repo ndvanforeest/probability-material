@@ -1,0 +1,72 @@
+\input{header.tex}
+
+\setcounter{theorem}{15}
+\begin{exercise}[BH.5.16] Let $U \sim \text{Unif}(0, 1)$, and $X = \log\left(\frac{U}{1 - U}\right)$. Then $X$ has the \emph{logistic distribution}, which has CDF $F(x) = \frac{e^x}{1 + e^x}$ for $x \in \mathbb{R}$.
+	\begin{enumerate}
+		\item Write down (but do not compute) an integral giving $E(X^2)$.
+		\item Find $E(X)$ without using calculus.
+	\end{enumerate}
+\begin{hint}
+	Hint: A useful symmetry property here is that $1 - U$ has the same distribution as $U$.
+\end{hint}
+\begin{solution}
+    \begin{enumerate}
+	    \item By \textbf{LOTUS} and the PDF of Unif(0,1) takes the value 1 within the interval (0,1) and 0 elsewhere, we have
+    	\begin{align*}
+    		\int_{0}^{1} \left[\log\left(u/(1-u) \right)\right]^2 du
+    	\end{align*}
+    	~\\~\\
+    	\textit{Further comment: Note that $X^2$ is also a function of U: $X^2=(\log(U/(1-U)))^2$.
+		So LOTUS allows us to derive $\mathbb{E}X^2 = \mathbb{E}(\log(U/(1-U)))^2$ Using the distribution of U as well. \\~\\
+		Alternatively (this one takes more computation time and is slightly more complicated), if you want to try, you can also derive $X$'s PDF, which should be $ f_X(x)=e^x/(e^x+1)^2$ with support $(-\infty, \infty)$. Then again by LOTUS
+		\begin{align*}
+			\mathbb{E} X^2 =\int_{-\infty}^{\infty} x^2 f_X(x)dx = \int_{-\infty}^{\infty} x^2 e^x/(e^x+1)^2dx 
+		\end{align*}
+		which is also a correct answer. We can use Integration by substitution to show these two integrals are equal. Choose  $x=\log(u/(1-u))$ and thus 
+		\begin{align*}
+			\int_{-\infty}^{\infty} x^2 e^x/(e^x+1)^2dx  = \int_{0}^1 ( \log(u/(1-u)) )2 (u/(1-u))/ (u/(1-u) +1)^2 d \log(u/(1-u))
+		\end{align*}
+		which after simplifying would be $\int_{0}^{1} \left[\log\left(u/(1-u) \right)\right]^2 du$. Both expressions $\int_{0}^{1} \left[\log\left(u/(1-u) \right)\right]^2 du$ and $\int_{-\infty}^{\infty} x^2 e^x/(e^x+1)^2dx $ are correct answers (there are more different expressions that could all lead to the same integration value, and they could all be correct).}
+    \item Use the fact that (why we have this, think about the hint given in the exercise) 
+    	$\mathbb{E}X = \mathbb{E}(-X)$, we have 
+    	\begin{align*}
+    		\mathbb{E}X = \mathbb{E}(X -X)/2=0
+    	\end{align*}
+    	\\~\\
+    	Here we give two ways of proving the result (all rely on the fact that if two \textbf{two r.v.s have the same distribution then they have the same expectation value})   :\\~\\
+    	\textbf{(1)} First approach (I explain the above hint): I prove the above claim $\mathbb{E}X = \mathbb{E}(-X)$. Notice that if $U$ follows Unif(0,1) then $U'=1-U$ also follows Unif(0,1) which is easily checked by the CDF of $U'$.\\
+    	For  $x\in (0,1)$, $\mathbb{P}\left(U' \leq x \right)= \mathbb{P}\left(U \geq 1-x \right)=\int_{1-x}^{1} 1 da= x$ (similarly you can check $x\leq 0, \mathbb{P}\left(U' \leq x \right)=0;x\geq 1, \mathbb{P}\left(U' \leq x \right)=1; $); therefore, the CDF of $U'$  is the distribution of Unif(0,1). 
+    	~\\
+    	By LOTUS we know 
+    	\begin{align}
+    		\mathbb{E}\left(X \right)=	\int_{0}^{1} \left[\log\left(u/(1-u) \right)\right] du \label{(1)}
+    	\end{align}  
+    	but at the same time we can rewrite $X$ as $-\log((1-U)/U)=-\log(U'/(1-U'))$, and using the distribution of $U'$ we would know that 
+    	\begin{align}
+    		\mathbb{E}\left(X \right)= \mathbb{E} \left(-\log(U'/(1-U'))\right) = - 	\int_{0}^{1} \left[\log\left(u'/(1-u') \right)\right] du'= - 	\int_{0}^{1} \left[\log\left(u/(1-u) \right)\right] du \label{(2)}
+    	\end{align}  
+    	The left hand of (\ref{(2)})  is equal to the minus the left hand of (\ref{(1)}), and thus this implies that 
+    	\begin{align*}
+    		\mathbb{E}(X) = \mathbb{E}(-X)
+    	\end{align*} 
+    	Therefore, we know 
+    	\begin{align*}
+    		\mathbb{E}(X) = (\mathbb{E}(X)+ 	\mathbb{E}(X))/2 = (\mathbb{E}(-X)	\mathbb{E}(X))/2 = \mathbb{E}(0)/2=0
+    	\end{align*}
+    	
+    	~\\
+    	\textbf{(2)} Alternatively (second approach), we could derive the conclusion in an easier way (again use the fact if two r.v.s have the same distribution then they have the same expectation value):
+    	notice that if $U$ and $U'$ has the same distribution then by LOTUS we should have 
+    	\begin{align*}
+    		\mathbb{E}\log(U)=	\mathbb{E}\log(U')
+    	\end{align*}
+    	as both sides are equal to $\int_{0}^1 \log(a)da$. Therefore:
+    	\begin{align*}
+    		\mathbb{E}X=\mathbb{E}\left( \log\frac{U}{U'} \right)	= \mathbb{E}\left( \log U \right)-\mathbb{E}\left( \log U'\right) =0
+    	\end{align*}
+    	~\\~\\\textit{Further comment: Let's denote X, Y two r.v.s. with CDFs $F_X, F_Y$, notice that $X=Y$ implies $F_X=F_Y$, $F_X=F_Y$ implies $\mathbb{E}X = \mathbb{E}Y$ but the inverse may not hold. We can have $\mathbb{E}X = \mathbb{E}Y$  but $F_X\neq F_Y$ (think about Unif(-1,1), Unif(-2,2)) and we can have $F_X = F_Y$ but $X\neq Y$ (think about $X$ and $1-X$ in this exercise).}
+	\end{enumerate}
+\end{solution}
+\end{exercise}
+
+\input{trailer.tex}
