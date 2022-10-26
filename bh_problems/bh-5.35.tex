@@ -1,7 +1,7 @@
 \input{header.tex}
 
 \setcounter{theorem}{34}
-\begin{exercise}[BH.5.35] Let $Z \sim N(0, 1)$, and $c$ be a nonnegative constant. Find $E(\text{max}(Z - c, 0))$, in terms of the standard Normal CDF $\Phi$ and PDF $\phi$. (This kind of calculation often comes up in quantitative finance.)
+\begin{exercise}[BH.5.35]
 \begin{hint}
     Use LOTUS, and handle the max symbol by adjusting the limits of integration appropriately. As a check, make sure that your answer reduces to $1/ 2 \pi$ when $c = 0$; this must be the case since we showed in Example 5.4.7 that $E|Z| = \sqrt{2/\pi}$, and we have $|Z| = \text{max}(Z, 0) + \text{max}(-Z, 0)$ so by symmetry $E|Z| = E(\text{max}(Z, 0)) + E(\text{max}(-Z, 0)) = 2E(\text{max}(Z, 0))$.
 \end{hint}
