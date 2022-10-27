@@ -2,7 +2,6 @@
 \setcounter{theorem}{0}
 
 \begin{exercise} [BH.1.1]
-	How many ways are there to permute the letters in the word MISSISSIPPI?
 \begin{solution}
 	11 distinct letters can be arranged in $11!$ ways. But of course, the letters of MISSISSIPPI are not all distinct: we have 1M, 4I, 4S and 2P. We therefore need to adjust for overcounting. To determine the overcounting factor, note that if we interchange the S's, nothing changes. We can interchange the S's in $4!$ ways. For each of these ways, we can then also interchange the I's, and still nothing changes. By the multiplication rule, we can interchange the S's and I's in $4!\cdot 4!$ ways. Adding the $P$'s, we have $4!\cdot 4!\cdot 2!$ permutations that yield exactly the same result. We conclude that the letters of the word MISSISSIPPI can be arranged in $$N=\frac{11!}{4!\cdot 4!\cdot 2!}\text{ ways.}$$
 \end{solution}
