@@ -1,7 +1,6 @@
 \input{header.tex}
-\setcounter{theorem}{13}
+\setcounter{theorem}{22}
 \begin{exercise}[BH.1.23]
-    Three people get into an empty elevator at the first floor of a building that has 10 floors. Each presses the button for their desired floor (unless one of the others has already pressed that button). Assume that they are equally likely to want to go to floors 2 through 10 (independently of each other). What is the probability that the buttons for 3 consecutive floors are pressed?
 \begin{solution}
     Define by $A$ the event that buttons for 3 consecutive floors are pressed. Notice first that the first floor is the ground floor since this is an American book. There are in total $N_{T}=9^3$ different sets of preferences of the three persons. We get consecutive buttons if they want to go to floor $\{2,3,4\}$, $\{3,4,5\}$, $\{4,5,6\}$, $\ldots$, $\{8,9,10\}$. These are 7 options, but the order of these number is not relevant, so there are $N_{A}=7\cdot 3!$ options favorable to $A$. Using the naive definition of probability, we find that $$P(A) = \frac{N_{A}}{N_{T}} = \frac{7\cdot 3!}{9^3}.$$
 \end{solution}
