@@ -1,11 +1,7 @@
 \input{header.tex}
 
-\setcounter{theorem}{22}
+\setcounter{theorem}{56}
 \begin{exercise}[BH.2.57]
-    \begin{enumerate}
-        \item There are two crimson jars (labeled $C_1$ and $C_2$) and two mauve jars (labeled $M_1$ and $M_2$). Each jar contains a mixture of green gummi bears and red gummi bears. Show by example that it is possible that $C_1$ has a much higher percentage of green gummi bears than $M_1$, and $C_2$ has a much higher percentage of green gummi bears than $M_2$, yet if the contents of $C_1$ and $C_2$ are merged into a new jar and likewise for $M_1$ and $M_2$, then the combination of $C_1$ and $C_2$ has a lower percentage of green gummi bears than the combination of $M_1$ and $M_2$.
-        \item Explain how (a) relates to Simpson's paradox, both intuitively and by explicitly defining events $A$, $B$, $C$ as in the statement of Simpson’s paradox.
-    \end{enumerate}
 \begin{solution}
     \begin{enumerate}
         \item Suppose $C_{1}$ is small, but has a high percentage of green gummy bears. $M_{1}$ is large, and has a lower percentage of green gummy bears. $C_{2}$ is large and has a higher percentage green gummy bears than $M_{2}$, but lower than $M_{1}$. $M_{2}$ is small. Because $C_{1}$ and $M_{2}$ are small, the percentage of green gummy bears after merging will be close to the percentage in $C_{2}$ for the $C_{1}+C_{2}$ mixture, and close to the percentage in $M_{2}$ for the $M_{1}+M_{2}$ mixture. Since the percentage in $M_{2}$ is higher than in $C_{2}$, the $M_{1}+M_{2}$ mixture will also have a higher percentage of green gummi bears. In numbers, $C_{1}: 9G,1R$. $M_{1}: 500G,500R$, $C_{2}: 300G,700R$, $M_{2}:1G,9R$. The percentage of green gummy bears in $C$ is 309/1010, while in $M$ it is 501/1010.
