@@ -1,12 +1,7 @@
 \input{header.tex}
-\setcounter{theorem}{7}
+\setcounter{theorem}{9}
 
 \begin{exercise}[BH.1.10]
-	To fulfill the requirements for a certain degree, a student can choose to take any 7 out of a list of 20 courses, with the constraint that at least 1 of the 7 courses must be a statistics course. Suppose that 5 of the 20 courses are statistics courses.
-	\begin{enumerate}
-		\item How many choices are there for which 7 courses to take?
-		\item Explain intuitively why the answer to (a) is \emph{not} $\binom{5}{1} \cdot \binom{19}{6}$.
-	\end{enumerate}
 \begin{solution}~
 	 \begin{enumerate}
 	 	\item Without restrictions there would be $N_{u}={20\choose 7}$ options. From those, we need to subtract the number of choices that do not contain statistics course, which would amount to choosing 7 courses from the 15 non-statistics courses: $N_{r} = {15\choose 7}$. Then, $N=N_{u}-N_{r}={20\choose 7}-{15 \choose 7}$.
