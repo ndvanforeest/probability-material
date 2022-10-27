@@ -1,11 +1,6 @@
 \input{header.tex}
-\setcounter{theorem}{16}
+\setcounter{theorem}{33}
 \begin{exercise}[BH.1.34]
-	A random 5-card poker hand is dealt from a standard deck of cards. Find the probability of each of the following possibilities (in terms of binomial coefficients).
-	\begin{enumerate}
-		\item A flush (all 5 cards being of the same suit; do not count a royal flush, which is a flush with an ace, king, queen, jack, and 10).
-		\item Two pair (e.g., two 3’s, two 7’s, and an ace).
-	\end{enumerate}
 \begin{solution}~
 	\begin{enumerate}
 		\item There are ${13 \choose 5}$ ways to get 5 cards with the suit Spades (for example), so ${13 \choose 5}-1$ ways to get 5 cards with the suit Spades excluding the royal flush. A flush can appear for all suits, so there are $N_{F}=4\cdot ({13 \choose 5}-1)$ ways to get a flush. There are $N_{T}={52 \choose 5}$ ways to draw 5 cards from a standard deck. Then, denoting by $F$ the event of a flush, $$P(F) = \frac{N_{F}}{N_{T}} = \frac{4 \cdot ({13 \choose 5}-1)}{{52 \choose 5}}.$$
