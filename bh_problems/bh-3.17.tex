@@ -1,7 +1,6 @@
 \input{header.tex}
-\setcounter{theorem}{8}
+\setcounter{theorem}{16}
 \begin{exercise}[BH.3.17]
-  An airline overbooks a flight, selling more tickets for the flight than there are seats on the plane (figuring that it’s likely that some people won’t show up). The plane has 100 seats, and 110 people have booked the flight. Each person will show up for the flight with probability 0.9, independently. Find the probability that there will be enough seats for everyone who shows up for the flight.
 \begin{solution}
 	There are enough seats if 100 or less people show up. Denote by $N$ the number of people who show up. We are looking for $P(N\leq 100)$. $N$ follows a binomial distribution (since each person shows up independently of the other), with parameters $n=110$ and $p=0.9$. Then,
 	\begin{align*}
