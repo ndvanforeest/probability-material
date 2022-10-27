@@ -1,8 +1,7 @@
 \input{header.tex}
-\setcounter{theorem}{20}
+\setcounter{theorem}{42}
 
 \begin{exercise}[BH.1.43]
-	Show that for any events A and B, $\P{A} + \P{B} - 1 \leq \P{A \cap B} \leq \P{A \cup B} \leq \P{A} + \P{B}$. For each of these three inequalities, give a simple criterion for when the inequality is actually an equality (e.g., give a simple condition such that $\P{A \cap B} = \P{A \cup B}$ if and only if the condition holds).
 \begin{solution}
 	$P(A\cap B)\leq P(A\cup B)$, since $A\cap B\subseteq A\cup B$. We also know from the inclusion-exclusion principle that $P(A\cup B) = P(A) + P(B)-P(A\cap B)$. Hence, $P(A\cap B) = P(A)+P(B)-P(A\cup B)\geq P(A) + P(B)-1$ (where the inequality uses that probabilities are $\leq 1$). Since $P(A\cap B)\geq 0$, we also have from $P(A\cap B) = P(A)+P(B)-P(A\cup B)$ that $P(A\cup B)\leq P(A) + P(B)$.
 

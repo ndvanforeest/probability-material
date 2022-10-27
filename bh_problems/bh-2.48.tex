@@ -1,13 +1,8 @@
 \input{header.tex}
 
-\setcounter{theorem}{19}
+\setcounter{theorem}{47}
 
 \begin{exercise}[BH.2.48]
-  A fair die is rolled repeatedly, and a running total is kept (which is, at each time, the total of all the rolls up until that time). Let $p_n$ be the probability that the running total is ever \emph{exactly} $n$ (assume the die will always be rolled enough times so that the running total will eventually exceed $n$, but it may or may not ever equal $n$).
-	\begin{enumerate}
-		\item  Write down a recursive equation for $p_n$ (relating $p_n$ to earlier terms $p_k$ in a simple way). Your equation should be true for all positive integers $n$, so give a definition of $p_0$ and $p_k$ for $k < 0$ so that the recursive equation is true for small values of $n$.
-		\item Find $p_7$.
-	\end{enumerate}
 \begin{solution}
 	\begin{enumerate}
 		\item Suppose, we current have $n-i$ for $i=1,\ldots,6$, then we have a probability of $\frac{1}{6}$ of achieving $p_{n}$. So

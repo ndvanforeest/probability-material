@@ -1,7 +1,6 @@
 \input{header.tex}
-\setcounter{theorem}{24}
+\setcounter{theorem}{51}
 \begin{exercise}[BH.1.52]
-	A certain class has 20 students, and meets on Mondays and Wednesdays in a classroom with exactly 20 seats. In a certain week, everyone in the class attends both days. On both days, the students choose their seats completely randomly (with one student per seat). Find the probability that no one sits in the same seat on both days of that week.
 \begin{solution}
 	If we define $A_{i}$ to be the event that student $i$ sits in the same seat on both days, then we are looking for
 	$P(\cup_{i=1}^{20}A_{i})$. We are going to calculate this probability using the inclusion-exclusion principle. First, the probability that student $i$ sits in the same place twice. The student can take any seat in the first lecture, but then in the second lecture must choose the same seat. Since in the second lecture, seating is assigned at random, the probability of sitting in the same seat in both lectures is $P(A_{i})=\frac{1}{20}$. Now consider the intersection $A_{i}\cap A_{j}$ for $i\neq j$. By the LOTP $$P(A_{i}\cap A_{j}) = P(A_{i}\cap A_{j}|A_{i})P(A_{i})=P(A_{j}|A_{i})P(A_{i}).$$ To calculate the conditional probability, note that if we know that student $i$ sits in the same seat in both lectures, student $i$ faces the same problem as when calculating the marginal probability, only now with 19 seats. So $P(A_{j}|A_{i}) = \frac{1}{19}$. We conclude that $P(A_{i}\cap A_{j})=\frac{1}{20}\frac{1}{19} = \frac{18!}{20!}$. The same strategy can be used to find the remaining intersections, for example $P(A_{i}\cap A_{j}\cap A_{k} =\frac{1}{20\cdot 19\cdot 18} = \frac{17!}{20!}$. For general $n$ ($n=20$ in the question), we now have

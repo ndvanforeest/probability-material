@@ -1,11 +1,6 @@
 \input{header.tex}
-\setcounter{theorem}{10}
+\setcounter{theorem}{21}
 \begin{exercise}[BH.3.24]
-  Let $X$ be the number of Heads in 10 fair coin tosses.
-	\begin{enumerate}
-		\item Find the conditional PMF of $X$, given that the first two tosses both land Heads. 
-		\item Find the conditional PMF of X, given that at least two tosses land Heads.
-	\end{enumerate}
 \begin{solution}~
 	\begin{enumerate}
 	    \item Denote by $X_{8}$ the number of heads in $8$ tosses, so $X_{8}\sim \text{Bin}(8,0.5)$, and by $HH$ the event that the first two tosses are heads. Notice that we have $X=2$ if in the remaining 8 tosses we don't see any heads. Similarly, we have $X=3$ if in the remaining 8 tosses we have 1 heads. In general, 

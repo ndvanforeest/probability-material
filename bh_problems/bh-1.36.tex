@@ -1,7 +1,6 @@
 \input{header.tex}
-\setcounter{theorem}{17}
+\setcounter{theorem}{35}
 \begin{exercise}[BH.1.36]
-	A group of 30 dice are thrown. What is the probability that 5 of each of the values 1,2,3,4,5,6 appear?
 \begin{solution}
 	 Denote the event of five of each of the values as $5E$. The total number of outcomes is $N_{T}=6^{30}$.  Notice that in this total number of outcomes, the outcome $11111,22222,\ldots,66666$ is counted once, but it does include all permutations where for example a 1 and a 2 trade places. So it includes $N_{5E}=\frac{30!}{5!^6}$ sequences favorable to the outcome. Therefore $P(5E) = \frac{N_{5E}}{N_{T}} = \frac{30!}{5!^6\cdot 6^{30}}$.\\~\\
 	 
