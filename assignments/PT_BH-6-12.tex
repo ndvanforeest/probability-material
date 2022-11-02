@@ -1,0 +1,47 @@
+\begin{exercise}
+	\textbf{[BH.12]} Let $X_1, \ldots, X_n \sim N(c, \sigma^2)$ and they are i.i.d. r.v.s.  $\bar{X}_n = \frac{1}{n} \sum_{j = 1}^n X_j$, $T_1 = \bar{X}_n^2$ and $T_2 = \frac{1}{n} \sum_{j = 1}^n X_j^2$. Note that $T_1$ is the square of the first sample moment and $T_2$ is the second sample moment.
+	\begin{enumerate}
+\item First answer the original questions in your own words.
+\item What is the distribution of $\bar{X}_n$, what happens to the distribution when $n\rightarrow \infty$, can you infer what would happen to the distribution of $T_1$?
+\item What is the variance of $T_2$, what happens to its distribution when  $n\rightarrow \infty$.
+	\end{enumerate}
+	The following codes may give you some insight:
+	\begin{minted}[]{R}
+f <- function(n,c, sigma, seeds){
+	set.seed(seeds)
+	X=rnorm(n,c,sigma)
+	T1=(mean(X))^2;
+	T2=mean(X^2)
+	return(c(T1,T2))
+} 
+g <- function(n,seeds){
+	c=3
+	sigma2=1
+	sigma=sqrt(sigma2)
+	return(f(n,c, sigma, seeds))
+}
+repeat_draw=100
+T12_fixed_n<-function(n,repeat_draw){
+	sapply(seq(1, repeat_draw, by=1), function(x){g(n,x)})
+}
+T12 <-T12_fixed_n(100,repeat_draw)
+T1=T12[1,] 
+T2=T12[2,]
+plot(T1,T2,  xlim=c(5,12),ylim=c(5,12) )
+abline(0,1)
+
+large_n=1000;
+T12 <-sapply(seq(1, large_n, by=1), function(x){T12_fixed_n(x,1)})
+T1=T12[1,] 
+T2=T12[2,]
+plot(T1, type="l", lty=2,col="red", lwd=3)
+lines(T2, lwd=3)
+abline(h=9, col="blue")
+	\end{minted}
+	\begin{hint}~
+\begin{enumerate}
+	\item Start by comparing $\left(\frac{1}{n} \sum_{j = 1}^n x_j\right)^2$ and $\frac{1}{n} \sum_{j = 1}^n x_j^2$ when $x_1, \ldots, x_n$ are \emph{numbers}, by considering a discrete random variable whose possible values are $x_1, \ldots, x_n$.
+	\item First find the distribution of $\bar{X}_n$. In general, for finding $E(Y^2)$ for a random variable, it is often useful to write it as $E(Y^2) = V(Y) + (E(Y))^2$.
+\end{enumerate}
+	\end{hint}
+\end{exercise} 
