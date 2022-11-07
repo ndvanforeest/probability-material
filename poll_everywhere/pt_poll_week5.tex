@@ -1,0 +1,163 @@
+\documentclass[poll_tutorial_format]{subfiles}
+\begin{document}
+	\maketitle
+	
+	\setcounter{section}{4}
+	\section{PT Week 5 (Continuous) random variables}
+	
+	\subsection{Set things up}
+	\label{sec:set-things-up}
+	
+	
+	
+	\setcounter{theorem}{-1}
+	\begin{exercise}
+		Have you helped your neighbors to set up their polleverywhere app? 
+		\begin{enumerate}
+			\item Yes
+			\item No
+		\end{enumerate}
+	\end{exercise}
+	
+	\subsection{Real questions}
+	\label{sec:start-real-questions pt week 5}
+	
+		
+	
+ 
+	
+	
+	\begin{exercise}
+		Which of these statements is incorrect: 
+		\begin{enumerate}
+			\item An r.v. has a continuous distribution if its CDF is differentiable at finitely many points. 
+			\item A continuous random variable is a random variable with a continuous distribution.  
+			\item For a continuous r.v. $X$ with CDF
+			$F$, the probability density function (PDF) of $X$ is the derivative f of the CDF.
+			\item It is impossible for two different PDFs to have the same CDF.
+			\item The distribution of a random variable specifies the probabilities of all events associated with the r.v..
+		\end{enumerate}
+	\end{exercise}
+	
+	
+		\begin{exercise}
+		Let $X$ be a continuous real-valued r.v. with probability continuous r.v. with PDF $f$ and $f(0)> 0$. Let $\tilde{f}$ be another probability density function such that  $\tilde{f}(x)=f(x)$ for all $x$ except $x=0$ where $\tilde{f}(0)=0$.   Suppose $\tilde{X}$ has the PDF $\tilde{f}$.	
+		Which of these statements is incorrect: 
+		\begin{enumerate}
+			\item The CDF of $X$ is given by $F(x)=\int_{-\infty}^{x}f(x)dx$.
+			\item The support of $X$ contains the number $0$, but the support of $\tilde{X}$ does not.
+			\item $X$ and $\tilde{X}$ have the same distribution, e.g., $P(X \leq a )=P(\tilde{X} \leq a)$ for any real number $a$.
+ 			\item $X$ and $\tilde{X}$ have different distributions.
+ 			\item $P(X=0)=P(\tilde{X}=0)=0$.
+		\end{enumerate}
+	\end{exercise}
+	
+	
+	\begin{exercise}
+		Which of these statements is incorrect: 
+		\begin{enumerate}
+			\item If two r.v.s have the same CDF (or PDF or PMF), then they have the same distribution.
+			\item If two r.v.s have the same distribution, then they have the same CDF/PMF (but not necessarily the same PDF) .
+			\item CDF functions map to values within 0 and 1, while PDF functions map to non-negative values. 
+			\item If $f$ is a PDF function for a real-valued r.v.,  then $\int_{-\infty}^{x}f(s)ds$ is a CDF function and  $\int_{-\infty}^{+\infty}f(s)ds=1$.
+			\item CDF functions are continuous functions. 
+		\end{enumerate}
+	\end{exercise}
+
+\begin{exercise}
+	Which of these statements may be incorrect: 
+	\begin{enumerate}
+		\item Given a CDF $F$ for a continuous r.v., which is differentiable except at points $a_1, a_2, \cdots$, we conventionally (unless otherwise specified) choose its PDF to be $f(x)=F'(x)$ except for  $f(a_1), f(a_2), \cdots$ that are set to be 0.
+		\item The discrete r.v.'s PMF is uniquely determined by one CDF but there might be several (could be infinite) PDFs that correspond to the same CDF.   
+		\item It is possible to have two r.v.s with the same CDF (or in other words, same distribution) but different PDFs and supports. 
+		\item If two r.v.s have the same distribution, they must be equal to each other.
+	\end{enumerate}
+\end{exercise}
+	
+	
+
+	\begin{exercise}
+		Let $X$ be a continuous real-valued r.v. with probability continuous r.v. with PDF $f$. Let $F(x)=\int_{-\infty}^x f(s)ds$. 
+		Choose the correct statement:
+		\begin{enumerate}
+			\item $P(a< X\leq b) =F(b)-F(a)$.
+			\item $P(a< X\leq b) =\int_{a}^b f(s)ds$.
+			\item $P(a< X\leq b)=P(a\leq  X\leq b)=P(a< X< b)$.
+			\item $\int_{-\infty}^{+\infty} f(x)dx=1$.
+			\item All of the above. 
+		\end{enumerate}
+	\end{exercise}
+	
+	
+	
+	\begin{exercise}
+	Let $X$ be a continuous real-valued r.v. with probability continuous r.v. with PDF $f$. Let $F(x)=\int_{-\infty}^x f(s)ds$. Let $\tilde{f}$ be another probability density function such that  $\tilde{f}(x)=f(x)$ for all $x$ except $x=0$ where $\tilde{f}(0)\neq {f}(0)$.
+	Choose the correct statement:
+	\begin{enumerate}
+		\item $P(a< X\leq b|X<a) =0$.
+		\item $P(a< X\leq b|X\leq c) =\frac{\int_{a}^b f(s)ds}{\int_{-\infty}^c f(s)ds}$ (suppose $P(X\leq c) >0, c>b$).
+		\item $F(x)=\int_{-\infty}^x \tilde{f}(s)ds$.
+		\item $E(X)= \int_{-\infty}^{+\infty} xf(x)dx=1$.
+		\item It is possible for $f(x)$ to be larger than 10.
+		\item All of the above. 
+	\end{enumerate}
+\end{exercise}
+
+	
+	
+	\begin{exercise}
+	Let $U\sim $Unif(0,1), and $X=F^{-1}(U)$ with $F$ being the CDF of Unif(0,1) such that 
+	$$F(x)= \begin{cases}0 & \text { if } x \leq 0 \\ x & \text { if } 0<x<1 \\ 1 & \text { if } x \geq 1\end{cases} $$
+	Which of these statements is incorrect:
+	\begin{enumerate}
+		\item $E(U)=\int_{0}^{1}xdx=1/2$.
+		\item $V(U)=\int_{0}^{1}(x-1/2)^2dx$.
+		\item $V(aU)=a^2E(U-EU)^2$.
+		\item $X$, $U$ and $F(U)$ have different distributions. 
+	\end{enumerate}
+\end{exercise}
+
+	
+	\begin{exercise}
+	 	Let $U\sim $Unif(0,1), and denote $\tilde{U}=aU+a$, what is the value $P(\tilde{U}\in(a,7a/4)|\tilde{U}\leq 3a/2)$?  
+		Which of these statements is correct: 
+		\begin{enumerate}
+			\item 0
+			\item 3/4
+			\item 1/2
+			\item 3/2
+			\item -1/2 
+		\end{enumerate}
+	\end{exercise}
+	
+	
+	\begin{exercise}
+		Let $Z\sim$N(0,1) (standard normal distribution) and $X=\mu+\sigma Z$. 
+		Which of these statements is incorrect: 
+		\begin{enumerate}
+			\item $X\sim N(\mu, \sigma^2)$
+			\item The PDF of $X$ is $f(x)=\frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{(x-\mu)^2 }{2\sigma^2 }}$
+			\item $X$ and $Z$ have the same support: the whole real line.   
+			\item The PDF function of $X$ is symmetric about 0.
+		\end{enumerate}
+	\end{exercise}
+	
+
+	\begin{exercise}
+		Let $Z\sim$N(0,1) with CDF $\Phi$ and pdf $\psi$ (standard normal distribution) and $X=\mu+\sigma Z$. 
+		Which of these statements may be incorrect: 
+		\begin{enumerate}
+			\item $P(X\leq \mu)=P(X\geq \mu)=1/2$.
+			\item The CDF of $X$ is $\Phi((x-\mu)/\sigma)$.
+			\item The PDF of $X$ is $\phi((x-\mu)/\sigma)/\sigma$.
+			\item $P(|X-\mu|\leq 2\sigma) >P(|Z|<2)$.
+			\item $P(X-\mu=\sigma Z)=1$.
+		\end{enumerate}
+	\end{exercise}
+	
+ 
+	
+	
+	
+	
+\end{document}
