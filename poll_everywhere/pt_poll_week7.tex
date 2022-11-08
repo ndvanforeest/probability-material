@@ -1,0 +1,153 @@
+\documentclass[poll_tutorial_format]{subfiles}
+\begin{document}
+	\maketitle
+	\setcounter{section}{6}
+	\section{PT Week 7 Moments and Sample moments}
+	
+	\subsection{Set things up}
+	\label{sec:set-things-up}
+	
+	
+	
+	\setcounter{theorem}{-1}
+	\begin{exercise}
+		Have you helped your neighbors to set up their polleverywhere app? 
+		\begin{enumerate}
+			\item Yes
+			\item No
+		\end{enumerate}
+	\end{exercise}
+	
+	\subsection{Real questions}
+	\label{sec:start-real-questions pt week 5}
+	
+	
+	
+		\begin{exercise}
+			\textbf{[Discrete r.v. v.s. Continuous r.v. I]}
+				Let $X$ be a discrete (real-valued) r.v. with mean $\mu$, PMF $p$ and CDF $F_X$, and $Y$ be a continuous (real-valued) r.v. with mean $\mu$, PDF $f$ and CDF $F_Y$, and $g$ a function from $\mathbb{R}$ to $\mathbb{R}$.
+				Which of these statements may be incorrect: 
+				\begin{enumerate}
+						\item $\E{X}=\sum_{a_i \in \textit{support}(X) } a_i p(a_i).$.
+						\item $\E{Y} = \int_{\textit{support}(Y) } yf(y)dy. $
+						\item $\E{X}=\sum_{a_i \in \textit{support}(X) } a_i \Delta F_X(a_i)$. ($\Delta F(a_i):=F(a_i)-\lim\limits_{x\rightarrow a_{i,-}}F(x)$.)
+						\item $\E{Y} = \int_{\textit{support}(Y) } ydF(y).$
+						\item $g(\E{X})=g(\E{Y})$ and hence  $\E{g(X)}=\E{g(Y)}$. 
+					\end{enumerate}
+			\end{exercise}
+	
+		
+				\begin{exercise}
+			\textbf{[Discrete r.v. v.s. Continuous r.v. II]}
+			Let $X_i, i=1,\cdots, n$ be i.i.d. discrete (real-valued), and $Y_i, i=1,\cdots, n$ be i.i.d. continuous (real-valued).
+			Which of these statements is incorrect: 
+			\begin{enumerate}
+				\item $\P{X_1=\cdots =X_n}>0$.
+				\item $\P{Y_1=\cdots =Y_n}=0$.
+				\item $\P{X_1=Y_1}=0$.
+				\item $\P{Y_1<\cdots <Y_n}=1/n!$.
+				\item $\P{X_1<\cdots <X_n}=1/n!$.
+				\item $\P{Y_1=\min\{Y_1, \cdots, Y_n\}}=1/n$.  
+			\end{enumerate}
+		\end{exercise}
+		
+	
+	\begin{exercise}
+		Which of these statements could be incorrect:
+		\begin{enumerate}
+			\item Moments exist for all r.v.s.
+			\item The first moment of $X$ equals $\E{X}$.
+			\item The second central moment of $X$ equals $\V{X}$.
+			\item The third standardized moment of $X$ equals Skew$(X)$. 
+		\end{enumerate}
+	\end{exercise}
+	
+	
+	\begin{exercise}
+		Let $X_1, . . . ,X_n$ be i.i.d. and consider them as the sample in this exercise.
+		Which of these statements may be incorrect: 
+		\begin{enumerate}
+			\item Sample moments always exist.
+			\item Moments are numbers while sample moments are random variables.
+			\item Assume $\E{X_i}$ exists, then $\E{M_1}=\E{X_1}$.
+			\item The sample mean equals the mean of $X_1$. 
+		\end{enumerate}
+	\end{exercise}
+	
+	
+			\begin{exercise}
+		Let $X$ be i.i.d. r.v.s with mean $\mu$ and variance $\sigma^2$. What happens to $X$ if $\sigma^2 =0$? 
+		\begin{enumerate}
+			\item $\P{X=\mu}=1$. 
+			\item $X=\mu$.			
+			\item $X=0$.			
+			\item $\P{X=0}=1$.			
+		\end{enumerate}
+	\end{exercise}
+	
+	\begin{exercise}
+		Let $X_1, . . . ,X_n$ be i.i.d. r.v.s with mean $\mu$ and variance $\sigma^2$, and $M_1=\frac{1}{n}\sum_{i=1}^n X_i$ . What are the mean and variance of $M_1$? 
+		\begin{enumerate}
+			\item $\frac{\mu}{n}, \frac{\sigma^2}{n}$.
+			\item $\frac{\mu}{n}, \frac{\sigma^2}{n^2}$.			
+			\item ${\mu}{},  {\sigma^2}{}$.			
+			\item ${\mu}{},  \frac{\sigma^2}{n}$.
+		\end{enumerate}
+	\end{exercise}
+	
+
+	
+		\begin{exercise}
+		Let $X_1, . . . ,X_n$ be i.i.d. r.v.s with mean $\mu$ and variance $\sigma^2$, and $M_1=\frac{1}{n}\sum_{i=1}^n X_i$. What happens to the variance of $M_1$ when $n$ increases? 
+		\begin{enumerate}
+			\item Converges to 0, implying that $M_1$ is more likely to be closer and closer to its expectation. 
+			\item Remains constant.			
+			\item Increases to infinity.			
+		\end{enumerate}
+	\end{exercise}
+	
+	
+	
+	\begin{exercise}
+	Let $X_1, . . . ,X_n$ be i.i.d. r.v.s.
+	Which of these statements is incorrect: %TODO ans:$P(S_n^2 =\sigma^2) >0$.
+		\begin{enumerate}
+			\item The sample variance, which always exist, is $S_n^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X})^2$.
+			\item $\E{S_n^2} =\sigma^2$ if $\V{X_1}=\sigma^2$.
+			\item If $\E{X^4_i} <\infty$, then $\V{S_n^2} \rightarrow 0$ as $n$ increases 
+			\item $\P{S_n^2 =\sigma^2} >0$. 
+		\end{enumerate}
+	\end{exercise}
+	
+
+	
+\begin{exercise}
+	Suppose you observe a sample of three data points $\{0,1,2\}$, what are its sample mean and sample variance? 
+	\begin{enumerate}
+		\item  1, 1.
+		\item  1, 2/3.
+		\item  3, 2. 
+		\item  1, 2. 
+	\end{enumerate}
+\end{exercise}
+
+	
+	
+	\begin{exercise}
+		Let $X_1, . . . ,X_n$ be i.i.d. r.v.s. with mean $\mu$, and $g(x_1, x_2, \cdots, x_n) =\frac{1}{n}\sum_{i=1}^n x_i$. 
+		Which of these statements may be incorrect:
+		\begin{enumerate}
+			\item $\E{g(X_1, . . . ,X_n)}=g(\E{X_1}, . . . ,\E{X_n}) =\mu$.
+			\item $\P{X_1\leq x_1, . . . ,X_n\leq x_n}=\P{X_1\leq x_1}\times  . . . \times \P{X_n\leq x_n}$.
+			\item $\V{X_1 -X_2}=\V{X_1}+\V{X_2}$.
+			\item $\P{g(x_1, x_2, \cdots, x_n) >\mu} =1/2 $.
+		\end{enumerate}
+	\end{exercise}
+	
+	
+	
+	 
+	
+	
+	
+\end{document}

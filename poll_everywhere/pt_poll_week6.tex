@@ -1,0 +1,145 @@
+\documentclass[poll_tutorial_format]{subfiles}
+\begin{document}
+	\maketitle
+	\setcounter{section}{5}
+	\section{PT Week 6 (Continuous) random variables \& Characteristics of distributions}
+	
+	\subsection{Set things up}
+	\label{sec:set-things-up}
+	
+	
+	
+	\setcounter{theorem}{-1}
+	\begin{exercise}
+		Have you helped your neighbors to set up their polleverywhere app? 
+		\begin{enumerate}
+			\item Yes
+			\item No
+		\end{enumerate}
+	\end{exercise}
+	
+	\subsection{Real questions}
+	\label{sec:start-real-questions pt week 6}
+	
+	
+	
+	\begin{exercise}
+		Let $Y\sim$Expo($\lambda$),
+		which of these statements could be incorrect:
+		\begin{enumerate}
+			\item Y can be interpreted as a waiting time for a success in continuous time, and $\lambda$ represents the success rate. Therefore, the larger the $\lambda$, the more likely to have a smaller waiting time.  
+			\item $\lambda Y\sim$Expo(1).
+			\item $\V{\lambda Y} \neq \E{\lambda Y}$.
+			\item Given $Y\geq s$, $Y-s$ follows Expo($\lambda$) (conditionally). 
+		\end{enumerate}
+	\end{exercise}
+	
+	
+	\begin{exercise}
+	$\lambda>0$,	$Y$ has the PDF $f_Y(y) = \lambda e^{-\lambda y}, y\geq 0$ otherwise 0, $X$ has the PDF $f(x) = \lambda e^{-\lambda x}, x> 0$ otherwise 0, and $X,Y$ are independent 
+		Which of these statements could be incorrect:
+		\begin{enumerate}
+			\item $X$ and $Y$ have different distributions. 
+			\item $\P{X>-1}=\int_{0}^{+\infty} f(x)dx=\P{Y>0}.$
+			\item $\E{X} = \E{Y}=1/\lambda $. 
+			\item $\min\{X,Y\}\sim$Expo($2\lambda$)
+		\end{enumerate}
+	\end{exercise}
+	
+	
+	\begin{exercise}
+	\textbf{[Poisson process I.]} Denote $N_t$ a \textit{Poisson process} with rate $\lambda$ (per unit time), which represents the number of visitors to a website within the time interval [0,t]. Denote the waiting time till the ith arrival/visitor as $T_i$. Which of these statements is incorrect: 
+		\begin{enumerate}
+			\item $N_t-N_s$ is independent from $N_s$ for $t>s$. 
+			\item $\{T_1> t\}=\{N_t=0\}$.
+			\item $T_1$ follows the Expo($\lambda$).
+			\item $T_2-T_1$ is independent from $T_1$.
+		\end{enumerate}
+	\end{exercise}
+	
+	
+	\begin{exercise}
+	\textbf{[Poisson process II.]} Denote $N_t$ a \textit{Poisson process} with rate $\lambda$ (per unit time), which represents the number of visitors to a website within the time interval [0,t]. Denote the waiting time till the ith arrival/visitor is $T_i$. Which of these statements is incorrect: 
+	\begin{enumerate}
+		\item $\P{N_t-N_s <l|N_s>u}=\P{N_t-N_s <l}$. 
+		\item $\P{T_1> t}= 1-e^{-\lambda t}$.
+		\item $\P{N_t=0} = e^{-\lambda t}$.
+		\item $T_2$ follows the same distribution as the one of $X+Y$ where $X,Y$ follows Expo($\lambda$) independently.
+	\end{enumerate}
+\end{exercise}
+	
+	
+
+	\begin{exercise}
+	\textbf{[Poisson process III.]} Denote $N_t$ a \textit{Poisson process} with rate $1$, which represents the number of visitors to a website within the time interval [0,t]. What is the probability of strictly more than one visitor within the time interval [0,1]: 
+	\begin{enumerate}
+		\item 1.
+		\item $e^{-1}$.
+		\item $1-e^{-1}$.
+		\item $1-2e^{-1}$.
+ 	\end{enumerate}
+\end{exercise}
+
+	
+	\begin{exercise}
+		Let X1, . . . ,Xn be i.i.d. from a continuous distribution, e.g., they may represent the lunch time of $n$ identical dogs respectively.
+		Which of these statements is incorrect:
+		\begin{enumerate}
+			\item $\P{X_1<X_2<X_3}=1/3!$.
+			\item The probability of two dogs use exactly the same lunch time is zero.		
+			\item The event $X_1$ is the smallest among these n r.v.s. is not independent from the event that $X_2$ is the smallest among $X_2,\cdots, X_n$.
+			\item The event $X_j$ is greater than all of
+			$X_{j-1},\cdots,X_1$ happens with 1/j.
+		\end{enumerate}
+	\end{exercise}
+	
+	
+	\begin{exercise}
+		Which of these statements is incorrect:
+		\begin{enumerate}
+			\item Median always exists 
+			\item Expectation/mean always exists.
+			\item Mode always exists.
+			\item Median and Mode of a r.v. may not be unique. 
+		\end{enumerate}
+	\end{exercise}
+	
+	
+	
+	\begin{exercise}
+		Which of the following is most likely to be affected by extreme values in the support of r.v.s:
+		\begin{enumerate}
+			\item Median.
+			\item Expectation/mean.
+			\item Mode. 
+		\end{enumerate}
+	\end{exercise}
+	
+	
+	
+	\begin{exercise}
+		Which of these statements is incorrect: 
+		\begin{enumerate}
+			\item $X\sim N(\mu,\sigma^2)$ has a symmetric
+			distribution about $\mu$.
+			\item $X\sim N(\mu,\sigma^2)$, then $X-\mu$ and $\mu-X$ have the same distribution.
+			\item $X\sim N(\mu,\sigma^2)$, then $Y=-X\sim N(\mu,\sigma^2)$. However, $\P{X=Y}=0$.   
+			\item $\arg_c \min E(X-c)^2$ equals the set of medians of $X$.   
+		\end{enumerate}
+	\end{exercise}
+	
+	
+	\begin{exercise}
+		Let $X_1$ follow Bernoulli distribution with probability of success $1/2$, what is  $\arg_c \min E|X-c|$? %TODO ans: [0,1].
+		\begin{enumerate}
+			\item 1/2.
+			\item 0.  
+			\item 1.
+			\item ~$[0,1]$.
+		\end{enumerate}
+	\end{exercise}
+	
+	
+	
+ 	
+\end{document}

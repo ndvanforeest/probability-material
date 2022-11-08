@@ -46,9 +46,9 @@
 		\begin{enumerate}
 			\item The CDF of $X$ is given by $F(x)=\int_{-\infty}^{x}f(x)dx$.
 			\item The support of $X$ contains the number $0$, but the support of $\tilde{X}$ does not.
-			\item $X$ and $\tilde{X}$ have the same distribution, e.g., $P(X \leq a )=P(\tilde{X} \leq a)$ for any real number $a$.
+			\item $X$ and $\tilde{X}$ have the same distribution, e.g., $\P{X \leq a }=\P{\tilde{X} \leq a}$ for any real number $a$.
  			\item $X$ and $\tilde{X}$ have different distributions.
- 			\item $P(X=0)=P(\tilde{X}=0)=0$.
+ 			\item $\P{X=0}=\P{\tilde{X}=0}=0$.
 		\end{enumerate}
 	\end{exercise}
 	
@@ -80,9 +80,9 @@
 		Let $X$ be a continuous real-valued r.v. with probability continuous r.v. with PDF $f$. Let $F(x)=\int_{-\infty}^x f(s)ds$. 
 		Choose the correct statement:
 		\begin{enumerate}
-			\item $P(a< X\leq b) =F(b)-F(a)$.
-			\item $P(a< X\leq b) =\int_{a}^b f(s)ds$.
-			\item $P(a< X\leq b)=P(a\leq  X\leq b)=P(a< X< b)$.
+			\item $\P{a< X\leq b} =F(b)-F(a)$.
+			\item $\P{a< X\leq b} =\int_{a}^b f(s)ds$.
+			\item $\P{a< X\leq b}=\P{a\leq  X\leq b}=\P{a< X< b}$.
 			\item $\int_{-\infty}^{+\infty} f(x)dx=1$.
 			\item All of the above. 
 		\end{enumerate}
@@ -94,10 +94,10 @@
 	Let $X$ be a continuous real-valued r.v. with probability continuous r.v. with PDF $f$. Let $F(x)=\int_{-\infty}^x f(s)ds$. Let $\tilde{f}$ be another probability density function such that  $\tilde{f}(x)=f(x)$ for all $x$ except $x=0$ where $\tilde{f}(0)\neq {f}(0)$.
 	Choose the correct statement:
 	\begin{enumerate}
-		\item $P(a< X\leq b|X<a) =0$.
-		\item $P(a< X\leq b|X\leq c) =\frac{\int_{a}^b f(s)ds}{\int_{-\infty}^c f(s)ds}$ (suppose $P(X\leq c) >0, c>b$).
+		\item $\P{a< X\leq b|X<a} =0$.
+		\item $\P{a< X\leq b|X\leq c} =\frac{\int_{a}^b f(s)ds}{\int_{-\infty}^c f(s)ds}$ (suppose $\P{X\leq c} >0, c>b$).
 		\item $F(x)=\int_{-\infty}^x \tilde{f}(s)ds$.
-		\item $E(X)= \int_{-\infty}^{+\infty} xf(x)dx=1$.
+		\item $\E{X}= \int_{-\infty}^{+\infty} xf(x)dx=1$.
 		\item It is possible for $f(x)$ to be larger than 10.
 		\item All of the above. 
 	\end{enumerate}
@@ -110,16 +110,16 @@
 	$$F(x)= \begin{cases}0 & \text { if } x \leq 0 \\ x & \text { if } 0<x<1 \\ 1 & \text { if } x \geq 1\end{cases} $$
 	Which of these statements is incorrect:
 	\begin{enumerate}
-		\item $E(U)=\int_{0}^{1}xdx=1/2$.
-		\item $V(U)=\int_{0}^{1}(x-1/2)^2dx$.
-		\item $V(aU)=a^2E(U-EU)^2$.
+		\item $\E{U}=\int_{0}^{1}xdx=1/2$.
+		\item $\V{U}=\int_{0}^{1}(x-1/2)^2dx$.
+		\item $\V{aU}=a^2\E{U-\E{U}}^2$.
 		\item $X$, $U$ and $F(U)$ have different distributions. 
 	\end{enumerate}
 \end{exercise}
 
 	
 	\begin{exercise}
-	 	Let $U\sim $Unif(0,1), and denote $\tilde{U}=aU+a$, what is the value $P(\tilde{U}\in(a,7a/4)|\tilde{U}\leq 3a/2)$?  
+	 	Let $U\sim $Unif(0,1), and denote $\tilde{U}=aU+a$, what is the value $\P{\tilde{U}\in(a,7a/4)|\tilde{U}\leq 3a/2}$?  
 		Which of these statements is correct: 
 		\begin{enumerate}
 			\item 0
@@ -147,11 +147,11 @@
 		Let $Z\sim$N(0,1) with CDF $\Phi$ and pdf $\psi$ (standard normal distribution) and $X=\mu+\sigma Z$. 
 		Which of these statements may be incorrect: 
 		\begin{enumerate}
-			\item $P(X\leq \mu)=P(X\geq \mu)=1/2$.
+			\item $\P{X\leq \mu)}=\P{X\geq \mu}=1/2$.
 			\item The CDF of $X$ is $\Phi((x-\mu)/\sigma)$.
 			\item The PDF of $X$ is $\phi((x-\mu)/\sigma)/\sigma$.
-			\item $P(|X-\mu|\leq 2\sigma) >P(|Z|<2)$.
-			\item $P(X-\mu=\sigma Z)=1$.
+			\item $\P{|X-\mu|\leq 2\sigma} >\P{|Z|<2}$.
+			\item $\P{X-\mu=\sigma Z}=1$.
 		\end{enumerate}
 	\end{exercise}
 	
