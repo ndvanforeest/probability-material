@@ -1,0 +1,86 @@
+\begin{Hint}{1.2}
+			Note the difference between mean and median. This question sheds light on the link between our informal daily languages and formal mathematical concepts.
+		
+\end{Hint}
+\begin{Hint}{1.5}
+			For the median, use the fact that the Cauchy density function is symmetric about $0$.
+		
+\end{Hint}
+\begin{Hint}{1.6}
+			Given any random variable $X$ whose distribution is symmetric about some point $\mu$, you can construct a random variable $Y$ that is symmetric about 0. What can you say about $E(Y^3)$ and $E((-Y)^3)$?
+		
+\end{Hint}
+\begin{Hint}{1.7}
+			Check from the definition that a random variable $X$ has zero skewness if $E(X) = E(X^3) = 0$. Construct a random variable satisfying this property. The easiest option is to consider a discrete random variable with 3 values in its support.
+		
+\end{Hint}
+\begin{Hint}{1.9}
+			Note that variances (if exist) are always non-negative.
+%			\textbf{Intuition:} ${\displaystyle \operatorname {E} (X)=\operatorname {P} (X<a)\cdot \operatorname {E} (X|X<a)+\operatorname {P} (X\geq a)\cdot \operatorname {E} (X|X\geq a)}$ where ${\displaystyle \operatorname {E} (X|X<a)}$  is larger than 0 as r.v. ${\displaystyle X}$ is non-negative and ${\displaystyle \operatorname {E} (X|X\geq a)}$  is larger than ${\displaystyle a}$ because the conditional expectation only takes into account of values larger than ${\displaystyle a}$ which r.v. ${\displaystyle X}$ can take. Hence intuitively ${\displaystyle \operatorname {E} (X)\geq \operatorname {P} (X\geq a)\cdot \operatorname {E} (X|X\geq a)\geq a\cdot \operatorname {P} (X\geq a)}$${\displaystyle \operatorname {E} (X)\geq \operatorname {P} (X\geq a)\cdot \operatorname {E} (X|X\geq a)\geq a\cdot \operatorname {P} (X\geq a)}$, which directly leads to ${\displaystyle \operatorname {P} (X\geq a)\leq {\frac {\operatorname {E} (X)}{a}}}$.
+		
+\end{Hint}
+\begin{Hint}{1.10}
+		\begin{enumerate}[i.]
+			\item Use the fundamental bridge. Note that
+			\begin{equation*}
+				\begin{array}{cl}
+						P(|X-\mu|\geq \epsilon) &= E(1_{\{\left( |X-\mu|\geq \epsilon\right) \}})= E(1_{\{  \frac{|X-\mu|}{\epsilon}\geq 1  \}})
+				\end{array}
+			\end{equation*}
+		\item Show that $1_{\{ \frac{|X-\mu|}{\epsilon}\geq 1  \}}\leq \left( \frac{|X-\mu|}{\epsilon}\right)^2 $.
+		\item The above two imply that $P(|X-\mu|\geq \epsilon)\leq E\left( \frac{|X-\mu|}{\epsilon}\right)^2$.
+		\end{enumerate}
+	
+\end{Hint}
+\begin{Hint}{1.12}
+			Use the result from Ex \ref{ex:chap06:05}.
+		
+\end{Hint}
+\begin{Hint}{1.13}
+			First, derive the identity $\sum_{i = 1}^n (X_i - \mu)^2 = \sum_{i = 1}^n (X_i - \bar{X}_n)^2 + n (\bar{X}_n - \mu)^2$.
+		
+\end{Hint}
+\begin{Hint}{1.14}
+		Try to make use the fact that sample average of i.i.d. data goes to the expectation by decomposing $S^2$ as the sum of components with sample averages.  $$S_n^2 = \frac{n}{n - 1}\frac{1}{n} \sum_{i = 1}^n (X_i - \mu)^2 - \frac{n}{n - 1} (\bar{X}_n - \mu)^2.$$
+	
+\end{Hint}
+\begin{Hint}{1.15}
+			If you were to throw a fair coin a large number of times, what is the proportion of heads you would expect?
+		
+\end{Hint}
+\begin{Hint}{1.16}
+			FUse that if $X \sim N(\mu, \sigma^2)$, the MGF of $X$ is given by $M_X(t) = e^{\mu t} e^{\frac{1}{2} \sigma^2 t^2}$.
+		
+\end{Hint}
+\begin{Hint}{1.18}
+			Recall the formula for geometric series: for $|\rho| < 1$, $\sum_{k = 0}^{\infty} \rho^k = \frac{1}{1 - \rho}$.
+		
+\end{Hint}
+\begin{Hint}{1.19}
+			For $X \sim N(\mu, \sigma^2)$, the MGF of $X$ is given by $M_X(t) = e^{\mu t} e^{\frac{1}{2} \sigma^2 t^2}$. Now take derivatives.
+		
+\end{Hint}
+\begin{Hint}{1.20}
+			For $X \sim N(\mu, \sigma^2)$, the MGF of $X$ is given by $M_X(t) = e^{\mu t} e^{\frac{1}{2} \sigma^2 t^2}$. Now take derivatives.
+		
+\end{Hint}
+\begin{Hint}{1.21}
+		MGFs determines distributions. Show the MGF of the sum can not be written in the form of the Expo MGF.
+	
+\end{Hint}
+\begin{Hint}{1.22}
+		MGF!
+	
+\end{Hint}
+\begin{Hint}{1.23}
+		MGF!
+	
+\end{Hint}
+\begin{Hint}{1.24}
+		The sum of independent Gaussian is Gaussian, use the fact that $X_1+X_2\sim N(\mu_1+\mu_2, \sigma_1^2+\sigma_2^2)$ when $X_1,X_2$ are independent and $X_i\sim N(\mu_i, \sigma_i^2), i=1,2$.
+	
+\end{Hint}
+\begin{Hint}{1.28}
+		MGF!
+	
+\end{Hint}

@@ -1,0 +1,292 @@
+% arara: pdflatex: { shell: yes }
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex: { shell: yes }
+
+\input{header.tex}
+\chapter{Chapter 1: Exercises and remarks}
+
+Try to link the theoretical concepts from the first chapter with our daily life stories. This makes memorizing these concepts easier.\\~\\
+The first chapter formalizes our daily-life uncertainty measurement. For example, when describing how likely it is that it is going to rain tomorrow, you may say something like 50\%, a number between 0 (almost surely not to happen) and 1 (almost sure to happen). \\~\\
+Similarly, \textbf{probability} is nothing but a function (with some special properties),
+which \textbf{assigns values from 0 to 1 to random events to measure
+	uncertainty}. To specify a function, we need to specify three elements:
+(1) the domain (a collection of various events); (2) the codomain/image (real numbers between 0 and 1); and (3) how this function
+map one element within the domain to one element within the image (naive probability is one way to map the events to numbers, but not the unique way).
+The naive definition of probability is the starting point, from which we proceed to the general definition of probability.\\~\\
+The non-naive definition of probability is also consistent with our daily experience: the probability of the outcomes being in the whole sample space is one, in the empty set is zero, and the probability of \textbf{disjoint} events should be the sum of the probability values of each of these events. The \textbf{disjoint} request is the key, and you will see that in order to calculate probability values of events, it is sometimes easier to decompose events into \textbf{disjoint} ones first. \\~~\\ 
+
+\section{Sample spaces}
+\label{sec:section-1.1}
+
+\begin{exercise} \label{ex:chap01:01} 
+	Consider two coin tosses. Denote by $H_i$ and $T_i$ the event that the $i$th coin lands heads and tails, respectively.
+	\begin{enumerate}
+		\item Determine which of the following sets can serve as one sample space (suppose that you do not necessarily care about both tosses):
+		\begin{enumerate}
+			\item $\{H_1H_2,H_1T_2,T_1H_2,T_1T_2\}$;
+			\item $\{H_1, T_1\}$;
+			\item $\{H_2, T_2\}$;
+			\item $\{H_1H_2 ~~\textit{or}~~ T_1T_2,  H_1T_2 ~~\textit{or}~~ T_1H_2 \}$;
+			\item $\{H_1H_2 ~~\textit{or}~~ T_1T_2,  H_1T_2 , T_1H_2 \}$.
+		\end{enumerate}
+		\item If one only cares about the outcomes of the second coin, which of the above sets can serve as the sample space? 
+		\item If one only cares about whether two coins have the same outcome, which of the above sets can serve as the sample space? 
+		\item Calculate the probability of $\{H_1\}, \{H_1H_2 ~~\textit{or}~~ T_1T_2\}, \{ H_1T_2 ~~\textit{or}~~ T_1H_2 \}, \{T_1H_2 \}$
+		%		\item In which of the above sets is each outcome equally likely to happen?		
+		\item Suppose you work with the sample space $S=\{H_1H_2,H_1T_2,T_1H_2,T_1T_2\}$, can you propose a partition of $S$? 
+	\end{enumerate}
+	
+	\begin{hint} 
+		From Wikipedia: \textit{A partition of a set means a grouping of its elements into non-empty subsets, in such a way that every element is included in exactly one subset. Every equivalence relation on a set defines a partition of this set, and every partition defines an equivalence relation.}
+	\end{hint}
+	
+	\begin{solution} 
+		\begin{enumerate}
+			\item The sets $\{H_1H_2,H_1T_2,T_1H_2,T_1T_2\}$, $\{H_1H_2 ~~\textit{or}~~ T_1T_2, H_1T_2 ~~\textit{or}~~ T_1H_2 \}$ and \\$\{H_1H_2 ~~\textit{or}~~ T_1T_2, H_1T_2, T_1H_2 \}$ are valid sample spaces. The sets $\{H_1, T_1\}$ and $\{H_2, T_2\}$ are not valid sample spaces, as they do not contain all possible outcomes of the experiment.
+			\item If one only cares about the outcomes of the second coin, the set $\{H_2, T_2\}$ can serve as the sample space.
+			\item If one only cares about whether two coins have the same outcome, the set \\$\{H_1H_2 ~~\textit{or}~~ T_1T_2,  H_1T_2 ~~\textit{or}~~ T_1H_2 \}$ can serve as the sample space.
+			\item $\P{H_1} = \frac{1}{2}$, $\P{H_1H_2 ~~\textit{or}~~ T_1T_2} = \frac{1}{2}$ and $\P{H_1T_2 ~~\textit{or}~~ T_1H_2} = \frac{1}{2}$ and $\P{T_1H_2} = \frac{1}{4}$.
+			%			\item In the sets $\{H_1H_2,H_1T_2,T_1H_2,T_1T_2\}$, $\{H_1, T_1\}$, $\{H_2, T_2\}$ and $\{H_1H_2 ~~\textit{or}~~ T_1T_2,  H_1T_2 , T_1H_2 \}$, each outcome is equally likely to happen. In the set $\{H_1H_2 ~~\textit{or}~~ T_1T_2,  H_1T_2 ~~\textit{or}~~ T_1H_2 \}$, not every outcome is equally likely to happen.
+			\item E.g.,  $\{H_1T_2, H_1H2\}$ and $\{T_1T_2, T_1H2\}$.
+		\end{enumerate}
+	\end{solution}
+\end{exercise}
+	
+\begin{exercise} \label{ex:chap01:02}
+	Provide one possible sample space resulting from two fair coin tosses.  
+	\begin{solution}
+		There are many possible answers. One correct answer is $\{H_1H_2,H_1T_2,T_1H_2,T_1T_2\}$.
+	\end{solution}
+\end{exercise}
+	
+\begin{remark}~
+	\begin{enumerate}
+		\item Ex \ref{ex:chap01:01} shows the flexibility one has when defining a sample space. Even within the same coin-flipping game, there are many possible specifications of the sample spaces you can choose. In practice, we usually either choose the \textbf{finest} set 1.(a) (\textit{the outcomes in other specifications can always be regarded as events under the specification of 1.(a), e.g., the outcome $H_1$ in 1.(b) sample space under the 1.(a) specification should be the event $\{H_1T_2, H_1H_2\}$})\footnote{It is okay to have different ways of modeling, or different notations, for the same probabilistic story. It is legitimate to regard events in one specification as outcomes (thus be elements of events of \textit{second order}, e.g., the 1.(b)'s outcomes $H_1$ under the specification 1.(a) should be the event $\{H_1T_2, H_1H_2\}$, and these two different ways of modeling, or two different notations both describe the same thing: first coin lands head)  in another specification. These events of second order may again be elements of events of a higher order in another specification. \textbf{As long as we maintain the consistency of the notations within the same specification, namely, events are always a set of outcomes within the same specification (e.g., $H_1$ is one outcome in 1.(b), and it is not a well-defined notation in 1.(a) unless otherwise specified; $\{H_1\}$ is one event in 1.(b), and to describe the same event in 1.(a), we should use the notation $\{H_1H_2, H_1T_2\}$ unless otherwise specified).} We shall avoid such terms as ``the sample space containing all events as elements,'' which leads to contradictions, as the sample space does not contain itself, which is also an event. When specifying the sample space, though quite flexible to model, we shall be careful to only include \textit{disjoint} outcomes to which the resulting sample space does not belong. You may find similar arguments in any textbook for basic set theory, and we skip too detailed discussion here.} or choose one based on the very question you want to explore as long as the specification can distinguish between the results you care about (e.g., it is also natural to choose 1.(d) sample space in subquestion 3, though it only contains two outcomes: both coins having or not having the same side, it distinguishes whether or not these two coins have the same results).
+        \item Compare your answers in Ex \ref{ex:chap01:02} with the Ex \ref{ex:chap01:01}. Learn to model your own sample spaces. Sometimes choosing one easier/clearer sample space gives rise to much easier solutions.
+	\end{enumerate}
+\end{remark}
+	 
+\section{How to count}
+\label{sec:section-1.2}	 
+	 
+	\begin{exercise}
+		Consider a jar with two balls, one labelled $H$ and one marked $T$. We sample balls one at a time with replacement, meaning that each time a ball is chosen, it is returned to the jar.
+		\begin{enumerate}
+			\item How many ways are there to draw one ball from the jar?
+			\item How many ways are there to draw two balls from the jar?
+			\item How many ways are there to draw $n$ balls from the jar?
+		\end{enumerate}
+		\begin{solution}~
+			\begin{enumerate}
+				\item There are 2 ways to draw one ball from the jar ($H$ and $T$).
+				\item By the multiplication rule, there are $2 \cdot 2 = 4$ ways to draw two balls from the jar.
+				\item By the multiplication rule, there are $\underbrace{2 \cdot 2 \cdot 2}_{n \: times} = 2^n$ ways to draw $n$ balls from the jar.
+			\end{enumerate}
+		\end{solution}
+	\end{exercise}
+	
+	
+	\begin{exercise}
+		Consider a jar with two balls, one labelled $H$ and one marked $T$. We sample balls one at a time without replacement, meaning that each time a ball is chosen, it is left out of the jar.
+		\begin{enumerate}
+			\item How many ways are there to draw one ball from the jar?
+			\item How many ways are there to draw two balls from the jar?
+			\item How many ways are there to draw three balls from the jar?
+		\end{enumerate}
+		\begin{solution}~
+			\begin{enumerate}
+				\item There are 2 ways to draw one ball from the jar ($H$ and $T$).
+				\item There are 2 ways to draw the first ball from the jar. Then there is 1 way to draw the remaining ball from the jar. By the multiplication rule, there are $2 \cdot 1 = 2$ ways to draw two balls.
+				\item There are 0 ways to draw three balls from a jar containing 2 balls.
+			\end{enumerate}
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}
+		Consider a jar with $N$ balls, $n_H$ labelled $H$ and the remainder marked $T$. We sample balls one at a time without replacement, meaning that each time a ball is chosen, it is left out of the jar. Assume $n_H \geq 3$.
+		\begin{enumerate}
+			\item How many ways are there to draw one ball from the jar?
+			\item How many ways are there to draw two balls from the jar?
+			\item How many ways are there to draw three balls from the jar?
+		\end{enumerate}
+		\begin{solution}~
+			\begin{enumerate}
+				\item If $n-n_H=0$ it means that there are no balls marked with $T$, therefore there is one way to draw one ball from the jar.
+				
+				If $n-n_H\geq 1$ there are two ways to draw one ball from the jar ($H$ and $T$).
+				
+				\item If $n-n_H=0$ there is one way to draw two balls from the jar.
+				
+				If $n-n_H\geq 2$ there are two ways to draw the first ball from the jar. Then there are two ways to draw the second ball. By the multiplication rule, there are $2 \cdot 2 = 4$ ways to draw two balls.
+				
+				If $n-n_H=1$ the same outcomes as when $n-n_H\geq 2$ are possible, with the exception of drawing two balls marked with $T$. Therefore in this case the number of different ways to draw two balls from the jar is three.
+				
+				\item If $n-n_H=0$ there is one way to draw two balls from the jar.
+				
+				If $n-n_H=1$ we can draw only balls marked with $H$ or we can draw one ball marked with $T$ and the remaining ones marked with $H$. The ball marked with $T$ can be drawn at three different moments: as the first, second or third ball. Therefore the different ways to draw three balls from the jar is in this case four. 
+
+				If $n-n_H\geq 3$ there are two ways to draw the first ball from the jar. Then there are two ways to draw the second ball. Finally, there are two ways to draw the remaining ball. By the multiplication rule, there are $2 \cdot 2 \cdot 2 = 8$ ways to draw two balls.
+
+				If $n-n_H=2$ the same outcomes as when $n-n_H\geq 3$ are possible with the exception of drawing three balls marked with $T$. Therefore in this case the number of different ways to draw three balls from the jar is seven.
+			\end{enumerate}
+		\end{solution}
+	\end{exercise}
+	 
+	\begin{exercise}~
+		\begin{enumerate}
+			\item Suppose you have $n$ distinct cards. How many different ordered sequences of $n$ cards can you make?
+			\item How many different ordered sequences of $k$ cards can you make, for $k \leq n$?
+			\item How many different \text{un}ordered sequences of $k$ cards can you make, for $k \leq n$? What do you notice?
+		\end{enumerate}
+		\begin{solution}~
+			\begin{enumerate}
+				\item $n(n - 1)(n - 2 )\ldots 1 = n!$
+				\item $n(n - 1)(n - 2 )\ldots (n - k) = \frac{n!}{(n - k)!}$
+				\item Each ordered sequence can be ordered in $k!$ ways, so there are $\frac{n!}{(n - k)!k!}$ unordered sequences. Notice that $\frac{n!}{(n - k)!k!} = \binom{n}{k}$.
+			\end{enumerate}	
+		\end{solution}
+	\end{exercise}
+
+\section{Story proof}
+\label{sec:section-1.3}	 
+	
+	\begin{exercise}\label{ex:chap01:11}
+		Give a story proof that
+		\begin{equation}
+			n \binom{n - 1}{k - 1} = k \binom{n}{k}
+		\end{equation}
+		for any positive integers $n$ and $k$ with $k \leq n$.
+		\begin{solution}
+			Consider a group of $n$ people, from which a team of $k$ will be chosen, one of whom will be the team captain. To specify a possibility, we could first choose the team captain and then choose the remaining $k - 1$ team members; this gives the left-hand side. Equivalently, we could first choose the $k$ team members and then choose one of them to be captain; this gives the right-hand side.
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}\label{ex:chap01:12}
+		Give a story proof that
+		\begin{align*}
+			\sum_{j = 0}^k \binom{m}{k - j} \binom{n}{j} = \binom{n + m}{k}
+		\end{align*}
+		for any positive integers $m, n, k$ with $k \leq n + m$.
+		\begin{solution}
+			Consider a student organization consisting of $m$ juniors and $n$ seniors, from which a committee of size $k$ will be chosen. There are $\binom{m+n}{k}$ possibilities. If there are $j$ juniors in the committee, then there must be $k - j$ seniors in the committee. The right-hand side of the identity sums up the cases for $j$.
+		\end{solution}
+	\end{exercise}
+
+	\begin{exercise}
+		Give a story proof that
+		\begin{equation}
+			(a + b)^n = \sum_{k=0}^n {n \choose k}a^k b^{n-k}
+		\end{equation}
+		for any $a,b \in \mathbb{R}$ and $n \in \mathbb{N}$. This result is called the \emph{binomial theorem}.
+		\begin{solution}
+			Expand out the product
+			\begin{equation*}
+				(x + y)^n = \underbrace{(x + y)(x + y) \ldots (x + y)}_{n \: factors}.
+			\end{equation*}
+			The terms of $(x + y)^n$ are obtained by picking either the $x$ or the $y$ from each factor. There are $\binom{n}{k}$ ways to choose exactly $k$ of the $x$'s, and each such choice yields the term $x^k y^{n - k}$. The binomial theorem follows.
+		\end{solution}
+	\end{exercise}
+
+\section{Probability}
+\label{sec:section-1.4}	 
+	
+	\begin{exercise}
+		Prove that the naive probability satisfies the axioms of non-naive probability. 
+		\begin{solution}
+			Consider a finite sample space $S$. For any event $A$ in $S$, the \emph{naive} probability of $A$ is $\P{A} = \frac{|A|}{|S|}$. Notice that for any two disjoints sets $A$ and $B$, $|A \cup B| = |A| + |B|$. As such we have:
+			\begin{enumerate}
+				\item $\P{\emptyset} = \frac{|\emptyset|}{|S|} = 0$ and $\P{S} = \frac{|S|}{|S|} = 1$;
+				\item If $A_1, A_2, \hdots$ are disjoint events in $S$, then $\P{\bigcup_{i = 1}^{\infty} A_i} = \frac{\left|\bigcup_{i = 1}^{\infty} A_i\right|}{|S|} = \frac{\sum_{i = 1}^{\infty} |A_i|}{|S|} = \sum_{i = 1}^{\infty} \P{A_i}$.
+			\end{enumerate}
+			Hence, the naive probability satisfies the axioms of non-naive probability. 
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}
+		Flip a coin $n$ times. Denote $S_i$ the outcome of the $i$th flip, and let $S_i = 1$ if the $i$th flip lands heads and $S_i = 0$ otherwise. All flips are independent from each other and $\P{S_i = 1} = p$.
+		\begin{enumerate}
+			\item If the first two flips all land heads, what is the value of $S_1 \times S_2$?
+			\item Calculate $\P{S_1 \times S_2 = (0,0)}$.
+			\item Calculate $\P{\{S_1=1\}\cup \{S_1\times S_2 =(0,0) \}}$.
+			\item Calculate $\P{\cup_{i=2}^3 \left\{\cap_{j=1}^{i-1}\{S_j=1 \} \cap \{S_i=0\} \right\}}$.
+			\item Suppose we flip the coin an infinite number of times. Calculate 
+			$\P{\cup_{i=2}^\infty \left\{\cap_{j=1}^{i-1}\{S_j=1 \} \cap \{S_i=0\} \right\}}$.
+		\end{enumerate}
+		Verify your results for the special case that $p = 1$. Does your answer make sense?
+		\begin{hint}
+			To calculate $\P{\cup_{i=1}^\infty \left\{\cap_{j=1}^{i-1}\{S_j=1 \} \cap \{S_i=0\} \right\} }$, you can start with a simpler case, such as $\P{\cup_{i=2}^3 \left\{\cap_{j=1}^{i-1}\{S_j=1 \} \cap \{S_i=0\} \right\} }$. Which events are disjoint?
+		\end{hint}
+		\begin{solution}~
+			\begin{enumerate}
+				\item If the first two flips all land heads, then $S_1 \times S_2 = (1,1)$.
+				\item $\P{S_1 \times S_2 = (0,0)} = \P{(S_1=0)\P(S_2=0)}=(1-\P{S_1=0})(1-\P{S_2=0})=(1-p)^2$.
+				\item $\P{\{S_1=1\}\cup \{S_1\times S_2 =(0,0) \}} = \P{\{S_1=1\} \cup \{S_1 = S_2 =0\}}$\\$= \P{\{S_1=1\}} + \P{\{S_1 = S_2 = 0\}} - \P{\{S_1=1\} \cap \{S_1\times S_2 =(0,0) \}} =\P{\{S_1=1\}} + \P{\{S_1 = S_2 = 0\}}= p + (1 - p)^2$
+				\item $\P{\cup_{i=2}^3 \left\{\cap_{j=1}^{i-1}\{S_j=1 \} \cap \{S_i=0\} \right\} } = \P{\{\{S_1 = 1\} \cap \{S_2 = 0\}\} \cup \{\{S_1 = 1\} \cap \{S_2 = 1\} \cap \{S_3 = 0\}\}}$ \\ $= \P{\{S_1 = 1\} \cap \{S_2 = 0\}} + \P{\{S_1 = 1\} \cap \{S_2 = 1\} \cap \{S_3 = 0\}} = p(1 - p) + p^2 (1 - p)$
+				\item $\P{\cup_{i=2}^\infty \left\{\cap_{j=1}^{i-1}\{S_j=1 \} \cap \{S_i=0\} \right\}} = \P{\cup_{i=2}^\infty \{S_i=0\} \cap \left\{\cap_{j=1}^{i-1}\{S_j=1 \} \right\}}$ \\ $ = \sum_{i = 2}^{\infty} \P{\{S_i=0\} \cap \left\{\cap_{j=1}^{i-1}\{S_j=1 \} \right\}} = \sum_{i = 2}^{\infty} (1 - p) p^{i - 1} $ \\ $= p^{-1} (1 - p) \sum_{i = 2}^{\infty} p^i = p^{-1} (1 - p) (\sum_{i = 0}^{\infty} p^i - p^0 - p^1) = p^{-1} - p^{-1}(1-p)(1 + p) = p$ for $0<p<1$.
+			\end{enumerate}
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}
+		Prove the following statements \emph{mathematically}:
+		\begin{enumerate}
+			\item For any events $A$ and $B$, $\P{A \cup B} = \P{A} + \P{B} - \P{A \cap B}$;
+			\item For any events $A$ and $B$, $\P{A \cap B^c} = \P{A} - \P{A \cap B}$;
+			\item For any events $A$ and $B$, $\P{A \cap B} \geq \P{A} + \P{B} - 1$.
+		\end{enumerate}
+		\begin{hint}
+			For the first part of this exercise, make use of the identities $A \cup (A^c \cap B)$ and $B = (A \cap B) \cup (A^c \cap B)$.  For the third part of this exercise, write $A = (A \cap B^c) \cup (A \cap B)$. Check that these identities are true!
+		\end{hint}
+		\begin{solution}~
+			\begin{enumerate}
+				\item Using the hint, $\P{A \cup B} = \P{A \cup (A^c \cap B)} = \P{A} + \P{A^c \cap B} = \P{A} + \P{A^c \cap B} + \P{A \cap B} - \P{A \cap B} = \P{A} + \P{B} - \P{A \cap B}$.
+				\item Notice that $A = (A \cap B^c) \cup (A \cap B)$. Hence, $\P{A} = \P{(A \cap B^c) \cup (A \cap B)} = \P{A \cap B^c} + \P{A \cap B}$ as $A \cap B^c$ and $(A \cap B)$ are disjoint. The result follows after rearranging terms.
+				\item For any events $A$ and $B$, $\P{A \cup B} \leq 1$. Therefore, using the result of the first part of this exercise, $1 \geq \P{A \cup B} = \P{A} + \P{B} - \P{A \cap B}$. The result follows after rearranging terms.
+			\end{enumerate}
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}
+		The event that ``$A$ or $B$ but not both" will occur can be written as $(A \cap B^c) \cup (A^c \cap B)$. Express the probability of this event in terms of $\P{A}$, $\P{B}$ and $\P{A \cap B}$.
+		\begin{hint}
+			The use of a Venn diagram may help.
+		\end{hint}
+		\begin{solution}
+			Using a Venn diagram or the previous exercise, it is easy to see that $\P{A \cap B^c} = \P{A} - \P{A \cap B}$ and $\P{A^c \cap B} = \P{B} - \P{A \cap B}$. As the events $(A \cap B^c) \cup (A^c \cap B)$ are disjoint, it follows that $\P{(A \cap B^c) \cup (A^c \cap B)} = \P{A \cap B^c} + \P{A^c \cap B} = \P{A} + \P{B} - 2 \P{A \cap B}$. See also the previous exercise.
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}
+		A card player is dealt a 13-card hand from a well-shuffled, standard deck of cards. What is the probability that the hand is void in at least one suit?
+		\begin{solution}
+			Let $S$, $H$, $D$ and $C$ be the events of being void in spades, hearts, diamonds and clubs, respectively. We want to find $\P{S \cup D \cup H \cup C}$. By inclusion-exclusion and symmetry,
+			\begin{equation*}
+				\P{S \cup D \cup H \cup C} = 4 \P{S} - 6 \P{S \cap H} + 4 \P{S \cap H \cap D} - \P{S \cap H \cap D \cap C}.
+			\end{equation*}
+			The probability of being void in a specific suit is $\frac{\binom{39}{13}}{\binom{52}{13}}$. The probability of being void in two specific suits is $\frac{\binom{26}{13}}{\binom{52}{13}}$. The probability of being void in three suits is $\frac{1}{\binom{52}{13}}$. The probability of being void in four suits is 0. As such,
+			\begin{equation*}
+				\P{S \cup D \cup H \cup C} = 4 \cdot \frac{\binom{39}{13}}{\binom{52}{13}} - 6 \cdot \frac{\binom{26}{13}}{\binom{52}{13}} + \frac{4}{\binom{52}{13}} \approx 0.051.
+			\end{equation*}
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}
+		A company has 100 employees. Of them, 45 are proficient in German, 30 in French, 20 in Spanish, six in French and German, one in German and Spanish, five in French and Spanish, and just one employee is proficient in all three languages. What is the probability that a randomly chosen employee is proficient in at least one of these three languages?
+		\begin{hint}
+			Use the inclusion-exclusion principle.
+		\end{hint}
+		\begin{solution}
+			Let $G$, $F$, $S$ denote the probability of an employee being proficient in German, French and Spanish, respectively. Using the naive definition of probability, we know $\P{G} = 0.45$, $\P{F} = 0.30$, $\P{S} = 0.20$, $\P{G \cap F} = 0.06$, $\P{G \cap S} = 0.01$, $\P{F \cap S} = 0.05$ and $\P{G \cap F \cap S} = 0.01$. Using the inclusion-exclusion principle, we obtain
+			\begin{align*}
+				P{G \cup F \cup S} & = \P{G} + \P{F} + \P{S} - \P{G \cap F} - \P{G \cap S} - \P{F \cap S} + \P{G \cap F \cap S} \\
+				& = 0.45 + 0.30 + 0.20 - 0.06 - 0.01 - 0.05 + 0.01 = 0.84
+			\end{align*}
+		\end{solution}
+	\end{exercise}
+
+\input{trailer.tex}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "study-guide.tex"
+%%% End:

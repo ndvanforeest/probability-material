@@ -1,0 +1,506 @@
+% arara: pdflatex: { shell: yes }
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex: { shell: yes }
+
+\input{header.tex}
+\chapter{Chapter 2: Exercises and remarks}
+When you see the sun shine in the morning, you might reduce the probability that it will rain that day. Later on the day you suddenly see clouds gathering, and conditional on such observation, you would then increase the probability of rain. In chapter 2, we proceed from the probability concept to the conditional probability conditional on a random event, e.g., B. Informally speaking, now we only consider what happens within B. Conditional on that event B occurred, we might want to change from an old probability to a new one since now we have additional information. 
+
+~\newline 
+\textbf{The conditional probability (with a given event) is also a probability and thus also a function satisfying probability-related restrictions.} It is simply an updated probability based on an event. Of course, events could be informative or not. Thus, we can also discuss a (conditional) independent event, an event that does not update your prior (conditional) probability. With more structures/concepts introduced, we can now explore more additional properties, such as Bayes' rule and the law of total probability, independence, and conditional independence. 
+
+~\newline 
+Try to link these technical terms with your daily life experience, and you will find these ideas quite intuitive and easy to memorize. Let's go back to the rainy day example. If you learn the news (a) that your roommate A is traveling back from a city far away from your city is likely to be late today, this information (a) may not update much on your prior probability of raining here in your city, or if you learn the news (b) that another roommate B in traveling back from a third city, which is far away from the other two cities is also likely to be late, then the news (b) alone may not change much of your prior of the probability of rain. However, if you combine news (a) and (b), and given what they have in common is to be late in arriving in your city, you might guess there is something to happen here and raise the rain probability. Hence, here you would see that either news (a) or (b) are (roughly) independent from the event of rain in your city as they are not very informative and do not update too much on your prior probability of rain in your city, but the joint event of both news (a) and (b) happening is quite informative. You can make up your own real-life story to get a better understanding of conditional probability. 
+
+\section{Definition and intuition}
+\label{sec:section-2.1}
+
+	\begin{exercise}\label{ex:chap02:01}
+		Consider two independent coin tosses. Denote by $H_i$ and $T_i$ the event that the $i$th coin lands heads and tails, respectively. The coin is not fair. Write $p$ for the probability of a coin landing heads, i.e. $\P{H_i} = p$. Express the followings probabilities in terms of $p$:
+		\begin{enumerate}
+			\item $\P{T_1}$, $\P{T_2}$;
+			\item $\P{H_1|T_1}$;
+			\item $\P{H_2|T_1}$, $\P{H_2|H_1}$;
+			\item $\P{\{H_1H_2\}|H_1}$, $\P{\{H_1T_2\}|H_1}$, $\P{\{T_1H_2\}|H_1}$;			
+			\item $\P{\{H_1H_2\}|S}$, $\P{\{H_1T_2\}|S}$, $\P{\{T_1H_2\}|S}$, where $S$ denotes the sample space;
+		\end{enumerate}
+		Verify your results with the special case such that $p = \frac{1}{2}$.
+		\begin{solution}~
+			\begin{enumerate}
+				\item $\P{T_1} = \P{T_2} = 1 - \P{H_2} = 1 - p$;
+				\item $\P{H_1|T_1} = 0$, as the probability of a coin landing heads given that it landed tails is zero;
+				\item $\P{H_2|T_1} = \P{H_2|H_1} = \P{H_2} = p$, because the outcome of the second coin is independent of the outcome of the first coin;
+				\item $\P{H_1H_2|H_1} = \frac{\P{\{H_1H_2\}}}{\P{H_1}} = \frac{\P{H_1} \P{H_2}}{\P{H_1}} = \P{H_2} = p$, $\P{H_1T_2|H_1} = \frac{\P{H_1T_2}}{\P{H_1}} = \frac{\P{H_1} \P{T_2}}{\P{H_1}} = \P{T_2} = 1 - p$ using the definition of conditional probability, and $\P{T_1H_2|H_1} = 0$ because the probability of the first coin landing tails given that it landed heads is zero;
+				\item $\P{H_1H_2|S} = P{H_1H_2} = P{H_1} P{H_2} = p^2$, $\P{H_1T_2|S} = \P{H_1T_2} = \P{H_1} \P{T_2} = p(1 - p)$ and $\P{T_1H_2|S} = \P{T_1H_2} = \P{T_1} \P{H_2} = p(1 - p)$, using independence between the coins and the fact that conditioning on the entire sample space is the same as calculating unconditional probabilities.
+			\end{enumerate}
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}\label{ex:chap02:02}
+		Continue from Ex \ref{ex:chap02:01} and consider the sample space $S=\{H_1H_2, H_1T_2, T_1H_2, T_1T_2\}$, and calculate 
+		$P_{T_1}(s)=\P{\{s\}|T_1}$ for all $s\in S$.  
+
+		\begin{solution}
+			Let $S = \{H_1H_2, H_1T_2, T_1H_2, T_1T_2\}$. We want to calculate $P_{T_1}(s) = \P{\{s\}|T_1}$ for all $s \in S$. Evidently, $\P{H_1H_2 | T_1} = \P{H_1T_2 | T_1} = 0$ as the probability of the first coin landing heads given that it landed tails is zero. Moreover, $\P{T_1H_2 | \{T_1} = \frac{\P{T_1H_2}}{\P{T_1}} = \frac{\P{T_1} \P{H_2}}{\P{T_1}} = \P{H_2} = p$ and $\P{T_1T_2 | T_1} = \frac{\P{T_1T_2}}{\P{T_1}} = \frac{\P{T_1} \P{T_2}}{\P{T_1}} = \P{T_2} = 1 - p$.
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}\label{ex:chap02:03}
+		Show that $P_{T_1}$ defined in Ex \ref{ex:chap02:02} is a proper probability function on the sample space $S$ by verifying that it satisfies the axioms of non-naive probability. 
+		\begin{solution}
+			We have $P_{T_1}(\emptyset) = \P{\emptyset | T_1} = \frac{\P{\emptyset \cap T_1}}{\P{T_1}} = \frac{\P{\emptyset}}{\P{T_1}} = 0$ and $P_{T_1}(S) = \P{S | T_1} = \frac{\P{S \cap T_1}}{\P{T_1}} = \frac{\P{T_1}}{\P{T_1}} = 1$. Moreover, for any set of disjoint events in $S$, the probability of the union of all events in the set is the sum of the probabilities of all individual events in the set. (If you want to, you can check this explicitly by considering all possible combinations of disjoint sets -- though this is a tedious job.) Hence, $P_{T_1}$ satisfies the non-naive probability definition.\\~\\
+			Alternatively, make use of the fact that $\P{\cdot}$ is a probability function and must satisfy the two axioms. Now we use this fact to simplify the above seeming-tedious job. Note that for any disjoint events $A_i$, $\tilde{A}_i=A_i\cap T_1$ must be disjoint as well (why? because $\tilde{A}_i\cap \tilde{A}_j=(A_i\cap A_j)\cap T_1$) therefore, $$\P{\cup_i \tilde{A}_i}=\sum_i \P{\tilde{A}_i},$$ and thus $$P_{T_1}{(\cup_i A_i)}= P(\cup_i \tilde{A}_i) /P(T_i)=\sum_i \P{\tilde{A}_i}/\P{T_i}=\sum_i P_{T_1}{(A_i)}.$$
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}\label{ex:chap02:05}
+		Prove that the conditional probability conditional on the whole sample space is simply the original probability. 
+		\begin{solution}
+			Let $S$ denote the sample space. Let $A$ denote any event in $S$. Then, by definition,
+			\begin{equation*}
+				\P{A|S} = \frac{\P{A \cap S}}{\P{S}} = \frac{\P{A}}{\P{S}} = \P{A},
+			\end{equation*}
+			using $\P{S} = 1$.
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}\label{ex:chap02:04}
+		Prove that the conditional probability is also a probability (assuming that the event being conditioned occurs with non-zero probability).
+		\begin{solution}
+			Let $B$ be any event with $\P{B} > 0$. Then
+			\begin{itemize}
+				\item $\P{\emptyset | B} = \frac{\P{\emptyset \cap B}}{\P{B}} = \frac{\P{\emptyset}}{\P{B}} = 0$ and $\P{S | B} = \frac{\P{S \cap B}}{\P{B}} = \frac{\P{B}}{\P{B}} = 1$;
+				\item For disjoint events $A_1, A_2, \hdots$, $\P{\bigcup_{i = 1}^{\infty} A_i | B} = \frac{\P{\left(\bigcup_{i = 1}^{\infty} A_i\right) \cap B}}{\P{B}} = \frac{\P{\bigcup_{i = 1}^{\infty} (A_i \cap B)}}{\P{B}} = \frac{\sum_{i = 1}^{\infty} \P{A_i \cap B}}{\P{B}} = \sum_{i = 1}^{\infty} \P{A_i | B}$.	
+			\end{itemize}
+		where $\P{\bigcup_{i = 1}^{\infty} (A_i \cap B)} = \sum_{i = 1}^{\infty} \P{A_i \cap B}$ using the fact that $\P{}$ satisfies the two axioms and the fact that $\widetilde{A}_i=A_i \cap B, i$ are disjoint events. 
+			By definition, the conditional probability is also a probability.
+		\end{solution}
+	\end{exercise}
+	
+	\begin{remark}
+		Ex \ref{ex:chap02:05} is a special case of Ex \ref{ex:chap02:04}: an unconditional probability is simply a conditional probability conditional on the entire sample space. We know outcomes would be in the sample space, so knowing the information that the sample space would happen does not update the probability and thus it remains the same.\\~\\
+				Ex \ref{ex:chap02:03} is a special case of Ex \ref{ex:chap02:04} since Ex \ref{ex:chap02:04} shows that basically when you condition on a non-zero probability event, the conditional probability is a probability.
+	\end{remark}
+
+\section{Independence of events}
+\label{sec:section-2.2}
+	
+	\begin{exercise}
+		Show that if events $A$ and $B$ are dependent, then $A$ and $B^c$ are dependent.
+		\begin{solution}
+			Let $A$ and $B$ be dependent events. Suppose $A$ and $B^c$ are independent. Then
+			\begin{equation*}
+				\P{A} = \P{A \cap B} + \P{A \cap B^c} = \P{A \cap B} + \P{A}\P{B^c}.
+			\end{equation*}
+			Consequently,
+			\begin{equation*}
+				\P{A \cap B} = \P{A} - \P{A} \P{B^c} = \P{A} \left[1 - \P{B^c}\right] = \P{A} \P{B}.
+			\end{equation*}
+			This implies that $A$ and $B$ are independent. This is a contradiction. Hence $A$ and $B^c$ must be dependent.
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}
+		Provide an example in which pairwise independence of events $A$, $B$ and $C$ does not imply independence.
+		\begin{solution}
+			Consider two fair, independent coin tosses. Let $A$ be the event that the first is Heads, $B$ the event that the second is Heads, and $C$ the event that both tosses have the same result. Then $A$, $B$ and $C$ are pairwise independent, as $\P{A \cap B} = \frac{1}{4} = \P{A} \P{B}$, $\P{A \cap C} = \frac{1}{4} = \P{A} \P{C}$ and $\P{B \cap C} = \frac{1}{4} = \P{B} \P{C}$. Meanwhile, they are not independent, as $\P{A \cap B \cap C} = \frac{1}{4}$ while $\P{A} \P{B} \P{C} = \frac{1}{8}$.
+		\end{solution}
+	\end{exercise}
+
+	\begin{exercise}
+		Provide an example in which independence of events $A$ and $B$ does not imply conditional independence given some event $C$.
+		\begin{solution}
+			Consider two fair, independent coin tosses. Let $A$ be the event that the first is Heads, $B$ the event that the both coin flips are the same, and $C$ be the event that the second is Tails. Then $\P{A \cap B} = \frac{1}{4} = \P{A} \P{B}$; hence $A$ and $B$ are independent. However, $\P{A \cap B | C} = 0$ whereas $\P{A | C} \cdot \P{B | C} = \frac{1}{4}$.
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}
+		Given three events $A$, $B$ and $C$ such that $\P{A \cap B \cap C} \neq 0$ and $\P{C | A \cap B} = \P{C | B}$, show that $\P{A | B \cap C} = \P{A | B}$.
+		\begin{solution}
+			Let $A$, $B$ and $C$ be events such that $\P{A \cap B \cap C} \neq 0$ and $\P{C | A \cap B} = \P{C | B}$. The fact that $\P{C | A \cap B} = \P{C | B}$ implies $\frac{\P{A \cap B \cap C}}{\P{A \cap B}} = \frac{\P{B \cap C}}{\P{B}}$. This can be rewritten to $\frac{\P{A \cap B \cap C}}{\P{B \cap C}} = \frac{\P{A \cap B}}{\P{B}}$. By definition, this means $\P{A | B \cap C} = \P{A | B}$, as required.
+		\end{solution}
+	\end{exercise}
+
+\section{Bayes' rule and the law of total probability}
+\label{sec:section-2.3}
+	
+	\begin{exercise}
+		You play a game where you start with 1 dollar. You throw a three-sided fair die. If you throw a 1, you lose one dollar; if you throw a 2, nothing changes; and if you throw a 3, you win one dollar. You keep playing until you run out of money. What is the probability that this is a never-ending game?
+		\begin{hint}
+			Apply the law of total probability. A hard one and you can find solutions in the knowledge clips.
+		\end{hint}
+		\begin{solution}
+			Let $D$ denote the event that the game is ending. At the start of the game, if you throw a 1, then $D$ occurs; if you throw a 2, the exact same game repeats; if you throw a 3, you now have to throw a 1 \emph{twice} for the game to end. Let $A_i$ denote the event that the first throw is $i$. Then, by applying the law of total probability, we have
+			\begin{equation*}
+				\P{D} = \P{D | A_1} \P{A_1} + \P{D | A_2} \P{A_2} + \P{D | A_3} \P{A_3} = \frac{1}{3} + \frac{1}{3} \P{D} + \frac{1}{3} \P{D}^2
+			\end{equation*}
+			Solving this expression for $\P{D}$ yields $\P{D} = 1$. Hence, the game is ending with certainty.
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}
+		In an industry, disputes are over wages, over working conditions, or over fringe issues, with respective probabilities of 0.6, 0.15 and 0.25. Some disputes result in strikes. When there is a dispute over wages, the probability of a strike equals 0.30; when there is a dispute over working conditions, the probability of a strike equals 0.30; and when there is a fringe dispute, the probability of a strike equals 0.60. What is the probability that a dispute is over wages and the dispute gets resolved without a strike?
+		\begin{solution}
+			Let $W$ denote the event that a dispute is over wages, let $C$ denote the event that a dispute is over working conditions, and $F$ denote the event that a dispute is over fringe issues. Let $S$ denote the event that a strike occurs. We want to calculate $\P{S^c \cap W}$. We know $\P{W} = 0.6$ and $\P{S|W} = 0.55$. As such,
+			\begin{equation*}
+				\P{S^c \cap W} = \P{W} - \P{S \cap W} = 0.6 - \P{S|W} \P{W} = 0.6 - 0.55 \cdot 0.6 = 0.27.
+			\end{equation*}
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}
+		You decide to undergo a test for COVID-19. The test is positive for 99 out of 100 people who have the disease. The test is negative for 99 out of 100 people who do not have the disease. The current incidence of COVID-19 is $p$. If you test positive, what is the probability you have the disease? Does this probability increase or decrease with $p$?
+		\begin{hint}
+			Apply Bayes' rule and the law of total probability.
+		\end{hint}
+		\begin{solution}
+			Let $V$ be the event that you carry the disease. Let $T_+$ be the event that you test positive. We have $\P{T_+ | V} = 0.99$, $\P{T_+^C | V^C} = 0.99$ and $\P{V} = p$. Using Bayes' rule and the law of total probability, we obtain
+			\begin{equation*}
+				\P{V | T_+} = \frac{\P{T_+ | V} \P{V}}{\P{T_+ | V} \P{V} + \P{T_+ | V^c} \P{V^c}} = \frac{0.99p}{0.99p + 0.01(1 - p)} = \frac{99}{98 + 1 / p}.
+			\end{equation*}
+			This probability is increasing with $p$: the higher the current incidence of COVID-19, the larger the probability that you have it, too.
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}
+		Research shows that 60\% of econometrics graduates have a high salary, compared to 6\% for the population overall. Should this incite you to study econometrics?
+		\begin{solution}
+			Not necessarily: there might be an additional event that affects salary that has not been taken into account. For example, salaries might depend on whether one is good at math or not. Let us formalize this argument. Let $H$ denote the event of having a high salary, let $E$ be the event of being an econometrics graduate and let $M$ be the event that you are good at math. We observe that $\P{H | E} > \P{H}$. But it is well possible that $\P{H | E, M^c} < \P{H | M^c}$! In this case, studying econometrics is only a good idea if you are good at math. Of course, this is one hypothetical causality case, and there could be other reasons if we allow for more flexible models. It is not easy to identify the exact effect from one variable to another.
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}
+		In 1998, Sally Clark was tried for murder after two of her sons died shortly after birth. During the trial, an expert witness for the prosecution testified that the probability of a newborn dying of sudden infant death syndrome (SIDS) was $1 / 8500$, so the probability of two deaths due to SIDS in one family was $(1 / 8500)^2$, or about one in 73 million. Therefore, he continued, the probability of Clark's innocence was one in 73 million. Is this line of reasoning correct?
+		\begin{hint}
+			Apply Bayes' theorem.
+		\end{hint}
+		\begin{solution}
+			No, the line of reasoning is not correct. Let $D_1$ be the event of the first son dying, let $D_2$ be the event of the second son dying, and let $I$ be the event that the mother is innocent. The expert witness claims that, because $\P{D_1 | I} = \P{D_2 | I} = \frac{1}{8500}$, $\P{I | D_1 \cap D_2} = \frac{1}{8500^2}$. However, by Bayes' theorem, we have
+			\begin{equation*}
+				\P{I | D_1 \cap D_2} = \frac{\P{D_1 \cap D_2 | I} \P{I}}{\P{D_1 \cap D_2 | I} \P{I} + \P{D_1 \cap D_2 | I^c} \P{I^c}}.
+			\end{equation*}
+			This need not equal $\frac{1}{8500^2}$. (In fact, if we presume the mother to be innocent (that is, $\P{I} \approx 1$), then $\P{I | D_1 \cap D_2} \approx 1$.)
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}
+		You have a job that consists of two tasks. You know that at both tasks, you are outperforming your colleague Jim, who is sleeping half of the time. Table \ref{fig:chap04:02} reports both your and Jim's job performance.
+		
+		\begin{table}[!ht]
+			\caption{Job performance}
+			\label{fig:chap04:02}
+			\centering
+			\begin{tabular}{lcccc}
+				\toprule
+				& \multicolumn{2}{c}{You} & \multicolumn{2}{c}{Jim} \\
+				\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+				& Task 1 & Task 2 & Task 1 & Task 2 \\
+				\midrule
+				Fails & 40 & 1 & 10 & 18 \\
+				Successes & 80 & 22 & 15 & 100 \\
+				\bottomrule
+			\end{tabular}
+		\end{table}
+		Based on this table, your boss calls you in and says: ``You're not doing well. Even Jim, who is sleeping half of the time, scores better than you. We have to let you go." Is your boss right?
+		\begin{hint}
+			This exercise demonstrates an example of Simpson's paradox. How do you perform on both tasks separately? What happens is you combine the tasks together?
+		\end{hint}
+		\begin{solution}
+			Let $S$ be the event that a task is a success. Let $T_i$ be the event that a task is task $i$, $i = 1, 2$. Let $B$ be the event that you are performing the task (such that $B^c$ is the event that Jim is). Indeed, the probability that you succeed at task 1 and 2 appears higher than for him:
+			\begin{align*}
+				\P{S | T_1, B} \approx \frac{80}{120} > \frac{15}{25} \approx \P{S | T_1, B^c} \\
+				\P{S | T_2, B} \approx \frac{22}{23} > \frac{100}{118} \approx \P{S | T_2, B^c}
+			\end{align*}
+			However, aggregating across the two tasks yields
+			\begin{align*}
+				\P{S | B} \approx \frac{102}{143} < \frac{115}{143}.
+			\end{align*}
+			It appears your boss is right! This demonstrates an example of Simpson's paradox: separate groups of data show one particular trend, but this trend is reversed when the groups are combined together.
+		\end{solution}
+	\end{exercise}
+\begin{exercise}
+	Suppose now A and B are conditional independent events given $C$, prove that $A$ and $B^c$ are also conditional independent given $C$ and what can you say about (conditional) independence of $A$ and $B^c$ if $C=S$ ($S$ denotes the sample space of all possible outcomes)? 
+	\begin{solution}
+		\textit{\scriptsize Remark: 			This exercise targets at three folds: (1) understand the conditional probability is also a probability function, and it also satisfies the general definition of probability (thus it has all the structures of a probability function); and these two concepts are closely linked and so are the other relevant concepts; (2) be familiar with the (conditional) independence definition: they are simply functions satisfying special identities; (3) understand when we are dealing with probability theory, they are nothing special but just functions (of course, use the right notations to define these functions).} \\
+		\begin{itemize}
+			\item[I.] 		\textbf{First possible proof:}
+			From the conditional independence definition we know
+			\begin{align*}
+				P(A\cap B|C) = 	P(A|C) P(B|C). 
+			\end{align*}
+			Since conditional probability is also a probability, the second axiom implies that $P(B|C)=(1-P(B^c|C))$. The above two equations imply that 
+			\begin{align*}
+				P(A\cap B|C) = 	P(A|C)(1-P(B^c|C)) =P(A|C)-P(A|C)P(B^c|C), 
+			\end{align*}
+			which means 
+			\begin{align*}
+				P(A\cap B|C) = 	P(A|C)(1-P(B^c|C)) =P(A|C)-P(A|C)P(B^c|C). 
+			\end{align*}
+			From $				P(A\cap B|C) = P(A|C)-P(A|C)P(B^c|C)$ and the fact (second axiom of probability of the conditional probability version) $P(A|C)-P(A\cap B|C)=P(A\cap B^c|C)$, we know
+			$P(A\cap B^c|C) = P(A|C) P(B^c|C)$ and thus by the definition of the conditional independence we know $A$ and $B^c$ are also independent given C. \\~\\
+			\textbf{Second possible proof (shorter and smarter one):} 				Since conditional probability is also a probability and now if we regard the conditional probability function $P(\cdot|B)$ as a new probability function $P^*(\cdot)$, then $A$ and $B$ are independent with respect to probability $P^*(\cdot)$. Therefore,  according to the proposition (Proposition 2.5.3 from the textbook) such that if $A$ and $B$ are independent then   $A$ and $B^c$ are independent, we know  $A$ and $B^c$ are also independent with respect to probability $P^*(\cdot)$.  Then we know $A$ and $B^c$ are also independent given $C$.\\ \textit{\scriptsize Remark: The second solution is a bit abstract, but I trust you can understand it.}\\
+			\item[II.] \textbf{When $C=S$}, we would have that $A$ and $B$ are independent since $P(D|S)=P(D)$ (knowing $S$ occurred does not provide any extra information). This shows that once we conditional on the whole sample space, we are operating with the same probability, and conditional independence is simply independence. Then the result we prove above would imply that if $A$ and $B$ are independent then $A$ and $B^c$ are also independent.\\ \textit{\scriptsize Remark: When we work with conditionings, we are using the control variates method by narrowing down the sample space to smaller(could be the same as shown here) specific events. Here when we choose a  specific event (sample space) to conditional on, we could derive properties of independence from properties of conditional independence.}  
+		\end{itemize}
+	\end{solution}	
+\end{exercise}
+
+\begin{exercise}
+	\begin{enumerate}
+		\item Consider drawing 6 (six!) cards from a well-shuffled standard deck (52 ($13\times 4$) cards without jokers). We provide  {R} codes for you to verify the results. Just like flipping a fair coin many times, the average value will be closer to 1/2 (get 1 for head, 0 for bottom), you can check if the simulated results are closer to your theoretically derived ones.
+		\begin{enumerate}
+			\item Calculate the probability of drawing exactly two pair. Does it make sense to you that this number is higher/lower than the probability of two pair when drawing 5 cards?
+			\item Calculate the probability of drawing three pair.
+			\item What is the probability of not drawing two pair with the first four cards and ending up with three pair? You can use that the probability of drawing two pair with the first four cards occurs with probability $\frac{216}{20825}=0.0104$, and the conditional probability of drawing three pairs given first four cards forming two pairs is $\frac{{11\choose 1}{4 \choose 2} }{{48 \choose 2}}=0.0585$.
+		\end{enumerate}
+	\item Repeat the exact game described in (I) three times (we draw three 6-card hands with replacement). We use the following notations:
+	\begin{itemize}
+		\item $X_i$ is the random variable for the 6 cards you draw from the $i$th game ($i=1,2,3$);
+		\item We say $X_i=X_j$ if they are the same 6 cards.\\ {\scriptsize Order does not matter, so if you get 777722 (first 2 with the spades, and second 2 with the heart suit) from the first draw, and 727772 from the second draw (first 2 with the heart suit, and second 2 with the spade),
+			then $X_2=X_1=\{\textit{get the following 6-card~} \\ \textit{hand:~} 227777 \textit{~(2's with the heart and the spades)}\}$}.\\
+	\end{itemize}
+\begin{enumerate}
+	\item What is ${P}(X_1=X_2)$? 
+	\item What is the probability that you have at least two $X_i$'s of $N=3$ drawings that are equal to each other? 
+\end{enumerate}
+	\end{enumerate}
+\textit{For nearly any problem you'll encounter in business, consultancy, you'll need the computer to do the computations and simulations. The earlier you become comfortable with using the computer, the better.} \\~\\
+Here we provide a short discussion in R. Later on in other courses, e.g., \textit{Probability distribution} you may need to learn to read these as well. Both R and Python are used widely!
+
+\subsection*{R help!}
+We can use simulation to verify answers 2.(I).(a) and 2.(I).(b). You need to draw $N$ different hands (with replacement) from a deck. Provide the simulated probability for $N=\{10,100,1000,10000\}$  (using 1 decimal precision for $R=10$, 2 decimals for $N=100$, 3 decimals for $N=1000$ and 4 decimals for $N=10000$. Intuitively, for a given value of $N$, would you trust your simulation results more for the answer to a or b? 
+	About 90\% of the groups will get something between the following numbers for (a)
+\begin{center}
+	\begin{tabular}{ccc}
+		$R$ & Lower & Upper\\
+		\midrule
+		10  & 0 & 0.3\\
+		100 & 0.07 & 0.18\\
+		1000 & 0.10 & 0.14\\
+		10000 & 0.11 & 0.13\\
+	\end{tabular}
+\end{center}
+And for (b)
+\begin{center}
+	\begin{tabular}{ccc}
+		$R$ & Lower & Upper\\
+		\midrule
+		10  & 0 & 0\\
+		100 & 0 & 0.01\\
+		1000 & 0.001 & 0.006\\
+		10000 & 0.0021 & 0.0039\\
+	\end{tabular}
+\end{center}
+
+Intuitively, there are two (opposing) answers: (a) can be simulated more precisely for smaller values of $R$ since the event occurs more frequently. (b) seems to be simulated more precisely (the range is much smaller), since for such a rare event 0 is very close to the correct answer. It turns out that the second answer is more precise if we think of precision in terms of the variance (which we will define later). The variance is an absolute measure of deviation from the true values calculated in (a) and (b). 
+
+The Rnotebook file also on Nestor. Open it with Rstudio, and the rests come easily as shown by our introduction video on Nestor. Exam of our course this time \textbf{would not} involve any codes, but you will need to learn some basic coding ideas for the following course, e.g., Probability Distribution; and when you get stuck somewhere, simulations by codes are also a nice way to explore possible directions. \newline\newline
+Each line of code can be executed using $\text{ctrl}+\text{Enter}$ in Rstudio.  
+~\\~\\
+Construct a deck using
+\begin{minted}[]{R}
+	rank   <- 1:13  
+	suit   <- c(1,1,1,1)
+	deck   <- kronecker(rank,suit)
+\end{minted}
+You now have created a vector with four 1's (representing the four aces), four 2s, $\ldots$, four 13s. You can get a draw of $k=6$ cards from the deck using 
+\begin{minted}[]{R}
+	k    <- 6
+	draw <- sample(deck,k,replace=FALSE)
+\end{minted}
+We need to get many of these draws (say $N=100$ of them), for which we use the {replicate()} function, i.e.
+\begin{minted}[]{R}
+	N     <- 100
+	draws <- replicate(N,sample(deck,k,replace=FALSE))
+\end{minted}
+This will store the hands in a matrix with 6 rows (the number of cards we draw) and $N$ columns.
+
+Now we are going to count the number of 1s, 2s, ..., 13s that are selected in each hand. Here's the command, we won't get into the details.
+\begin{minted}[]{R}
+	freq <- t(sapply(1:13,function(a) colSums(draws==a)))
+\end{minted}
+If you look at  {freq[,1]}, R will show you the frequencies of the numbers 1 to 13 in the first hand. You get two pair when there are exactly two 2s in this vector. So you want how many columns contain exactly two 2s. The command is
+\begin{minted}[]{R}
+	M    <- freq == 2
+	TwoP <- sum(colSums(M)==2)
+\end{minted}
+What is this command doing? {M <- freq==2} generates a matrix $M$ with 13 rows and $N$ columns. In each column, $M$ has a 1 on the $i$th row if $i$ appears two times in the hand. So we have two pairs if the column sum ({colSums(M)}) is equal to 2. We then count how many times this happens in the $N$ hands that we have drawn by taking the outer {sum} on the second line of the above piece of code.  
+
+	\begin{minted}[]{R}
+	N       <- 200000 # Number of hands 		
+	
+	# Generate a deck to draw from
+	rank    <- 1:13
+	suit    <- c(1,1,1,1)
+	deck    <- kronecker(rank,suit)
+	
+	# Draw N hands
+	draw    <- replicate(N,sample(deck,6,replace=FALSE))
+	
+	# Get the frequencies
+	freq    <- t(sapply(1:13,function(a) colSums(draw==a)))
+	
+	# Probability of exactly two pairs
+	TwoP    <- sum(colSums(freq==2)==2)/N
+	# Probability of exactly three pairs
+	ThreeP  <- sum(colSums(freq==2)==3)/N
+	
+	# Conditional probabilities
+	# Count hands with two pair in the first four cards
+	drawF   <- draw[1:4,]
+	freqF   <- t(sapply(1:13,function(a) colSums(drawF==a)))
+	TwoPF   <- sum(colSums(freqF==2)==2)/N
+	# Count hands with one pair in the last two cards 
+	# given that there were two pair in the first four cards
+	drawL   <- draw[5:6,]
+	freqL   <- t(sapply(1:13,function(a) colSums(drawL==a)))
+	TcDf    <- sum((colSums(freqL==2)==1)*(colSums(freqF==2)==2))/(TwoPF*N)
+	
+	# Count hands with Three Pair given that we did not get
+	# two pair in the first four cards
+	TiDf    <- sum((colSums(freq==2)==3)*(colSums(freqF==2)!=2))/N
+	
+	# Gather and display results
+	sim               <- c(TwoP,ThreeP,TwoPF,TcDf,TiDf)
+	theory            <- c(0.1214, 0.0030,0.0104,0.0585,0.0024)
+	results           <- cbind(sim,theory,sim/theory)
+	colnames(results) <- c("Simulation","Theory", "Ratio")
+	rownames(results) <- c("D", "T","Df","T|Df","T\&Dfc")
+	print(results)
+\end{minted}  
+Here are also codes in Python
+\begin{minted}[fontsize=\footnotesize]{python}
+	import numpy as np
+	import random
+	import collections
+	N = 2000 # Number of hands to draw (with replacement)
+	k =6
+	# Generate a deck to draw from
+	rank =  np.arange(13)+1  
+	suit = np.ones([1,4])
+	deck =np.kron(rank, suit)
+	deck = deck[0]
+	# Draw N hands
+	draw=[] 	
+	# in r we work with k times N matrix, here we works with N times k matrix, each 
+	# row would store one hand
+	for i in np.arange(N):
+	draw.append(random.sample(list(deck),k))
+	# draw
+	freq=np.ones([1,N])
+	i=0
+	for i in np.arange(13)+1: 
+	freq= np.vstack((freq, np.sum( draw ==i, axis=1)))
+	freq=freq[1:,:] # 13*N freqency table
+	# Probability of exactly two pairs
+	TwoP = np.sum(np.sum(freq==2, axis=0)==2)/N
+	# Probability of exactly three pairs
+	ThreeP = np.sum(np.sum(freq==2, axis=0)==3)/N 
+	# Probability of two three of a kinds
+	TwoTok = np.sum(np.sum(freq==3, axis=0)==2)/N  
+	# Conditional probabilities
+	# Count hands with two pair in the first four cards
+	draw=np.array(draw)
+	drawF = draw[:,[0,1,2,3]]
+	freqf=np.ones([1,N])
+	i=0
+	for i in np.arange(13)+1: 
+	freqf= np.vstack((freqf, np.sum(drawF == i, axis=1)))
+	freqf=freqf[1:,:] # 13*N freqency table
+	TwoPF = np.sum(np.sum(freqf==2, axis=0)==2)/N  
+	# Count hands with one pair in the last two cards 
+	# given that there were two pair in the first four cards
+	drawL =draw[:,[4,5]]
+	# drawL.shape
+	freqL=np.ones([1,N])
+	i=0
+	for i in np.arange(13)+1: 
+	freqL= np.vstack((freqL, np.sum(drawL == np.ones([N,2])*i, axis=1)))
+	freqL=freqL[1:,:] # 13*N freqency table
+	TcDf = np.sum((np.sum(freqL==2, axis=0)==1 )*( np.sum(freqf==2, axis=0)==2))/(TwoPF*N) 
+	# Count hands with Three Pair given that we did not get
+	# two pair in the first four cards
+	TiDf  = np.sum((np.sum(freq==2, axis=0)==3 )*( np.sum(freqf==2, axis=0)!=2))/N
+	from tabulate import tabulate
+	print(tabulate([["D", TwoP],["T", ThreeP],["Df",TwoPF],["T|Df",TcDf], \
+	["T&Dfc", TiDf]], headers=['Name', 'Simulation']))
+\end{minted}
+
+	\begin{solution}
+		\begin{enumerate}
+			\item 
+			\begin{enumerate}
+				\item Define the event of drawing two pairs in $j$ cards as $D_j$. There are $N_{r} = {13 \choose 2}$ ways to draw the ranks of the pairs. Then for each rank, there are $N_{p}={4 \choose 2}$ ways to draw the cards with this particular rank. We also need to select the remaining two cards. These need to have a different rank from the others and from each other, so we draw two ranks from the remaining 11 ranks, i.e. $N_{d} = {11 \choose 2}$. For each of these, we have $N_{o} = {4 \choose 1}$ options to draw a card. 
+				In total, there are $N_{t} = {52 \choose 6}$ possible hands. Using the naive definition of probability, we conclude that the probability of drawing exactly two pair equals
+				\begin{align*}
+					P(D_{6}) = \frac{N_{r}N_{p}^2 N_{d} N_{o}^2}{N_{t}} = \frac{381}{3139}=0.1214
+				\end{align*} 
+				
+				
+				It is not clear cut whether drawing an extra card is favorable to drawing two pair. It can work against you: you might have two pair after five cards and then the extra card can make it three pair. Or it helps: you might not have two pair after five cards, but get two pair on the sixth. 
+				
+				Intuitively  though, it feels like drawing an extra card should help. Suppose that you have not drawn two pair with the first five cards. To be able to end up with two pair, the only relevant case is where you have drawn one pair and three cards of different ranks. This one pair hand is quite common, it happens with probability $352/833\approx 0.426$. Given this hand, $3\cdot 3=9$ out of the remaining 47 cards are favorable to you, still about a 0.192 probability. So drawing one pair in 5 and making that into a two pair on the sixth has probability $0.426\cdot 0.192=0.0809$. This is already higher than the probability of two pair in 5 which we calculated in the exercises, so definitely the extra card is going to help. More precisely, denote by $S_j$ the event of drawing a single pair in $j$ cards, then
+				\begin{align*}
+					P(D_6) &= P(D_6|D_5) P(D_5) + P(D_6|S_5)P(S_5)\\
+					&=\frac{40}{47}\frac{198}{4165} + \frac{9}{47}\frac{352}{833}\\
+					& = 0.1214
+				\end{align*}
+				\textit{Remark: so to show whether an etra card helps or not, we discuss the case where it does not help (we have two pairs already $D_5$) and where it does help (turn one pair into two pairs), and given the second case outweight the probability value of event $D_5$ we know it is benefitial for sure.}
+				\item Define the event of drawing three pairs as $T$. There are $N_{r} = {13 \choose 3}$ ways to draw the three ranks. Then for each rank, there are $N_{p} = {4 \choose 2}$ ways to draw the cards. In total, there are $N_{t} = {52 \choose 6}$ possible hands. Using the naive definition of probability and the multiplication rule, we conclude that
+				\begin{align*}
+					P(T) = \frac{N_{r}N_{p}^3}{N_{t}} = 0.0030
+				\end{align*}
+			\item Denote by $D_{4}^{C}$ the complement of $D_{4}$. By the law of total probability
+			\begin{align*}
+				P(T) &= P(T|D_{4})P(D_{4}) + P(T\cap D_{4}^{C})\\
+				&\Rightarrow \\
+				P(T\cap D_{4}^{C})&=P(T)-P(T|D_{f})P(D_{4})
+			\end{align*}
+			%To get the probability of drawing two pair in the first four cards, we note that there are again $N_{r}={13 \choose 2}$ ways to select the rank and then for each rank $N_{o}={4\choose 2}$ options to select the cards with that rank. Finally, there are $N_{t} = {52 \choose 4}$ options to select the first four cards. Then, using the naive definition of probability,
+			%\begin{align*}
+				%	P(D_{f}) = \frac{N_{r}N_{o}^2}{N_{t}} = \frac{{13 \choose 2}{4 \choose 2}^2}{	{52 \choose 4}} = 0.0104.
+				%\end{align*}
+			We now have all the information to find the probability of not drawing a two pair with the first four cards and ending up with three pair,
+			\begin{align*}
+				P(T\cap D_{4}^{C})=P(T)-P(T|D_{4})P(D_{4})=0.0030 - 0.0585\cdot 0.0104 = 0.0024.
+			\end{align*}
+			
+			\textit{Remark: here is how we calculate $P(T|D_{4})$
+				and thanks Hans Ligtenberg for pointing this solution out:
+				\begin{align*}
+					P(T|D_{4}) = \frac{{11\choose 1}{4 \choose 2} }{{48 \choose 2}}.
+				\end{align*}
+				The idea behind is that by symmetry, if we know event $M$ occurred that the first two pairs are 7's and 2's should not change the above conditional probability, and thus we can use $P(T|D_{4},M)$ to calculate $P(T|D_{4})$.} 
+			\end{enumerate}
+		\item 
+		\begin{enumerate}
+			\item 			 There are $n \choose k$ ($n=52, k=6$) total possible outcomes in $S$ for the $i$th game ($i=1,2,3$), denote $\{X_i=a\}$ as the event that $i$th get the 6-card hand $a$. Then by LOTP:
+			\begin{align*}
+				{P}(X_1=X_2) & = \sum_{a\in S} 	{P}(X_1=X_2|X_1=a) P(X_1=a) \\
+				& = \sum_{a\in S} \frac{1}{{n \choose k} }\frac{1}{{n \choose k} } \\
+				& = {n \choose k} \frac{1}{{n \choose k} }\frac{1}{{n \choose k} } = \frac{1}{{n \choose k} } \approx 4.91194841e^{-8}.
+			\end{align*}
+			Alternatively, you can also consider this as drawing 6-card hands with replacement for two times, and count there are $ {n \choose k}$ outcomes among the total equally likely $ {n \choose k}^2$ outcomes, and the result remains the same.
+			\item 		\begin{align*}
+				P\left(\cup_{i<j} \{X_i=X_j\} \right) & = P\left(\{X_1=X_2\}\cup\{X_1=X_3\} \cup \{X_2=X_3\}  \right) \\
+				& = \sum_{m} P(A_m) -\sum_{m<n} P(A_m\cap A_n) + P(A_1\cap A_2\cap A_3) \\
+				& =_{\textit{by symmetry}} 3 P(A_1) - 3 P(A_1 \cap A_2) + P(A_1\cap A_2\cap A_3)\\
+				& =   3 P(A_1) - 3 P(X_1=X_2=X_3) + P(X_1=X_2=X_3)\\
+				& =  3 \frac{1}{{n \choose k} }   - 2  \frac{1}{{n \choose k}^2 }=    \frac{3{n \choose k}-2}{{n \choose k}^2 } \approx 1.47358448e^{-7}.
+			\end{align*}
+			where we denote $A_1=\{X_1=X_2\}, A_2=\{X_1=X_3\}, A_3=\{X_2=X_3\}$. 
+		\end{enumerate}
+		\end{enumerate}
+	\end{solution}	
+\end{exercise}
+
+
+
+
+
+
+\input{trailer.tex}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "study-guide.tex"
+%%% End:
