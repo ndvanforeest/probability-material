@@ -1,0 +1,19 @@
+\begin{exercise}
+	\textbf{[BH.12]} Communication from Alice to Bob by sending a message (encoded in binary) across a channel.  
+	\begin{enumerate}
+		\item First answer the original questions in your own words.
+		\item Now, Alice sends $\underbrace{00\cdots0}_{n \  0's}$ to convey $0$ and $\underbrace{11\cdots1}_{n \  1's}$ to convey $1$. 
+		\begin{enumerate}
+			\item Given that Bob receives $\underbrace{11\cdots1}_{(n-1) \ 1's}0$, what is the probability that Alice intended to convey a $1$ now? 
+			\item What is the probability when Alice intends to convey a $1$, Bob gets it correctly (it can happen that the message can not be decoded, e.g., half $0$'s half $1$'s)? The following code calculates the correct rate corresponding to $n=1,11,21,31,41$  (Outputs are $0.9000000$ $0.9997043$ $0.9999986$ $1.0000000$ $1.0000000$).
+			\begin{minted}[]{R}
+f <- function(n,k){choose(n, k)*0.9^k*0.1^(n-k)}
+g <- function(n){sum(f(n, seq(floor(0.5*n)+1, n, by=1))) } 
+lower = 1
+upper = 41
+sapply(seq(lower, upper, by=10), g)
+			\end{minted} 
+		\end{enumerate}
+		
+	\end{enumerate}  
+\end{exercise}
