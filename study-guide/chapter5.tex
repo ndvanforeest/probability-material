@@ -1,0 +1,292 @@
+% arara: pdflatex: { shell: yes }
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex: { shell: yes }
+
+\input{header.tex}
+\chapter{Chapter 5: Exercises and remarks}
+In the previous chapters we have seen discrete random variables, which are random variables whose values are a list of numbers that can be indexed by natural numbers. Now we consider
+continuous random variables, which are random variables that can take any value in a (possibly infinite) interval
+from the real line.\\~\\
+Previously, we have seen examples of fair coin tossing. If we only toss one time, its output follows discrete uniform distribution on $\{0,1\}$ (0 for tail, 1 for head). What if we keep tossing infinitely? 1/3 in binary is 0.0101010101.... Then, if your flip sequence is 0101010101.... you could denote it 1/3. This way, you can actually generate any number from 0 to 1, and such an infinite random sequence leads to a random number from 0 to 1, which follows continuous uniform distribution! 
+\\~\\
+This is a new function type from the underlying sample space to the real numbers, and do we distinguish different random variables via their
+distributions. See also the PDFs and CDFs  in the textbook or plot them yourself. 
+
+\section{PDF and CDF}
+\label{sec:section-5.1}
+
+\begin{exercise} 
+		Use the non-naive definition of probability to prove the properties of PDF and CDF.
+		\begin{hint}
+			A \textbf{probability function (measure)} $\P{\cdot}$ maps an event, a (well-constructed) subset $A$ of the sample space $S$ ($A\subseteq S$), to the probability of the event $\P{A}$, a real number within $[0,1]$. It should satisfy the \emph{Axioms of Probability} 
+			\begin{enumerate}
+				\item $\P{\emptyset}=0$, and $\P{S}=1$.
+				\item If $A_{1},A_{2},\ldots $ are disjoint (i.e. mutually exclusive, $A_i\cap A_j=\emptyset, i\neq j$) events, then
+				\begin{equation*}
+					\P{\cup_{i=1}^{\infty}A_{i}} = \sum_{i=1}^{\infty}\P{A_{i}}.
+				\end{equation*}
+			\end{enumerate}
+		\end{hint}
+		\begin{solution}
+			First we prove the two properties of PDF, and for convenience, we assume that PDF is continuous (in this chapter, feel free to assume so).
+			\begin{enumerate}
+				\item Non-negativity: if the PDF would be negative for some $x\in (a,b)$, then we could integrate the PDF over a small area around $x$ and have that the probability that the random variable is in this interval is negative. Since probabilities must always be positive, this is a contradiction and we conclude that the PDF must be positive.
+				\item Integrate to one, which is due to the fact that $\P{S}=1$.
+			\end{enumerate}
+			Then we show properties of CDF:
+			\begin{enumerate}
+				\item Increasing from 0 to 1: the increasing part comes from the fact that the PMF and PDF are non-negative, while from 0 to 1 is due to the fact that  $\P{\emptyset}=0$, and $\P{S}=1$.
+				\item Right continuous: $\lim\limits_{x\downarrow a}F(x)=\lim\limits_{x\downarrow a}\left(\P{X\leq a}+\P{a<X\leq x} \right) =F(a) + \lim\limits_{x\downarrow a}\P{a<X\leq x}=F(a)$ since in the limit $\P{a<X\leq a}=\P{\emptyset}=0$.
+			\end{enumerate}
+		\end{solution}
+	\end{exercise}
+
+\section{Weibull distribution}
+\label{sec:section-5.2}
+
+	\begin{exercise}
+		A random variable $X$ has a Weibull distribution if and only if its probability distribution is given by
+		\begin{equation}
+			f(x) = kx^{\beta - 1} e^{- \alpha x^{\beta}} \quad \text{for } x > 0
+		\end{equation}
+		where $\alpha, \beta > 0$. Use the properties of the PDF to express $k$ in terms of $\alpha$ and $\beta$.
+		\begin{hint}
+			The pdf of $X$ must satisfy $\int_0^{\infty} f_X(x) = 1$. Use this to solve for $k$.
+		\end{hint}
+		\begin{solution}
+			The pdf must satisfy $\int_0^{\infty} f_X(x) = 1$. Let $u = \alpha x^{\beta}$; then $\d u = \alpha \beta x^{\beta - 1}$. As such
+			\begin{align*}
+				\int_0^{\infty} k x^{\beta - 1} e^{- \alpha x^{\beta}} \d x = \frac{k}{\alpha \beta} \int_0^{\infty} e^{-u} \d u = \frac{k}{\alpha \beta} \left[-e^u\right]_0^{\infty} = \frac{k}{\alpha \beta}.
+			\end{align*}
+			It follows that $k = \alpha \beta$.
+		\end{solution}
+	\end{exercise}
+
+\section{Cauchy distribution}
+\label{sec:section-5.3}
+	
+	\begin{exercise}\label{ex:chap05:04}
+		A random variable $X$ has a standard Cauchy distribution if and only if its probability distribution is given by
+		\begin{equation}
+			f(x) = \frac{1}{\pi (1 + x^2)} \quad \text{for } x \in \R.
+		\end{equation}
+		Show that $\E{X}$ is not defined.
+		\begin{hint}
+			Split the integral in two parts.	
+		\end{hint}
+
+		\begin{solution}
+			Let $X$ follow a standard Cauchy distribution. Then
+			\begin{align*}
+				\E{X} = \int_{-\infty}^{\infty} \frac{x}{\pi (1 + x^2)} \d x = \int_{-\infty}^0 \frac{x}{\pi (1 + x^2)} \d x + \int_0^{\infty} \frac{x}{\pi (1 + x^2)} \d x
+			\end{align*}
+			Note that $\int_0^{\infty} \frac{x}{\pi (1 + x^2} \d x = \left[\frac{1}{2 \pi} \ln(1 + x^2)\right]_0^{\infty} = \infty$. Similarly, $\int_{-\infty}^0 \frac{x}{\pi (1 + x^2} \d x = \left[\frac{1}{2 \pi} \ln(1 + x^2)\right]_{-\infty}^0 = - \infty$. Since both numbers are not finite and the two integrals have opposite sign, $\E{X}$ is not defined.
+		\end{solution}
+	\end{exercise}
+
+\section{Rayleigh distribution}
+\label{sec:section-5.4}
+	
+	\begin{exercise}
+		A random variable $X$ has a Rayleigh distribution if and only if its probability distribution is given by
+		\begin{equation}
+			f(x) = \frac{x}{\sigma^2} e^{-\frac{x^2}{2 \sigma^2}} \quad \text{for } x > 0.
+		\end{equation}
+		where $\sigma > 0$. Derive the CDF of $Y = X^2$. What is the distribution of $Y$?
+		\begin{solution}
+			Let $X$ follow a Rayleigh distribution with parameter $\sigma > 0$. The CDF of $X$ is given by
+			\begin{align*}
+				F_X(x) = \int_0^x f_X(t) \d t = \int_0^x \frac{t}{\sigma^2} e^{-\frac{t^2}{2 \sigma^2}} \d t = \left[- e^{-\frac{t^2}{2 \sigma^2}}\right]_0^x = 1 - e^{-\frac{x^2}{2 \sigma^2}}.
+			\end{align*}
+			Let $Y = X^2$. The CDF of $Y$ is given by
+			\begin{align*}
+				F_Y(x) = \P{Y \leq y} = \P{X^2 \leq y} = \P{-\sqrt{y}\leq X \leq \sqrt{y}}= \P{X \leq \sqrt{y}} = F_X(\sqrt{y}) = 1 - e^{-\frac{y}{2 \sigma^2}},
+			\end{align*}
+			because $\P{X\leq 0}=0$. This is the CDF of the $\Exp{\frac{1}{2 \sigma^2}}$ distribution. Hence, $Y \sim \Exp{\frac{1}{2 \sigma^2}}$.
+		\end{solution}
+	\end{exercise}
+
+\section{Uniform distribution}
+\label{sec:section-5.5}
+	
+	\begin{exercise}
+		Verify, by calculating the CDF, that for $U \sim \Unif{0,1}$, $X = a + (b - a) U \sim \Unif{a,b}$.
+		\begin{solution}
+			Let $U \sim \Unif{0,1}$ and let $X = a + (b - a) U \sim \Unif{0,1}$. We have
+			\begin{align*}
+				F_X(x) = \P{X \leq x} = \P{a + (b - a) U \leq x} = \P{U \leq \frac{x - a}{b - a}} = \frac{x - a}{b - a}.
+			\end{align*}
+			This is the CDF of the $\Unif{a,b}$ distribution.
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}\label{ex:chap05:03}
+		Let $X, Y \sim \Unif{0,1}$. Is $X + Y$ also uniformly distributed? Why or why not? Provide the support of $X + Y$.
+		\begin{solution}
+			Since both $X$ and $Y$ take on values between $0$ and $1$, $X + Y$ takes on values between $0$ and $2$. So, the support of $X + Y$ is $(0,2)$. However, $X + Y$ is not uniformly distributed on $(0,2)$. Intuitively, ``moderate" outcomes close to the mean of 1 are more likely to occur than ``extreme" outcomes close to 0 or 2. In fact, it can be shown that
+			\begin{align*}
+				\P{X + Y \leq z} =
+				\begin{cases}
+					0 & \text{for } z < 0 \\
+					\frac{1}{2} z^2 & \text{for } 0 < z \leq 1 \\
+					1 - \frac{1}{2} (2 - z)^2 & \text{for } 1 < z \leq 2 \\
+					1 & \text{for } z > 2
+				\end{cases}.
+			\end{align*}
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}
+		Let $U \sim \Unif{0,1}$. Show that $\frac{1}{\lambda} \ln U \sim \Exp{\lambda}$ for $\lambda > 0$.
+		\begin{hint}
+			Use the universality of the uniform distribution.
+		\end{hint}
+		\begin{solution}
+			Let $U \sim \Unif{0,1}$. We know that $F(x) = 1 - e^{- \lambda x}$ is the CDF of the $\Exp{\lambda}$ distribution. The inverse of this CDF is given by $F^{-1}(U) = - \frac{1}{\lambda} \ln(1 - U)$. From the universality of the uniform distribution, we obtain that $F^{-1}(U) = - \frac{1}{\lambda} \ln(1 - U) \sim \Exp{\lambda}$. By symmetry, $1 - U$ has the same distribution as $U$. Hence, $- \frac{1}{\lambda} \ln(U)$ has the same distribution as $- \frac{1}{\lambda} \ln(1 - U)$. It follows that $- \frac{1}{\lambda} \ln U \sim \Exp{\lambda}$.
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}
+		Suppose that for each $n \in \N$, $X_{n}$ has the discrete uniform distribution with endpoints $a$ and $b$, and step size $(b - a) / n$. Show that, as $n \to \infty$, $X_n$ converges to the continuous uniform distribution on $[a, b]$.
+		\begin{hint}
+			When we talk about the distribution of a random variable, we are talking about how the probability values are distributed to events generated by this r.v., which is fully captured by the CDF or the PDF/PMF. Here, take a look at the CDF of $X_n$ and show it converges (we are talking about a point-wise convergence of functions, CDF are functions) to the CDF of a continuous uniform CDF.
+		\end{hint}
+		\begin{solution}
+			Notice that for all $y \in \R$, $ny - 1 \le \lfloor ny \rfloor \le ny $. As such, $ \lfloor n y \rfloor / n \to y $ as $n\rightarrow \infty$. also
+			\begin{equation*}
+				\P{X_n\leq x}=\begin{cases}
+					0 &\text{for } x<a\\
+					\lfloor\frac{(x-a)n}{b-a}\rfloor/n &\text{for } a\leq x\leq b\\
+					1&\text{for } x>b.
+				\end{cases}	
+			\end{equation*} 
+			Hence $ F_n(x) \to (x - a) / (b - a) $ as $n\rightarrow \infty$. This is the CDF of the continuous uniform distribution on $[a,b]$. Therefore, as $n \to \infty$, $X_n$ converges to the continuous uniform distribution on $[a, b]$.
+		\end{solution}
+	\end{exercise}
+
+\section{Normal distribution}
+\label{sec:section-5.6}
+	
+	\begin{exercise}
+		Let $X \sim \Norm{\mu, \sigma^2}$. Let $Y = e^X$. The distribution of $Y$ is said to be \emph{log-normal}, as the logarithm of $Y$ is normally distributed. Calculate $\E{Y}$.
+		\begin{hint}
+			Apply the law of the unconscious statistician.
+		\end{hint}
+		\begin{solution}
+			Let $X \sim \Norm{\mu, \sigma^2}$. Let $Y = e^X$. Using the law of the unconscious statistician, we have
+			\begin{align*}
+				\E{Y} & = \int_{-\infty}^{\infty} e^x \cdot f_X(x) \d x = \int_{-\infty}^{\infty} e^x \cdot \frac{1}{\sqrt{2 \pi} \sigma} e^{- \frac{(x - \mu)^2}{2 \sigma}} \d x = \int_{-\infty}^{\infty} \cdot \frac{1}{\sqrt{2 \pi} \sigma} e^{- \frac{(x^2 - 2 \mu x + \mu^2) - 2 \sigma^2 x}{2 \sigma}} \d x \\
+				& = \int_{-\infty}^{\infty} \cdot \frac{1}{\sqrt{2 \pi} \sigma} e^{- \frac{(x - (\mu + \sigma^2))^2 - 2 \mu \sigma^2 - \sigma^4}{2 \sigma^2}} \d x = e^{\mu + \frac{1}{2} \sigma^2} \int_{-\infty}^{\infty} \cdot \frac{1}{\sqrt{2 \pi} \sigma} e^{- \frac{(x - (\mu + \sigma^2))^2}{2 \sigma^2}} \mathrm{d}x \\
+				& = e^{\mu + \frac{1}{2} \sigma^2}.
+			\end{align*}
+			Here we recognize $\int_{-\infty}^{\infty} e^x \cdot \frac{1}{\sqrt{2 \pi} \sigma} e^{- \frac{(x - (\mu + \sigma^2))^2}{2 \sigma^2}} \d x$ as the PDF of a normal distribution with mean $\mu+\sigma^2$ and variance $\sigma^2$; hence it integrates to unity.
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}
+		\emph{Jensen's inequality} states that for $X$ a random variable and $g$ a convex function, $g(\E{X}) \leq \E{g(X)}$. Verify that this inequality holds for $X \sim N(0,1)$ and $g(x) = |x|$.
+		\begin{hint}
+			Split the integral in two parts and use symmetry. Note that $\phi'(x) = -z \phi(x)$.
+		\end{hint}
+		\begin{solution}
+			Let $X \sim \Norm{0,1}$ and $g(x) = |x|$. The pdf of $X$ is given by $\phi(z) = \frac{1}{\sqrt{2 \pi}} e^{- \frac{z^2}{2}}$. Notice that $\phi'(z) = - z \frac{1}{\sqrt{2 \pi}} e^{- \frac{z^2}{2}} = -z \phi(z)$. Using the law of the unconscious statistician, we have
+			\begin{align*}
+				\E{g(X)} & = \int_{-\infty}^{\infty} g(z) \cdot \phi(z) \d z = \int_{-\infty}^{\infty} |z| \phi(z) \d z = \int_0^{\infty} z \phi(z) \d z - \int_{-\infty}^0 z \phi(z) \mathrm{d}z \\
+				& = \int_0^{\infty} z \phi(z) \d z + \int_0^{\infty} z \phi(z) \d z = 2 \int_0^{\infty} z \phi(z) \d z = - 2 \int_0^{\infty} \phi'(z) \d z = - 2 \left[\phi(z)\right]_0^{\infty} \\
+				& = 2 \cdot \frac{1}{\sqrt{2 \pi}} = \sqrt{\frac{2}{\pi}}.	
+			\end{align*}
+			Moreover, $g(\E{X}) = g(0) = 0$. Evidently, $g(\E{X}) \leq \E{g(X)}$.
+		\end{solution}
+	\end{exercise}
+
+	\begin{exercise}
+	Let $Z \sim \Norm{0,1}$. Derive the PMF of the indicator random variable $X=1_{\{Z>0\}}$. Using the law of the unconscious statistician, derive $\E{X}$.
+		\begin{solution}
+			Let $Z \sim \Norm{0,1}$ and let $X = 1_{\{Z>0\}}$. As $Z$ is symmetric about $0$, we have
+			\begin{align*}
+				\P{X = 0} = \P{1_{\{Z>0\}} = 0} = \P{Z \leq 0} = \frac{1}{2}, \quad \P{X = 1} = \P{1_{\{Z>0\}} = 1} = \P{Z > 0} = \frac{1}{2}
+			\end{align*}
+			and $\P{X = x} = 0$ for $x \notin \{0,1\}$. Using LOTUS and the symmetry of the standard normal distribution around zero, we obtain
+			\begin{align*}
+				\E{X} = \E{1_{\{Z>0\}}} = \int_{-\infty}^{\infty} 1_{\{z > 0\}} \cdot \frac{1}{\sqrt{2 \pi}} e^{-z^2} \d z = \int_0^{\infty} \frac{1}{\sqrt{2 \pi}} e^{-z^2} \d z = \frac{1}{2}.
+			\end{align*}
+		\end{solution}
+	\end{exercise}
+
+\section{Exponential distribution}
+\label{sec:section-5.7}
+	
+	\begin{exercise}\label{ex:chap05:01}
+		Let $X \sim \Exp{\lambda}$. Calculate the expectation $\E{X}$ and variance $\V{X}$.
+		\begin{hint}
+			Use integration by parts.
+		\end{hint}
+		\begin{solution}
+			Let $X \sim \text{Expo} (\lambda)$. Using integration by parts, we obtain
+			\begin{align*}
+				\E{X} & = \int_0^{\infty} y f_Y(y) \d y = \int_0^{\infty} \lambda y e^{- \lambda y} \d y = \frac{1}{\lambda} \int_0^{\infty} w e^{- w} \d w \\
+				& = \frac{1}{\lambda} \left(\left[w e^{- w}\right]_0^{\infty} +\int_0^{\infty} w e^{- w} \d w\right) = \frac{1}{\lambda} \left(0 + \left[-e^{- w} \right]_0^{\infty}\right) = \frac{1}{\lambda}
+			\end{align*}
+			Note we substituted $w = \lambda y$ here for notational convenience. Again using integration by parts, we also have
+			\begin{align*}
+				\E{X^2} & = \int_0^{\infty} y^2 f_Y(y) \d y = \int_0^{\infty} \lambda y^2 e^{- \lambda y} \d y = \left[-y^2 e^{- \lambda y}\right]_0^{\infty} + \int_0^{\infty} 2x e^{- \lambda y} \mathrm{d}y \\
+				& = 0 + \frac{2}{\lambda} \int_0^{\infty} x \cdot \lambda e^{- \lambda y} \d y = \frac{2}{\lambda} \E{Y} = \frac{2}{\lambda^2}.
+			\end{align*}
+			It follows that $\V{X} = \E{X^2} - (\E{X})^2 = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{\lambda^2}$.
+		\end{solution}
+	\end{exercise}
+
+\section{Poisson distribution}
+\label{sec:section-5.8}
+	
+	\begin{exercise}
+		Suppose the random variable $T$ measures the time to failure of a product. The \emph{failure rate} of $T$ at time $t$ is given by $\frac{f_T(t)}{1 - F_T(t)}$. It measures the probability density of failure at time $t$ given that failure does not occur before time $t$. Show that if $T \sim \Exp{\lambda}$, the failure rate is constant. How does this result relate to the memorylessness property of the exponential distribution?
+		\begin{solution}
+			Let $T \sim \Exp{\lambda}$. The PDF of $T$ is given by $f(x) = \lambda e^{- \lambda x}$ and the CDF of $T$ is given by $F(x) = 1 - e^{- \lambda x}$. As such,
+			\begin{equation*}
+				\frac{f_T(t)}{1 - F_T(t)} = \frac{\lambda e^{- \lambda x}}{1 - (1 - e^{- \lambda x})} = \frac{\lambda e^{- \lambda x}}{e^{- \lambda x}} = \lambda.
+			\end{equation*}
+			This is a constant. Intuitively, knowing that no failure has occurred until time $t$ does not give you information about when failure \emph{will} occur.
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}
+		A supermarket has three cashiers, who are currently all busy serving customers. You enter the queue and are second in line. Assuming all customers' service time are i.i.d. $\Exp{\lambda}$ distributed, what is the expected time until you leave the store?
+		\begin{solution}
+			Before you can leave the store, the person before you in line needs to leave the queue; after this, you need to leave the queue yourself; and finally, you need to be served. The person before you in line leaves the queue whenever the first customer currently being served finishes service. By the memorylessness property the time that the customers have already spend at the cashier does not change the expected serving time. Therefore, the expected time until one customer finishes is $\frac{1}{3 \lambda}$, since the minimum of three $\Exp{\lambda}$ random variables is $\Exp{3 \lambda}$ distributed. Using a similar argument, the expected time it takes you to leave the queue after the person before you left the queue is $\frac{1}{3 \lambda}$. Finally, your expected time in service is $\frac{1}{\lambda}$. Hence, the expected time until you leave the store is $\frac{1}{3 \lambda} + \frac{1}{3 \lambda} + \frac{1}{\lambda} = \frac{5}{3 \lambda}$.
+		\end{solution}
+	\end{exercise}
+
+	\begin{exercise}
+		Suppose that emails land in an inbox according to a Poisson process with rate $\lambda$. Let $N_t$ denote the number of emails that arrive at or before time $t$. For $s \in [0,t]$, find $\P{N_s = 1 | N_t = 1}$. Interpret the outcome.
+		\begin{solution}
+			By definition of a Poisson process, the number of arrivals that occur in an interval of length $t$ is a $\Pois{\lambda t}$ variable. For $s \in [0,t]$ we have
+			\begin{align*}
+				\P{N_s = 1 | N_t = 1} & = \frac{\P{N_s = 1 \cap N_t = 1}}{\P{N_s = 1}} = \frac{\P{N_s = 1} \P{N_t - N_s = 0}}{\P{N_t = 1}} \\
+				& = \frac{\left(\frac{(\lambda s)^1 e^{-\lambda s}}{1!} - \frac{(\lambda (t - s))^0 e^{-\lambda (t - s)}}{0!}\right)}{\frac{(\lambda t)^1 e^{-\lambda t}}{1!}} = \frac{\lambda s e^{- \lambda s} e^{-\lambda (t - s)}}{\lambda t e^{- \lambda t}} = \frac{s}{t}.
+			\end{align*}
+			This is the CDF of the $\Unif{0,t}$ distribution. So, if you know that an email arrived during $[0, t]$, the arrival is distributed uniformly on the interval $[0, t]$.
+		\end{solution}
+	\end{exercise}
+	
+	\begin{exercise}
+		Consider two independent Poisson processes with rates $\lambda$ and $\mu$. Let $M_t$ denote the number of arrivals at or before time $t$ in the first process and let $N_t$ denote the number of arrivals at or before time $t$ in the second process. Show that $\P{M_t = 1 | M_t + N_t = 1} = \frac{\lambda}{\lambda + \mu}$.
+		\begin{hint}
+			Note that $\P{M_t + N_t = 1} = \P{M_t = 1} \P{N_t = 0} + \P{M_t = 0} \P{N_t = 1}$.
+		\end{hint}
+
+		\begin{solution}
+			We have
+			\begin{align*}
+				\P{M_t = 1 | M_t + N_t = 1} & = \frac{\P{M_t = 1 \cap M_t + N_t = 1}}{\P{M_t + N_t = 1}} = \frac{\P{M_t = 1} \P{N_t = 0}}{\P{M_t = 1} \P{N_t = 0} + \P{M_t = 0} \P{N_t = 1}} \\
+				& = \frac{\frac{(\lambda t)^1 e^{- \lambda t}}{1!} \cdot \frac{(\mu t)^0 e^{- \mu t}}{0!}}{\left(\frac{(\lambda t)^1 e^{- \lambda t}}{1!} \cdot \frac{(\mu t)^0 e^{- \mu t}}{0!} + \frac{(\lambda t)^0 e^{- \lambda t}}{0!} \cdot \frac{(\mu t)^1 e^{- (\mu t)}}{1!}\right)} = \frac{\lambda t e^{- (\lambda + \mu)t}}{\lambda t e^{- (\lambda + \mu)t} + \mu t e^{- (\lambda + \mu)t}} = \frac{\lambda}{\lambda + \mu}.
+			\end{align*}
+		\end{solution}
+	\end{exercise}
+
+\input{trailer.tex}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "study-guide.tex"
+%%% End:
