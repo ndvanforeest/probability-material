@@ -40,14 +40,14 @@ MGFs are constructed based on moments, which are essentially numbers (assigned b
 		\end{enumerate}
 		\begin{solution}~
 			\begin{enumerate}
-				\item Let $X$ be a random variable. We want to show that the value of $c$ that minimizes $E(X - c)^2$ is $c = \mu$, where $\mu$ denotes the mean of $X$. We have
+				\item Let $X$ be a random variable. We want to show that the value of $c$ that minimizes $\E{(X - c)^2}$ is $c = \mu$, where $\mu$ denotes the mean of $X$. We have
 				\begin{align*}
 					\E{(X - c)^2} & = \E{((X - \mu) + (\mu - c))^2} \\
 					& = \E{(X - \mu)^2} + 2 \E{(X - \mu)(\mu - c)} + \E{(\mu - c)^2} \\
 					& = \E{(X - \mu)^2} + (\mu - c)^2
 				\end{align*}
 				It is easily seen that $\E{(X - c)^2}$ is minimal for $c = \mu$.
-				\item Let $X$ be a random variable. We want to show that the value of $a$ that minimizes $\E{\abs{X - a}}$ is $a = m$, where $m$ denotes the median of $X$. We want to evaluate $E|X - a|$ for $a \neq m$.
+				\item Let $X$ be a random variable. We want to show that the value of $a$ that minimizes $\E{\abs{X - a}}$ is $a = m$, where $m$ denotes the median of $X$. We want to evaluate $\E{\abs{X - a}}$ for $a \neq m$.
 					
 				Assume $m < a$. If $X \leq m$, then
 				\begin{equation*}
@@ -165,6 +165,26 @@ MGFs are constructed based on moments, which are essentially numbers (assigned b
 \section{Momnets}
 \label{sec:section-6.2}
 
+\begin{exercise}\label{ex:chap06:02-1}
+ Calculate the first four moments, and central moments of $N(\mu,\sigma^2)$,
+	\begin{solution}
+		Via LOTUS (also from the symmetry, we know the odd-order central moments should be zero directly, and when you set $\mu=0$, moments and central moments should be equal):~\\~\\		
+		$\begin{array}{|l|l|l|}
+			\hline \text { Order } & \multicolumn{1}{|c|}{\text { Non-central moment }} & \text { Central moment } \\
+			\hline 1 & \mu & 0 \\
+			\hline 2 & \mu^2+\sigma^2 & \sigma^2 \\
+			\hline 3 & \mu^3+3 \mu \sigma^2 & 0 \\
+			\hline 4 & \mu^4+6 \mu^2 \sigma^2+3 \sigma^4 & 3 \sigma^4 \\
+			\hline
+		\end{array}$~\\
+	\end{solution}
+\end{exercise}
+
+
+
+\section{Sample Momnets}
+\label{sec:section-6.3}
+
 	\begin{exercise}\label{ex:chap06:06}
 $X_i, i=1,\cdots, n$ are i.i.d r.v.s with finite forth moment, show that $\frac{1}{n}\sum_i^n (X_i-\E{X_i})^2$ is eventually a constant $n$ when increases to infinity. What is this constant?
 	\begin{solution}
@@ -256,7 +276,7 @@ plt.show()
 	\end{exercise}
 	
 	
-\section{Exercises moved to Probability Distribution}	
+\section{Exercises moved to Probability Distribution (Not in the exam range of PT for EOR)}	
 	\begin{exercise}\label{ex:chap06:01}
 		Let $X_1\sim \Norm{\mu_1, \sigma_1^2}$ and	$X_2\sim \Norm{\mu_2, \sigma_2^2}$ be independent. Using the MGF, derive the distribution of $X_1 + X_2$.
 		\begin{hint}
