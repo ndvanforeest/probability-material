@@ -265,7 +265,7 @@ plt.show()
 		\begin{solution}
 			For $X \sim \Norm{\mu, \sigma^2}$, the MGF of $X$ is given by $M_X(t) = e^{\mu t} e^{\frac{1}{2} \sigma^2 t^2}$. To verify this, first write $X = \mu + \sigma Z$ for $Z \sim \Norm{0,1}$, and calculate
 			\begin{align*}
-				M_Z(t) & = E(e^{tZ}) = \int_{-\infty}^{\infty} e^{tz} \cdot \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2} z^2} \d z = \int_{-\infty}^{\infty} e^{tz} \cdot \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2} z^2} \d z \\
+				M_Z(t) & = \E{e^{tZ}} = \int_{-\infty}^{\infty} e^{tz} \cdot \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2} z^2} \d z = \int_{-\infty}^{\infty} e^{tz} \cdot \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2} z^2} \d z \\
 				& = e^{\frac{1}{2} t^2} \int_{-\infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2} (z - t)^2} \d z = e^{\frac{1}{2} t^2}
 			\end{align*}
 			(The last step follows from recognizing $\frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2} (z - t)^2}$ as a PDF.) It then follows that
