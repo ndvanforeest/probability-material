@@ -12,7 +12,18 @@ g <- function(n){sum(f(n, seq(floor(0.5*n)+1, n, by=1))) }
 lower = 1
 upper = 41
 sapply(seq(lower, upper, by=10), g)
-			\end{minted} 
+			\end{minted}
+\begin{minted}{python}
+import math
+def f(n,k):
+    return(math.comb(n,k)*0.9**k*0.1**(n-k))
+def g(n):
+    a = [f(n, k) for k in range(math.floor(0.5*n)+1,n+1)]
+    return(sum(a))
+lower = 1
+upper = 41
+[print(g(i)) for i in range(lower,upper+1,10)]        
+			\end{minted}			
 		\end{enumerate}
 		
 	\end{enumerate}  
