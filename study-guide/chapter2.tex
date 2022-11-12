@@ -38,18 +38,18 @@ Try to link these technical terms with your daily life experience, and you will 
 	
 	\begin{exercise}\label{ex:chap02:02}
 		Continue from Ex \ref{ex:chap02:01} and consider the sample space $S=\{H_1H_2, H_1T_2, T_1H_2, T_1T_2\}$, and calculate 
-		$P_{T_1}(s)=\P{\{s\}|T_1}$ for all $s\in S$.  
+		$p_{T_1}(s)=\P{\{s\}|T_1}$ for all $s\in S$.  
 
 		\begin{solution}
-			Let $S = \{H_1H_2, H_1T_2, T_1H_2, T_1T_2\}$. We want to calculate $P_{T_1}(s) = \P{\{s\}|T_1}$ for all $s \in S$. Evidently, $\P{H_1H_2 | T_1} = \P{H_1T_2 | T_1} = 0$ as the probability of the first coin landing heads given that it landed tails is zero. Moreover, $\P{T_1H_2 | \{T_1} = \frac{\P{T_1H_2}}{\P{T_1}} = \frac{\P{T_1} \P{H_2}}{\P{T_1}} = \P{H_2} = p$ and $\P{T_1T_2 | T_1} = \frac{\P{T_1T_2}}{\P{T_1}} = \frac{\P{T_1} \P{T_2}}{\P{T_1}} = \P{T_2} = 1 - p$.
+			Let $S = \{H_1H_2, H_1T_2, T_1H_2, T_1T_2\}$. We want to calculate $p_{T_1}(s) = \P{\{s\}|T_1}$ for all $s \in S$. Evidently, $\P{H_1H_2 | T_1} = \P{H_1T_2 | T_1} = 0$ as the probability of the first coin landing heads given that it landed tails is zero. Moreover, $\P{T_1H_2 | \{T_1} = \frac{\P{T_1H_2}}{\P{T_1}} = \frac{\P{T_1} \P{H_2}}{\P{T_1}} = \P{H_2} = p$ and $\P{T_1T_2 | T_1} = \frac{\P{T_1T_2}}{\P{T_1}} = \frac{\P{T_1} \P{T_2}}{\P{T_1}} = \P{T_2} = 1 - p$.
 		\end{solution}
 	\end{exercise}
 	
 	\begin{exercise}\label{ex:chap02:03}
-		Show that $P_{T_1}$ defined in Ex \ref{ex:chap02:02} is a proper probability function on the sample space $S$ by verifying that it satisfies the axioms of non-naive probability. 
+		Show that $p_{T_1}$ defined in Ex \ref{ex:chap02:02} is a proper probability function on the sample space $S$ by verifying that it satisfies the axioms of non-naive probability. 
 		\begin{solution}
-			We have $P_{T_1}(\emptyset) = \P{\emptyset | T_1} = \frac{\P{\emptyset \cap T_1}}{\P{T_1}} = \frac{\P{\emptyset}}{\P{T_1}} = 0$ and $P_{T_1}(S) = \P{S | T_1} = \frac{\P{S \cap T_1}}{\P{T_1}} = \frac{\P{T_1}}{\P{T_1}} = 1$. Moreover, for any set of disjoint events in $S$, the probability of the union of all events in the set is the sum of the probabilities of all individual events in the set. (If you want to, you can check this explicitly by considering all possible combinations of disjoint sets -- though this is a tedious job.) Hence, $P_{T_1}$ satisfies the non-naive probability definition.\\~\\
-			Alternatively, make use of the fact that $\P{\cdot}$ is a probability function and must satisfy the two axioms. Now we use this fact to simplify the above seeming-tedious job. Note that for any disjoint events $A_i$, $\tilde{A}_i=A_i\cap T_1$ must be disjoint as well (why? because $\tilde{A}_i\cap \tilde{A}_j=(A_i\cap A_j)\cap T_1$) therefore, $$\P{\cup_i \tilde{A}_i}=\sum_i \P{\tilde{A}_i},$$ and thus $$P_{T_1}{(\cup_i A_i)}= P(\cup_i \tilde{A}_i) /P(T_i)=\sum_i \P{\tilde{A}_i}/\P{T_i}=\sum_i P_{T_1}{(A_i)}.$$
+			We have $p_{T_1}(\emptyset) = \P{\emptyset | T_1} = \frac{\P{\emptyset \cap T_1}}{\P{T_1}} = \frac{\P{\emptyset}}{\P{T_1}} = 0$ and $p_{T_1}(S) = \P{S | T_1} = \frac{\P{S \cap T_1}}{\P{T_1}} = \frac{\P{T_1}}{\P{T_1}} = 1$. Moreover, for any set of disjoint events in $S$, the probability of the union of all events in the set is the sum of the probabilities of all individual events in the set. (If you want to, you can check this explicitly by considering all possible combinations of disjoint sets -- though this is a tedious job.) Hence, $P_{T_1}$ satisfies the non-naive probability definition.\\~\\
+			Alternatively, make use of the fact that $\P{\cdot}$ is a probability function and must satisfy the two axioms. Now we use this fact to simplify the above seeming-tedious job. Note that for any disjoint events $A_i$, $\tilde{A}_i=A_i\cap T_1$ must be disjoint as well (why? because $\tilde{A}_i\cap \tilde{A}_j=(A_i\cap A_j)\cap T_1$) therefore, $$\P{\cup_i \tilde{A}_i}=\sum_i \P{\tilde{A}_i},$$ and thus $$p_{T_1}{(\cup_i A_i)}= \P{\cup_i \tilde{A}_i} /\P{T_i}=\sum_i \P{\tilde{A}_i}/\P{T_i}=\sum_i p_{T_1}{(A_i)}.$$
 		\end{solution}
 	\end{exercise}
 	
@@ -226,20 +226,20 @@ Try to link these technical terms with your daily life experience, and you will 
 			\item[I.] 		\textbf{First possible proof:}
 			From the conditional independence definition we know
 			\begin{align*}
-				P(A\cap B|C) = 	P(A|C) P(B|C). 
+				\P{A\cap B|C} = 	\P{A|C} \P{B|C}. 
 			\end{align*}
 			Since conditional probability is also a probability, the second axiom implies that $P(B|C)=(1-P(B^c|C))$. The above two equations imply that 
 			\begin{align*}
-				P(A\cap B|C) = 	P(A|C)(1-P(B^c|C)) =P(A|C)-P(A|C)P(B^c|C), 
+				\P{A\cap B|C} = 	\P{A|C}(1-\P{B^c|C}) =\P{A|C}-\P{A|C}\P{B^c|C}, 
 			\end{align*}
 			which means 
 			\begin{align*}
-				P(A\cap B|C) = 	P(A|C)(1-P(B^c|C)) =P(A|C)-P(A|C)P(B^c|C). 
+				\P{A\cap B|C} = 	\P{A|C}(1-\P{B^c|C}) =\P{A|C}-\P{A|C}\P{B^c|C}. 
 			\end{align*}
-			From $				P(A\cap B|C) = P(A|C)-P(A|C)P(B^c|C)$ and the fact (second axiom of probability of the conditional probability version) $P(A|C)-P(A\cap B|C)=P(A\cap B^c|C)$, we know
-			$P(A\cap B^c|C) = P(A|C) P(B^c|C)$ and thus by the definition of the conditional independence we know $A$ and $B^c$ are also independent given C. \\~\\
-			\textbf{Second possible proof (shorter and smarter one):} 				Since conditional probability is also a probability and now if we regard the conditional probability function $P(\cdot|B)$ as a new probability function $P^*(\cdot)$, then $A$ and $B$ are independent with respect to probability $P^*(\cdot)$. Therefore,  according to the proposition (Proposition 2.5.3 from the textbook) such that if $A$ and $B$ are independent then   $A$ and $B^c$ are independent, we know  $A$ and $B^c$ are also independent with respect to probability $P^*(\cdot)$.  Then we know $A$ and $B^c$ are also independent given $C$.\\ \textit{\scriptsize Remark: The second solution is a bit abstract, but I trust you can understand it.}\\
-			\item[II.] \textbf{When $C=S$}, we would have that $A$ and $B$ are independent since $P(D|S)=P(D)$ (knowing $S$ occurred does not provide any extra information). This shows that once we conditional on the whole sample space, we are operating with the same probability, and conditional independence is simply independence. Then the result we prove above would imply that if $A$ and $B$ are independent then $A$ and $B^c$ are also independent.\\ \textit{\scriptsize Remark: When we work with conditionings, we are using the control variates method by narrowing down the sample space to smaller(could be the same as shown here) specific events. Here when we choose a  specific event (sample space) to conditional on, we could derive properties of independence from properties of conditional independence.}  
+			From $				\P{A\cap B|C} = \P{A|C}-\P{A|C}\P{B^c|C}$ and the fact (second axiom of probability of the conditional probability version) $\P{A|C}-\P{A\cap B|C}=\P{A\cap B^c|C}$, we know
+			$\P{A\cap B^c|C} = \P{A|C} \P{B^c|C}$ and thus by the definition of the conditional independence we know $A$ and $B^c$ are also independent given C. \\~\\
+			\textbf{Second possible proof (shorter and smarter one):} 				Since conditional probability is also a probability and now if we regard the conditional probability function $\P{\cdot|B}$ as a new probability function $P^*(\cdot)$, then $A$ and $B$ are independent with respect to probability $P^*(\cdot)$. Therefore,  according to the proposition (Proposition 2.5.3 from the textbook) such that if $A$ and $B$ are independent then   $A$ and $B^c$ are independent, we know  $A$ and $B^c$ are also independent with respect to probability $P^*(\cdot)$.  Then we know $A$ and $B^c$ are also independent given $C$.\\ \textit{\scriptsize Remark: The second solution is a bit abstract, but I trust you can understand it.}\\
+			\item[II.] \textbf{When $C=S$}, we would have that $A$ and $B$ are independent since $\P{D|S}=\P{D}$ (knowing $S$ occurred does not provide any extra information). This shows that once we conditional on the whole sample space, we are operating with the same probability, and conditional independence is simply independence. Then the result we prove above would imply that if $A$ and $B$ are independent then $A$ and $B^c$ are also independent.\\ \textit{\scriptsize Remark: When we work with conditionings, we are using the control variates method by narrowing down the sample space to smaller(could be the same as shown here) specific events. Here when we choose a  specific event (sample space) to conditional on, we could derive properties of independence from properties of conditional independence.}  
 		\end{itemize}
 	\end{solution}	
 \end{exercise}
@@ -259,7 +259,7 @@ Try to link these technical terms with your daily life experience, and you will 
 			then $X_2=X_1=\{\textit{get the following 6-card~} \\ \textit{hand:~} 227777 \textit{~(2's with the heart and the spades)}\}$}.\\
 	\end{itemize}
 \begin{enumerate}
-	\item What is ${P}(X_1=X_2)$? 
+	\item What is $\P{X_1=X_2}$? 
 	\item What is the probability that you have at least two $X_i$'s of $N=3$ drawings that are equal to each other? 
 \end{enumerate}
 	\end{enumerate}
@@ -432,7 +432,7 @@ Here are also codes in Python
 				\item Define the event of drawing two pairs in $j$ cards as $D_j$. There are $N_{r} = {13 \choose 2}$ ways to draw the ranks of the pairs. Then for each rank, there are $N_{p}={4 \choose 2}$ ways to draw the cards with this particular rank. We also need to select the remaining two cards. These need to have a different rank from the others and from each other, so we draw two ranks from the remaining 11 ranks, i.e. $N_{d} = {11 \choose 2}$. For each of these, we have $N_{o} = {4 \choose 1}$ options to draw a card. 
 				In total, there are $N_{t} = {52 \choose 6}$ possible hands. Using the naive definition of probability, we conclude that the probability of drawing exactly two pair equals
 				\begin{align*}
-					P(D_{6}) = \frac{N_{r}N_{p}^2 N_{d} N_{o}^2}{N_{t}} = \frac{381}{3139}=0.1214
+				\P{D_{6}} = \frac{N_{r}N_{p}^2 N_{d} N_{o}^2}{N_{t}} = \frac{381}{3139}=0.1214
 				\end{align*} 
 				
 				
@@ -440,20 +440,20 @@ Here are also codes in Python
 				
 				Intuitively  though, it feels like drawing an extra card should help. Suppose that you have not drawn two pair with the first five cards. To be able to end up with two pair, the only relevant case is where you have drawn one pair and three cards of different ranks. This one pair hand is quite common, it happens with probability $352/833\approx 0.426$. Given this hand, $3\cdot 3=9$ out of the remaining 47 cards are favorable to you, still about a 0.192 probability. So drawing one pair in 5 and making that into a two pair on the sixth has probability $0.426\cdot 0.192=0.0809$. This is already higher than the probability of two pair in 5 which we calculated in the exercises, so definitely the extra card is going to help. More precisely, denote by $S_j$ the event of drawing a single pair in $j$ cards, then
 				\begin{align*}
-					P(D_6) &= P(D_6|D_5) P(D_5) + P(D_6|S_5)P(S_5)\\
+					\P{D_6} &= \P{D_6|D_5} \P{D_5} + \P{D_6|S_5}\P{S_5}\\
 					&=\frac{40}{47}\frac{198}{4165} + \frac{9}{47}\frac{352}{833}\\
 					& = 0.1214
 				\end{align*}
 				\textit{Remark: so to show whether an etra card helps or not, we discuss the case where it does not help (we have two pairs already $D_5$) and where it does help (turn one pair into two pairs), and given the second case outweight the probability value of event $D_5$ we know it is benefitial for sure.}
 				\item Define the event of drawing three pairs as $T$. There are $N_{r} = {13 \choose 3}$ ways to draw the three ranks. Then for each rank, there are $N_{p} = {4 \choose 2}$ ways to draw the cards. In total, there are $N_{t} = {52 \choose 6}$ possible hands. Using the naive definition of probability and the multiplication rule, we conclude that
 				\begin{align*}
-					P(T) = \frac{N_{r}N_{p}^3}{N_{t}} = 0.0030
+					\P{T} = \frac{N_{r}N_{p}^3}{N_{t}} = 0.0030
 				\end{align*}
 			\item Denote by $D_{4}^{C}$ the complement of $D_{4}$. By the law of total probability
 			\begin{align*}
-				P(T) &= P(T|D_{4})P(D_{4}) + P(T\cap D_{4}^{C})\\
+				\P{T} &= \P{T|D_{4}}\P{D_{4}} + \P{T\cap D_{4}^{C}}\\
 				&\Rightarrow \\
-				P(T\cap D_{4}^{C})&=P(T)-P(T|D_{f})P(D_{4})
+				\P{T\cap D_{4}^{C}}&=\P{T}-\P{T|D_{f}}\P{D_{4}}
 			\end{align*}
 			%To get the probability of drawing two pair in the first four cards, we note that there are again $N_{r}={13 \choose 2}$ ways to select the rank and then for each rank $N_{o}={4\choose 2}$ options to select the cards with that rank. Finally, there are $N_{t} = {52 \choose 4}$ options to select the first four cards. Then, using the naive definition of probability,
 			%\begin{align*}
@@ -461,30 +461,30 @@ Here are also codes in Python
 				%\end{align*}
 			We now have all the information to find the probability of not drawing a two pair with the first four cards and ending up with three pair,
 			\begin{align*}
-				P(T\cap D_{4}^{C})=P(T)-P(T|D_{4})P(D_{4})=0.0030 - 0.0585\cdot 0.0104 = 0.0024.
+				\P{T\cap D_{4}^{C}}=\P{T}-\P{T|D_{4}}\P{D_{4}}=0.0030 - 0.0585\cdot 0.0104 = 0.0024.
 			\end{align*}
 			
 			\textit{Remark: here is how we calculate $P(T|D_{4})$
 				and thanks Hans Ligtenberg for pointing this solution out:
 				\begin{align*}
-					P(T|D_{4}) = \frac{{11\choose 1}{4 \choose 2} }{{48 \choose 2}}.
+					\P{T|D_{4}} = \frac{{11\choose 1}{4 \choose 2} }{{48 \choose 2}}.
 				\end{align*}
-				The idea behind is that by symmetry, if we know event $M$ occurred that the first two pairs are 7's and 2's should not change the above conditional probability, and thus we can use $P(T|D_{4},M)$ to calculate $P(T|D_{4})$.} 
+				The idea behind is that by symmetry, if we know event $M$ occurred that the first two pairs are 7's and 2's should not change the above conditional probability, and thus we can use $\P{T|D_{4},M}$ to calculate $\P{T|D_{4}}$.} 
 			\end{enumerate}
 		\item 
 		\begin{enumerate}
 			\item 			 There are $n \choose k$ ($n=52, k=6$) total possible outcomes in $S$ for the $i$th game ($i=1,2,3$), denote $\{X_i=a\}$ as the event that $i$th get the 6-card hand $a$. Then by LOTP:
 			\begin{align*}
-				{P}(X_1=X_2) & = \sum_{a\in S} 	{P}(X_1=X_2|X_1=a) P(X_1=a) \\
+				\P{X_1=X_2} & = \sum_{a\in S} 	\P{X_1=X_2|X_1=a} \P{X_1=a} \\
 				& = \sum_{a\in S} \frac{1}{{n \choose k} }\frac{1}{{n \choose k} } \\
 				& = {n \choose k} \frac{1}{{n \choose k} }\frac{1}{{n \choose k} } = \frac{1}{{n \choose k} } \approx 4.91194841e^{-8}.
 			\end{align*}
 			Alternatively, you can also consider this as drawing 6-card hands with replacement for two times, and count there are $ {n \choose k}$ outcomes among the total equally likely $ {n \choose k}^2$ outcomes, and the result remains the same.
 			\item 		\begin{align*}
-				P\left(\cup_{i<j} \{X_i=X_j\} \right) & = P\left(\{X_1=X_2\}\cup\{X_1=X_3\} \cup \{X_2=X_3\}  \right) \\
-				& = \sum_{m} P(A_m) -\sum_{m<n} P(A_m\cap A_n) + P(A_1\cap A_2\cap A_3) \\
+				\P{\cup_{i<j} \{X_i=X_j\}} & = \P{\{X_1=X_2\}\cup\{X_1=X_3\} \cup \{X_2=X_3\} } \\
+				& = \sum_{m} \P{A_m} -\sum_{m<n} \P{A_m\cap A_n} + \P{A_1\cap A_2\cap A_3} \\
 				& =_{\textit{by symmetry}} 3 P(A_1) - 3 P(A_1 \cap A_2) + P(A_1\cap A_2\cap A_3)\\
-				& =   3 P(A_1) - 3 P(X_1=X_2=X_3) + P(X_1=X_2=X_3)\\
+				& =   3 \P{A_1} - 3 \P{X_1=X_2=X_3} + \P{X_1=X_2=X_3}\\
 				& =  3 \frac{1}{{n \choose k} }   - 2  \frac{1}{{n \choose k}^2 }=    \frac{3{n \choose k}-2}{{n \choose k}^2 } \approx 1.47358448e^{-7}.
 			\end{align*}
 			where we denote $A_1=\{X_1=X_2\}, A_2=\{X_1=X_3\}, A_3=\{X_2=X_3\}$. 

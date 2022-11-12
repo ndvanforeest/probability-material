@@ -28,7 +28,7 @@ can be inferred from these probabilities. For example, you can calculate various
 		
 	\begin{solution}~
 		\begin{enumerate}
-			\item The number of heads in two throws can take on the values 0, 1 and 2. Therefore, the support of $X$ is given by $\text{Supp}(X) = \{0,1,2\}$.	
+			\item The number of heads in two throws can take on the values 0, 1 and 2. Therefore, the support of $X$ is given by $\supp(X) = \{0,1,2\}$.	
 			\item We have $X(H_1H_2) = 2$, $X(H_1T_2) = X(T_1H_2) = 1$ and $X(T_1T_2) = 0$.
 			\item $X(H_1T_2 ~\textit{or}~ T_1H_2) = 1$
 			\item $\{X = 1\} = \{H_1 T_2, T_1 H_2\}$
@@ -45,19 +45,19 @@ can be inferred from these probabilities. For example, you can calculate various
 \label{sec:section-3.2}
 	
 \begin{exercise}\label{ex:chap03:02} 
-	Consider two independent coin tosses. Denote by $H_i$ and $T_i$ the event that the $i$th coin lands heads and tails, respectively. The coin is not fair. Write $p$ for the probability of a coin landing heads, i.e. $\P{H_i} = p$. Denote $X$ the number of heads in two throws and define a function, denoted by $P(H_1T_2|X)$, that maps $s \in S = \{H_1H_2, H_1T_2, T_1H_2, T_1T_2\}$ to the conditional probability value $\P{H_1T_2|\{X = X(s)\}}$: $P(H_1T_2|X)(s)=\P{H_1T_2|\{X = X(s)\}}$.
+	Consider two independent coin tosses. Denote by $H_i$ and $T_i$ the event that the $i$th coin lands heads and tails, respectively. The coin is not fair. Write $p$ for the probability of a coin landing heads, i.e. $\P{H_i} = p$. Denote $X$ the number of heads in two throws and define a function, denoted by $\P{H_1T_2|X}$, that maps $s \in S = \{H_1H_2, H_1T_2, T_1H_2, T_1T_2\}$ to the conditional probability value $\P{H_1T_2|\{X = X(s)\}}$: $\P{H_1T_2|X}(s)=\P{H_1T_2|\{X = X(s)\}}$.
 	\begin{enumerate}
-		\item What is $P\left(H_1T_2|X\right)(H_1H_2)$?
-		\item Calculate $P(H_1T_2|X)(s)$ for all $s\in S$.
-		\item Is $P(H_1T_2|X)$ a proper (discrete) random variable?
-		\item Derive the CDF and PMF of $P(H_1T_2|X)$.
+		\item What is $\P{H_1T_2|X}(H_1H_2)$?
+		\item Calculate $\P{H_1T_2|X}(s)$ for all $s\in S$.
+		\item Is $\P{H_1T_2|X}$ a proper (discrete) random variable?
+		\item Derive the CDF and PMF of $\P{H_1T_2|X}$.
 	\end{enumerate} 
 	\begin{solution}
 			\begin{enumerate}
-			\item   $P(H_1T_2|X)(H_1H_2)=P(H_1T_2|\{X=2\})= \frac{P(\{H_1T_2\}\cap \{X=2\})}{P\{X=2\}}=0$.
-			\item Calculate $P(H_1T_2|X)(s)$ for all $s\in S$. Note that the support of X contains only three values: 0, 1 and 2. As long as $s$ is one outcome in the sample space that has either two or zero heads, i.e., $\{T_1T_2\},\{H_1H_2\}$, similarly to the above subquestion, $P(H_1T_2|X)(s)=0$. Now if $s\in \{X=1\}$, then $P(H_1T_2|X)(s)= P(H_1T_2|\{X=1\})= P(H_1T_2|\{H_1T_2, H_2T_1\})=1/2.$
-			\item Is $P(H_1T_2|X)$ a proper (discrete) random variable? Based on the above question, yes, a discrete uniform distributed one with support $\{0,1/2\}$.
-			\item Derive the CDF and PMF of $P(H_1T_2|X)$. It is a \textbf{discrete uniform distributed one with support $\{0,1/2\}$.} CDF and PMF is given in the textbook.
+			\item   $\P{H_1T_2|X}(H_1H_2)=\P{H_1T_2|\{X=2\}}= \frac{\P{\{H_1T_2\}\cap \{X=2\}}}{\P{X=2}}=0$.
+			\item Calculate $\P{H_1T_2|X}(s)$ for all $s\in S$. Note that the support of X contains only three values: 0, 1 and 2. As long as $s$ is one outcome in the sample space that has either two or zero heads, i.e., $\{T_1T_2\},\{H_1H_2\}$, similarly to the above subquestion, $\P{H_1T_2|X}(s)=0$. Now if $s\in \{X=1\}$, then $\P{H_1T_2|X}(s)= \P{H_1T_2|\{X=1\}}= \P{H_1T_2|\{H_1T_2, H_2T_1\}}=1/2.$
+			\item Is $\P{H_1T_2|X}$ a proper (discrete) random variable? Based on the above question, yes, a discrete uniform distributed one with support $\{0,1/2\}$.
+			\item Derive the CDF and PMF of $\P{H_1T_2|X}$. It is a \textbf{discrete uniform distributed one with support $\{0,1/2\}$.} CDF and PMF is given in the textbook.
 		\end{enumerate} 
 	\end{solution}
 \end{exercise}
@@ -65,19 +65,19 @@ can be inferred from these probabilities. For example, you can calculate various
 \begin{exercise} 
 	Use the non-naive definition of probability to prove the properties of PMF.
 	\begin{hint}
-		A \textbf{probability function (measure)} $P$ maps an event , a (well-constructed) subset $A$ of the sample space $S$ ($A\subseteq S$), to the probability of the event $P(A)$, a real number within $[0,1]$. It should satisfy the \textit{Axioms of Probability} 
+		A \textbf{probability function (measure)} $P$ maps an event , a (well-constructed) subset $A$ of the sample space $S$ ($A\subseteq S$), to the probability of the event $\P{A}$, a real number within $[0,1]$. It should satisfy the \textit{Axioms of Probability} 
 \begin{enumerate}
-	\item $P(\emptyset)=0$, and $P(S)=1$.
+	\item $\P{\emptyset}=0$, and $\P{S}=1$.
 	\item If $A_{1},A_{2},\ldots $ are disjoint (i.e. mutually exclusive, $A_i\cap A_j=\emptyset, i\neq j$) events, then
 	\begin{equation*}
-		P\left(\cup_{i=1}^{\infty}A_{i}\right) = \sum_{i=1}^{\infty}P(A_{i})
+		\P{\cup_{i=1}^{\infty}A_{i}} = \sum_{i=1}^{\infty}\P{A_{i}}
 	\end{equation*}
 \end{enumerate}
 	\end{hint}
 	\begin{solution}
 		\begin{enumerate}
 			\item Non-negativity of the PMF is due to the fact that $P$ maps an event to a real number within $[0,1]$. So, always non-negative!
-			\item As for the sum to one: assume that $X$ has support $A=\{x_1,x_2....\}$, note that $1=P(S)=P(\{X\in A\}\cup S\setminus\{X\in A \} )=P(\{X\in A\}) +P(S\setminus\{X\in A \} )=P(\cup_i \{X=x_i\}) +0=\sum_iP( \{X=x_i\})$. 
+			\item As for the sum to one: assume that $X$ has support $A=\{x_1,x_2....\}$, note that $1=\P{S}=\P{\{X\in A\}\cup S\setminus\{X\in A \}}=\P{X\in A} +\P{S\setminus{X\in A }}=\P{\cup_i \{X=x_i\}} +0=\sum_i \P{X=x_i}$. 
 		\end{enumerate}
 	\end{solution}
 \end{exercise}
@@ -98,7 +98,7 @@ can be inferred from these probabilities. For example, you can calculate various
 			\item Yes. For example, the outcome ``the first coin lands heads and the rest land tails" can be represented as $\{H\underbrace{TTT \ldots TT}_{\textit{n - 1 T's in total}}\}$.
 			\item Yes, all outcomes are equally likely. The probability that the outcome of the $i$th coin flip matches the $i$th value of a specific sequence is $\frac{1}{2}$. So, the probability of observing, say, $\underbrace{\{HTT...HTH\}}_{\textit{n characters in total}}$ is $\underbrace{\frac{1}{2} \cdot \frac{1}{2} \cdot \ldots \frac{1}{2}}_{n \: times} = \left(\frac{1}{2}\right)^n$ and this probability is the same for any other sequence.
 			\item There are $\binom{n}{k}$ outcomes with $k$ heads in $n$ coin flips. Hence the event $\{X=k\}$ contains $\binom{n}{k}$ elements.
-			\item There are $\binom{n}{k}$ outcomes with $k$ heads in $n$ coin flips. Each outcome has a probability of $\left(\frac{1}{2}\right)^n$ of occurring. Hence, for $k = 0, 1, \hdots, n$, $\P{X = k} = \binom{n}{k} \left(\frac{1}{2}\right)^n$. Recognize that this is the PMF of the $\text{Binom}(n, 1/2)$ distribution. Hence $X \sim \text{Binom}(n, 1/2)$.
+			\item There are $\binom{n}{k}$ outcomes with $k$ heads in $n$ coin flips. Each outcome has a probability of $\left(\frac{1}{2}\right)^n$ of occurring. Hence, for $k = 0, 1, \hdots, n$, $\P{X = k} = \binom{n}{k} \left(\frac{1}{2}\right)^n$. Recognize that this is the PMF of the $\Bin{n, 1/2}$ distribution. Hence $X \sim \Bin{n, 1/2}$.
 		\end{enumerate}
 	\end{solution}
 \end{exercise}
@@ -108,27 +108,27 @@ can be inferred from these probabilities. For example, you can calculate various
 \end{remark}
 
 \begin{exercise}
-	Let $X \sim \text{Bin}(n, p)$. Show that $Y = n - X \sim \text{Bin}(n, 1 - p)$.
+	Let $X \sim \Bin{n, p}$. Show that $Y = n - X \sim \Bin{n, 1 - p}$.
 	\begin{solution}
-	 	Let $X \sim \text{Bin}(n, p)$. Let $Y = n - X \sim \text{Bin}(n, 1 - p)$. Then
+	 	Let $X \sim \Bin{n, p}$. Let $Y = n - X \sim \Bin{n, 1 - p}$. Then
 	 	\begin{equation*}
 	 		\P{Y = k} = \P{X = n - k} = \binom{n}{n - k} p^{n - k} (1 - p)^k = \binom{n}{k}	 (1 - p)^k p^{n - k}.
 	 	\end{equation*}
-	 	This shows that the PMF of $Y$ is the $\text{Bin}(n, 1 - p)$ distribution. Hence $Y \sim \text{Bin}(n, 1 - p)$.
+	 	This shows that the PMF of $Y$ is the $\Bin{n, 1 - p}$ distribution. Hence $Y \sim \Bin{n, 1 - p}$.
 	\end{solution}
 \end{exercise}
 
 \begin{exercise}\label{ex:chap03:08}
 	There are 100 slips of paper in a hat, each of which has one of the numbers $1,2, \ldots, 100$ written on it, with no number appearing more than once. Five of the slips are drawn, one at a time. Suppose sampling happens with replacement.
 	\begin{enumerate}
-		\item What is the distribution of how many of the drawn slips have a value of at least 80 written on them?
+		\item What is the distribution of how many of the drawn slips have a value of at least $80$ written on them?
 		\item What is the distribution of the value of the $i$th draw (for $1 \leq i \leq 5$)?
 		\item What is the probability that the number 100 is drawn at least once?
 	\end{enumerate}
 	\begin{solution}~
 	 	\begin{enumerate}
-	 		\item The distribution is $\text{Bin}(5, 0.21)$.
-	 		\item Let $X_i$ be the value of the $i$th draw. By symmetry, $X_i \sim \text{DUnif}(1, 2, \ldots, 100)$.
+	 		\item The distribution is $\Bin{5, 0.21}$.
+	 		\item Let $X_i$ be the value of the $i$th draw. By symmetry, $X_i \sim \DUnif{1, 2, \ldots, 100}$.
 	 		\item Let $X_i$ be the value of the $i$th draw. Let $A$ be the event that the number 100 is drawn at least once. Then
 	 		\begin{align*}
 	 			\P{A} & = 1 - \P{A^c} = 1 - \P{X_1 \neq 100, \ldots, X_5 \neq 100} \\
@@ -144,7 +144,7 @@ can be inferred from these probabilities. For example, you can calculate various
  	\begin{solution}~
  		\begin{enumerate}
 	 		\item The distribution is now $\text{HGeom}(21, 79, 5)$.
-	 		\item Let $X_i$ be the value of the $i$th draw. By symmetry, $X_i \sim \text{DUnif}(1, 2, \ldots, 100)$. (Nothing changes.)
+	 		\item Let $X_i$ be the value of the $i$th draw. By symmetry, $X_i \sim \DUnif{1, 2, \ldots, 100}$. (Nothing changes.)
 	 		\item Let $X_i$ be the value of the $i$th draw. Let $A$ be the event that the number 100 is drawn at least once. The events $X_1 = 100, \ldots, X_5 = 100$ are now disjoint, so
 	 			\begin{equation*}
 	 				\P{A} = \P{X_1 = 100} + \hdots + \P{X_5 = 100} = 0.05.
@@ -154,9 +154,9 @@ can be inferred from these probabilities. For example, you can calculate various
 \end{exercise}
  	
 \begin{exercise}\label{ex32111}
-	Let $X$ be a discrete random variable with support $R_{X}=\{1, 2, \ldots\}$. Suppose the PMF of $X$ is given by $P_{X}(k) = \frac{1}{2^{k}}$ for $k = 1, 2 , \ldots$.
+	Let $X$ be a discrete random variable with support $R_X=\{1, 2, \ldots\}$. Suppose the PMF of $X$ is given by $p_X(k) = \frac{1}{2^{k}}$ for $k = 1, 2 , \ldots$.
 	\begin{enumerate}
-		\item Find and plot the CDF of $X, F_{X}(x)$.
+		\item Find and plot the CDF of $X, F_X(x)$.
 		\item Find $\P{2<X \leq 5}$.
 		\item Find $\P{X>4}$.
 	\end{enumerate}
@@ -164,13 +164,13 @@ can be inferred from these probabilities. For example, you can calculate various
 		Recall the formulas for geometric series.
 	\end{hint}
 	\begin{solution}
-		First, note that the provided PMF is valid: $\sum_{k = 1}^{\infty} P_{X}(k)=\sum_{k=1}^{\infty} \frac{1}{2^{k}} = 1$ using the formula for geometric series.
+		First, note that the provided PMF is valid: $\sum_{k = 1}^{\infty} p_X(k)=\sum_{k=1}^{\infty} \frac{1}{2^{k}} = 1$ using the formula for geometric series.
 		\begin{enumerate}
 			\item  To find the CDF, note that:
 			\begin{itemize}
-				\item For $x<1, \quad \quad F_{X}(x)=0$.
-				\item For $1 \leq x<2, \: \: F_{X}(x)=P_{X}(1)=\frac{1}{2}$.
-				\item For $2 \leq x<3, \: \: F_{X}(x)=P_{X}(1)+P_{X}(2)=\frac{1}{2}+\frac{1}{4}=\frac{3}{4}$.
+				\item For $x<1, \quad \quad F_X(x)=0$.
+				\item For $1 \leq x<2, \: \: F_X(x)=p_X(1)=\frac{1}{2}$.
+				\item For $2 \leq x<3, \: \: F_X(x)=p_X(1)+p_X(2)=\frac{1}{2}+\frac{1}{4}=\frac{3}{4}$.
 			\end{itemize}
 			Generalizing this, for $x \geq 1$ we have
 			\begin{equation*}
@@ -204,22 +204,22 @@ can be inferred from these probabilities. For example, you can calculate various
 
 \begin{exercise}~\label{ex3211}
 	\begin{enumerate}
- 		\item Let $X_1,X_2\sim \text{Bern}(0.5)$ be independent. Derive the PMF of $Y=X_1+X_2$. 
- 		\item Let $X_1,X_2\sim \text{Bern}(0.5)$ be independent. Derive the PMF of $g(X_1,X_2)$, with $g(x_1,x_2)=x_1+x_2$.	 
- 		\item Let $X_1\sim \text{Bin}(n, p)$ and $X_2\sim \text{Bin}(m, p)$ be independent. Derive the PMF of $Y=X_1+X_2$.
- 		\item Let $X_1\sim \text{Bin}(n,p)$ and $X_2\sim \text{Bin}(n,s)$ be independent. Derive the PMF of $Y=X_1+X_2$.
+ 		\item Let $X_1,X_2\sim \Bern{0.5}$ be independent. Derive the PMF of $Y=X_1+X_2$. 
+ 		\item Let $X_1,X_2\sim \Bern{0.5}$ be independent. Derive the PMF of $g(X_1,X_2)$, with $g(x_1,x_2)=x_1+x_2$.	 
+ 		\item Let $X_1\sim \Bin{n, p}$ and $X_2\sim \Bin{m, p}$ be independent. Derive the PMF of $Y=X_1+X_2$.
+ 		\item Let $X_1\sim \Bin{n, p}$ and $X_2\sim \Bin{n, s}$ be independent. Derive the PMF of $Y=X_1+X_2$.
  	\end{enumerate}
  	\begin{solution}~
  		\begin{enumerate}
- 			\item Let $X_1,X_2\sim \text{Bern}(0.5)$ be independent. Then $Y = X_1 + X_2$ has support $\{0,1,2\}$. By independence, $\P{Y = 0} = \P{X_1 = 0, X_2 = 0} = \P{X_1 = 0} \P{X_2 = 0} = 0.5^2$, $\P{Y = 1} = \P{X_1 = 0, X_2 = 1} + \P{X_1 = 1, X_2 = 0} = \P{X_1 = 0} \P{X_2 = 1} + \P{X_1 = 1} \P{X_2 = 0}= 0.5^2 + 0.5^2 = 0.5$ and $\P{Y = 2} = \P{X_1 = 1, X_2 = 1} = \P{X_1 = 1} \P{X_2 = 1} = 0.5^2$. ($\P{Y = k} = 0$ for $k \notin \{0, 1, 2\}$.)
+ 			\item Let $X_1,X_2\sim \Bern{0.5}$ be independent. Then $Y = X_1 + X_2$ has support $\{0,1,2\}$. By independence, $\P{Y = 0} = \P{X_1 = 0, X_2 = 0} = \P{X_1 = 0} \P{X_2 = 0} = 0.5^2$, $\P{Y = 1} = \P{X_1 = 0, X_2 = 1} + \P{X_1 = 1, X_2 = 0} = \P{X_1 = 0} \P{X_2 = 1} + \P{X_1 = 1} \P{X_2 = 0}= 0.5^2 + 0.5^2 = 0.5$ and $\P{Y = 2} = \P{X_1 = 1, X_2 = 1} = \P{X_1 = 1} \P{X_2 = 1} = 0.5^2$. ($\P{Y = k} = 0$ for $k \notin \{0, 1, 2\}$.)
  			\item The PMF of $g(X_1,X_2)$ is the same as the PMF of $Y$ in the previous subquestion.
- 			\item Let $X_1 \sim \text{Bin}(n, p)$ and $X_2 \sim \text{Bin}(m, p)$ be independent. Then, by conditioning on $X_1$ and using the law of total probability, we have
+ 			\item Let $X_1 \sim \Bin{n, p}$ and $X_2 \sim \Bin{m, p}$ be independent. Then, by conditioning on $X_1$ and using the law of total probability, we have
 				 \begin{align*}
 					 \P{Y = k} & = \P{X_1 + X_2 = k} = \sum_{j = 0}^k \P{X_1 + _2 = k|X_2=j} \P{X = j} = \sum_{j = 0}^k \P{X_2 = k - j} \P{X = j} \\
 					 & = \sum_{j = 0}^k \binom{m}{k - j} p^{k - j} (1 - p)^{m - k + j} \cdot \binom{n}{j} p^j (1 - p)^{n - j} = p^k (1 - p)^{n + m - k} \sum_{j = 0}^k \binom{m}{k - j} \binom{n}{j} \\
 					 & = \binom{n + m}{k} p^k (1 - p)^{n + m - k}\quad\text{for }k=0,1,\dots,n+m.
 				 \end{align*}
- 			\item Let $X_1\sim \text{Bin}(n,p)$ and $X_2\sim \text{Bin}(n,s)$ be independent. Let $Y=X_1+X_2$. The support of $Y$ is $\{0, 1, \ldots, 2n\}$. Then $\P{Y = a} = \P{X_1 + X_2 = n} = \sum_{b = 0}^k \P{X_1 = a - b} \P{X_2 = b} = \sum_{b = 0}^k \binom{n}{a - b} \binom{n}{b} p^{a - b} (1 - p)^{n + b - a} s^b (1 - s)^{n - b}$ for $a=0,1,\dots,n+m$.
+ 			\item Let $X_1\sim \Bin{n, p}$ and $X_2\sim \Bin{n, s}$ be independent. Let $Y=X_1+X_2$. The support of $Y$ is $\{0, 1, \ldots, 2n\}$. Then $\P{Y = a} = \P{X_1 + X_2 = n} = \sum_{b = 0}^k \P{X_1 = a - b} \P{X_2 = b} = \sum_{b = 0}^k \binom{n}{a - b} \binom{n}{b} p^{a - b} (1 - p)^{n + b - a} s^b (1 - s)^{n - b}$ for $a=0,1,\dots,n+m$.
  		\end{enumerate}
  	\end{solution}
 \end{exercise}
@@ -256,18 +256,18 @@ can be inferred from these probabilities. For example, you can calculate various
 \end{exercise}
 
 \begin{exercise}\label{ex:chap03:10}
- 	Let $X \sim \text{Bin}(n, p)$ and $Y \sim \text{Bin}(m, p)$ be independent. Find the distribution of $X + Y$.
+ 	Let $X \sim \Bin{n, p}$ and $Y \sim \Bin{m, p}$ be independent. Find the distribution of $X + Y$.
  	\begin{hint}
  		Condition on $X$ and apply the law of total probability. Or, you can also use the story proof, think about the background story of the binomial distribution.
  	\end{hint}
 	\begin{solution}
-		Let $X \sim \text{Bin}(n, p)$ and $Y \sim \text{Bin}(m, p)$ be independent. Then, by conditioning on $X$ and using the law of total probability, we have
+		Let $X \sim \Bin{n, p}$ and $Y \sim \Bin{m, p}$ be independent. Then, by conditioning on $X$ and using the law of total probability, we have
 		\begin{align*}
 			\P{X + Y = k} & = \sum_{j = 0}^k \P{X + Y = k} \P{X = j} = \sum_{j = 0}^k \P{Y = k - j} \P{X = j} \\
 			& = \sum_{j = 0}^k \binom{m}{k - j} p^{k - j} (1 - p)^{m - k + j} \cdot \binom{n}{j} p^j (1 - p)^{n - j} = p^k (1 - p)^{n + m - k} \sum_{j = 0}^k \binom{m}{k - j} \binom{n}{j} \\
 			& = \binom{n + m}{k} p^k (1 - p)^{n + m - k}.
 		\end{align*}
-		This is the PMF of the $\text{Binom}(n + m, p)$ distribution. Hence, $X + Y \sim \text{Binom}(n + m, p)$. 	(We used the result of Ex \ref{ex:chap01:12} to write $\sum_{j = 0}^k \binom{m}{k - j} \binom{n}{j}$ as $\binom{n + m}{k}$.)
+		This is the PMF of the $\Bin{n + m, p}$ distribution. Hence, $X + Y \sim \Bin{n + m, p}$. 	(We used the result of Ex \ref{ex:chap01:12} to write $\sum_{j = 0}^k \binom{m}{k - j} \binom{n}{j}$ as $\binom{n + m}{k}$.)
 	\end{solution}
 \end{exercise}
 
@@ -276,12 +276,12 @@ can be inferred from these probabilities. For example, you can calculate various
 \end{remark}
 
  \begin{exercise}
- 	Let $X \sim \text{Bin}(n, p)$ and $Y \sim \text{Bin}(m, p)$ be independent. Find conditional distribution of $X$ given $X + Y = r$.
+ 	Let $X \sim \Bin{n, p}$ and $Y \sim \Bin{m, p}$ be independent. Find conditional distribution of $X$ given $X + Y = r$.
 	\begin{hint}
 		Apply Bayes' rule.
 	\end{hint}
 	\begin{solution}
-		Let $X \sim \text{Bin}(n, p)$ and $Y \sim \text{Bin}(m, p)$ be independent. Let $Z = X + Y$. Note that $X + Y \sim \text{Bin}(n + m, p)$ by the result of Ex \ref{ex:chap03:10}. Then
+		Let $X \sim \Bin{n, p}$ and $Y \sim \Bin{m, p}$ be independent. Let $Z = X + Y$. Note that $X + Y \sim \Bin{n+m, p}$ by the result of Ex \ref{ex:chap03:10}. Then
 		\begin{align*}
 			\P{X = x | X + Y = r} & = \frac{\P{X + Y = r | X = x} \P{X = x}}{\P{X + Y = r}} = \frac{\P{Y = r - x} \P{X = x}}{\P{x + Y = r}} \\
 			& = \frac{\binom{m}{r - x} p^{r - x} (1 - p)^{m - r + x} \cdot \binom{n}{x} p^x (1 - p)^{n - x}}{\binom{n + m}{r} p^r (1 - p)^{n + m - r}} \\
@@ -292,7 +292,7 @@ can be inferred from these probabilities. For example, you can calculate various
 \end{exercise}
 
  \begin{exercise}
- 	Let $X \sim \text{HGeom}(w, b, n)$ and $N = w + b \to \infty$ such that $p = \frac{w}{w + b}$ remains fixed. Show that the PMF of $X$ converges to the PMF of the $\text{Bin}(n,p)$ distribution.
+ 	Let $X \sim \text{HGeom}(w, b, n)$ and $N = w + b \to \infty$ such that $p = \frac{w}{w + b}$ remains fixed. Show that the PMF of $X$ converges to the PMF of the $\Bin{n, p}$ distribution.
 	\begin{hint}
 		Use the fact that $X \sim \text{HGeom}(w, b, n)$ and $Y \sim \text{HGeom}(n, w + b - n, w)$ have the same distribution.
 	\end{hint}
@@ -304,7 +304,7 @@ can be inferred from these probabilities. For example, you can calculate various
 			& = \binom{n}{k} \frac{p \left(p - \frac{1}{N}\right) \hdots \left(p - \frac{k - 1}{N}\right) \cdot (1 - p) \left((1 - p) - \frac{1}{N}\right) \hdots \left((1 - p) - \frac{n - k - 1}{N}\right)}{\left(1 - \frac{1}{N}\right) \left(1 - \frac{2}{N}\right) \hdots \left(1 - \frac{n - 1}{N}\right)} \\
 			& \to \frac{n}{k} p^k (1 - p)^{n - k} \quad \text{as } N \to \infty
 		\end{align*}
-		This is the PMF of the $\text{Bin}(n,p)$ distribution. Note here that we used the equivalency of the $\text{HGeom}(w, b, n)$ and $\text{HGeom}(n, w + b - n, w)$ distributions.
+		This is the PMF of the $\Bin{n, p}$ distribution. Note here that we used the equivalency of the $\text{HGeom}(w, b, n)$ and $\text{HGeom}(n, w + b - n, w)$ distributions.
 	\end{solution}
 \end{exercise}
 

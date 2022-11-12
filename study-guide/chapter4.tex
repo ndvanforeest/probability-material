@@ -33,84 +33,84 @@ theory.).
 	\begin{solution}
 		Let $X$ and $Y$ be random variables. Let $c$ be a constant. Then
 		\begin{align*}
-			\mathbb{E}(X+Y) & = \sum_{c\in \operatorname{supp}(X+Y)} c P(X+Y=c) \\
-			&= \sum_{c\in \operatorname{supp}(X+Y)} c\left(\sum_{a \in \operatorname{supp}(X)} P(X=a, Y=c-a)\right) \\
-			&= \sum_{a \in \operatorname{supp}(X)} \sum_{c\in \operatorname{supp}(X+Y)} c P(X=a, Y=c-a) \\
-			&= \sum_{a \in \operatorname{supp}(X)} \sum_{c\in \operatorname{supp}(X+Y)}((a)+(c-a)) P(X=a, Y=c-a) \\
-			&= \sum_{a \in \operatorname{supp}(X)} \sum_{b \in \operatorname{supp}(Y)}(a+b) P(X=a, Y=b) \\
-			&= \sum_{a \in \operatorname{supp}(X)} \sum_{b \in \operatorname{supp}(Y)} a P(X=a, Y=b)+\sum_{a \in \operatorname{supp}(X)} \sum_{b \in \operatorname{supp}(Y)} b P(X=a, Y=b) \\
-			&= \sum_{a \in \operatorname{supp}(X)} a \sum_{b \in \operatorname{supp}(Y)} P(X=a, Y=b)+\sum_{b \in \operatorname{supp}(Y)} b \sum_{a \in \operatorname{supp}(X)} P(X=a, Y=b) \\
-			&= \sum_{a \in \operatorname{supp}(X)} a P(X=a)+\sum_{b \in \operatorname{supp}(Y)} b P(Y=b) \\
+			\E{X+Y} & = \sum_{c\in \supp{X+Y}} c P(X+Y=c) \\
+			&= \sum_{c\in \supp{X+Y}} c\left(\sum_{a \in \supp{X}} P(X=a, Y=c-a)\right) \\
+			&= \sum_{a \in \supp{X}} \sum_{c\in \supp{X+Y}} c P(X=a, Y=c-a) \\
+			&= \sum_{a \in \supp{X}} \sum_{c\in \supp{X+Y}}((a)+(c-a)) P(X=a, Y=c-a) \\
+			&= \sum_{a \in \supp{X}} \sum_{b \in \supp{Y}}(a+b) P(X=a, Y=b) \\
+			&= \sum_{a \in \supp{X}} \sum_{b \in \supp{Y}} a P(X=a, Y=b)+\sum_{a \in \supp{X}} \sum_{b \in \supp{Y}} b P(X=a, Y=b) \\
+			&= \sum_{a \in \supp{X}} a \sum_{b \in \supp{Y}} P(X=a, Y=b)+\sum_{b \in \supp{Y}} b \sum_{a \in \supp{X}} P(X=a, Y=b) \\
+			&= \sum_{a \in \supp{X}} a P(X=a)+\sum_{b \in \supp{Y}} b P(Y=b) \\
 			&= E(X)+E(Y)
 		\end{align*}
 		and
 		\begin{align*}
-			E(cX) & = \sum_{x \in \text{supp}(cX)} x \P{cX = x} = \sum_{x\in \text{supp}(cX)} x \P{X = \frac{x}{c}} \\
-			& = \sum_{y \in \text{supp}(X)} cy \P{X = y } = c\sum_{y \in \text{supp}(X)} y \P{X = y} \\
+			E(cX) & = \sum_{x \in \supp{cX}} x \P{cX = x} = \sum_{x\in \supp{cX}} x \P{X = \frac{x}{c}} \\
+			& = \sum_{y \in \supp{X}} cy \P{X = y } = c\sum_{y \in \supp{X}} y \P{X = y} \\
 			& = c E(X).
 		\end{align*}
 	\end{solution}
 \end{exercise}
 
 \begin{exercise}
-	Let $X$ be a random variable and let $Z=(X-E(X))^2$. Is $E(Z)$ smaller than, greater than or equal to $Var(X)$?
+	Let $X$ be a random variable and let $Z=(X-\E{X})^2$. Is $E(Z)$ smaller than, greater than or equal to $\V{X}$?
 	\begin{solution}
-		The two are equal: $E(Z) = E((X-E(X))^2) = Var(X)$.
+		The two are equal: $\E{Z} = \E{(X-\E{X})^2} = \V{X}$.
 	\end{solution}
 \end{exercise}
 
 \begin{exercise}\label{ex:chap04:03} 
-	Prove that $E(XY) = E(X)E(Y)$ when $X,Y$ are independent (discrete) random variables.
+	Prove that $\E{XY} = \E{X}\E{Y}$ when $X,Y$ are independent (discrete) random variables.
 	\begin{hint}
-		Think about a new random variable which is a function of $X,Y$, such that $Z=g(X,Y)$ with $g(x,y)=xy$. We can then start with the definition of the expectation of $Z$, or we can use LOTUS $E(XY) = \sum_x \sum_y xy \P{X = x, Y = y}$ (these two ways lead to the same expected value). What does it mean for $X$ and $Y$ to be independent? 
+		Think about a new random variable which is a function of $X,Y$, such that $Z=g(X,Y)$ with $g(x,y)=xy$. We can then start with the definition of the expectation of $Z$, or we can use LOTUS $\E{XY} = \sum_x \sum_y xy \P{X = x, Y = y}$ (these two ways lead to the same expected value). What does it mean for $X$ and $Y$ to be independent? 
 	\end{hint}
 	\begin{solution}
-		Let $X$ and $Y$ be independent discrete random variables. Consider  $Z=g(X,Y)$ with $g(x,y)=xy$. Then $E(Z) = \sum_z z \P{Z = z}=\sum_z \sum_{x,y:xy=z} z \P{X = x, Y=y}$. As $X$ and $Y$ are independent, $\P{X = x, Y = y} = \P{X = x}\P{Y = y}$ for all values of $x$ and $y$. As such, $E(XY) = \sum_x \sum_y xy \P{X = x, Y = y} = \sum_x \sum_y xy \P{X = x} \P{Y = y} = \sum_x x \P{X = x} \sum_y y \P{Y = y} = E(X) E(Y)$.
+		Let $X$ and $Y$ be independent discrete random variables. Consider  $Z=g(X,Y)$ with $g(x,y)=xy$. Then $\E{Z} = \sum_z z \P{Z = z}=\sum_z \sum_{x,y:xy=z} z \P{X = x, Y=y}$. As $X$ and $Y$ are independent, $\P{X = x, Y = y} = \P{X = x}\P{Y = y}$ for all values of $x$ and $y$. As such, $\E{XY} = \sum_x \sum_y xy \P{X = x, Y = y} = \sum_x \sum_y xy \P{X = x} \P{Y = y} = \sum_x x \P{X = x} \sum_y y \P{Y = y} = \E{X} \E{Y}$.
 	\end{solution}
 \end{exercise}
 
 \begin{exercise}\label{Exref{ex:chap04:03}}
-	Calculate $E(XY) - E(X)E(Y)$ when $X,Z\sim \text{Bin}(n, p)$, $X,Z$ are independent and $Y = X + Z$.
+	Calculate $\E{XY} - \E{X}\E{Y}$ when $X,Z\sim \Bin{n, p}$, $X,Z$ are independent and $Y = X + Z$.
 	\begin{hint}
 		Use the result of Ex \ref{ex:chap04:03}. 
 	\end{hint}
 	\begin{solution}
-		Note that, because $X$ and $Z$ are independent, $E(XZ) = E(X) E(Z)$ (see Ex \ref{ex:chap04:03}). As such, $E(XY) = E(X(X + Z) = E(X^2 + XZ) = E(X^2) + E(X) E(Z)$. Moreover, $E(X)E(Y) = E(X) E(X + Z) = E(X)^2 + E(X) E(Z)$. As such, $E(XY) - E(X)E(Y) = E(X^2) + E(X) E(Z) - (E(X)^2 + E(X) E(Z)) = E(X^2) - E(X)^2 = V(X)$. Since $X\sim$Bin($n$,$p$), we know that $V(X) = np(1 - p)$. Hence $E(XY) - E(X)E(Y) = np(1 - p)$.
+		Note that, because $X$ and $Z$ are independent, $\E{XZ} = \E{X} \E{Z}$ (see Ex \ref{ex:chap04:03}). As such, $\E{XY} = \E{X(X + Z)} = \E{X^2 + XZ} = \E{X^2} + \E{X} \E{Z}$. Moreover, $\E{X}\E{Y} = \E{X} \E{X + Z} = \E{X}^2 + \E{X} \E{Z}$. As such, $\E{XY} - \E{X}\E{Y} = \E{X^2} + \E{X} \E{Z} - (\E{X}^2 + \E{X} \E{Z}) = \E{X^2} - \E{X}^2 = \V{X}$. Since $X\sim$Bin($n$,$p$), we know that $\V{X} = np(1 - p)$. Hence $\E{XY} - \E{X}\E{Y} = np(1 - p)$.
 	
-		Remark: if you are familiar with the concept of covariance, the problem becomes much easier. Note that $E(XY) - E(X)E(Y) = \text{Cov}(X,Y)$. Since covariance is linear and independent random variables have zero covariance, $E(XY) - E(X)E(Y) = \text{Cov}(X,Y) = \text{Cov}(X,X+Z) = \text{Cov}(X,X) + \text{Cov}(X,Z) = \text{Cov}(X,X) = V(X) = np(1 - p)$.
+		Remark: if you are familiar with the concept of covariance, the problem becomes much easier. Note that $E(XY) - E(X)E(Y) = \text{Cov}(X,Y)$. Since covariance is linear and independent random variables have zero covariance, $\E{XY} - \E{X}\E{Y} = \cov{X,Y} = \cov{X,X+Z} = \cov{X,X} + \cov{X,Z} = \cov{X,X} = \V{X} = np(1 - p)$.
 	\end{solution}
 \end{exercise}
 
 \begin{remark}
-	Compare Ex \ref{ex:chap04:03} with Ex \ref{Exref{ex:chap04:03}}. We see that if $E(XY) - E(X)E(Y)$ is not zero, then $X$ and $Y$ are not independent. Indeed, non-zero values of $E(XY) - E(X)E(Y)$ imply dependence. However, the converse is not true: zero values of $E(XY) - E(X)E(Y)$ do \emph{not} imply independence! As an example, let $X$ be a random variable such that $\P{X = -1} = \P{X = 1} = \frac{1}{2}$ and let $Y = -X$. Then $X^2$ and $Y^2$ are not independent, yet $E(X^2Y^2) -E(X^2) E(Y^2) = 0$!    
+	Compare Ex \ref{ex:chap04:03} with Ex \ref{Exref{ex:chap04:03}}. We see that if $E(XY) - E(X)E(Y)$ is not zero, then $X$ and $Y$ are not independent. Indeed, non-zero values of $\E{XY} - \E{X}\E{Y}$ imply dependence. However, the converse is not true: zero values of $\E{XY} - \E{X}\E{Y}$ do \emph{not} imply independence! As an example, let $X$ be a random variable such that $\P{X = -1} = \P{X = 1} = \frac{1}{2}$ and let $Y = -X$. Then $X^2$ and $Y^2$ are not independent, yet $\E{X^2Y^2} -\E{X^2} \E{Y^2} = 0$!    
 \end{remark}
 
 \begin{exercise}\label{ex:chap04:01}
-	Let $X, Y \sim \text{Bin}(n,p)$ be independent.
+	Let $X, Y \sim \Bin{n,p}$ be independent.
 	\begin{enumerate}
-		\item Calculate $E(X)$.
-		\item Calculate $E(2X)$.
-		\item Calculate $E(X^2)$.
-		\item Calculate $E(X+Y)$. 
-		\item Calculate $E(XY)$.
-		\item Is $E(X+Y)$ smaller than, equal to or greater than $E(2X)$? Why?
-		\item Is $E(XY)$ smaller than, equal to or greater than $E(X^2)$? Why?
-		\item Is $E(XY)$ smaller than, equal to or greater than $E(X)E(Y)$? Why?
+		\item Calculate $\E{X}$.
+		\item Calculate $\E{2X}$.
+		\item Calculate $\E{X^2}$.
+		\item Calculate $\E{X+Y}$. 
+		\item Calculate $\E{XY}$.
+		\item Is $\E{X+Y}$ smaller than, equal to or greater than $\E{2X}$? Why?
+		\item Is $\E{XY}$ smaller than, equal to or greater than $\E{X^2}$? Why?
+		\item Is $\E{XY}$ smaller than, equal to or greater than $\E{X}\E{Y}$? Why?
 	\end{enumerate}
 	\begin{hint}
-		To calculate $E(X)$ and $E(X^2)$, make use of the identity $k \binom{n}{k} = n \binom{n - 1}{k - 1}$ derived in Ex \ref{ex:chap01:11}.
+		To calculate $\E{X}$ and $\E{X^2}$, make use of the identity $k \binom{n}{k} = n \binom{n - 1}{k - 1}$ derived in Ex \ref{ex:chap01:11}.
 	\end{hint}
 	\begin{solution}
-	Let $X, Y \sim \text{Bin}(n,p)$ be independent. To calculate $E(X)$ and $E(X^2)$, we make use of the identity $k \binom{n}{k} = n \binom{n - 1}{k - 1}$.
+	Let $X, Y \sim \Bin{n,p}$ be independent. To calculate $E(X)$ and $\E{X^2}$, we make use of the identity $k \binom{n}{k} = n \binom{n - 1}{k - 1}$.
 	\begin{enumerate}
-		\item $E(X) = \sum_{k = 0}^n k \binom{n}{k} p^k (1 - p)^{n - k} = \sum_{k = 1}^n k \binom{n}{k} p^k (1 - p)^{n - k} $\\$= \sum_{k = 1}^n n \binom{n - 1}{k - 1} p^k (1 - p)^{n - k} = np \sum_{k = 1}^n \binom{n - 1}{k - 1} p^{k - 1} (1 - p)^{n - k} = np \sum_{i = 0}^m \binom{m}{i} p^j (1 - p)^{m - j} = np$
+		\item $\E{X} = \sum_{k = 0}^n k \binom{n}{k} p^k (1 - p)^{n - k} = \sum_{k = 1}^n k \binom{n}{k} p^k (1 - p)^{n - k} $\\$= \sum_{k = 1}^n n \binom{n - 1}{k - 1} p^k (1 - p)^{n - k} = np \sum_{k = 1}^n \binom{n - 1}{k - 1} p^{k - 1} (1 - p)^{n - k} = np \sum_{i = 0}^m \binom{m}{i} p^j (1 - p)^{m - j} = np$
 		\item By the linearity of the expectation operator, $E(2X) = 2E(X) = 2np$.
-		\item $E(X^2) = \sum_{k = 0}^n k^2 \binom{n}{k} p^k (1 - p)^{n - k} = \sum_{k = 0}^n kn \binom{n - 1}{k - 1} p^k (1 - p)^{n - k}$\\$ = np \sum_{k = 1}^n k \binom{n - 1}{k - 1} p^{k - 1} (1 - p)^{(n - 1) - (k - 1)}$\\$ = np \left(\sum_{k = 1}^n (k - 1) \binom{n - 1}{k - 1} p^{k - 1} (1 - p)^{(n - 1) - (k - 1)} + \sum_{k = 1}^n \binom{n - 1}{k - 1} p^{k - 1} (1 - p)^{(n - 1) - (k - 1)}\right)$\\$ = np \left(\sum_{k = 0}^{n - 1} k \binom{n - 1}{k} p^{k} (1 - p)^{(n - 1) - k} + 1\right) = np((n - 1)p + 1) = n^2 p^2 + np(1 - p)$
-		\item $E(X + Y) = E(X) + E(Y) = E(X) + E(X) = 2E(X) = 2np(1-p)$. Note that $E(X) = E(Y)$ as $X$ and $Y$ have the same distribution.
-		\item By independence, $E(XY) = E(X)E(Y) = E(X)E(X) = E(X)^2 = n^2p^2(1 - p)^2$. (See Ex \ref{ex:chap04:03}.)
-		\item $E(X + Y) = E(X) + E(Y) = E(X) + E(X) = 2E(X) = E(2X)$
-		\item By independence, $E(XY) = E(X)E(Y) = E(X)E(X) = E(X)^2$. Notice that $V(X) = E(X^2) - E(X)^2 > 0$; as such $E(X^2) > E(X)^2 = E(XY)$.
-		\item By independence, $E(XY) = E(X)E(Y)$. (See Ex \ref{ex:chap04:03}.)
+		\item $\E{X^2} = \sum_{k = 0}^n k^2 \binom{n}{k} p^k (1 - p)^{n - k} = \sum_{k = 0}^n kn \binom{n - 1}{k - 1} p^k (1 - p)^{n - k}$\\$ = np \sum_{k = 1}^n k \binom{n - 1}{k - 1} p^{k - 1} (1 - p)^{(n - 1) - (k - 1)}$\\$ = np \left(\sum_{k = 1}^n (k - 1) \binom{n - 1}{k - 1} p^{k - 1} (1 - p)^{(n - 1) - (k - 1)} + \sum_{k = 1}^n \binom{n - 1}{k - 1} p^{k - 1} (1 - p)^{(n - 1) - (k - 1)}\right)$\\$ = np \left(\sum_{k = 0}^{n - 1} k \binom{n - 1}{k} p^{k} (1 - p)^{(n - 1) - k} + 1\right) = np((n - 1)p + 1) = n^2 p^2 + np(1 - p)$
+		\item $\E{X + Y} = \E{X} + \E{Y} = \E{X} + \E{X} = 2\E{X} = 2np(1-p)$. Note that $\E{X} = \E{Y}$ as $X$ and $Y$ have the same distribution.
+		\item By independence, $\E{XY} = \E{X}\E{Y} = \E{X}\E{X} = \E{X}^2 = n^2p^2(1 - p)^2$. (See Ex \ref{ex:chap04:03}.)
+		\item $\E{X+Y} = \E{X} + \E{Y} = \E{X} + \E{X} = 2\E{X} = \E{2X}$
+		\item By independence, $\E{XY} = \E{X}\E{Y} = \E{X}\E{X} = \E{X}^2$. Notice that $\V{X} = \E{X^2} - \E{X}^2 > 0$; as such $\E{X^2} > \E{X}^2 = \E{XY}$.
+		\item By independence, $\E{XY} = \E{X}\E{Y}$. (See Ex \ref{ex:chap04:03}.)
 	\end{enumerate}
 	\end{solution}
 \end{exercise}
@@ -171,7 +171,7 @@ theory.).
 \end{exercise}
 
 \begin{exercise}
-	Let $X$ be a non-negative integer-valued random variable. The \emph{survival function} of $X$ is given by $G_X(x) = 1 - F_X(x)$. Show that, if the expectation of $X$ exists, it equals $E(X) = \sum_{i = 1}^{\infty} G_X(i)$.
+	Let $X$ be a non-negative integer-valued random variable. The \emph{survival function} of $X$ is given by $G_X(x) = 1 - F_X(x)$. Show that, if the expectation of $X$ exists, it equals $\E{X} = \sum_{i = 1}^{\infty} G_X(i)$.
 	\begin{hint}
 		Write $X$ as the (infinite) sum of indicator random variables.
 	\end{hint}
@@ -181,12 +181,12 @@ theory.).
 \end{exercise}
 
 \begin{exercise}
-	There are $n$ visitors and $n$ balls with their names on respectively. Each visitor picks a ball randomly, then returns the ball. Denote $X$ the number of visitors picking the ball with their own name. Find $E(X)$.
+	There are $n$ visitors and $n$ balls with their names on respectively. Each visitor picks a ball randomly, then returns the ball. Denote $X$ the number of visitors picking the ball with their own name. Find $\E{X}$.
 	\begin{hint}
 		Denote by $A_i$ the event that the $i$th visitor gets the correct ball. Use these events to $X$ in terms of indicator variables.
 	\end{hint}
 	\begin{solution}
-		Denote by $A_i$ the event that the $i$th visitor gets the correct ball. Then $X = \sum_{i = 1}^n I_{A_i}$. By the fundamental bridge, $E(X) = \sum_{i = 1}^n \P{A_i}$. Note that $\P{A_i} = \frac{1}{n}$ by symmetry. Thus $E(X) = \sum_{i = 1}^n \frac{1}{n} = 1$.
+		Denote by $A_i$ the event that the $i$th visitor gets the correct ball. Then $X = \sum_{i = 1}^n I_{A_i}$. By the fundamental bridge, $\E{X} = \sum_{i = 1}^n \P{A_i}$. Note that $\P{A_i} = \frac{1}{n}$ by symmetry. Thus $\E{X} = \sum_{i = 1}^n \frac{1}{n} = 1$.
 	\end{solution}
 \end{exercise}
 
@@ -194,7 +194,7 @@ theory.).
 \label{sec:section-4.4}
 
 \begin{exercise}
-	Derive the CDF of $g(X)$ where $X\sim \text{Bern}(p)$ and 
+	Derive the CDF of $g(X)$ where $X\sim \Bern{p}$ and 
 	\begin{enumerate}
 		\item $g(x)=2x$;
 		\item $g(x)=x^2$;
@@ -204,7 +204,7 @@ theory.).
 		%\item $g$ is the inverse of the Bern($s$) CDF function.
 	\end{enumerate}
 	\begin{solution}
-		Let $X\sim \text{Bern}(p)$. The CDF of $X$ is given by
+		Let $X\sim \Bern{p}$. The CDF of $X$ is given by
 		\begin{equation*}
 			F_X(x) =
 			\begin{cases}
@@ -276,11 +276,11 @@ theory.).
 \end{exercise}
 
 \begin{exercise}
-	Calculate $E(g(X))$, where $X\sim \text{Bern}(p)$ and 
+	Calculate $\E{g(X)}$, where $X\sim \Bern{p}$ and 
 	\begin{enumerate}
 		\item $g(x)=2x$;
 		\item $g(x)=x^2$;
-		\item $g(x)=(x-E(X))^2$;
+		\item $g(x)=(x-\E{X})^2$;
 		\item $g(x)=\ln (x + 1)$;
 		%\item $g$ is the Bin($n$,$p$) CDF function;
 		%\item $g$ is the Bern($s$) CDF function;
@@ -290,12 +290,12 @@ theory.).
 		Use the law of the unconscious statistician (LOTUS).
 	\end{hint}
 	\begin{solution}
-	Let $X\sim \text{Bern}(p)$. Then:
+	Let $X\sim \Bern{p}$. Then:
 		\begin{enumerate}
-			\item Using linearity, for $g(x) = 2x$, $E(g(X)) = E(2X) = 2E(X) = 2(0 \cdot (1 - p) + 1 \cdot p) = 2p$;
-			\item Using LOTUS, for $g(x) = x^2$, $E(g(X)) = E(X^2) = 0^2 \cdot (1 - p) + 1^2 \cdot p = p$;
-			\item For $g(x) = (x - E(X))^2$, $E(g(X)) = E(x - E(X))^2 = V(X) = E(X^2) - E(X)^2 = p - p^2 = p(1 - p)$, using the results of the previous two parts;
-			\item Using LOTUS, for $g(x) = \ln (x + 1)$, $E(g(X)) = E(\ln(X + 1)) = \ln 1 \cdot p + \ln 2 \cdot (1 - p) = (1 - p) \ln 2$.
+			\item Using linearity, for $g(x) = 2x$, $\E{g(X)} = \E{2X} = 2\E{X} = 2(0 \cdot (1 - p) + 1 \cdot p) = 2p$;
+			\item Using LOTUS, for $g(x) = x^2$, $\E{g(X)} = \E{X^2} = 0^2 \cdot (1 - p) + 1^2 \cdot p = p$;
+			\item For $g(x) = (x - \E{X})^2$, $\E{g(X)} = \E{x - \E{X}}^2 = \V{X} = \E{X^2} - \E{X}^2 = p - p^2 = p(1 - p)$, using the results of the previous two parts;
+			\item Using LOTUS, for $g(x) = \ln (x + 1)$, $E(g(X)) = \E{\ln(X + 1)} = \ln 1 \cdot p + \ln 2 \cdot (1 - p) = (1 - p) \ln 2$.
 			%\item Using LOTUS, for $g$ the $\text{Bin}(n,p)$ CDF function, $E(g(X)) = g(0) \cdot (1 - p) + g(1) \cdot p = \binom{n}{0} p^0 (1 - p)^n + p \cdot \binom{n}{1} p^1 (1 - p)^{n - 1} = (1 - p)^n + n p^2 (1 - p)^{n - 1}$;
 			%\item Using LOTUS, for $g$ the $\text{Bern}(s)$ CDF function, $E(g(X)) = g(0) \cdot (1 - p) + g(1) \cdot p = s (1 - p) + p$;
 			%\item Using LOTUS, for $g$ is the inverse of the Bern($s$) CDF function, $E(g(X)) = g(0) \cdot (1 - p) + g(1) \cdot p = 0 \cdot (1 - p) + 1 \cdot p = p$.
@@ -304,16 +304,16 @@ theory.).
 \end{exercise}
 
 \begin{exercise}\label{ex:chap04:08}
-Show that, for any random variable $X$, the variance of $X$ can be written as $V(X) = E(X^2) - (E(X))^2$. Start from the definition $V(X) = E(X - E(X))^2$.
+Show that, for any random variable $X$, the variance of $X$ can be written as $\V{X} = \E{X^2} - \E{X}^2$. Start from the definition $\V{X} = \E{X - \E{X}}^2$.
 	\begin{solution}
-	Using the linearity of the expectation operator and the fact that $E(X)$ is a constant, we have $V(X) = E(X - E(X))^2 = E(X^2 - 2X E(X) + (E(X))^2) = E(X^2) - E(2X E(X)) + E((E(X))^2) = E(X^2) - 2 E(X) E(X) - (E(X))^2 = E(X^2) - 2 (E(X))^2 + (E(X))^2 = E(X^2) - (E(X))^2$.
+	Using the linearity of the expectation operator and the fact that $\E{X}$ is a constant, we have $\V{X} = \E{X - \E{X}}^2 = \E{X^2 - 2X \E{X} + \E{X}^2} = \E{X^2} - \E{2X \E{X}} + \E{\E{X}^2} = \E{X^2} - 2 \E{X} \E{X} - \E{X}^2 = \E{X^2} - 2 \E{X}^2 + \E{X}^2 = \E{X^2} - \E{X}^2$.
 	\end{solution}
 \end{exercise}
 
 \begin{exercise}
-Show that, for any random variable $X$ and any constants $a$ and $b$, $V(aX + b) = a^2 V(X)$.
+Show that, for any random variable $X$ and any constants $a$ and $b$, $\V{aX + b} = a^2 \V{X}$.
 	\begin{solution}
-	Using the result of Ex \ref{ex:chap04:03} and the linearity of the expectation operator, $V(aX + b) = E((aX + b) - E(aX + b))^2 = E((aX + b)^2) - (E(aX + b))^2 = E(a^2 X^2 + 2ab X + b^2) - (a E(X) + b)^2 = a^2 E(X^2) + 2ab E(X) + b^2 - (a^2 (E(X))^2 + 2ab E(X) + b^2) = a^2 (E(X^2) - (E(X))^2) = a^2 V(X)$.
+	Using the result of Ex \ref{ex:chap04:03} and the linearity of the expectation operator, $V(aX + b) = E((aX + b) - E(aX + b))^2 = E((aX + b)^2) - (E(aX + b))^2 = E(a^2 X^2 + 2ab X + b^2) - (a  \E{X} + b)^2 = a^2 \E{X^2} + 2ab  \E{X} + b^2 - (a^2  \E{X})^2 + 2ab  \E{X} + b^2) = a^2 (\E{X^2} -  \E{X}^2) = a^2 \V{X}$.
 	\end{solution}
 \end{exercise}
 
@@ -321,12 +321,12 @@ Show that, for any random variable $X$ and any constants $a$ and $b$, $V(aX + b)
 \label{sec:section-4.5}
 
 \begin{exercise}
-	Let $X \sim \text{Pois}(\lambda)$. Calculate the variance $V(X)$ of $X$.
+	Let $X \sim \Pois{\lambda}$. Calculate the variance $\V{X}$ of $X$.
 	\begin{hint}
 		Recall that $\sum_{k = 0}^{\infty} \frac{1}{k!} x^k = e^x$.
 	\end{hint}
 	\begin{solution}
-		Let $X \sim \text{Pois}(\lambda)$. Recall that $\sum_{k = 0}^{\infty} \frac{1}{k!} x^k = e^x$. We have
+		Let $X \sim \Pois{\lambda}$. Recall that $\sum_{k = 0}^{\infty} \frac{1}{k!} x^k = e^x$. We have
 		\begin{align*}
 			E(X) & = \sum_{k = 0}^{\infty} k \P{Y = k} = \sum_{k = 0}^{\infty} k \cdot \frac{1}{k!} \lambda^k e^{-\lambda} = \sum_{k = 1}^{\infty} k \cdot \frac{1}{k!} \lambda^k e^{-\lambda} \\
 			& = \lambda e^{-\lambda} \sum_{k = 1}^{\infty} \frac{1}{(k - 1)!} \lambda^{k - 1} = \lambda e^{-\lambda} \sum_{m = 0}^{\infty} \frac{1}{m!} \lambda^m = \lambda e^{-\lambda} \cdot \lambda e^{\lambda} \\
@@ -342,7 +342,7 @@ Show that, for any random variable $X$ and any constants $a$ and $b$, $V(aX + b)
 			& = \lambda e^{-\lambda} \left(\lambda e^{\lambda} + e^{\lambda}\right) \\
 			& = \lambda^2 + \lambda \\
 		\end{align*}
-		It follows that $V(X) = E(X^2) - (E(X))^2 = \lambda^2 + \lambda - \lambda^2 = \lambda$.
+		It follows that $\V{X} = \E{X^2} - \E{X}^2 = \lambda^2 + \lambda - \lambda^2 = \lambda$.
 	\end{solution}
 \end{exercise}
 
@@ -352,7 +352,7 @@ Show that, for any random variable $X$ and any constants $a$ and $b$, $V(aX + b)
 \begin{exercise}\label{ex:chap04:17}
 	On a Monday morning, 400 people independently pass a street with 10 shops. Whenever a person passes a shop, they decide to visit the shop with probability 0.015. Assume each decision to enter a shop is independent of all others. Use the Poisson paradigm to approximate the probability that all shops are visited on Monday morning.
 	\begin{solution}
-		Let $X_{ij}$ be Bernoulli random variables that indicate whether person $j$ enters shop $i$, i.e. $X_{ij} = 1$ if person $j$ enters shop $i$ and $X_{ij} = 0$ otherwise. Let $Y_i$ denote the number of people that enter the $i$th shop, $i \in \{1, \hdots, 10\}$. According to the Poisson paradigm, the distribution of $Y_i$ can be approximated by a Poisson distribution with parameter $\lambda = E(Y_i) = E(\sum_{j = 1}^{400} X_{ij}) = 400 \cdot 0.015 = 6$. The $i$th shop is visited if and only if $Y_i \geq 1$. We have
+		Let $X_{ij}$ be Bernoulli random variables that indicate whether person $j$ enters shop $i$, i.e. $X_{ij} = 1$ if person $j$ enters shop $i$ and $X_{ij} = 0$ otherwise. Let $Y_i$ denote the number of people that enter the $i$th shop, $i \in \{1, \hdots, 10\}$. According to the Poisson paradigm, the distribution of $Y_i$ can be approximated by a Poisson distribution with parameter $\lambda = \E{Y_i} = \E{\sum_{j = 1}^{400} X_{ij}} = 400 \cdot 0.015 = 6$. The $i$th shop is visited if and only if $Y_i \geq 1$. We have
 		\begin{equation*}
 			\P{Y_i \geq 1} = 1 - \P{Y_i = 0} = 1 - \frac{e^{-6} 6^0}{0!} = 1 - e^{-6}.
 		\end{equation*}
@@ -363,7 +363,7 @@ Show that, for any random variable $X$ and any constants $a$ and $b$, $V(aX + b)
 \begin{exercise}
 	On a Monday morning, 400 people independently pass two shops. Whenever a person passes a shop, they decide to visit the shop with probability 0.015. Assume each decision to enter a shop is independent of all others. Given the fact that the two shops together have 11 visitors, approximate the probability that 7 people visit the first shop.
 	\begin{solution}
-		Let $X$ denote the number of people that enter the first shop and let $Y$ denote the number of people that enter the second shop. According to the Poisson paradigm, $X$ and $Y$ are approximately $\text{Pois}(6)$ distributed (see Ex \ref{ex:chap04:17}). Hence $X | X + Y = 11$ is approximately $\text{Binom}(11, 0.5)$ distributed. Hence $\P{X = 7| X + Y = 11} \approx \binom{11}{7} 0.5^{11} \approx 0.1611$.
+		Let $X$ denote the number of people that enter the first shop and let $Y$ denote the number of people that enter the second shop. According to the Poisson paradigm, $X$ and $Y$ are approximately $\Pois{6}$ distributed (see Ex \ref{ex:chap04:17}). Hence $X | X + Y = 11$ is approximately $\Bin{11, 0.5}$ distributed. Hence $\P{X = 7| X + Y = 11} \approx \binom{11}{7} 0.5^{11} \approx 0.1611$.
 	\end{solution}
 \end{exercise}
 
@@ -371,26 +371,26 @@ Show that, for any random variable $X$ and any constants $a$ and $b$, $V(aX + b)
 \label{sec:section-4.7}
 
  \begin{exercise}\label{eq:determin 1}
- 	Use the fact that $E(X-EX)^2$ is always non-negative (not a surprise, the ``average'' of a non-negative $Y=(X-EX)^2$ r.v. is non-negative) to prove that 
+ 	Use the fact that $\E{X-\E{X}}^2$ is always non-negative (not a surprise, the ``average'' of a non-negative $Y=(X-\E{X})^2$ r.v. is non-negative) to prove that 
  	$$\frac{1}{n}\sum_{i=1}^n x_i^2 \geq \left(\frac{1}{n}\sum_{i=1}^n x_i \right)^2,$$
  	where $x_i$'s are real numbers.
 	\begin{hint}
 		Consider a discrete uniform distributed $X$ with support $x_i, i=1,\cdots, n$.
 	\end{hint}
 	\begin{solution}
-		For the numbers $\{x_1,\dots,x_n\}$, define a random variable $X$ that takes each value with equal probability. That is $\P{X=x_i}=\frac{1}{n}$ for all $i$. Then from the given inequality, the decomposition of the variance and LOTUS we have $0\leq E(X-E(X))^2=E(X^2)-(E(X))^2=\left(\sum_{i=1}\frac{1}{n}x_i^2\right)- \left(\sum_{i=1}^n\frac{1}{n}x_i\right)^2$. Rearranging gives the desired result.
+		For the numbers $\{x_1,\dots,x_n\}$, define a random variable $X$ that takes each value with equal probability. That is $\P{X=x_i}=\frac{1}{n}$ for all $i$. Then from the given inequality, the decomposition of the variance and LOTUS we have $0\leq E{X-\E{X}}^2=\E{X^2}-\E{X}^2=\left(\sum_{i=1}\frac{1}{n}x_i^2\right)- \left(\sum_{i=1}^n\frac{1}{n}x_i\right)^2$. Rearranging gives the desired result.
 	\end{solution}
 \end{exercise}
 
  \begin{exercise}\label{eq:determin 2}
-	Use the fact that $E(X-EX)^2=EX^2-(EX)^2$ to prove that 
+	Use the fact that $E{X-\E{X}}^2=\E{X}^2-\E{X}^2$ to prove that 
 	$$\frac{1}{n}\sum_{i=1}^n x_i^2 - \left(\frac{1}{n}\sum_{i=1}^n x_i \right)^2=\frac{1}{n}\sum_{i=1}^n\left(x_i- \frac{1}{n}\sum_{i=1}^n x_i \right)^2,$$
 	where $x_i$'s are real numbers.
 	\begin{hint}
 		Consider a discrete uniform distributed $X$ with support $x_i, i=1,\cdots, n$.
 	\end{hint}
 	\begin{solution} 
-		For the numbers $\{x_1,\dots,x_n\}$, define a random variable $X$ that takes each value with equal probability. That is $\P{X=x_i}=\frac{1}{n}$ for all $i$. Then from LOTUS we have $E(X-EX)^2=\sum_{i=1}^n\frac{1}{n}(x_i-\sum_{i=1}^n\frac{1}{n}x_i)^2$ and $E(X^2)-(E(X))^2=\left(\sum_{i=1}\frac{1}{n}x_i^2\right)- \left(\sum_{i=1}^n\frac{1}{n}x_i\right)^2$. The desired result then follows from the given equation.
+		For the numbers $\{x_1,\dots,x_n\}$, define a random variable $X$ that takes each value with equal probability. That is $\P{X=x_i}=\frac{1}{n}$ for all $i$. Then from LOTUS we have $E{X-\E{X}}^2=\sum_{i=1}^n\frac{1}{n}(x_i-\sum_{i=1}^n\frac{1}{n}x_i)^2$ and $\E{X^2}-\E{X}^2=\left(\sum_{i=1}\frac{1}{n}x_i^2\right)- \left(\sum_{i=1}^n\frac{1}{n}x_i\right)^2$. The desired result then follows from the given equation.
 	\end{solution}
 \end{exercise}
 \begin{remark}
@@ -401,21 +401,21 @@ Show that, for any random variable $X$ and any constants $a$ and $b$, $V(aX + b)
 	Use the fact that  
 	$$\frac{1}{n}\sum_{i=1}^n x_i^2 \geq \left(\frac{1}{n}\sum_{i=1}^n x_i \right)^2,$$
 	where $x_i$'s are real numbers and equality hods only when all $x_i$'s are equal, to prove (1) 
-	$$P\left(\frac{1}{n}\sum_{i=1}^n X_i^2 \geq \left(\frac{1}{n}\sum_{i=1}^n X_i \right)^2\right)=1,$$
+	$$\P{\frac{1}{n}\sum_{i=1}^n X_i^2 \geq \left(\frac{1}{n}\sum_{i=1}^n X_i \right)^2}=1,$$
 	where $X_i$'s are real random variables; and (2)
-	$$P\left(\frac{1}{n}\sum_{i=1}^n Y_i^2 > \left(\frac{1}{n}\sum_{i=1}^n Y_i \right)^2\right)=1,$$
+	$$\P{\frac{1}{n}\sum_{i=1}^n Y_i^2 > \left(\frac{1}{n}\sum_{i=1}^n Y_i \right)^2}=1,$$
 	where $Y_i$'s are \textbf{independent} real \textbf{continuous} random variables. 	
 	\begin{hint}
 		Suppose a deterministic inequality holds true for arbitrary values in a set $A$. Then the inequality should also holds for random variables with supports that are subsets of $A$, since whatever values they take, the inequality holds.  
 	\end{hint}
 	\begin{solution} 
-		Suppose $\frac{1}{n}\sum_{i=1}^n  x_i^2  -  ( \frac{1}{n}\sum_{i=1}^n  x_i )^2 \geq 0$  holds true for any arbitrary constants $x_i$ 's, then if now we replace constant $x_i$ with r.v. $X_i$, we would have $P\left(\frac{1}{n}\sum_{i=1}^n  X_i^2  -  ( \frac{1}{n}\sum_{i=1}^n  X_i )^2 \geq 0 \right)=1$.
+		Suppose $\frac{1}{n}\sum_{i=1}^n  x_i^2  -  ( \frac{1}{n}\sum_{i=1}^n  x_i )^2 \geq 0$  holds true for any arbitrary constants $x_i$ 's, then if now we replace constant $x_i$ with r.v. $X_i$, we would have $\P{\frac{1}{n}\sum_{i=1}^n  X_i^2  -  ( \frac{1}{n}\sum_{i=1}^n  X_i )^2 \geq 0}=1$.
 		Because for any arbitrary random events: $\cap \{X_i=s_i\}$ (suppose $X_i$ takes arbitrary real value $s_i$), we know $\frac{1}{n}\sum_{i=1}^n  s_i^2  -  ( \frac{1}{n}\sum_{i=1}^n  s_i )^2 \geq 0$. Notice we choose $s_i$ arbitrarily, so no matter what random events happen (or in other words, whatever elements from the underlying sample space and thus whatever numbers $X_i$'s map these elements into) we always have $\frac{1}{n}\sum_{i=1}^n  X_i^2  -  ( \frac{1}{n}\sum_{i=1}^n  X_i )^2 \geq 0$ conditional on these events.  Therefore, $\frac{1}{n}\sum_{i=1}^n  X_i^2  -  ( \frac{1}{n}\sum_{i=1}^n  X_i )^2 \geq 0$ holds true (no matter what random events occur) with probability one (you may also think about LOTP + Bayes'rule). \\~\\
 		The equality hods true only when  all $x_i$'s are equal, note that when $Y_i$'s are \textbf{independent} real \textbf{continuous} random variables,
-			$$P\left( Y_i=Y_j, \forall i,j \right)\leq P\left( Y_1=Y_2\right)=0,$$
+			$$\P{Y_i=Y_j, \forall i,j}\leq \P{ Y_1=Y_2}=0,$$
 			due to the fact that $Y_1-Y_2$ is also continuous random variable which equals any number with zero probability. 
 		Therefore, the equality holds with probability one, and	
-		$$P\left(\frac{1}{n}\sum_{i=1}^n Y_i^2 > \left(\frac{1}{n}\sum_{i=1}^n Y_i \right)^2\right)=1.$$
+		$$\P{\frac{1}{n}\sum_{i=1}^n Y_i^2 > \left(\frac{1}{n}\sum_{i=1}^n Y_i \right)^2}=1.$$
 	\end{solution}
 \end{exercise}
 \begin{remark}
@@ -425,46 +425,46 @@ Show that, for any random variable $X$ and any constants $a$ and $b$, $V(aX + b)
 \begin{exercise}
 	\label{1}$X,Y$ are two independent discrete random varaibles.	
 	\begin{enumerate}
-		\item \label{1a}Prove $\text{Var}(X+Y)=\text{Var}(X)+\text{Var}(Y)$.
-		\item Provide a counter-example such that $Z_1,Z_2$ are two random varaibles and  $\text{Var}(Z_1+Z_2)>\text{Var}(Z_1)+\text{Var}(Z_2)$. Compare with the result you proved in the subquestion \ref{1}.(\ref{1a}), provide one intuitive explaination for the difference. 
+		\item \label{1a}Prove $\V{X+Y}=\V{X}+\V{Y}$.
+		\item Provide a counter-example such that $Z_1,Z_2$ are two random varaibles and  $\V{Z_1+Z_2}>\V{Z_1}+\V{Z_2}$. Compare with the result you proved in the subquestion \ref{1}.(\ref{1a}), provide one intuitive explaination for the difference. 
 	\end{enumerate}
 \begin{solution}
 	\begin{enumerate}
-		\item Denote $X_0=X-E(X), Y_0=Y-E(Y)$, and  $\text{Var}(X+Y)=\text{Var}(X_0+Y_0)$ since we shift by a constant the varaince would remain the same. 
+		\item Denote $X_0=X-\E{X}, Y_0=Y-\E{Y}$, and  $\V{X+Y}=\V{X_0+Y_0}$ since we shift by a constant the varaince would remain the same. 
 		\begin{align*}
-			\text{Var}(X_0+Y_0)= E(X_0+Y_0)^2- \left(E(X_0+Y_0)\right)^2 = E(X_0+Y_0)^2.
+			\V{X_0+Y_0}= \E{(X_0+Y_0)^2}- (\E{X_0+Y_0})^2 = \E{X_0+Y_0}^2.
 		\end{align*}
 		By LOTUS, we know 
 		\begin{align}
-			E(X_0+Y_0)^2& =_{} \sum_{x\in \text{Supp}(X_0),y\in \text{Supp}(Y_0)} (x+y)^2 P(X_0=x,Y_0=y)\nonumber\\
-			&= \sum_{x\in \text{Supp}(X_0),y\in \text{Supp}(Y_0)} (x^2+y^2+2xy) P(X_0=x,Y_0=y)\nonumber \\
-			&= \sum_{x\in \text{Supp}(X_0),y\in \text{Supp}(Y_0)} (x^2 ) P(X_0=x,Y_0=y)\nonumber\\&+\sum_{x\in \text{Supp}(X_0),y\in \text{Supp}(Y_0)} ( y^2 ) P(X_0=x,Y_0=y)\nonumber\\&+\sum_{x\in \text{Supp}(X_0),y\in \text{Supp}(Y_0)} ( 2xy) P(X_0=x,Y_0=y)   \label{11}
+			\E{X_0+Y_0}^2& =\sum_{x\in \supp{X_0},y\in \supp{Y_0}} (x+y)^2 \P{X_0=x,Y_0=y}\nonumber\\
+			&= \sum_{x\in \supp{X_0},y\in \supp{Y_0}} (x^2+y^2+2xy) \P{X_0=x,Y_0=y}\nonumber \\
+			&= \sum_{x\in \supp{X_0},y\in \supp{Y_0}} (x^2 ) \P{X_0=x,Y_0=y}\nonumber\\&+\sum_{x\in \supp{X_0},y\in \supp{Y_0}} ( y^2 ) \P{X_0=x,Y_0=y}\nonumber\\&+\sum_{x\in \supp{X_0},y\in \supp{Y_0}} ( 2xy) \P{X_0=x,Y_0=y}   \label{11}
 		\end{align}
 		Note that by axioms of probability or LOTP and LOTUS:
 		\begin{align*}
-			& \sum_{x\in \text{Supp}(X_0),y\in \text{Supp}(Y_0)} (x^2 ) P(X_0=x,Y_0=y) \\
-			=& \sum_{x\in \text{Supp}(X_0) } x^2 \sum_{ y\in \text{Supp}(Y_0)}   P(X_0=x,Y_0=y)\\
-			= &  \sum_{x\in \text{Supp}(X_0) } x^2   P(X_0=x)\\
-			=& E(X_0)^2
+			& \sum_{x\in \supp{X_0},y\in \supp{Y_0}} (x^2 ) \P{X_0=x,Y_0=y} \\
+			=& \sum_{x\in \supp{X_0} } x^2 \sum_{ y\in \supp{Y_0}}   \P{X_0=x,Y_0=y}\\
+			= &  \sum_{x\in \supp{X_0} } x^2   \P{X_0=x}\\
+			=& \E{X_0}^2
 		\end{align*} 
 		So we know 
 		\begin{align}
-			\sum_{x\in \text{Supp}(X_0),y\in \text{Supp}(Y_0)} (x^2 ) P(X_0=x,Y_0=y)=\text{Var}(X_0) \label{12}
+			\sum_{x\in \supp{X_0},y\in \supp{Y_0}} (x^2 ) \P{X_0=x,Y_0=y}=\V{X_0} \label{12}
 		\end{align}
-		since $\text{Var}(X_0)=E(X_0)^2-(E(X_0))^2$ for mean-zero $X_0$ ($E(X_0)=0$).
+		since $\V{X_0}=\E{X_0}^2-(\E{X_0})^2$ for mean-zero $X_0$ ($\E{X_0}=0$).
 		Similarly,  we know 
 		\begin{align}
-			\sum_{x\in \text{Supp}(X_0),y\in \text{Supp}(Y_0)} (y^2 ) P(X_0=x,Y_0=y)=\text{Var}(Y_0) \label{13}
+			\sum_{x\in \supp{X_0},y\in \supp{Y_0}} (y^2 ) \P{X_0=x,Y_0=y}=\V{Y_0} \label{13}
 		\end{align}
 		By independence,
 		\begin{align}
-			&\sum_{x\in \text{Supp}(X_0),y\in \text{Supp}(Y_0)} ( 2xy) P(X_0=x,Y_0=y) =  \sum_{x\in \text{Supp}(X_0)}\sum_{y\in \text{Supp}(Y_0)} ( 2xy) P(X_0=x)P(Y_0=y)\nonumber \\
-			=& 2\sum_{x\in \text{Supp}(X_0)}  x   P(X_0=x) \sum_{y\in \text{Supp}(Y_0)}yP(Y_0=y)= 2 E(X_0)E(Y_0)=0 \label{14}
+			&\sum_{x\in \supp{X_0},y\in \supp{Y_0}} ( 2xy) \P{X_0=x,Y_0=y} =  \sum_{x\in \supp{X_0}}\sum_{y\in \supp{Y_0}} ( 2xy) \P{X_0=x}\P{Y_0=y}\nonumber \\
+			=& 2\sum_{x\in \supp{X_0}}  x   P(X_0=x) \sum_{y\in \supp{Y_0}}yP(Y_0=y)= 2 \E{X_0}\E{Y_0}=0 \label{14}
 		\end{align}
-		Equations (\ref{11})-(\ref{14}) togenter imply that $	\text{Var}(X_0+Y_0)=	\text{Var}(X_0)+	\text{Var}(Y_0).$
+		Equations (\ref{11})-(\ref{14}) togenter imply that $	\V{X_0+Y_0}=	\V{X_0}+	\V{Y_0}.$
 		\item 	Let $Z_1=Z_2=X$ and assume that $\text{Var}(X)>0$. Then 
 		\begin{align*}
-			\text{Var}(Z_1+Z_2)=	\text{Var}(2X) =4\text{Var}(X) > 2\text{Var}(X)=\text{Var}(Z_1)+\text{Var}(Z_2).
+			\V{Z_1+Z_2}=	\V{2X} =4\V{X} > 2\V{X}=\V{Z_1}+\V{Z_2}.
 		\end{align*}
 		The intuiation is when we sum up two independent r.v.'s, since they are independent, when one is large the other one could be small, and thus after the summation they may not be far away from the mean. If we add two highly dependent r.v.'s then they can be simutaneously large and small and thus increase the spread. 
 	\end{enumerate}
