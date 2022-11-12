@@ -177,7 +177,7 @@ The non-naive definition of probability is also consistent with our daily experi
 		\begin{equation}
 			(a + b)^n = \sum_{k=0}^n {n \choose k}a^k b^{n-k}
 		\end{equation}
-		for any $a,b \in \mathbb{R}$ and $n \in \mathbb{N}$. This result is called the \emph{binomial theorem}.
+		for any $a,b \in \R$ and $n \in \N$. This result is called the \emph{binomial theorem}.
 		\begin{solution}
 			Expand out the product
 			\begin{equation*}
@@ -193,10 +193,10 @@ The non-naive definition of probability is also consistent with our daily experi
 	\begin{exercise}
 		Prove that the naive probability satisfies the axioms of non-naive probability. 
 		\begin{solution}
-			Consider a finite sample space $S$. For any event $A$ in $S$, the \emph{naive} probability of $A$ is $\P{A} = \frac{|A|}{|S|}$. Notice that for any two disjoints sets $A$ and $B$, $|A \cup B| = |A| + |B|$. As such we have:
+			Consider a finite sample space $S$. For any event $A$ in $S$, the \emph{naive} probability of $A$ is $\P{A} = \frac{\abs{A}}{\abs{S}}$. Notice that for any two disjoints sets $A$ and $B$, $\abs{A \cup B} = \abs{A} + \abs{B}$. As such we have:
 			\begin{enumerate}
-				\item $\P{\emptyset} = \frac{|\emptyset|}{|S|} = 0$ and $\P{S} = \frac{|S|}{|S|} = 1$;
-				\item If $A_1, A_2, \hdots$ are disjoint events in $S$, then $\P{\bigcup_{i = 1}^{\infty} A_i} = \frac{\left|\bigcup_{i = 1}^{\infty} A_i\right|}{|S|} = \frac{\sum_{i = 1}^{\infty} |A_i|}{|S|} = \sum_{i = 1}^{\infty} \P{A_i}$.
+				\item $\P{\emptyset} = \frac{\abs{\emptyset}}{\abs{S}} = 0$ and $\P{S} = \frac{\abs{S}}{\abs{S}} = 1$;
+				\item If $A_1, A_2, \hdots$ are disjoint events in $S$, then $\P{\bigcup_{i = 1}^{\infty} A_i} = \frac{\left|\bigcup_{i = 1}^{\infty} A_i\right|}{\abs{A}} = \frac{\sum_{i = 1}^{\infty} \abs{A_i}}{\abs{A}} = \sum_{i = 1}^{\infty} \P{A_i}$.
 			\end{enumerate}
 			Hence, the naive probability satisfies the axioms of non-naive probability. 
 		\end{solution}
