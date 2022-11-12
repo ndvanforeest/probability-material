@@ -319,7 +319,7 @@ plt.show()
 	\end{exercise}
 	
 	\begin{exercise}\label{ex:chap06:013}
-		Use the MGF of normal distribution to derive the expectation and variance of the $N(\mu,\sigma^2)$ distribution. 
+		Use the MGF of normal distribution to derive the expectation and variance of the $\Norm{\mu,\sigma^2}$ distribution. 
 		\begin{hint}
 			For $X \sim \Norm{\mu, \sigma^2}$, the MGF of $X$ is given by $M_X(t) = e^{\mu t} e^{\frac{1}{2} \sigma^2 t^2}$. Now take derivatives.
 		\end{hint}
@@ -468,13 +468,13 @@ plt.show()
 			\begin{align*}
 				M_{Y}(t)= \prod_{i=1}^{n}M_{(X_i-1)}(t/\sqrt{n}) =(e^{-t/\sqrt{n}} M_{X_1}(t/\sqrt{n}))^n = {\color{red}e^{n\left(e^{\frac{t}{\sqrt{n}}}-1-\frac{t}{\sqrt{n}}\right)}}, 
 			\end{align*} {which is finite for $t\in \R$, so the MGF,  $M_Y$, is well defined.} 
-			\item {MGF $M_\xi(t)$ for $\xi \sim N(\mu,\sigma^2)$.}
+			\item {MGF $M_\xi(t)$ for $\xi \sim \Norm{\mu,\sigma^2}$.}
 			\begin{align*}
 				{ M_\xi(t)}& =  {\color{red}e^{\mu t + \frac{1}{2}\sigma^2 t^2}}, 
 			\end{align*}  {which is finite for $t\in \R$, so the MGF,  $M_\xi$, is well defined.} 
 		\end{enumerate}
 		\item Note that $\lim\limits_{n\rightarrow \infty }{\color{red}e^{n\left(e^{\frac{t}{\sqrt{n}}}-1-\frac{t}{\sqrt{n}}\right)}}= \lim\limits_{n\rightarrow \infty}{e^{n\left(\sum_{i=0}^{\infty}\left(\frac{t}{\sqrt{n}} \right)^i/i!   -1-\frac{t}{\sqrt{n}}\right)}}=  {\color{red}e^{\frac{1}{2}t^2}}$.
-		\item{The MGFs of $\frac{1}{\sqrt{n}}\sum_{i=1}^n (X_i-1)$ and $N(0,1)$ are the same in the limit}, which implies in the limit these two distributions coincide.
+		\item{The MGFs of $\frac{1}{\sqrt{n}}\sum_{i=1}^n (X_i-1)$ and $\Norm{0,1}$ are the same in the limit}, which implies in the limit these two distributions coincide.
 	\end{enumerate}~\\
 	\end{solution}
 \end{exercise}
@@ -550,7 +550,7 @@ plt.show()
   	=&  \left(\sqrt{n}\left(e^{t/(2\sqrt{n})} -e^{-t/(2\sqrt{n}) } \right)/t\right)^n =_{\textit{large n}} \left((t+t^3/24/n)/t\right)^n\\ \rightarrow_{n\rightarrow \infty}& e^{t^2/24}
   \end{align*}	
   When $t=0$, $M_{X^*}(t) =1$. 	
-  The limiting distribution should be $N(0,1/12)$ by the format of our derived limiting MGF, since the normal distribution has the MGF $e^{\mu t + \sigma^2t^2/2 }$.	
+  The limiting distribution should be $\Norm{0,1/12}$ by the format of our derived limiting MGF, since the normal distribution has the MGF $e^{\mu t + \sigma^2t^2/2 }$.	
   	\end{enumerate}
   ~\\~\\~\\
   Some simulation codes to help you with this exercise, also you may need some coding skills for the PD course.
