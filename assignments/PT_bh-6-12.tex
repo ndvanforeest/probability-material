@@ -1,0 +1,92 @@
+\begin{exercise}
+    \textbf{[BH.12]} Let $X_1, \ldots, X_n \sim \Norm{c, \sigma^2}$ and they are \iid r.v.s. $\bar{X}_n = \frac{1}{n} \sum_{j = 1}^n X_j$, $T_1 = \bar{X}_n^2$ and $T_2 = \frac{1}{n} \sum_{j = 1}^n X_j^2$. Note that $T_1$ is the square of the first sample moment and $T_2$ is the second sample moment.
+    \begin{enumerate}
+\item First answer the original questions in your own words.
+\item What is the distribution of $\bar{X}_n$ and what happens to the distribution when $n\rightarrow \infty$? Can you infer what would happen to the distribution of $T_1$?
+\item What is the variance of $T_2$ and what happens to its distribution when  $n\rightarrow \infty$.
+    \end{enumerate}
+    The following codes may give you some insight:
+    \begin{minted}[]{R}
+f <- function(n,c, sigma, seeds){
+    set.seed(seeds)
+    X=rnorm(n,c,sigma)
+    T1=(mean(X))^2;
+    T2=mean(X^2)
+    return(c(T1,T2))
+}
+g <- function(n,seeds){
+    c=3
+    sigma2=1
+    sigma=sqrt(sigma2)
+    return(f(n,c, sigma, seeds))
+}
+repeat_draw=100
+T12_fixed_n<-function(n,repeat_draw){
+    sapply(seq(1, repeat_draw, by=1), function(x){g(n,x)})
+}
+T12 <-T12_fixed_n(100,repeat_draw)
+T1=T12[1,]
+T2=T12[2,]
+plot(T1,T2,  xlim=c(5,12),ylim=c(5,12) )
+abline(0,1)
+
+large_n=1000;
+T12 <-sapply(seq(1, large_n, by=1), function(x){T12_fixed_n(x,1)})
+T1=T12[1,]
+T2=T12[2,]
+plot(T1, type="l", lty=2,col="red", lwd=3)
+lines(T2, lwd=3)
+abline(h=9, col="blue")
+    \end{minted}
+\begin{minted}{python}
+import numpy as np
+from statistics import mean
+from math import sqrt
+import matplotlib.pyplot as plt
+
+
+def f(n, c, sigma, seeds):
+    np.random.seed(seeds)
+    X = np.random.normal(c, sigma, n)
+    T1 = (mean(X)) ** 2
+    T2 = mean(X**2)
+    return [T1, T2]
+
+
+def g(n, seeds):
+    c = 3
+    sigma2 = 1
+    sigma = sqrt(sigma2)
+    return f(n, c, sigma, seeds)
+
+
+repeat_draw = 100
+
+
+def T12_fixed_n(n, repeat_draw):
+    if repeat_draw != 1:
+        return [g(n, x) for x in range(1, repeat_draw + 1)]
+    else:
+        return g(n, 1)
+
+
+T12 = T12_fixed_n(100, repeat_draw)
+T1 = [T12[k][0] for k in range(0, len(T12))]
+T2 = [T12[k][1] for k in range(0, len(T12))]
+plt.ylim(5, 12)
+plt.xlim(5, 12)
+plt.scatter(T1, T2)
+x = list(range(5, 13))
+plt.plot(x, x, "-")
+
+large_n = 1000
+T12 = [T12_fixed_n(x, 1) for x in range(1, large_n + 1)]
+T1 = [T12[k][0] for k in range(0, len(T12))]
+T2 = [T12[k][1] for k in range(0, len(T12))]
+plt.clf()
+plt.plot(T1, color="r")
+plt.plot(T2, color="k")
+plt.axhline(y=9, color="b", linestyle="-")
+\end{minted}
+
+\end{exercise}

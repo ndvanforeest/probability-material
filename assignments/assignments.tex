@@ -13,19 +13,23 @@
 \usepackage[all-solutions-at-end]{optional}
 
 \usepackage{../common/preamble}
-\newcommand{\sectionbreak}{\clearpage}
+%\newcommand{\sectionbreak}{\clearpage}
 \setcounter{tocdepth}{2}
 \usepackage{a4wide}
 \usepackage{../common/abbreviations}
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{exercise}[theorem]{Ex}
+\newtheorem{remark}[theorem]{Remark}
+
 
 % \Opensolutionfile{hint}
 % \Opensolutionfile{ans}
 
 
 
-\author{Nicky van Foreest \\
-  Joost Doornbos, Wietze Koops, Mikael Makonnen, Arpan Rijal
-}
+\author{PD team}
 \date{\today}
 \title{Probability distributions EBP038A05\\
 Assignments}
@@ -44,22 +48,12 @@ Assignments}
 \subfile{bh-7-1.tex}
 \subfile{bh-7-9.tex}
 
-\clearpage
-\subsection{Challenges}
-Select one of either problem if you would like to get a 10. Of course you can try both, but one suffices.
-
-\subfile{poisson.tex}
-\subfile{cauchy.tex}
 
 \section{Assignment 2}
 \subfile{bh-7-48.tex}
 \subfile{bh-7-53.tex}
 \subfile{bh-7-86.tex}
 
-\clearpage
-\subsection{Challenges}
-Try this challenge  if you would like to get a 10.
-\subfile{normal.tex}
 
 \section{Assignment 3}
 \subfile{bh-8-4-figure.tex}
@@ -68,10 +62,6 @@ Try this challenge  if you would like to get a 10.
 \subfile{bh-8-18.tex}
 
 
-\clearpage
-\subsection{Challenges}
-Try this challenge  if you would like to get a 10.
-\subfile{recourse.tex}
 
 \section{Assignment 4}
 \subfile{bh-8-27.tex}
@@ -79,10 +69,6 @@ Try this challenge  if you would like to get a 10.
 \subfile{bh-8-54.tex}
 \subfile{bh-9-1.tex}
 
-\clearpage
-\subsection{Challenges}
-Try this challenge  if you would like to get a 10.
-\subfile{beluga.tex}
 
 \section{Assignment 5}
 \subfile{bh-9-1-7.tex}
@@ -90,10 +76,6 @@ Try this challenge  if you would like to get a 10.
 \subfile{bh-9-6-1.tex}
 \subfile{bh-9-7.tex}
 
-\clearpage
-\subsection{Challenges}
-Try this challenge  if you would like to get a 10.
-\subfile{benford.tex}
 
 
 \section{Assignment 6}
@@ -101,10 +83,7 @@ Try this challenge  if you would like to get a 10.
 \subfile{bh-9-37.tex}
 \subfile{bh-9-50.tex}
 \subfile{bh-10-2-3.tex}
-\clearpage
-\subsection{Challenges}
-Try this challenge  if you would like to get a 10.
-\subfile{betting.tex}
+
 
 \section{Assignment 7}
 \subfile{bh-10-9.tex}
@@ -113,9 +92,17 @@ Try this challenge  if you would like to get a 10.
 \subfile{bh-10-39.tex}
 
 \clearpage
-\subsection{Challenges}
-Try this challenge  if you would like to get a 10.
+\section{Challenges}
+These problems are for fun, but not needed for the exam. You won't get extra points for it. However, from past years we know that the good students really liked these challenges.
+\subfile{poisson.tex}
+\subfile{cauchy.tex}
 \subfile{records.tex}
+\subfile{normal.tex}
+\subfile{recourse.tex}
+\subfile{beluga.tex}
+\subfile{benford.tex}
+\subfile{betting.tex}
+
 
 
 
