@@ -1,0 +1,107 @@
+\input{header}
+
+\subsection{BH.8.11}
+\label{sec:bh-8.1}
+
+We apply the results of BH.8.11 to various examples to check (numerically) whether the result is indeed ok.
+
+\begin{minted}[]{python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+def ecdf(x):
+    support, values = np.unique(x, return_counts=True)
+    X = values.cumsum()
+    return support, X / X[-1]
+
+
+rng = np.random.default_rng(2021)
+
+# experiment 1
+
+num = 1000
+labda = 0.5
+X = rng.exponential(1 / labda, size=num)
+Y = 1 / X
+s, y = ecdf(Y)
+plt.xlim(0, 10)
+plt.plot(s, y, label="ecdf")
+plt.plot(s, np.exp(-labda / s), label="theory")
+plt.legend()
+plt.savefig("inv_exp.pdf")
+\end{minted}
+
+\begin{exercise}
+In the code above, what is the distribution of $X$?
+\end{exercise}
+
+\begin{exercise}
+Which of our variables correspond to $T$ and $V$ of BH.8.11?
+\end{exercise}
+
+\begin{exercise}
+What is the form for $F_{V}$ when you appy the result of BH.8.11 to the case of this exercise? Take all parts of the support of the relevant rvs.
+\end{exercise}
+
+The next code is for the next few questions.
+
+\begin{minted}[]{python}
+T = rng.exponential(1 / labda, size=num) - 3
+V = 1 / T
+s, y = ecdf(V)
+
+
+def FT(x):
+    if x < -3:
+        return 0
+    return 1 - np.exp(-labda * (x + 3))  # why not -3?
+
+
+def FV(v):
+    if v > 0:
+        return FT(0) + 1 - FT(1 / v)
+    if v == 0:
+        return FT(0)
+    return FT(0) - FT(1 / v)
+
+
+yy = [FV(v) for v in s]
+
+plt.clf()
+plt.xlim(-10, 10)
+plt.plot(s, y, label="ecdf")
+plt.plot(s, yy, label="theory")
+plt.legend()
+plt.savefig("inv_exp3.pdf")
+\end{minted}
+
+\begin{minted}[]{R}
+\end{minted}
+
+\begin{exercise}
+In the code we marked a line with the comment \texttt{why not -3}? So, why do we have $+3$ instead of $-3$?
+\end{exercise}
+
+\begin{exercise}
+Comment on the figures you get.
+\end{exercise}
+
+\begin{exercise}
+Remove the line \texttt{xlim}. What happens to the figure? Why do we include these limits?
+\end{exercise}
+
+
+
+\begin{exercise}
+Use the above code to plot $1/T$ when $T\sim \Norm{3, 1}$ on the interval $[-1, 1]$.
+Why do you have to change the code for \texttt{FT}?
+Include your code for \texttt{FT}. (Hint: use \texttt{from scipy.stats import norm} and then the cdf. Search the web for example to see what you have to type.)
+Include the figure in your report.
+\end{exercise}
+
+
+
+
+
+\input{trailer}
