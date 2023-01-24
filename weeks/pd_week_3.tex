@@ -1,0 +1,531 @@
+% arara: pdflatex: { shell: yes }
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex: { shell: yes }
+% arara: move: {  files: ['study-guide.pdf'], target: ['../pdf-files/'] }
+
+\documentclass[a4paper,11pt]{article}
+
+
+\usepackage[all-solutions-at-end]{optional}
+
+\usepackage{../common/preamble}
+%\newcommand{\sectionbreak}{} %\clearpage}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{exercise}[theorem]{Ex}
+\newtheorem{remark}[theorem]{Remark}
+
+\setcounter{tocdepth}{1}
+\usepackage{a4wide}
+\usepackage{../common/abbreviations}
+
+\author{Lecturers PT and PD
+}
+\date{\today}
+\title{Probability Distributions, Week 3}
+
+\opt{all-solutions-at-end}{
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+}
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Lecture 5}
+
+\subsection{Compulory material}
+\label{sec:compulory-material}
+
+
+
+\begin{itemize}
+\item 8.1: read up  to and including Example 8.1.6., skip the rest of 8.1 from Theorem 8.1.7  onwards
+\item BH video: 22
+\item Exercises: 8.11, 8.18 (provide the formula?) 8.52, 8.54,
+\end{itemize}
+
+
+
+\begin{exercise}
+Suppose $(X,Y)$ are bi-variate normal distributed with mean vector $\mu = (\mu_X, \mu_Y) = (0,0)$, standard deviations $\sigma_X = \sigma_Y = 1$ and correlation $\rho_{X Y}$ between $X$ and $Y$. Specify the joint pdf of $X$ and $X + Y$.
+\begin{solution}
+Define $V := X$ and $W := X + Y$. Observe that for any $t_V, t_W$, we have
+\begin{align}
+    t_V V + t_W W &= t_V X + t_W (X + Y) \\
+    &= (t_V + t_W) X + t_W Y.
+\end{align}
+Hence, any linear combination of $V$ and $W$ is a linear combination of $X$ and $Y$. Since $(X,Y)$ is bi-variate normal, every linear combination of $X$ and $Y$ is normally distributed. Hence, every linear combination of $V$ and $W$ is normally distributed. Hence, by definition, $(V,W)$ is bi-variate normally distributed.
+
+We need to compute the mean vector and covariance matrix of $(V,W)$. We have
+\begin{align}
+    \mu_V = \E{V} = \E{X} = \mu_X = 0,
+\end{align}
+and
+\begin{align}
+    \mu_W = \E{W} = \E{X + Y} = \mu_X + \mu_Y = 0.
+\end{align}
+Next, we have
+\begin{align}
+    \V{V} = \V{X} = \sigma_X^2 = 1,
+\end{align}
+and
+\begin{align}
+    \V{W} &= \V{X + Y} = \V{X} + \V{Y} + 2\cov{X,Y}\\
+    &= 1 + 1 + 2 \rho_{XY} \sigma_X \sigma_Y = 2(1 + \rho_{XY}).
+\end{align}
+Finally,
+\begin{align}
+    \cov{V,W} &= \cov{X, X + Y} = \cov{X, X} + \cov{X, Y} \\
+    &= \sigma_X^2 + \rho_{XY} \sigma_X \sigma_Y = 1 + \rho_{XY},
+\end{align}
+and hence,
+\begin{align}
+    \rho_{VW} := \cor(V,W) &= \frac{\cov{V,W}}{\sqrt{\V{V}\V{W}}} \\
+    &= \frac{1 + \rho_{XY}}{\sqrt{1 \cdot 2(1 + \rho_{XY})}} \\
+    &= \sqrt{\frac{1 + \rho_{XY}}{2}}.
+\end{align}
+We have now specified all parameters of the bi-variate normal distribution. This yields the following joint pdf:
+\begin{align}
+    f_{V,W}(v,w) &= \frac{1}{2\pi \sigma_V \sigma_W \tau_{VW}} \exp\left(-\frac{1}{2 \tau_{VW}^2}\left(\left(\frac{v}{\sigma_V}\right)^2 + \left(\frac{w}{\sigma_W}\right)^2 - 2 \frac{\rho_{VW}}{\sigma_V \sigma_W} vw\right) \right),
+\end{align}
+where $\tau_{VW} := \sqrt{1 - \rho_{VW}^2} = \sqrt{1 - \frac{1 + \rho_{XY}}{2}} = \sqrt{\frac{1 - \rho_{XY}}{2}}$ and $\sigma_V = \sqrt{\V{V}} = 1$ and $\sigma_W = \sqrt{\V{W}} = \sqrt{2(1 + \rho_{XY})}$. Hence,
+\begin{align}
+    f_{V,W}(v,w) &= \frac{1}{2\pi \sqrt{1 - (\rho_{XY})^2}} \exp\left(-\frac{1}{1 - \rho_{XY}}\left(v^2 + \frac{w^2}{2(1 + \rho_{XY})}-vw\right)\right).
+\end{align}
+
+\end{solution}
+\end{exercise}
+
+
+\subsection{Background material, not obligatory}
+\label{sec:backgr-mater-not}
+
+Here we provide  a nice geometrical explanation of how the normal distribution originates.
+
+\begin{exercise}\label{ex:1}
+Suppose $z_0=(x_0,y_{0})$ is the target on a dart board at which Barney (our national darts hero) aims, but you can also interpret it as the true position of a star in the sky.
+Let $z$ be the actual position at which the dart of Barney lands on the board, or the measured position of the star.
+For ease, take $z_0$ as the origin, i.e., $z_0=(0,0)$.
+Then make the following assumptions:
+\begin{enumerate}
+\item The disturbance $(x,y)$ has the same distribution in any direction.
+\item The disturbance $(x,y)$ along the $x$ direction and the $y$ direction are independent.
+\item Large disturbances are less likely than small disturbances.
+\end{enumerate}
+Show that the disturbance along the $x$-axis (hence $y$-axis) is normally distributed. You can use BH.8.17 as a source of inspiration. (This is perhaps a hard exercise, but  the solution is easy to understand and very useful to memorize.)
+
+\begin{solution}
+Since the disturbance $(x,y)$ has the same distribution in any direction, it has in particular the same distribution in the $x$ and $y$ direction.
+From this and property 2 we conclude that the joint PDF of the disturbance $(x,y)$ must satisfy
+\begin{equation}
+  \label{eq:051}
+  f_{X,Y}(x,y) = f_X(x)f_Y(x) =: f(x)f(y),
+\end{equation}
+where we use property 2 first and then property 1, and we write $f(x)$ for ease.
+Since the disturbance has the same distribution in \textit{any} direction, the density $f$ can only depend on the distance $r$ from the origin but not on the angle. Therefore, the probability that the dart lands on some square $\d x\d y$ must be such that
+\begin{equation}
+  \label{eq:054}
+  f(x)f(y) \d x \d y = g(r) \d x \d y,
+\end{equation}
+for some function $g$, hence $g(r) = f(x)f(y)$. But since $g$ does not depend on the angle $\phi$,
+\begin{equation}
+\label{eq:055}
+\partial_{\phi} g(r) = 0 = f(x) \partial_{\phi}f(y) + f(y) \partial_{\phi}f(x).
+\end{equation}
+
+What can we about $\partial_{\phi} f(x)$ and $\partial_{\phi}f(y)$?
+The relation between $x$ and $y$ and $r$ and $\phi$ is given by the relations:
+\begin{align}
+\label{eq:056}
+x &= r \cos \phi, & y&=r\sin \phi.
+\end{align}
+Using the chain rule,
+\begin{align}
+  \label{eq:057}
+  \partial_{\phi} f(x) &= \partial_{x} f(x) \frac{\d x}{\d \phi} = f'(x) r (-\sin \phi) = - f'(x) y, \\
+  \partial_{\phi} f(y) &= \partial_{y} f(y) \frac{\d y}{\d \phi} = f'(y) r \cos \phi =  f'(y) x.
+\end{align}
+All this gives for \cref{eq:055}
+\begin{equation}
+\label{eq:058}
+0 = x f(x) f'(y) - y f(y)f'(x).
+\end{equation}
+Simplifying,
+\begin{equation}
+  \label{eq:059}
+   \frac{f'(x)}{x f(x)} = \frac{f'(y)}{ y f(y)}.
+\end{equation}
+But now notice that must hold for all $x$ and $y$ at the same time. The only possibility is that there is some constant $\alpha$ such that
+\begin{equation}
+\label{eq:0510}
+   \frac{f'(x)}{x f(x)} =  \frac{f'(y)}{y f(y)} = \alpha.
+\end{equation}
+Hence, our $f$ must satisfy for all $x$
+\begin{equation}
+\label{eq:0511}
+f'(x) = \alpha x f(x).
+\end{equation}
+Differentiating the guess $f(x) = a e^{ x^2/{2 \alpha}}$, for some constant $a$, shows that this $f$ satisfies this differential equation.
+
+Finally, by the third property, we want that $f$ decays as $x$ increases, so that necessarily $\alpha<0$.
+
+
+We set $\alpha = -1/\sigma^{2}$ to get the final answer:
+\begin{equation}
+  \label{eq:0512}
+  f(x) = a e^{-x^{2}/2 \sigma^{2}}.
+\end{equation}
+It remains to find the normalization constant $a$; recall, $f$ must be a PDF. This is the topic of the next exercise.
+\end{solution}
+\end{exercise}
+
+\section{Lecture 6}
+
+\subsection{Compulsory material}
+\label{sec:compulsory-material}
+
+
+\begin{itemize}
+\item 8.2: we do this section after Ch 9. Hence, skip for the moment
+\item 8.3: skip
+\item 8.4: read, but skip story 8.4.5 on gamma Poisson conjugacy
+\item 8.5: skip
+\item 8.6: read
+\item BH video: -
+\item BH Exercises:
+\end{itemize}
+
+\subsection{Background material, not obligatory}
+\label{sec:backgr-mater-not-1}
+
+
+
+We show why the normalizing constant of the normal distribution includes $\pi$.
+
+\begin{exercise}
+For this purpose consider two circles in the plane: $C(N)$ with radius $N$ and $C(\sqrt 2 N)$ with radius $\sqrt 2 N$.
+It is obvious that the square $S(N) = [-N,N]\times[-N,N]$ contains the first circle, and is contained in the second.
+Therefore,
+\begin{equation}
+  \label{eq:0513}
+  \iint_{C(N)}f_{X,Y}(x,y) \d x\d y \leq
+  \iint_{S(N)}f_{X,Y}(x,y) \d x\d y \leq
+  \iint_{C(\sqrt 2 N)}f_{X,Y}(x,y) \d x\d y.
+\end{equation}
+Now substitute the normal distribution of~\cref{ex:1}.
+Then use polar coordinates (See BH.8.1.9) to solve the integrals over the circles, and derive the normalization constant.
+\begin{solution}
+\begin{equation}
+\label{eq:0514}
+  \iint_{C(N)}f_{X,Y}(x,y) \d x\d y =
+a^{2}  \iint_{C(N)} e^{-(x^{2}+y^{2})/2\sigma^2} \d x\d y.
+\end{equation}
+Since  $x = r \cos \phi$ and $y=r\sin \phi$, we get that $x^2+y^2 = r^{2}$. For the Jacobian,
+\begin{equation}
+  \label{eq:0515}
+  \frac{\partial(x, y)}{\partial(r,\phi)} =
+  \begin{vmatrix}
+    \cos \phi  & -r\sin \phi \\
+    \sin \phi  & r\cos \phi
+  \end{vmatrix}
+= r(\cos^{2} \phi + \sin^2 \phi) = r.
+\end{equation}
+Therefore
+\begin{equation}
+\label{eq:0516}
+\d x \d y = r \d r \d \phi,
+\end{equation}
+from which
+\begin{align}
+a^{2}  \iint_{C(N)} e^{-(x^{2}+y^{2})/2\sigma} \d x\d y
+&=a^{2}  \iint_{C(N)} e^{-r^{2}/2\sigma^{2}} r \d r\d \phi \\
+&= a^{2}  \int_{0}^{N} \int_{0}^{2\pi} e^{-r^{2}/2\sigma^{2}} r \d r\d \phi \\
+&= a^{2}  2\pi \int_{0}^{N}  e^{-r^{2}/2\sigma^{2}} r \d r \\
+&= - a^{2}  2\pi{\sigma^{2}} e^{-r^{2}/2\sigma^{2}}\biggr|_{0}^{N} \\
+&= a^{2}2\pi{\sigma^{2}} (1-e^{-N^{2}/2\sigma^{2}}),
+\end{align}
+where we use~\cref{eq:0511}.
+
+
+Therefore, for the square,
+\begin{equation}
+a^{2}2\pi{\sigma^{2}} (1-e^{-N^{2}/2\sigma^{2}}) \leq
+  \iint_{S(N)}f_{X,Y}(x,y) \d x\d y \leq
+a^{2}2\pi{\sigma^{2}} (1-e^{-2N^{2}/2\sigma^{2}}).
+\end{equation}
+Taking $N\to\infty$ we conclude that
+\begin{align}
+a^{2}2\pi{\sigma^{2}}
+&=\iint f_{X,Y}(x,y) \d x\d y
+=a^{2}  \iint e^{-x^{2}/2\sigma^{2}} e^{-y^{2}/2\sigma} \d x\d y\\
+&=a^{2}  \int_{-\infty}^{\infty} \int_{-\infty}^{\infty }e^{-x^{2}/2\sigma^{2}} e^{-y^{2}/2\sigma} \d x\d y
+=a^{2} \left( \int_{-\infty}^{\infty }e^{-x^{2}/2\sigma^{2}} \d x\right)^{2},
+\end{align}
+and therefore
+\begin{equation}
+\label{eq:0518}
+\int_{-\infty}^{\infty }e^{-x^{2}/2\sigma^{2}} \d x = \sqrt{2 \pi}\sigma.
+\end{equation}
+\end{solution}
+\end{exercise}
+
+
+\section{Tutorial}
+\label{sec:tutorial}
+
+
+\subsection{Practice}
+
+
+\begin{exercise}
+Let $X \sim \Pois{\lambda}$ and $Y \sim \Pois{\mu}$ be independent. What is the distribution of $Z = X + Y$?\\
+\begin{hint}
+Use the Binomial theorem:
+\begin{align}
+    (a + b)^n = \sum_{k=0}^n {n \choose k}a^k b^{n-k},
+\end{align}
+\textit{for any non negative integer $n$.}
+\end{hint}
+
+\begin{solution}
+We use a convolution sum. First note that the domain of $X$ and $Y$ is $0,1,2,\ldots$. For any $n=0,1,2,\ldots$ we get
+\begin{align}
+    \P{Z = n} &= \sum_{k=0}^\infty \P{X = k} \P{Z = n \ | \ X = k} \\
+    &= \sum_{k=0}^\infty \P{X = k} \P{Y = n - X \ | \ X = k} \\
+    &= \sum_{k=0}^n \P{X = k} \P{Y = n - k} \\
+    &= \sum_{k=0}^n \frac{e^{-\lambda}}{k!}\lambda^k  \cdot \frac{e^{-\mu}}{(n-k)!}\mu^{n-k}  \\
+    &= e^{-(\lambda+\mu)} \sum_{k=0}^n \frac{1}{k!(n-k)!} \cdot \lambda^k\mu^{n-k}  \\
+    &= \frac{e^{-(\lambda+\mu)}}{n!} \sum_{k=0}^n \frac{n!}{k!(n-k)!} \cdot \lambda^k\mu^{n-k}  \\
+    &= \frac{e^{-(\lambda+\mu)}}{n!} \sum_{k=0}^n {n \choose k} \cdot \lambda^k\mu^{n-k}  \\
+    &= \frac{e^{-(\lambda+\mu)}}{n!} (\lambda + \mu)^k.
+\end{align}
+We recognize this as the PMF of a Poisson distribution with parameter $\lambda+\mu$. Hence, $Z \sim \Pois{\lambda + \mu}$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+(BH.8.4.3.) Let $X_1, X_2, \ldots$ be i.i.d. $\Exp{\lambda}$ distributed. Let $T_n = \sum_{k=1}^n X_k$. Show that $T_n$ has the following pdf:
+\begin{align}
+    f_{T_n}(t) = \frac{\lambda^n}{(n-1)!} t^{n-1} e^{-\lambda t}, \quad t > 0.
+\end{align}
+That is, show that $T_n$ follows a \emph{Gamma distribution} with parameters $n$ and $\lambda$. (We will learn about the Gamma distribution in BH.8.4.)\\
+\begin{hint}
+Use mathematical induction.
+\end{hint}
+
+\begin{solution}
+We use mathematical induction. For $n=1$ we have $T_1 = X_1$, which follows an exponential distribution with rate $\lambda$. We get
+\begin{align}
+    \frac{\lambda^n}{(n-1)!} t^{n-1} e^{-\lambda t} &= \frac{\lambda^1}{0!} t^{0} e^{-\lambda t}\\
+    &= \lambda e^{-\lambda t},
+\end{align}
+for all $t>0$. Hence, the statement is true for $n=1$. Now suppose the statement is true for $n-1 \geq 1$. That is, we assume that
+\begin{align}
+    f_{T_{n-1}}(t) = \frac{\lambda^{n-1}}{(n-2)!} t^{n-2} e^{-\lambda t}, \quad t > 0.
+\end{align}
+We need to prove that it follows that the statement holds for $n$. Note that $T_n = T_{n-1} + X_n$. Moreover, the domain of both $X_n$ and $T_{n-1}$ is $(0,\infty)$. This yields the convolution integral for all $t>0$:
+\begin{align}
+    f_{T_n}(t) &= \int_{-\infty}^{\infty} f_{T_{n-1}}(t - x) f_{X_n}(x) dx \\
+    &= \int_0^t f_{T_{n-1}}(t - x) f_{X_n}(x) dx \\
+    &= \int_0^t \frac{\lambda^{n-1}}{(n-2)!} (t-x)^{n-2} e^{-\lambda (t-x)} \lambda e^{-\lambda x} dx \\
+    &= \frac{\lambda^{n} e^{-\lambda t}}{(n-2)!} \int_0^t (t-x)^{n-2}  dx \\
+    &= \frac{\lambda^{n} e^{-\lambda t}}{(n-2)!} \Bigg[ -\frac{(t - x)^{n-1}}{n-1} \Bigg]_{x=0}^t \\
+    &= \frac{\lambda^{n} e^{-\lambda t}}{(n-2)!} \Bigg( 0 - \frac{-t^{n-1}}{n-1} \Bigg) \\
+    &= \frac{\lambda^{n} }{(n-1)!} t^{n-1} e^{-\lambda t}.
+\end{align}
+Hence, the statement holds for $n$. By mathematical induction, the statement holds for any $n=1,2,\ldots$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Let $X,Y$ be i.i.d. $\mathcal{N}(0,1)$ distributed and define $Z = X + Y$. Show that $Z \sim \mathcal{N}(0,2)$ using a convolution integral.
+
+\begin{solution}
+Recall the pdf of a $\mathcal{N}(\mu,\sigma^2)$ random variable $T$:
+\begin{align}
+    f_T(t) = \frac{1}{\sqrt{2\pi}\sigma} \exp\left\{-\frac{(t-\mu)^2}{2 \sigma^2}\right\}, \quad t \in \R.
+\end{align}
+We use a convolution integral. We have for every $z \in \R$:
+\begin{align}
+    f_Z(z) &= \int_{-\infty}^\infty f_Y(z - x) f_X(x) dx \\
+    &= \int_{-\infty}^\infty \frac{1}{\sqrt{2\pi}} \exp\left\{-\frac{(z - x)^2}{2}\right\} \frac{1}{\sqrt{2\pi}} \exp\left\{-\frac{x^2}{2 }\right\} dx \\
+    &= \frac{1}{2\pi} \int_{-\infty}^\infty  \exp\left\{-\frac{z^2 - 2zx + 2 x^2}{2}\right\} dx \\
+    &= \frac{1}{2\pi} \int_{-\infty}^\infty  \exp\left\{-\left[\frac{1}{2}z^2 - zx +  x^2\right]\right\} dx \\
+    &= \frac{1}{2\pi} \int_{-\infty}^\infty  \exp\left\{-\left[\left(x - \frac{1}{2}z\right)^2 + \frac{1}{4}z^2\right]\right\} dx \\
+    &= \frac{1}{2\pi} \exp\left\{-\frac{1}{4}z^2\right\} \int_{-\infty}^\infty  \exp\left\{-\left(x - \frac{1}{2}z\right)^2\right\} dx \\
+    &= \frac{1}{\sqrt{2\pi} \cdot \sqrt{2}} \exp\left\{-\frac{z^2}{2 \cdot \sqrt{2}^2}\right\} \cdot \int_{-\infty}^\infty  \frac{1}{\sqrt{2\pi} \cdot (1/\sqrt{2})} \exp\left\{-\frac{\left(x - \tfrac{1}{2}z\right)^2}{2 \cdot (1/\sqrt{2})^2}\right\} dx \\
+    &= \frac{1}{\sqrt{2\pi} \cdot \sqrt{2}} \exp\left\{-\frac{z^2}{2 \cdot \sqrt{2}^2}\right\},
+\end{align}
+where in the last step we recognize that the integral on the right is the integral of the pdf of a $\mathcal{N}(\tfrac{1}{2}z, 1/2)$ random variable, which integrates to one (since any pdf integrates to one). We are left with the pdf of a $\mathcal{N}(0,2)$ random variable. Hence, $Z \sim \mathcal{N}(0,2)$.
+\end{solution}
+\end{exercise}
+
+
+\subsection{BH Exercises}
+
+
+\begin{exercise}
+BH Exercises: 7.15,
+\begin{solution}
+See our solution manual.
+\end{solution}
+\end{exercise}
+
+
+\section{Homework}
+\label{sec:homework}
+
+\subsection{Practice}
+\label{sec:practice}
+
+
+The following exercises will show how probability theory can be used in finance. We will look at the trade off between risk and return in a financial portfolio.
+
+John is an investor who has $\$ 10,000$ to invest.
+There are three stocks he can choose from.
+The returns on investment $(A,B,C)$ of these three stocks over the following year (in terms of percentages) follow a Multivariate Normal distribution.
+The expected returns on investment are $\mu_A = 7.5 \%$, $\mu_B = 10\%$, $\mu_C = 20\%$.
+The corresponding standard deviations are $\sigma_A = 7\%$, $\sigma_B = 12 \%$ and $\sigma_C = 17\%$.
+Note that risk (measured in standard deviation) increases with expected return.
+The correlation coefficients between the different returns are $\rho_{AB} = 0.7$, $\rho_{AC} = -0.8$, $\rho_{BC} = -0.3$.
+
+\begin{exercise}
+Suppose the investor decides to invest $\$ 2,000$ in stock A, $\$4,000$ in stock B, $\$2,000$ in stock C and to put the remaining $\$ 2,000$ in a savings account with a zero interest rate. What the expected value of his portfolio after a year?
+\begin{solution}
+Let $X$ denote the value of the portfolio after a year in thousands of dollars. Then,
+\begin{align}
+    X &:= 2(1 + A) + 4(1 + B) + 2(1 + C) + 2 \\
+    &= 10 + 2A + 4B + 2C.
+\end{align}
+Then,
+\begin{align}
+    \E{X} &= \E{ 10 + 2A + 4B + 2C } \\
+    &= 10 + 2\E{A} + 4\E{B} + 2\E{C} \\
+    &= 10 + 2\cdot 0.075  + 4 \cdot 0.1  + 2 \cdot 0.2 \\
+    &= 10 + 0.15  + 0.4  + 0.4 \\
+    &= 10.95
+\end{align}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+What is the standard deviation of the value of the portfolio in a year?
+\begin{solution}
+We have
+\begin{align}
+    \V{X} &= \V{ 10 + 2A + 4B + 2C} \\
+    &= \V{2A} + \V{4B} + \V{2C} \\
+    &\quad +2\Big( \cov{2A, 4B} + \cov{2A, 2C} + \cov{4B, 2C} \Big) \\
+    &= 4\V{A} + 16\V{B} + 4\V{C}\\
+    &\quad +2\Big( 8\cov{A, B} + 4\cov{A, C} + 8\cov{B, C} \Big) \\
+    &= 4\sigma_A^2 + 16\sigma_B^2 + 4\sigma_C^2 \\
+    &\quad +2\Big( 8\rho_{AB}\sigma_A \sigma_B + 4\rho_{AC}\sigma_A \sigma_C + 8\rho_{BC}\sigma_B \sigma_C \Big) \\
+    &= 4(0.07)^2 + 16(0.12)^2 + 4(0.17)^2 \\
+    &\quad +2\Big( 8(0.7)(0.07) (0.12) + 4(-0.8)(0.07)(0.17) + 8(-0.3)(0.12) (0.17)\Big) \\
+    &= 0.2856.
+\end{align}
+So
+\begin{align}
+    \sigma_X = \sqrt{0.2856} = 0.5344.
+\end{align}
+So $X$ has a standard deviation of $\$534$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+John does not like losing money. What is his probability of having made a net loss after a year?
+\begin{solution}
+We need to compute the probability $\P{X \leq 10}$. We have
+\begin{align}
+    \P{X \leq 10}
+ &= \P{ X - \mu_X \leq 10 - 10.95} \\
+    &= \P{ \frac{X - \mu_X}{\sigma_X} \leq \frac{10 - 10.95}{0.5344} } \\
+    &= \P{ Z \leq \frac{10 - 10.95}{0.5344} } \\
+    &= \P{ Z \leq -1.7777 } \\
+    &= 0.0377.
+\end{align}
+So John has a probability of $3.77\%$ of losing money with his investment.
+\end{solution}
+\end{exercise}
+
+John has a friend named Mary, who is a first-year EOR student. She has never invested money herself, but she is paying close attention during the course Probability Distributions. She tells her friend: ``John, your investment plan does not make a lot of sense. You can easily get a higher expected return at a lower level of risk!''
+
+\begin{exercise}
+Show that Mary is right. That is, make a portfolio with a higher expected return, but with a lower standard deviation. \\
+\textit{Hint: Make use of the \textbf{negative correlation} between $C$ and the other two stocks!}
+\begin{solution}
+Observe that $C$ has the highest expected return \textit{and} it is negatively correlated with the other two stocks. We will use these facts to our advantage.
+
+Starting out with portfolio $X$, we construct a portfolio $Y$ by splitting the investment in stock B in two halves, which we add to our investments in stock A and C. Since the average expected return of A and C is higher than that of B, we must have that $\E{Y} > \E{X}$. Moreover, the fact that A and C are negatively correlated will mitigate the level of risk. If one stock goes up, we expect the other to go down, so the stocks cancel out each others variability. This is the idea behind the investment principle of \textit{diversification}.
+
+Mathematically, we define
+\begin{align}
+    Y &:= 4(1 + A) + 4(1 + C) + 2 \\
+    &= 10 + 4A + 4C.
+\end{align}
+Then,
+\begin{align}
+    \E{Y} &= \E{10 + 4A + 4C} \\
+    &= 10 + 4\E{A} + 4\E{C} \\
+    &= 10 + 4(0.075) + 4(0.20) \\
+    &= 11.1
+\end{align}
+Moreover,
+\begin{align}
+    \V{Y} &= \V{10 + 4A + 4C} \\
+    &= \V{4A} + \V{4C} + 2 \cov{4A, 4C}\\
+    &= 4^2\V{A} + 4^2 \V{C} +2 \cdot  4 \cdot 4 \cdot \cov{A,C} \\
+    &= 16 (.07)^2 + 16 (.17)^2  + 32 (-.8)(.07)(.17) \\
+    &= 0.23616,
+\end{align}
+which corresponds to a standard deviation of
+\begin{align}
+    \sigma_Y = \sqrt{\V Y} = \sqrt{0.23616} = 0.4860
+\end{align}
+So indeed, $\E{Y} > \E{X}$, while $\sigma_Y < \sigma_X$. Clearly, portfolio $Y$ is more desirable.
+\end{solution}
+\end{exercise}
+
+
+\subsection{BH Exercises}
+\label{sec:bh-exercises-1}
+
+
+\begin{exercise}
+BH 7.24
+\begin{solution}
+See our solution manual.
+\end{solution}
+\end{exercise}
+
+
+
+\section{Poleverywhere questions}
+\label{sec:polev-quest}
+
+
+TBD
+
+
+\section{Assignment}
+\label{sec:assignment}
+
+%\subfile{../assignments/bh-7-1.tex}
+
+
+
+\opt{all-solutions-at-end}{
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\clearpage
+\section{Hints}
+\input{hint}
+\clearpage
+\section{Solutions}
+\input{ans}
+}
+\end{document}

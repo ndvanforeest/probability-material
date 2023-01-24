@@ -3,17 +3,18 @@
 % arara: pdflatex: { shell: yes }
 % arara: move: {  files: ['study-guide.pdf'], target: ['../pdf-files/'] }
 
-\documentclass[a4paper,12pt]{book}
+\documentclass[a4paper,11pt]{article}
 
 
-%\usepackage[nosolutions]{optional}
-%\usepackage[justhints]{optional}
-%\usepackage[check]{optional}
 \usepackage[all-solutions-at-end]{optional}
 
 \usepackage{../common/preamble}
 %\newcommand{\sectionbreak}{} %\clearpage}
 
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{exercise}[theorem]{Ex}
+\newtheorem{remark}[theorem]{Remark}
 
 \setcounter{tocdepth}{1}
 \usepackage{a4wide}
@@ -22,26 +23,20 @@
 \author{Lecturers PT and PD
 }
 \date{\today}
-\title{Probability Distributions, Week 1}
+\title{Probability Distributions, Week 2}
 
 \opt{all-solutions-at-end}{
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 }
 
+
 \begin{document}
 \maketitle
 \tableofcontents
 
-\chapter{Week 2}
-\label{cha:week-1}
 
-
-
-\section{Lectures}
-\label{sec:lectures}
-
-\subsection{Lecture 3}
+\section{Lecture 3}
 \label{sec:lecture-1}
 
 \begin{enumerate}
@@ -51,24 +46,448 @@
 \item BH Exercises: 7.1, 7.10, 7.11
 \end{enumerate}
 
+\begin{exercise}
+$n$ people throw their hat in a box. After shuffling, each of them takes out a hat at random. How many people do you expect to take out their own hat (i.e., the hat they put in the box); what is the variance?
+\begin{hint}
+Take $\1{X_i=i}$. When this is 1, person $i$ picks its own hat, and if 0, the person picks somebody else's hat. What is the meaning of $S=\sum_{i=1}^n \1{X_i=i}$?
+\end{hint}
+\begin{solution}
+Use the hint.
+\end{solution}
+\begin{align*}
+\E{\1{X_i=i}} &= 1/n, \quad \text{for all } i. \\
+  \E{S} &= \sum_{i=1}^n \E{\1{X_{i}=i}} = \sum_{i=1}^n 1/n = 1. \\
+  \E{S^{2}} &= \sum_{i=1}^n \E{\1{X_{i}=i}} + \sum_{i \neq j} \E{\1{X_{i}=i}\1{X_{j}=j}} = 1 + n(n-1)\cdot \frac{1}{n}\frac{1}{n-1} = 1 + 1 =2.\\
+  \V S &= \E{S^{2}}  - (\E S)^{2} = 2 - 1 = 1.
+\end{align*}
 
-\subsection{Lecture 4}
+\end{exercise}
+
+
+
+\begin{exercise}
+Continuation of the previous exercise. Write a simulator for compute the expectation and variance.
+\begin{solution}
+Let us first do one run.
+\begin{pyblock}[][numbers=left,frame=lines]
+import numpy as np
+
+np.random.seed(3)
+
+n = 4
+X = np.arange(n)
+np.random.shuffle(X)
+print(X)
+print(np.arange(n))
+print((X == np.arange(n)))
+print((X == np.arange(n)).sum())
+\end{pyblock}
+Here are the results of the print statements: $X = \py{X}$. The matches are \py{(X == np.arange(n))}; we see that $X[1] = 1$ (recall, python arrays start at index 0, not at 1, so $X[1]$ is the second element of $X$, not the first), so that the second person picks his own hat. The number of matches is therefore 1 for this simulation.
+
+Now put the people to work, and let them pick hats for $50$ times.
+\begin{pyblock}[][numbers=left,frame=lines]
+import numpy as np
+
+np.random.seed(3)
+
+num_samples = 50
+n = 5
+
+res = np.zeros(num_samples)
+for i in range(num_samples):
+    X = np.arange(n)
+    np.random.shuffle(X)
+    res[i] = (X == np.arange(n)).sum()
+
+print(res.mean(), res.var())
+\end{pyblock}
+Here is the number of matches for each round: \py{res}
+The mean and variance are as follows: $\E X = \py{res.mean()}$ and $\V X = \py{res.var()}$.
+
+For your convenience, here's the R code
+\begin{minted}{R}
+# set seed such that results can be recreated
+set.seed(42)
+
+# number simulations and people
+numSamples <- 50
+n <- 5
+
+# initialize empty result vector
+res <- c()
+
+# for loop to simulate repeatedly
+for (i in 1:numSamples) {
+
+  # shuffle the n hats
+  x <- sample(1:n)
+
+  # number of people picking own hat (element by element the vectors x and
+  # 1:n are compared, which yields a vector of TRUE and FALSE, TRUE = 1 and
+  # FALSE = 0)
+  correctPicks <- sum(x == 1:n)
+
+  # append the result vector by the result of the current simulation
+  res <- append(res, correctPicks)
+}
+
+# printing of observed mean and variance
+print(mean(res))
+print(var(res))
+\end{minted}
+\end{solution}
+\end{exercise}
+
+\section{Lecture 4}
 \label{sec:lecture-1}
 \begin{enumerate}
-\item BH Book: Section 7.2, 2d lotus
-\item BH Book:  Section 7.3, covariance and correlation
+\item BH Book: Section 7.2, 2d LOTUS
+\item BH Book: Section 7.3, covariance and correlation
+\item BH Book: Section 7.4, skip
+\item BH Book: Section 7.5, only proof of Theorem 7.5.7, skip the rest
 \item BH video: 21
 \item BH Exercises: 7.38, 7.53, 7.58
 \end{enumerate}
 
 
+
+\begin{exercise}
+We ask a married woman on the street her height $X$.
+What does this tell us about the height $Y$ of her spouse?
+We suspect that taller/smaller people choose taller/smaller partners, so, given $X$, a simple estimator $\hat Y$ of $Y$ is given by
+\begin{equation*}
+  \hat Y = a X + b.
+\end{equation*}
+(What is the sign of $a$ if taller people tend to choose taller people as spouse?)
+But how to determine $a$ and $b$? A common method is to find $a$ and $b$ such that the function
+\begin{equation*}
+  f(a,b) = \E{(Y-\hat Y)^2}
+\end{equation*}
+is minimized. Show that the optimal values are such that
+\begin{align*}
+  \hat Y = \E Y + \rho \frac{\sigma_Y}{\sigma_X} (X - \E X),
+\end{align*}
+where $\rho$ is the correlation between $X$ and $Y$ and where $\sigma_X$ and $\sigma_Y$ are the standard deviations of $X$ and $Y$ respectively.
+
+\begin{solution}
+We take the partial derivatives of $f$ with respect to $a$ and $b$, and solve for $a$ and $b$. In the derivation, we use that
+\begin{align}
+  \label{eq:336}
+\rho = \frac{\cov{X,Y}}{\sqrt{\V X \V Y}} = \frac{\cov{X,Y}}{\sigma_X \sigma_Y} \implies  \rho \frac{\sigma_{Y}}{\sigma_{X}} = \frac{\cov{X,Y}}{\V X}.
+\end{align}
+Hence,
+  \begin{align*}
+f(a,b) &= \E{(Y-\hat Y)^2} \\
+ &= \E{(Y-a X - b)^2} \\
+ &= \E{Y^{2}} - 2a\E{YX} - 2b\E Y + a^{2}\E{X^2} + 2 ab \E X + b^{2}\\
+\partial_{a} f &=-2 \E{YX} + 2a \E{X^2} + 2 b \E X = 0 \\
+&\implies a \E{X^2} =  \E{YX}  -  b \E X \\
+\partial_{b} f &=-2 \E{Y}  + 2 a \E X  + 2 b= 0 \\
+& \implies  b = \E Y - a \E{X}\\
+a \E{X^2} &=  \E{YX}  -  \E X (\E Y - a \E X) \\
+&\implies  a (\E{X^{2}} - \E X \E X)  = \E{YX} - \E X \E Y  \\
+&\implies a = \frac{\cov{X,Y}}{\V X} = \rho \frac{\sigma_Y}{\sigma_X}\\
+b &= \E Y - \rho \frac{\sigma_Y}{\sigma_X}\E X\\
+\hat Y &= a X + b \\
+&= \rho \frac{\sigma_Y}{\sigma_X} X + \E Y - \rho\frac{\sigma_Y}{\sigma_X} \E X \\
+&=  \E Y + \rho \frac{\sigma_Y}{\sigma_X} (X-\E X).
+  \end{align*}
+What a neat formula! Memorize the derivation, at least the structure. You'll come across many more optimization problems.
+
+What if $\rho=0$?
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Using scaling laws often can help to find errors. For instance,  the prediction $\hat Y$ should not change whether we measure the height in meters or centimeters.
+In view of this, explain that
+\begin{align*}
+  \hat Y = \E Y + \rho \frac{\V Y}{\sigma_X} (X - \E X)
+\end{align*}
+must be wrong.
+\begin{solution}
+  If we measure $X$ in centimeters instead of meters, then $X$, $\E X$ and $\sigma_X$ are all multiplied by 100, and the prediction $\hat Y$ should also be expressed in centimeters But $\V Y $ scales as length squared.
+  This messes up the units.
+\end{solution}
+\end{exercise}
+
+
+
 \section{Tutorial}
 \label{sec:tutorial}
 
+
+\subsection{Practice}
+
+\begin{exercise}
+Let $L=\min\{X, Y\}$ and $M=\max\{X, Y\}$, where $X, Y$ iid and $\sim \Exp{\lambda}$.
+Use the fundamental bridge to show that for $u\leq v$, the joint CDF has the form
+\begin{equation*}
+  F_{L,M}(u,v) = \P{L\leq u, M\leq v} = 2\int_0^u (F_Y(v)- F_Y(x)) f_X(x) \d x.
+\end{equation*}
+\begin{solution}
+First the joint distribution. With $u\leq v$,
+  \begin{align*}
+F_{L,M}(u,v) &= \P{L\leq u, M \leq v} \\
+&= 2\iint \1{x \leq u, y\leq v, x\leq y} f_{X,Y}(x,y)\d x \d y \\
+&= 2\int_0^u \int_x^v f_Y(y) \d y f_X(x) \d x & \text{independence} \\
+&= 2\int_0^u (F_Y(v)- F_Y(x)) f_X(x) \d x.
+  \end{align*}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}\label{ex:25}
+Take partial derivatives to show that for the joint PDF,
+\begin{equation*}
+f_{L,M}(u,v) = 2f_X(u) f_Y(v)\1{u\leq v}.
+\end{equation*}
+\begin{solution}
+Taking partial derivatives,
+\begin{align*}
+f_{L,M}(u,v)
+&=\partial_v\partial_{u}F_{L,M}(u,v) \\
+&=2 \partial_v\partial_{u} \int_0^u (F_Y(v)- F_Y(x)) f_X(x) \d x  \\
+&=2 \partial_v \left\{(F_Y(v)- F_Y(u)) f_X(u) \right \}  \\
+&=2 f_X(u)\partial_v F_Y(v)  \\
+&=2 f_X(u)f_Y(v).
+\end{align*}
+\end{solution}
+\end{exercise}
+
+
+\subsection{BH Exercises}
+
+
+\begin{exercise}
+BH Exercises: 7.15,
+\begin{solution}
+See our solution manual.
+\end{solution}
+\end{exercise}
+
+
+\section{Homework}
+\label{sec:homework}
+
+\subsection{Practice}
+\label{sec:practice}
+
+
+
+\begin{exercise}
+Let $X, Y$ be two discrete rvs with CDF $F_{X,Y}$.  Can we compute the PDF as $\partial_{x}\partial_{y} F_{X,Y}(x,y)$?
+\begin{solution}
+This claim is incorrect, because $X, Y$ are discrete, hence they have a PMF, not a PDF.
+
+Mistake: Someone said that $\partial_{x}\partial_{y}$ is not correct notation; however, it is correct! It's a (much used) abbreviation of the much heaver $\partial^{2}/\partial x \partial y$. Next, the derivative of the PMF is not well-defined (at least, not within this course. If you object, ok, but then show that you passed a decent course on measure theory.)
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+We have the random vector $(X, Y) \in [0,1]^{2}$ (here $[0,1]^{2} = [0,1]\times [0,1]$) consisting of the rvs X and Y with the joint PDF $f_{X,Y}(x,y) = 2 \1{x\leq y}$.
 \begin{enumerate}
-\item BH Exercises: 7.15,
-\item Problems of the  assignment
+\item Are $X$ and $Y$ independent?
+\item Compute $F_{X,Y}(x,y)$.
 \end{enumerate}
+\begin{solution}
+\begin{align}
+f_{X}(x) &= \int_{0}^{1} f_{X,Y}(x,y) \d y = 2\int_{0}^{1} \1{x\leq y} \d y = 2\int_{x}^{1} \d y = 2(1-x) \\
+f_{Y}(y) &= \int_{0}^{1} f_{X,Y}(x,y) \d x = 2\int_{0}^{1} \1{x\leq y} \d x = 2\int_{0}^{y} \d y = 2 y.
+\end{align}
+But $f_{X,Y}(x,y) \neq f_{X}(x)f_{Y}(y)$, hence $X,Y$ are dependent.
+
+\begin{align}
+F_{X,Y}(x,y)
+&= \int_{0}^{x}\int_{0}^{y} f_{X,Y}(u,v) \d v \d u \\
+&= 2\int_{0}^{x}\int_{0}^{y} \1{u\leq v} \d v \d u \\
+&= 2\int_{0}^{x}\int \1{u\leq v} \1{0\leq v \leq y}\d v \d u \\
+&= 2\int_{0}^{x}\int  \1{u\leq v \leq y}\d v \d u \\
+&= 2\int_{0}^{x} [y-u]^{+} \d u,
+\end{align}
+because $u > y \implies \1{u\leq v \leq y} = 0$. Now, if $y>x$,
+\begin{align}
+  2\int_{0}^{x} [y-u]^{+} \d u &=
+  2\int_{0}^{x} (y-u) \d u = 2 y x - x^{2},
+\end{align}
+while if $y\leq x$,
+\begin{align}
+  2\int_{0}^{x} [y-u]^{+} \d u &=
+  2\int_{0}^{y} (y-u) \d u = 2 y^{2} - y^{2} = y^{2}
+\end{align}
+
+Make a drawing of the support of $f_{X,Y}$ to help to understand this better.
+
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+We have two continuous rvs $X, Y$.
+Suppose the joint CDF factors into the product of the marginals, i.e., $F_{X,Y}(x,y) = F_X(x)F_Y(y)$. Can it still be possible in general that the joint PDF does not factor into a product of marginals PDFs of $X$ and $Y$, i.e., $f_{X,Y}(x,y) \neq f_X(x) f_Y(y)$?
+\begin{solution}
+\begin{align*}
+\partial_{x}\partial_{y}F_{X,Y}(x,y)
+=\partial_{x}\partial_{y}F_{X}(x) F_{Y}(y)
+=\partial_{x}F_{X}(x) \partial_{y} F_{Y}(y) = f_{X}(x) f_{Y}(y).
+\end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH define the conditional CDF given an event $A$ on page 416 as $F(y|A)$.
+Use this definition to write $F_{X,Y}(x,y)/F_{X}(x)$ as a conditional CDF.
+Is this equal to the conditional CDF of $X$ and $Y$?
+\begin{solution}
+\begin{align}
+\frac{F_{X,Y}(x,y)}{F_{X}(x)} = \frac{\P{X\leq x, Y\leq y}}{\P{X\leq x}}
+  = \P{Y\leq y, X\leq x|X\leq x} = \P{Y\leq y|X\leq x}.
+\end{align}
+It is a big mistake to write $F_{X,Y}(x,y) = \P{X=x, Y=y}$. If you wrote this, recheck the definitions of BH.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+We have two rvs $X$ and $Y$ on $\R^{+}$. It is given that $F_{X,Y}(x,y) = F_X(x)F_Y(y)$ for $x,y \leq 1/3$. It is true that then  $X$ and $Y$ are necessarily independent.
+\begin{solution}
+For $X, Y$ to be independent, it is necessary that  $F_{X,Y}(x,y) = F_X(x)F_Y(y)$ for all $x,y$, not just one particular choice. (This is an example that satisfying a necessary condition is not necessarily sufficient.)
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+I select a random guy from the street, his height $X\sim\Norm{1.8, 0.1}$, and I select a random woman from the street, her height is $Y\sim\Norm{1.7, 0.08}$.
+I claim that since I selected the man and the woman independently, their heights are independent.
+Briefly comment on this claim.
+
+
+\begin{solution}
+  Many answers are possible here, depending on extra assumptions you make.
+  Here is one.
+  Suppose, just by change, the fraction of taller guys in the street is a bit higher than the population fraction.
+  Assuming that taller (shorter) people prefer taller (shorter) spouses, there must be a dependence between the height of the men and the women. This is because when selecting a man, I can also select his wife.
+
+From this exercise you should memorize that \emph{independence is a property of the joint CDF, not of the rvs}.
+
+Mistake:   $\P{Y}$ is wrong notation wrong because we can only compute the probability of an event, such as $\{Y\leq y\}$. But $Y$ itself is not an event. \end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+For any two rvs $X$ and $Y$ on $\R^{+}$ with marginals $F_{X}$ and $F_{Y}$, can  it hold that $\P{X\leq x, Y\leq y} = F_{X}(x) F_{Y}(y)$?
+\begin{solution}
+Only when $X, Y$ are independent.
+
+Mistake:  independence of $X$ and $Y$ is not the same as the linear independence. Don't confuse these two types of dependene.
+\end{solution}
+
+\end{exercise}
+
+\begin{exercise} Redo BH.7.1.24 with indicator functions and the  fundamental bridge (recall, $\P{A} = \E{\1{A}}$ for an event $A$).
+(Indicators are often  easy to use, and prevent many mistakes, as is demonstrated with this example.)
+\begin{solution}
+\begin{align*}
+\P{T_1 < T_2 } = \E{\1{T_1<T_2}} =
+&= \int_0^\infty \int_0^\infty \1{t_1<t_2} f_{T_1, T_2}(t_1, t_2)\d t_{1} \d{t_2} \\
+&= \int_0^\infty \int_{t_1}^{\infty}  \lambda_1 e^{-\lambda_1 t_1} \lambda_2 e^{-\lambda_2 t_2}  \d{t_2} \d{t_1}\\
+&= \int_0^\infty   \lambda_1 e^{-\lambda_1 t_1} \lambda_2 \int_{t_1}^{\infty} e^{-\lambda_2 t_2}  \d{t_2} \d{t_1}\\
+&= \int_0^\infty   \lambda_1 e^{-\lambda_1 t_1} e^{-\lambda_2 t_1}  \d{t_1}\\
+&= \int_0^\infty   \lambda_1 e^{-\lambda_1 t_1 - \lambda_2t_{1}} \d{t_1}\\
+&= \frac{\lambda_{1}}{\lambda_{1}+\lambda_2}.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+We have a continuous r.v. $X\geq 0$ with finite expectation. Use 2D integration and indicators to prove that
+\begin{align}
+\E X = \int_{0}^{\infty} x f(x) \d x = \int_{0} G(x) \d x,
+\end{align}
+where $G(x)$ is the survival function.
+\begin{hint}
+  Check the proof of BH.4.4.8
+\end{hint}
+\begin{solution}
+The trick is to realize that $x = \int_0^{\infty} \1{y\leq x} \d y$. Using this,
+\begin{align}
+\E X
+&= \int_{0}^{\infty} x f(x) \d x \\
+&= \int_{0}^{\infty} \int_{0}^{\infty} \1{y \leq x} f(x) \d y \d x \\
+&= \int_{0}^{\infty} \int_{0}^{\infty} \1{y \leq x} f(x) \d x \d y \\
+&= \int_{0}^{\infty} \int_{0}^{\infty} \1{x \geq y} f(x) \d x \d y \\
+&= \int_{0}^{\infty} \int_{y}^{\infty} f(x) \d x \d y \\
+&= \int_{0}^{\infty} G(y) \d y.
+\end{align}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+A variation on Exercise BH.7.1. Alice is prepared to wait 20 minutes for Bob, while Bob doesn't want to wait longer than 10 minutes. What is the probability that they meet?
+
+Use the fundamental bridge and indicator functions to write this probability as a 2D integral. Then use repeated integration to solve the 2D integral.
+\begin{solution}
+Let $A$, $B$ be the arrival times of Alice and Bob. They meet if $\1{A<B+1/3}\1{B<A+1/6}$ is true, i.e., is equal to 1. Therefore, by letting $M$ be the event that they meet:
+
+\begin{equation*}
+\P{M} = \E{\1{A<B+1/3}\1{B<A+1/6}} = \int_0^1\int_0^1 \1{x<y+1/3}\1{y<x+1/6} \d y \d x.
+\end{equation*}
+We can solve this integral by first integrating along $y$, and then along $x$. Let's focus on the integral over $y$ first.
+\begin{align*}
+\int_0^1 \1{x<y+1/3}\1{y<x+1/6} \d y
+&=\int_0^1 \1{x-1/3<y<x+1/6} \d y \\
+&=\int_0^1 \1{\max\{0, x-1/3\} <y \min\{1,x+1/6\} } \d y \\
+&= \min\{1,x+1/6\} - \max\{0, x-1/3\}
+\end{align*}
+Now the integral over $x$:
+\begin{align*}
+  \int_0^1 (\min\{1,x+1/6\} - \max\{0, x-1/3\}) \d x
+&=  \int_0^1 \min\{1,x+1/6\}\d x - \int_0^{1}\max\{0, x-1/3\} \d x  \\
+&=  \int_0^{5/6}(x+1/6)\d x + \int_{5/6}^{1}1 \d x
+ - \int_{1/3}^{1}(x-1/3) \d x \\
+  &=0.5 x^2\Big|_{0}^{5/6} + 1/6\cdot 5/6 - 0.5x^2\Big|_{1/3}^1 + 1/3\cdot 2/3
+\end{align*}
+
+Of course, we can find the probability with some simple geometric arguments (compute the area of two triangles). However, this does not work any longer if the density is not uniform.  Then we have to do the integration, and that is the reason why I show above how to handle the general case.
+\end{solution}
+\end{exercise}
+
+\subsection{BH Exercises}
+\label{sec:bh-exercises-1}
+
+
+\begin{exercise}
+BH 7.24
+\begin{solution}
+See our solution manual.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH 7.58
+\begin{solution}
+See our solution manual.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+BH 7.86
+\begin{solution}
+See our solution manual.
+\end{solution}
+\end{exercise}
+
+
+
+
+\section{Poleverywhere questions}
+\label{sec:polev-quest}
+
+
+TBD
+
 
 \section{Assignment}
 \label{sec:assignment}
@@ -78,32 +497,14 @@
 
 
 
-\section{Homework}
-\label{sec:homework}
-
-\begin{enumerate}
-\item Our exercises on Section BH.7.1.2
-\item Redo the exercises of the lectures and the tutorial
-\item BH Exercises: 7.24, 7.58, 7.86
-\end{enumerate}
-
-\subfile{../study-guide/bh-7.1.2.tex}
-
-\section{Poleverywhere questions}
-\label{sec:polev-quest}
-
-
-TBD
-
-
-\opt{nosolutions}{
+\opt{all-solutions-at-end}{
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}
 \clearpage
-\chapter{Hints}
+\section{Hints}
 \input{hint}
 \clearpage
-\chapter{Solutions}
+\section{Solutions}
 \input{ans}
 }
 
