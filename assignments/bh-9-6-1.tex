@@ -34,7 +34,7 @@ print(X.stats(moments='mv')) # final check.
 \begin{minted}[]{R}
 library(pracma)
 
-mu = 1 / 2 
+mu = 1 / 2
 var = 1 / 12  # why this test case?
 
 func = function(x){
@@ -45,7 +45,7 @@ func = function(x){
   return (c(m - mu, v - var))
 }
 
-output = fsolve(func, c(2,2))$x
+output = fsolve(func, c(2,2)) #x
 a = output[1]
 b = output[2]
 print(paste(a, b))
@@ -128,9 +128,9 @@ Here is the code to compute the mean and variance with Adam and Eve's laws. Expl
 \begin{enumerate}
 \item explain the lines marked as `this';
 \item what are the contents of the demand matrix;
-\item what is the $P$;
-\item how are $EX, EV$ and $VE$  computed;
-\item Note in particular the difference between $EXn$ and $EXN$, and similarly for the variance. Use BH.9.2.1 to explain why I use a small $n$ and a large $N$ in the naming of the variables.
+\item what is the \texttt{P};
+\item how are \texttt{EX}, \texttt{EV} and \texttt{VE}  computed;
+\item Note in particular the difference between \texttt{EXn} and \texttt{EXN}, and similarly for the variance. Use BH.9.2.1 to explain why I use a small $n$ and a large $N$ in the naming of the variables.
 \end{enumerate}
 
 Remark: I realize that this is a hard piece of code, but your understanding of Eve's law will increase by a lot. Some subtle points about the code that you \emph{don't} have to explain:
@@ -216,7 +216,7 @@ for(n in 1:n_max){
     next
   }
   P[n] = length(idx) / days # this
-  m = 
+  m =
   EXn[n] = mean(demands[idx, c(1:n)]) * (n - 1)  #this
   VXn[n] = sd(demands[idx, c(1:n)]) * sd(demands[idx, c(1:n)])* (n - 1) #this
 }

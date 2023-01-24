@@ -1,0 +1,540 @@
+% arara: pdflatex: { shell: yes }
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex: { shell: yes }
+% arara: move: {  files: ['study-guide.pdf'], target: ['../pdf-files/'] }
+
+\documentclass[a4paper,11pt]{article}
+
+
+\usepackage[all-solutions-at-end]{optional}
+
+\usepackage{../common/preamble}
+%\newcommand{\sectionbreak}{} %\clearpage}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{exercise}[theorem]{Ex}
+\newtheorem{remark}[theorem]{Remark}
+
+\setcounter{tocdepth}{1}
+\usepackage{a4wide}
+\usepackage{../common/abbreviations}
+
+\author{Lecturers PT and PD
+}
+\date{\today}
+\title{Probability Distributions, Week 4}
+
+\opt{all-solutions-at-end}{
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+}
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Lecture 7}
+\label{sec:lecture-1}
+
+
+\begin{itemize}
+\item 9.1: read, but skip example 9.1.6 on the two envelopes paradox.
+\item BH video: 26
+\item BH Exercises: 9.1
+\end{itemize}
+
+The next real exercise is about recursion applied to the negative hypergeometric distribution. But to get in the mood, here is short fun question on how to use recursion.
+
+\begin{exercise}
+We have a chocolate bar consisting of $n$ small squares.
+The bar is in any shape you like, square, rectangular, whatever.
+What is the number of times you have to break the bar such that you end up with the $n$ single pieces?
+%Recursive arguments are very powerful, and I often find them very insightful (and I also like this type of reasoning).
+\begin{solution}
+  Write $T(n)$ for the number of times you have to break the bar when there are $n$ squares.
+  Clearly, $T(1) =0$.
+  In general, suppose $n=m+k$, $1 \leq k < n$, then $T(n) = T(m) + T(k) + 1$, because we need $T(k)$ to break the part with $k$ pieces, and $T(m)$ for the part with $m$ pieces, and we need 1 to break the big bar into the two parts. But then, with the \emph{boundary condition} $T(1)=0$,
+  \begin{align*}
+    T(2) &= T(1) + T(1) + 1 = 1, \\
+T(3) &= T(1) + T(2) + 1 = 1 + 1 = 2,
+  \end{align*}
+and so on. So we guess that $T(n)=n-1$ for any $n$. Let's check. It certainly holds for $n=1$.  Generally,
+\begin{align*}
+n-1 = T(n) = T(k) + T(m) + 1 = k-1 + m-1 + 1 = k+m-1 = n-1.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Use recursion to find the expected number $X$ of black balls drawn without replacement at random from an urn containing $w\geq 1$ white balls and $b$ black balls before we draw 1 white ball.
+In other words, I ask to use recursion to compute $\E X$ for $X$ a negative hypergeometric distribution with parameters $w,b, r=1$ and show that
+\begin{align}
+  \label{eq:727}
+\E X = \frac{b}{w+1}
+\end{align}
+\begin{hint}
+For ease, write $N(w,b)= \E X$ for an  urn with $w\geq r = 1$ white balls and $b$ black balls. Then explain that
+\begin{align}
+N(w, 0) &= 0\quad \text{ for all $w$},\\
+  N(w,b) &= \frac{b}{w+b} (1+N(w, b-1)).
+\end{align}
+Then show that this implies that $N(w,b) = b/ (w+1)$.
+\end{hint}
+\begin{solution}
+If there are no black balls left, then we cannot pick a black ball which implies that $N(w, 0) = 0$.
+As soon as we pick a white ball, we have to stop.
+
+When $w, b \geq 1$ two things can happen.
+Suppose we pick a white ball, then we stop right away and we cannot increase the number of black balls picked.
+Suppose we pick a black ball, which happens with probability $b/(b+w)$, we obtain one black ball, and we continue with one black ball less.
+Hence, with LOTE,
+\begin{align}
+  N(w,b) = \frac{b}{w+b} (1+N(w, b-1)).
+\end{align}
+You should realize that here we use conditioning; we condition on the color of the ball picked.
+
+Now we need a real tiny bit of inspiration.
+Let's \emph{guess} that $N(w,b)=\alpha b$ for some $\alpha>0$.
+Guessing is always allowed; if it works, we are done (since the recursion, together with the boundary condition, has a unique solution: just repeatedly applying it allows us to calculate all values).
+In general, you can make any guess whatsoever, but mind that only the good guesses work. So, trying the form $N(w,b) = \alpha b$, we find that
+\begin{equation*}
+\alpha b = \frac{b}{w+b} (1+ \alpha (b-1)) \stackrel{\textrm{\tiny algebra}}{\implies} \alpha = \frac{1}{w+1} \implies  N(w, b) = \frac{b }{w+1}.
+\end{equation*}
+This is consistent with the boundary condition $N(w,0)=0$. Hence, we can move the case $b=0$ to the case with $b=1$, and so on, thereby proving the validity of the formula in general.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Extend the previous exercise to cope with the case $r\geq 2$.
+For this, write $N_{r}(w,b)$ for an urn with $w$ white balls and $b$ black balls, and $r$ white balls to go.
+\begin{hint}
+Explain that $N_{0}(w,b) = 0$ and
+\begin{align}
+  N_r(w,b) &= \frac{w}{w+b} N_{r-1}(w-1, b) +  \frac{b}{w+b} (1+N_{r}(w, b-1)).
+\end{align}
+Then show that this implies that $N_{r}(w,b) = r b/ (w+1)$.
+\end{hint}
+\begin{solution}
+The recursion follows right away by noticing that we pick a white ball with probability $w/(w+b)$, but then we remove one white ball \emph{and} we have one white ball less to go.
+With probability $b/(w+b)$ we pick a black ball, in which case the number of black balls drawn increases by one, but there is one black ball less in the urn.
+
+The boundary condition is also clear: $N_{0}(w,b)=0$ because we stop.
+Note that this is consistent with the previous exercise.
+
+If $r=2$, we use from the previous exercise that
+\begin{equation*}
+N_{r-1}(w-1, b) = N_{1}(w-1, b) = \frac{b }{w-1 + 1} = \frac{b }{w}.
+\end{equation*}
+Using this in the recursion,
+\begin{align*}
+  N_2(w,b)
+&= \frac{w}{w+b} N_{1}(w-1, b) +  \frac{b}{w+b} (1+N_{2}(w, b-1)) \\
+&= \frac{w}{w+b} \frac{b }{w} +  \frac{b}{w+b} (1+N_{2}(w, b-1)) \\
+&=  \frac{b}{w+b} (2+N_{2}(w, b-1)).
+\end{align*}
+But this has the same form as~\cref{eq:727}, except that the 1 has been replaced by a 2. But, now we are dealing with the case $r=2$ instead of $r=1$. Hence, by the same token,
+\begin{equation*}
+  N_2(w,b) = 2 \frac{b}{w+1}
+\end{equation*}
+Knowing the result for $r=2$, we fill this for $r=3$, and so on, to get the general result.
+
+What an elegant procedure;  we pull ourselves out of the swamp, just like Baron Munchhausen.
+\end{solution}
+\end{exercise}
+
+\section{Lecture 8}
+
+
+\begin{itemize}
+\item 9.2: read
+\item BH video: 27
+\item BH Exercises: 9.25, 9.28
+\end{itemize}
+
+
+\begin{exercise}
+We draw, with replacement, balls, numbered 1 to $N$, from an urn.
+Find a recursion to compute the expected number $\E T$ of draws necessary to see all balls.
+\begin{solution}
+Write $T_{n}$ for expected time to finish given that we have seen $n$ different balls. Thus, $\E T = T_{0}$.
+Then for $n< N$ and using conditioning and LOTE
+\begin{align}
+T_n
+&= 1
++T_{n+1} \P{\text{draw a new ball}}
++T_{n} \P{\text{draw an old ball}}  \\
+&= 1
++T_{n+1} \frac{N-n}{N}
++T_{n} \frac{n}{N} \\
+&\implies\\
+T_n \frac{N-n}{N} &= 1 +T_{n+1} \frac{N-n}{N} \\
+&\implies \\
+T_n &= \frac{N}{N-n}  +T_{n+1}.
+\end{align}
+How about the boundary conditions, i.e., what is $T_{n}$ for $n=N$?
+That's obvious: $T_{N} = 0$. Hence,
+\begin{equation}
+T_{N-1} = \frac{N}{N-(N-1)} + T_{N} = N,
+\end{equation}
+and so on.
+
+If you are interested,  push the result a bit further: approximate $T_{0}$ for $N\gg 0$.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Write code to compute $\E T$ for $N=45$.
+\begin{solution}
+Here is the python code.
+
+\begin{pyblock}
+N = 45
+
+
+def T(n):
+    if n >= N:
+        return 0
+    return N / (N - n) + T(n + 1)
+
+# print(T(44))
+# print(T(0))
+\end{pyblock}
+\begin{minted}{R}
+N = 45
+
+bigT = function(n) {
+  if(n >= N) {
+    return(0)
+  }
+  return(N / (N - n) + bigT(n + 1))
+}
+
+#print(bigT(44))
+#print(bigT(0))
+\end{minted}
+Here are the results $T(44) = \py{T(44)}$ (check!) and $T(0) = \py{T(0)}$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+We draw, with replacement, balls, numbered 1 to $N$, from an urn, but 6 at a time (not just one as in the previous exercise).
+Find a recursion to compute the expected number $\E T$ of draws necessary to see all balls.
+\begin{solution}
+  Write $T_{n}$ for expected time to finish given that we have seen $n$ different balls.
+  Take 6 balls.
+  If we would know the number $k$ of new balls drawn, then $T_{n} = 1 + T_{n+k}$.
+  What is the probability to draw $k$ new balls  out of the 6 we pick?
+  This must be
+\begin{equation}
+\label{eq:930}
+{n \choose 6-k}{N-n \choose k}\big/{N \choose 6}.
+\end{equation}
+Therefore, by LOTE, and when $N-n\geq 6$
+\begin{align}
+T_{n} = 1 + \sum_{k=0}^{6} \frac{{n \choose 6-k}{N-n \choose k}}{{N \choose 6}} T_{n+k}.
+\end{align}
+This formula is not ok when are just 2 new balls as in that case we cannot pick $k=6$ new balls. In general, we can pick $k=\min\{6, N-n\}$ new balls. Hence,
+\begin{align}
+T_{n}
+&=
+1 + \sum_{k=0}^{\min\{6, N-n\}} \frac{{n \choose 6-k}{N-n \choose k}}{{N \choose 6}} T_{n+k} \\
+&\implies \\
+T_{n} - \frac{{n \choose 6}{N-n \choose 0}}{{N \choose 6}} T_{n}
+&=1 + \sum_{k=1}^{\min\{6, N-n\}} \frac{{n \choose 6-k}{N-n \choose k}}{{N \choose 6}} T_{n+k} \\
+&\implies \\
+T_{n}\left( {N\choose 6}  -{n \choose 6} \right)
+&={N\choose 6} + \sum_{k=1}^{\min\{6, N-n\}}{n \choose 6-k}{N-n \choose k} T_{n+k} \\
+\end{align}
+And this is the final result.
+
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+For the previous exercise, compute $\E T$ for $N=45$.
+\begin{solution}
+  When we draw $m=6$ balls at a time, we should take care how we compute the recursion.
+
+  To see this, consider for ease the case in which we draw two balls at at time.  Now I want to know how often each function gets called in the computation. For this, I write a simple helper function $S(n, N)$ that returns $1$ for being called plus $S(n+1, N) + S(n+2, N)$. Like this, I can find out how often the functions are called in the recursion.
+
+\begin{pyblock}
+def S(n, N):
+    if n >= N:
+        return 0
+    return 1 + S(n + 1, N) + S(n + 2, N)
+
+
+for N in range(1, 25):
+    print(S(0, N))
+\end{pyblock}
+\begin{minted}{R}
+S = function(n, N) {
+  if(n >= N) {
+    return(0)
+  }
+  return(1 + S(n + 1, N) + S(n + 2, N))
+}
+
+for (N in 1:24) {
+  print(S(0, N))
+}
+\end{minted}
+The result is this: \printpythontex.
+Apparently, the number of functions called grows very rapidly.
+When we want to compute for 6 balls and $N=45$ the situation must be much, much worse.
+
+The way out is to \emph{store} intermediate results rather than computing them time and again.
+For this we use the concept \emph{memoization}.
+You should memorize this concept when dealing with the computation of recursions.
+In short, this means that we check whether we computed the value of a function earlier.
+If so, get the value from memory, otherwise, do the computation, and store it for later purposes.
+
+Let's check what happens if we print out how often the function gets called when using memoization.
+\begin{pyblock}
+from functools import lru_cache
+
+@lru_cache   # This realizes the memoization.
+def S(n, N):
+    if n >= N:
+        return 0
+    print(f"Called for n = {n}\n")
+    return 1 + S(n + 1, N) + S(n + 2, N)
+
+
+S(0, 5)
+\end{pyblock}
+\begin{minted}{R}
+library("memoise")
+
+S = function(n, N) {
+  if(n >= N) {
+    return(0)
+  }
+  cat("Called for n =", n, "\n")
+  return(1 + S(n + 1, N) + S(n + 2, N))
+}
+S = memoise(S)
+
+S(0, 5)
+\end{minted}
+Now the result is this:
+\begin{center}
+\printpythontex
+\end{center}
+This is much better, for each $n$ the function in the recursion gets called just once.
+
+To convince you that memoization really works, let's remove the memoization.
+\begin{pyblock}
+def S(n, N):
+    if n >= N:
+        return 0
+    print(f"Called for n = {n}\n")
+    return 1 + S(n + 1, N) + S(n + 2, N)
+
+
+S(0, 5)
+\end{pyblock}
+\begin{minted}{R}
+S = function(n, N) {
+  if(n >= N) {
+    return(0)
+  }
+  cat("Called for n =", n, "\n")
+  return(1 + S(n + 1, N) + S(n + 2, N))
+}
+
+S(0, 5)
+\end{minted}
+This is the result:
+\begin{center}
+\printpythontex
+\end{center}
+You see how often the function is called with $n=4$?
+
+
+
+For the course you don't have to look up on the web how memoization is implemented, but I advice you to read about.
+Understanding such ideas makes you much better at programming, which is important in view of the fact that many of you will have to use computers a lot in your profession careers.
+Besides this, memoization lies at the heart of how spreadsheet programs such as excel work.
+
+Now we know that we have to use memoization, we can turn to the balls and urn problem.
+I build a general function $T(n,m)$ for the situation in which we have seen $n$ balls and we pick $m$ balls at a time.
+Like this, I can check with the earlier case in which we picked just one ball by computing $T(n, 1)$.
+(Hopefully you learn from this that you should also test your code.)
+
+
+%\begin{pyblock}[][numbers=left]
+\begin{pyblock}
+from math import comb
+from functools import lru_cache
+
+N = 45
+
+
+@lru_cache
+def T(n, m):
+    if n >= N:
+        return 0
+    res = comb(N, m)
+    for k in range(1, min(m, N - n) + 1):
+        P = comb(n, m - k)
+        P *= comb(N - n, k)
+        res += P * T(n + k, m)
+    return res / (comb(N, m) - comb(n, m))
+
+\end{pyblock}
+\begin{minted}{R}
+library("memoise")
+
+N = 45
+
+bigT = function(n, m) {
+  if(n >= N) {
+    return(0)
+  }
+  res = choose(N, m)
+  for (k in 1:min(m, N - n)) {
+    P = choose(n, m - k)
+    P = P * choose(N - n, k)
+    res = res + P * bigT(n + k, m)
+  }
+  return(res / (choose(N, m) - choose(n, m)))
+}
+bigT = memoise(bigT)
+
+bigT(0, 1)
+bigT(0, 6)
+\end{minted}
+Here is the check: $T(0, 1) = \py{T(0, 1)}$, which is the same as our earlier computation.
+
+Next, $T(0, 6) = \py{T(0,6)}$.
+This is more than $6$ as fast, i.e., $6\times T(0, 6) = \py{6*T(0, 6)} < T(0,1)$.
+Why is that?
+Well, the 6 balls we pick from the urn are guaranteed to be drawn without replacement.
+
+
+Can you solve the following extension? Suppose for each time you draw a set of balls, you get the value (in Euro's say) of the numbers on the balls, and then you put the balls back in the urn.
+The game stops when you have seen all balls at least once. What is your expected gain?
+
+\end{solution}
+\end{exercise}
+
+
+
+\section{Tutorial}
+\label{sec:tutorial}
+
+
+\subsection{Practice}
+
+\begin{exercise}
+Let $X$ be a continuous random variable with a pdf
+\begin{align}
+    f_X(x) = \begin{cases}
+    c, &\text{if } 0 \leq x \leq 4, \\
+    0, &\text{otherwise}.
+    \end{cases}
+\end{align}
+\begin{enumerate}
+    \item What is the value of $c$?
+    \item What is the distribution of $X$?
+    \item Do we need to know the value of $c$ to determine the distribution of $X$?
+\end{enumerate}
+
+\begin{solution}
+We need that the pdf $f_X$ integrates to one. Hence, we need
+\begin{align}
+    \int_{-\infty}^\infty f_X(x) dx &= 1 \qquad \iff \\
+    \int_{0}^4 c dx &= 1 \qquad \iff \\
+    4c &= 1 \qquad \iff \\
+    c &= 1/4.
+\end{align}
+Clearly, $X$ is uniformly distributed on $[0,4]$. In fact, we do not need to know the value of $c$ to determine this. It is sufficient to know that the pdf of $X$ is constant on the interval $[0,4]$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Let $X$ be a continuous random variable with a pdf
+\begin{align}
+    f_X(x) = c \cdot e^{-\frac{(x - 4)^2}{8}}, \quad x \in \R.
+\end{align}
+\begin{enumerate}
+    \item What is the value of $c$?
+    \item What is the distribution of $X$?
+    \item Do we need to know the value of $c$ to determine the distribution of $X$?
+\end{enumerate}
+\begin{solution}
+We need that the pdf $f_X$ integrates to one. Hence, we need
+\begin{align}
+    \int_{-\infty}^\infty f_X(x) dx &= 1 \qquad \iff \\
+    \int_{-\infty}^\infty c \cdot e^{-\frac{(x - 4)^2}{8}} dx &= 1 \qquad \iff \\
+    c \cdot \sqrt{2\pi}\cdot 2 \int_{-\infty}^\infty  \frac{1}{\sqrt{2\pi}\cdot 2} e^{-\frac{1}{2}\frac{(x - 4)^2}{2^2}} dx &= 1 \qquad \iff \\
+    c \cdot \sqrt{2\pi}\cdot 2 \cdot 1 &= 1 \qquad \iff \\
+    c &= \frac{1}{\sqrt{2\pi}\cdot 2}.
+\end{align}
+Clearly, $X$ is $N(4,2)$ distributed. In fact, we do not need to know the value of $c$ to determine this. It is sufficient to observe the structure of the pdf as a function of $x$.
+\end{solution}
+\end{exercise}
+
+
+\subsection{BH Exercises}
+
+
+\begin{exercise}
+BH Exercises: 7.15,
+\begin{solution}
+See our solution manual.
+\end{solution}
+\end{exercise}
+
+
+\section{Homework}
+\label{sec:homework}
+
+\subsection{Practice}
+\label{sec:practice}
+
+
+
+\subsection{BH Exercises}
+\label{sec:bh-exercises-1}
+
+
+\begin{exercise}
+BH 7.24
+\begin{solution}
+See our solution manual.
+\end{solution}
+\end{exercise}
+
+
+
+\section{Poleverywhere questions}
+\label{sec:polev-quest}
+
+
+TBD
+
+
+\section{Assignment}
+\label{sec:assignment}
+
+\subfile{../assignments/bh-8-18.tex}
+
+
+
+\opt{all-solutions-at-end}{
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\clearpage
+\section{Hints}
+\input{hint}
+\clearpage
+\section{Solutions}
+\input{ans}
+}
+j
+\end{document}

@@ -1,0 +1,352 @@
+% arara: pdflatex: { shell: yes }
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex: { shell: yes }
+% arara: move: {  files: ['study-guide.pdf'], target: ['../pdf-files/'] }
+
+\documentclass[a4paper,11pt]{article}
+
+
+\usepackage[all-solutions-at-end]{optional}
+
+\usepackage{../common/preamble}
+%\newcommand{\sectionbreak}{} %\clearpage}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{exercise}[theorem]{Ex}
+\newtheorem{remark}[theorem]{Remark}
+
+\setcounter{tocdepth}{1}
+\usepackage{a4wide}
+\usepackage{../common/abbreviations}
+
+\author{Lecturers PT and PD
+}
+\date{\today}
+\title{Probability Distributions, Week 6}
+
+\opt{all-solutions-at-end}{
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+}
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+
+\section{Lecture 11}
+\label{sec:lecture-1}
+
+
+\begin{itemize}
+\item 10.1: read, but skip examples 10.1.7, 10.1.8, 10.1.9
+\item BH video: 28
+\item BH Exercises: 10.2, 10.3, 10.6, 10.9,
+\end{itemize}
+
+
+
+\begin{exercise}
+We have a continuous r.v. $X$ with PDF
+\begin{align}
+  \label{eq:1123}
+  f(x) =
+  \begin{cases}
+    1/2, & 0\leq x < 1, \\
+    1/4, & 1\leq x \leq 3,
+  \end{cases}
+\end{align}
+and $0$ elsewhere. Compute $\E X$ and $\V X$.
+
+Then define the r.v.
+$Y$ such that $Y=\1{X< 1} + 2\1{X\geq 1}$.
+Explain what information you obtain about $X$ when somebody tells that $Y=1$, or that $Y=2$.
+Use conditioning on $Y$ and Adam's and Eve's laws to recompute $\E X$ and $\V X$.
+
+Again, with this exercise we can check whether we are applying all concepts in the correct way.
+\begin{solution}
+
+Using the properties of the uniform distribution,
+\begin{align}
+\E X &= \frac{1}{2} \int_0^1 x \d x + \frac{1}{4} \int_1^3 x \d x = \frac{1}{4} + \frac{9-1}{8} = \frac{5}{4} \\
+\E{X^2} &=  \frac{1}{2}\int_0^{1} x^{2}\d x + \frac{1}{4}\int_1^{3} x^{2}\d x = \frac{1}{6} + \frac{27-1}{12} = \frac{7}{3} \\
+\V X &=  \frac{7}{3} - \frac{25}{16} = \frac{37}{48}.
+\end{align}
+
+$Y=1 \implies 0\leq X< 1$,  $Y=2 \implies 2\leq X \leq 4$.
+
+\begin{align}
+\E{X\given Y=1} &= 1/2, \\
+\E{X\given Y=2} &= 2, \\
+g(y) &= \E{X\given Y=1}\1{y=1} + \E{X\given Y=2}\1{y=2}\\
+g(Y) &= \E{X \given Y} = \frac{1}{2} \1{Y=1} + 2 \1{Y=2},\\
+\E{X} &= \E{\E{X\given Y}} = \E{g(Y)} \\
+&=\E{\frac{1}{2} \1{Y=1} + 2 \1{Y=2}} \\
+&= \frac{1}{2} \E{\1{Y=1}} + 2 \E{\1{Y=2}} \\
+&= \frac{1}{2} \P{Y=1} + 2 \P{Y=2} \\
+\P{Y=1} &= \E{\1{Y=1}} = \E{\1{X<1}} = \frac{1}{2} \\
+\P{Y=2} &= \E{\1{Y=2}} = \E{\1{X\geq 1}} = \frac{1}{2} \\
+\E X &= \frac{1}{2} \frac{1}{2} + 2 \frac{1}{2} = \frac{5}{4}.
+\end{align}
+
+
+\begin{align}
+\V{X\given Y} &= \V{X\given Y=1}\1{Y=1} + \V{X\given Y=2}\1{Y=2} \\
+&= \frac{1}{12} \1{Y=1} + \frac{4}{12} \1{Y=2}, \\
+\E{\V{X\given Y}} &= \frac{1}{12} \frac{1}{2} + \frac{4}{12} \frac{1}{2} = \frac{5}{24}, \\
+\V{\E{X \given Y}} &= \frac{1}{4}\V{\1{Y=1}} + 4\V{\1{Y=2}} + 2\cov{\frac{1}{2}\1{Y=1}, 2\1{Y=2}} \\
+\V{\1{Y=1}} &= \V{\1{Y=2}}  = \frac{1}{4}, \\
+2\cov{\frac{1}{2}\1{Y=1}, 2\1{Y=2}} &= 2\cov{\1{Y=1}, \1{Y=2}}=-2\E{\1{Y=1}}\E{\1{Y=2}} = -\frac{1}{2}\\
+\V{\E{X \given Y}} &= \frac{1}{16} + 1 - \frac{1}{2} = \frac{9}{16}\\
+\V X &= \E{\V{X\given Y}} + \V{\E{X\given Y}} = \frac{5}{24} + \frac{9}{16}.
+\end{align}
+I forgot the covariance at first :-(
+\end{solution}
+\end{exercise}
+
+
+\section{Lecture 12}
+
+\begin{itemize}
+\item 10.2: read
+\item BH video: 29
+\item BH Exercises:
+\end{itemize}
+
+
+\begin{exercise}
+A server (e.g., a machine, a mechanic, a doctor) spends a random amount $T$ on a job.
+While the server works on the job, it sometimes gets interrupted to do other tasks $\{R_{i}\}$.
+Such tasks can be failures of the machine, and they need to be repaired before the machine can continue working again.
+(In the case of a mechanic, interruptions occur when the mechanic has to check some other machine or help other mechanics.)
+It is clear that such interruptions can only occur when the server is working.
+Assume that the interruptions arrive according to a Poisson process with rate $\lambda$, i.e., the number of failures $N| T \sim\Pois{\lambda T}$.
+The interruptions $\{R_{i}\}$ are independent of $T$ and form an iid sequence with common mean $\E R$ and variance $\V R$.
+(Typically, we get estimates for $\E T$ and $\V T$ from measurements.)
+
+Use Adam and Eve's laws to express the expectation and variance of the total time $S$ to complete a job in terms of $\E T$ and $\V R$.
+\begin{solution}
+
+Below we need some properties of the Poisson distribution.
+\begin{align}
+\E{N(T)} &= \E{\E{N(T)\given T}}\\
+\E{\E{N(T)\given T=t}}&= \E{N(t)} = \lambda t \\
+\E{\E{N(T)\given T}}&= \lambda T \\
+\E{N(T)} &= \E{\E{N(T)\given T}} = \E{\lambda T} = \lambda \E T\\
+\V{N(t)} &= \lambda t
+% \V N &= \E{\V{N\given T}} + \V{\E{N\given T}} \\
+% \V{N\given T} &= \lambda T  \implies \E{\V{N\given T}} = \lambda \E{T} \\
+% \E{N\given T} &= \lambda T \implies \V{\E{N\given T}} = \V{\lambda T} = \lambda^{2} \V T \\
+% \V N &= \lambda \E T + \lambda^{2} \V T.
+\end{align}
+
+The  duration $S$ of a job  is its own service time $T$ plus all interruptions, hence $S = T+ \sum_{i=1}^{N(T)} R_{i}$, hence
+\begin{align}
+\E S &= \E{\E{S\given T}}   = \E{\E{T + \sum_{i=1}^{N(T)} R_{i}\given T}} \\
+\E{S\given T = t} &= \E{T + \sum_{i=1}^{N(T)} R_{i}\given T=t} = \E{t + \sum_{i=1}^{N(t)} R_{i}} = t + \E{\sum_{i=1}^{N(t)} R_{i}} \\
+\E{\sum_{i=1}^{N(t)} R_{i}}  &= \E{\E{\sum_{i=1}^{N(t)} R_{i}\given N(t)}}\\
+\E{\sum_{i=1}^{N(t)} R_{i}\given N(t)= n} &= \E{\sum_{i=1}^{n} R_{i}} = n \E R  \implies \E{\sum_{i=1}^{N(t)} R_{i}\given N(t)} = N(t) \E R \\
+\E{\sum_{i=1}^{N(t)} R_{i}} &= \E{N(t) \E R} = \E R \E{N(t)} = \lambda t \E R\\
+\E{S \given T=t} &= t + \lambda \E R t = (1+\lambda \E R) t \\
+\E{S \given T} &= (1+\lambda \E R) T \\
+\E S  &= \E{(1 + \lambda \E R )T} = (1+\lambda \E R) \E T.
+\end{align}
+(When rereading this exercise, explain per step which assumption we use to get to the next step.)
+
+For the variance,
+\begin{align}
+\V S &= \E{\V{S\given T}} + \V{\E{S\given T}}.
+\end{align}
+From the above we immediately have
+\begin{align}
+\V{\E{S\given T}} &= \V{(1+\lambda \E R) T} = (1+\lambda\E R)^{2} \V T.
+\end{align}
+For $\E{\V{S\given T}}$ we go step  by step.
+\begin{align}
+\V{S\given T=t} &= \V{T + \sum_{i=1}^{N(T)} R_{i}\given T=t} = \V{\sum_{i=1}^{N(t)} R_{i}},
+\end{align}
+as $\V t = 0$. But $N(t)$ is a Poisson rv. So we need to use Eve's law again, but now condition on $N(t)$.
+\begin{align}
+\V{\sum_{i=1}^{N(t)} R_{i}} &= \E{\V{\sum_{i=1}^{N(t)} R_{i}\given N(t)}} + \V{\E{\sum_{i=1}^{N(t)} R_{i}\given N(t)}}.
+\end{align}
+For the middle part:
+\begin{align}
+\V{\sum_{i=1}^{N(t)} R_{i}\given N(t)=n} &= \V{\sum_{i=1}^{n} R_{i}}  = n \V R \\
+\V{\sum_{i=1}^{N(t)} R_{i}\given N(t)} &= N(t) \V R \\
+\E{\V{\sum_{i=1}^{N(t)} R_{i}\given N(t)}} &= \E{N(t) \V R}=  \lambda t \V R.
+\end{align}
+For the right part:
+\begin{align}
+\E{\sum_{i=1}^{N(t)} R_{i}\given N(t)=n} &= n \E R\\
+\E{\sum_{i=1}^{N(t)} R_{i}\given N(t)} &= N(t) \E R\\
+\V{\E{\sum_{i=1}^{N(t)} R_{i}\given N(t)}} &= \V{N(t)\E R} = (\E R)^{2} \V{N(t)} = (\E R)^{2} \lambda t.
+\end{align}
+And so,
+\begin{align}
+\V{\sum_{i=1}^{N(t)} R_{i}} &= \lambda t \V R  + \lambda t (\E R)^{2}  = \lambda t \E{R^{2}}.
+\end{align}
+Putting the things together:
+\begin{align}
+\V{S\given T=t} &= \V{\sum_{i=1}^{N(t)} R_{i}} = \lambda t \E{R^{2}}\\
+\V{S\given T} &= \lambda T \E{R^{2}}\\
+\E{\V{S\given T}} &= \lambda \E{R^{2}} \E T.
+\end{align}
+So, finally,
+\begin{align}
+\V S &= \lambda \E{R^{2}} \E T + (1+\lambda\E R)^{2} \V T.
+\end{align}
+
+Special cases for you to sort out:
+\begin{enumerate}
+\item  $R$ and $T$ constant. Why is still $\V S > 0$?
+\item Take $R$ and $T$ exponential; then the expressions for $\V T$ etc are still easy to manage.
+\end{enumerate}
+\end{solution}
+\end{exercise}
+
+
+\section{Tutorial}
+\label{sec:tutorial}
+
+
+\subsection{Practice}
+
+
+
+\begin{exercise}
+$\E{XY}^2 \quad?\quad \E{X^2}\E{Y^2}$.
+\begin{solution}
+By the Cauchy-Schwartz inequality,
+\begin{align}
+    \E{XY} \leq \sqrt{\E{X^2}\E{Y^2}}.
+\end{align}
+Squaring both sides yields the solution
+\begin{align}
+    \E{XY}^2 \leq \E{X^2}\E{Y^2}.
+\end{align}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+$\E{\log (X) } \quad?\quad \log(\E{X})$
+\begin{solution}
+By Jensen's inequality, $\E{\log X } \leq \log \E{X}$, since $\log(\cdot)$ is a concave function.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+$\V{Y} \quad?\quad \E{\V{Y|X}}$
+\begin{solution}
+By Eve's law we have
+\begin{align}
+    \V{Y} &= \E{\V{Y|X}} + \V{\E{Y|X}}.
+\end{align}
+Since $\V{\E{Y|X}} \geq 0$, it follows that
+\begin{align}
+    \V{Y} &\geq \E{\V{Y|X}}.
+\end{align}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+$\E{|X|} \quad?\quad \sqrt{\E{X^2}}$
+\begin{solution}
+Note that $|X| = \sqrt{X^2}$. Define $Y = X^2$ and note that $g(y) = \sqrt{y}$ is a concave function. Hence, by Jensen's inequality,
+\begin{align}
+    \E{|X|} &= \E{g(Y)} \leq g(\E{Y}) = \sqrt{\E{X^2}}.
+\end{align}
+Hence, the solution is $\E{|X|} \leq \sqrt{\E{X^2}}$
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+$\P{X^2 \geq 4} \quad?\quad \E{|X|}/2$
+\begin{solution}
+We have
+\begin{align}
+    \P{X^2 \geq 4} = \P{|X| \geq 2} \leq \E{|X|}/2,
+\end{align}
+by Markov's inequality.
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+Let $Z \sim N(0,1)$. Then, $\P{Z > \sqrt{2}} \quad?\quad 1/e$.
+\begin{solution}
+By Chernoff's inequality,
+\begin{align}
+    \P{Z > \sqrt{2}} &\leq \frac{\E{e^{tZ}}}{e^{\sqrt{2}t}} \\
+    &= \frac{e^{\frac{1}{2}t^2}}{e^{\sqrt{2}t}} \\
+    &= e^{\frac{1}{2}t^2 - \sqrt{2}t},
+\end{align}
+for every $t > 0$. This inequality is tightest for $t = \sqrt{2}$, as this minimizes $\frac{1}{2}t^2 - \sqrt{2}t$. Plugging in this value yields
+\begin{align}
+    \P{Z > \sqrt{2}} &\leq e^{\frac{1}{2}\sqrt{2}^2 - \sqrt{2}\cdot \sqrt{2}}\\
+    &\leq e^{1 - 2} = 1/e.
+\end{align}
+\end{solution}
+\end{exercise}
+
+
+\subsection{BH Exercises}
+
+
+\begin{exercise}
+BH Exercises: 7.15,
+\begin{solution}
+See our solution manual.
+\end{solution}
+\end{exercise}
+
+
+\section{Homework}
+\label{sec:homework}
+
+\subsection{Practice}
+\label{sec:practice}
+
+
+
+
+\subsection{BH Exercises}
+\label{sec:bh-exercises-1}
+
+
+\begin{exercise}
+BH 7.24
+\begin{solution}
+See our solution manual.
+\end{solution}
+\end{exercise}
+
+
+
+\section{Polleverywhere questions}
+\label{sec:polev-quest}
+
+
+TBD
+
+
+\section{Assignment}
+\label{sec:assignment}
+
+\subfile{../assignments/bh-9-37.tex}
+
+
+\opt{all-solutions-at-end}{
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\clearpage
+\section{Hints}
+\input{hint}
+\clearpage
+\section{Solutions}
+\input{ans}
+}
+\end{document}
