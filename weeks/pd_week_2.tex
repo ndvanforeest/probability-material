@@ -40,27 +40,28 @@
 \label{sec:lecture-1}
 
 \begin{enumerate}
-\item BH Book: Section 7.1.2 joint, marginal, conditional for continuous rvs
-\item BH Book: Section 7.1.3 joint, marginal, conditional for hybrid rvs
+\item BH Book: Read Section 7.1.2 joint, marginal, conditional for continuous rvs
+\item BH Book: Read Section 7.1.3 joint, marginal, conditional for hybrid rvs
 \item BH video: -
 \item BH Exercises: 7.1, 7.10, 7.11
 \end{enumerate}
 
 \begin{exercise}
-$n$ people throw their hat in a box. After shuffling, each of them takes out a hat at random. How many people do you expect to take out their own hat (i.e., the hat they put in the box); what is the variance?
+$n$ people throw their hat in a box.
+After shuffling, each of them takes out a hat at random.
+How many people do you expect to take out their own hat (i.e., the hat they put in the box); what is the variance?
 \begin{hint}
 Take $\1{X_i=i}$. When this is 1, person $i$ picks its own hat, and if 0, the person picks somebody else's hat. What is the meaning of $S=\sum_{i=1}^n \1{X_i=i}$?
 \end{hint}
 \begin{solution}
 Use the hint.
-\end{solution}
 \begin{align*}
 \E{\1{X_i=i}} &= 1/n, \quad \text{for all } i. \\
   \E{S} &= \sum_{i=1}^n \E{\1{X_{i}=i}} = \sum_{i=1}^n 1/n = 1. \\
   \E{S^{2}} &= \sum_{i=1}^n \E{\1{X_{i}=i}} + \sum_{i \neq j} \E{\1{X_{i}=i}\1{X_{j}=j}} = 1 + n(n-1)\cdot \frac{1}{n}\frac{1}{n-1} = 1 + 1 =2.\\
   \V S &= \E{S^{2}}  - (\E S)^{2} = 2 - 1 = 1.
 \end{align*}
-
+\end{solution}
 \end{exercise}
 
 
@@ -141,10 +142,10 @@ print(var(res))
 \section{Lecture 4}
 \label{sec:lecture-1}
 \begin{enumerate}
-\item BH Book: Section 7.2, 2d LOTUS
-\item BH Book: Section 7.3, covariance and correlation
-\item BH Book: Section 7.4, skip
-\item BH Book: Section 7.5, only proof of Theorem 7.5.7, skip the rest
+\item BH Book: Read Section 7.2, 2d LOTUS
+\item BH Book: Read Section 7.3, covariance and correlation
+\item BH Book: Read Section 7.4, skip
+\item BH Book: Read Section 7.5, only proof of Theorem 7.5.7, skip the rest
 \item BH video: 21
 \item BH Exercises: 7.38, 7.53, 7.58
 \end{enumerate}
@@ -482,7 +483,7 @@ See our solution manual.
 
 
 
-\section{Poleverywhere questions}
+\section{Polleverywhere questions}
 \label{sec:polev-quest}
 
 
@@ -493,7 +494,6 @@ TBD
 \label{sec:assignment}
 
 \subfile{../assignments/bh-7-1.tex}
-\subfile{../assignments/bh-7-9.tex}
 
 
 

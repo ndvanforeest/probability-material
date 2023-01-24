@@ -1,0 +1,369 @@
+% arara: pdflatex: { shell: yes }
+% arara: pythontex: {verbose: yes, rerun: modified }
+% arara: pdflatex: { shell: yes }
+% arara: move: {  files: ['study-guide.pdf'], target: ['../pdf-files/'] }
+
+\documentclass[a4paper,11pt]{article}
+
+
+\usepackage[all-solutions-at-end]{optional}
+
+\usepackage{../common/preamble}
+%\newcommand{\sectionbreak}{} %\clearpage}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{exercise}[theorem]{Ex}
+\newtheorem{remark}[theorem]{Remark}
+
+\setcounter{tocdepth}{1}
+\usepackage{a4wide}
+\usepackage{../common/abbreviations}
+
+\author{Lecturers PT and PD
+}
+\date{\today}
+\title{Probability Distributions, Week 5}
+
+\opt{all-solutions-at-end}{
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+}
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Lecture 9}
+\label{sec:lecture-1}
+
+\begin{itemize}
+\item 8.2: read, but do convolutions with conditioning
+\item 9.3: read
+\item 9.4: skip
+\item BH video: 27
+\item BH Exercises:9.32, 9.37, 9.39, 9.50, 9.52, 9.55
+\end{itemize}
+
+
+\begin{exercise}
+The lifetime $X$ of a machine is $\Exp{\lambda}$.
+
+a. Compute $\E{X \given X\leq \tau}$ where $\tau$ is some positive constant.
+
+b. As a \emph{check} on the result of a., use  Adam's law and LOTP to show that $\E{X} = \E{\E{X\given Y}} = 1/\lambda$, where $Y=\1{X\leq \tau}$.
+\begin{solution}
+Since $X\sim \Exp{\lambda}$,
+\begin{equation*}
+\P{X\leq t | X\leq \tau} = \frac{\P{X\leq \min\{t, \tau\}}}{\P{X\leq \tau}} = \frac{1-e^{-\lambda\min\{t, \tau\}}}{1-e^{-\lambda \tau}}.
+\end{equation*}
+ Defining
+\begin{equation*}
+  f(t) = \partial_{t} \P{X\leq t | X\leq \tau} = \lambda \frac{e^{-\lambda t}}{1-e^{-\lambda \tau}} \1{0\leq t \leq \tau},
+\end{equation*}
+we get
+\begin{align}
+  \label{eq:9925}
+\E{X|X\leq \tau}
+&= \int t f(t) \d t \\
+&= \frac{1}{1-e^{-\lambda \tau}}\int_{0}^{\tau} \lambda t e^{-\lambda t} \d t.
+\end{align}
+Simplifying,
+\begin{align}
+\label{eq:926}
+\int_0^{\tau} \lambda t e^{-\lambda t} \d t
+&= \left.- t e^{-\lambda t}\right|_{0}^{\tau} + \int_0^{\tau} e^{-\lambda t} \d t \\
+&= -\tau e^{-\lambda \tau} + \frac{e^{-\lambda \tau} -1}{-\lambda} \\
+&= \frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda},
+\end{align}
+\begin{align}
+  \label{eq:925}
+\E{X|X\leq \tau}
+&= \frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda(1-e^{-\lambda \tau})}.
+\end{align}
+
+For part 2: by memorylessness, $\E{X\given X>\tau} = \tau + 1/\lambda$. Hence,
+\begin{align}
+  \label{eq:94}
+\E X
+&= \E{\E{X\given Y}}, \quad \text{Adam's law} \\
+&= \E{X\given Y=1}\P{Y=1} + \E{X\given Y=0}\P{Y=0}, \quad \text{LOTE}\\
+&= \E{X\given X\leq \tau}\P{X\leq \tau} + \E{X\given X>\tau} \P{X>\tau} \\
+&= \frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda(1-e^{-\lambda \tau})} (1-e^{-\lambda \tau}) + (\tau+ 1/\lambda) e^{-\lambda \tau} \\
+&= 1/\lambda - e^{-\lambda \tau}/\lambda - \tau e^{-\lambda \tau} + \tau e^{-\lambda T} + e^{-\lambda \tau}/\lambda \\
+&=1/\lambda.
+\end{align}
+
+Here is a final point for you to think hard about: ${X\leq \tau}$ is an event, $Y=\1{X \leq \tau}$ is a r.v. Therefore the following is sloppy notation: $\E{\E{X\given X\leq \tau}}$, and when using, it is easy to get confused, because where is the random variable  on which we  should condition according to Adam's law?
+\end{solution}
+\end{exercise}
+
+
+
+\section{Lecture 10}
+
+
+\begin{itemize}
+\item 9.5: read but skip example 9.5.4
+\item 9.6: read but skip example 9.6.3
+\item BH video: -
+\item BH Exercises:
+\end{itemize}
+\begin{exercise}
+We have a station with two machines, one is working, the other is off.
+If the first fails, the other machine takes over.
+The repair time of the first machine is a constant $\tau$.
+If the second machine fails before the first is repaired, the station stops working, i.e., is `down'. If the second machine does not fail before the first is repaired, the first machine takes over, and a new cycle starts (i.e., wait for the first to fail again, and so on).
+
+Use a conditioning argument to find the expected time $\E T$ until the station is down when the lifetimes of both machines is iid $\sim\Exp{\lambda}$.
+\begin{solution}
+Let $X_i$ be the lifetime of machine $i$. Suppose that  the second machine does not break down before $\tau$, then
+\begin{equation}
+\E{T| X_{2}>\tau} = \E{X_{1} + \tau + C |X_2>\tau} = 1/\lambda + \tau + \E T,
+\end{equation}
+because the expected time until machine 1 fails is $1/\lambda$, then we wait until it is repaired, and then, by memoryless, a new cycle $C$ starts, which has an expected duration of $\E T$.
+
+Next condition on the second machine breaking down before $\tau$. Then, since $X_{1}$ and $X_2$ are independent and by the previous exercise,
+\begin{equation}
+\E{T| X_{2}\leq \tau} = \E{X_{1} + X_{2}  |X_2\leq \tau} = \frac{1}{\lambda} + \frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda(1-e^{-\lambda \tau})}.
+\end{equation}
+
+By LOTE and using $\P{X_{2}\geq \tau} = e^{-\lambda \tau}$,
+\begin{align}
+  \label{eq:924}
+\E T
+&=
+\E{T| X_{2}\leq \tau} \P{X_{2}\leq \tau} + \E{T| X_{2}\geq \tau} \P{X_{2}\geq \tau} \\
+&=(1-e^{-\lambda \tau})\left( \frac 1\lambda+
+\frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda(1-e^{-\lambda \tau})} \right)
++e^{-\lambda \tau}\left( \frac{1}{\lambda} + \tau + \E T \right) \\
+&=\frac{1}{\lambda} + \frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda}
++e^{-\lambda \tau} \tau + e^{-\lambda \tau}\E T \\
+&\implies \\
+\left( 1-e^{-\lambda \tau} \right) \E T
+&=\frac{2-e^{-\lambda \tau}}{\lambda} \\
+&\implies \\
+\E T
+&=\frac{2-e^{-\lambda \tau}}{\lambda(1-e^{-\lambda \tau})}.
+\end{align}
+
+For you to do: Check the limits $\tau=0$ and $\tau=\infty$. Is the result in accordance with your intuition?
+
+Two challenges: Does the problem become much harder when $X_{1}$ and $X_{2}$ are still exponential, but have different failure rates $\lambda_1$ and $\lambda_{2}$? Can you extend the analysis to 3 machines, or $n$ machines?
+
+\end{solution}
+\end{exercise}
+
+
+\section{Tutorial}
+\label{sec:tutorial}
+
+
+\subsection{Practice}
+
+We have a wooden stick of length 100 cm that we break twice.
+First, we break the stick at a random point that is uniformly distributed over the entire stick.
+We keep the left end of the stick.
+Then, we break the remaining stick again at a random point, uniformly distributed again, and we keep the left end again.
+
+\begin{exercise}
+What is the expected length of the stick we end up with?
+\begin{solution}
+Let $X \sim \Unif{0,100}$ denote the point where the first stick is broken (in cm). Let $S$ denote the point where the second stick is broken (i.e., the length of the remaining stick). Then, $S \sim \Unif{0,X}$. We want to compute $\E{Y}$. Using Adam's law we obtain
+\begin{align}
+    \E{S} &= \E{\E{S|X}} \\
+    &= \E{X/2} \\
+    &= \E{X}/2 \\
+    &= 100/4 = 25.
+\end{align}
+Hence, we end up with a stick of expected length 25 cm.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Now we change the story slightly. Every time we break a stick, we keep the \textit{longest} part. What is the expected length of the remaining stick?
+\begin{solution}
+By symmetry we can assume that the point of the first break is $Y\sim\Unif{1/2, 1}$, in meters. By the same reasoning, the point of the second break, conditional on $Y=y$, is $Z|Y=y \sim \Unif{y/2, y}$. Then, $\E{Z|Y=y} = 3y/4$. Replacing $y$ by the rv $Y$, we have that $\E{Z|Y} = 3 Y/4$. With this, and Adam's law,
+\begin{equation}
+\E Z = \E{\E{Z|Y}} = \E{3Y/4} = 3/4\cdot \E{Y}= 3/4\cdot (1/2+1)/2 = (3/4)^{2},
+\end{equation}
+in meters.
+
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+As a continuation of BH.9.2.4, we now ask you to use Eve's law to compute $\V Y$, the variance of the second break point.
+\begin{solution}
+Recall that $\V X = 1/12$. More generally, if the stick has length $l$, then $\V X = l^{2}/12$. With this idea and using the solution of BH.9.2.4,
+\begin{align}
+\E{Y\given X=x} &= x/2,\\
+\V{Y\given X=x}
+&= \E{Y^{2}\given X=x} - (\E{Y\given X=x})^{2} \\
+&= \frac{1}{x}\int_{0}^{x} y^{2} \d y - \left(\frac1x\int_{0}^{x} y \d y\right)^{2}  = x^{3}/3x - (x^{2}/2x)^{2} = x^{2}/12\\
+\intertext{Replacing $x$ by $X$:}
+\E{Y\given X} &= X/2,\\
+\V{Y\given X} &= X^{2}/12, \\
+\intertext{Adam's law:}
+\E{Y\given X} &= X/2 \implies \E{Y} = \E{\E{Y\given X}} = \E{X/2} = 1/4.
+\intertext{Eve's law:}
+\V Y &= \E{\V{Y\given X}} + \V{\E{Y\given X}} \\
+\V{Y\given X} &= X^{2}/12 \implies \E{\V{Y\given X}} = \E{X^2}/12 = \frac{1}{12} \int_0^1x^2 \d x = \frac{1}{12\cdot 3}\\
+\E{Y\given X} &= X/2 \implies \V{\E{Y\given X}} = \V{X/2} = \frac{1}{4} \frac{1}{12}, \\
+\V Y &= 1/12\cdot (1/3 + 1/4) = 7/144.
+\end{align}
+\end{solution}
+\end{exercise}
+
+
+
+\subsection{BH Exercises}
+
+
+\begin{exercise}
+BH Exercises: 7.15,
+\begin{solution}
+See our solution manual.
+\end{solution}
+\end{exercise}
+
+
+\section{Homework}
+\label{sec:homework}
+
+\subsection{Practice}
+\label{sec:practice}
+
+
+
+
+\begin{exercise}
+We have a standard fair die and we paint red the sides with $1, 2, 3$ and blue the other sides.
+Let $X$ be the color after a throw and $Y$ the number.
+Use the definitions of conditional expectation, conditional variance and Adam's and Eve's law to compute $\E Y$ and $\V Y$.
+Compare that to the results you would obtain from using the standard methods; you should get the same result.
+
+This exercises is handy to check before you solve BH.9.1.
+
+
+BTW, it's easy to make some variations on this exercise by painting other combinations of sides, e.g., only 1 and 2 are red.
+\begin{solution}
+The first step is easy:
+\begin{align}
+\E{Y\given X=r} &= \sum_{y} y \P{Y=y\given X=r} = \sum_{y} y \frac{\P{Y=y,  X=r}}{\P{X=r}} = \frac{(1+2+3)/6}{1/2}  = 2, \\
+\E{Y\given X=b} &= \frac{(4 + 5+ 6)/6}{1/2}  = 5.
+\end{align}
+
+Recall that in the stick breaking exercise, we first computed $\E{Y\given X = x} = x/2$, and then we replaced $x$ by $X$ to get $\E{Y\given X} = X/2$. In the present case (with the die), where is the $x$ at the RHS? In other words, how to turn the above into a function $g(x)$ so that we can replace $x$ by $X$ to get a rv?
+
+
+Here is the solution. Define $g$ as
+\begin{equation}
+  \label{eq:111}
+  g(x) =
+  \begin{cases}
+    \E{Y\given X=r}, & \text{if } x = r \\
+    \E{Y\given X=b}, & \text{if } x = b.
+  \end{cases}
+\end{equation}
+But this is equal to
+\begin{equation}
+  \label{eq:112}
+  g(x) = \E{Y\given X=r} \1{x=r} + \E{Y\given X=b} \1{x=b}.
+\end{equation}
+
+With this insight:
+\begin{align*}
+\E{Y\given x} &=  g(x) = \E{Y\given X=r} \1{x=r} + \E{Y\given X=b} \1{x=b}, \\
+\E{Y\given X} &=  g(X) = \E{Y\given X=r} \1{X=r} + \E{Y\given X=b} \1{X=b}.
+\end{align*}
+Here, the indicators are the rvs!
+
+And now,
+\begin{align}
+\E Y &= \E{\E{Y\given X}} = \E{g(X)} \\
+&=\E{\E{Y\given X=r} \1{X=r} + \E{Y\given X=b} \1{X=b}}\\
+&=\E{\E{Y\given X=r} \1{X=r}} + \E{\E{Y\given X=b} \1{X=b}}\\
+&=\E{Y\given X=r} \E{\1{X=r}} + \E{Y\given X=b} \E{\1{X=b}}\\
+&=\E{Y\given X=r} \P{X=r} + \E{Y\given X=b} \P{X=b}\\
+&=2 \frac{1}{2}+ 5 \frac{1}{2}.
+\end{align}
+
+In view of this, let's consider LOTE again. Observing that
+\begin{align}
+A_{1} = \{s \in S : \textrm{paint of $s$ is red}\} = \{1, 2,3 \} \\
+A_{2} = \{s \in S : \textrm{paint of $s$ is blue}\} = \{4, 5, 6\},
+\end{align}
+we have
+\begin{align}
+  \E{Y\given X=r} &= \E{Y\given A_{1}}, \\
+  \E{Y\given X=b} &= \E{Y\given A_{2}} \\
+  g(x) &= \E{Y\given X=r} \1{x=r} + \E{Y\given X=b} \1{x=b} \\
+   &= \E{Y\given A_{1}} \1{x\in A_{1}} + \E{Y\given A_{2}} \1{x=A_{2}} \\
+ &= \sum_{i=1,2}  \E{Y\given A_{i}} \1{x\in A_{i}}
+\end{align}
+The last is simple to generalize!
+\begin{align}
+  g(x)  &= \sum_{i}  \E{Y\given A_{i}} \1{x\in A_{i}}  \\
+  g(X)  &= \sum_{i}  \E{Y\given A_{i}} \1{X\in A_{i}}.
+\end{align}
+And now we define $\E{Y\given X} = g(X)$. Remember these general equations!
+
+
+Now observe that Adam's law and LOTE are the same for discrete rvs:
+\begin{align*}
+\E{Y}
+&= \E{\E{Y\given X}} \\
+&= \E{g(X)} \\
+&=\E{\sum_{i} \E{Y\given A_{i}} \1{X\in A_{i}}} \\
+&=\sum_{i}  \E{Y\given A_{i}} \E{\1{X\in A_{i}}} \\
+&=\sum_{i}  \E{Y\given A_{i}} \P{A_{i}}.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+
+
+\subsection{BH Exercises}
+\label{sec:bh-exercises-1}
+
+
+\begin{exercise}
+BH 7.24
+\begin{solution}
+See our solution manual.
+\end{solution}
+\end{exercise}
+
+
+
+
+\section{Poleverywhere questions}
+\label{sec:polev-quest}
+
+
+TBD
+
+
+\section{Assignment}
+\label{sec:assignment}
+
+%\subfile{../assignments/bh-7-1.tex}
+
+\subfile{../assignments/bh-9-6-1.tex}
+
+
+
+\opt{all-solutions-at-end}{
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\clearpage
+\section{Hints}
+\input{hint}
+\clearpage
+\section{Solutions}
+\input{ans}
+}
+\end{document}
