@@ -6,9 +6,6 @@
 \documentclass[a4paper,11pt]{article}
 
 
-%\usepackage[nosolutions]{optional}
-%\usepackage[justhints]{optional}
-%\usepackage[check]{optional}
 \usepackage[all-solutions-at-end]{optional}
 
 \usepackage{../common/preamble}
@@ -38,15 +35,7 @@
 \maketitle
 \tableofcontents
 
-\chapter{Week 1}
-\label{cha:week-1}
-
-
-
-\section{Lectures}
-\label{sec:lectures}
-
-\subsection{Lecture 1}
+\section{Lecture 1}
 \label{sec:lecture-1}
 
 \begin{enumerate}
@@ -58,7 +47,7 @@
 \end{enumerate}
 
 
-\subsection{Lecture 2}
+\section{Lecture 2}
 \label{sec:lecture-1}
 \begin{enumerate}
 \item BH Book: Section 7.0 intro,
@@ -68,15 +57,305 @@
 \end{enumerate}
 
 
+\begin{exercise}
+Consider 12 football players on a football field.
+Eleven of them are players of F.C. Barcelona, the other one is an arbiter.
+We select a random player, uniform.
+This player must take a penalty.
+The probability that a player of Barcelona scores is 70\%, for the arbiter it is 50\%.
+Let $P\in \{A, B\}$ be r.v that corresponds to the selected player, and $S\in\{0,1\}$ be the score.
+\begin{enumerate}
+\item What is the PMF? In other words, determine $\P{P = B, S=1}$ and so on for all possibilities.
+\item What is $\P{S=1}$? What is $\P{P=B}$?
+\item Show that $S$ and $P$ are dependent.
+\end{enumerate}
+\begin{solution}
+Here is the joint PMF:
+\begin{align}
+\P{P=A, S=1} &= \frac{1}{12}0.5 & \P{P=A, S=0} &= \frac{1}{12}0.5 \\
+\P{P=B, S=1} &= \frac{11}{12}0.7 & \P{P=B, S=0} &= \frac{11}{12}0.3.
+\end{align}
+Now the marginal PMFs
+\begin{align*}
+\P{S=1}  &= \P{P=A, S=1} + \P{P=B, S=1} = 0.042 + 0.64 = 0.683 = 1-\P{S=0}\\
+\P{P=B}  &= \frac{11}{12} = 1-\P{P=A}.
+\end{align*}
+For independence we take the definition.
+In general, for all outcomes $x,y$ we must have that $\P{X=x, Y=y} = \P{X=x}\P{Y=y}$.
+For our present example, let's check for  a particular outcome:
+\begin{align*}
+\P{P=B, S=1} &= \frac{11}{12}\cdot0.7 \neq \P{P=B}\P{S=1} = \frac{11}{12} \cdot 0.683
+\end{align*}
+The joint PMF is obviously not the same as the product of the marginals, which implies that $P$ and $S$ are not independent.
+\end{solution}
+\end{exercise}
+
+
 \section{Tutorial}
 \label{sec:tutorial}
 
+\subsection{Practice}
+
+\begin{exercise}
+Let $L=\min\{X, Y\}$, where $X, Y\sim \Geo{p}$ and independent.
+What is the domain of $L$? Then, use the fundamental bridge and 2D LOTUS to show that
+\begin{equation*}
+\P{L\geq i}=q^{2i} \implies L\sim\Geo{1-q^{2}}.
+\end{equation*}
+\begin{hint}
+The fundamental bridge and 2D LOTUS have  the general form
+\begin{equation*}
+\P{g(X,Y}\in A\} = \E{\1{g(X, Y) \in A}} = \sum_{i}\sum_j \1{g(i, j)\in A} \P{X=i, Y=j}.
+  \end{equation*}
+Take  $g(i,j) = \min\{i, j\}$.
+\end{hint}
+\begin{solution}
+With the hint,
+  \begin{align*}
+\P{L\geq k}
+&= \sum_{i}\sum_{j} \1{\min\{i,j\}\geq k} \P{X=i, Y=j}\\
+&= \sum_{i\geq k} \sum_{j\geq k} \P{X=i}\P{Y=j}\\
+&=  \P{X\geq k}\P{Y\geq k} = q^{k} q^{k} = q^{2k}.
+  \end{align*}
+$\P{L>i}$ has the same form as $\P{X>i}$, but now with $q^{2i}$ rather than $q^{i}$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}\label{ex:1}
+Let $M=\max\{X, Y\}$, where $X, Y\sim \Geo{p}$ and independent.
+Show that
+\begin{align*}
+\P{M=k} = 2 pq^{k}(1-q^{k}) + p^2q^{2k}.
+\end{align*}
+\begin{hint}
+  Use 2D LOTUS on $g(x,y) = \1{\max\{x, y\} = k}$.
+\end{hint}
+\begin{solution}
+  \begin{align*}
+\P{M=k}
+&= \P{\max\{X, Y\} = k} \\
+&=p^{2}\sum_{ij}\1{\max\{i,j\} =k} q^i q^j\\
+&=2 p^{2}\sum_{ij}\1{i=k}\1{j < k} q^i q^j + p^{2}\sum_{ij}\1{i=j=k} q^{i} q^j \\
+&=2 p^{2}q^{k}\sum_{j < k} q^j + p^{2}q^{2k}\\
+&=2 p^{2}q^{k}\frac{1-q^{k}}{1-q} +  p^{2}q^{2k}\\
+  \end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}\label{ex:2}
+Explain that
+\begin{equation*}
+\P{L=i, M=k} = 2p^{2}q^{i+k}\1{k>i}+ p^{2}q^{2i}\1{i=k}).
+\end{equation*}
+\begin{solution}
+  \begin{align*}
+\P{L=i, M=k}
+&= 2\P{X=i, Y=k}\1{k>i} + \P{X=Y=i}\1{i=k} \\
+&= 2p^{2}q^{i+k}\1{k>i}+ p^{2}q^{2i}\1{i=k}.
+  \end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+With the previous exercise, use marginalization to compute the marginal PMF $\P{M=k}$.
+\begin{solution}
+  \begin{align*}
+\P{M=k}
+&= \sum_{i} \P{L=i, M=k} \\
+ &= \sum_{i} (2p^{2}q^{i+k}\1{k>i}+ p^{2}q^{2i}\1{i=k}) \\
+ &= 2p^2q^k\sum_{i=0}^{k-1} q^{i}+ p^{2}q^{2k} \\
+ &= 2pq^k (1-q^{k})+ p^{2}q^{2k} \\
+ &= 2pq^k + (p^{2}-2p) q^{2k},
+  \end{align*}
+\end{solution}
+\end{exercise}
+
+
+\subsection{BH Exercises}
+\label{sec:bh-exercises}
+
+
+\begin{exercise}
+Exercise BH.6.22
+\begin{solution}
+See our solution manual for BH problems.
+\end{solution}
+\end{exercise}
+
+
+
+
+\section{Homework}
+\label{sec:homework}
+
+\subsection{Practice}
+\label{sec:simple-exercises}
+
+
+\begin{exercise}
+In your own words, explain what is
 \begin{enumerate}
-\item Our exercises on Section bh.7.1.1
-\item BH Exercises: 6.22
+\item a joint PMF, PDF, CDF;
+\item a conditional PMF, PDF, CDF;
+\item a marginal PMF, PDF, CDF.
+\end{enumerate}
+\begin{solution}
+Check the definitions of the book.
+
+Mistake: To say that $\P{X=x}$ is the PMF for a continuous random variable is wrong, because $\P{X=x}=0$ when $X$ is continuous.
+
+Why is $\P{1 < x \leq 4}$ wrong notation?
+hint: $X$ should be a capital.
+What is the difference between $X$ and $x$?
+
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+Suppose the probability of obtaining a head twice out of two coin flips is $\P{X_1=H, X_2=H}$.
+What has this to do with joint PMFs? Can you generalize this idea to other examples?
+\begin{solution}
+This example shows why joint distributions are important!
+In any experiment that involves a sequence of measurements, such as multiple throws of a coin, or the weighing of a bunch of chimpanzees, we have to deal with joint CDFs and PMFs.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+In the previous exercise, suppose the outcome of the second throw is always equal to that of the first. Specify the joint PMF.
+\begin{solution}
+Here, we deal with two rvs, and we have to specify how they depend. In the present case $\P{X_1= H, X_2=H} = \P{X_1=H}$ and $\P{X_1= T, X_2=T} = \P{X_1=T}$, $\P{X_1= H, X_2=T} = \P{X_1= T, X_2=H} = 0$. Note that with this, we specified the joint PMF on all possible outcomes.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Let $X$ be uniformly distributed on the set $\{0,1,2\}$ and let $Y \sim \Bern{1/4}$; $X$ and $Y$ are independent.
+\begin{enumerate}
+\item Present a contingency table for $X$ and $Y$.
+\item What is the interpretation of the column sums of the table?
+\item What is the interpretation of the row sums of the table?
+\item Suppose you would change some of the entries in the table. Are $X$ and $Y$ still independent?
+\end{enumerate}
+\begin{solution}
+$\P{X=0, Y=0} = 1/3 \cdot 3/4$,
+$\P{X=0, Y=1} = 1/3 \cdot 1/4$, and so on.
+
+If we have one column with $Y=0$ and the other with $Y=1$, then the sum over the columns are $\P{Y=0}$ and $\P{Y=1}$. The row sum for row $i$ are  $\P{X=i}$.
+
+Changing the values will (most of the time) make $X$ and $Y$ dependent. But, what if we changes the values such that  $\P{X=0, Y=0} =1$? Are $X$ and $Y$ then again independent? Check the conditions again.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+A machine makes items on a day.
+Some items, independent of the other items, are failed (i.e., do not meet the quality requirements).
+What are $N$ and  $p$ in the context of the chicken-egg story of BH? What are the `eggs' in this context, and what is the meaning of `hatching'?
+What type of `hatching' do we have here?
+\begin{solution}
+  The number of produced items (laid eggs) is $N$. The probability of hatching is $p$, that is, an item is ok. The hatched eggs are the good items.
+\end{solution}
+\end{exercise}
+
+% \begin{exercise}
+% Apply the chicken-egg story. Families enter a zoo in a given hour. Some families have one child, other two, and so on.
+% What are the `eggs' in this context, and what is the meaning of `hatching'?
+% \end{exercise}
+
+
+\begin{exercise}
+Theorem 7.1.11. What is the meaning of the notation $X|N=n$?
+\begin{solution}
+  Given $N=n$, the random variable $X$ has a certain distribution, here binomial.
+\end{solution}
+\end{exercise}
+
+
+
+
+
+
+\begin{exercise}
+An insurance company receives on a certain day two claims $X, Y \geq 0$.
+We will find the PMF of the loss $Z=X+Y$ under different assumptions.
+
+Suppose $p_{X,Y}(i,j) = c \1{i=j}\1{1\leq i \leq 4}$.
+\begin{enumerate}
+\item  What is $c$?
+\item What is $F_{X}(i)$?
+\item What is $F_{Y}(j)$?
+\item  Are $X$ and $Y$ dependent?  If so, why, because $1=F_{X,Y}(4,4)= F_X(4)F_Y(4)$?
+\item What is $\P{Z=k}$?
+\item What is $\V Z$?
 \end{enumerate}
 
 
+\begin{solution}
+1. $c=1/4$ because there are just four possible values for $i$ and $j$.
+2. and 3. Use marginalization:
+\begin{align}
+F_X(k) &=  F_{X,Y}(k, \infty ) = \sum_{i\leq k} \sum_j p_{X,Y}(i,j) \\
+ &= \frac{1}{4}\sum_{i\leq k} \sum_j \1{i=j}\1{1\leq i \leq 4}\\
+ &= \frac{1}{4}\sum_{i\leq k} \1{1\leq i \leq 4} \\
+&=k/4,\\
+F_Y(j) &= j/4.
+\end{align}
+
+4.  The equality in the question must hold for all $i,j$, not only for $i=j=4$.
+  If you take $i=j=1$, you'll see immediately that $F_{X,Y}(1,1)\neq F_X(1)F_Y(1)$:
+  \begin{align}
+    \label{eq:823}
+    \frac{1}{4} = F_{X,Y}(1,1) \neq F_{X}(1) F_Y(1) = \frac{1}{4}\frac{1}{4}.
+  \end{align}
+
+5. $\P{Z=2} = \P{X=1, Y=1} = 1/4 = \P{Z=4}$, etc.
+$\P{Z=k} = 0$ for $k\not \in \{2, 4, 6, 8\}$.
+
+6.
+Here is one approach
+\begin{align}
+\label{eq:83}
+\V Z &= \E{Z^2} - (\E Z)^{2}\\
+\E{Z^2} &= \E{(X+Y)^{2}} = \E{X^{2}} + 2\E{XY} + \E{Y^{2}} \\
+(E{Z})^{2} &= (\E X + \E Y)^{2} \\
+ &= (\E X)^2 + 2\E X \E Y + (\E Y)^{2} \\
+&\implies \\
+\V Z &= \E{Z^2} - (\E Z)^{2}\\
+ &= \V X + \V Y + 2 (\E{XY} - (\E X \E Y))\\
+\E{XY} &= \sum_{ij} ijp_{X,Y}(i,j) = \frac 1 4 (1 + 4 + 9 + 16) = \ldots \\
+\E{X^{2}} &= \ldots
+\end{align}
+The numbers are for you to compute.
+\end{solution}
+\end{exercise}
+
+
+
+\subsection{BH Exercises}
+\label{sec:bh-exercises-1}
+
+\begin{exercise}
+Exercise BH.6.13
+\begin{solution}
+See the sample solutions of BH.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Exercise BH.6.18
+\begin{solution}
+See our solution manual for BH problems.
+\end{solution}
+\end{exercise}
+
+
+\section{Poleverywhere questions}
+\label{sec:polev-quest}
+
+To be included after the tutorial.
 
 \section{Assignment}
 \label{sec:assignment}
@@ -84,32 +363,16 @@
 There is no assignment in week 1.
 
 
-\section{Homework}
-\label{sec:homework}
 
-\begin{enumerate}
-\item Redo the exercises of the lectures and the tutorial
-\item Our exercises on Section BH.7.1.1
-\item BH Exercises: 6.22
-\end{enumerate}
-
-\subfile{../study-guide/bh-7.1.1.tex}
-
-\section{Poleverywhere questions}
-\label{sec:polev-quest}
-
-To be included after the tutorial.
-
-
-\opt{nosolutions}{
+%\opt{all-solutions-at-end}{
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}
 \clearpage
-\chapter{Hints}
+\section{Hints}
 \input{hint}
 \clearpage
-\chapter{Solutions}
+\section{Solutions}
 \input{ans}
-}
+%}
 
 \end{document}
