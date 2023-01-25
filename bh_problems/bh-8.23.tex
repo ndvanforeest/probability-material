@@ -1,0 +1,25 @@
+\input{header.tex}
+\setcounter{theorem}{22}
+\begin{exercise} BH.8.23
+ We already analyzed how to handle addition, subtraction and division. It remains to deal with multiplication.
+\begin{hint}
+You might want to follow the approach of BH.8.18.
+\end{hint}
+\begin{solution}
+a.
+\begin{align*}
+f_{X,T}(x,t) &= f_{X,Y}(x,y) |\frac{\partial (x,y)}{\partial (x, t)}|, \\
+\frac{\partial (x,t)}{\partial (x,y)} &=
+  \begin{pmatrix}
+    1 & 0 \\
+y & x
+  \end{pmatrix} = x. \\
+&\implies \\
+f_{X,T}(x,t) &= f_{X,Y}(x,y)/x= f_{X,Y}(x,t/x)/x,
+\end{align*}
+since $y=t/x$. Finally, for $f_T$, marginalize $x$ out by integration.
+
+b. Just do the algebra. With part a. you have the answer, so you can check.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

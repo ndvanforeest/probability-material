@@ -1,0 +1,40 @@
+\input{header.tex}
+\setcounter{theorem}{51}
+\begin{exercise} BH.8.52
+ The concepts discussed here are useful to better understand how to generate exponential random numbers.
+\begin{hint}
+a.
+\begin{align*}
+\P{X_j\leq c} = \P{ \log U_{j} \geq -c} = \P{ U_{j} \geq e^{-c}} = \P{1-U_{j} \leq 1-e^{-c}}.
+\end{align*}
+What is the distribution of $1-U_{j}$?
+
+b. $\log \Pi_{j=1}^{n} U_{j} = \sum_{j=1}^n \log U_j = \sum_{j=1}^n (-X_{j})$.  But $-X_j\sim \Exp{1}$, hence the sum is just a sum of iid Exp rvs. What is the distribution of this sum?
+
+\end{hint}
+\begin{solution}
+a. By the  hint and  the fact that $U_j$ is uniform on $[0,1]$, so that $1-U_j$ is also uniform,  the last  equality of the hint implies  that
+$\P{ 1-U_{j} \leq 1- e^{-c}} = \P{ U_{j} \leq 1-e^{-c}} =  1-e^{-c}$.
+But then, $X_{j}\sim \Exp{1}$.
+
+b. The sum of $n$ iid exponentials is $\Gamm{n, \lambda}$. And so, if $S_n=\sum_i^n X_{i}$, then $\P{S_n\leq x} = \int_{0}^{x}f(y) \d y$, with $f(y)$ the gamma density with $n$ and $\lambda=1$.
+
+Just to test my skills, I used MGFs, because I know that the MGF of a sum of iid rvs is the product of the MGF of one them. Since $e^{\log u} = u$,
+\begin{align*}
+  \E{e^{-s \log U}} &= \int_{0}^1 e^{-s \log u}\d u = \int_{0}^{1} u^{-s}\d u.
+\end{align*}
+If $s\geq 1$ this does not converge (convince yourself that you understand this). With $s<1$,
+\begin{align*}
+  \E{e^{-s \log U}} &= \frac1 {-s+1} u^{-s+1}|_0^1 = \frac{1}{1-s}.
+\end{align*}
+Therefore,
+\begin{align*}
+  \E{e^{-s S_n}}
+  &=  \E{e^{-s \log U_1 -s \log U_2 - \cdots -s \log U_n}}
+  = \left(\E{e^{-s\log U}}\right)^n \\
+  &= \left(\frac{1}{1-s}\right)^{n},
+\end{align*}
+and this is the MGF of a $\Gamm{n, \lambda=1}$ rvs.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

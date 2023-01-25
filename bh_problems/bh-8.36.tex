@@ -1,0 +1,55 @@
+\input{header.tex}
+\setcounter{theorem}{35}
+\begin{exercise} BH.8.36
+\begin{hint}
+a. See BH.8.5.1. The exponential is a special case of the gamma distribution. See also BH.8.34.c. $T_1/T_2$ is a function of $T_1/(T_1+T_2)$.
+
+b. This can be solved with a joint distribution function and integration over the event $\{T_1<T_2\}$. However, we can use Exercise BH.7.10 or BH.7.1.24.
+
+c. First she has to wait for the first server to become free. This is the minimum of the two exponentials.
+With $\P{T_1<T_2}$ server 1 is the first.
+What is the probability that the other server is empty first? Then, once she is at a server, what is her expected service time? The total time in the system is the time in queue plus the service time.
+\end{hint}
+\begin{solution}
+a. I did not attempt any smart tricks. Take as transform $u=s/t$ and $v=s+t$, where I associate $s$ to $T_{1}$ and $t$  to $T_2$. Then,
+\begin{align*}
+\frac{\partial (u,v)}{\partial (s,t)} &=
+  \begin{pmatrix}
+    1/t & -s/t^{2} \\
+1 & 1
+  \end{pmatrix} = \frac 1 t + \frac{s}{t^{2}} = \frac{t+s}{t^{2}} = \frac{v}{t^{2}}
+\end{align*}
+With a bit of algebra: $s=uv/(u+1)$ and $t=v/(u+1)$.
+Therefore the Jacobian we need becomes
+\begin{equation}
+\label{eq:12}
+\frac{\partial (s,t)}{\partial (u,v)} = \frac{v}{t^{2}} = v \frac{v^2}{(u+1)^2} = \frac{(u+1)^{2}}{v}.
+\end{equation}
+Next,
+\begin{align*}
+  f_{U, V}(u,v) &= f_{T_1,T_2}(s,t) \frac{\partial (s,t)}{\partial (u,v)}
+  =  f_{T_1}(uv/(u+1) f_{T_2}(v/(u+1)) \frac{(u+1)^{2}}{v} \\
+  &=  \lambda^{2} \exp(-\lambda uv/(u+1) - \lambda v/(u+1)) \frac{(u+1)^{2}}{v} \\
+  &=  \lambda^{2} \exp(-\lambda v) \frac{(u+1)^{2}}{v} \\
+  &=  \lambda^{2} \exp(-\lambda v)/v \cdot  (u+1)^{2}. \\
+\end{align*}
+Clearly, this is a product of a function $f_{V}(f)$ that depends only  $v$ and another function $f_U(u)$ that depends  only $u$. Hence, $U$ and $V$ are independent.
+
+b. With the hint,
+\begin{align*}
+\P{T_1<T_2}
+&= \int_0^{\infty} \P{T_1< T_2\given T_1=s} f_{T_1}(s)\d s \\
+&= \int_0^{\infty} \P{s< T_2\given T_1=s} \lambda_1e^{-\lambda_1 s} \d s \\
+&= \lambda_{1} \int_0^{\infty} e^{-\lambda_{2} s} e^{-\lambda_1 s} \d s = \frac{\lambda_1}{\lambda_1+\lambda_2}.
+\end{align*}
+
+c. See the hint. Alice first has to wait for the first server to become free. The expected time in queue is $1/(\lambda_1+\lambda_2)$. If server 1 is the first, then Alice spends a  time $1/\lambda_1$ in service. Thus, the total time is
+\begin{align*}
+  \frac{1}{\lambda_1+\lambda_2} +
+  \frac{\lambda_1}{\lambda_1+\lambda_2} \frac{1}{\lambda_{1}} +
+  \frac{\lambda_2}{\lambda_1+\lambda_2} \frac{1}{\lambda_{2}}  =
+\frac{3}{\lambda_1+\lambda_{2}}.
+\end{align*}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

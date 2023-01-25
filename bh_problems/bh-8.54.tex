@@ -1,0 +1,38 @@
+\input{header.tex}
+\setcounter{theorem}{53}
+\begin{exercise} BH.8.54
+  We tackle this also with simulation in an assignment.
+
+I find it easier to consider $Y=pX$, rather than $pX/q$. Note that since $q=1-p\to 1$ as $p\to 0$, the factor $1/q$ is immaterial for the final result.
+
+Read my solution too, as I develop some nice ideas in passing.
+
+\begin{hint}
+Use BH.4.3.9. Then, start with a geometic rv, then extend to a negative binomial rv.
+\end{hint}
+\begin{solution}
+\begin{align*}
+M_{Y}(s) =\E{\exp{s Y}} = p \sum_{i=0}^{\infty} e^{s p i} q^{i} = p/(1-qe^{sp}).
+\end{align*}
+Now, use that $e^{s p)} \approx 1 + s p$ for $p\ll 1$. (This is easier than using l' Hopital's rule as BH do in their solution). Hence, the denominator becomes $\approx 1-(1-p)(1+sp) = p(1-s) - sp^{2} \approx p(1-s)$ when $p\ll 1$ Hence,
+\begin{align*}
+M_{Y}(s) \approx p/(p(1-s) =  1/(1-s).
+\end{align*}
+In the limit $p\to 0$ the LHS converges to the RHS, which is the MGF of an exponential rv. For the rest, follow the solution of BH.
+
+Here is another line of attack. Let us first use probability theory to find out what is $\sum_{i=0}^{\infty} q^{1}$ for some $|q|<1$. Take $X\sim\Geo{p}$, so that $X$ corresponds to the number of failures (tails say) until we see a success (heads say). So, $X$ corresponds to the number of tails until we see a heads. Now if we keep on throwing, then we know that eventually a heads will appear. Therefore $p + pq +pq^2 + \cdots = 1$, that, is $p\sum_i^{\infty} q^{i}=1$. But this implies that $\sum_{i=0}^{\infty}q^i = 1/ p = 1/(1-q)$.
+
+By similar reasoning, if we keep on throwing the coin until we see $r$ heads then we know that $p^r \sum_{i=0}^{\infty} {r+i-1 \choose r} q^{i} = 1$.  Therefore,
+\begin{align*}
+\sum_{i=0}^{\infty} {r+i-1 \choose r} q^{i} =  \frac{1}{p^{2}}= \frac{1}{(1-q)^{r}}.
+\end{align*}
+With this insight, for $X\sim\NBin{p,n}$
+\begin{align*}
+  M_X(s) &= p^r \sum_{i=0}^{\infty} {r+i-1 \choose r} q^{i} e^{si}
+ = p^r \sum_{i=0}^{\infty} {r+i-1 \choose r} (e^{s}q)^{i} \\
+  &= \frac{p^r}{(1-qe^{s})^{r}} \approx \left(\frac{p}{p(1-s)}\right)^{r},
+\end{align*}
+where we use again Taylor's expansion for $p\ll 1$.x
+\end{solution}
+\end{exercise}
+\input{trailer.tex}
