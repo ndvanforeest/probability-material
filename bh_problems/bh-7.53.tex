@@ -1,0 +1,29 @@
+\input{header.tex}
+\setcounter{theorem}{52}
+\begin{exercise}BH.7.53
+We simulate this in one of the assignments.
+The ideas of this exercise find much use in finance, physics, and actuarial sciences.
+In particular, the expected time it takes the drunken person---It's not only guys that sometimes consume too much alcohol---to hit some boundary is interesting. The notation of the book is a bit clumsy. Here is better notation.
+Let $X_i$ be the movement along the \(x\)-axis at step $i$, and $Y_i$ along the $y$-axis.
+Then $S_n=\sum_{i=1}^n X_i$ and $T_n=\sum_{j=1}^n Y_{j}$, and $R_n^2= S_n^2+T_n^2$.
+\begin{hint}
+Use the hint of the book and independence to see that $\E{S_{n}^2 T_n^2} = \E{S_n^{2}} \E{T_n^{2}}$.
+Then try to simplify.
+
+b. It is immediate that $\E{S_n} = 0$.
+Hence, focus on $\E{S_n T_n}$. Expand  the sums of $\E{S_n T_n}$, and consider the individual terms $\E{X_i Y_j}$. When $i\neq j$, are $X_i$ and $Y_{j}$  independent? What if  $i=j$?
+
+c. It is clear that $R_n^2=S_n^2+T_{n}^2$. Now use linearity to split $\E{R^2_n}$. Finally, realize that $\E{S_n}=0$, hence $\E{S_n^2} = \V{S_n}$. But then we can use the formula of the variance of a sum to split it up into a sum of variances plus covariances.
+\end{hint}
+
+\begin{solution}
+a. In my notation, $X_i=0 \implies Y_i\neq 0$ and $X_i\neq 0 \implies Y_i=0$. The reason is that in step $i$, the drunkard makes a step left or right OR up or down. However, s/he cannot move to the right and up at the same time.
+
+Here is an argument based on recursion. (By now I hope you see that I like this method in particular).
+\begin{align*}
+\E{R_n^2} = \E{(R_{n-1} + X_n + Y_n)^{2}},
+\end{align*}
+but $R_{n-1}$ and $X_n+Y_n$ are independent, and $\E{(X_n + Y_n)^2} = 1$. Using the recursion, $\E{R^2_n} = n$.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

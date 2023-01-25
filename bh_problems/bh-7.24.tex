@@ -1,0 +1,35 @@
+\input{header.tex}
+\setcounter{theorem}{23}
+\begin{exercise}BH.7.24
+In the assignments we'll develop a simulator.
+
+\begin{hint}
+Check BH.7.1.24 and BH.7.1.25
+First draw the area over which we have to integrate. Then use an indicator function over which to integrate. What is the joint PDF  $f_{Y_1, Y-2}$?
+\end{hint}
+\begin{solution}
+a. From the hint,
+\begin{align*}
+\P{Y_1<c Y_2}
+  &= \int \int \1{x<c y}\lambda_1 e^{-\lambda_1 x} \lambda_2e^{-\lambda_2 y}\d x \d y
+  = \lambda_1\lambda_2\int_0^{\infty} e^{-\lambda_{1}x}\int_{x/c}^{\infty} e^{-\lambda_{2} y}\d y \d x\\
+  & = \lambda_1\int_0^{\infty} e^{-\lambda_{1}x} e^{-\lambda_{2} x/c} \d x
+  = \frac{\lambda_1}{\lambda_1+\lambda_2/c}.
+\end{align*}
+Check the result for $c=0$ and $c=\infty$.
+
+I prefer to use conditioning, like this:
+\begin{align*}
+\P{Y_1<c Y_2}
+  &= \int \P{Y_1<cY_2| Y_1=x}\lambda_1 e^{-\lambda_1 x} \d x
+  = \int \P{Y_2>x/c| Y_1=x}\lambda_1 e^{-\lambda_1 x} \d x\\
+&= \int e^{-\lambda x/c} \lambda_1 e^{-\lambda_1 x} \d x,
+\end{align*}
+and the rest goes as before. Actually, I tend to use conditioning as it helps to make the reasoning easier. In this case, suppose that I know that $Y_1=x$, what can I say about $\P{Y_2 > c x}$?
+
+BTW, conditioning does not always make things simpler. When rvs are dependent, then you have to watch out.
+
+b. See the solutions of BH on the web.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

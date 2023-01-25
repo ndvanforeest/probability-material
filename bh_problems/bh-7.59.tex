@@ -1,0 +1,63 @@
+\input{header.tex}
+\setcounter{theorem}{58}
+\begin{exercise}BH.7.59
+Read this exercise, then read (and do) BH.5.53 for some further background.
+You'll encounter these topics countless times in other courses!
+The final answer is really nice and intuitive.
+
+\begin{hint}
+a. Use that expectation is linear.
+
+b. Read the entire exercise in its entirety before trying to solve it. In this case trying to solve c.\/ seems simpler because of the extra iid assumption. You  might want to use this to formulate some simple guesses.
+
+Thus first part c. It is given that the $X_i$ and $Y_j$ are iid. Then, if I could improve the estimator $\hat \theta$ by splitting the measurements into two sets $X_i$ and $Y_j$, then I would certainly do that.
+And not only I would do that; anybody in his right mind would do that.
+But, I never heard of this idea, and I am sure you have neither, so this must be impossible (because if it would, people would have been using this trick for ages.)
+Hence, we can place this in the context of the maxim: `we cannot obtain information for free'.
+For this case, this must imply that splitting iid measurements into smaller sets cannot help with improving the estimator. What does this idea imply for the weights?
+
+
+Part b, continued. I always try to solve the problem myself without a hint. This lead to the following considerations, which gave me quite a bit of extra understanding beyond the problem itself.  As a next piece of advice, before doing hard work, I prefer to look at some corner cases to acquire some intuitive understanding. I also use the rvs of Part c.
+
+Suppose  that $v_2:=\V{Y_j} = 0$, but $v_1 := \V{X_i} > 0$. (For instance, $Y_j$ is the $j$th measurement of a perfect machine and $X_j$ of an imperfect machine.)
+Then we know that the set $\{Y_j\}$ forms a set of perfect measurements.
+But then I am not interested in the $\{X_i\}$ measurements anymore; why should I as I have the perfect measurements $\{Y_j\}$ at my disposal.
+So, then I put $w_1=0$, because I don't want the $\{X_i\}$ measurements to pollute my estimator.
+In other words, the final result should be such that $v_2=0 \implies w_{1}=0$, and vice versa.
+
+
+More generally, I learned from this  corner case that I want this for the final result:  when $v_2<v_{1} \implies w_1 < w_{2}$, and vice versa.
+
+How would you choose the weights such that this requirement is satisfied, but also the condition imposed by Part c.?
+\end{hint}
+
+
+\begin{solution}
+a. Follows directly from the hint.
+
+Check the hint!
+
+c.  If $X_i$ and $Y_j$ are iid, it must be that $w_{1} = n/(n+m)$.
+
+b. Can we make some further progress, just by keeping a clear mind?
+Well, in fact we can by using our insights of part c.
+If we have $n+m$ iid measurements of which we call $n$ measurements of type $X_i$, and $m$ of type $Y_{j}$, then
+\begin{align*}
+\V{\hat \theta_{1}}  =  \E{\left(\frac{1}{n}\sum_{i}X_{i} - \theta\right)^2} = n^{-2}\E{\left(\sum_i (X_{i}-\theta)\right)^{2}} = n^{-2}\V{\sum_i X_i} = \V{X_1}/n = \sigma^{2}/n.
+\end{align*}
+So, $n=\sigma^{2}/\V{\hat \theta_1}$, and likewise $m=\sigma^{2}/\V{\hat \theta_2}$. Finally, plug this into our earlier expression for $w_1$ to  get
+\begin{align*}
+w_1 = \frac n {n+m} = \frac{\sigma^2/\V{\hat \theta_1}}{\sigma^2/\V{\hat \theta_1} + \sigma^2/\V{\theta_2}} = \frac{\V{\hat \theta_2}}{\V{\hat \theta_1} + \V{\theta_2}}.
+\end{align*}
+If we check our earlier insight, then we see that if $\V{Y_j}=0$, then $\V{\theta_2}=0$, hence $w_1=0$ in that case. This is precisely what we wanted.
+
+Let us finally use the  hint of BH to check that the above expression for $w_1$ is correct.
+\begin{align*}
+\E{(\hat \theta -\theta)^{2}} =
+\E{(w_1(\hat \theta_{1} - \theta) + w_2(\hat \theta_{2}-\theta))^{2}} =
+\V{w_1 \hat \theta_{1}} + \V{w_2 \hat \theta_{2}},
+\end{align*}
+by independence. Take the $w$'s out of the variances, then write $w_2=1-w_1$, take $\partial_{w_1}$ of the expression,  set the result to 0, and solve for $w_1$. You'll get the above expression.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}
