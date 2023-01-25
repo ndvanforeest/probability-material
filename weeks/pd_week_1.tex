@@ -45,13 +45,21 @@
 \item BH video: 18
 \end{enumerate}
 
+\begin{pycode}
+from pathlib import Path
 
-\begin{exercise}
-BH Exercises: 6.24
-\begin{solution}
-See our  solution manual of BH exercises on Brightspace.
-\end{solution}
-\end{exercise}
+exercise_name = "bh-6.24.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 Here is a story to see how the Poisson distribution emerges, just by allowing people a bit of choice.
 The conclusion is that the Poisson distribution comes up at many unexpected processes.
