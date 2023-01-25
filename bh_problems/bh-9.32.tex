@@ -1,0 +1,22 @@
+\input{header.tex}
+\setcounter{theorem}{31}
+\begin{exercise} BH.9.32
+ The results of this exercise are (or should be) used by nearly all software packages to control inventory levels of companies such as supermarkets and bol.com.
+\begin{hint}
+a. Let $Y$ be the amount purchased by the first customer that comes along, let $P$ be the rv that is 1 if the customer does indeed purchase, and 0 otherwise, and let $X$ be the size of the purchase. Why is $Y=XP$? What is $\E{P}$? What is $\E{Y\given P}$? What is $\E{Y^{2}\given P}$. You might want to use BH.9.1.
+
+
+b. Let $N\sim\Pois{8\lambda}$ be the number of customers that pass by. Given $N=n$, what is $\E{S\given N}$, where $S=\sum_{i=1}^N X_iP_{i}$ is the total sales. Now use the law of total expectation. What is $\V{S\given N}$? Use Eve's law  to compute $\V S$. Bigger hint, read Example 9.6.1.
+\end{hint}
+\begin{solution}
+Use that $P^{2}=P$ (indicator funtion), Adam and Eve, and that $N\sim \Pois{8\lambda}$,
+\begin{align*}
+  \E{Y|P}&= \E{PX|P} = \E{X}\E{P|P} = \mu P, &\V{Y|P} &= \V{XP|P} = P^{2} \V{X|P} = P \sigma^2 \\
+  \E Y &= \mu p, & \V Y &= \E{\V{Y|P}} + \V{\E{Y|P}} = \sigma^2 p + \mu^{2}p(1-p), \\
+  \E{S|N} &= N \E Y, & \V{S|N} &= N \V Y \\
+  \E N &= 8 \lambda, & \V N &=  8\lambda.
+\end{align*}
+Now use BH.9.6.1. It's just a matter of filling in.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

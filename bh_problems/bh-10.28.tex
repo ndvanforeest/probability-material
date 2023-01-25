@@ -1,0 +1,26 @@
+\input{header.tex}
+\setcounter{theorem}{27}
+\begin{exercise} BH.10.28
+ Note that standardized version of a rv $X$ is $Y=(X-\mu)/\sigma$ where $\E X = \mu$ and $\V X = \sigma$.
+\begin{hint}
+The idea is to prove that the MGF of $X_n$ converges to the MGF of a $N(\mu, \sigma^{2})$ rv as $n\to\infty$. Thus, read and follow the proof of the CTL, BH.10.3.1.
+
+What are  $\E{X_n}$ and $\V{X_n}$ if $X\sim \Pois{n}$?  Once you know that, explain that the MGF of the standardized version of $X_n$ is equal to  $\exp\{-n+s \sqrt n + n e^{-s/\sqrt n}\}$.
+
+Perhaps you should do BH.10.27 first.
+\end{hint}
+\begin{solution}
+Since $X_n\sim \Pois{n}$, $\E{X_n}=n$, $\V{X_n}=n$. Using the hints, with $Y_{n}$ the standardized version of $X_n$:
+\begin{align*}
+M_{Y_n}(s) &= \sum_{i=0}^{\infty} e^{-n} n^i/i!\cdot e^{s (i-n)/\sqrt n}
+= e^{-n} e^{s\sqrt n} \sum_{i=0}^{\infty}  (ne^{s/\sqrt n})^i/i!\\
+&= \exp\{-n+s \sqrt n + n e^{-s/\sqrt n}\}.
+\end{align*}
+With Taylor's expansion for $e^x$ to second order,
+\begin{align*}
+-n+s \sqrt n + n e^{-s/\sqrt n} \approx -n+s \sqrt n + n \left(1 -s/\sqrt n + s^{2}/2 n\right) =   s^2/2.
+\end{align*}
+Now follow the proof of the CTL, BH.10.3.1.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

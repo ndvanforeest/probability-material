@@ -1,0 +1,36 @@
+\input{header.tex}
+\setcounter{theorem}{8}
+\begin{exercise}BH.10.9
+\begin{hint}
+a. Jensen's inequality, $g(x)=e^x$
+
+b. Use symmetry: $X$ and $Y$ are iid.
+
+c. Which set of events is larger?
+
+d.
+Use Jensen's inequality and Cauchy-Schwarz.
+
+e. Eve's law.
+
+f. Use Markov's inequality and  the triangle inequality
+\end{hint}
+\begin{solution}
+a. $\leq$ Immediate from the hint.
+
+b. $=$: immediate from the hint
+
+c.
+\begin{align*}
+\P{X>Y-3} =  \P{X>Y+3} + \P{Y-3\leq X \leq Y+3}.
+\end{align*}
+Both terms on the RHS are non-negative.
+
+d. Use the hint. $(\E{XY})^{2} \leq \E{X^2}\E{Y^2} =(\E{X^2})^{2} \leq \E{X^4}$, where we use that  $X$ and $Y$ are iid, so that $\E{X^2}$ and $\E{Y^2}$ are equal.
+
+e. $=$: since $X$ and $Y$ are independent, $\V{Y|X} = \V Y$.
+
+f. From the hint,  $\P{|X+Y|>3} \leq \E{|X+Y|}/3 \leq \E{|X|}/3 + \E{|Y|}/3 = 2\E{|X|}/3 \leq \E{|X|}$. Why is there not an $<$ in the last step?
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

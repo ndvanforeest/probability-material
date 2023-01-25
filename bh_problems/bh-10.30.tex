@@ -1,0 +1,34 @@
+\input{header.tex}
+\setcounter{theorem}{29}
+\begin{exercise} BH.10.30
+ The problem demonstrates a simple investment strategy.
+If you plan to work as a quant in finance or as an actuary, or if you play poker, or some similar game, such strategies should interest you naturally.
+
+\begin{hint}
+a. See BH.10.3.7. Try to convert the recursion for $Y_n$ to a form as in that example.
+
+b. Just substitute $\alpha$ in the relevant formula of part a.
+\end{hint}
+\begin{solution}
+a. Define $I_n$ as the success indicator: it is 1 if I win, and 0 if I loose.  For round 1, suppose I win, then $Y_{1} = Y_0/2 + 1.7 Y_0/2= 1.35 Y_{0}$. If I lose,
+$Y_{1} = Y_0/2 + 0.5 Y_0/2= 0.75 Y_{0}$. Therefore,
+\begin{align*}
+Y_n = Y_{n-1} (1.35)^{I_{n}}(0.75)^{1-I_{n}}.
+\end{align*}
+With this expression, the rest  is simple, just  follow  BH.10.3.7.
+It turns out that $Y_n\to\infty$ as $n\to\infty$.
+
+b. Use the hint.
+\begin{align*}
+Y_n &= Y_{n-1} (1+0.7\alpha)^{I_{n}}(1-0.5\alpha)^{1-I_{n}} \implies \\
+\log Y_n &= \log Y_{n-1}  + I_{n} \log(1+0.7\alpha) + (1-I_{n})\log (1-0.5\alpha)  \\
+& = \log Y_{0}  + \log(1+0.7\alpha) \sum_{i=1}^{n}I_{i}  + \log(1-0.5\alpha).\sum_{i=1}^{n} (1-I_{i})
+\end{align*}
+By the strong law, $\sum I_i/n \to 1/2$ and $\sum (1-I_{i})/n \to 1/2$. Therefore
+\begin{align*}
+n^{-1}\log Y_n \to 0.5 \log(1+0.7\alpha) + 0.5\log(1-0.5\alpha) = 0.5 \log( (1+0.7\alpha)(1-0.5\alpha)) = g(\alpha)
+\end{align*}
+For the maximum, take the derivative with respect to $\alpha$. This gives $\alpha=2/7$.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

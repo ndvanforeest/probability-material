@@ -1,0 +1,47 @@
+\input{header.tex}
+\setcounter{theorem}{55}
+\begin{exercise} BH.9.56
+\begin{hint}
+Refresh your  knowledge of the Beta distributions.
+
+a. Since we include the win, the number of games $T|p$ (since we assume $p$ given) must be $\sim\FS{p}$. Hence, $\E{T|p} = 1/p$
+
+To get $\E T$ use Adam's law. Realize that you have to take the integral with respect to $p$!
+
+b. $1+\E G$ is smaller than the expected time as computed in a. Why is this so?
+
+c. The number of wins, conditional on $p$, out of $n$ is $X|p\sim\Bin{n,p}$. Then use Beta-Binomial conjugacy.
+
+BTW, I find it easier to think about $f(p, X=k)$ instead of $f(p|X=k)$, since on the event $(p, X=k)$.
+\begin{equation*}
+f(p, X=k) \propto p^{a-1} q^{b-1} {n \choose k} p^k q^{n-k} \propto p^{a-1+k}q^{b-1+n-k}.
+\end{equation*}
+Then, as  $f(p|X=k) = f(p, X=k)/\P{X=k} \sim f(p, X=k)$ (because $\P{X=k}$ is just a constant) we get the same result op to a scaling factor. But we can use the reasoning of BH.8.3.3 to get the correct constant.
+\end{hint}
+\begin{solution}
+a. From the hint,
+\begin{align*}
+\E{T}
+&=\E{\E{T|p}} = \frac{1}{\beta(a,b)}\int_0^{1}\frac 1 p p^{a-1}(1-p)^{b-1} \d p \\
+&= \frac{1}{\beta(a,b)}\int_0^{1} p^{a-2}(1-p)^{b-1} \d p
+= \frac{\beta(a-1, b)}{\beta(a,b)} \\
+&= \frac{a+b-1}{a-1} = 1 + \frac b {a-1}.
+\end{align*}
+To get the last equation,  use the definition of $\beta(a,b)$ in terms of factorials (see the Bayes' billiards story) to simplify. This is easy, many terms cancel.
+
+
+b. Take $Y=1+G$, then $Y$ has the first success distribution since $G$ is geometric. Hence, $\E Y = (a+b)/a= 1 + b/a$. Clearly, this is smaller than $1+b/(a-1) = \E T$.
+
+But why is this so?
+
+
+I must miss something here.
+The prior is $\Beta{a, b}$.
+Then Beta-Binomial conjugacy story, we assume that Vishy won $a-1$ games, and lost $b-1$ games.
+My guess for Vishy winning the next game would be $(a-1)/(a+b-2)$, not $a/(a+b)$.
+But I make an error here. Check the BH problem 9.57. You'll see that we should indeed use $a/(a+b)$!  Tricky!
+
+c.  Immediate from BH.8.3.3: $p|X=7 \sim\Beta{a+7, b+3}$.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

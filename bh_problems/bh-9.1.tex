@@ -1,0 +1,34 @@
+\input{header.tex}
+\setcounter{theorem}{0}
+\begin{exercise} BH.9.1
+ It is best to solve this problem with EVE's law.
+\begin{solution}
+a.
+\begin{align*}
+\E{T\given R=j} &= \mu_{j} \\
+\E{T\given R} &= \mu_{R} = \sum_j \mu_j \1{R=j},\\
+\E{T} &= \E{\E{T\given R}} = \E{\sum_j \mu_{j}\1{R=j}} = \sum_j\mu_{j}p_{j} \\
+&=(\mu_{1}+\mu_2+\mu_3)/3.
+\end{align*}
+For b., use a. And then,
+\begin{align*}
+\V{T|R=j} &= \sigma_j^2 \\
+\V{T|R} &= \sum_j\sigma_j^2\1{R=j} \\
+\E{V{T|R}} &= (\sigma_1^2+\sigma_2^2+\sigma_3^3)/3,\\
+\V{\E{T\given R}}
+&= \E{(\E{T\given R})^{2}}  - (\E{\E{T|R}})^2 \\
+(\E{T\given R})^{2}
+&= \left(\sum_j \mu_j \1{R=j}\right)^{2}
+= \sum_j \mu_j^{2} \1{R=j} + 2\mu_1 \mu_2\1{R=1}\1{R=2} + \cdot\\
+&= \sum_j \mu_j^{2} \1{R=j}.\\
+\E{(\E{T\given R})^{2}} &= \sum_j\mu_j^{2}p_j= (\mu_1^2+\mu_2^2+\mu_{3}^2)/3\\
+\V{\E{T\given R}}
+&= \E{(\E{T\given R})^{2}}  - (\E{\E{T|R}})^2 \\
+&=(\mu_1^2+\mu_2^2+\mu_{3}^2)/3 - (\mu_1+\mu_2+\mu_3)^2/9.  \\
+\V T
+ &= \V{\E{T|R}} + \E{\V{T|R}} \\
+&=(\mu_1^2+\mu_2^2+\mu_{3}^2)/3 - (\mu_1+\mu_2+\mu_3)^2/9 + (\sigma_1^2+\sigma_2^2+\sigma_3^3)/3.
+ \end{align*}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}
