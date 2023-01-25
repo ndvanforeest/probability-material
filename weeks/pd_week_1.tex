@@ -150,19 +150,44 @@ The demand at the surgery department will be about Poisson, so some days there w
 \item BH Exercises: 7.9, 7.29
 \end{enumerate}
 
-\begin{exercise}
-BH Exercise 7.9
-\begin{solution}
-See our  solution manual of BH exercises on Brightspace.
-\end{solution}
-\end{exercise}
+% \begin{exercise}
+% BH Exercise 7.9
+% \begin{solution}
+% See our  solution manual of BH exercises on Brightspace.
+% \end{solution}
+% \end{exercise}
 
-\begin{exercise}
-BH Exercise 7.29
-\begin{solution}
-See our  solution manual of BH exercises on Brightspace.
-\end{solution}
-\end{exercise}
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-7.9.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-7.29.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 
 \begin{exercise}
