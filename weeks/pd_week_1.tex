@@ -45,12 +45,91 @@
 \item BH video: 18
 \end{enumerate}
 
+
 \begin{exercise}
 BH Exercises: 6.24
 \begin{solution}
 See our  solution manual of BH exercises on Brightspace.
 \end{solution}
 \end{exercise}
+
+Here is a story to see how the Poisson distribution emerges, just by allowing people a bit of choice.
+The conclusion is that the Poisson distribution comes up at many unexpected processes.
+
+A patient arrives at the first aid of a hospital with, perhaps, a broken foot.
+An X ray photo shows that the patient indeed has a broken foot.
+Given the type of fraction, the patient has to undergo surgery somewhere in the next 10 days.
+Should we let the patient decide what is the best day to do the surgery?
+
+We model the system as a queueing network with two stations, the first is the X-ray, the second the surgery.
+We make the assumption that the first station works super regularly and sends exactly five patients every day to the surgery.
+(Of course these assumptions are a bit silly, but we want to demonstrate a certain phenomenon.)
+After the first step, each patient is allowed to choose an arbitrary day in the next 10 days for the next appointment.
+What is the distribution of the number of appointments on a certain day?
+This will be approximately Poisson!
+Here we use moment generating functions (MGFs) to see why.
+
+\begin{exercise}
+Show that the MGF of $N\sim \Pois{\lambda}$ is $M_{N}(s)= e^{\lambda(e^s-1)}$.
+\begin{solution}
+Read BH chapter 6 to find out where. While reading you'll discover lots of other relevant and interesting material.
+\end{solution}
+\end{exercise}
+
+Next, let \(X_{i}\in\{1, 2, \ldots, n\}\) be the choosen day of patient \(i\).
+Then \(Y_{i}(j)=\1{X_{i}=j}\) is 1 if \(X_i=j\) and 0 else.
+Thus, when we have \(m\) patients, \(S_{m}=\sum_{i=1}^{m} Y_i(j)\) is the number of jobs that arrived on day \(j\). In the above queueing model, there are 5 arrivals per day, hence \(m=5n\).
+
+\begin{exercise}
+Show that the MGF of \(Y\), i.e., the generic rv associated to \(Y_j(\cdot)\), is
+\begin{equation}
+\label{eq:2}
+M_Y(s) = \E{e^{s Y}}  = 1 + \frac{e^s-1}{n}.
+\end{equation}
+\begin{solution}
+\begin{equation*}
+M_Y(s) = \E{e^{s Y}} = e^{s\cdot 1} \frac{1}{n} + e^{s\cdot 0} \frac{n-1}{n} = 1 + \frac{e^s-1}{n},
+\end{equation*}
+since \(\P{Y_j=1} = 1/n = 1-\P{Y=0}\).
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Show that
+\begin{equation}
+M_{S_{m}}(s) = \left( 1 + \frac{e^s-1}{n}\right)^{5n}.
+\end{equation}
+\begin{solution}
+Using that  \(Y_i(j)\) are idd,
+\begin{equation}
+M_{S_{m}}(s) = \left( M_Y(s)\right)^m = \left( 1 + \frac{e^s-1}{n}\right)^{5n}.
+\end{equation}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+When \(n\) is not too small, use a standard limit to see that
+\begin{equation}
+M_S(s) \approx \exp(5(e^s-1)).
+\end{equation}
+Observe that this is the MGF of the Poisson distribution with mean \(5\).
+\begin{solution}
+Check out appendix A of BH to conclude that
+\begin{equation}
+\lim_{n\to\infty}\left( 1 + \frac{e^s-1}{n}\right)^{5n} =\exp(5(e^s-1))
+\end{equation}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Is it a good idea to let patients select the day at which they want to receive surgery?
+\begin{solution}
+No, because it gives lots of variability.
+The demand at the surgery department will be about Poisson, so some days there will be many patients, and on some other hardly any.
+\end{solution}
+\end{exercise}
+
+
 
 
 
@@ -217,6 +296,14 @@ See our solution manual for BH problems.
 
 Practice exercises are meant to get you started with reading definitions, notation, and involve only simple calculus.
 These questions are simpler than the exercises of BH.
+
+\begin{exercise}
+Read BH.6.22. Relate that exercise to the story of the patients of Lecture 1.
+\begin{solution}
+The mapping is one to one.
+\end{solution}
+\end{exercise}
+
 
 \begin{exercise}
 In your own words, explain what is
