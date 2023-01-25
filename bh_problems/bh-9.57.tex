@@ -1,0 +1,44 @@
+\input{header.tex}
+\setcounter{theorem}{56}
+\begin{exercise} BH.9.57
+\begin{hint}
+a. The prior of $p$ is uniform on $[0,1]$. But this is equal to $\Beta{1,1}$. Now use  Beta-Binomial conjugacy.
+
+b. Write $S_n=\sum_{i=1}^nX_{i}$. What are $\P{X_{n+1}=1|p}$ and $\P{S_n=k|p}$?
+\end{hint}
+\begin{solution}
+a. By  the hint,
+\begin{equation*}
+f(p|X_1=x_{1}) \propto f(p, X_1=x_{1}) \propto
+p^{a-1} q^{b-1} p^{x_1}q^{1-x_1}
+\propto p^{a+x_1-1} q^{b+(1-x_{1})-1}.
+\end{equation*}
+Hence, $p|X_1=x_1 \sim \Beta{a+x_1, b+(1-x_{1})}$. We can now use this as prior to see that  $p|X_1=x_{a}, X_{2}=x_{2} \sim \Beta{1+x_1+x_2, 1+ (1-x_1) + (1-x_2)}$, and so on. Hence, $p|X_{1}, \ldots X_{n} \sim \Beta{1+S_k, 1+n-S_{k}}$.
+
+b. With the hint, $\P{X_{n+1}=1|p} = p$ and $\P{S_n=k|p} ={n \choose k} p^{k}q^{n-k} \propto p^{k}q^{n-k}$. Also $X_{n_+1}|p$ and $S_n|p$ are conditionally independent.
+Therefore,
+\begin{equation*}
+\P{X_{n+1}=1, S_n=k | p} \propto p p^kq^{n-k} = p^{k+1} q^{n-k},
+\end{equation*}
+which in turn implies that
+\begin{equation*}
+\P{X_{n+1}=1| S_n=k, p} \propto = p^{k+1} q^{n-k}.
+\end{equation*}
+Hence, $X_{n+1}| S_n=k, p \sim \Beta{k+2, n-k+1}$.
+Now, $X_{n+1}\in \{0, 1\}$, so that $\P{X_{n+1}=1| S_n=k, p} = \E{X_{n+1}| S_n=k, p} = (k+2)/(n+3)$, since $X_{n+1}| S_n=k, p \sim \Beta{k+2, n-k+1}$.
+
+The last step is to realize that $\E{X_{n+1}|S_{n}=k} = \E{\E{X_{n+1}|S_{n}=k, p}|S_{n=k}}$.
+
+Here is another way to get the same result.
+\begin{align*}
+\P{S_n=k} &= \frac 1 {n+1},\text{ by Bayes' billiard}, \\
+\P{X_{n+1}=1,S_n=k} &=  \int_0^1 \P{X_{n+1}=1,S_n=k\given p} f(p) \d p
+= \int_0^1 p {n \choose k} p^{k} (1-p)^{n-k} f(p) \d p \\
+&= \frac{k+1}{n+1}\int_0^1  {n+1 \choose k+1} p^{k+1} (1-p)^{n-k} f(p) \d p \\
+&= \frac{k+1}{n+1} \frac 1 {n+2}, \text{ again with Bayes' billiard}, \\
+\P{X_{n+1}=1 \given S_n=k} &= \P{X_{n+1}=1,S_n=k}/\P{S_{n}=k}.
+\end{align*}
+Now simplify.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

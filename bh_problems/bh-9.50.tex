@@ -1,0 +1,25 @@
+\input{header.tex}
+\setcounter{theorem}{49}
+\begin{exercise} BH.9.50
+We will also simulate this in an assignment.
+\begin{hint}
+a.
+$N | \lambda \sim \Pois{\lambda}$.
+
+b. Analogous to BH.9.6.1
+
+c. and d. See BH.8.4.5.
+\end{hint}
+\begin{solution}
+a. Using the hint gives us $\E{N\given \lambda} = \lambda$ and $\V{N\given \lambda}= \lambda$.
+
+Now use Adam and Eve.
+
+b. Just copy the formulas of BH.9.6.1
+
+c. With the hint, observe that $\Exp(1)=\Gamma{1,1}$. In the relevant formula of BH.8.4.5 ($\P{Y=y}$), take $t=r_0=b_0=1$ and conclude that $\P{N=n}=2^{-n-1}$. Hence, $N\sim\Geo{1/2}$.
+
+d. Same story. The relevant formula is $f_1(\lambda|y)$.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

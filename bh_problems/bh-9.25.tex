@@ -1,0 +1,17 @@
+\input{header.tex}
+\setcounter{theorem}{24}
+\begin{exercise} BH.9.25
+ We tackle this problem also in an assignment with simulation.  Check out \url{https://en.wikipedia.org/wiki/Kelly_criterion} you're interested.
+\begin{hint}
+Use Adam's law to express $\E{X_{n+1}}$ in terms of $\E{X_{n}}$, then use recursion.
+\end{hint}
+\begin{solution}
+\begin{align*}
+  \E{X_{n+1} |X_n=100} &= 100 + pf 100 - (1-p)f 100  = 100(1-f + 2pf) \\
+  \E{X_{n+1} |X_n} &= X_{n}( 1- f + 2pf) \\
+  \E{X_{n+1} } &= ( 1- f + 2pf) \E{X_{n}} \\
+  \E{X_{n+1} } &= ( 1- f + 2pf)^{2} \E{X_{n-1}} =  ( 1- f + 2pf)^{n+1}X_{0}.
+\end{align*}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}
