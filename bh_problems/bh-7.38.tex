@@ -1,0 +1,21 @@
+\input{header.tex}
+\setcounter{theorem}{37}
+\begin{exercise}BH.7.38
+Besides the solution of BH, read our solution.
+\begin{solution}
+First check~\cref{ex:3a}.
+
+In general, I am always very careful with such `shortcuts' such as $\max\{X,Y\} + \min\{X, Y\} = X +Y$.  As a matter of fact, I try to avoid such arguments because it is easy to go wrong. Seemingly plausible arguments are often wrong due to overlooked dependency or non-linearity (effects of higher moments).
+
+It is useful to write $\max\{x,y\} = x\1{x\geq y}+y\1{y>x}$, and something similar for the minimum. In the present case, $\cov{X,Y} = \E{X Y}-\E X \E Y$, and, similarly, $\cov{M,L} = \E{ML}- \E M \E L$, where $M$ is max, and $L$ is min. With the above indicators, it is simple to show that $\E{ML} = \E{X Y}$:
+\begin{align*}
+ ML
+  &= (X\1{X\geq Y} + Y\1{Y\geq X})((X\1{X<Y} + Y\1{Y<X}) \\
+  &= XY\1{X\geq Y} + XY\1{Y<X} = XY
+\end{align*}
+since $\1{X\geq Y}\1{X<Y} =0$.
+
+However, take $X,Y\sim \Exp{\lambda}$. Then, $\E M = 3/(2\lambda)$ and $\E L= 1/(2\lambda)$, but $\E X = \E Y = 1/\lambda$.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

@@ -1,0 +1,25 @@
+\input{header.tex}
+\setcounter{theorem}{12}
+\begin{exercise}BH.7.13
+\begin{hint}
+\cref{sec:memoryl-exerc-conf} contains all the explanations.
+\end{hint}
+\begin{solution}
+Read the material of \cref{sec:memoryl-exerc-conf} for many detailed explanations on the exponential. As we will not repeat that, here are just the results.
+$\P{X<Y} = 1/2$. Hence, $\P{X\leq x|X<Y} = 2\P{X\leq x, X<Y}$.
+\begin{align*}
+2\P{X\leq x, X<Y}
+  &= 2\lambda^2\int_0^{\infty}\int_0^{\infty}   \1{u\leq x} \1{u<v} e^{-\lambda u} e^{-\lambda v} \d v \d u \\
+  &= 2\lambda^2\int_0^{\infty}   \1{u\leq x} e^{-\lambda u} \int_0^{\infty} \1{u<v}  e^{-\lambda v} \d v \d u\\
+  &= 2\lambda\int_0^{\infty}   \1{u\leq x} e^{-\lambda u} e^{-\lambda u}  \d u \\
+  1 - e^{-2\lambda x}.
+\end{align*}
+
+b. If $X<Y$, then we know that $X=\min\{X, Y\}$. But,
+\begin{align*}
+  \{\min\{X,Y\}\leq x\} =  \{X\leq x, X<Y\} \cup \{Y\leq x, Y\leq X\},
+\end{align*}
+and the two sets on the RHS are disjoint. Hence, $\P{\min\{X,Y\}\leq x}$ is the sum of the probabilities on the RHS. By symmetry, these are equal.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

@@ -1,0 +1,33 @@
+\input{header.tex}
+\setcounter{theorem}{10}
+\begin{exercise}BH.7.11
+\begin{hint}
+a.
+First find $f_{Y|X}$ and $f{Z|X}$. Then, given $X$, $Z$ and $Y$ are iid. Hence $f_{X,Y,Z} = f_{Y, Z |X} f_{X}$. Use independence to split $f_{Y,Z|X}$ into a product.
+
+
+b.
+Suppose that  a realization of $Y$ is really big. Since $Y$ is dependent on $X$, $X$ must be dependent on $Y$. But $Z$ is in turn dependent on $X$. What are the consequences?
+
+\end{hint}
+\begin{solution}
+a. Use the hint. Next, $f_{Y|X}(y|x) \propto e^{-(y-x)^{2}}$, and a similar expression holds for $f_{Z|X}(z|x)$. Now follow the steps of the hint.
+
+b. Read the hint. When $Y$ is really big, $X$ must be big (with large probability), so $Z$ must be big too.
+
+ c.
+Here is the answer. The ideas are important, you'll need them during nearly any course in statistics, given the importance of the normal distribution.
+\begin{align*}
+f_{Y,Z}(y, z) = \int \frac 1 {2\pi} e^{-(y-x)^2/2} e^{-(z-x)^2/2} \frac 1 {\sqrt{2\pi}} e^{-x^2/2}\d x.
+\end{align*}
+It remains to simplify $(y-x)^2 + (z-x)^2 + x^2$. With a bit of work, it follows that this can be written as
+\begin{align*}
+3(x-(y+z)/3)^{2} - (y+z)^2/3+y^2+z^2.
+\end{align*}
+When plugging this in the integral, the last two terms appear in front of the integral. The term $(y+z)/2$ is just a shift, hence can be neglected in the integration over $x$. The $3$ has to be absorbed in the standard deviation $\sigma=1/\sqrt{3}$. And therefore,
+\begin{align*}
+f_{Y,Z}(y, z) = \frac 1 {2\pi} \frac 1 {\sqrt{3}} e^{-y^2/2 - z^2/2 + (y+z)^2/6}.
+\end{align*}
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

@@ -1,0 +1,70 @@
+\input{header.tex}
+\setcounter{theorem}{70}
+\begin{exercise}BH.7.71
+
+\begin{hint}
+
+b. The people in the sample of size $n$ with an $A$ is $X_1+X_2$. But this is the same as $n-X_3$. Hence, what is $\P{X_3=n-i}$?
+
+
+c. I found this a hard problem.
+Here is my hint based on recursion.
+Let $S_n$ be the number of $A$s in $n$ individuals.
+We want to know $f_n(i) = \P{S_n=i}$.
+A simple recursive idea, i.e., one-step analysis by conditioning on the phenotype of the $n$th person, gives that
+\begin{align*}
+f_n(i)=f_{n-1}(i-2) p^2 + f_{n-1}(i-1) 2p q + f_{n-1}(i)q^2,
+\end{align*}
+with $q=1-p$ as always. Now I was a bit stuck, but just to try to see whether I could see some structure, I tried a simpler case, namely, a recursion for the binomial distribution. Derive this, and then use this to solve the problem.
+
+
+d. It is easiest to work with $f(p) = \log \P{X_1=k, X_2=l, X_3 = m}$, where $\P{X_1=k, X_2=l, X_3 = m}$ follows from a., and then differentiate with respect to $p$.
+
+e. Follow the same scheme as for d.
+\end{hint}
+
+\begin{solution}
+a. Multinomial.
+
+b. With the hint we end up at $X_1+X_2\sim \Bin{n, p^2+2p(1-p)}$.
+
+c. Here is a short intermezzo on finding a recursion for the sum of a number of Bernouilli rvs.  Let $S_n$ be the number of successes in the binomial, and write $g_n(i) = \P{S_n=i}$ for this case.
+Then,
+\begin{align*}
+g_n(i)&= g_{n-1}(i-1)p +  g_{n-1}(i)q \\
+&= (g_{n-2}(i-2)p + g_{n-2}(i-1)q)p + (g_{n-2}(i-1)p+g_{n-2}(i)q)q \\
+&= g_{n-2}(i-2)p^2 + g_{n-2}(i-1)2p q + g_{n-2}(i)q^{2}.
+\end{align*}
+I also know that $g_n(i) = {n \choose i} p^iq^{n-i}$.
+End of intermezzo.
+
+Now compare the recursion with $f_n(i)$ for the genes tox the expression for the binomial.
+They are nearly the same, except that in the genes case, the `n' seems to run twice as fast.
+I then tried the guess $f_n(i) = {2n \choose i} p^i q^{2n-i}$.
+For you, plug it in, and show that it works.
+
+So, what was my overall approach?
+I used recursion, but got stuck.
+Then I used recursion for a simpler case whose solution I know by heart.
+I compared the recursions for both cases to see whether I could recognize a pattern.
+This lead me to a guess, which I verified by plugging it in.
+Using recursion is not guaranteed to work, of course, but often it's worth a try.
+
+Now, looking back, I realize that it is as if individual $n$ adds the outcome of two coin flips (with values in $AA$, $Aa$ or $a a$) to the sum $S_{n}$ of $A'$s. For you to solve: what is the distribution of two coin flips? Next, $S_n$ is just the sum of $n$ individual `double coin flips'. Hence, what must the distribution of $S_n$ be?
+
+d. It is easiest to work with $f(p) = \log \P{X_1=k, X_2=l, X_3 = m}$. With part a. this can be written as
+\begin{align*}
+f(p) = C + (2k+l)\log p + (l+2m)\log(1-p),
+\end{align*}
+where $C$ is a constant (the log of the normalization constant). (BTW, with this you can check your answer for part a.)
+Compute $\d f(p)/\d p = 0$, because at this $p$, $\log f$, hence $f$ itself, is maximal.  Observe that $C$ drops out of the computation, because when differentiating, it disappears.
+
+
+e. Now we like to know what $p$  maximizes $\P{X_3=n-i}$. Take $g(q) = \log \P{X_3 = n-i}$, then
+\begin{align*}
+g(q) = C + i \log (1-q^{2}) + 2 (n-i)\log q.
+\end{align*}
+(With this, check your answer of part b.) Again, take the derivative (with respect to $q$), and solve for $q$.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

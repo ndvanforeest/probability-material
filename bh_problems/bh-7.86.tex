@@ -1,0 +1,34 @@
+\input{header.tex}
+\setcounter{theorem}{85}
+\begin{exercise}BH.7.86
+The concepts discussed here are a standard part of the education of GPs (i.e., medical doctors), and in data science in general.
+\begin{hint}
+The challenge for you is to try to understand the mathematics behind these concepts.
+Read the exercise a number of times. I found it quite difficult to capture the concepts in formulas. (I solved it once. After two weeks,  I tried to solve it again, and found it just as hard as the first time.) Once you have the model, the technical part itself is simple.
+\end{hint}
+\begin{solution}
+a. It is given that $\P{T\leq t\given D=1} = G(t)$ and $\P{T\leq t\given D=0} = H(t)$. From Theorem 5.3.1.i,  we have that we can associate a rv. to a CDF F. Sometimes we say that the CDF $F$ /induces/ a rv. $X$.  So let us use this here to say that $G$ induces the rv. $T_1$ and $H$ induces $T_0$.
+So the /sensitivity/ is $\P{T_1>t_0} = 1-G(t_0)$ and the /specificity/ is $\P{T_1<t_0} = H(t_0)$.
+
+To make the ROC plot, I first made two plots, one of the sensitivity and the other for 1 minus the specificity, i.e., $1-H(t_0)$.
+Then, in the ROC plot, we put a specificity of $s$ on the \(x\)-axis, then we search for a $t$ such that $1-H(t) = s$, and then we plug this $t$ into $1-G(t)$ to get the sensitivity.
+To help you understand this better, check that $s=0 \implies t = b \implies 1-G(t) = 0$.
+Moreover, check that $s=1\implies t=a \implies 1- G(t) = 1$.
+Hence, the ROC curve starts in the origin and stops at the point $(1,1)$.
+
+With this insight, the area under the ROC curve can be written as
+\begin{align*}
+\int_0^1 (1-G(H^{-1}(1-s))) \d s  =
+1 - \int_0^1 G(H^{-1}(1-s)) \d s  =
+1 - \int_a^b G(t) h(t) \d t,
+\end{align*}
+where, in the last step, we use the 1D change of variable $H(t)=1-s \implies h(t) \d t = -\d s$. It remains to  interpret the integral, so let's plug in the definitions:
+\begin{align*}
+\int_a^b G(t) h(t) \d t =
+\int_a^b \P{T_1\leq t} f_{T_0}(t) \d t =
+\int_a^b \P{T_1\leq T_0\given T_0 = t} f_{T_0}(t) \d t =  \P{T_{1\leq T_0}}.
+\end{align*}
+
+\end{solution}
+\end{exercise}
+\input{trailer.tex}
