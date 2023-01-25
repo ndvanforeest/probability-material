@@ -1,0 +1,16 @@
+\input{header.tex}
+\setcounter{theorem}{38}
+\begin{exercise} BH.10.39
+\begin{solution}
+a.
+ $\P{N=n} = \P{X_1 < 1, X_2<1, \cdots X_{n-1}<1, X_n>1}$. But, then $N$ must have the  first success distribution, and $N-1$ be geometric.
+
+
+b.
+Let $X_i$ be the inter-arrival time between jobs $i-1$ and $i$. Then $S_n=\sum_i^n X_i$ is the arrival time of job $n$. We want that $S_{M-1} < 10 \leq S_M$. Since the $X_i$ are $\sim \Exp{\lambda}$, $S_n \sim \Pois{\lambda t}$.
+
+c.  The sum of $n$ iid $\Exp{1}$ rvs is $\Gamm{n,1}$. Since $\bar X_{n}$ has mean $1$, $X_{n} \sim \Gamm{n,n}$. Then $\V{X_n} = 1/n$ (I just looked it up in the back of the book).  By the CLT, $\bar X_n$ is approximated well by a $\Norm{\mu, \sigma^{2}}$ rv with $\mu=1, \sigma^2=1/n$.
+
+\end{solution}
+\end{exercise}
+\input{trailer.tex}
