@@ -1,0 +1,50 @@
+\input{header.tex}
+\setcounter{theorem}{39}
+\begin{exercise} BH.8.40
+ A nice question on the exam could be to take another prior, e.g., $p$ uniform on $[1/3, 2/3]$. How would that affect the solution?
+\begin{hint}
+Apply beta-binomial conjugacy.
+\end{hint}
+\begin{solution}
+Let us solve the question from first principles. At the end, I'll give the short solution based on Beta-Binomial conjugacy.
+
+Let $f(p)$ be our prior density (In the exercise it is taken to be uniform). Then
+\begin{align*}
+\P{p>r}=\int \1{p>r}f(p) \d p = \int_{r}^{1} f(p) \d p
+\end{align*}
+is our belief that $p>r$. For this exercise, we are interested in the relation $\P{p>r} \geq c$. For instance, suppose we take $c=0.95$, then we like to know which value for $r$ achieves that $\P{p>r} \geq c$?
+
+We can start with one trial, i.e., $n=1$. Then we analyze the case for $n=2$, and so on, and hope to see a pattern.  Here are the standard steps of Bayesian reasoning.
+\begin{enumerate}
+\item I want to know the density $f_1(p | N= 1)$, i.e, the density of $p$ after having seen one  successful test.  (Note here that I am careful about notation. We do $n=1$ trials, and then the number of successes is given by the random variable $N$.)
+\item Now I use Bayes' rule:
+   \begin{align*}
+    f_1(p| N=1) &= \frac{f_1(p, N=1)}{\P{N=1}} = \frac{f_1( N=1| p)}{\P{N=1}} f(p).
+   \end{align*}
+   Here $f(p)$ acts as the prior density on $p$.
+\item It is clear that $f_1(N=1|p) = p$, because  we know that  an item passes a test with probability $p$, when $p$ is given.
+\item Perhaps I don't need $\P{N=1}$ if I can guess it (though see below), but here it is just for completeness' sake.
+   \begin{align*}
+   \P{N=1} = \int f(N=1|p) f(p) \d p = \int_0^{1} p \d p = 1/2,
+   \end{align*}
+   because the prior $f(p) = \1{p\in [0,1]}$, i.e., uniform on $[0,1]$, i.e, it is $\Beta{1,1}$.
+\item With this, $f_1(p|N=1) = \frac{p}{1/2} \1{p\in[0,1]} = 2p  \1{p\in[0,1]}$.
+\item Thus, $\P{p>r\given N=1} = \int_{0}^1 \1{p>r} f_1(p |N=1)\d p = \int_{r}^1 2p\d p = 1-r^2$.
+\end{enumerate}
+Sometimes we are lucky and we don't have to compute the denominator in Bayes' formula. We did this earlier, but let's show again how this works.
+   \begin{align*}
+    f_1(p| N=1) &= \frac{f_1(p, N=1)}{\P{N=1}} \propto f_1( N=1| p)f(p) = p \1{0\leq p \leq 1}.
+   \end{align*}
+Now $f_1(p| N=1)$ is a PDF, hence must integrate to 1. Thus, $\int_{0}^{1} p \d p = 1/2$, must be the normalization constant by which we have to divide to turn $f_1$ into a real PDf. In this case we don't save any work, but sometimes this really helps, in particular when dealing with integrals with Beta distributed rvs.
+
+Now generalize to larger $n$, compute $f_2(p|N=2)$, then for $n=3$, and so on, until you see the pattern.
+
+We can also directly use the ideas of the book. Starting with a prior $\Beta{1,1}$, after $n$ `wins', the distribution becomes $\Beta{1+n, 1}$.  Then,
+\begin{align*}
+  \P{p>r} = \frac{\Gamma(n+2)}{\Gamma(n+1)\Gamma(1)}\int_r^1 p^n \d p = 1-r^{n+1}.
+   = (n+1) p^{n+1}|_r^{1} = 1-r^{n+1}.
+\end{align*}
+
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

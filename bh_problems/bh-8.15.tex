@@ -1,0 +1,45 @@
+\input{header.tex}
+\setcounter{theorem}{14}
+\begin{exercise} BH.8.15
+We'll use this exercise in a lecture to show how the normal distribution originates from astronomy (or dart throwing).
+
+The notation is a bit clumsy for the angle coordinate. Write $\Theta$ for the rv and $\theta$ for its value.
+\begin{hint}
+a. See BH.8.1.9.
+
+b. If $(X,Y)$ are uniform on the disk, then the function $g(x,y)$ must be constant on this disk. Use an indicator to ensure that $X^2+Y^2\leq 1$. Finally, normalize.
+
+c. What are the densities of $X$ and $Y$ when they are $N(0,1)?$
+\end{hint}
+
+\begin{solution}
+a.  I remember this: $f_{X,Y}(x,y) \d x \d y = f_{R, \Theta}(r, \theta) \d r \d \theta$. From this,
+\begin{align*}
+f_{R, \Theta}(r, \theta)  = f_{X,Y}(x,y) \left| \frac{\partial (x,y)}{\partial(r, \theta)} \right|.
+\end{align*}
+Now, since $x=r\cos \theta$ and $y=r \sin \theta$,
+\begin{align*}
+\frac{\partial (x,y)}{\partial(r, \theta)} =
+  \begin{pmatrix}
+    \cos \theta & -r \sin \theta \\
+ \sin \theta & r \cos \theta
+  \end{pmatrix},
+\end{align*}
+which has determinant equal to $r$.
+It is given that $f_{X,Y}(x,y)=g(x^2+y^2) = g(r^2)$. Hence,
+\begin{align*}
+f_{R, \Theta}(r, \theta)  = f_{X,Y}(x,y) r = g(r^2)r,
+\end{align*}
+with $r\geq 0, \theta\in[0, 2\pi$.
+The RHS  does not  depend on $\theta$. Hence, $f_{\Theta}(\theta)$ must be a constant.
+
+b. Use the hint. Since $g$ is a constant, $f_{R, \Theta}(r, \theta) \propto r$. Thus,
+\begin{align*}
+  \int_{0}^{1}\int_{0}^{2\pi} r \d r \d \theta = 2\pi (1/2) r^{2}|_0^{1} = \pi.
+\end{align*}
+So, $1/\pi$ is the normalization constant.
+
+c. $f_{X,Y}(x,y) = \exp{-x^2}/\sqrt{2\pi}\exp{-y^{2}}/\sqrt{2\pi} = \exp{-(x^2+y^2)/2\pi} = \exp{-r^{2}}/2\pi$. Indeed, $f_{X,Y}(x,y)$ has the form $g(x^2+y^2)$. The rest is as in part b.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}
