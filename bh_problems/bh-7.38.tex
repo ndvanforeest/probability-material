@@ -1,10 +1,8 @@
 \input{header.tex}
 \setcounter{theorem}{37}
-\begin{exercise}BH.7.38
-Besides the solution of BH, read our solution.
+\begin{exercise}BH.7.38.
+Remark: Read our solution and  the one in the pdf with selected solutions of BH.
 \begin{solution}
-First check~\cref{ex:3a}.
-
 In general, I am always very careful with such `shortcuts' such as $\max\{X,Y\} + \min\{X, Y\} = X +Y$.  As a matter of fact, I try to avoid such arguments because it is easy to go wrong. Seemingly plausible arguments are often wrong due to overlooked dependency or non-linearity (effects of higher moments).
 
 It is useful to write $\max\{x,y\} = x\1{x\geq y}+y\1{y>x}$, and something similar for the minimum. In the present case, $\cov{X,Y} = \E{X Y}-\E X \E Y$, and, similarly, $\cov{M,L} = \E{ML}- \E M \E L$, where $M$ is max, and $L$ is min. With the above indicators, it is simple to show that $\E{ML} = \E{X Y}$:

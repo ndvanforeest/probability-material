@@ -1,7 +1,6 @@
 % arara: pdflatex: { shell: yes }
 % arara: pythontex: {verbose: yes, rerun: modified }
 % arara: pdflatex: { shell: yes }
-% arara: move: {  files: ['study-guide.pdf'], target: ['../pdf-files/'] }
 
 \documentclass[a4paper,11pt]{article}
 
@@ -39,11 +38,13 @@
 \section{Lecture 3}
 \label{sec:lecture-1}
 
+\subsection{Compulsory material}
+
+
 \begin{enumerate}
 \item BH Book: Read Section 7.1.2 joint, marginal, conditional for continuous rvs
 \item BH Book: Read Section 7.1.3 joint, marginal, conditional for hybrid rvs
 \item BH video: -
-\item BH Exercises: 7.1, 7.10, 7.11
 \end{enumerate}
 
 \begin{exercise}
@@ -139,15 +140,65 @@ print(var(res))
 \end{solution}
 \end{exercise}
 
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-7.1.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-7.10.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-7.11.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
 \section{Lecture 4}
-\label{sec:lecture-1}
+
+\subsection{Compulsory material}
+
 \begin{enumerate}
 \item BH Book: Read Section 7.2, 2d LOTUS
 \item BH Book: Read Section 7.3, covariance and correlation
 \item BH Book: Read Section 7.4, skip
 \item BH Book: Read Section 7.5, only proof of Theorem 7.5.7, skip the rest
 \item BH video: 21
-\item BH Exercises: 7.38, 7.53, 7.58
 \end{enumerate}
 
 
@@ -213,6 +264,55 @@ must be wrong.
 \end{exercise}
 
 
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-7.38.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-7.53.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-7.58.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 \section{Tutorial}
 \label{sec:tutorial}
@@ -260,12 +360,21 @@ f_{L,M}(u,v)
 \subsection{BH Exercises}
 
 
-\begin{exercise}
-BH Exercises: 7.15,
-\begin{solution}
-See our solution manual.
-\end{solution}
-\end{exercise}
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-7.15.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 
 \section{Homework}
@@ -459,26 +568,38 @@ Of course, we can find the probability with some simple geometric arguments (com
 \label{sec:bh-exercises-1}
 
 
-\begin{exercise}
-BH 7.24
-\begin{solution}
-See our solution manual.
-\end{solution}
-\end{exercise}
+\begin{pycode}
+from pathlib import Path
 
-\begin{exercise}
-BH 7.58
-\begin{solution}
-See our solution manual.
-\end{solution}
-\end{exercise}
+exercise_name = "bh-7.24.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
-\begin{exercise}
-BH 7.86
-\begin{solution}
-See our solution manual.
-\end{solution}
-\end{exercise}
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-7.58.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
 
 
 

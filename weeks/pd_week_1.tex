@@ -1,7 +1,6 @@
 % arara: pdflatex: { shell: yes }
 % arara: pythontex: {verbose: yes, rerun: modified }
 % arara: pdflatex: { shell: yes }
-% arara: move: {  files: ['study-guide.pdf'], target: ['../pdf-files/'] }
 
 \documentclass[a4paper,11pt]{article}
 
@@ -38,6 +37,9 @@
 \section{Lecture 1}
 \label{sec:lecture-1}
 
+
+\subsection{Compulsory material}
+
 \begin{enumerate}
 \item BH Book: Read Section 6.4, MGFs
 \item BH Book: Read Section 6.5, Generating moments with MGFs
@@ -45,21 +47,6 @@
 \item BH video: 18
 \end{enumerate}
 
-\begin{pycode}
-from pathlib import Path
-
-exercise_name = "bh-6.24.tex"
-fname = Path("../bh_problems") / exercise_name
-with fname.open("r") as fp:
-    state = 0  # dump
-    for line in fp.readlines():
-        if line[:16] == r"\begin{exercise}":
-            state = 1
-        if state == 1:
-            print(line.strip())
-        if line[:14] == r"\end{exercise}":
-            break
-\end{pycode}
 
 Here is a story to see how the Poisson distribution emerges, just by allowing people a bit of choice.
 The conclusion is that the Poisson distribution comes up at many unexpected processes.
@@ -137,32 +124,80 @@ The demand at the surgery department will be about Poisson, so some days there w
 \end{solution}
 \end{exercise}
 
+\begin{exercise}
+Read BH.6.22. Relate that exercise to the story of the patients of this lecture. You should see that conceptually the mapping is one-to-one.
+\begin{solution}
+Just read the solution of BH.6.22 and compare.
+\end{solution}
+\end{exercise}
 
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-6.24.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 
 
 \section{Lecture 2}
 \label{sec:lecture-1}
+
+\subsection{Compulsory material}
+
 \begin{enumerate}
 \item BH Book: Read Section 7.0 intro,
 \item BH Book: Read Section 7.1.1 joint, marginal, conditional for discrete rvs
 \item BH video: 19
-\item BH Exercises: 7.9, 7.29
 \end{enumerate}
 
-\begin{exercise}
-BH Exercise 7.9
-\begin{solution}
-See our  solution manual of BH exercises on Brightspace.
-\end{solution}
-\end{exercise}
+% \begin{exercise}
+% BH Exercise 7.9
+% \begin{solution}
+% See our  solution manual of BH exercises on Brightspace.
+% \end{solution}
+% \end{exercise}
 
-\begin{exercise}
-BH Exercise 7.29
-\begin{solution}
-See our  solution manual of BH exercises on Brightspace.
-\end{solution}
-\end{exercise}
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-7.9.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-7.29.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 
 \begin{exercise}
@@ -285,14 +320,21 @@ With the previous exercise, use marginalization to compute the marginal PMF $\P{
 \subsection{BH Exercises}
 \label{sec:bh-exercises}
 
+\begin{pycode}
+from pathlib import Path
 
-\begin{exercise}
-Exercise BH.6.22
-\begin{solution}
-See our solution manual for BH problems.
-\end{solution}
-\end{exercise}
-
+exercise_name = "bh-6.22.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 
 
@@ -305,12 +347,6 @@ See our solution manual for BH problems.
 Practice exercises are meant to get you started with reading definitions, notation, and involve only simple calculus.
 These questions are simpler than the exercises of BH.
 
-\begin{exercise}
-Read BH.6.22. Relate that exercise to the story of the patients of Lecture 1.
-\begin{solution}
-The mapping is one to one.
-\end{solution}
-\end{exercise}
 
 
 \begin{exercise}
@@ -458,20 +494,38 @@ The numbers are for you to compute.
 \subsection{BH Exercises}
 \label{sec:bh-exercises-1}
 
-\begin{exercise}
-Exercise BH.6.13
-\begin{solution}
-See the sample solutions of BH.
-\end{solution}
-\end{exercise}
 
-\begin{exercise}
-Exercise BH.6.18
-\begin{solution}
-See our solution manual for BH problems.
-\end{solution}
-\end{exercise}
+\begin{pycode}
+from pathlib import Path
 
+exercise_name = "bh-6.13.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-6.18.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 \section{Poleverywhere questions}
 \label{sec:polev-quest}
@@ -483,6 +537,8 @@ To be included after the tutorial.
 
 \setcounter{theorem}{0}
 \subfile{../assignments/bh-7-9.tex}
+
+
 
 
 
