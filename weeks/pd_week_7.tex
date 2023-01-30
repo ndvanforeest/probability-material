@@ -1,7 +1,6 @@
 % arara: pdflatex: { shell: yes }
 % arara: pythontex: {verbose: yes, rerun: modified }
 % arara: pdflatex: { shell: yes }
-% arara: move: {  files: ['study-guide.pdf'], target: ['../pdf-files/'] }
 
 \documentclass[a4paper,11pt]{article}
 
@@ -46,8 +45,42 @@
 \begin{itemize}
 \item 10.3: read
 \item BH video: 30
-\item BH Exercises: 10.23, 10.26
 \end{itemize}
+
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-10.23.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-10.26.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
 
 
 \begin{exercise}
@@ -226,8 +259,43 @@ print(find_root(gain, 0, 200))
 \begin{itemize}
 \item 10.4: read
 \item BH video: -
-\item BH Exercises: 10.28, 10.30, 10.36. 10.39
 \end{itemize}
+
+
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-10.28.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-10.36.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
 
 
 Little Mike needs to get ready for school. He must leave within 15 minutes, but there are two more things he needs to do: eat his breakfast and get dressed. The time it takes Mike to eat his breakfast has a mean value of 6 minutes with a standard deviation of 3 minutes. The time it takes Mike to get dressed has a mean value of 4 minutes with a standard deviation of 1 minute.
@@ -359,14 +427,21 @@ Equating the right-hand side to 0.01 yields $n=400$. So we need $n \geq 400$.
 
 \subsection{BH Exercises}
 
+\begin{pycode}
+from pathlib import Path
 
-\begin{exercise}
-BH Exercises: 7.15,
-\begin{solution}
-See our solution manual.
-\end{solution}
-\end{exercise}
-
+exercise_name = "bh-10.39.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 \section{Homework}
 \label{sec:homework}
@@ -434,12 +509,21 @@ So the probability I will move is approximately 5.3\%.
 \label{sec:bh-exercises-1}
 
 
-\begin{exercise}
-BH 7.24
-\begin{solution}
-See our solution manual.
-\end{solution}
-\end{exercise}
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-10.30.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 
 
@@ -453,7 +537,7 @@ TBD
 \section{Assignment}
 \label{sec:assignment}
 
-%\subfile{../assignments/bh-10-28.tex}
+No assignment this week.
 
 \opt{all-solutions-at-end}{
 \Closesolutionfile{hint}

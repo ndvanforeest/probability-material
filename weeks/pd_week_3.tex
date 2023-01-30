@@ -1,7 +1,7 @@
 % arara: pdflatex: { shell: yes }
 % arara: pythontex: {verbose: yes, rerun: modified }
 % arara: pdflatex: { shell: yes }
-% arara: move: {  files: ['study-guide.pdf'], target: ['../pdf-files/'] }
+
 
 \documentclass[a4paper,11pt]{article}
 
@@ -45,7 +45,6 @@
 \begin{itemize}
 \item 8.1: read up  to and including Example 8.1.6., skip the rest of 8.1 from Theorem 8.1.7  onwards
 \item BH video: 22
-\item Exercises: 8.11, 8.18 (provide the formula?) 8.52, 8.54,
 \end{itemize}
 
 
@@ -100,6 +99,21 @@ where $\tau_{VW} := \sqrt{1 - \rho_{VW}^2} = \sqrt{1 - \frac{1 + \rho_{XY}}{2}} 
 \end{solution}
 \end{exercise}
 
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-8.11.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 \subsection{Background material, not obligatory}
 \label{sec:backgr-mater-not}
@@ -196,8 +210,40 @@ It remains to find the normalization constant $a$; recall, $f$ must be a PDF. Th
 \item 8.5: skip
 \item 8.6: read
 \item BH video: -
-\item BH Exercises:
 \end{itemize}
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-8.36.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-8.47.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 \subsection{Background material, not obligatory}
 \label{sec:backgr-mater-not-1}
@@ -368,12 +414,21 @@ where in the last step we recognize that the integral on the right is the integr
 \subsection{BH Exercises}
 
 
-\begin{exercise}
-BH Exercises: 7.15,
-\begin{solution}
-See our solution manual.
-\end{solution}
-\end{exercise}
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-8.52.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 
 \section{Homework}
@@ -497,13 +552,22 @@ So indeed, $\E{Y} > \E{X}$, while $\sigma_Y < \sigma_X$. Clearly, portfolio $Y$ 
 \label{sec:bh-exercises-1}
 
 
-\begin{exercise}
-BH 7.24
-\begin{solution}
-See our solution manual.
-\end{solution}
-\end{exercise}
 
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-8.54.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 
 \section{Polleverywhere questions}

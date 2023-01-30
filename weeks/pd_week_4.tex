@@ -1,7 +1,6 @@
 % arara: pdflatex: { shell: yes }
 % arara: pythontex: {verbose: yes, rerun: modified }
 % arara: pdflatex: { shell: yes }
-% arara: move: {  files: ['study-guide.pdf'], target: ['../pdf-files/'] }
 
 \documentclass[a4paper,11pt]{article}
 
@@ -39,11 +38,31 @@
 \label{sec:lecture-1}
 
 
+\subsection{Compulory material}
+\label{sec:compulory-material}
+
 \begin{itemize}
 \item 9.1: read, but skip example 9.1.6 on the two envelopes paradox.
 \item BH video: 26
-\item BH Exercises: 9.1
 \end{itemize}
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-9.1.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
+
 
 The next real exercise is about recursion applied to the negative hypergeometric distribution. But to get in the mood, here is short fun question on how to use recursion.
 
@@ -147,10 +166,12 @@ What an elegant procedure;  we pull ourselves out of the swamp, just like Baron 
 \section{Lecture 8}
 
 
+\subsection{Compulory material}
+\label{sec:compulory-material}
+
 \begin{itemize}
 \item 9.2: read
 \item BH video: 27
-\item BH Exercises: 9.25, 9.28
 \end{itemize}
 
 
@@ -423,6 +444,22 @@ The game stops when you have seen all balls at least once. What is your expected
 \end{exercise}
 
 
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-9.25.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
 
 \section{Tutorial}
 \label{sec:tutorial}
@@ -483,15 +520,24 @@ Clearly, $X$ is $N(4,2)$ distributed. In fact, we do not need to know the value 
 \subsection{BH Exercises}
 
 
-\begin{exercise}
-BH Exercises: 7.15,
-\begin{solution}
-See our solution manual.
-\end{solution}
-\end{exercise}
+\begin{pycode}
+from pathlib import Path
 
+exercise_name = "bh-9.32.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 \section{Homework}
+
 \label{sec:homework}
 
 \subsection{Practice}
@@ -502,13 +548,21 @@ See our solution manual.
 \subsection{BH Exercises}
 \label{sec:bh-exercises-1}
 
+\begin{pycode}
+from pathlib import Path
 
-\begin{exercise}
-BH 7.24
-\begin{solution}
-See our solution manual.
-\end{solution}
-\end{exercise}
+exercise_name = "bh-9.28.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 
 
@@ -536,5 +590,5 @@ TBD
 \section{Solutions}
 \input{ans}
 }
-j
+
 \end{document}

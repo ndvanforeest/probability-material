@@ -1,0 +1,21 @@
+\input{header.tex}
+\setcounter{theorem}{46}
+\begin{exercise} BH.8.47.
+\begin{hint}
+Realize that when $\max\{X, Y\} \leq z$, then $X\leq z$ \emph{and} $Y\leq z$. Use this to find the CDF of $M_{n}$. Next, if $M_{n+1}\leq y$, can it happen that $M_{n}> x$ for some $x>y$?
+\end{hint}
+\begin{solution}
+With the hint, $M_{n}\leq x \implies X_{i}\leq x$ for all $i=1,\ldots, n$. Thus, $\P{M_n\leq x} = (F(x))^{n}$.
+
+Now we go for the joint distribution of $M_{n}$ and $M_{n+1}$. If $y\leq x$, then from the hint,
+\begin{align*}
+\P{M_n\leq x, M_{n+1}\leq y} = \P{M_{n+1}\leq y} = (F(y))^{n+1}.
+\end{align*}
+When $y>x$, then we know that $M_{n}\leq x$ but $X_{n+1}\leq y$, hence,
+\begin{align*}
+\P{M_n\leq x, M_{n+1}\leq y} = \P{M_{n}\leq x, X_{n+1}\leq y} = (F(x))^{n} F(y).
+\end{align*}
+Where do we use the fact that the $X_i$ are iid?
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

@@ -1,7 +1,6 @@
 % arara: pdflatex: { shell: yes }
 % arara: pythontex: {verbose: yes, rerun: modified }
 % arara: pdflatex: { shell: yes }
-% arara: move: {  files: ['study-guide.pdf'], target: ['../pdf-files/'] }
 
 \documentclass[a4paper,11pt]{article}
 
@@ -39,13 +38,46 @@
 \section{Lecture 11}
 \label{sec:lecture-1}
 
+\subsection{Compulory material}
+\label{sec:compulory-material}
+
 
 \begin{itemize}
 \item 10.1: read, but skip examples 10.1.7, 10.1.8, 10.1.9
 \item BH video: 28
-\item BH Exercises: 10.2, 10.3, 10.6, 10.9,
 \end{itemize}
 
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-10.2.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-10.3.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 
 \begin{exercise}
@@ -109,11 +141,33 @@ I forgot the covariance at first :-(
 
 \section{Lecture 12}
 
+
+\subsection{Compulory material}
+\label{sec:compulory-material}
+
+
 \begin{itemize}
 \item 10.2: read
 \item BH video: 29
-\item BH Exercises:
 \end{itemize}
+
+
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-10.21.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 
 \begin{exercise}
@@ -295,13 +349,21 @@ for every $t > 0$. This inequality is tightest for $t = \sqrt{2}$, as this minim
 
 \subsection{BH Exercises}
 
+\begin{pycode}
+from pathlib import Path
 
-\begin{exercise}
-BH Exercises: 7.15,
-\begin{solution}
-See our solution manual.
-\end{solution}
-\end{exercise}
+exercise_name = "bh-10.6.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 
 \section{Homework}
@@ -317,12 +379,21 @@ See our solution manual.
 \label{sec:bh-exercises-1}
 
 
-\begin{exercise}
-BH 7.24
-\begin{solution}
-See our solution manual.
-\end{solution}
-\end{exercise}
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-10.9.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 
 

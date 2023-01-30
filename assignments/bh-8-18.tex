@@ -1,4 +1,4 @@
-\subsection{BH.8.18}
+\subsection{BH.8.18: Division of rvs}
 
 
 % Use Python uncertainties module.\footnote{\url{https://pythonhosted.org/uncertainties/}}.
@@ -6,9 +6,12 @@
 
 % We can demonstrate the use of Taylor's equation to see how uncertaintly should propagate\footnote{\url{https://en.wikipedia.org/wiki/Propagation_of_uncertainty}}.
 
+Whle BH.8.18 uses Jacobians to deal with the fraction $X/Y$ of two rvs $X$ and $Y$, here we use simulation for this purpose
+(You don't have to solve BH.8.18 as this year (2023) we skip the Jacobians.)
+
+Here is the basic question: How many ping pong balls fit into an Airbus Beluga?
 
 
-How many ping pong balls fit into an Airbus Beluga?
 One way to answer this is as follows.
 According to this \href{https://en.wikipedia.org/wiki/Airbus\_Beluga}{wiki-page} the cargo volume $V$ of this airplane is $1500 \m^{3}$.
 But this number is based on the physical dimensions that is available to store containers, tanks, and so on.
@@ -82,5 +85,5 @@ Include code to make a histogram of the PDF of $N$.
 
 
 \begin{remark}
-The numerical results suggest the interesting guess $\V N \approx \V V * \V v$. Whether this is true more generally will be discussed in the Challenge of week 4. 
+The numerical results suggest the interesting guess $\V N \approx \V V * \V v$. Whether this is true more generally will be discussed in the Challenge of week 4.
 \end{remark}
