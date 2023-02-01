@@ -1,0 +1,21 @@
+\input{header.tex}
+\setcounter{theorem}{12}
+\begin{exercise}BH.8.13
+\begin{hint}
+Note that the following implications hold:
+\begin{align*}
+\{T\leq t\} = \{X/Y \leq e^{t}\} = \{X \leq e^t Y\}
+\end{align*}
+\end{hint}
+\begin{solution}
+With the hint:
+\begin{align*}
+\P{T\leq t}
+  &= \P{X \leq e^t Y} = \lambda \int_0^{\infty} \P{X\leq e^{t}y} e^{-\lambda y} \d y
+  = \lambda \int_0^{\infty} (1- \exp{(-\lambda e^{t} y)}) e^{-\lambda y}\d y \\
+&= 1 - \lambda \int_0^{\infty} \exp{(-\lambda (e^{t}+1) y)} \d y = 1-\frac{\lambda}{\lambda(e^{t}+1)}.
+\end{align*}
+Clearly, we can cancel the $\lambda$. For the PDF, just take the derivative with respect to $t$.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}
