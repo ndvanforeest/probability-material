@@ -1,7 +1,7 @@
 \documentclass[poll_tutorial_format]{subfiles}
 \begin{document}
 \maketitle
-
+\setcounter{section}{6}
 \section{PD Week 1}
 
 \subsection{Set things up}
@@ -11,93 +11,101 @@
 
 \setcounter{theorem}{-1}
 \begin{exercise}
-Have you helped your neighbors to set up their polleverywhere app?
+Claim: you should help your neighbors to set up their polleverywhere app.
+
+\vspace{0.5cm}\noindent  Which of the following options applies?
 \begin{enumerate}
-\item Yes
-\item No
+\item The claim is correct.
+\item The claim is false.
 \end{enumerate}
 \end{exercise}
 
 \subsection{Real questions}
-\label{sec:start-real-questions}
-
-
+\label{sec:start-real-questions pt week 5}
 
 \begin{exercise}
-Let $F(x) = e^{-x}$ for $x\in \R$? Can $F$ be a CDF?
+$X$ is a rv, $X  \in \R$. Claim: $\supp{X} = [c, \infty) \iff \P{X\leq c} = 0$.
 
-Choose one of these answers:
+\vspace{0.5cm}\noindent  Which of the following options applies?
 \begin{enumerate}
-\item Yes, but we still need to compute the normalization constant.
-\item Yes, because it is an increasing function.
-\item No, because it is a decreasing function.
-\item No, because $\lim_{x\to\infty} e^{-x}=\infty$.
-\item No, because it's the PDF of an exponentially distributed rv.
+\item The claim is correct.
+\item The claim is false.
 \end{enumerate}
+% \begin{solution}
+% No $X=c$ is possible. Moreover, $X\sim \Unif{[c, c+1]}$ has support $[c, c+1]$ which is not $[c, \infty)$.
+% \end{solution}
+\end{exercise}
+
+\begin{exercise}
+Write $m$ for the median $\E X$ of the rv $X$. Claim, the following definition correct:
+\begin{equation}
+\label{eq:1}
+\V X := \E{X^2} - m^{2}?
+\end{equation}
+\vspace{0.5cm}\noindent  Which of the following options applies?
+\begin{enumerate}
+\item The definition correct.
+\item The definition is false.
+\end{enumerate}
+% \begin{solution}
+% No, $\E X$ need not be equal to the median, moreover the \emph{definition} of the variance involves the mean, not the median.
+% \end{solution}
+\end{exercise}
+
+\begin{exercise}
+Suppose $X$ a real-valued rv with $\supp X = [0, c]$. Claim:
+\begin{equation}
+\label{eq:3}
+\V X = \E{X^2} - \mu^2 \leq c \E X - (\E X)^2 = (c-\E X)\E X?
+\end{equation}
+
+\vspace{0.5cm}\noindent  Which of the following options applies?
+\begin{enumerate}
+\item The claim is correct.
+\item The claim is false.
+\end{enumerate}
+% \begin{solution}
+% Yes.
+% \end{solution}
 \end{exercise}
 
 
 \begin{exercise}
-If $X\sim  \Unif{[-5, 10]}$, what is $C$ in $f_{X}(x) = C \1{-5, 10}$?
+$X\sim \Geo{p}$. Take $s$ such that $e^{s}q < 1$.
+\begin{align}
+\label{eq:5}
+M_{X}(s)
+  &\stackrel{1}= \E{e^{sX}} \stackrel{2}= \sum_{k=1}^{\infty} p q^{k} e^{sk} \\
+  &\stackrel{3}= p \sum_{k=1}^{\infty} (e^{s}q)^{k}
+  \stackrel{4}= p (\sum_{k=0}^{\infty} (e^{s}q)^{k}-1) \\
+&  \stackrel{5}= p /(1+e^{s}q)  - p.
+\end{align}
 
-Choose one of these answers:
+\vspace{0.5cm}\noindent  Which of the following options applies:
 \begin{enumerate}
-\item $C$ is not well defined because $f_{x}(x)$ does not have the right form for PDF.
-\item $C=15$
-\item $\int_0^{\infty} f_{X}(x) \d x = 10$, hence $C=1/10$.
-\item $C=1/15$.
+\item all steps are correct.
+\item step 2 is incorrect.
+\item step 3 is incorrect.
+\item step 4 is incorrect.
+\item step 5 is incorrect.
+\item More than one step is incorrect.
 \end{enumerate}
+% \begin{solution}
+% Steps 2 and 5 are incorrect. Step 2: start with $k=0$, step 5: the plus should be a minus.
+% \end{solution}
 \end{exercise}
 
 \begin{exercise}
-Take $f_X(x) = e^{-x}-1/2$ for $x\geq 0$.  Can $f$ be a PDF?
+Let $X$ and $Y$ be independent rvs. Claim: $F_{X+Y}(x, y) = F_X(x) + F_{Y}(y)$.
 
-Choose one of these answers:
+\vspace{0.5cm}\noindent  Which of the following options applies?
 \begin{enumerate}
-\item No, because it's a PMF of a discrete rv.
-\item Yes, it's the PDF of the rv $X\sim\Exp{\lambda}$ with $\lambda = 1$.
-\item No, because $f(0)  = -1/2$.
-\item No, because $f(1000) < 0$.
+\item The claim is correct.
+\item The claim is false.
 \end{enumerate}
+% \begin{solution}
+% No. We should write $F_{X,Y}}$ rather than $F_{X+Y}$ , and since the rvs are independent, consider the product of the CDFs, not the sum.
+% \end{solution}
 \end{exercise}
-
-
-\begin{exercise}
-Suppose $X$ does not have a second moment, what is it's variance?
-
-Choose one of these answers:
-\begin{enumerate}
-\item It's variance can still be $0$ when $\E{X^2} = \infty$ and $(\E X)^2=-\infty$.
-\item $\V X=0$, because its second moment does not exist, hence $\E{X^2}=0$, hence $\E X=0$.
-\item $\V X = \infty$.
-\end{enumerate}
-\end{exercise}
-
-\begin{exercise}
-Suppose the $X$ has  $\R$ as support. Take $g(x) = \log x$, and define $Y = g(X)$. What is the support of $Y$?
-
-Choose one of these answers:
-\begin{enumerate}
-\item The support of $Y$ is $\R$.
-\item The support of $Y$ is $\R^+$.
-\item The support of $Y$ is $(-\infty, 0]$.
-\item The support of $Y$ is $(0, \infty)$.
-\item $Y$ is not well defined.
-\end{enumerate}
-
-\end{exercise}
-
-\begin{exercise}
-Suppose the $X$ has  $\R$ as support. Take $g(x) = \log x$, and $h(x) = e^{x}$. Define $Y = h(g(X))$.
-
-Choose one of these answers:
-\begin{enumerate}
-\item Since $h$ and $g$ are each other's inverse, the support of $Y$ is $\R$.
-\item Even though $h$ and $g$ are each other's inverse, $Y$ is still not well defined.
-\item If $Y=g(h(X))$ then $Y$ has can have $\R$ as support.
-\end{enumerate}
-
-\end{exercise}
-
 
 \end{document}

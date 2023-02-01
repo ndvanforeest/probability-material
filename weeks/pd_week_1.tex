@@ -2,37 +2,15 @@
 % arara: pythontex: {verbose: yes, rerun: always }
 % arara: pdflatex: { shell: yes }
 
-\documentclass[a4paper,11pt]{article}
+\input{header}
 
-
-\usepackage[all-solutions-at-end]{optional}
-
-\usepackage{../common/preamble}
-%\newcommand{\sectionbreak}{} %\clearpage}
-
-
-\newtheorem{theorem}{Theorem}
-\newtheorem{exercise}[theorem]{Ex}
-\newtheorem{remark}[theorem]{Remark}
-
-\setcounter{tocdepth}{1}
-\usepackage{a4wide}
-\usepackage{../common/abbreviations}
-
-\author{Lecturers PT and PD
-}
-\date{\today}
 \title{Probability Distributions, Week 1}
-
-\opt{all-solutions-at-end}{
-\Opensolutionfile{hint}
-\Opensolutionfile{ans}
-}
-
 
 \begin{document}
 \maketitle
-\tableofcontents
+
+\toccontents
+%\tableofcontents
 
 \section{Lecture 1}
 \label{sec:lecture-1}
