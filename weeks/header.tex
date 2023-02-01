@@ -1,0 +1,29 @@
+\documentclass[notitlepage,a4paper,11pt]{article}
+
+
+\usepackage[all-solutions-at-end]{optional}
+
+\usepackage{../common/preamble}
+%\newcommand{\sectionbreak}{} %\clearpage}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{exercise}[theorem]{Ex}
+\newtheorem{remark}[theorem]{Remark}
+
+\setcounter{tocdepth}{1}
+\usepackage{a4wide}
+\usepackage{../common/abbreviations}
+
+
+\opt{all-solutions-at-end}{
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+}
+\makeatletter
+\newcommand*{\toccontents}{\@starttoc{toc}}
+\makeatother
+
+\author{Lecturers PT and PD
+}
+\date{\today}

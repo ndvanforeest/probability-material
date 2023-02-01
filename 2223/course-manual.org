@@ -1,0 +1,127 @@
+#+title:   Probability distributions: Course manual
+#+SUBTITLE: EBP038A05, 2021-2022
+#+author: Nicky D. van Foreest, Arpan Rijal
+#+date: {{{time(%Y-%m-%d)}}}
+
+#+STARTUP: indent
+#+STARTUP: showall
+#+OPTIONS: toc:nil
+#+PROPERTY: header-args:shell :exports both
+
+#+LATEX_HEADER: \usepackage{a4wide}
+#+LATEX_HEADER: \usepackage[english]{babel}
+#+LATEX_HEADER: \usepackage{fourier}
+#+LATEX_HEADER: \usepackage{minted}
+#+LaTeX_HEADER: \usepackage{mathtools,amsthm,amssymb,amsmath}
+#+LaTeX_HEADER: \renewcommand{\P}[1]{\,\mathsf{P}\left[#1\right]}
+#+LaTeX_HEADER: \newcommand{\E}[1]{\,\mathsf{E}\/\left[#1\right]}
+#+LaTeX_HEADER: \newcommand{\V}[1]{\,\mathsf{V}\left[#1\right]}
+#+LaTeX_HEADER: \newcommand{\cov}[1]{\,\mathsf{Cov}\left[#1\right]}
+#+LaTeX_HEADER: \renewcommand{\l}[1]{\fbox{#1}}
+
+
+* Course Material
+
+1. We use [[https://projects.iq.harvard.edu/stat110/home][Introduction to Probability]] by Blitzstein and Hwang (BH) as the main material. The [[https://projects.iq.harvard.edu/stat110/home][book's homepage]] provides an electronic copy of the book, video lectures by Blitzstein, and a solution manual for part of the problems. It's best to buy the book as it makes studying easier, and a physical book is much more practical than an ebook when working on the material and solving problems.
+2. We make available on brightspace a weekly pdf file that contains the schedule for that week, such the relevant sections of the book, the assignment, and the exercises.
+3. We will illustrate the material during the lectures by solving exercises (some from the book, some by our own) as indicated in weekly pdf file. Before our lectures, you have to read the required  material and the exercises.  You should think about how you would solve these exercises, but you don't have to solve the problems before the lecture.
+4. See [[https://www.rug.nl/ocasys/feb/vak/show?code=EBP038A05][Ocasys]] for the course goals
+5. We have all material for Probability Theory and Probability Distributions on [[https://github.com/ndvanforeest/probability-material][GitHub]]. This might be helpful for you to see how to organize \LaTeX files. Reading a few examples and  the package ~subfiles~ can save you many, many hours in the long run.
+
+* Tutorials
+
+1. for the tutorials you work on problems that are mentioned in the weekly pdf file. You can also discuss the assignments.
+2. We start the second hour of the tutorial with a number of questions in Poll-everywhere. You have to be in class to make them. The TAs will discuss the solutions in class, depending on the outcome of the test.
+
+
+* Assignments
+
+1. Each group consists of two members. Each group turns in an \LaTeX{}  document with the answers for the assignment. You can choose your group member when we open the groups.  We form random groups for the remaining students.
+2. For each assignment, you have to turn in a pdf document typeset in \LaTeX{}. Include a title, group number, student names and ids, and date.
+3. /Each/ student (so two per group) also turns in a /hand-written solution/ for the exercise of BH as mentioned in the assignment in the pdf file for that week.
+4. We expect brief answers, just a few sentences, or a number plus some short explanation. The idea of the assignment is to help you study and improve your coding skills by showing good code, not to turn you in a writer.
+5. When you have to turn in a graph, provide decent labels and a legend, ensure the axes have labels too.
+6. The deadlines are like this. The assignment in week $n$, $n=1,\ldots, 6$ is due on Wednesday 18h at week $n+1$. The handwritten solution for assignment $n$ is due on the tutorial on Thursday week $n+1$.
+7. Each assignment contains code in Python and R that shows how to implement an example or the solution of an exercises of BH. You have to run the code, read the output, and explain ow the code works. We include Python and R code, and leave the choice to you what to use. In the exam we will also include both languages in the same problem, so you can stay with the language you like.
+8. You are free to use ChatGPT to help you get started and have your work improved. I find it a great tool, and you should learn to use it to improve your work and generate ideas. However, it can make very dumb mistakes. If you use it, check the output very carefully, in particular when you use it to generate code. Also realize that during the exam you're on your own!
+
+
+Why do we insist on hand written solution?
+1. Writing out the solution step-by-step builds a better understanding of the problem.
+2. Writing out solutions by hand encourages you to take your time and think through each step carefully, as opposed to just quickly glance over the published solutions.
+3. Handwriting solutions helps to build a stronger connection to the material and reinforces the concepts that were taught in class. This is also essentail when  you revisit the material for the exam.
+4. Writing out solutions  helps you to develop recognizing mathematical patterns.
+
+You should know that many of you will need to learn multiple languages later in life.
+You should become familiar with looking up documentation on coding on the web, no matter your programming language of choice.
+Invest time in understanding the, at times, rather technical and terse, explanations.
+Once you are used to it, the core documentation is faster to read, i.e., less clutter.
+In the long run, it pays off.
+
+
+* Exam
+
+The exam will be based on:
+1. Variations and combinations of the selected exercises of the book. There will be about one question per chapter. Since you can prepare how to write the maths, we will be very critical on the exam on your answers.
+2. One or two of the questions will be based on the code of the assignments.  You have to be able explain how the code works, or if the code contains bugs, you should be able to find these  bugs, and explain why these are bugs, and give code on how to correct them.
+Some remarks:
+- The exam is closed book and has a duration of 2h.
+- For the following distributions, you have to know by heart the form and the parameters, and either learn (or be able to derive at the exam) the mean and variance: Bernoulli, Binomial, First success, Geometric, Poisson, Uniform (discrete and continuous) and Exponential.
+- If necessary, the exam will contain a list only with distributions that you don't have to learn by heart. See the mock exam for the list.
+- We will plan a perusal after the grades of the exam (resit) have been communicated. This will be the only moment in which you can check your exam.
+
+* Grading
+
+1. Each of the six assignments will be graded as 1, 4, 7, 9, or 10. All assignments have the same weight. If you don't turn in the assignment or the handwritten solution, the grade will default to 1. Results of the assignments of (the) previous year(s) do not carry over to this year.
+2. For poll-everywhere we add up all the points you earned, divide that by the total number of poll-everywhere questions (for instance, if we have 5 questions per week, then we have 35 questions in total), and round to one 1 decimal.
+3. For the exam (resit), we add up all the points you earned and divide that by the total amount of points of the exam. Round this to one decimal.
+
+Then we compute your final grade $g$ for the course like this (supposing for the moment that the number of points of the exam is 25):
+#+begin_src python :results output :exports both
+from sigfig import round
+
+tot = 25  # total exam points, may be different for the real exam.
+
+
+def grade(a, e):
+    ga = round(sum(a) / len(a), sigfigs=2)  # assignment
+    gp = round(10 * sum(p) / len(p), sigfigs=2)  # poll everywhere
+    ge = round(10 * e / tot, sigfigs=2)  # exam
+    if ge < 5:
+        g = max(ge, 1)
+    else:
+        g = 0.75 * ge + 0.15 * ga + 0.1 * gp
+    final = round(g, sigfigs=1)
+    print(f"{gp=}, {a=}, {ga=}, {e=}, {ge=}, {final=}")
+    return final
+#+end_src
+
+
+
+* Contact info
+
+- [[https://www.rug.nl/staff/n.d.van.foreest/][Nicky van Foreest]] (coordinator, lecturer)
+- [[https://www.rug.nl/staff/a.rijal/?lang=en][Arpan Rijal]] (lecturer)
+- Mark Tilburgs (TA)
+- Wietze Koops (TA)
+- Machiel Kroon (TA)
+- Max Posthumus (TA)
+
+In case some parts of this course guide are unclear, please mail =n.d.van.foreest@rug.nl= or =a.rijal@rug.nl=.
+
+
+* Interesting other literature for now and later
+
+There are a number of books that you might like too. (From experience I can tell that reading different types of explanation can be very helpful.)
+1. [[https://faculty.math.illinois.edu/~r-ash/BPT.html][R.B. Ash]]: Basic probability theory, free online
+2. [[https://math.dartmouth.edu/~prob/prob/prob.pdf][C.M. Grinsted and J. Laurie Snell]]: Introduction to probability, also free online
+3. F.M. Dekking, et al.: A Modern Introduction to Probability and Statistics, Understanding Why and How.
+
+After the course you might be interested in the following books that I liked a lot.
+1. D.V. Lindley, Understanding Uncertainty. This book explains why probability theory is the way it is. There are three rules that any coherent system of probabilities has to satisfy.
+   1. For any event $E$, $\P{E} \in [0,1]$;
+   2. $\P{E \text{ or } F} = \P{E} + \P{F} - \P{E F}$;
+   3. $\P{E\cap F} = \P{F \mid E} \P{E}$.
+   If you want to understand probability in terms of betting, any sensible strategy you can imagine should satisfy   these rules, for otherwise people can use arbitrage (an essential idea in the financial theory and asset and option pricing) to consistently make  money from you.
+2. E.T. Jaynes, Probability Theory: The Logic of Science. It is hard at times, but very interesting. it discusses  applications and ideas behind probability and statistics, and how to think about these topics as a sensible person (not just as a theoretician).
+3. [[https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf][C. Bishop, Pattern Recognition and Machine Learning]]. This is a really nice book on data analysis and  machine learning. After the course, you can read the first two chapters. At the end of the master, you can read most of the book.
