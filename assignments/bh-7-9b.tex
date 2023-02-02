@@ -1,0 +1,118 @@
+\subsection{Assignment based on exercise BH.7.9}
+\label{sec:bh.7.9}
+
+First read and solve BH.7.9. Here we provide a simulation.
+
+\begin{exercise}
+Include your hand written solution for this problem. Read the instructions on why we want you to do it like this.
+\end{exercise}
+
+\begin{exercise}
+  In Python (or R), devise a monte carlo test using the \texttt{min()} function to find if \texttt{scipy.stats.geom} (or the \texttt{\_geom()} functions in R) uses the ``geometric'' or ``first succes'' distribution.
+
+  What is the probability that your devised test fails to give the correct result?
+\end{exercise}
+
+\begin{exercise}
+  The naming convention of ``first succes'' is BH specific.  Expecting
+  the other distribution can lead to some nasty bugs or leave you
+  needlessly wondering where you messed up in your calculations.
+  
+  Provide a (simple) solution to obtain the correct/other distribution.
+\end{exercise}
+
+In Python one can raise various types of errors if such a check fails, resulting in more resilient code:\
+
+\begin{minted}
+if ... include your test here ...:
+    raise ValueError("Not a geometric distribution!")
+\end{minted}
+
+\begin{exercise}
+Explain the lines marked with `this line' in the code of ~\cref{BH.7.9.p} or ~\cref{BH.7.9.r}. You already explained the other parts so you don't have to do that again.
+\end{exercise}
+
+\begin{listing}[!ht]
+\begin{minted}[]{python}
+import numpy as np
+from scipy.stats import randint, geom
+import matplotlib.pyplot as plt
+
+np.random.seed(3)
+
+p, num = 0.1, 100000
+q = 1 - p
+rv = geom(p, loc=-1)
+X = rv.rvs(num)
+
+Y = rv.rvs(num)
+N = X + Y
+
+fig, axes = plt.subplots(3, 3, sharey="all", figsize=(6, 3))  # this
+n = 7  # gives nice results, after some experimentation
+for ax in axes.flatten():  # this
+    Xn = X[np.argwhere(N == n)]
+    y, bins = np.histogram(Xn, bins=np.linspace(0, n + 1, n + 2)) # this
+    ax.plot(range(n + 1), y, 'bo', ms=3, label='N=8')  # this
+    ax.vlines(range(n + 1), 0, y, colors='b', lw=2, alpha=0.5) # this
+    ax.set_title(f'{n=} ({len(Xn)})')
+    ax.set_ylim(0) # this
+    n += 1
+\end{minted}
+\caption{BH.7.9, Python code.}
+\label{BH.7.9.p}
+\end{listing}
+
+
+\begin{listing}[!ht]
+\begin{minted}[]{R}
+library(ggplot2)
+library(gridExtra)
+
+p = 0.1
+num = 100000
+q = 1 - p
+X = rgeom(num, p)
+
+Y = rgeom(num, p)
+N = X + Y
+
+pdf(file="bh-7-9.pdf", width = 8, height = 7,
+    bg = "white", colormodel = "cmyk", paper = "A4")
+
+plots <-list()
+par(oma= c(0,0,0,0))
+
+i = 1
+n = 7  # gives nice results, after some experimentation
+while (i <= 9){  #this
+  Xn = X[which(N == n)]
+  df = data.frame(Xn)
+  plots[[i]] =  ggplot()+
+                geom_histogram(df, mapping = (aes(x = Xn)),
+                bins = n + 1, color = "blue")+ # this
+                ylim(0,600)+  # this
+                labs(title=paste0("n=", n, ", (", length(Xn) ,")"))+
+                theme(axis.title.x=element_blank(),
+                axis.title.y = element_blank())
+  n = n + 1
+  i = i + 1
+}
+
+do.call("grid.arrange", c(plots, ncol=3))
+dev.off()
+\end{minted}
+\caption{BH.7.9, R code.}
+\label{BH.7.9.r}
+
+\end{listing}
+
+\begin{exercise}
+Explain the results. Do they match with the theoretical results?
+\end{exercise}
+
+\begin{exercise}
+  Include a handwritten solution of BH.7.29 and verify your results
+  using Python or R.  You don't need to plot a 3-D graph, checking
+  whether a few values are in the same ballpark is enough.
+\end{exercise}

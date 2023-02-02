@@ -21,7 +21,8 @@
 \begin{enumerate}
 \item BH Book: Read Section 6.4, MGFs
 \item BH Book: Read Section 6.5, Generating moments with MGFs
-\item BH Book: Read Section 6.6,  sums of independent rvs with MGFs
+\item BH Book: Read Section 6.6, Sums of independent rvs via MGFs
+\item BH Book: Read Appendix 9
 \item BH video: 18
 \end{enumerate}
 
@@ -30,7 +31,7 @@ Here is a story to see how the Poisson distribution emerges, just by allowing pe
 The conclusion is that the Poisson distribution comes up at many unexpected processes.
 
 A patient arrives at the first aid of a hospital with, perhaps, a broken foot.
-An X ray photo shows that the patient indeed has a broken foot.
+An X-ray photo shows that the patient indeed has a broken foot.
 Given the type of fraction, the patient has to undergo surgery somewhere in the next 10 days.
 Should we let the patient decide what is the best day to do the surgery?
 
@@ -49,9 +50,9 @@ Read BH chapter 6 to find out where. While reading you'll discover lots of other
 \end{solution}
 \end{exercise}
 
-Next, let \(X_{i}\in\{1, 2, \ldots, n\}\) be the choosen day of patient \(i\).
+Next, let \(X_{i}\in\{1, 2, \ldots, n\}\) be the chosen day of patient \(i\).
 Then \(Y_{i}(j)=\1{X_{i}=j}\) is 1 if \(X_i=j\) and 0 else.
-Thus, when we have \(m\) patients, \(S_{m}=\sum_{i=1}^{m} Y_i(j)\) is the number of jobs that arrived on day \(j\). In the above queueing model, there are 5 arrivals per day, hence \(m=5n\).
+Thus, when we have \(m\) patients, \(S_{m}=\sum_{i=1}^{m} Y_i(j)\) is the number of jobs will arrive on day \(j\). In the above queueing model, there are 5 arrivals per day, hence \(m=5n\).
 
 \begin{exercise}
 Show that the MGF of \(Y\), i.e., the generic rv associated to \(Y_j(\cdot)\), is
