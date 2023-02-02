@@ -1,7 +1,7 @@
 \subsection{Assignment based on exercise BH.7.9}
 \label{sec:bh.7.9}
 
-First read and solve BH.7.9. Here we provide a simulation.
+First read and solve BH.7.9. Here we provide a simulation to see how to solve such problems with simulation. You should know that simulation is a much used tool to obtain insight into how business processes work, or how to price insurance products. To build such simulations a firm understanding of probability is necessary. In these assignments we'll make the first steps to learn simulation and relate the theoretical models to numerical insights.
 
 \begin{exercise}
 Include your hand written solution for this problem. Read the course manual  on why we want you to do it like this.
@@ -9,7 +9,20 @@ Include your hand written solution for this problem. Read the course manual  on 
 
 
 \begin{exercise}
-Run this code, and use the documentation of scipy.stats.geom in Python ( rgeom() function in R) to explain why it fails. Perhaps you can also use the wikipedia page on the geometric distribution. (Hint: is this the first success distribution or the geometric distribution?)
+This exercise starts with a warning.
+Suppose you want to simulate samples from some distribution.
+When you use for this a computer function from a package, like the scipy.stats package from Python, you should always check first the documentation on what it precisely does.
+
+For instance, if you check Wikipedia, then you will see that the geometric distribution can refer either of what Blitzstein and Hwang call the first success distribution or the geometric distribution.
+So, apparently different authors use the same name for different distributions; it varies from book to book and article to article.
+Likewise, the geom function in Python simulates the first success distribution, while R simulates the geometric distribution (in the sense of BH).
+To be clear, in this course (hence this assignment) we will follow the definitions of BH, because these definitions are very clear and help prevent making nasty mistakes.
+
+
+Let's check what happens if we were to simulate from the geometric distribution with the geom function of Python.
+Just run the code below, and include the output in your assignment.
+If all goes well, the code should actually report an error.
+Explain that this error occurs precisely because we simulate the first success rv instead of the geometric rv.
 \begin{minted}[]{python}
 import numpy as np
 from scipy.stats import randint, geom
@@ -46,6 +59,7 @@ if (!(near(q/p,mean(X),0.1))){
 \end{minted}
 \end{exercise}
 
+
 \begin{exercise}
 The code of the previous exercise failed, on purpose.   It will work if we change the line marked as ``this line'', into this:
 \begin{minted}[]{python}
@@ -55,14 +69,19 @@ rv = geom(p, loc=-1)
 \begin{minted}[]{R}
 X = rgeom(num, p)
 \end{minted}
-Explain the difference, and why it now works. Relate this location-scale transformation to one of the distributions you know from BH.
+Explain the difference in terms of a location-scale transformation, and why the tests now pass.
 \end{exercise}
 
-Memorize from this exercise that with such checks you can build code that fails when it gets unexpected input.
+You should memorize from this exercise that by including such checks, your code becomes much more robust.
+As a matter of fact, if you consider working for an insurance company later in life, you should know that these companies have to show test cases and code documentation to the regulator; in other words, it's normal to include tests.
+
+\begin{exercise}
+People tend to use lower case letters in computer code to denote variables. Here we sometimes use capital letters such as $X$. Why do we do that? (Hint: how are rvs denoted in books?)
+\end{exercise}
 
 
 \begin{exercise}
-Run this code and explain in detail the output. Make, and include, some simple example code to show that you are correct.
+Run the next piece of code and explain in detail the output. Make some variations of the code, include it in your assignment document, and explain what you do, how it works, and why you get the output you see.
 
 \begin{minted}[]{python}
 import numpy as np
@@ -84,7 +103,7 @@ print(Xn)
 \end{exercise}
 
 \begin{exercise}
-Explain the lines marked with `this line' in the code of ~\cref{BH.7.9.p} or ~\cref{BH.7.9.r}. You already explained the other parts so you don't have to do that again.
+Explain the lines marked with `this line' in the code of ~\cref{BH.7.9.p} or ~\cref{BH.7.9.r}. You already explained the other parts of the code, so you only have  to explain the  code with the `this line' comment.
 \end{exercise}
 
 
@@ -164,5 +183,5 @@ dev.off()
 \end{listing}
 
 \begin{exercise}
-Explain the results. Do they match with the theoretical results?
+Explain the output. Does it match with the theoretical results?
 \end{exercise}
