@@ -4,11 +4,11 @@
 First read and solve BH.7.9. Here we provide a simulation.
 
 \begin{exercise}
-Include your hand written solution for this problem. Read the instructions on why we want you to do it like this.
+Include your hand written solution for this problem. Read the course manual  on why we want you to do it like this.
 \end{exercise}
 
 \begin{exercise}
-  In Python (or R), devise a monte carlo test using the \texttt{min()} function to find if \texttt{scipy.stats.geom} (or the \texttt{\_geom()} functions in R) uses the ``geometric'' or ``first succes'' distribution.
+  In Python (or R), devise a monte carlo test using the \texttt{min()} function to determine whether \texttt{scipy.stats.geom} (or the \texttt{\_geom()} functions in R) uses the ``geometric'' or ``first succes'' distribution.
 
   What is the probability that your devised test fails to give the correct result?
 \end{exercise}
@@ -17,13 +17,13 @@ Include your hand written solution for this problem. Read the instructions on wh
   The naming convention of ``first succes'' is BH specific.  Expecting
   the other distribution can lead to some nasty bugs or leave you
   needlessly wondering where you messed up in your calculations.
-  
+
   Provide a (simple) solution to obtain the correct/other distribution.
 \end{exercise}
 
 In Python one can raise various types of errors if such a check fails, resulting in more resilient code:\
 
-\begin{minted}
+\begin{minted}[]{python}
 if ... include your test here ...:
     raise ValueError("Not a geometric distribution!")
 \end{minted}
