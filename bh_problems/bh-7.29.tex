@@ -7,18 +7,18 @@ a. For the independence of $L$ and $M$, when $i>j$ then $\P{L=i, M=j}=0$, but $\
 This must be clear: for $i\leq j$,
 \begin{align*}
 \P{L=i, M=j}
-  &= \P{X=i, Y=j} + \P{X=j, Y=j} - \P{X=Y=i}\\
-  &\stackrel{2}{=} 2\P{X=i, Y=j} - \P{X=Y=i} \\
-  &\stackrel{3}{=} 2 p^{2} q^{i+j} - p^{2}q^{2i}\\
+  &= \P{X=i, Y=j} + \P{X=j, Y=j} - \P{X=Y=i}\1{i=j}\\
+  &\stackrel{2}{=} 2\P{X=i, Y=j} - \P{X=Y=i} \1{i=j} \\
+  &\stackrel{3}{=} 2 p^{2} q^{i+j} - p^{2}q^{2i}\1{i=j}\\
 \end{align*}
-where step $2$ by symmetry, and step 3 by indepence (recall, this was given in the problem description) and the PMF of a $\Geo{p}$ rv.
+where step $2$ by symmetry, and step 3 by independence (recall, this was given in the problem description) and the PMF of a $\Geo{p}$ rv.
 
 b. We use marginalization. Look up how to deal with $\sum_{i=0}^{\infty} q^{i}$ in the appendix.
 \begin{align*}
   \P{L=i}
   &= \sum_{j\geq i} \P{L=i, M=j} \\
   &= 2p^2q^i\sum_{j> i} q^j + p^2q^{2i} \\
-  &= 2p^2q^i q^{j+1}\sum_{k\geq 0} q^k + p^2q^{2i} \\
+  &= 2p^2q^i q^{i+1}\sum_{k\geq 0} q^k + p^2q^{2i} \\
   &= 2p^2q^i q^{i+1}\frac{1}{1-q} + p^2q^{2i} \\
   &= 2p q^{2i+1} + p^2q^{2i} \\
   &= (2 q + p)pq^{2i} \\
@@ -38,7 +38,7 @@ d. Using a.)
   \P{L=i, M-L=k} = \P{L=i, M=k+i} = 2p^2q^{2i} q^k - p^2q^{2i}=p^2q^{2i}(2q^k-1).
 \end{align*}
 So, if $k=0$ we have
-Clearly this splits into a product of a term with just an $i$ and another term with just a $k$, thereby implying that $L$ and $M-K$ are indepedent.
+Clearly this splits into a product of a term with just an $i$ and another term with just a $k$, thereby implying that $L$ and $M-K$ are independent.
 \end{solution}
 
 

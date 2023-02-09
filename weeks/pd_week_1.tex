@@ -223,7 +223,7 @@ These questions are simpler than the exercises of BH.
 
 \begin{exercise}
 Let $L=\min\{X, Y\}$, where $X, Y\sim \Geo{p}$ and independent.
-What is the domain of $L$? Then, use the fundamental bridge and 2D LOTUS to show that
+What is the support of $L$? Then, use the fundamental bridge and 2D LOTUS to show that
 \begin{equation*}
 \P{L\geq i}=q^{2i} \implies L\sim\Geo{1-q^{2}}.
 \end{equation*}
@@ -260,17 +260,18 @@ Show that
 \P{M=k}
 &= \P{\max\{X, Y\} = k} \\
 &=p^{2}\sum_{ij}\1{\max\{i,j\} =k} q^i q^j\\
-&=2 p^{2}\sum_{ij}\1{i=k}\1{j < k} q^i q^j + p^{2}\sum_{ij}\1{i=j=k} q^{i} q^j \\
+&\stackrel{1}{=}2 p^{2}\sum_{ij}\1{i=k}\1{j < k} q^i q^j + p^{2}\sum_{ij}\1{i=j=k} q^{i} q^j \\
 &=2 p^{2}q^{k}\sum_{j < k} q^j + p^{2}q^{2k}\\
 &=2 p^{2}q^{k}\frac{1-q^{k}}{1-q} +  p^{2}q^{2k}\\
   \end{align*}
+As $X$ and $Y$ are idd we use symmetry   in Step 1.
 \end{solution}
 \end{exercise}
 
 \begin{exercise}\label{ex:2}
 Explain that
 \begin{equation*}
-\P{L=i, M=k} = 2p^{2}q^{i+k}\1{k>i}+ p^{2}q^{2i}\1{i=k}).
+\P{L=i, M=k} = 2p^{2}q^{i+k}\1{k>i}+ p^{2}q^{2i}\1{i=k}.
 \end{equation*}
 \begin{solution}
   \begin{align*}
