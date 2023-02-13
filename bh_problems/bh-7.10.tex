@@ -1,54 +1,46 @@
 \input{header}
 \setcounter{theorem}{9}
 \begin{exercise}[BH.7.10]
-Remark: Recall that a conditional CDF given an event $A$ is defined as $F(y|A) = \P{Y\leq y|A}$. Likewise, let us write here $F_T(t|x) = \P{T\leq t|X=x}$.
-Just use this in your derivation. However, there is one problem with the fact that the event $\{X=x\}$ has probablity zero. In the solution I'll discuss how to around this.
-
 Don't forget to compare  this exercise to BH.7.9, which is the same but for discrete memoryless rvs.
 
+You should use that when two continuous rvs $X$ and $Y$ are independent, then $\P{Y\leq y | X=x} = \P{Y\leq y}$.
+
 \begin{solution}
-Just reasoning as if there is no problem, i.e., applying Bayes' rule in a  naive way,
+Using the idea in the problem statement,
 \begin{align*}
-F_T(t|x) &= \P{T\leq t|X=x} = \P{X+Y\leq t|X=x} \\
-  &=\P{Y\leq t-x, X=x}/\P{X=x} = \P{Y\leq t-x}\P{X=x}/\P{X=x}\\
-  &=\P{Y\leq t-x}, 0\leq x \leq t.
+F_T(t|x) &= \P{T\leq t|X=x} = \P{X+Y\leq t|X=x} \stackrel{1}=\P{Y\leq t-x} \\
+&=1 - e^{-\lambda(t-x)}, t \geq x.
 \end{align*}
-where I use that $Y$ and $X$ are independent to split the probability.
+where step 1 follows from the fact that $Y$ and $X$ are independent. When $t<x$, $F_{T|X}(t|x) = 0$.
 
-The problem with this derivation is that we multiply and divide by 0 ($=\P{X=x}$) just as if all is ok. But hopefully, you know that when we multiply and divide by zero, we can get any answer we like. A better way is as follows. Note beforehand that I do not expect that you could have  come up with such an answer, but you should definitely study it.
-
-
-The first step is to realize that PDF $f_{T|X}(t|x)=f_{TX}(t,x)/f_X(x)$ \emph{is} well defined; we don't divide by zero because $f_{X}(x)>0$ on $x\geq 0$. By the proof of BH.8.2.1 we see that $f_{TX}(t,x) = f_X(x)f_Y(t-x) \1{0 \leq x \leq t}$, where I include the indicator to ensure that we don't run out of the support of $X$ and $T$. Thus,
+b. Take the derivative wrt to $t$: $f_{T|X} (t|x) = F_{T|X}'(t|x) = \lambda e^{-\lambda (t-x)}\1{t\geq x\geq 0}$. To see that $f_{T|X}$ a valid PDF, note first that it is positive. Second, it must integrate to 1. By a change of variable,
 \begin{align*}
-  f_{T|X}(t|x) &= \frac{f_{TX}(t,x}{f_{X}(x)} = f_X(x)f_Y(t-x) \1{0 \leq x \leq t}/f_X(x) = f_Y(t-x)\1{0\leq x \leq t}.
+\int_0^{\infty}  f_{T|X} (t|x) \d t = \int_x^{\infty} \lambda e^{-\lambda t} \d x = 1.
 \end{align*}
-Now we know that a conditional PDF is a full-fledged PDF. So we can use idea that to \emph{define} the conditional CDF as follows:
-\begin{align*}
-F_{T|X}(t|x)
-  := \int_0^t f_{T|X}(v|x)\1{0\leq x \leq v} \d v
-    = \int_x^t \lambda e^{-\lambda(v-x)} \d v
-    = \int_0^{t-x} \lambda e^{-\lambda v} \d v = 1- e^{-\lambda(t-x)}.
-\end{align*}
+This last equality must be evident now. (Hint, what is the density of a rv  that is $\sim \Exp{\lambda}$?)
 
-Isn't it a bit strange that we get the same answer?
-How to get out of this situation in a technically correct way is one of the hard parts of (mathematical) probability, and certainly not something we can deal with  in this course.
-All books on elementary\footnote{When  in mathematics someething is elementary, it doesn't necessarily mean that that thing is simple. In fact, it can be very difficult.  Elementary means that we just dont use very advanced mathematical concepts.)} probability, and lecturers similarly, struggle with this problem; this course is not an exception, nor am I.
-
-b.  See  part a.
 
 c. By the above,
 \begin{align*}
-  f_{X|T}(x|t) &= f_{TX}(t,x)/f_T(t), \\
-f_{TX}(t,x)  &=  f_X(x)f_Y(t-x) \1{0\leq x \leq t} \lambda^2 e^{-\lambda x} e^{-\lambda(t-x)} \1{0\leq x\leq t} = \lambda^2e^{-\lambda t} \1{0\leq x\leq t},\\
-  &\implies  f_{X|T}(x|t) \propto \lambda^2e^{-\lambda t} \1{0\leq x\leq t} ,
+f_{T,X}(t,x)  &=  f_X(x)f_Y(t-x) \1{0\leq x \leq t} = \lambda^2 e^{-\lambda x} e^{-\lambda(t-x)} \1{0\leq x \leq t} = \lambda^2e^{-\lambda t} \1{0\leq x\leq t},\\
+  &\implies  \\
+  f_{X|T}(x|t) &= \frac{f_{T,X}(t,x)}{f_T(t)}  = \frac{\lambda^2e^{-\lambda t} \1{0\leq x\leq t}}{f_T(t)}.
 \end{align*}
-where the last follows because $f_T(t)$ is just a normalization constant.
-Now we use some real nice, but subtle, reasoning to avoid computing $f_T$ by means of marginalizing out $x$ from $f_{T,X}(t, x)$.  Observe that $f_{TX}(t, x)$ is constant \emph{as a function of $x$} on $0\leq x \leq t$ (in other words, the RHS does not depend on $x$ on this interval). But $f_{X|T}(x|t)$  is also a real PDF. This implies  that the constant $f_T(t)$ (since it does not depend on $x$) must be  such that  $f_{X|T}(x|t)$ integrates to $1$ on $0\leq x \leq t$. The only possibility is that $f_{X|T}(x|t) = t^{-1}\1{0\leq x \leq t}$.
+
+Now we use some real nice, but subtle, reasoning that allows us to avoid the computation $f_T$ by means of marginalizing out $x$ from $f_{T,X}(t, x)$.
+Observe that the LHS is a function of $x$, but the RHS is a constant as long as $x\in [0, t]$.  In other words, the RHS does not depend on $x$ on this interval.
+But, on the other hand,  $f_{X|T}(x|t)$ is  a real PDF.
+This implies that the constant $f_T(t)$ (since it does not depend on $x$) must be such that $f_{X|T}(x|t)$ integrates to $1$ on $0\leq x \leq t$.
+The only possibility is that
+\begin{equation*}
+f_{X|T}(x|t) = \frac{1}{t}\1{0\leq x \leq t}.
+\end{equation*}
 
 This reasoning gives some  offspin.  We can conclude that
 \begin{align*}
-  f_T(t) = f_{TX}(t, x)/f_{T|X}(t,x) = \lambda^2 t e^{-\lambda t}.
+  f_T(t) = \frac{f_{TX}(t, x)}{f_{T|X}(t,x)}= \lambda^2 t e^{-\lambda t}.
 \end{align*}
+
 
 This is more than a nice trick. Recall it, as it is not only used more often in the book, but also in more advanced courses on data science and machine learning.
 \end{solution}
