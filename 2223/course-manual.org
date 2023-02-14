@@ -96,7 +96,7 @@ def grade(a, e):
     return final
 #+end_src
 
-
+Homework is not graded, hence you don't have to turn that in as part of the assignment.
 
 * Contact info
 

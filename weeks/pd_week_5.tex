@@ -375,6 +375,23 @@ Now observe that Adam's law and LOTE are the same for discrete rvs:
 \begin{pycode}
 from pathlib import Path
 
+exercise_name = "bh-9.1.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
+
+\begin{pycode}
+from pathlib import Path
+
 exercise_name = "bh-9.57.tex"
 fname = Path("../bh_problems") / exercise_name
 with fname.open("r") as fp:

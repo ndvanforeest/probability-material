@@ -236,25 +236,27 @@ must be wrong.
 \begin{solution}
   If we measure $X$ in centimeters instead of meters, then $X$, $\E X$ and $\sigma_X$ are all multiplied by 100, and the prediction $\hat Y$ should also be expressed in centimeters But $\V Y $ scales as length squared.
   This messes up the units.
+
+  The idea behind this exercise is that it shows you a simple method to check whether an answer is correct or not. If the units are wrong, the result must be wrong too.
 \end{solution}
 \end{exercise}
 
 
-\begin{pycode}
-from pathlib import Path
+% \begin{pycode}
+% from pathlib import Path
 
-exercise_name = "bh-7.38.tex"
-fname = Path("../bh_problems") / exercise_name
-with fname.open("r") as fp:
-    state = 0  # dump
-    for line in fp.readlines():
-        if line[:16] == r"\begin{exercise}":
-            state = 1
-        if state == 1:
-            print(line.strip())
-        if line[:14] == r"\end{exercise}":
-            break
-\end{pycode}
+% exercise_name = "bh-7.38.tex"
+% fname = Path("../bh_problems") / exercise_name
+% with fname.open("r") as fp:
+%     state = 0  # dump
+%     for line in fp.readlines():
+%         if line[:16] == r"\begin{exercise}":
+%             state = 1
+%         if state == 1:
+%             print(line.strip())
+%         if line[:14] == r"\end{exercise}":
+%             break
+% \end{pycode}
 
 
 \begin{pycode}

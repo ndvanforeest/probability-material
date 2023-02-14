@@ -22,25 +22,11 @@
 \item BH video: 26
 \end{itemize}
 
-\begin{pycode}
-from pathlib import Path
-
-exercise_name = "bh-9.1.tex"
-fname = Path("../bh_problems") / exercise_name
-with fname.open("r") as fp:
-    state = 0  # dump
-    for line in fp.readlines():
-        if line[:16] == r"\begin{exercise}":
-            state = 1
-        if state == 1:
-            print(line.strip())
-        if line[:14] == r"\end{exercise}":
-            break
-\end{pycode}
 
 
 
-The next real exercise is about recursion applied to the negative hypergeometric distribution. But to get in the mood, here is short fun question on how to use recursion.
+The next real exercise is about recursion applied to the negative hypergeometric distribution.
+But to get in the mood, here is first a short fun question on how to use recursion.
 
 \begin{exercise}
 We have a chocolate bar consisting of $n$ small squares.
@@ -61,6 +47,9 @@ n-1 = T(n) = T(k) + T(m) + 1 = k-1 + m-1 + 1 = k+m-1 = n-1.
 \end{align*}
 \end{solution}
 \end{exercise}
+
+
+Here is the exercise in which we apply recursion to the negative hypergeometric distribution.
 
 \begin{exercise}
 Use recursion to find the expected number $X$ of black balls drawn without replacement at random from an urn containing $w\geq 1$ white balls and $b$ black balls before we draw 1 white ball.

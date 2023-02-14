@@ -5,31 +5,29 @@ With convolution we know how to  add and subtract independent rvs. Now we make a
 
 Before solving the problem, let's take a step back.
 You learned arithmetic at primary school.
-In all those problems, the numbers you had to add, subtract, etc.
-where supposed to be known precisely.
-At secondary school, you learned how to arithmetic with symbols.
-And now, at university, your next step is learn how to do arithmetic with rvs.
+In all those problems, the numbers you had to add/subtract/etc were known precisely.
+At secondary school, you learned how to do arithmetic with symbols.
+And now, at university, your next step is to learn how to do arithmetic with rvs.
 
-Here is an example to show you the relevance of this.
-In a paint factory at which a couple of my students did their master's thesis, the inventory level of dyes and other raw materials is often not known exactly.
-There are plenty of simple explanations for this.
-Raw materials are kept in big bags, and personnel uses shovels to take it out of the bags.
-Of course, occasionally, there is some spillage on the floor, and this extra `demand' is not reported.
-The demand side is also not exact.
-A customer orders for example 500 kg of red paint.
-To make this, the operators follow a recipe, but dyes (in certain combinations) do not always give the same  result. Therefore, the paint for each order is checked, and when it does not meet the quality level, the batch has to be adjusted by adding a bit more of certain dyes or solvents, or other chemical products.
+% Here is an example to show you the relevance of this.
+% In a paint factory the inventory level of dyes and other raw materials is often not known exactly.
+% There are plenty of simple explanations for this.
+% Raw materials are kept in big bags, and personnel uses shovels to take it out of the bags.
+% Of course, occasionally, there is some spillage on the floor, and this extra `demand' is not reported.
+% The demand side is also not exact.
+% A customer orders for example 500 kg of red paint.
+% To make this, the operators follow a recipe, but dyes (in certain combinations) do not always give the same  result. Therefore, the paint for each order is checked, and when it does not meet the quality level, the batch has to be adjusted by adding a bit more of certain dyes or solvents, or other chemical products.
 
-When the planner has to make a decision on when to reorder a certain raw material, s/he divides the total amount of raw material by the average demand size. And this leads to occasional stock outs. When the stock level and the demands are treated as a rvs, such stock outs may be prevented, but this requires to be capable of determining the distribution of the something like $Y/X$.
+% When the planner has to make a decision on when to reorder a certain raw material, s/he divides the total amount of raw material by the average demand size. And this leads to occasional stock outs. When the stock level and the demands are treated as a rvs, such stock outs may be prevented, but this requires to be capable of determining the distribution of the something like $Y/X$.
 
 \begin{hint}
 Start with the case $v=0$. Use the proof of BH.8.1.1. Reason carefully; corner cases as simple to miss.
 
-Then, make a graph of the two branches of the hyperbola's $1/t$, one branch for $t>0$, the other for $t<0$.
+Then, make a graph of the two branches of the function  $t \to 1/t$, one branch for $t>0$, the other for $t<0$.
 Then draw a horizontal line to indicate the level $V=v$; this shows with part(s) of the hyperbola's lie below $v$.
 Then compute the probability for each branch. This will give the answer of the  book immediately.
 \end{hint}
 \begin{solution}
-
 From the hint, we first focus on a set $\{V\leq 0\} = \{1/T \leq 0\}$. Now,  $1/T\leq 0 \iff T\leq 0$. And therefore $\P{V\leq 0} = \P{T\leq 0} = F_T(0)$.
 
 If $v<0$, then $1/T \leq v \leq 0\iff 1/v \leq T \leq 0$. Therefore

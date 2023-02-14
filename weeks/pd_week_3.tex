@@ -18,61 +18,99 @@
 
 
 \begin{itemize}
-\item 8.1: read up  to and including Example 8.1.6., skip the rest of 8.1 from Theorem 8.1.7  onwards
+\item BH section 8.1: read up  to and including Example 8.1.6., skip the rest of 8.1 from Theorem 8.1.7  onwards
 \item BH video: 22
 \end{itemize}
 
 
 
-\begin{exercise}
-Suppose $(X,Y)$ are bi-variate normal distributed with mean vector $\mu = (\mu_X, \mu_Y) = (0,0)$, standard deviations $\sigma_X = \sigma_Y = 1$ and correlation $\rho_{X Y}$ between $X$ and $Y$. Specify the joint pdf of $X$ and $X + Y$.
-\begin{solution}
-Define $V := X$ and $W := X + Y$. Observe that for any $t_V, t_W$, we have
-\begin{align}
-    t_V V + t_W W &= t_V X + t_W (X + Y) \\
-    &= (t_V + t_W) X + t_W Y.
-\end{align}
-Hence, any linear combination of $V$ and $W$ is a linear combination of $X$ and $Y$. Since $(X,Y)$ is bi-variate normal, every linear combination of $X$ and $Y$ is normally distributed. Hence, every linear combination of $V$ and $W$ is normally distributed. Hence, by definition, $(V,W)$ is bi-variate normally distributed.
+% \begin{exercise}
+% Suppose $(X,Y)$ are bi-variate normal distributed with mean vector $\mu = (\mu_X, \mu_Y) = (0,0)$, standard deviations $\sigma_X = \sigma_Y = 1$ and correlation $\rho_{X Y}$ between $X$ and $Y$. Specify the joint pdf of $X$ and $X + Y$.
+% \begin{solution}
+% Define $V := X$ and $W := X + Y$. Observe that for any $t_V, t_W$, we have
+% \begin{align}
+%     t_V V + t_W W &= t_V X + t_W (X + Y) \\
+%     &= (t_V + t_W) X + t_W Y.
+% \end{align}
+% Hence, any linear combination of $V$ and $W$ is a linear combination of $X$ and $Y$. Since $(X,Y)$ is bi-variate normal, every linear combination of $X$ and $Y$ is normally distributed. Hence, every linear combination of $V$ and $W$ is normally distributed. Hence, by definition, $(V,W)$ is bi-variate normally distributed.
 
-We need to compute the mean vector and covariance matrix of $(V,W)$. We have
-\begin{align}
-    \mu_V = \E{V} = \E{X} = \mu_X = 0,
-\end{align}
-and
-\begin{align}
-    \mu_W = \E{W} = \E{X + Y} = \mu_X + \mu_Y = 0.
-\end{align}
-Next, we have
-\begin{align}
-    \V{V} = \V{X} = \sigma_X^2 = 1,
-\end{align}
-and
-\begin{align}
-    \V{W} &= \V{X + Y} = \V{X} + \V{Y} + 2\cov{X,Y}\\
-    &= 1 + 1 + 2 \rho_{XY} \sigma_X \sigma_Y = 2(1 + \rho_{XY}).
-\end{align}
-Finally,
-\begin{align}
-    \cov{V,W} &= \cov{X, X + Y} = \cov{X, X} + \cov{X, Y} \\
-    &= \sigma_X^2 + \rho_{XY} \sigma_X \sigma_Y = 1 + \rho_{XY},
-\end{align}
-and hence,
-\begin{align}
-    \rho_{VW} := \cor(V,W) &= \frac{\cov{V,W}}{\sqrt{\V{V}\V{W}}} \\
-    &= \frac{1 + \rho_{XY}}{\sqrt{1 \cdot 2(1 + \rho_{XY})}} \\
-    &= \sqrt{\frac{1 + \rho_{XY}}{2}}.
-\end{align}
-We have now specified all parameters of the bi-variate normal distribution. This yields the following joint pdf:
-\begin{align}
-    f_{V,W}(v,w) &= \frac{1}{2\pi \sigma_V \sigma_W \tau_{VW}} \exp\left(-\frac{1}{2 \tau_{VW}^2}\left(\left(\frac{v}{\sigma_V}\right)^2 + \left(\frac{w}{\sigma_W}\right)^2 - 2 \frac{\rho_{VW}}{\sigma_V \sigma_W} vw\right) \right),
-\end{align}
-where $\tau_{VW} := \sqrt{1 - \rho_{VW}^2} = \sqrt{1 - \frac{1 + \rho_{XY}}{2}} = \sqrt{\frac{1 - \rho_{XY}}{2}}$ and $\sigma_V = \sqrt{\V{V}} = 1$ and $\sigma_W = \sqrt{\V{W}} = \sqrt{2(1 + \rho_{XY})}$. Hence,
-\begin{align}
-    f_{V,W}(v,w) &= \frac{1}{2\pi \sqrt{1 - (\rho_{XY})^2}} \exp\left(-\frac{1}{1 - \rho_{XY}}\left(v^2 + \frac{w^2}{2(1 + \rho_{XY})}-vw\right)\right).
-\end{align}
+% We need to compute the mean vector and covariance matrix of $(V,W)$. We have
+% \begin{align}
+%     \mu_V = \E{V} = \E{X} = \mu_X = 0,
+% \end{align}
+% and
+% \begin{align}
+%     \mu_W = \E{W} = \E{X + Y} = \mu_X + \mu_Y = 0.
+% \end{align}
+% Next, we have
+% \begin{align}
+%     \V{V} = \V{X} = \sigma_X^2 = 1,
+% \end{align}
+% and
+% \begin{align}
+%     \V{W} &= \V{X + Y} = \V{X} + \V{Y} + 2\cov{X,Y}\\
+%     &= 1 + 1 + 2 \rho_{XY} \sigma_X \sigma_Y = 2(1 + \rho_{XY}).
+% \end{align}
+% Finally,
+% \begin{align}
+%     \cov{V,W} &= \cov{X, X + Y} = \cov{X, X} + \cov{X, Y} \\
+%     &= \sigma_X^2 + \rho_{XY} \sigma_X \sigma_Y = 1 + \rho_{XY},
+% \end{align}
+% and hence,
+% \begin{align}
+%     \rho_{VW} := \cor(V,W) &= \frac{\cov{V,W}}{\sqrt{\V{V}\V{W}}} \\
+%     &= \frac{1 + \rho_{XY}}{\sqrt{1 \cdot 2(1 + \rho_{XY})}} \\
+%     &= \sqrt{\frac{1 + \rho_{XY}}{2}}.
+% \end{align}
+% We have now specified all parameters of the bi-variate normal distribution. This yields the following joint pdf:
+% \begin{align}
+%     f_{V,W}(v,w) &= \frac{1}{2\pi \sigma_V \sigma_W \tau_{VW}} \exp\left(-\frac{1}{2 \tau_{VW}^2}\left(\left(\frac{v}{\sigma_V}\right)^2 + \left(\frac{w}{\sigma_W}\right)^2 - 2 \frac{\rho_{VW}}{\sigma_V \sigma_W} vw\right) \right),
+% \end{align}
+% where $\tau_{VW} := \sqrt{1 - \rho_{VW}^2} = \sqrt{1 - \frac{1 + \rho_{XY}}{2}} = \sqrt{\frac{1 - \rho_{XY}}{2}}$ and $\sigma_V = \sqrt{\V{V}} = 1$ and $\sigma_W = \sqrt{\V{W}} = \sqrt{2(1 + \rho_{XY})}$. Hence,
+% \begin{align}
+%     f_{V,W}(v,w) &= \frac{1}{2\pi \sqrt{1 - (\rho_{XY})^2}} \exp\left(-\frac{1}{1 - \rho_{XY}}\left(v^2 + \frac{w^2}{2(1 + \rho_{XY})}-vw\right)\right).
+% \end{align}
 
-\end{solution}
-\end{exercise}
+% \end{solution}
+% \end{exercise}
+
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-8.1.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
+
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-8.5.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
+
+
 
 \begin{pycode}
 from pathlib import Path
@@ -203,6 +241,22 @@ with fname.open("r") as fp:
             break
 \end{pycode}
 
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-8.37.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 \begin{pycode}
 from pathlib import Path
