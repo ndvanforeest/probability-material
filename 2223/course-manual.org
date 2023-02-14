@@ -32,6 +32,9 @@
 
 1. For the tutorials, you work on problems that are mentioned in the weekly pdf file. You can also discuss the assignments.
 2. We start the second hour of the tutorial with a number of questions in Poll-everywhere. You have to be in class to participate in these polls. The TAs will discuss the solutions in class, depending on the outcome of the test.
+3. In week 7 there will be a tutorial in the last week, i.e., week 7 of the lecture weeks, but no poll-everywhere questions.
+4. We will not publish the poll everywhere questions because they will be discussed in class, and they are meant to give you an incentive to come to class.
+
 
 
 * Assignments

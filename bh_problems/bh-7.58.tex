@@ -42,22 +42,25 @@ Here are  some final remarks.
 
 Let's put all the above in a very general frame.  The covariance has a number of interesting properties:
 \begin{enumerate}
-\item  It is bilinear, that is, the covariance is linear in both arguments. The linearity in the first argument means that $\cov{X+Y, Z}=\cov{X,Z}+\cov{Y,Z}$ and $\cov{a X, Z}=a\cov{X,Z}$ for $a\in \R$. The linearity in the second argument means that $\cov{X, Y+Z}=\cov{X,Y}+\cov{X,Z}$ and $\cov{X, a Z}=a\cov{X,Z}$ for $a\in \R$.
+\item  It is bi-linear, that is, the covariance is linear in both arguments. The linearity in the first argument means that $\cov{X+Y, Z}=\cov{X,Z}+\cov{Y,Z}$ and $\cov{a X, Z}=a\cov{X,Z}$ for $a\in \R$. The linearity in the second argument means that $\cov{X, Y+Z}=\cov{X,Y}+\cov{X,Z}$ and $\cov{X, a Z}=a\cov{X,Z}$ for $a\in \R$.
 \item It is symmetric: $\cov{X, Y}=\cov{Y,X}$, from which we define $\V X = \cov{X,X}$.
 \item  $\cov{X,a} = 0$ for all $a\in R$.
 \end{enumerate}
 If you memorize the first two properties of covariance, all the rest follows.
 
-Now we do some geometry. Take three vectors $x,y, z\in \R^2$ (it's easy to generalize to $\R^n)$. Then we know that the area $D(x,y)$ of the parallelogram spanned by vectors $x$ and $y$  satisfies the following properties.
+What follows is some \emph{supplementary (non-obligatory)} material to see how to relate the covariance to a concept in linear algebra.
+
+
+Now we do some geometry. Take  three vectors $x,y, z\in \R^2$ (it's easy to generalize to $\R^n)$. Then we know that the area $D(x,y)$ of the parallelogram spanned by vectors $x$ and $y$  satisfies the following properties.
 \begin{enumerate}
-\item  Area is bilinear. The linearity in the first argument means that $D(x+y, z) = D(x, z) + D(y, z)$ and $D(ax, z)=a D(x, z)$ for $a\in \R$. (Just make a drawing to convince you about this.) The linearity in the second argument means that  $D(x, y+z) = D(x, y) + D(x, z)$  and $D(x, a z)=a D(x, z)$ for $a\in \R$.
+\item  Area is bi-linear. The linearity in the first argument means that $D(x+y, z) = D(x, z) + D(y, z)$ and $D(ax, z)=a D(x, z)$ for $a\in \R$. (Just make a drawing to convince you about this.) The linearity in the second argument means that  $D(x, y+z) = D(x, y) + D(x, z)$  and $D(x, a z)=a D(x, z)$ for $a\in \R$.
 \item  $D(x,x)$ = 0; there is no area between $x$ and $x$.
 \item $D( (1,0), (0,1)) = 1$; the area of the square with side 1 is 1.
 \end{enumerate}
-In fact, thex first property means that stretching vectors and stacking parallelograms result in stretching and adding areas.
+In fact, the first property means that stretching vectors and stacking parallelograms result in stretching and adding areas.
 The second says that the area of a parallelogram spanned by two parallel vectors is zero. The third specifies that the area of the unit square is 1.
 
-Now it can be proven that there exists just one function $D$ that satisfies these properties. In fact, this is the determinant of the matrix with as columns the vectors that span the parallellogram. Moreover, it can be shown that the second property can be replaced by the skew-symmetric property: $D(x,y) = - D(x,y)$.
+Now it can be proven that there exists just one function $D$ that satisfies these properties. In fact, this is the determinant of the matrix with as columns the vectors that span the parallelogram. Moreover, it can be shown that the second property can be replaced by the skew-symmetric property: $D(x,y) = - D(x,y)$.
 (Note that $D(x,x) = -D(x,x) \implies 2 D(x,x) = 0 \implies D(x,x) = 0$.)
 
 Let us use the properties to compute the area of a parallelogram spanned by the vectors $x = (a,b)$ and $y =(c,d)$ in 2D. Then
@@ -65,7 +68,7 @@ Let us use the properties to compute the area of a parallelogram spanned by the 
 D(x,y) &= D((a,b), (c,d)) =  D(a (1,0)) + b(0,1), c(1,0) + d(0,1)) \\
 &= ad D((1,0), (0,1)) + b c D((0,1), (1,0)) = ad - b c,
 \end{align*}
-where we use bilinearity in the first step, and skew-symmetry in the second and third. And this is indeed the determinant of the matrix with $x$ and $y$ as columns.
+where we use bilinearity in the first step, and skew-symmetry in the second and third. And this is indeed the determinant of the matrix with $x$ and $y$ as columns. (Note that this matrix is just a $2\times 2$ matrix).
 
 So, all in all, this is what I remembered throughout the years: the covariance and the determinant are bi-linear forms, the first is symmetric, the second skew- (or anti-)symmetric.
 
