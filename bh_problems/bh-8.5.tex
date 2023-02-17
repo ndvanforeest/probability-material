@@ -1,0 +1,18 @@
+\input{header.tex}
+\setcounter{theorem}{4}
+\begin{exercise} BH.8.5
+\begin{solution}
+Use the mnemonic of exercise BH.8.1 to get the order of $\d y/\d x$ right.
+
+Now note that $|Z|=z \implies X = z$ or $X=-z$ for $z>0$.  Also, $|\d z/\d x| = 1$  for $z>0$. Therefore,
+\begin{align*}
+  f_{Z}(z) = f_{X}(-z)  + f_X(z) \stackrel1 = 2f_X(z) = 2\phi(z),
+\end{align*}
+where step 1 follows from the symmetry of $\Norm{0, \sigma}$ under reflection in the $y$-axis. Since $\int_0^0 f_X(x) \d x = 0$, we can take any value we like for $f_{Z}(z)$ for $z=0$, so why not $2 \phi(0)$ too? And thus,
+\begin{align*}
+  f_{Z}(z) = f_{X}(-z)  + f_X(z) \stackrel1 = 2f_X(z) = 2\phi(z), \quad z \geq 0.
+\end{align*}
+Of course $\phi$ is the density of the standard normal distribution.
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

@@ -25,8 +25,9 @@
 
 
 
-The next real exercise is about recursion applied to the negative hypergeometric distribution.
-But to get in the mood, here is first a short fun question on how to use recursion.
+Conditioning, LOTP, and recursion can go hand in hand. As such, conditioning is a great and elegant tool to simplify probabilistic problems. This lecture focusses on demonstrating how to use these ideas, use the notation correctly, and present a new distribution.
+
+To get the mood, here is first a short fun question on how to use recursion.
 
 \begin{exercise}
 We have a chocolate bar consisting of $n$ small squares.
@@ -35,8 +36,7 @@ What is the number of times you have to break the bar such that you end up with 
 %Recursive arguments are very powerful, and I often find them very insightful (and I also like this type of reasoning).
 \begin{solution}
   Write $T(n)$ for the number of times you have to break the bar when there are $n$ squares.
-  Clearly, $T(1) =0$.
-  In general, suppose $n=m+k$, $1 \leq k < n$, then $T(n) = T(m) + T(k) + 1$, because we need $T(k)$ to break the part with $k$ pieces, and $T(m)$ for the part with $m$ pieces, and we need 1 to break the big bar into the two parts. But then, with the \emph{boundary condition} $T(1)=0$,
+ Suppose $n=k+m$, $1 \leq k < n$. Then it must hold that $T(n) = T(k) + T(m) + 1$, because we need $T(k)$ to break the part with $k$ pieces, and $T(m)$ for the part with $m$ pieces, and we need 1 breakage to break the big bar, consisting of $n$ parts, into the two parts. But then, with the \emph{boundary condition} $T(1)=0$,
   \begin{align*}
     T(2) &= T(1) + T(1) + 1 = 1, \\
 T(3) &= T(1) + T(2) + 1 = 1 + 1 = 2,
@@ -45,6 +45,8 @@ and so on. So we guess that $T(n)=n-1$ for any $n$. Let's check. It certainly ho
 \begin{align*}
 n-1 = T(n) = T(k) + T(m) + 1 = k-1 + m-1 + 1 = k+m-1 = n-1.
 \end{align*}
+We have solved the recursion, i.e., $T(n)=n-1$, and now we know that in whatever way we break an $n$ square chocolate bar with whatever shape, we need $n-1$ breackages.
+
 \end{solution}
 \end{exercise}
 
@@ -52,59 +54,87 @@ n-1 = T(n) = T(k) + T(m) + 1 = k-1 + m-1 + 1 = k+m-1 = n-1.
 Here is the exercise in which we apply recursion to the negative hypergeometric distribution.
 
 \begin{exercise}
-Use recursion to find the expected number $X$ of black balls drawn without replacement at random from an urn containing $w\geq 1$ white balls and $b$ black balls before we draw 1 white ball.
-In other words, I ask to use recursion to compute $\E X$ for $X$ a negative hypergeometric distribution with parameters $w,b, r=1$ and show that
+Use recursion to find the expected number $T(b,w)$ of black balls drawn at random without replacement from an urn containing $w\geq 1$ white balls and $b$ black balls \emph{before} we draw 1 white ball.
 \begin{align}
   \label{eq:727}
-\E X = \frac{b}{w+1}
+\E{T(b,w)} = \frac{b}{w+1}
 \end{align}
+
+In other words, the question is to use recursion to compute  the expectation of a negative hypergeometric distribution with parameters $w,b, r=1$.
+
+It is convenient to write $N(b,w) = \E{T(b,w)}$; it saves ink and it gives more overview of what we do.
+
+Compare this with the geometric random variable: then we ask how often to throw, for instance, a coin \emph{before} we see tails.
+The coin can be seen as an urn with one white ball (tails) and an infinite number of black ball (heads).
+Hence, the negative hypergeometric and geometric distributions are closely related.
+
 \begin{hint}
-For ease, write $N(w,b)= \E X$ for an  urn with $w\geq r = 1$ white balls and $b$ black balls. Then explain that
+Explain that
 \begin{align}
-N(w, 0) &= 0\quad \text{ for all $w$},\\
-  N(w,b) &= \frac{b}{w+b} (1+N(w, b-1)).
+N(0, w) &= 0\quad \text{ for all $w$},\\
+  N(b,w) &= \frac{b}{b+w} (1+N(b-1, w)).
 \end{align}
-Then show that this implies that $N(w,b) = b/ (w+1)$.
+Then show that this implies that $N(b,w) = b/ (w+1)$.
 \end{hint}
 \begin{solution}
-If there are no black balls left, then we cannot pick a black ball which implies that $N(w, 0) = 0$.
-As soon as we pick a white ball, we have to stop.
+Once again, realize that as soon as we pick a white ball, we have to stop.
+
+If there are no black balls left in the urn,  we cannot pick a black ball, hence $N(0,w) = 0$.
 
 When $w, b \geq 1$ two things can happen.
-Suppose we pick a white ball, then we stop right away and we cannot increase the number of black balls picked.
+Suppose we pick a white ball, then we stop right away.
 Suppose we pick a black ball, which happens with probability $b/(b+w)$, we obtain one black ball, and we continue with one black ball less.
-Hence, with LOTE,
+Hence, with LOTE and $X_{1}$ the color of the ball we pick,
 \begin{align}
-  N(w,b) = \frac{b}{w+b} (1+N(w, b-1)).
+\E{T(b,w)}
+  &= \E{T(b,w) | X_1 = w} \P{X_1=w} + \E{T(b,w)|X_1=b} \P{X_1=b}   \\
+  &= 0 + \E{T(b,w)|X_1=b} \P{X_1=b} \\
+  &= (1+\E{T(b-1, w)}) \frac{b}{b+w},
 \end{align}
-You should realize that here we use conditioning; we condition on the color of the ball picked.
+because $\E{T(b, w) |X_1=b} = 1 + \E{T(b-1,w)}$, i.e., we picked a black ball from the urn.
+
+In our notation, we can write this a bit shorter:
+\begin{equation}\label{eq:2}
+N(b,w) = \frac{b}{w+b} (1+N(b-1, w)) = a + a N(b-1, w),
+\end{equation}
+where we write $a=b/(b+w)$ for ease and overview.
+
 
 Now we need a real tiny bit of inspiration.
-Let's \emph{guess} that $N(w,b)=\alpha b$ for some $\alpha>0$.
+The equation for $N(b,w)$ looks like a line with slope $a$.
+So, let's \emph{guess} that $N(w,b)=\alpha b$ for some $\alpha>0$.
 Guessing is always allowed; if it works, we are done (since the recursion, together with the boundary condition, has a unique solution: just repeatedly applying it allows us to calculate all values).
-In general, you can make any guess whatsoever, but mind that only the good guesses work. So, trying the form $N(w,b) = \alpha b$, we find that
+In general, you can make any guess whatsoever, but mind that only the good guesses work.
+
+So, trying the form $N(b, w) = \alpha b$ in the above equation for $N(b,w)$, we find that
 \begin{equation*}
-\alpha b = \frac{b}{w+b} (1+ \alpha (b-1)) \stackrel{\textrm{\tiny algebra}}{\implies} \alpha = \frac{1}{w+1} \implies  N(w, b) = \frac{b }{w+1}.
+\alpha b = \frac{b}{w+b} (1+ \alpha (b-1)) \stackrel{\textrm{\tiny algebra}}{\implies} \alpha = \frac{1}{w+1} \implies  N(b,w) = \frac{b }{w+1}.
 \end{equation*}
-This is consistent with the boundary condition $N(w,0)=0$. Hence, we can move the case $b=0$ to the case with $b=1$, and so on, thereby proving the validity of the formula in general.
+This is consistent with the boundary condition $N(0,w=0$. Hence, we can move from the case $b=0$ to the case with $b=1$, and so on, thereby proving the validity of the formula in general.
 \end{solution}
 \end{exercise}
 
 \begin{exercise}
-Extend the previous exercise to cope with the case $r\geq 2$.
+We extend the previous exercise to a case in which we stop until we picked $r$, $r\geq 1$, white balls from the urn. Thus, we like to know the number of black balls drawn before we picked $r$ white balls.
+
 For this, write $N_{r}(w,b)$ for an urn with $w$ white balls and $b$ black balls, and $r$ white balls to go.
 \begin{hint}
 Explain that $N_{0}(w,b) = 0$ and
 \begin{align}
-  N_r(w,b) &= \frac{w}{w+b} N_{r-1}(w-1, b) +  \frac{b}{w+b} (1+N_{r}(w, b-1)).
+  N_r(b,w) &= \frac{w}{w+b} N_{r-1}(b,w-1) +  \frac{b}{w+b} (1+N_{r}( b-1, w)).
 \end{align}
-Then show that this implies that $N_{r}(w,b) = r b/ (w+1)$.
+Then show that this implies that $N_{r}(b, w) = r b/ (w+1)$.
+
+Note that this is consistent with the previous exercise.
+
 \end{hint}
 \begin{solution}
+Use the hint!
+
 The recursion follows right away by noticing that we pick a white ball with probability $w/(w+b)$, but then we remove one white ball \emph{and} we have one white ball less to go.
 With probability $b/(w+b)$ we pick a black ball, in which case the number of black balls drawn increases by one, but there is one black ball less in the urn.
 
-The boundary condition is also clear: $N_{0}(w,b)=0$ because we stop.
+The boundary condition is clear: $N_{0}(b,w)=0$ because we stop when $r=0$.
 Note that this is consistent with the previous exercise.
 
 If $r=2$, we use from the previous exercise that
@@ -113,20 +143,67 @@ N_{r-1}(w-1, b) = N_{1}(w-1, b) = \frac{b }{w-1 + 1} = \frac{b }{w}.
 \end{equation*}
 Using this in the recursion,
 \begin{align*}
-  N_2(w,b)
-&= \frac{w}{w+b} N_{1}(w-1, b) +  \frac{b}{w+b} (1+N_{2}(w, b-1)) \\
-&= \frac{w}{w+b} \frac{b }{w} +  \frac{b}{w+b} (1+N_{2}(w, b-1)) \\
-&=  \frac{b}{w+b} (2+N_{2}(w, b-1)).
+  N_2(b,w)
+&= \frac{w}{w+b} N_{1}(b, w-1) +  \frac{b}{w+b} (1+N_{2}(b-1,w)) \\
+&= \frac{w}{w+b} \frac{b }{w} +  \frac{b}{w+b} (1+N_{2}(b-1), w) \\
+&=  \frac{b}{w+b} (2+N_{2}(b-1, w)).
 \end{align*}
-But this has the same form as~\cref{eq:727}, except that the 1 has been replaced by a 2. But, now we are dealing with the case $r=2$ instead of $r=1$. Hence, by the same token,
+But this has the same form as what we see in the previous exercise, except that the 1 has been replaced by a 2. But, now we are dealing with the case $r=2$ instead of $r=1$! Hence, by the same line of reasoning,
 \begin{equation*}
-  N_2(w,b) = 2 \frac{b}{w+1}
+  N_2(b,w) = 2 \frac{b}{w+1}
 \end{equation*}
 Knowing the result for $r=2$, we fill this for $r=3$, and so on, to get the general result.
 
 What an elegant procedure;  we pull ourselves out of the swamp, just like Baron Munchhausen.
 \end{solution}
 \end{exercise}
+
+\subsection{Background material, not compulsory}
+\label{sec:backgr-mater-not}
+
+\begin{exercise}
+Example BH.9.1.8 takes a few shortcuts to derive the expectation of the number of tails before a heads appears when throwing a coin.
+Use conditioning to close the arguments. (This is background material because this is quite hard.)
+\begin{solution}
+Let $X_{i}$ be the outcome of the $i$th throw of the coin.
+If $X_{i}=0$ for $0\leq i< n$ and $X_{n}=1$, we stop.
+Thus, the expected number of throws $T$ is given as $T=\inf\{n: X_n=1\}$.
+
+Here is the first subtlety: we need to take the $\inf$ instead of the $\min$.
+The reason is that, formally, we might need to throw an infinite number of times.
+But, the minimum of an infinite set is not well defined, for instance $\min\{1/n: n=1, 2, 3, \ldots\}$ does not exist.
+To circumvent such problems we can use the infimum, because $\inf\{1/n : n = 1, 2, \ldots\} = 0$.
+
+We are interested in $\E T = \E{T|X_{0}=0}$. With LOTE:
+\begin{align*}
+  \E{T|X_0=0}
+  &= \E{T|X_0=X_1=0} \P{X_1=0} + \E{T|X_0=0, X_1=1} \P{X_1=1}\\
+\end{align*}
+Now $\E{T|X_0=0, X_1=1} = 0$ because the first outcome resulted in a 1 so that we can stop throwing after this first throw.
+How about the other conditional expectation?
+
+Here is the second subtlety. By memorylessness,
+\begin{align*}
+ \E{T-1|X_0=X_1=0} = \E{T|X_0=0}.
+\end{align*}
+Why is that?
+Well, if I tell you that the first throw results in a $0$, then we need at least two throws, while if I don't tell you the outcome of the first throw, then the first success may occur on the very first throw.
+However, after the first throw resulting in a $0$, the process starts from scratch (which is what memorylessness means).
+
+With this,  and writing $\P{X_1=1}=p$, $\P{X_1=0} = 1-p = q$,
+\begin{align*}
+  \E{T|X_0=0}
+  &= \E{T|X_0=X_1=0} q + 0\cdot p \\
+  &= (1+\E{T-1|X_0=X_1=0}) q \\
+  &= (1+\E{T|X_0=0}) q  \\
+  &= q + q \E{T|X_0=0}.
+\end{align*}
+And this finally implies that $\E{T} = q/(1-q) = q/p$.
+
+Note that for the first success rv,  $\E{T|X_0=0, X_1=1} = 1$ instead of $0$.
+\end{solution}
+\end{exercise}
+
 
 \section{Lecture 8}
 
@@ -141,7 +218,7 @@ What an elegant procedure;  we pull ourselves out of the swamp, just like Baron 
 
 
 \begin{exercise}
-We draw, with replacement, balls, numbered 1 to $N$, from an urn.
+We draw \emph{with replacement} balls, numbered 1 to $N$, from an urn.
 Find a recursion to compute the expected number $\E T$ of draws necessary to see all balls.
 \begin{solution}
 Write $T_{n}$ for expected time to finish given that we have seen $n$ different balls. Thus, $\E T = T_{0}$.
@@ -204,6 +281,26 @@ bigT = function(n) {
 Here are the results $T(44) = \py{T(44)}$ (check!) and $T(0) = \py{T(0)}$.
 \end{solution}
 \end{exercise}
+
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-9.25.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
+\subsection{Background material, not compulsory}
+\label{sec:backgr-mater-not}
 
 \begin{exercise}
 We draw, with replacement, balls, numbered 1 to $N$, from an urn, but 6 at a time (not just one as in the previous exercise).
@@ -409,22 +506,6 @@ The game stops when you have seen all balls at least once. What is your expected
 \end{exercise}
 
 
-\begin{pycode}
-from pathlib import Path
-
-exercise_name = "bh-9.25.tex"
-fname = Path("../bh_problems") / exercise_name
-with fname.open("r") as fp:
-    state = 0  # dump
-    for line in fp.readlines():
-        if line[:16] == r"\begin{exercise}":
-            state = 1
-        if state == 1:
-            print(line.strip())
-        if line[:14] == r"\end{exercise}":
-            break
-\end{pycode}
-
 
 \section{Tutorial}
 \label{sec:tutorial}
@@ -484,23 +565,6 @@ Clearly, $X$ is $N(4,2)$ distributed. In fact, we do not need to know the value 
 
 \subsection{BH Exercises}
 
-
-\begin{pycode}
-from pathlib import Path
-
-exercise_name = "bh-9.32.tex"
-fname = Path("../bh_problems") / exercise_name
-with fname.open("r") as fp:
-    state = 0  # dump
-    for line in fp.readlines():
-        if line[:16] == r"\begin{exercise}":
-            state = 1
-        if state == 1:
-            print(line.strip())
-        if line[:14] == r"\end{exercise}":
-            break
-\end{pycode}
-
 \section{Homework}
 
 \label{sec:homework}
@@ -508,6 +572,30 @@ with fname.open("r") as fp:
 \subsection{Practice}
 \label{sec:practice}
 
+
+\begin{exercise}
+Let $X,Y$ be i.i.d.
+$\mathcal{N}(0,1)$ distributed and define $Z = X + Y$.
+Show that $Z \sim \mathcal{N}(0,2)$ using a convolution integral.
+\begin{solution}
+Recall the pdf of a $\mathcal{N}(\mu,\sigma^2)$ random variable $T$:
+\begin{align}
+    f_T(t) = \frac{1}{\sqrt{2\pi}\sigma} \exp\left\{-\frac{(t-\mu)^2}{2 \sigma^2}\right\}, \quad t \in \R.
+\end{align}
+We use a convolution integral. We have for every $z \in \R$:
+\begin{align}
+    f_Z(z) &= \int_{-\infty}^\infty f_Y(z - x) f_X(x) dx \\
+    &= \int_{-\infty}^\infty \frac{1}{\sqrt{2\pi}} \exp\left\{-\frac{(z - x)^2}{2}\right\} \frac{1}{\sqrt{2\pi}} \exp\left\{-\frac{x^2}{2 }\right\} dx \\
+    &= \frac{1}{2\pi} \int_{-\infty}^\infty  \exp\left\{-\frac{z^2 - 2zx + 2 x^2}{2}\right\} dx \\
+    &= \frac{1}{2\pi} \int_{-\infty}^\infty  \exp\left\{-\left[\frac{1}{2}z^2 - zx +  x^2\right]\right\} dx \\
+    &= \frac{1}{2\pi} \int_{-\infty}^\infty  \exp\left\{-\left[\left(x - \frac{1}{2}z\right)^2 + \frac{1}{4}z^2\right]\right\} dx \\
+    &= \frac{1}{2\pi} \exp\left\{-\frac{1}{4}z^2\right\} \int_{-\infty}^\infty  \exp\left\{-\left(x - \frac{1}{2}z\right)^2\right\} dx \\
+    &= \frac{1}{\sqrt{2\pi} \cdot \sqrt{2}} \exp\left\{-\frac{z^2}{2 \cdot \sqrt{2}^2}\right\} \cdot \int_{-\infty}^\infty  \frac{1}{\sqrt{2\pi} \cdot (1/\sqrt{2})} \exp\left\{-\frac{\left(x - \tfrac{1}{2}z\right)^2}{2 \cdot (1/\sqrt{2})^2}\right\} dx \\
+    &= \frac{1}{\sqrt{2\pi} \cdot \sqrt{2}} \exp\left\{-\frac{z^2}{2 \cdot \sqrt{2}^2}\right\},
+\end{align}
+where in the last step we recognize that the integral on the right is the integral of the pdf of a $\mathcal{N}(\tfrac{1}{2}z, 1/2)$ random variable, which integrates to one (since any pdf integrates to one). We are left with the pdf of a $\mathcal{N}(0,2)$ random variable. Hence, $Z \sim \mathcal{N}(0,2)$.
+\end{solution}
+\end{exercise}
 
 
 \subsection{BH Exercises}

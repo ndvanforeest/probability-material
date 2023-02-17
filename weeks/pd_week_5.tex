@@ -18,28 +18,27 @@
 
 
 \begin{itemize}
-\item 8.2: read, but do convolutions with conditioning
 \item 9.3: read
 \item 9.4: skip
 \item BH video: 27
 \end{itemize}
 
 
-\begin{pycode}
-from pathlib import Path
+% \begin{pycode}
+% from pathlib import Path
 
-exercise_name = "bh-8.23.tex"
-fname = Path("../bh_problems") / exercise_name
-with fname.open("r") as fp:
-    state = 0  # dump
-    for line in fp.readlines():
-        if line[:16] == r"\begin{exercise}":
-            state = 1
-        if state == 1:
-            print(line.strip())
-        if line[:14] == r"\end{exercise}":
-            break
-\end{pycode}
+% exercise_name = "bh-8.23.tex"
+% fname = Path("../bh_problems") / exercise_name
+% with fname.open("r") as fp:
+%     state = 0  # dump
+%     for line in fp.readlines():
+%         if line[:16] == r"\begin{exercise}":
+%             state = 1
+%         if state == 1:
+%             print(line.strip())
+%         if line[:14] == r"\end{exercise}":
+%             break
+% \end{pycode}
 
 
 \begin{exercise}
@@ -95,55 +94,6 @@ Here is a final point for you to think hard about: ${X\leq \tau}$ is an event, $
 \end{exercise}
 
 
-
-\section{Lecture 10}
-
-\subsection{Compulory material}
-\label{sec:compulory-material}
-
-
-\begin{itemize}
-\item 9.5: read but skip example 9.5.4
-\item 9.6: read but skip example 9.6.3
-\item BH video: -
-\end{itemize}
-
-
-
-\begin{pycode}
-from pathlib import Path
-
-exercise_name = "bh-9.50.tex"
-fname = Path("../bh_problems") / exercise_name
-with fname.open("r") as fp:
-    state = 0  # dump
-    for line in fp.readlines():
-        if line[:16] == r"\begin{exercise}":
-            state = 1
-        if state == 1:
-            print(line.strip())
-        if line[:14] == r"\end{exercise}":
-            break
-\end{pycode}
-
-
-\begin{pycode}
-from pathlib import Path
-
-exercise_name = "bh-9.52.tex"
-fname = Path("../bh_problems") / exercise_name
-with fname.open("r") as fp:
-    state = 0  # dump
-    for line in fp.readlines():
-        if line[:16] == r"\begin{exercise}":
-            state = 1
-        if state == 1:
-            print(line.strip())
-        if line[:14] == r"\end{exercise}":
-            break
-\end{pycode}
-
-
 \begin{exercise}
 We have a station with two machines, one is working, the other is off.
 If the first fails, the other machine takes over.
@@ -188,6 +138,71 @@ Two challenges: Does the problem become much harder when $X_{1}$ and $X_{2}$ are
 
 \end{solution}
 \end{exercise}
+
+
+
+\section{Lecture 10}
+
+\subsection{Compulory material}
+\label{sec:compulory-material}
+
+
+\begin{itemize}
+\item 9.5: read but skip example 9.5.4
+\item 9.6: read but skip example 9.6.3
+\item BH video: -
+\end{itemize}
+
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-9.1.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-9.50.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-9.52.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 
 \section{Tutorial}
@@ -288,8 +303,6 @@ Let $X$ be the color after a throw and $Y$ the number.
 Use the definitions of conditional expectation, conditional variance and Adam's and Eve's law to compute $\E Y$ and $\V Y$.
 Compare that to the results you would obtain from using the standard methods; you should get the same result.
 
-This exercises is handy to check before you solve BH.9.1.
-
 
 BTW, it's easy to make some variations on this exercise by painting other combinations of sides, e.g., only 1 and 2 are red.
 \begin{solution}
@@ -372,10 +385,11 @@ Now observe that Adam's law and LOTE are the same for discrete rvs:
 \subsection{BH Exercises}
 \label{sec:bh-exercises-1}
 
+
 \begin{pycode}
 from pathlib import Path
 
-exercise_name = "bh-9.1.tex"
+exercise_name = "bh-9.32.tex"
 fname = Path("../bh_problems") / exercise_name
 with fname.open("r") as fp:
     state = 0  # dump
@@ -389,38 +403,38 @@ with fname.open("r") as fp:
 \end{pycode}
 
 
-\begin{pycode}
-from pathlib import Path
+% \begin{pycode}
+% from pathlib import Path
 
-exercise_name = "bh-9.57.tex"
-fname = Path("../bh_problems") / exercise_name
-with fname.open("r") as fp:
-    state = 0  # dump
-    for line in fp.readlines():
-        if line[:16] == r"\begin{exercise}":
-            state = 1
-        if state == 1:
-            print(line.strip())
-        if line[:14] == r"\end{exercise}":
-            break
-\end{pycode}
+% exercise_name = "bh-9.57.tex"
+% fname = Path("../bh_problems") / exercise_name
+% with fname.open("r") as fp:
+%     state = 0  # dump
+%     for line in fp.readlines():
+%         if line[:16] == r"\begin{exercise}":
+%             state = 1
+%         if state == 1:
+%             print(line.strip())
+%         if line[:14] == r"\end{exercise}":
+%             break
+% \end{pycode}
 
 
-\begin{pycode}
-from pathlib import Path
+% \begin{pycode}
+% from pathlib import Path
 
-exercise_name = "bh-9.58.tex"
-fname = Path("../bh_problems") / exercise_name
-with fname.open("r") as fp:
-    state = 0  # dump
-    for line in fp.readlines():
-        if line[:16] == r"\begin{exercise}":
-            state = 1
-        if state == 1:
-            print(line.strip())
-        if line[:14] == r"\end{exercise}":
-            break
-\end{pycode}
+% exercise_name = "bh-9.58.tex"
+% fname = Path("../bh_problems") / exercise_name
+% with fname.open("r") as fp:
+%     state = 0  # dump
+%     for line in fp.readlines():
+%         if line[:16] == r"\begin{exercise}":
+%             state = 1
+%         if state == 1:
+%             print(line.strip())
+%         if line[:14] == r"\end{exercise}":
+%             break
+% \end{pycode}
 
 
 

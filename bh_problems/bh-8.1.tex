@@ -1,0 +1,26 @@
+\input{header.tex}
+\setcounter{theorem}{0}
+\begin{exercise} BH.8.1
+\begin{solution}
+Here are two ways, one a bit cumbersome, but straightforward, the second with Theorem 8.1.1.
+
+$Y=g(X) = e^{-X}$, hence $g(x) = e^{-x}$. Note that $g(x) \in (0, 1]$ for $x\geq 0$. Also, $g^{-1}(x) = -\log x$. And so,
+\begin{align*}
+  \P{Y\leq y} &\stackrel1= \P{X \geq g^{-1}(y)} = \P{X \geq -\log y} = \P{X\geq \log 1/y} = e^{-\log 1/y} =  y.
+\end{align*}
+To understand step 1 in which we flip the inequality sign, make a drawing of $e^{-x}$ and note that it decreases.
+For the PDF, take the derivative with respect to $y$.
+
+Now the other method. Use the mnemonic $f_{x}(x) \d x = f_{Y}(y) \d y$. Divide both sides by $\d y$ and take the absolute value:
+\begin{align*}
+  f_{Y}(y) = f_{X}(x) |\frac{\d x}{\d y}|.
+\end{align*}
+Now, $\d y/\d x = \d g/\d x = -e^{-x}$. Hence,
+\begin{align*}
+  f_{Y}(y) = f_{X}(x) |\frac{\d x}{\d y}| = e^{-x} \frac{1}{e^{-x}} = \1 {0< y \leq 1},
+\end{align*}
+where we include the support of $Y$ in the last step.
+
+\end{solution}
+\end{exercise}
+\input{trailer.tex}

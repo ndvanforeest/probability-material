@@ -19,6 +19,7 @@
 
 \begin{itemize}
 \item BH section 8.1: read up  to and including Example 8.1.6., skip the rest of 8.1 from Theorem 8.1.7  onwards
+\item BH section 8.2: read
 \item BH video: 22
 \end{itemize}
 
@@ -217,7 +218,6 @@ It remains to find the normalization constant $a$; recall, $f$ must be a PDF. Th
 
 
 \begin{itemize}
-\item 8.2: we do this section after Ch 9. Hence, skip for the moment
 \item 8.3: skip
 \item 8.4: read, but skip story 8.4.5 on gamma Poisson conjugacy
 \item 8.5: skip
@@ -383,11 +383,17 @@ We recognize this as the PMF of a Poisson distribution with parameter $\lambda+\
 \end{exercise}
 
 \begin{exercise}
-(BH.8.4.3.) Let $X_1, X_2, \ldots$ be i.i.d. $\Exp{\lambda}$ distributed. Let $T_n = \sum_{k=1}^n X_k$. Show that $T_n$ has the following pdf:
+Let $X_1, X_2, \ldots$ be i.i.d.
+$\Exp{\lambda}$ distributed.
+Let $T_n = \sum_{k=1}^n X_k$.
+Using induction and a convolution integral to show that $T_n$ has the following pdf:
 \begin{align}
     f_{T_n}(t) = \frac{\lambda^n}{(n-1)!} t^{n-1} e^{-\lambda t}, \quad t > 0.
 \end{align}
-That is, show that $T_n$ follows a \emph{Gamma distribution} with parameters $n$ and $\lambda$. (We will learn about the Gamma distribution in BH.8.4.)\\
+Check the list of distributions at the end of the book to conclude that $T_n$ follows a \emph{Gamma distribution} with parameters $n$ and $\lambda$.
+
+You can compare this derivation to the  Example BH.8.4.3, there they use MGFs.
+
 \begin{hint}
 Use mathematical induction.
 \end{hint}
@@ -416,28 +422,6 @@ Hence, the statement holds for $n$. By mathematical induction, the statement hol
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
-Let $X,Y$ be i.i.d. $\mathcal{N}(0,1)$ distributed and define $Z = X + Y$. Show that $Z \sim \mathcal{N}(0,2)$ using a convolution integral.
-
-\begin{solution}
-Recall the pdf of a $\mathcal{N}(\mu,\sigma^2)$ random variable $T$:
-\begin{align}
-    f_T(t) = \frac{1}{\sqrt{2\pi}\sigma} \exp\left\{-\frac{(t-\mu)^2}{2 \sigma^2}\right\}, \quad t \in \R.
-\end{align}
-We use a convolution integral. We have for every $z \in \R$:
-\begin{align}
-    f_Z(z) &= \int_{-\infty}^\infty f_Y(z - x) f_X(x) dx \\
-    &= \int_{-\infty}^\infty \frac{1}{\sqrt{2\pi}} \exp\left\{-\frac{(z - x)^2}{2}\right\} \frac{1}{\sqrt{2\pi}} \exp\left\{-\frac{x^2}{2 }\right\} dx \\
-    &= \frac{1}{2\pi} \int_{-\infty}^\infty  \exp\left\{-\frac{z^2 - 2zx + 2 x^2}{2}\right\} dx \\
-    &= \frac{1}{2\pi} \int_{-\infty}^\infty  \exp\left\{-\left[\frac{1}{2}z^2 - zx +  x^2\right]\right\} dx \\
-    &= \frac{1}{2\pi} \int_{-\infty}^\infty  \exp\left\{-\left[\left(x - \frac{1}{2}z\right)^2 + \frac{1}{4}z^2\right]\right\} dx \\
-    &= \frac{1}{2\pi} \exp\left\{-\frac{1}{4}z^2\right\} \int_{-\infty}^\infty  \exp\left\{-\left(x - \frac{1}{2}z\right)^2\right\} dx \\
-    &= \frac{1}{\sqrt{2\pi} \cdot \sqrt{2}} \exp\left\{-\frac{z^2}{2 \cdot \sqrt{2}^2}\right\} \cdot \int_{-\infty}^\infty  \frac{1}{\sqrt{2\pi} \cdot (1/\sqrt{2})} \exp\left\{-\frac{\left(x - \tfrac{1}{2}z\right)^2}{2 \cdot (1/\sqrt{2})^2}\right\} dx \\
-    &= \frac{1}{\sqrt{2\pi} \cdot \sqrt{2}} \exp\left\{-\frac{z^2}{2 \cdot \sqrt{2}^2}\right\},
-\end{align}
-where in the last step we recognize that the integral on the right is the integral of the pdf of a $\mathcal{N}(\tfrac{1}{2}z, 1/2)$ random variable, which integrates to one (since any pdf integrates to one). We are left with the pdf of a $\mathcal{N}(0,2)$ random variable. Hence, $Z \sim \mathcal{N}(0,2)$.
-\end{solution}
-\end{exercise}
 
 
 \subsection{BH Exercises}
