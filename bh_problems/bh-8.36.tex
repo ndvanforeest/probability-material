@@ -28,15 +28,14 @@ With a bit of algebra: $s=uv/(u+1)$ and $t=v/(u+1)$.
 Therefore the Jacobian we need becomes
 \begin{equation}
 \label{eq:12}
-\frac{\partial (s,t)}{\partial (u,v)} = \frac{v}{t^{2}} = v \frac{(u+1)^2}{v^{2}} = \frac{(u+1)^{2}}{v}.
+\frac{\partial (s,t)}{\partial (u,v)} = \frac{t^{2}}{v} = \frac{v^{2}}{(u+1)^2} \frac{1}{v} = \frac{v}{(u+1)^{2}}.
 \end{equation}
 Next,
 \begin{align*}
   f_{U, V}(u,v) &= f_{T_1,T_2}(s,t) \frac{\partial (s,t)}{\partial (u,v)}
-  =  f_{T_1}(uv/(u+1) f_{T_2}(v/(u+1)) \frac{(u+1)^{2}}{v} \\
-  &=  \lambda^{2} \exp(-\lambda uv/(u+1) - \lambda v/(u+1)) \frac{(u+1)^{2}}{v} \\
-  &=  \lambda^{2} \exp(-\lambda v) \frac{(u+1)^{2}}{v} \\
-  &=  \lambda^{2} \exp(-\lambda v)/v \cdot  (u+1)^{2}. \\
+  =  f_{T_1}(uv/(u+1) f_{T_2}(v/(u+1)) \frac{v}{(u+1)^{2}} \\
+  &=  \lambda^{2} e^{-\lambda uv/(u+1)} e^{- \lambda v/(u+1)} \frac v{(u+1)^{2}} \\
+  &=  \lambda^{2} \exp(-\lambda v) v \cdot \frac 1{(u+1)^{2}}.
 \end{align*}
 Clearly, this is a product of a function $f_{V}(f)$ that depends only  $v$ and another function $f_U(u)$ that depends  only $u$. Hence, $U$ and $V$ are independent.
 

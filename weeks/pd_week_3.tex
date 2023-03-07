@@ -430,7 +430,7 @@ Hence, the statement holds for $n$. By mathematical induction, the statement hol
 \begin{pycode}
 from pathlib import Path
 
-exercise_name = "bh-8.52.tex"
+exercise_name = "bh-7.86.tex"
 fname = Path("../bh_problems") / exercise_name
 with fname.open("r") as fp:
     state = 0  # dump
@@ -443,6 +443,23 @@ with fname.open("r") as fp:
             break
 \end{pycode}
 
+
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-8.52.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
 
 \section{Homework}
 \label{sec:homework}
@@ -581,6 +598,7 @@ with fname.open("r") as fp:
         if line[:14] == r"\end{exercise}":
             break
 \end{pycode}
+
 
 
 % \section{Polleverywhere questions}
