@@ -46,8 +46,8 @@ func = function(x){
 }
 
 output = fsolve(func, c(2,2)) #x
-a = output[1]
-b = output[2]
+a = output$x[1]
+b = output$x[2]
 print(paste(a, b))
 
 X_mean = a / (a + b)
