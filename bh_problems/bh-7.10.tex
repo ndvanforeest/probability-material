@@ -15,7 +15,7 @@ where step 1 follows from the fact that $Y$ and $X$ are independent. When $t<x$,
 
 b. Take the derivative wrt to $t$: $f_{T|X} (t|x) = F_{T|X}'(t|x) = \lambda e^{-\lambda (t-x)}\1{t\geq x\geq 0}$. To see that $f_{T|X}$ a valid PDF, note first that it is positive. Second, it must integrate to 1. By a change of variable,
 \begin{align*}
-\int_0^{\infty}  f_{T|X} (t|x) \d t = \int_x^{\infty} \lambda e^{-\lambda t} \d x = 1.
+\int_0^{\infty}  f_{T|X} (t|x) \d t = \int_x^{\infty} \lambda e^{-\lambda (t-x)} \d t = \int_{0}^{\infty} \lambda e^{-\lambda t} \d t = 1.
 \end{align*}
 This last equality must be evident now. (Hint, what is the density of a rv  that is $\sim \Exp{\lambda}$?)
 

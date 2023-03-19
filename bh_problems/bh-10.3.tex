@@ -7,9 +7,18 @@ First check the assumption that $Y\neq a X$, for some $a>0$; why is it there?
 Then, take a suitable $g$ in Jensen's inequality.
 Bigger hint: $g(x)=1/x$.
 
-In the solution guide, the authors do not explain the $>$, while in Jensen's inequality there is a $\leq$. To see why the $>$ is allowed here, rethink the assumption in the exercise, and reread Theorem 10.1.5.
+In the solution guide, the authors do not explain the $>$, while in Jensen's inequality there is a $\leq$.
+To see why the $>$ is allowed here, rethink the assumption in the exercise, and reread Theorem 10.1.5 carefully.
 
 Finally, at what $p$ is $p(1-p)$ maximal?
 \end{hint}
+\begin{solution}
+Check the hint.
+
+With the Cauchy-Schwartz inequality we will not get what we want. To see why, take $W=\sqrt{X/Y}$ and $Z=\sqrt{Y/X}$, which is ok because $X,Y>0$.  Then, with the Cauchy-Schwartz inequality, $1 = (\E{WY})^{2} \leq \E{W^2}\E{Z^{2}} = \E{X/Y}\E{Y/X}$. But this gives only a $\leq$, not the $<$ which we have to prove.
+
+See the solutions provided by BH in their pdf with solutions.
+\end{solution}
+
 \end{exercise}
 \input{trailer.tex}

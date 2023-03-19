@@ -57,6 +57,9 @@ with fname.open("r") as fp:
 
 
 \begin{exercise}
+The aim of this exercise is not to find the fastest way to compute $\E X$ and $\V X$; instead, the aim of this exercise is to practice with many of the concepts we have learned in the book up to now.
+
+
 We have a continuous r.v. $X$ with PDF
 \begin{align}
   \label{eq:1123}
@@ -73,7 +76,6 @@ $Y$ such that $Y=\1{X< 1} + 2\1{X\geq 1}$.
 Explain what information you obtain about $X$ when somebody tells that $Y=1$, or that $Y=2$.
 Use conditioning on $Y$ and Adam's and Eve's laws to recompute $\E X$ and $\V X$.
 
-The aim of this exercise is not to find the fastest way to compute $\E X$ and $\V X$; instead, the aim of this exercise is to practice with many of the concepts we have learned in the book up to now.
 
 \begin{solution}
 Using the properties of the uniform distribution,
@@ -174,10 +176,9 @@ Use Adam and Eve's laws to express the expectation and variance of the total tim
 Below we need some properties of the Poisson distribution.
 \begin{align}
 \E{N(T)} &= \E{\E{N(T)\given T}}\\
-\E{\E{N(T)\given T=t}}&= \E{N(t)} = \lambda t \\
-\E{\E{N(T)\given T}}&= \lambda T \\
+\E{N(T)\given T=t}&= \E{N(t)|T=t} = \lambda t \\
+\E{N(T)\given T}&= \lambda T \\
 \E{N(T)} &= \E{\E{N(T)\given T}} = \E{\lambda T} = \lambda \E T\\
-\V{N(t)} &= \lambda t
 % \V N &= \E{\V{N\given T}} + \V{\E{N\given T}} \\
 % \V{N\given T} &= \lambda T  \implies \E{\V{N\given T}} = \lambda \E{T} \\
 % \E{N\given T} &= \lambda T \implies \V{\E{N\given T}} = \V{\lambda T} = \lambda^{2} \V T \\
