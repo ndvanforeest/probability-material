@@ -4,7 +4,7 @@
 
 \input{header}
 
-\title{Probability Distributions, Week 6}
+\title{Probability Distributions, Week 7}
 
 \begin{document}
 \maketitle
@@ -62,13 +62,13 @@ with fname.open("r") as fp:
 \begin{exercise}
 A shop receives demands with sizes $\{X_{k}\}$ for some product, for instance, cans with beans.
 Write $\mu = \E X$ and $\sigma^{2} = \V X$.
-
-Suppose $n$ customers arrive.
+Suppose $n$ customers arrive so that the total demand $D=\sum_{i=1}^{n} X_{i}$.
 The shop has an initial inventory of $I$ cans on the shelf.
-a) Use the CLT to determine $I$ such that the probability that the total demand~$D$ remains below $I$ is larger than some threshold $\alpha$.
-b) The safety stock is defined as $I$ minus the expected demand.
-How large is the safety stock?
-c) When is it reasonable to use the CLT to estimate $I$?
+\begin{enumerate}[a.]
+\item Use the CLT to determine $I$ such that the probability that the total demand~$D$ remains below $I$ is larger than some threshold $\alpha$.
+\item The safety stock is defined as $I$ minus the expected demand. How large is the safety stock?
+\item When is it reasonable to use the CLT to estimate $I$?
+\end{enumerate}
 \begin{solution}
 We have $D=\sum_{i=1}^{n} X_{i}$. Hence, $\E D = n \E X = n \mu$ and $\V D = n \V X = n \sigma^{2}$. We search for $I$ such that
 \begin{equation}
@@ -107,8 +107,8 @@ We use this insight in the next lecturexto explain why people pay for insurance,
 
 \begin{exercise}
 Suppose we have one perfectly fair die.
-When the die lands 1, 2 you loose your investment, otherwise your investment gets doubled.
- You are given two options: bet all the money $M$ you have and whatever you can lay your hands on (possibly including the total fortune of your parents, your friends, and so on), or not bet at all.
+When the die lands 1 or 2 you loose your investment, otherwise your investment gets doubled.
+You are given two options: bet all the money $M$ you have and whatever you can lay your hands on (possibly including the total fortune of your parents, your friends, and so on), or not bet at all.
 Show that your expected gain is $M/3$.
 Given this, would you play this game?
 \begin{solution}
@@ -131,13 +131,21 @@ Would you bet all the money you have?
 \end{exercise}
 
 \begin{exercise}
-Consider the, so-called, St.
-Petersburg game in which we throw a fair coin until it comes up heads, and then we stop.
+Consider the, so-called, St.~Petersburg game in which we throw a fair coin until it comes up heads, and then we stop.
 When the coin lands heads on the $n$th throw, you receive $2^{n}$ Euros.
-Suppose your initial capital is $m$ and you invest $f$, then your expected gain is $m-f + \sum_{n=1}^{\infty} 2^{-n} 2^{n} = \infty$.
-But, how much are you actually prepared to pay to enter this game?
-To resolve this, we don't focus on monetary expectation but instead on expected utility (see the previous exercise).
-Explain that, when investing $f$, the later is given by
+Suppose you pay $f=5$ euros to play this game.
+If the coin lands heads on the first throw, you earn $2-5=-3$ euros.
+If it lands tails first, and then heads, you earn $2^{2}-5=-1$.
+If you throw $TTH$, then you earn $2^{3}-5=3$, and so on.
+More generally, suppose your initial capital is $m$ and you invest $f$ to play the game, then your expected gain is
+\begin{equation}
+m-f + \sum_{n=1}^{\infty} 2^{-n} 2^{n} = \infty.
+\end{equation}
+
+
+But, how much are you actually prepared to pay to enter this game, given that you can also lose part of your investment $f$?
+To resolve this, we don't focus on monetary expectation but instead on expected utility where we express the utility of having $x$ euro as $\log x$ (so, the utility of $10^{6}$ is twice has much as the utility of $10^{3}$).
+Explain that, when investing $f$, the expected utility is given by
 \begin{equation}
   \label{eq:135}
   \sum_{n=1}^{\infty} 2^{-n}\log(m - f + 2^{n}).

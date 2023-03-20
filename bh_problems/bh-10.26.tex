@@ -18,8 +18,8 @@ Check the solution manual. Then, with $\mu=\sigma=\lambda=n$, and $n\gg 1$,
 \Phi(n+1/2) - \Phi(n-1/2)
 &= \frac 1 {\sqrt{2\pi \sigma^{2}}}\int_{n-1/2}^{n+1/2} e^{-(x-\mu)/2\sigma^{2}} \d x\\
 &= \frac 1 {\sqrt{2\pi n }}\int_{-1/2}^{1/2} e^{-x^{2}/2n} \d x\\
-&= \frac 1 {\sqrt{2\pi n }}\int_{-1/2}^{1/2} (1 - x^{2}/2n) \d x\\
-&= \frac 1 {\sqrt{2\pi n }} (1- 1/(24 n)).
+&= \frac 1 {\sqrt{2\pi n }}\int_{-1/2}^{1/2} \left(1 - \frac{x^{2}}{2n}\right) \d x\\
+&= \frac 1 {\sqrt{2\pi n }} \left (1-  \frac{1}{24n}\right ).
 \end{align*}
 So, we found another term to approximate $n!$ yet better.
 \end{solution}
