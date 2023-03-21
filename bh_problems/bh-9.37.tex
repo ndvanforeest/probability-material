@@ -1,14 +1,15 @@
 \input{header.tex}
 \setcounter{theorem}{36}
-\begin{exercise} BH.9.37
-
-Bootstrapping is used in statistics to, for instance, construct confidence intervals. It is a much used and intuitive technique.
-
-Extra exercise to  help you recall some ideas of Ch 1. How many different bootstrap samples are possible?
-
-I used some extra ideas to save some time. We say that the rvs $\{X_i\}$ are independent and  distributed as the common rv~$X$ when $X_i\sim F_X$ where $F_X$ is the CDF of the rv $X$. Then $\E{X_{i}}=\E X$, and so on.  Next,  I prefer to write $Y_{j}= X_j^{*}$, as this writes (and types) faster. Finally,  it is easy to define
-$Y_j = \sum_{i=1}^n X_i\1{S_j = i}$, where $S_{j}\sim \DUnif{\{1, \ldots, n\}}$ is the \(j\)th sample of the $\{X_{i}\}$.
+\begin{exercise} BH.9.37.
  \begin{solution}
+Here are some remarks.
+\begin{enumerate}
+\item  Bootstrapping is used in statistics to, for instance, construct confidence intervals. It is a much used and intuitive technique.
+\item Extra exercise to  help you recall some ideas of Ch 1. How many different bootstrap samples are possible? (The solution is at the end.)
+\item  We use some simple ideas to make the solution a bit simpler. We say that the rvs $\{X_i\}$ are independent and  distributed as the common rv~$X$ when $X_i\sim F_X$ where $F_X$ is the CDF of the rv $X$. Then $\E{X_{i}}=\E X$, and so on.  Next,  I prefer to write $Y_{j}= X_j^{*}$, as this writes (and types) faster. Finally,  it is easy to define
+$Y_j = \sum_{i=1}^n X_i\1{S_j = i}$, where $S_{j}\sim \DUnif{\{1, \ldots, n\}}$ is the \(j\)th sample of the $\{X_{i}\}$.
+\end{enumerate}
+
 
 a. Here you should assume that the $X_i$ are not yet known. Thus, the expectation over $X_i$ is taken with respect to the CDF $F_X$. Using the independence of $X_j$ and $S_j$, $\1{S_j=i}\1{S_j=k} = 0$ if $i\neq k$, and that $\E{\1{S_j=k}} = 1/n$,
 \begin{align*}
@@ -22,28 +23,38 @@ b. Now we are given the outcomes (samples) $X_i=x_i$ of $n$ experiments.
 I prefer to write $D = X_{1}, \ldots, X_{n}$ as it is shorter.
 Noting that $S_j$ and $D$ are independent, and that $\E{X_{k}|D} = X_{k}$,
 \begin{align*}
-  \E{Y_{j}|D} = \sum_k X_k \E{\1{S_j=k}|D} = \frac 1 n \sum_k X_k := \bar X
+  \E{Y_{j}|D} = \sum_k X_k \E{\1{S_j=k}|D} = \frac 1 n \sum_k X_k := \bar X.
 \end{align*}
-Observe that this average  need  not be the same as $\mu$!
+By symmetry, this holds for all $j$.
+Observe that this sample average $\bar X$  is in general not the same as $\mu$!
+Next,
+\begin{align*}
+\E{\bar Y|D} &= \E{\frac 1 n\sum_{j}Y_{j}|D} = \frac 1{n} \sum_j \E{Y_j|D} = \frac 1 n n \E{Y_1|D} = \bar X.
+\end{align*}
 
-The conditional variance. Since $S_j$ and $S_k$ are independent when $j\neq k$, it must be that $Y_j|D$ and $Y_k|D$ are also conditionally independent. Moreover, $\{Y_j|D\}$ are conditionally iid. Therefore,
+
+Now the conditional variance. Since $S_j$ and $S_k$ are independent when $j\neq k$, it must be that $Y_j|D$ and $Y_k|D$ are also conditionally independent for all $j\neq k$. Therefore,
 \begin{align*}
 \E{Y_{j}^{2}|D}
 &= \E{\sum_k\sum_l X_kX_l\1{S_j=k}\1{S_j=l}|D} \\
 &= \E{\sum_kX_k^{2}\1{S_j=k}|D}  = \sum_kX_k^{2}\E{\1{S_j=k}|D} \\
 &= \frac 1 n \sum_{k} X_k^{2}, \\
-\V{Y_j| D} &= \frac 1 n \sum_{k} X_k^{2} - (\bar X)^{2} = \frac 1 n \sum_{k} (X_k - \bar X)^{2} = \frac{n-1}n \sigma^{2},\\
-\V{\bar Y|D} &= \V{\frac 1 n\sum_{j}Y_{j}|D} = \frac 1{n^{2}} \sum_j \V{Y_j|D} = \frac 1 n \V{Y_1|D}.
+\V{Y_j| D} &= \E{Y_j^2|D} - (\E{Y_j|D})^{2} = \frac 1 n \sum_{k} X_k^{2} - (\bar X)^{2} = \frac 1 n \sum_{k} (X_k - \bar X)^{2}.
 \end{align*}
-
-
-c. For $\E{\bar Y}$ use linearity and Adam's law:
+As this holds for all $j$, and the $Y_{j}|D$ are conditionally independent,
 \begin{align*}
-\E{\bar Y} = \E{\E{\bar Y|D}} = \frac 1 n \sum_{k}\E{X_{k}} = \E X = \mu.
+\V{\bar Y|D}
+=\V{\frac 1 n\sum_{j}Y_{j}|D} = \frac 1{n^{2}} \sum_j \V{Y_j|D} = \frac 1 n \V{Y_1|D}.
 \end{align*}
 
 
-Here are the details for $\V{\bar Y}$. Using  BH.6.3.3 and BH.6.3.4,
+c. For $\E{\bar Y}$ use Adam's law, linearity and symmetry:
+\begin{align*}
+\E{\bar Y} = \E{\E{\bar Y|D}} = \E{\bar X} = \E{\frac 1 n \sum_{k=1}^{n}X_{k}} =  \frac 1 n \sum_{k}\E{X_{k}} = \E X = \mu.
+\end{align*}
+
+
+Here are the details for $\V{\bar Y}$. Using  examples BH.6.3.3 and BH.6.3.4,
 \begin{align*}
 \E{\V{\bar Y|D}} &=  \frac 1 n \E{\V{Y_{1}|D}} =
 \frac 1 {n^2} \E{ \sum_{i=1}^n (X_i-\bar X)^2} \\
@@ -51,7 +62,10 @@ Here are the details for $\V{\bar Y}$. Using  BH.6.3.3 and BH.6.3.4,
 = \frac{n-1} {n^2} \E{S_{n}^2} = \frac{(n-1)\sigma^{2}} {n^2} \\
 \V{\E{\bar Y|D}} &= \V{\bar X}= \frac 1{n^{2}} \sum_{i} \V{X_{i}} = \frac 1 n \sigma^{2}.
 \end{align*}
-Now use Eve's law to add both terms to get $V{\bar Y}$.
+Now use Eve's law to add both terms to get $V{\bar Y}$:
+\begin{align}
+  \V{\bar Y} = \E{\V{\bar Y|D}} + \V{\E{\bar Y|D}} = \frac{n-1}{n^{2}}\sigma^2 + \frac{1}{n} \sigma^2 = \frac{2n-1}{n^{2}}\sigma^{2}.
+\end{align}
 
 
 d. We add randomness twice, first we draw  samples to get $D$, and then we draw randomly from $D$.

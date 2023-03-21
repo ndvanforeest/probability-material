@@ -396,6 +396,25 @@ with fname.open("r") as fp:
 \section{Assignment}
 \label{sec:assignment}
 
+For the handwritten solution, take the following exercise.
+
+\begin{pycode}
+from pathlib import Path
+
+exercise_name = "bh-9.37.tex"
+fname = Path("../bh_problems") / exercise_name
+with fname.open("r") as fp:
+    state = 0  # dump
+    for line in fp.readlines():
+        if line[:16] == r"\begin{exercise}":
+            state = 1
+        if state == 1:
+            print(line.strip())
+        if line[:14] == r"\end{exercise}":
+            break
+\end{pycode}
+
+
 \subfile{../assignments/bh-9-37.tex}
 
 
