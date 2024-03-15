@@ -1,0 +1,22 @@
+\documentclass[12pt]{article}
+
+\usepackage[check]{optional}
+\usepackage{../common/preamble}
+\usepackage{../common/abbreviations}
+
+\usepackage[a5paper,landscape]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{truefalse}[theorem]{TF}
+\AtEndEnvironment{truefalse}{\clearpage} %%  each exercise on a new page
+
+\title{TF all source questions}
+
+
+\begin{document}
+\maketitle
+
+
+
+\subfile{tf-week-1-source-questions.tex}
+\end{document}

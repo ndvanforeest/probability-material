@@ -1,0 +1,120 @@
+\documentclass[tf-tutorial-all.tex]{subfiles}
+\begin{document}
+
+\setcounter{section}{0}
+\section{TF questions PD Week 1}
+
+
+\begin{truefalse}
+$X$ is a rv, $X  \in \R$. Claim: $\supp{X} = (c, \infty) \implies \P{X\leq c} = 0$.
+\begin{solution}
+Yes.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Suppose $X$ a real-valued rv with $\supp X = [0, c]$. Claim:
+\begin{equation}
+\label{eq:3}
+\V X = \E{X^2} - (\E{X})^2 \leq c \E X - (\E X)^2 = (c-\E X)\E X.
+\end{equation}
+\begin{solution}
+Yes.
+\end{solution}
+\end{truefalse}
+
+
+\begin{truefalse}
+Let $X$ and $Y$ be independent rvs. Claim: $F_{X+Y}(x, y) = F_X(x) + F_{Y}(y)$.
+\begin{solution}
+No. We should write $F_{X,Y}$ rather than $F_{X+Y}$ , and since the rvs are independent, consider the product of the CDFs, not the sum.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Let $M_{X}(s)$ be the moment generating function of some rv $X$.  Claim:
+\begin{equation}
+\label{eq:2}
+M_{X}(0) = 0.
+\end{equation}
+\begin{solution}
+It's false.
+\end{solution}
+\end{truefalse}
+
+
+\begin{truefalse}
+Let $M_{X}(s)$ be the moment generating function of some rv $X$.  Claim:
+\begin{equation}
+\label{eq:2}
+\left(\frac{\d}{\d s}\right)^{2 }M_{X}(s)|_{s=0} =  \V X + (\E{X})^{2}.
+\end{equation}
+\begin{solution}
+It's true.
+\end{solution}
+\end{truefalse}
+
+
+\begin{truefalse}
+We have two positive rvs $X$ and $Y$. Claim: $\V{X+Y} = \V X + \V Y$.
+\begin{solution}
+It's false, it's not given that $X$  and $Y$ are independent.
+\end{solution}
+\end{truefalse}
+
+
+
+\begin{truefalse}
+We have two independent positive rvs $X$ and $Y$. Claim: $M_{2X+Y}(s)  = (M_{X}(s))^{2} M_{Y}(s)$.
+\begin{solution}
+It's false in general, because $X$ is not independent of itself.
+\end{solution}
+\end{truefalse}
+
+
+
+
+\begin{truefalse}
+People enter a shop such that the time $X$ between  any two consecutive customers is $X\sim \Exp{\lambda}$ with $\lambda=10$ per h. Claim: $\P{X > x} = e^{-\lambda x}$, for $x\geq 0$.
+\begin{solution}
+It's correct, see BH.5.45.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+People enter a shop such that the time $X$ between any two consecutive customers is $X\sim \Exp{\lambda}$ with $\lambda=10$ per h.
+Assume that the interarrival times between customers are iid.
+Let $N(t)$ be the number of people that enter during a time interval of length $t$.
+Claim $N(t) \sim \Pois{\lambda}$.
+\begin{solution}
+It's false, see BH.5.45. It's $\sim \Pois{\lambda t}$.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+People enter a shop such that the time $X$ between any two consecutive customers is $X\sim \Exp{\lambda}$ with $\lambda=10$ per h.
+Assume that the interarrival times between customers are iid.
+Let $N(t)$ be the number of people that enter during a time interval of length $t$.
+Suppose that $T_{3}$ is the time the third person enters.
+Claim: $\P{N(t) <3} = \P{T_{3}>t}$.
+\begin{solution}
+It's true.
+\end{solution}
+\end{truefalse}
+
+
+
+
+
+\begin{truefalse}
+Write $m$ for the median $\E X$ of the rv $X$. Claim, the following definition correct:
+\begin{equation*}
+\V X := \E{X^2} - m^{2}?
+\end{equation*}
+\begin{solution}
+No, $\E X$ need not be equal to the median, moreover the \emph{definition} of the variance involves the mean, not the median.
+\end{solution}
+\end{truefalse}
+
+
+\end{document}
