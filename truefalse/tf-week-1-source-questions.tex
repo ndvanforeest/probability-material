@@ -109,12 +109,60 @@ It's true.
 \begin{truefalse}
 Write $m$ for the median $\E X$ of the rv $X$. Claim, the following definition correct:
 \begin{equation*}
-\V X := \E{X^2} - m^{2}?
+\V X := \E{X^2} - m^{2}.
 \end{equation*}
 \begin{solution}
-No, $\E X$ need not be equal to the median, moreover the \emph{definition} of the variance involves the mean, not the median.
+False, $\E X$ need not be equal to the median, moreover the \emph{definition} of the variance involves the mean, not the median.
 \end{solution}
 \end{truefalse}
+
+
+\begin{truefalse}
+    For two events $A$ and $B$. Claim: $\E{\1{A}\1{B}} = P(A) + P(B) - P(A \cup B)$
+\begin{solution}
+It's True
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+For an unfair 4-sided die that throws 4 half of the time and 1 to 3 with equal probability.
+If the rv
+$X$ denotes the thrown value of the dice.
+Claim: $\E{X^2} = \frac{38}{3}$
+\begin{solution}
+It's False. Calculating using LOTUS gives $\E{X^2} = \frac{1}{2} 4^{2} + \frac{1}{2\cdot3}(1 + 4 + 9) = \frac{31}{3}$
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+For a degenerate rv $X$ and $c$ an arbitrary, non-zero constant. Claim: $\V{cX} > 0$
+\begin{solution}
+It's False. the variance of a degenerate rv is always 0.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Assume that $\V{X} = \sigma^2$ and $\E{X^2} = a^2$ both exist and are finite. Claim:$ \E{X} = \sqrt{a^2-\sigma^2}$
+\begin{solution}
+It's True.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Given $\V{X+Y} = \V{X} + \V{Y}$. Claim: $X$ and $Y$ are independent,
+\begin{solution}
+It's False. Independence is sufficient but not necessary for the equality to hold.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+For two rvs $X$ and $Y$, where $Y$ is always equal to $X$, given $\V{X}>0$. Claim: $\V{X+Y} = \V{X} + \V{Y}$
+\begin{solution}
+It's False, since if $Y$ is always equal to $X$ they are definitely not independent. (see BH. p. 172) In fact, as $Y=X$, $\V{X+Y} = \V{2X} = 4 \V X}$. Isn't it a bit counter intuitive that when $X$ and $Y$ are  dependent like this, the variance is larger than if they would be independent?
+\end{solution}
+\end{truefalse}
+
+
 
 
 \end{document}
