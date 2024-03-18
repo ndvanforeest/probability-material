@@ -27,7 +27,7 @@ Yes.
 \begin{truefalse}
 Let $X$ and $Y$ be independent rvs. Claim: $F_{X+Y}(x, y) = F_X(x) + F_{Y}(y)$.
 \begin{solution}
-No. We should write $F_{X,Y}$ rather than $F_{X+Y}$ , and since the rvs are independent, consider the product of the CDFs, not the sum.
+False. We should write $F_{X,Y}$ rather than $F_{X+Y}$ , and since the rvs are independent, consider the product of the CDFs, not the sum.
 \end{solution}
 \end{truefalse}
 
@@ -158,11 +158,127 @@ It's False. Independence is sufficient but not necessary for the equality to hol
 \begin{truefalse}
 For two rvs $X$ and $Y$, where $Y$ is always equal to $X$, given $\V{X}>0$. Claim: $\V{X+Y} = \V{X} + \V{Y}$
 \begin{solution}
-It's False, since if $Y$ is always equal to $X$ they are definitely not independent. (see BH. p. 172) In fact, as $Y=X$, $\V{X+Y} = \V{2X} = 4 \V X}$. Isn't it a bit counter intuitive that when $X$ and $Y$ are  dependent like this, the variance is larger than if they would be independent?
+It's False, since if $Y$ is always equal to $X$ they are definitely not independent.
+(see BH.
+p.
+172) In fact, as $Y=X$, $\V{X+Y} = \V{2X} = 4 \V X$.
+Isn't it a bit counter intuitive that when $X$ and $Y$ are dependent like this, the variance is larger than if they would be independent?
 \end{solution}
 \end{truefalse}
 
+%5.1 Q1
+\begin{truefalse}
+The expectation of a continuous random variable must always be nonnegative given that the probabilty density function values are nonnegative. (i.e. , $f(x) \geq 0$,)
+\begin{solution}
+False.\\
+The density values are nonnegative. The values that the RV can attain can be negative, therefore the expectation may be negative.
+\end{solution}
+\end{truefalse}
 
+%5.1 Q2
+\begin{truefalse}
+Let $X \sim N(0, 1)$. We then know that $P(X = 0) > P(X = 5)$.
+\begin{solution}
+False. By definition $P(X = k) = 0 \quad \forall k $.
+\end{solution}
+\end{truefalse}
+
+%5.2 Q1
+\begin{truefalse}
+Let $U \sim \Unif{(a,b)}$ and  $(c,d) \subset (a,b)$. Then the conditional distribution of $U$ given that $U \in (c,d)$ is $\Unif{(c,d)}$.
+\begin{solution}
+True.
+\\See Blitzstein proposition 5.2.3:\\
+\textit{Proof.} For $u$ in $(c, d)$, the conditional CDF at $u$ is
+$$
+P(U \leq u \mid U \in(c, d))=\frac{P(U \leq u, c<U<d)}{P(U \in(c, d))}=\frac{P(U \in(c, u])}{P(U \in(c, d))}=\frac{u-c}{d-c} .
+$$
+The conditional CDF is 0 for $u \leq c$ and 1 for $u \geq d$. So the conditional distribution of $U$ is as claimed.
+$\square$
+\end{solution}
+\end{truefalse}
+
+%5.2 Q2
+\begin{truefalse}
+Let $U \sim \Unif{(a,b)}$. The distribution of $c^{2} log(d)U + e - f^{4}$ is still uniform. Here $c,d, e $ and $ f \in R$. \\
+% you can say the constants to be in N as a version. Or apply a non linear transformation.
+\begin{solution}
+True.\\
+This still is a linear transformation. Let $c^{2} log(d)$ be a constant $c_{1}$. And $e - f^{4}$ be a constant $c_{2}$. Then the question becomes $c_{1} U + c_{2} $, this still is linear by Blitzstein 5.2.6.
+\end{solution}
+\end{truefalse}
+
+%5.4 Q1
+\begin{truefalse}
+Let $Z \sim N(0,1)$ then $\Phi(z) = \Phi(-z)$ due to symmetry.
+\begin{solution}
+False.\\
+This equation for symmetry does not hold for the CDF. \\
+We have $\phi(z) = \phi(-z)$
+\\And $\Phi(z) = 1 - \Phi(-z)$
+\end{solution}
+\end{truefalse}
+
+%5.4 Q2
+\begin{truefalse}
+Let $Z \sim \Norm{\mu, \sigma^{2}}$. Let $X = Z \cdot \sigma^{-1} - \mu \cdot \sigma^{-1}$ then $X \sim N(0,1)$.
+\begin{solution}
+True.
+\\Rewriting results in $X = \frac{Z - \mu}{\sigma} $ Then $ X \sim N(0,1)$ by definition.
+\end{solution}
+\end{truefalse}
+
+%5.5 Q1
+\begin{truefalse}
+Let $X \sim \Exp{1}$ and $Y = \lambda X$, then $Y \sim Exp{\lambda}$.
+\begin{solution}
+False\\
+It should become $Y \sim \Exp{\frac{1}{\lambda}}$.
+\end{solution}
+\end{truefalse}
+
+%5.5 Q2
+\begin{truefalse}
+Let $X \sim \Exp{\lambda}$, then:
+\\$$ \int^{\infty}_{0} x \cdot \lambda e^{ - \lambda x} dx  =  \int^{\infty}_{- \infty} x \cdot \lambda e^{ - \lambda x} dx $$
+
+\begin{solution}
+True.\\
+The random variable X  attains negative values with a probability zero. It does not attain negative values, therefore the lowerbound of the integral can be 0. Instead of $-\infty$ as is in the general case.
+
+\end{solution}
+\end{truefalse}
+
+%5.5 Q3
+\begin{truefalse}
+For the Exponential distribution holds that:
+\\ $Pr(X > t + s | X > t) = P(X > t)$
+
+\begin{solution}
+ False.
+ \\It should be :
+\\ $Pr(X > t + s | X > s) = P(X > t)$
+\\This is the memoryless property.
+% A version could be the correct answer, then the solution would be true.
+\end{solution}
+\end{truefalse}
+
+%5.6 Q1
+\begin{truefalse}
+Let there be three cars in three different painting workshops, that are painted independently, and at the same time. The paint times are iid and $X\sim \Exp{\lambda}$, with $\E X = 1/ \lambda = 3$.
+Claim: The expected time for the first two cars to be finished is 2.5 hours.
+
+\begin{solution}
+True.
+Due to independence and memorylessness we have that the expected time for the first two cars to finish is $ T = T_{1} + T_{2}$, as we only need the first two painting jobs;
+$T_{1}$ is the time for the first job to finish, $T_{2}$ is the additional time for the second job to finish.
+Clearly $T_{1} = \min\{X_{1}, X_{2}, X_{3}\}$,  and, after a restart (recall, memoryless), $T_{2} = \min\{X_{1}, X_{2}\}$. Hence,
+\begin{equation*}
+\E[T] = \frac{1}{3 \lambda} + \frac{1}{2\lambda} = 1 + 1.5 = 2.5.
+\end{equation*}
+For more reference, see 5.6.3 and 5.6.5 in Blitzstein.
+\end{solution}
+\end{truefalse}
 
 
 \end{document}
