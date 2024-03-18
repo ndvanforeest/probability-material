@@ -165,4 +165,65 @@ It's False, since if $Y$ is always equal to $X$ they are definitely not independ
 
 
 
+
+\begin{truefalse}
+Let $A$, $B$ be two arbitrary events. Claim: $\P{A|B}=\frac{\P{A \cap B}}{\P{B}}$.
+\begin{solution}
+False. The condition $\P{B}>0$ is missing.
+\end{solution}
+\end{truefalse}
+
+
+
+
+
+\begin{truefalse}
+Let $A$, $B$ be events s.t. $\P{A},\P{B}>0$. Claim: $\P{A|B}\P{B}=\P{B|A}\P{A}$.
+\begin{solution}
+True.
+\end{solution}
+\end{truefalse}
+
+
+
+
+
+\begin{truefalse}
+Let $A$, $B$, $C$ be events s.t. $\P{A \cap B}>0$. Claim:
+\begin{equation}
+\label{eq:2}
+\frac{\P{B \cap C | A}}{\P{B|A}}=\frac{\P{A \cap C|B}}{\P{A|B}}
+\end{equation}
+\begin{solution}
+True. Both sides are equal to $\P{C|A,B}$.
+\end{solution}
+\end{truefalse}
+
+
+
+
+
+\begin{truefalse}
+Let $A$, $B$, $C$ be events s.t. $\P{C}>0$. Claim:
+\begin{equation}
+\label{eq:2}
+\P{A \cap B | C} + \P{A \cup B | C}=\P{A|C}+\P{B|C}
+\end{equation}
+\begin{solution}
+True.
+\end{solution}
+\end{truefalse}
+
+
+
+
+
+\begin{truefalse}
+Let $A$ and $B$ be two disjoint events. Claim: $A$ and $B$ are dependent.
+\begin{solution}
+False. $A$ and $B$ are independent if $\P{A}=0$ or $\P{B}=0$.
+\end{solution}
+\end{truefalse}
+
+
 \end{document}
