@@ -177,7 +177,7 @@ The density values are nonnegative. The values that the RV can attain can be neg
 
 %5.1 Q2
 \begin{truefalse}
-Let $X \sim N(0, 1)$. We then know that $P(X = 0) > P(X = 5)$.
+Let $X \sim \Norm{0, 1}$. We then know that $\P{X = 0} > \P{X = 5}$.
 \begin{solution}
 False. By definition $P(X = k) = 0 \quad \forall k $.
 \end{solution}
@@ -200,17 +200,17 @@ $\square$
 
 %5.2 Q2
 \begin{truefalse}
-Let $U \sim \Unif{(a,b)}$. The distribution of $c^{2} log(d)U + e - f^{4}$ is still uniform. Here $c,d, e $ and $ f \in R$. \\
+Let $U \sim \Unif{(a,b)}$. The distribution of $c^{2} \log(d) U + e - f^{4}$ is still uniform when $c,d, e $ and $ f \in R$. \\
 % you can say the constants to be in N as a version. Or apply a non linear transformation.
 \begin{solution}
 True.\\
-This still is a linear transformation. Let $c^{2} log(d)$ be a constant $c_{1}$. And $e - f^{4}$ be a constant $c_{2}$. Then the question becomes $c_{1} U + c_{2} $, this still is linear by Blitzstein 5.2.6.
+This still is a linear transformation. Let $c^{2} \log(d)$ be a constant $c_{1}$. And $e - f^{4}$ be a constant $c_{2}$. Then the question becomes $c_{1} U + c_{2} $, this still is linear by Blitzstein 5.2.6.
 \end{solution}
 \end{truefalse}
 
 %5.4 Q1
 \begin{truefalse}
-Let $Z \sim N(0,1)$ then $\Phi(z) = \Phi(-z)$ due to symmetry.
+Let $Z \sim \Norm{0,1}$ then $\Phi(z) = \Phi(-z)$ due to symmetry.
 \begin{solution}
 False.\\
 This equation for symmetry does not hold for the CDF. \\
@@ -221,43 +221,38 @@ We have $\phi(z) = \phi(-z)$
 
 %5.4 Q2
 \begin{truefalse}
-Let $Z \sim \Norm{\mu, \sigma^{2}}$. Let $X = Z \cdot \sigma^{-1} - \mu \cdot \sigma^{-1}$ then $X \sim N(0,1)$.
+Let $Z \sim \Norm{\mu, \sigma^{2}}$. Let $X = Z \cdot \sigma^{-1} - \mu \cdot \sigma^{-1}$ then $X \sim \Norm{0,1}$.
 \begin{solution}
 True.
-\\Rewriting results in $X = \frac{Z - \mu}{\sigma} $ Then $ X \sim N(0,1)$ by definition.
+\\Rewriting results in $X = \frac{Z - \mu}{\sigma} $ Then $ X \sim \Norm{0,1}$ by definition.
 \end{solution}
 \end{truefalse}
 
 %5.5 Q1
 \begin{truefalse}
-Let $X \sim \Exp{1}$ and $Y = \lambda X$, then $Y \sim Exp{\lambda}$.
+Let $X \sim \Exp{1}$ and $Y = \lambda X$, then $Y \sim \Exp{\lambda}$.
 \begin{solution}
-False\\
-It should become $Y \sim \Exp{\frac{1}{\lambda}}$.
+False. It should become $Y \sim \Exp{\frac{1}{\lambda}}$.
 \end{solution}
 \end{truefalse}
 
 %5.5 Q2
 \begin{truefalse}
 Let $X \sim \Exp{\lambda}$, then:
-\\$$ \int^{\infty}_{0} x \cdot \lambda e^{ - \lambda x} dx  =  \int^{\infty}_{- \infty} x \cdot \lambda e^{ - \lambda x} dx $$
-
+$$ \int^{\infty}_{0} x  \lambda e^{ - \lambda x} \d x  =  \int^{\infty}_{- \infty} x \lambda e^{ - \lambda x} \1{x> 0}\d x.$$
 \begin{solution}
 True.\\
-The random variable X  attains negative values with a probability zero. It does not attain negative values, therefore the lowerbound of the integral can be 0. Instead of $-\infty$ as is in the general case.
-
 \end{solution}
 \end{truefalse}
 
 %5.5 Q3
 \begin{truefalse}
 For the Exponential distribution holds that:
-\\ $Pr(X > t + s | X > t) = P(X > t)$
-
+$$\P{X > t + s | X > t} = \P{X > t}$$
 \begin{solution}
  False.
  \\It should be :
-\\ $Pr(X > t + s | X > s) = P(X > t)$
+$\P{X > t + s | X > s} = \P{X > t}$
 \\This is the memoryless property.
 % A version could be the correct answer, then the solution would be true.
 \end{solution}
@@ -274,7 +269,7 @@ Due to independence and memorylessness we have that the expected time for the fi
 $T_{1}$ is the time for the first job to finish, $T_{2}$ is the additional time for the second job to finish.
 Clearly $T_{1} = \min\{X_{1}, X_{2}, X_{3}\}$,  and, after a restart (recall, memoryless), $T_{2} = \min\{X_{1}, X_{2}\}$. Hence,
 \begin{equation*}
-\E[T] = \frac{1}{3 \lambda} + \frac{1}{2\lambda} = 1 + 1.5 = 2.5.
+\E T = \frac{1}{3 \lambda} + \frac{1}{2\lambda} = 1 + 1.5 = 2.5.
 \end{equation*}
 For more reference, see 5.6.3 and 5.6.5 in Blitzstein.
 \end{solution}
@@ -299,8 +294,6 @@ Let $A$, $B$ be events s.t. $\P{A},\P{B}>0$. Claim: $\P{A|B}\P{B}=\P{B|A}\P{A}$.
 True.
 \end{solution}
 \end{truefalse}
-
-
 
 
 
@@ -337,7 +330,7 @@ True.
 \begin{truefalse}
 Let $A$ and $B$ be two disjoint events. Claim: $A$ and $B$ are dependent.
 \begin{solution}
-False. $A$ and $B$ are independent if $\P{A}=0$ or $\P{B}=0$.
+False. If $A$ and $B$ are disjoint, they can be only independent if  $\P{A}=0$ or $\P{B}=0$.
 \end{solution}
 \end{truefalse}
 
