@@ -43,7 +43,7 @@ The two functions at the RHS of the claim are not of this type, both include $x^
 
 \begin{truefalse}
 The joint density of $X$ and $Y$ is given by $f_{X,Y}(x,y) = Ce^{-(x + 2y)}\1{x\geq 0}\1{y\geq 0}$.
-Claim:  $X$ and $Y$ iid because  $f_{X,Y}(x, y) = C e^{-x}e^{-2y}$.
+Claim:  $X$ and $Y$ are iid because  $f_{X,Y}(x, y) = C e^{-x}e^{-2y}$.
 \begin{solution}
 False. The densities  $f_{X}$ and $f_{Y}$ are not the same.
 
@@ -57,6 +57,26 @@ Variations on this type of question.
 \end{solution}
 \end{truefalse}
 
+\begin{truefalse}
+$p(k) = \frac{1-x}{1-x^{n+1}} x^k$ with $k \in \{0, \dots, n\}$ is a valid PMF for any $x$.
+\begin{solution}
+  False. Not if $x = 0$ or $x = 1$.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+  $M(t) = 2^{-n} \sum_{k=1}^n \binom{n}{k} e^{tk}$ is a valid expression for the MGF of a $\Bin{n, 0.5}$ distribution.
+\begin{solution}
+True. Apply the binomial theorem: $(e^t + 1)^n = \sum_{k=1}^n \binom{n}{k} e^{tk}$.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+$\big(\sum_{k=1}^n k \big)^2 = \sum_{k=1}^n k^3$
+\begin{solution}
+True.
+\end{solution}
+\end{truefalse}
 
 
 
