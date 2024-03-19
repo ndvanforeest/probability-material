@@ -79,4 +79,30 @@ True.
 \end{truefalse}
 
 
+
+
+\begin{truefalse}
+Claim: $M_X(s)=e^{-(s-1)^2/2}$ could be a valid MGF for some r.v. $X$.
+\begin{solution}
+False. Note that $M_X(s)=\E{e^{sX}}$, s.t. $M_X(0)=1$ must always hold.
+\end{solution}
+\end{truefalse}
+
+
+
+
+
+\begin{truefalse}
+Let $X$ and $Y$ be two independent r.v.s with MGFs $M_X$ and $M_Y$. Claim:
+\begin{align}
+\label{eq:2}
+M_{X-Y}(s)=M_X(s)M_Y(-s)
+\end{align}
+\begin{solution}
+True. $M_{X-Y}(s)=\E{e^{s(X-Y)}}=\E{e^{sX}}\E{e^{-sY}}=M_X(s)M_Y(-s)$.
+\end{solution}
+\end{truefalse}
+
+
+
 \end{document}
