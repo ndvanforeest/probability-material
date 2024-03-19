@@ -1,0 +1,62 @@
+\documentclass[tf-tutorial-all.tex]{subfiles}
+\begin{document}
+
+
+
+\begin{truefalse}
+$X\sim \Geo{p}$. Take $s$ such that $e^{s}q < 1$.
+\begin{align}
+\label{eq:5}
+M_{X}(s)
+  &\stackrel{1}= \E{e^{sX}} \stackrel{2}= \sum_{k=1}^{\infty} p q^{k} e^{sk} \\
+  &\stackrel{3}= p \sum_{k=1}^{\infty} (e^{s}q)^{k}
+  \stackrel{4}= p (\sum_{k=0}^{\infty} (e^{s}q)^{k}-1) \\
+&  \stackrel{5}= p /(1+e^{s}q)  - p.
+\end{align}
+
+Claim: more than one of these step is incorrect.
+\begin{solution}
+True. Steps 2 and 5 are incorrect. Step 2: start with $k=0$, step 5: the plus should be a minus.
+
+Variations on this theme.
+\begin{enumerate}
+\item all steps are correct.
+\item step 2 is incorrect.
+\end{enumerate}
+\end{solution}
+\end{truefalse}
+
+
+\begin{truefalse}
+For two strictly positive rvs $X$ and $Y$, let $f_{X,Y}(x, y) = \frac{xy}{x^{2}+y^2}$. Claim: since
+\begin{align*}
+  f_{X,Y}(x, y) = \frac{xy}{x^{2}+y^2} = \frac{x}{\sqrt{x^{2}+y^2}} \frac{y}{\sqrt{x^{2}+y^2}},
+\end{align*}
+the rvs $X$ and $Y$ are independent.
+\begin{solution}
+False.
+For indepence of continuous rvs, the joint pdf should be split into two functions that strictly depend on one variable, like $f_{X,Y}(x,y) = f_{X}(x) f_{Y}(y)$.
+The two functions at the RHS of the claim are not of this type, both include $x^{2}+y^{2}$.
+\end{solution}
+\end{truefalse}
+
+
+\begin{truefalse}
+The joint density of $X$ and $Y$ is given by $f_{X,Y}(x,y) = Ce^{-(x + 2y)}\1{x\geq 0}\1{y\geq 0}$.
+Claim:  $X$ and $Y$ iid because  $f_{X,Y}(x, y) = C e^{-x}e^{-2y}$.
+\begin{solution}
+False. The densities  $f_{X}$ and $f_{Y}$ are not the same.
+
+Variations on this type of question.
+\begin{enumerate}
+\item Yes, because
+\item No,  these rvs are identical, hence dependent.
+\item Yes, because $X$ and $Y$ are independent and identical.
+\item Yes, because $X$ and $Y$ are independent and identically distributed.
+\end{enumerate}
+\end{solution}
+\end{truefalse}
+
+
+
+\end{document}
