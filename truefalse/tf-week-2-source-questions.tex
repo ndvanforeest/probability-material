@@ -73,13 +73,13 @@ False. Note that $M_X(s)=\E{e^{sX}}$, s.t. $M_X(0)=1$ must always hold.
 
 
 \begin{truefalse}
-Let $X$ be an r.v. with MGF $M_X$. Claim:
+Let $X$ and $Y$ be two independent r.v.s with MGFs $M_X$ and $M_Y$. Claim:
 \begin{align}
 \label{eq:2}
-\V{X}=M''(0)-(M'(0))^2
+M_{X-Y}(s)=M_X(s)M_Y(-s)
 \end{align}
 \begin{solution}
-True.
+True. $M_{X-Y}(s)=\E{e^{s(X-Y)}}=\E{e^{sX}}\E{e^{-sY}}=M_X(s)M_Y(-s)$.
 \end{solution}
 \end{truefalse}
 
