@@ -118,13 +118,13 @@ $$\E{e^{ty}} = \int^{\infty}_{-\infty} \frac{1}{\sqrt{2 \pi}} e^{t e^{z} - \frac
 \begin{truefalse}
 We can obtain the moments for the Log-normal, trough the formula given below.
 Here $X \sim \N(\mu, \sigma^{2})$ and $Y = e^{X}$
-$$E(Y^{n}) =  M_{X}'(n) $$
+$$\E{Y^{n}} =  M_{X}'(n) $$
     \begin{solution}
         False, 
         \\The formula should be:
-        $$E(Y^{n}) = E[e^{n X}] = M_{X}(n) $$
+        $$E(Y^{n}) = \E{e^{n X}} = M_{X}(n) $$
         We do not take the derivative for this moment. 
-        $$E[Y^{n}] = E[(e^{X}) ^{n}] = E[e^{nX}] = M_{X}(n)$$
+        $$\E{Y^{n}} = \E{(e^{X}) ^{n}} = \E{e^{nX}} = M_{X}(n)$$
     \end{solution}
 \end{truefalse}
 
