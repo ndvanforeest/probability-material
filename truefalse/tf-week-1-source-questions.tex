@@ -165,7 +165,7 @@ Isn't it a bit counter intuitive that when $X$ and $Y$ are dependent like this, 
 
 %5.1 Q1
 \begin{truefalse}
-The expectation of a continuous random variable must always be nonnegative given that the probabilty density function values are nonnegative. (i.e. , $f(x) \geq 0$,)
+The expectation of a continuous random variable must always be nonnegative given that the probabilty density function values are nonnegative. (i.e. , $f(x) \geq 0$).
 \begin{solution}
 False.\\
 The density values are nonnegative. The values that the RV can attain can be negative, therefore the expectation may be negative.
@@ -339,24 +339,36 @@ False. They also need to have identical distributions.
 \end{truefalse}
 
 \begin{truefalse}
-If $X$ and $Y$ are independent, then for functions $g$ and
-$f$: $g(X)$ is independent of $f(Y)$.
+Let  $X$ and $Y$ be independent. Claim: for any functions $f, g$ it holds that $g(X)$ is independent of $f(Y)$.
 \begin{solution}
 True.
 \end{solution}
 \end{truefalse}
 
 \begin{truefalse}
-A discrete random variable has a finite number of outcomes.
+Claim: a  discrete random variable requires that the  number of outcomes is finite.
 \begin{solution}
-False. It has a countable number of outcomes, but it may be infinite, e.g. $\N$.
+False. It can also have a countable number of outcomes like $\N$.
 \end{solution}
 \end{truefalse}
 
 \begin{truefalse}
-Let $X \sim \HGeom{3, 5, 2}$. Claim: $\P{X = 3} = 0$.
+We have an urn with $w>0$ white balls and $b>0$ black balls.
+We pick, without replacement, $n\leq w+b$ balls from the urn.
+Then the number $X$ of white balls picked from the urn is hypergeometric, i.e., $X\sim\HGeom{w, b, n}$.
+
+Claim: if  $X \sim \HGeom{3, 5, 2}$, then $\P{X = 3} = 0$.
 \begin{solution}
 True. $3$ is not in the support of X: $\{0, 1, 2\}$.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Given numbers $c, d \in \R$, possible the same.
+Take $X\equiv c$, i.e., $\P{X=c} = 1$, and $Y\equiv d$.
+Claim: $X$ and $Y$ are independent.
+\begin{solution}
+True. $\P{X=c, Y=d} = 1 = \P{X=c}\P{Y=d}$, $\P{X=c, Y\neq d} = 0 = \P{X=c} \P{Y\neq d}$, etc.
 \end{solution}
 \end{truefalse}
 
