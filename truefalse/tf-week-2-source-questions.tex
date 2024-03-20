@@ -107,7 +107,7 @@ True. $M_{X-Y}(s)=\E{e^{s(X-Y)}}=\E{e^{sX}}\E{e^{-sY}}=M_X(s)M_Y(-s)$.
 \begin{truefalse}
 Let $Z \sim \N(0,1)$ and $Y \sim e^{Z}$. We want to find the MGF of Y.
 We have the formula:
-$$E[e^{ty}] = \int^{\infty}_{-\infty} \frac{1}{\sqrt{2 \pi}} e^{t e^{z} - \frac{z^{2}}{2}} dz$$
+$$\E{e^{ty}} = \int^{\infty}_{-\infty} \frac{1}{\sqrt{2 \pi}} e^{t e^{z} - \frac{z^{2}}{2}} dz$$
 \\ \textbf{Claim: } since the integral does not diverge for t = 0, we can use this as a MGF to estimate moments. 
 \begin{solution}
     False.
