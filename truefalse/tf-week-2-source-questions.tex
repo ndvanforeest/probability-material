@@ -128,4 +128,23 @@ $$E(Y^{n}) =  M_{X}'(n) $$
     \end{solution}
 \end{truefalse}
 
+%6.6
+\begin{truefalse}
+Given  $X\sim \Pois{\lambda}$ and $Y \sim \Pois{\mu}$ independently and  $\E{e^{tX}} = e^{-\lambda}\sum^{\infty}_{k=0} \frac{(\lambda e^t)^k}{k!}$
+Claim: $M_{X+Y}(t) = e^{(\lambda \mu)(e^t-1)}$
+\begin{solution}
+It's false. By Taylor series we find$ \E{e^{tX}} = e^{-\lambda} e^{\lambda e^t}$ and by independence $M_{X+Y}(t) = M_X(t) \cdot M_Y(t) = e^{\lambda(e^t-1)} e^{\mu(e^t-1)} = e^{(\mu + \lambda)(e^t-1)}$
+\end{solution}
+\end{truefalse}
+
+
+\begin{truefalse}
+Given $X_1\sim \Norm{\mu_1, \sigma_1^2}$ with $M_{X_1}(t) = e^{\mu_1t + \frac{1}{2}\sigma_1^2t^2}$.
+Given  $X_2\sim \Norm{\mu_2, \sigma_2^2}$
+Claim: $M_{X_1+X_2}(t) = e^{(\mu_1 + \mu_2)t +\frac{1}{2}(\sigma_1^2 + \sigma_2^2)t^2}$
+\begin{solution}
+It's false. It is not given that $X_1$ and $X_2$ are independent.
+\end{solution}
+\end{truefalse}
+
 \end{document}
