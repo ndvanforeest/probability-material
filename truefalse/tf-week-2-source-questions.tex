@@ -103,6 +103,29 @@ True. $M_{X-Y}(s)=\E{e^{s(X-Y)}}=\E{e^{sX}}\E{e^{-sY}}=M_X(s)M_Y(-s)$.
 \end{solution}
 \end{truefalse}
 
+%2 6.5
+\begin{truefalse}
+Let $Z \sim \N(0,1)$ and $Y \sim e^{Z}$. We want to find the MGF of Y.
+We have the formula:
+$$E[e^{ty}] = \int^{\infty}_{-\infty} \frac{1}{\sqrt{2 \pi}} e^{t e^{z} - \frac{z^{2}}{2}} dz$$
+\\ \textbf{Claim: } since the integral does not diverge for t = 0, we can use this as a MGF to estimate moments. 
+\begin{solution}
+    False.
+    \\We need differentiability around zero. Since the integral diverges for t > 0, we have that the MGF is not properly defined for t > 0. As this destroys the differentiability property, we cannot use this as a MGF. 
+\end{solution}
+\end{truefalse}
 
+\begin{truefalse}
+We can obtain the moments for the Log-normal, trough the formula given below.
+Here $X \sim \N(\mu, \sigma^{2})$ and $Y = e^{X}$
+$$E(Y^{n}) =  M_{X}'(n) $$
+    \begin{solution}
+        False, 
+        \\The formula should be:
+        $$E(Y^{n}) = E[e^{n X}] = M_{X}(n) $$
+        We do not take the derivative for this moment. 
+        $$E[Y^{n}] = E[(e^{X}) ^{n}] = E[e^{nX}] = M_{X}(n)$$
+    \end{solution}
+\end{truefalse}
 
 \end{document}
