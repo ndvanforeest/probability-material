@@ -105,9 +105,9 @@ True. $M_{X-Y}(s)=\E{e^{s(X-Y)}}=\E{e^{sX}}\E{e^{-sY}}=M_X(s)M_Y(-s)$.
 
 %2 6.5
 \begin{truefalse}
-Let $Z \sim \N(0,1)$ and $Y \sim e^{Z}$. We want to find the MGF of Y.
+Let $Z \sim \Norm(0,1)$ and $Y \sim e^{Z}$. We want to find the MGF of Y.
 We have the formula:
-$$E[e^{ty}] = \int^{\infty}_{-\infty} \frac{1}{\sqrt{2 \pi}} e^{t e^{z} - \frac{z^{2}}{2}} dz$$
+$$\E{e^{ty}} = \int^{\infty}_{-\infty} \frac{1}{\sqrt{2 \pi}} e^{t e^{z} - \frac{z^{2}}{2}} dz$$
 \\ \textbf{Claim: } since the integral does not diverge for t = 0, we can use this as a MGF to estimate moments. 
 \begin{solution}
     False.
@@ -116,15 +116,15 @@ $$E[e^{ty}] = \int^{\infty}_{-\infty} \frac{1}{\sqrt{2 \pi}} e^{t e^{z} - \frac{
 \end{truefalse}
 
 \begin{truefalse}
-We can obtain the moments for the Log-normal, trough the formula given below.
-Here $X \sim \Norm(\mu, \sigma^{2})$ and $Y = e^{X}$
+We can obtain the moments for the Log-normal, through the formula given below.
+Here $X \sim \Norm{\mu, \sigma^{2}}$ and $Y = e^{X}$
 $$E(Y^{n}) =  M_{X}'(n) $$
     \begin{solution}
         False, 
         \\The formula should be:
-        $$E(Y^{n}) = E[e^{n X}] = M_{X}(n) $$
+        $$E(Y^{n}) = \E{e^{n X}} = M_{X}(n) $$
         We do not take the derivative for this moment. 
-        $$E[Y^{n}] = E[(e^{X}) ^{n}] = E[e^{nX}] = M_{X}(n)$$
+        $$\E{Y^{n}} = \E{(e^{X}) ^{n}} = \E{e^{nX}} = M_{X}(n)$$
     \end{solution}
 \end{truefalse}
 
