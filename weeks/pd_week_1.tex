@@ -184,7 +184,7 @@ Eleven of them are players of F.C. Barcelona, the other one is an arbiter.
 We select a random player, uniform.
 This player must take a penalty.
 The probability that a player of Barcelona scores is 70\%, for the arbiter it is 50\%.
-Let $P\in \{A, B\}$ be r.v that corresponds to the selected player, and $S\in\{0,1\}$ be the score.
+Let $P\in \{A, B\}$ be the rv that corresponds to the selected player, and $S\in\{0,1\}$ be the score.
 \begin{enumerate}
 \item What is the PMF? In other words, determine $\P{P = B, S=1}$ and so on for all possibilities.
 \item What is $\P{S=1}$? What is $\P{P=B}$?
@@ -229,7 +229,7 @@ What is the support of $L$? Then, use the fundamental bridge and 2D LOTUS to sho
 \begin{hint}
 The fundamental bridge and 2D LOTUS have  the general form
 \begin{equation*}
-\P{g(X,Y}\in A\} = \E{\1{g(X, Y) \in A}} = \sum_{i}\sum_j \1{g(i, j)\in A} \P{X=i, Y=j}.
+\P{g(X,Y)\in A\} = \E{\1{g(X, Y) \in A}} = \sum_{i}\sum_j \1{g(i, j)\in A} \P{X=i, Y=j}.
   \end{equation*}
 Take  $g(i,j) = \min\{i, j\}$.
 \end{hint}
@@ -521,7 +521,7 @@ with fname.open("r") as fp:
 
 \section{True false questions}
 \label{sec:true-false-questions}
-
+\setcounter{theorem}{0}
 \subfile{../truefalse/tf-week-1-source-questions.tex}
 
 
