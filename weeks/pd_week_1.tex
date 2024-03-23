@@ -229,19 +229,42 @@ What is the support of $L$? Then, use the fundamental bridge and 2D LOTUS to sho
 \begin{hint}
 The fundamental bridge and 2D LOTUS have  the general form
 \begin{equation*}
-\P{g(X,Y)\in A\} = \E{\1{g(X, Y) \in A}} = \sum_{i}\sum_j \1{g(i, j)\in A} \P{X=i, Y=j}.
+\P{g(X,Y)\in A} = \E{\1{g(X, Y) \in A}} = \sum_{i}\sum_j \1{g(i, j)\in A} \P{X=i, Y=j}.
   \end{equation*}
 Take  $g(i,j) = \min\{i, j\}$.
 \end{hint}
 \begin{solution}
 With the hint,
   \begin{align*}
-\P{L\geq k}
-&= \sum_{i}\sum_{j} \1{\min\{i,j\}\geq k} \P{X=i, Y=j}\\
-&= \sum_{i\geq k} \sum_{j\geq k} \P{X=i}\P{Y=j}\\
-&=  \P{X\geq k}\P{Y\geq k} = q^{k} q^{k} = q^{2k}.
+\P{L\geq k} = \P{\min(X, Y) \geq k} 
+&= \sum_{i=0}^\infty \sum_{j=0}^\infty \1{\min\{i,j\}\geq k} \P{X=i, Y=j}\\
+&= \sum_{i=k}^\infty \sum_{j=k}^\infty \P{X=i}\P{Y=j} = \sum_{i=k}^\infty \sum_{j=k}^\infty p^2q^{i + j} \\
+&= p^2 \big ( q^k \sum_{i=0}^\infty q^i \big) \big( q^k \sum_{j=0}^\infty q^j \big) = \frac{p^2}{(1 - q)^2} q^{2k} = q^{2k}
   \end{align*}
-$\P{L>i}$ has the same form as $\P{X>i}$, but now with $q^{2i}$ rather than $q^{i}$.
+In the second line we use the fact that $X$ and $Y$ are independent to infer that their joint PMF is the product of the marginal PMF's.
+Furthermore, whenever the value of $j$ or $i$ is less than $k$ the indicator is zero, hence the change in the lower-bounds.
+In the third line, constants are taken out of the sum to easily recognize patterns (the geometric sum),
+then a typical procedure is used to get the full geometric sum: $\sum_{j=k}^\infty q^j = q^k + q^{k+1} + \dots = q^k (q^0 + q^1 + \dots)$.
+
+$\P{L\geq i}$ has the same form as $\P{X\geq i}$, but now with
+$q^{2i}$ rather than $q^{i}$. Since the CDF fully determines
+distribution, we can conclude $L\sim \Geo{q^2}$.
+
+The Fundamental Bridge + Lotus approach is very general and the
+indicators work as bookkeeping devices, reducing the chances of making
+mistakes.
+
+We can also use some common tricks to solve this particular problem which are worth mentioning.
+First of all, convince yourself of the equality of these sets $\{\min\{X, Y\} > k\} = \{X > k \cap Y > k\}$.
+Similarly $\{\max\{X, Y\} < k\} = \{X < k \cap Y < k\}$.
+Then using the independence of $X$ and $Y$, we can quickly find the answer:
+\begin{equation*}
+\P{\min\{X, Y\} \geq k} = \P{X\geq k}\P{Y\geq k} = q^k q^k = q^{2k}
+\end{equation*}
+Notice the similarity between the two solutions, the first approach
+just works out a few more steps. However, the first approach also
+works for situations where $X$ and $Y$ are not independent and for all
+kinds of functions of $X$ and $Y$.
 \end{solution}
 \end{exercise}
 
@@ -263,7 +286,21 @@ Show that
 &=2 p^{2}q^{k}\sum_{j < k} q^j + p^{2}q^{2k}\\
 &=2 p^{2}q^{k}\frac{1-q^{k}}{1-q} +  p^{2}q^{2k}\\
   \end{align*}
-As $X$ and $Y$ are idd we use symmetry   in Step 1.
+As $X$ and $Y$ are idd we use symmetry in Step 1.
+Here indicator variables are used as a bookkeeping device for conditioning.
+
+A cool trick for discrete rvs that can be used to solve this problem
+is that $\P{M=k} = \P{M \leq k} - \P{M < k}$. This can be seen from
+$\P{M < k} = \sum_{j=-\infty}^{k-1} \P{M=j}$, or by using $\P{M=k}
+= \P{M\leq k \cap M\geq k}$ and $\P{M\leq k \cup M \geq k} = \P{M\leq
+k} + \P{M \geq k} - \P{M\leq k \cap M\geq k} = 1$. Then using the
+independence of $X$ and $Y$:
+
+\begin{align*}
+\P{M = k} &= \P{M \leq k} - \P{M < k} = \P{X \leq k} \P{Y \leq k} - \P{X < k} \P{Y < k} \\
+&= (1-q^{k+1})^2 - (1 - q^k)^2 = (1 - q^k + pq^k)^2 - (1-q^k)^2 = (pq^k)^2 + 2(1-q^k)pq^k
+\end{align*}
+
 \end{solution}
 \end{exercise}
 
