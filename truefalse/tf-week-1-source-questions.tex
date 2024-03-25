@@ -72,16 +72,16 @@ It's false in general, because $X$ is not independent of itself.
 
 
 \begin{truefalse}
-People enter a shop such that the time $X$ between  any two consecutive customers is $X\sim \Exp{\lambda}$ with $\lambda=10$ per h. Claim: $\P{X > x} = e^{-\lambda x}$, for $x\geq 0$.
+People enter a shop such that the time $X$ between  any two consecutive customers is $X\sim \Exp{\lambda}$ with $\lambda=10$ per hour. Claim: $\P{X > x} = e^{-\lambda x}$, for $x\geq 0$.
 \begin{solution}
 It's correct, see BH.5.45.
 \end{solution}
 \end{truefalse}
 
 \begin{truefalse}
-People enter a shop such that the time $X$ between any two consecutive customers is $X\sim \Exp{\lambda}$ with $\lambda=10$ per h.
+People enter a shop such that the time $X$ between any two consecutive customers is $X\sim \Exp{\lambda}$ with $\lambda=10$ per hour.
 Assume that the interarrival times between customers are iid.
-Let $N(t)$ be the number of people that enter during a time interval of length $t$.
+Let $N(t)$ be the number of people that enter during an interval $[0,t]$.
 Claim $N(t) \sim \Pois{\lambda}$.
 \begin{solution}
 It's false, see BH.5.45. It's $\sim \Pois{\lambda t}$.
@@ -89,9 +89,9 @@ It's false, see BH.5.45. It's $\sim \Pois{\lambda t}$.
 \end{truefalse}
 
 \begin{truefalse}
-People enter a shop such that the time $X$ between any two consecutive customers is $X\sim \Exp{\lambda}$ with $\lambda=10$ per h.
+People enter a shop such that the time $X$ between any two consecutive customers is $X\sim \Exp{\lambda}$ with $\lambda=10$ per hour.
 Assume that the interarrival times between customers are iid.
-Let $N(t)$ be the number of people that enter during a time interval of length $t$.
+Let $N(t)$ be the number of people that enter during an interval $[0,t]$.
 Suppose that $T_{3}$ is the time the third person enters.
 Claim: $\P{N(t) <3} = \P{T_{3}>t}$.
 \begin{solution}
@@ -102,14 +102,13 @@ It's true.
 
 
 
-% ? If the median of X is equal to $\E X$ the surely it is correct?
 \begin{truefalse}
-Write $m$ for the median $\E X$ of the rv $X$. Claim, the following definition correct:
+Write $m$ for the median of the rv $X$. Claim: the following definition is correct:
 \begin{equation*}
 \V X := \E{X^2} - m^{2}.
 \end{equation*}
 \begin{solution}
-False, $\E X$ need not be equal to the median, moreover the \emph{definition} of the variance involves the mean, not the median.
+False, $\E X$ need not be equal to the median $m$, and  the \emph{definition} of the variance involves the mean, not the median.
 \end{solution}
 \end{truefalse}
 
@@ -131,11 +130,10 @@ It's False. Calculating using LOTUS gives $\E{X^2} = \frac{1}{2} 4^{2} + \frac{1
 \end{solution}
 \end{truefalse}
 
-% I had to look up degenerate rv
 \begin{truefalse}
 For a degenerate rv $X$ and $c$ an arbitrary, non-zero constant. Claim: $\V{cX} > 0$
 \begin{solution}
-It's False. the variance of a degenerate rv is always 0.
+It's False. the variance of a degenerate rv is always 0. See the warning in BH.4.1.3 in which degeneracy is discussed.
 \end{solution}
 \end{truefalse}
 
