@@ -37,7 +37,7 @@ Should we let the patient decide what is the best day to do the surgery?
 We model the system as a queueing network with two stations, the first is the X-ray, the second the surgery.
 We make the assumption that the first station works super regularly and sends exactly five patients every day to the surgery.
 (Of course these assumptions are a bit silly, but we want to demonstrate a certain phenomenon.)
-After the first step, each patient is allowed to choose an arbitrary day in the next 10 days for the next appointment.
+After the first step, each patient is allowed to choose an arbitrary day in the next $n$ days for the next appointment.
 What is the distribution of the number of appointments on a certain day?
 This will be approximately Poisson!
 Here we use moment generating functions (MGFs) to see why.
@@ -51,7 +51,8 @@ Read BH chapter 6 to find out where. While reading you'll discover lots of other
 
 Next, let \(X_{i}\in\{1, 2, \ldots, n\}\) be the chosen day of patient \(i\).
 Then \(Y_{i}(j)=\1{X_{i}=j}\) is 1 if \(X_i=j\) and 0 else.
-Thus, when we have \(m\) patients, \(S_{m}=\sum_{i=1}^{m} Y_i(j)\) is the number of jobs will arrive on day \(j\). In the above queueing model, there are 5 arrivals per day, hence \(m=5n\).
+Thus, when we have \(m\) patients, \(S_{m}=\sum_{i=1}^{m} Y_i(j)\) is the number of jobs will arrive on day \(j\).
+(In the above queueing model, there are 5 arrivals per day, hence \(m=5n\).) We are interested in the distribution of the number of arrivals on som given day $j$, when $n$ is large.
 
 \begin{exercise}
 Show that the MGF of \(Y\), i.e., the generic rv associated to \(Y_j(\cdot)\), is
