@@ -13,7 +13,7 @@ Yes.
 \end{truefalse}
 
 \begin{truefalse}
-Suppose $X$ a real-valued rv with $\supp X = [0, c]$. Claim:
+Suppose $X$ is a real-valued rv with $\supp X = [0, c]$. Claim:
 \begin{equation}
 \V X = \E{X^2} - (\E{X})^2 \leq c \E X - (\E X)^2 = (c-\E X)\E X.
 \end{equation}
@@ -36,7 +36,7 @@ Let $M_{X}(s)$ be the moment generating function of some rv $X$.  Claim:
 M_{X}(0) = 0.
 \end{equation}
 \begin{solution}
-It's false.
+It's false. Recall the definition: $\E{e^{0\cdot X}} = \E{e^0} = 1$.
 \end{solution}
 \end{truefalse}
 
@@ -102,7 +102,7 @@ It's true.
 
 
 
-
+% ? If the median of X is equal to $\E X$ the surely it is correct?
 \begin{truefalse}
 Write $m$ for the median $\E X$ of the rv $X$. Claim, the following definition correct:
 \begin{equation*}
@@ -131,6 +131,7 @@ It's False. Calculating using LOTUS gives $\E{X^2} = \frac{1}{2} 4^{2} + \frac{1
 \end{solution}
 \end{truefalse}
 
+% I had to look up degenerate rv
 \begin{truefalse}
 For a degenerate rv $X$ and $c$ an arbitrary, non-zero constant. Claim: $\V{cX} > 0$
 \begin{solution}
@@ -156,9 +157,7 @@ It's False. Independence is sufficient but not necessary for the equality to hol
 For two rvs $X$ and $Y$, where $Y$ is always equal to $X$, given $\V{X}>0$. Claim: $\V{X+Y} = \V{X} + \V{Y}$
 \begin{solution}
 It's False, since if $Y$ is always equal to $X$ they are definitely not independent.
-(see BH.
-p.
-172) In fact, as $Y=X$, $\V{X+Y} = \V{2X} = 4 \V X$.
+(see BH. p. 172) In fact, as $Y=X$, $\V{X+Y} = \V{2X} = 4 \V X$.
 Isn't it a bit counter intuitive that when $X$ and $Y$ are dependent like this, the variance is larger than if they would be independent?
 \end{solution}
 \end{truefalse}
@@ -176,7 +175,7 @@ The density values are nonnegative. The values that the RV can attain can be neg
 \begin{truefalse}
 Let $X \sim \Norm{0, 1}$. We then know that $\P{X = 0} > \P{X = 5}$.
 \begin{solution}
-False. By definition $\P(X = k) = 0 \quad \forall k $.
+False. By definition $\P{X = k} = 0 \quad \forall k $.
 \end{solution}
 \end{truefalse}
 
@@ -319,36 +318,33 @@ True.
 \end{truefalse}
 
 
-
-
-
 \begin{truefalse}
-Let $A$ and $B$ be two disjoint events. Claim: $A$ and $B$ are dependent.
+Let $A$ and $B$ be two disjoint events with positive probability. Claim: $A$ and $B$ are dependent.
 \begin{solution}
-False. If $A$ and $B$ are disjoint, they can be only independent if  $\P{A}=0$ or $\P{B}=0$.
+True. $\P{A\given B} = 0 \neq \P{A}$. %If $A$ and $B$ are disjoint, they can be only independent if  $\P{A}=0$ or $\P{B}=0$.
 \end{solution}
 \end{truefalse}
 
 
 \begin{truefalse}
-Suppose $A_i$ for $i=1, 2, \dots, n$ are independent indicator random
-variables. Then $\sum_{i=1}^n A_i$ has a Binomial distribution.
+  Suppose $A_i$ for $i=1, 2, \dots, n$ are independent indicator rvs.
+  Claim: $\sum_{i=1}^n A_i$ has a Binomial distribution.
 \begin{solution}
 False. They also need to have identical distributions.
 \end{solution}
 \end{truefalse}
 
 \begin{truefalse}
-Let  $X$ and $Y$ be independent. Claim: for any functions $f, g$ it holds that $g(X)$ is independent of $f(Y)$.
+Let $X$ and $Y$ be independent. Claim: for any functions $f, g$ it holds that $g(X)$ is independent of $f(Y)$.
 \begin{solution}
 True.
 \end{solution}
 \end{truefalse}
 
 \begin{truefalse}
-Claim: a  discrete random variable requires that the  number of outcomes is finite.
+Claim: a discrete random variable requires that the  number of outcomes is finite.
 \begin{solution}
-False. It can also have a countable number of outcomes like $\N$.
+False. It must have a \emph{countable} number of outcomes, but not necessarily finite, like $\N$.
 \end{solution}
 \end{truefalse}
 
@@ -364,7 +360,7 @@ True. $3$ is not in the support of X: $\{0, 1, 2\}$.
 \end{truefalse}
 
 \begin{truefalse}
-Given numbers $c, d \in \R$, possible the same.
+Given numbers $c, d \in \R$, possibly the same.
 Take $X\equiv c$, i.e., $\P{X=c} = 1$, and $Y\equiv d$.
 Claim: $X$ and $Y$ are independent.
 \begin{solution}

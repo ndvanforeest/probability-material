@@ -57,28 +57,65 @@ Variations on this type of question.
 \end{solution}
 \end{truefalse}
 
+%% \begin{truefalse}
+%% $p(k) = \frac{1-x}{1-x^{n+1}} x^k$ with $k \in \{0, \dots, n\}$ is a valid PMF for any $x$.
+%% \begin{solution}
+%%   False. Not if $x = 0$ or $x = 1$.
+%% \end{solution}
+%% \end{truefalse}
+
 \begin{truefalse}
-$p(k) = \frac{1-x}{1-x^{n+1}} x^k$ with $k \in \{0, \dots, n\}$ is a valid PMF for any $x$.
+  Let $X \sim \Geo{p}$. The following steps are correct.
+  \begin{equation*}
+    \P{X = k \given X \geq n}
+    = \frac{\P{X=k, X \geq n}}{\P{X \geq n}}
+    = \frac{\1{k \geq n} \P{X = k}}{\P{X \geq n}}
+    = \1{k \geq n} pq^{k-n}
+  \end{equation*}
+  Thus,
+  \begin{align*}
+    \E{X \given X \geq n} &= \sum_{k=0}^\infty k \1{k \geq n} pq^{k-n}\\
+    &=  p \sum_{k=n}^\infty kq^{k-n}\\
+    &= (1 - q) \big(n q^0 + (n+1) q^1 + (n+2) q^2 + \dots\big)\\
+    &= \big(n q^0 + (n+1) q^1 + (n+2) q^2 + \dots\big) - \big(n q^1 + (n+1)q^2 + (n+2)q^3 + \dots\big)\\
+    &= n + q^1 + q^2 + \dots\\
+    &= n + \frac{1}{1-q} - 1\\
+    &= n + \frac{q}{p}\\
+  \end{align*}
 \begin{solution}
-  False. Not if $x = 0$ or $x = 1$.
+    True. Of course, the memoryless property of the geometric
+    distribution can be used to find the answer too. 
+\end{solution}
+\end{truefalse}
+
+
+\begin{truefalse}
+  $M(t) = 2^{-n} \sum_{k=0}^n \binom{n}{k} e^{tk}$ is a valid expression for the MGF of a $\Bin{n, 0.5}$ distribution.
+\begin{solution}
+True. Apply the binomial theorem: $(e^t + 1)^n = \sum_{k=0}^n \binom{n}{k} e^{tk}$.
 \end{solution}
 \end{truefalse}
 
 \begin{truefalse}
-  $M(t) = 2^{-n} \sum_{k=1}^n \binom{n}{k} e^{tk}$ is a valid expression for the MGF of a $\Bin{n, 0.5}$ distribution.
+  One of the following steps is incorrect:
+  \begin{equation*}
+    \lim_{n\to\infty} \big(1+n^{-1}\big)^n
+    \stackrel{1} = \lim_{n\to\infty} \sum^n_{k=0} n^{-k}
+    \stackrel{2} = 1
+  \end{equation*}
 \begin{solution}
-True. Apply the binomial theorem: $(e^t + 1)^n = \sum_{k=1}^n \binom{n}{k} e^{tk}$.
+True, step 1 misses the binomial coefficient. Without the binomial
+coefficient, step 2 holds, otherwise, it should be $e$.
 \end{solution}
 \end{truefalse}
 
 \begin{truefalse}
-$\big(\sum_{k=1}^n k \big)^2 = \sum_{k=1}^n k^3$
+Suppose $f$ is a linear function, then there is a $c$ such that $c
+e^{-f(x)^2}$ is the pdf of a normal distribution.
 \begin{solution}
-True.
+  True.
 \end{solution}
 \end{truefalse}
-
-
 
 
 \begin{truefalse}
@@ -87,9 +124,6 @@ Claim: $M_X(s)=e^{-(s-1)^2/2}$ could be a valid MGF for some r.v. $X$.
 False. Note that $M_X(s)=\E{e^{sX}}$, s.t. $M_X(0)=1$ must always hold.
 \end{solution}
 \end{truefalse}
-
-
-
 
 
 \begin{truefalse}
