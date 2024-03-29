@@ -86,7 +86,7 @@ When \(n\) is not too small, use a standard limit to see that
 \begin{equation}
 M_S(s) \approx \exp(5(e^s-1)).
 \end{equation}
-Observe that this is the MGF of the Poisson distribution with mean \(5\).
+Observe that the RHS the MGF of the Poisson distribution with mean \(\lambda = 5\).
 \begin{solution}
 Check out appendix A of BH to conclude that
 \begin{equation}
@@ -237,7 +237,7 @@ Take  $g(i,j) = \min\{i, j\}$.
 \begin{solution}
 With the hint,
   \begin{align*}
-\P{L\geq k} = \P{\min(X, Y) \geq k} 
+\P{L\geq k} = \P{\min(X, Y) \geq k}
 &= \sum_{i=0}^\infty \sum_{j=0}^\infty \1{\min\{i,j\}\geq k} \P{X=i, Y=j}\\
 &= \sum_{i=k}^\infty \sum_{j=k}^\infty \P{X=i}\P{Y=j} = \sum_{i=k}^\infty \sum_{j=k}^\infty p^2q^{i + j} \\
 &= p^2 \big ( q^k \sum_{i=0}^\infty q^i \big) \big( q^k \sum_{j=0}^\infty q^j \big) = \frac{p^2}{(1 - q)^2} q^{2k} = q^{2k}
