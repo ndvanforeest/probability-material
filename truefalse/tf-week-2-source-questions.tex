@@ -11,10 +11,10 @@ M_{X}(s)
   &\stackrel{1}= \E{e^{sX}} \stackrel{2}= \sum_{k=1}^{\infty} p q^{k} e^{sk} \\
   &\stackrel{3}= p \sum_{k=1}^{\infty} (e^{s}q)^{k}
   \stackrel{4}= p (\sum_{k=0}^{\infty} (e^{s}q)^{k}-1) \\
-&  \stackrel{5}= p /(1+e^{s}q)  - p.
+&  \stackrel{5}= \frac p {1+e^{s}q}  - p.
 \end{align}
 
-Claim: more than one of these step is incorrect.
+Claim: more than one of these steps is incorrect.
 \begin{solution}
 True. Steps 2 and 5 are incorrect. Step 2: start with $k=0$, step 5: the plus should be a minus.
 
@@ -65,7 +65,7 @@ Variations on this type of question.
 %% \end{truefalse}
 
 \begin{truefalse}
-  Let $X \sim \Geo{p}$. The following steps are correct.
+  Let $X \sim \Geo{p}$. Claim: all of the following steps are correct.
   \begin{equation*}
     \P{X = k \given X \geq n}
     = \frac{\P{X=k, X \geq n}}{\P{X \geq n}}
@@ -84,28 +84,25 @@ Variations on this type of question.
   \end{align*}
 \begin{solution}
     True. Of course, the memoryless property of the geometric
-    distribution can be used to find the answer too. 
+    distribution can be used to find the answer too.
 \end{solution}
 \end{truefalse}
 
 
 \begin{truefalse}
-  $M(t) = 2^{-n} \sum_{k=0}^n \binom{n}{k} e^{tk}$ is a valid expression for the MGF of a $\Bin{n, 0.5}$ distribution.
+Claim:  $M(t) = 2^{-n} \sum_{k=0}^n \binom{n}{k} e^{tk}$ is a valid expression for the MGF of a $\Bin{n, 0.5}$ distribution.
 \begin{solution}
 True. Apply the binomial theorem: $(e^t + 1)^n = \sum_{k=0}^n \binom{n}{k} e^{tk}$.
 \end{solution}
 \end{truefalse}
 
 \begin{truefalse}
-  One of the following steps is incorrect:
+ Claim:  This contains an error:
   \begin{equation*}
-    \lim_{n\to\infty} \big(1+n^{-1}\big)^n
-    \stackrel{1} = \lim_{n\to\infty} \sum^n_{k=0} n^{-k}
-    \stackrel{2} = 1
+e \stackrel 1 =  \lim_{n\to\infty} \big(1+n^{-1}\big)^n   \stackrel{2} = \lim_{n\to\infty} \sum^n_{k=0} n^{-k}.
   \end{equation*}
 \begin{solution}
-True, step 1 misses the binomial coefficient. Without the binomial
-coefficient, step 2 holds, otherwise, it should be $e$.
+True, Step 2 is wrong. Compare the Taylor series for $e^{x}$.
 \end{solution}
 \end{truefalse}
 
@@ -113,13 +110,13 @@ coefficient, step 2 holds, otherwise, it should be $e$.
 Suppose $f$ is a linear function, then there is a $c$ such that $c
 e^{-f(x)^2}$ is the pdf of a normal distribution.
 \begin{solution}
-  True.
+  True. The normal distribution is of the same type.
 \end{solution}
 \end{truefalse}
 
 
 \begin{truefalse}
-Claim: $M_X(s)=e^{-(s-1)^2/2}$ could be a valid MGF for some r.v. $X$.
+Claim: $M_X(s)=e^{-(s-1)^2/2}$ could be a valid MGF for some rv $X$.
 \begin{solution}
 False. Note that $M_X(s)=\E{e^{sX}}$, s.t. $M_X(0)=1$ must always hold.
 \end{solution}
@@ -127,7 +124,8 @@ False. Note that $M_X(s)=\E{e^{sX}}$, s.t. $M_X(0)=1$ must always hold.
 
 
 \begin{truefalse}
-Let $X$ and $Y$ be two independent r.v.s with MGFs $M_X$ and $M_Y$. Claim:
+Let $X$ and $Y$ be two independent rvs such that $\E{e^{s X}}$ and $\E{e^{s Y}}$ are well defined for $s$ in an open interval around $0$.
+Claim:
 \begin{align}
 \label{eq:2}
 M_{X-Y}(s)=M_X(s)M_Y(-s)
@@ -138,34 +136,34 @@ True. $M_{X-Y}(s)=\E{e^{s(X-Y)}}=\E{e^{sX}}\E{e^{-sY}}=M_X(s)M_Y(-s)$.
 \end{truefalse}
 
 %2 6.5
-\begin{truefalse}
-Let $Z \sim \Norm{0,1}$ and $Y \sim e^{Z}$. We want to find the MGF of Y.
-We have the formula:
-$$\E{e^{ty}} = \int^{\infty}_{-\infty} \frac{1}{\sqrt{2 \pi}} e^{t e^{z} - \frac{z^{2}}{2}} dz$$
-\\ \textbf{Claim: } since the integral does not diverge for t = 0, we can use this as a MGF to estimate moments. 
-\begin{solution}
-    False.
-    \\We need differentiability around zero. Since the integral diverges for t > 0, we have that the MGF is not properly defined for t > 0. As this destroys the differentiability property, we cannot use this as a MGF. 
-\end{solution}
-\end{truefalse}
+% \begin{truefalse}
+% Let $Z \sim \Norm{0,1}$ and $Y \sim e^{Z}$. We want to find the MGF of Y.
+% We have the formula:
+% $$\E{e^{ty}} = \int^{\infty}_{-\infty} \frac{1}{\sqrt{2 \pi}} e^{t e^{z} - \frac{z^{2}}{2}} dz$$
+% \\ \textbf{Claim: } since the integral does not diverge for t = 0, we can use this as a MGF to estimate moments.
+% \begin{solution}
+%     False.
+%     \\We need differentiability around zero. Since the integral diverges for t > 0, we have that the MGF is not properly defined for t > 0. As this destroys the differentiability property, we cannot use this as a MGF.
+% \end{solution}
+% \end{truefalse}
 
-\begin{truefalse}
-We can obtain the moments for the Log-normal, through the formula given below.
-Here $X \sim \Norm{\mu, \sigma^{2}}$ and $Y = e^{X}$
-$$E(Y^{n}) =  M_{X}'(n) $$
-    \begin{solution}
-        False, 
-        \\The formula should be:
-        $$E(Y^{n}) = \E{e^{n X}} = M_{X}(n) $$
-        We do not take the derivative for this moment. 
-        $$\E{Y^{n}} = \E{(e^{X}) ^{n}} = \E{e^{nX}} = M_{X}(n)$$
-    \end{solution}
-\end{truefalse}
+% \begin{truefalse}
+% We can obtain the moments for the Log-normal, through the formula given below.
+% Here $X \sim \Norm{\mu, \sigma^{2}}$ and $Y = e^{X}$
+% $$E(Y^{n}) =  M_{X}'(n) $$
+%     \begin{solution}
+%         False,
+%         \\The formula should be:
+%         $$E(Y^{n}) = \E{e^{n X}} = M_{X}(n) $$
+%         We do not take the derivative for this moment.
+%         $$\E{Y^{n}} = \E{(e^{X}) ^{n}} = \E{e^{nX}} = M_{X}(n)$$
+%     \end{solution}
+% \end{truefalse}
 
 %6.6
 \begin{truefalse}
-Given  $X\sim \Pois{\lambda}$ and $Y \sim \Pois{\mu}$ independently and  $\E{e^{tX}} = e^{-\lambda}\sum^{\infty}_{k=0} \frac{(\lambda e^t)^k}{k!}$
-Claim: $M_{X+Y}(t) = e^{(\lambda \mu)(e^t-1)}$
+Given $X\sim \Pois{\lambda}$, $Y \sim \Pois{\mu}$, $X$ and $Y$ are independently, and $\E{e^{tX}} = e^{-\lambda}\sum^{\infty}_{k=0} \frac{(\lambda e^t)^k}{k!}$.
+Claim: $M_{X+Y}(t) = e^{(\lambda \mu)(e^t-1)}$.
 \begin{solution}
 It's false. By Taylor series we find$ \E{e^{tX}} = e^{-\lambda} e^{\lambda e^t}$ and by independence $M_{X+Y}(t) = M_X(t) \cdot M_Y(t) = e^{\lambda(e^t-1)} e^{\mu(e^t-1)} = e^{(\mu + \lambda)(e^t-1)}$
 \end{solution}
@@ -173,9 +171,8 @@ It's false. By Taylor series we find$ \E{e^{tX}} = e^{-\lambda} e^{\lambda e^t}$
 
 
 \begin{truefalse}
-Given $X_1\sim \Norm{\mu_1, \sigma_1^2}$ with $M_{X_1}(t) = e^{\mu_1t + \frac{1}{2}\sigma_1^2t^2}$.
-Given  $X_2\sim \Norm{\mu_2, \sigma_2^2}$
-Claim: $M_{X_1+X_2}(t) = e^{(\mu_1 + \mu_2)t +\frac{1}{2}(\sigma_1^2 + \sigma_2^2)t^2}$
+Given $X_1\sim \Norm{\mu_1, \sigma_1^2}$ with $M_{X_1}(t) = e^{\mu_1t + \frac{1}{2}\sigma_1^2t^2}$, and $X_2\sim \Norm{\mu_2, \sigma_2^2}$.
+Claim: $M_{X_1+X_2}(t) = e^{(\mu_1 + \mu_2)t +\frac{1}{2}(\sigma_1^2 + \sigma_2^2)t^2}$.
 \begin{solution}
 It's false. It is not given that $X_1$ and $X_2$ are independent.
 \end{solution}
