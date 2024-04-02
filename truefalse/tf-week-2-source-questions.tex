@@ -57,12 +57,12 @@ Variations on this type of question.
 \end{solution}
 \end{truefalse}
 
-%% \begin{truefalse}
-%% $p(k) = \frac{1-x}{1-x^{n+1}} x^k$ with $k \in \{0, \dots, n\}$ is a valid PMF for any $x$.
-%% \begin{solution}
-%%   False. Not if $x = 0$ or $x = 1$.
-%% \end{solution}
-%% \end{truefalse}
+\begin{truefalse}
+$p(k) = \frac{1-x}{1-x^{n+1}} x^k$ with $k \in \{0, \dots, n\}$ is a valid PMF for any $x$.
+\begin{solution}
+  False. Not if $x = 0$ or $x = 1$.
+\end{solution}
+\end{truefalse}
 
 \begin{truefalse}
   Let $X \sim \Geo{p}$. Claim: all of the following steps are correct.
@@ -107,8 +107,7 @@ True, Step 2 is wrong. Compare the Taylor series for $e^{x}$.
 \end{truefalse}
 
 \begin{truefalse}
-Suppose $f$ is a linear function, then there is a $c$ such that $c
-e^{-f(x)^2}$ is the pdf of a normal distribution.
+Suppose $f = a x + b$ with $a\neq 0$, then there is a $c$ such that $c e^{-f(x)^2}$ is the pdf of a normal distribution.
 \begin{solution}
   True. The normal distribution is of the same type.
 \end{solution}
@@ -135,32 +134,6 @@ True. $M_{X-Y}(s)=\E{e^{s(X-Y)}}=\E{e^{sX}}\E{e^{-sY}}=M_X(s)M_Y(-s)$.
 \end{solution}
 \end{truefalse}
 
-%2 6.5
-% \begin{truefalse}
-% Let $Z \sim \Norm{0,1}$ and $Y \sim e^{Z}$. We want to find the MGF of Y.
-% We have the formula:
-% $$\E{e^{ty}} = \int^{\infty}_{-\infty} \frac{1}{\sqrt{2 \pi}} e^{t e^{z} - \frac{z^{2}}{2}} dz$$
-% \\ \textbf{Claim: } since the integral does not diverge for t = 0, we can use this as a MGF to estimate moments.
-% \begin{solution}
-%     False.
-%     \\We need differentiability around zero. Since the integral diverges for t > 0, we have that the MGF is not properly defined for t > 0. As this destroys the differentiability property, we cannot use this as a MGF.
-% \end{solution}
-% \end{truefalse}
-
-% \begin{truefalse}
-% We can obtain the moments for the Log-normal, through the formula given below.
-% Here $X \sim \Norm{\mu, \sigma^{2}}$ and $Y = e^{X}$
-% $$E(Y^{n}) =  M_{X}'(n) $$
-%     \begin{solution}
-%         False,
-%         \\The formula should be:
-%         $$E(Y^{n}) = \E{e^{n X}} = M_{X}(n) $$
-%         We do not take the derivative for this moment.
-%         $$\E{Y^{n}} = \E{(e^{X}) ^{n}} = \E{e^{nX}} = M_{X}(n)$$
-%     \end{solution}
-% \end{truefalse}
-
-%6.6
 \begin{truefalse}
 Given $X\sim \Pois{\lambda}$, $Y \sim \Pois{\mu}$, $X$ and $Y$ are independently, and $\E{e^{tX}} = e^{-\lambda}\sum^{\infty}_{k=0} \frac{(\lambda e^t)^k}{k!}$.
 Claim: $M_{X+Y}(t) = e^{(\lambda \mu)(e^t-1)}$.

@@ -1,0 +1,116 @@
+\documentclass[tf-tutorial-all.tex]{subfiles}
+\begin{document}
+
+
+\begin{truefalse}
+Eve's law says that $V(X) = \E{\V{X|N}} + \V{\E{X|N}}$.
+
+Claim: $\E{\V{X|N}}$ is called the \emph{in-between} group variation.
+
+\begin{solution}
+False.
+\end{solution}
+\end{truefalse}
+
+
+\begin{truefalse}
+Eve's law says that $V(X) = \E{\V{X|N}} + \V{\E{X|N}}$.
+
+Claim: $\V{\E{X|N}}$ is called the \emph{explained variance}.
+
+\begin{solution}
+True.
+\end{solution}
+\end{truefalse}
+
+
+
+\begin{truefalse}
+Write $g(X) = \E{Y|X}$ for two rvs $X, Y$.
+Claim: This derivation is correct:
+\begin{equation}
+\label{eq:7}
+\V{\E{Y|X}} = \E{(g(X))^2} - (\E{g(X)})^{2} = \E{(g(X))^2} - (\E{Y})^{2}.
+\end{equation}
+
+\begin{solution}
+True.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Claim: The inequality of Cauchy-Schwarz says that $\E{(XY)^{2}} \geq \E X \E Y$.
+
+\begin{solution}
+False.
+\end{solution}
+\end{truefalse}
+
+
+\begin{truefalse}
+Claim: This is correct: $\E{X} \leq \E{X\1{X\geq 0}}$.
+\begin{solution}
+True.
+\end{solution}
+\end{truefalse}
+
+
+
+\begin{truefalse}
+Let $g$ be a function that is concave and convex at the same time, and such that $g(0) = 0$.
+Claim: by Jensen's inequality: $\E{g(X)} = g(\E{X})$.
+
+\begin{solution}
+True.
+\end{solution}
+\end{truefalse}
+
+
+\begin{truefalse}
+Claim: The following reasoning is correct. For any $a\geq 0$,
+\begin{equation}
+\label{eq:8}
+\E{|X|} \geq \E{a \1{|X|\geq a}} = a \P{|X| \geq a}.
+\end{equation}
+
+\begin{solution}
+It's true.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+The set $\{X_i : i = 1, 2, \ldots\}$ forms a set of iid rvs such that $X_i\in \{0, 1\}$ and $\P{X_i=1} = 1/2$ for all $i$.
+Take $A=\{\lim_{n\to\infty} n^{-1}\sum_{i=1}^{n}X_i = 1\}$.
+
+Claim: The strong law of large numbers implies that $A=\varnothing$.
+
+\begin{solution}
+It's false.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+The set $\{X_i : i = 1, 2, \ldots\}$ forms a set of iid rvs such that $X_i\in \{0, 1\}$ and $\P{X_i=1} = 1/2$ for all $i$.
+Take $A=\{\lim_{n\to\infty} n^{-1}\sum_{i=1}^{n}X_i = 1\}$.
+
+Claim: The strong law of large numbers says that $\P{A} = 0$.
+
+\begin{solution}
+It's true.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+The set $\{X_i : i = 1, 2, \ldots\}$ forms a set of iid rvs.
+Claim: The weak law of large numbers states that:
+\begin{equation}
+\label{eq:9}
+\forall \delta, \epsilon > 0: \exists m > 0 : \forall n > m: \P{|\bar X_{n}-\mu| > \epsilon} < \delta,
+\end{equation}
+where $\mu=\E{X_{i}}$ and $\bar X_n = n^{-1}\sum_{i=1}^{n}X_{i}$.
+\begin{solution}
+True.
+\end{solution}
+\end{truefalse}
+
+\end{document}
