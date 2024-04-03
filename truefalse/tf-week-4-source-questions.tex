@@ -1,0 +1,115 @@
+\documentclass[tf-tutorial-all.tex]{subfiles}
+\begin{document}
+
+
+
+\begin{truefalse}
+Claim: $\E{Y|A} = \sum_{y=0}^{\infty} y \P{Y=y|A}$  if $Y$ is discrete.
+
+\begin{solution}
+No, what if $Y$ can take negative values?
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Claim: $\E{Y|A} = \sum_{y=-\infty}^{\infty} y \P{Y=y|A} = 0$  if $\P{A}=0$ and $Y$ is discrete.
+
+\begin{solution}
+It is false, the definition in BH requires that $\P{A}>0$.
+\end{solution}
+\end{truefalse}
+
+
+\begin{truefalse}
+Let $X$ be a continuous rv with PDF $f_{X}(x) > 0$ on $x\in[a, b]$ and $Y$ discrete.
+Claim: when $x\in [a, b]$, $\E{Y|X=x} = \sum_{y=-\infty}^{\infty} y \frac{f_{X,Y}(x,y)}{f_{X}(x)}$.
+
+\begin{solution}
+Yes.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Let $X_{(i)}, i = 1, \ldots, n$ be the order statistic of $\{X_{i}, i=1, \ldots, n\}$.
+Claim: $\P{X_{(j)}\leq x} = \sum_{k=0}^{n}{n \choose k} F(x)^k (1-F(x))^{n-k}$.
+
+\begin{solution}
+False, check theorem 8.6.3.
+It's easy to check.
+The LHS depends on $j$, the RHS not, hence it must be false, unless the probability would not depend on $j$, but that cannot be true.
+\end{solution}
+\end{truefalse}
+
+
+\begin{truefalse}
+Let $X_{(i)}, i = 1, \ldots, n$ be the order statistic of the continuous rvs $\{X_{i}, i=1, \ldots, n\}$.
+Claim: $f_{(j)}(x) \d x = n f(x) \d x {n \choose j} F(x)^j (1-F(x))^{n-j}$.
+\begin{solution}
+It's false, theorem 8.6.4.
+\end{solution}
+\end{truefalse}
+
+
+
+\begin{truefalse}
+Claim: It is a good idea to conceptualize the order statistic as a set rather than as a list.
+\begin{solution}
+No. Elements in a set are not ordered, elements in a sequence or list are.
+\end{solution}
+\end{truefalse}
+
+
+% \begin{truefalse}
+% Claim: The order statistic is a sorted set of numbers.
+
+% \vspace{0.5cm}\noindent  Which of the following options applies?
+% \begin{enumerate}
+% \item The claim is correct.
+% \item The claim is false.
+% \end{enumerate}
+% % \begin{solution}
+% % No. Elements in a set are not ordered, elements in a sequence or list are.
+% % \end{solution}
+% \end{truefalse}
+
+
+\begin{truefalse}
+Let $X_{(i)}, i = 1, \ldots, n$ be the order statistic of the continuous iid rvs $\{X_{i}, i=1, \ldots, n\}$.
+Claim: $\E{X_{(i)} | X_{(j)}=x} \leq x$ for any $i\leq j$.
+\begin{solution}
+It's true.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Given two positive iid rvs $X$ and $Y$. Let $L=\min\{X,  Y\}, M = \max\{X, Y\}$. Claim: $\E{L|M=3}=3/2$.
+
+\begin{solution}
+It's false. For instance, take $X, Y \sim \Exp{10}$.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+The continuous rvs $\{X_{i}\}$ with support on $(0, \infty)$ are idd, and $S_n=\sum_{i=1}^n X_{i}$.
+Claim: for some $x$ and $n$,
+\begin{equation}
+\label{eq:6}
+\E{X_{n}| S_{n-1} = x} = S_n/n.
+\end{equation}
+\begin{solution}
+It's false because the condition is on $x$ being given. On the LHS we have an $x$, but on the RHS there is no $x$.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Take $g(x) = \E{Y|X=x}$.
+Define the conditional expectation of the rv $Y$ given $X$ as $g(X)$, and write it as $\E{Y|X}$.
+Claim: this is one of the most important definitions in probability.
+
+\begin{solution}
+True. This is just a bonus to stress the importance of the definition of conditional expectation.
+\end{solution}
+\end{truefalse}
+
+
+\end{document}

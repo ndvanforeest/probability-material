@@ -1,0 +1,117 @@
+\documentclass[tf-tutorial-all.tex]{subfiles}
+\begin{document}
+
+
+
+\begin{truefalse}
+Suppose the rv $X$ has PDF $f_{X}(x) = Ax^{-s} \1{x\geq 1}$ for $s\in (1, 2)$ where $A$ is the normalization constant.
+Claim: $\E X = \infty$.
+\begin{solution}
+True.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Claim: LOTP on a discrete sample space states that $P(B) = \sum_{i=1}^{n} \P{B|A_{i}} \P{A_{i}}$, where $\{A_{i}\}$ is a set of non-overlapping subsets of the sample space.
+\begin{solution}
+It's false in general, because it's not given that the sets cover the state space.
+\end{solution}
+\end{truefalse}
+
+
+\begin{truefalse}
+Let $X$ be a rvs on $\R$ and $g$ a function from $\R^{2}$ to $\R$.
+Claim, $g(X)$ is a rv.
+\begin{solution}
+False. $g$ needs to two arguments as it maps $\R^{2}$ to $\R$.
+\end{solution}
+\end{truefalse}
+
+% \begin{truefalse}
+% Let $X$ be a rvs on $\R$ and $g: \R \to \R, g(x) \equiv 0$. Claim: $\E{\1{g(X) = 0}} = 1$.
+
+% \vspace{0.5cm}\noindent  Which of the following options applies?
+% \begin{enumerate}
+% \item The claim is correct.
+% \item The claim is false.
+% \end{enumerate}
+% % \begin{solution}
+% % correct. Apply the fundamental bridge.
+% % \end{solution}
+% \end{truefalse}
+
+
+
+\begin{truefalse}
+Let $X\sim \FS{p}$ with $p\in (0, 1)$, $q=1-p$. Claim: $\E X = 1+q\E X \implies \E X = 1/p$.
+\begin{solution}
+It's true.
+\end{solution}
+\end{truefalse}
+
+
+\begin{truefalse}
+Claim: according to 2D LOTUS: if $g$ is a function such that $g(x, y) \in \R $, and $X, Y$ two real-valued rvs, then
+\begin{equation}
+\E{g(X,Y)} = \int_{-\infty}^{\infty} \int_{-\infty} ^{\infty} g(x,y) f_{X}(x)f_Y(y) \d x \d y.
+\end{equation}
+\begin{solution}
+It's false. $X$ and $Y$ need not be independent, as is suggested here.
+\end{solution}
+\end{truefalse}
+
+
+
+\begin{truefalse}
+Take $g(x, X) = \1{X\leq x}$ for some rv $X$ with CDF $F_{X}$. Claim: $\E{g(y, X)} = F_{X}(y)$.
+\begin{solution}
+It's true.
+\end{solution}
+\end{truefalse}
+
+
+
+
+\begin{truefalse}
+Let $L = \min\{X_{i} : i =1, \ldots, n\}$ with $\{X_{i}\}$ a set of iid rvs.
+Claim:
+\begin{equation}
+\P{L\leq x} = (\P{X_{1} \leq x})^{n}.
+\end{equation}
+\begin{solution}
+It's false. This holds for the maximum, or reverse the direction of the inequalities with respect to $x$.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+For two continuous rvs $X, Y$ with joint distribution $F_{X,Y}(x,y)$. Write $\partial_{x}$ for $\partial/ \partial_{x}$.
+Claim: $f_{X}(x) = \partial_{x} F_{X,Y}(x,y)$.
+\begin{solution}
+It's false. Why is this claim nonsense?
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Claim: for two continuous rvs $X, Y$ with joint PDF $f_{X,Y}(x,y)$ it holds that $f_{Y|X}(y|x) = F_{X,Y}(x,y)/F_{X}(x)$.
+\begin{solution}
+It's false.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Let $X$ be a discrete rv on the numbers $\{a_{i}\}_{i=1}^{\infty}$ with $a_{i} \in \R$.
+Claim: the PMF of $X$ can be found by $f_{X}(x) = F_{X}'(x)$ for $x\in \{a_{i}\}_{i=1}^{\infty}$.
+\begin{solution}
+It's false. The PMF does not have a derivative as $a_{i}$.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+    Let $X \sim \Norm{0,1}$, $Y=X^2$. Claim: The change of variables formula tells us that:
+    $$f_Y(y)=f_X(x)\left|\frac{dx}{dy}\right|=\phi(x)\left|\frac{1}{2x}\right|=\phi(\sqrt{y})\frac{1}{2\sqrt{y}},\quad y>0.$$
+    \begin{solution}
+        False. $Y=X^2$ is not a strictly increasing (or decreasing) function, so the change of variables formula cannot be applied.
+    \end{solution}
+\end{truefalse}
+
+\end{document}

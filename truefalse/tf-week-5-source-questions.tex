@@ -1,0 +1,110 @@
+\documentclass[tf-tutorial-all.tex]{subfiles}
+\begin{document}
+
+\begin{truefalse}
+You may assume that, when $T=X+Y$, $f_{X,T}(x,t) = f_{X,Y}(x, t-x)$, even when the positive rvs $X$ and $Y$ are not independent.
+
+Claim: $f_T(t)  = \int_{0}^{t} f_{X, Y}(x,t-x) \d x$.
+
+\begin{solution}
+yes.
+
+For next year: Claim: $f_T(t)  = \int_{0}^{t} f_{X, Y}(x,t-x) f_{X}(x)\d x$, now it's false.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+You may assume that, when $T=X+Y$, $f_{X,T}(x,t) = f_{X,Y}(x, t-x)$.
+
+Claim: When the rvs $X, Y$ have \emph{support equal to $\R$} and are independent,
+\begin{equation}
+\label{eq:10}
+f_T(t)  = \int_{0}^{t} f_{Y}(t-x) f_X(x) \d x.
+\end{equation}
+
+\begin{solution}
+No, it is not given that $X$ or $Y$ are positive.
+\end{solution}
+\end{truefalse}
+
+
+\begin{truefalse}
+The positive rvs $X$ and $Y$ are independent, and $T=XY$.
+
+Claim: $f_T(t)  = \int_{0}^{t} f_{Y}(t/x) f_X(x) \d x$.
+
+\begin{solution}
+No. The integration bounds are not correct, which is easy to see. The harder part is that the Jabobian is missing. Even when students don't know this, they can guess, based on the 1D case, that there must be function to compensate  for the change in $f_{Y}$, because we divide $t$ by $x$.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Claim: $\E{h(Y)Y | X} = h(Y) \E{Y|X}$.
+
+\begin{solution}
+False.
+\end{solution}
+\end{truefalse}
+
+
+\begin{truefalse}
+Claim: $\E{h(Y)|Y} = h(Y)\E{1|Y} = h(Y)\cdot 1 = h(Y)$.
+
+\begin{solution}
+True.
+\end{solution}
+\end{truefalse}
+
+
+
+\begin{truefalse}
+Let $g(x) =\E{Y|X=x} = \sum_{y=-\infty}^{\infty} y \P{Y=y|X=x}$.
+Claim: the following rv
+\begin{equation}
+\label{eq:11}
+g(X) = \sum_{y=-\infty}^{\infty} y \P{Y=y|X=X}
+\end{equation}
+is well-defined.
+
+\begin{solution}
+False. The final condition $X=X$ is nonsense.
+\end{solution}
+\end{truefalse}
+
+
+\begin{truefalse}
+Claim: $\V{X|Y} = \E{X^2|Y} - (\E{X|Y})^{2}$.
+
+\begin{solution}
+It's true.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Claim: $\V{\E{X|Y}} = \E{X^2|Y} - (\E{X|Y})^{2}$.
+
+\begin{solution}
+It's false. The first term of the RHS should be $\E{(\E{X|Y})^{2}}$. The second term is also wrong: it must be $(\E{Y})^{2}$. Another  way to see why the claim, is like this. The LHS takes the variance of the rvs $\E{X|Y}$. Thus, the LHS is some constant (probably $>0$). The RHS still depends on $Y$, hence are rvs.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+We have two rvs $X$ and $Y$, such that $X$ is independent of $Y$. Claim:  the fact that $X$  is independent of $Y$ does not imply that $Y$  is independent of $X$.
+
+\begin{solution}
+It's false. Independence is symmetric.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Claim: if $X$ is independent from $Y$, then $\E{\V{Y|X}} = \V Y$.
+
+\begin{solution}
+correct. $\V{Y|X}$ is a rv, while $\V{Y}$ is a number. By taking the expectation of $\V{Y|X}$ we reduce the rv to a number.
+The book writes, as a property, that $\E{Y|X} = \E{Y}$ when $Y,X$ are independent. We use the same property here for the variance.
+\end{solution}
+\end{truefalse}
+
+
+
+\end{document}
