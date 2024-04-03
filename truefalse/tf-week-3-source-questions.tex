@@ -102,7 +102,7 @@ It's false.
 Let $X$ be a discrete rv on the numbers $\{a_{i}\}_{i=1}^{\infty}$ with $a_{i} \in \R$.
 Claim: the PMF of $X$ can be found by $f_{X}(x) = F_{X}'(x)$ for $x\in \{a_{i}\}_{i=1}^{\infty}$.
 \begin{solution}
-It's false. The PMF does not have a derivative as $a_{i}$.
+It's false. The PMF does not have a derivative (in the proper sense) at $a_{i}$.
 \end{solution}
 \end{truefalse}
 
@@ -112,6 +112,51 @@ It's false. The PMF does not have a derivative as $a_{i}$.
     \begin{solution}
         False. $Y=X^2$ is not a strictly increasing (or decreasing) function, so the change of variables formula cannot be applied.
     \end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Let $X \sim \Gamm{n,\lambda}$, then $\E{X^{k}} = \frac{n+k-1}{\lambda} \E{X^{k-1}}$ for $k \in \N = \{0, 1, 2, \ldots\}$.
+Claim, for $c\in \N$,
+\begin{equation}
+\E{X^{c}} =  \frac{(n+c-1)!}{(n-1)!\lambda^{c}}.
+\end{equation}
+    \begin{solution}
+        TRUE,
+        \\This expression is equivalent to
+        \\$$\E{X^{c}} = \frac{\Gamma(n+c)}{\Gamma(n)} = \frac{(n+c-1)!}{(n-1)!}$$
+        \\This is defined as the c-th moment for Gamma(n, 1). (See Blitzstein page 390)
+
+
+    \end{solution}
+\end{truefalse}
+
+%Alternate version
+\begin{truefalse}
+Let $X \sim \Gamm{n,\lambda}$, then the c-th moment is given with the expression below. Here n is an integer.
+\\$$\E{X^{c}} =  \frac{(n+c-1)!}{(n-1)!}$$
+    \begin{solution}
+        FALSE,
+        \\It should be:
+        \\$$\E{X^{c}} = \frac{1}{\lambda^{c}}\frac{\Gamma(n+c)}{\Gamma(n)} = \frac{1}{\lambda^{c}}\frac{(n+c-1)!}{(n-1)!}$$
+        \\This is defined as the c-th moment for Gamma(n, $\lambda$). (See Blitzstein page 390 )
+
+
+    \end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+  Let $X$ and $Y$ be independent discrete rvs, $T = X + Y$. Claim:
+  $$F_T(t) = \sum_x F_X(x - t) p_X(x)$$
+\begin{solution}
+  False, it should be $F_Y(t - x)$.
+  Variations:
+  \begin{itemize}
+  \item True
+  \item False with $p_X(t)$
+  \item False with $\sum_x p_Y(t -  x) p_X(x)$
+  \item False with $\sum_{x=0}^t F_Y(t - x) p_X(x)$
+  \end{itemize}
+\end{solution}
 \end{truefalse}
 
 \end{document}
