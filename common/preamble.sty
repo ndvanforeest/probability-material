@@ -9,7 +9,6 @@
 \usepackage[english]{babel}
 \usepackage{mathtools,amsthm,amssymb,amsmath}
 
-%\usepackage{fouriernc}
 \usepackage{fourier}
 \usepackage{hyperref}
 \usepackage[capitalize]{cleveref}
@@ -48,13 +47,6 @@
 \Newassociation{hint}{Hint}{hint}
 \renewcommand{\Hintlabel}[1]{\emph{h.#1.}}
 \renewcommand{\Solutionlabel}[1]{\emph{s.#1.}}
-%\renewcommand{\Hintlabel}[1]{\textbf{h.#1.}}
-%\renewcommand{\Solutionlabel}[1]{\textbf{s.#1.}}
-%\AtEndEnvironment{exercise}{\clearpage} %  each exercise on a new page
-% \BeforeBeginEnvironment{hint}{\clearpage} %  each exercise on a new page
-% \BeforeBeginEnvironment{solution}{\clearpage} %  each exercise on a new page
-%\AtBeginEnvironment{hint}{\clearpage} %  each exercise on a new page
-%\AtEndEnvironment{exercise}{\clearpage} %  each exercise on a new page
 }
 
 \opt{justhints}{
@@ -72,19 +64,10 @@
 
 % I don't like slanted fonts in the exercises
 \theoremstyle{definition}
-% \newtheorem{theorem}{Theorem}[section]
-% \newtheorem{exercise}{Ex}[section]
-% \newtheorem{remark}{Remark}[section]
-% \makeatletter
-% \def\@endtheorem{~\newline \noindent\rule[8pt]{2.5cm}{0.4pt}\@endpefalse}
-% \makeatother
-
-% Don't set theorem counter here because that forces you to use the book or report style for all documents, and that is a pain.
-% It's better to include the number scheme in the document themselves.
-% \newtheorem{theorem}{Theorem} %[chapter]
-% \newtheorem{exercise}[theorem]{Ex}
-% \newtheorem{remark}[theorem]{Remark}
-%+LaTeX_HEADER: \newtheorem{exercise}{Ex}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{exercise}{Ex}[section]
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{truefalse}[exercise]{TF}
 
 
 \crefname{equation}{}{}
