@@ -113,11 +113,26 @@ True. This is just a bonus to stress the importance of the definition of conditi
 
 
 \begin{truefalse}
-Let $X$ be a continuous rv with support $(0, \infty)$. Claim:
+Let $X$ be a continuous rv with support $(0, \infty)$. Claim: for $x>0$,
 \begin{equation}
 \label{eq:6}
-\E{X|X>x}>\E{X}, \quad x>0.
+\E{X|X>x}>\E{X}.
 \end{equation}
+\begin{solution}
+True.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Let $X \sim \Exp{\lambda}$; we write $f_{X}$ for the density of $X$.
+Claim:  all steps in the following lines are correct.
+\begin{align*}
+ f_{X}(x|X>s) &= \frac{\P{X>s|X=x}f_{X}(x)}{\P{X>s}} = \frac{ \1{x > s} \lambda e^{-\lambda x}}{e^{-\lambda s}}. \\
+&  \implies \\
+    \E{X|X>s} &= \int^{\infty}_{s} x \lambda e^{-\lambda(x-s)} dx\\
+    &= \int^{\infty}_{0}(x + s) \lambda e^{-\lambda x} dx \\
+    &= \int^{\infty}_{0}x  \lambda e^{-\lambda x} dx + \int^{\infty}_{0} s \lambda e^{-\lambda x} dx.
+\end{align*}
 \begin{solution}
 True.
 \end{solution}
