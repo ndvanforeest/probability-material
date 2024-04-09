@@ -8,7 +8,11 @@ Read BH.9.6.1 first. We will redo the computations and check the results with si
 
 \begin{exercise}
 We need to model the distribution of an individual demand $X$.
-As an example, we can use the beta distribution. In the example, $\mu$ and $\sigma$ are assumed as given, but for the beta distribution we need an $a$ and a $b$. One way is to solve by hand for $a$ and $b$ for given $\mu$ and $\sigma$. However, we can also be lazy and let the computer do the work. Here is the code to do that.
+As an example, we can use the beta distribution.
+In the example, $\mu$ and $\sigma$ are assumed as given, but for the beta distribution we need an $a$ and a $b$.
+One way is to solve  for $a$ and $b$ for given $\mu$ and $\sigma$.
+However, we can also be lazy and let the computer do the work.
+Here is the code to do that.
 
 Explain how this code works. (You can use the relevant documentation on the web on how the function fsolve works.) Why do I use $\mu=1/2$ and $\sigma^{2}=1/12$ as test case? Are the $a$ and $b$ that comes out of the solver correct? What does the final check do?
 \begin{minted}[]{python}
