@@ -1,6 +1,22 @@
 \documentclass[tf-tutorial-all.tex]{subfiles}
 \begin{document}
 
+\begin{truefalse}
+  The central limit theorem in its approximation form states that for
+  rvs $X_i$ with mean $\mu$ and variance $\sigma^2$.
+  $$ n^{-1}\sum_{i=1}^n X_i = \bar X_n \stackrel{\cdot}\sim \Norm{\mu, \sigma^2 \sqrt{n}} $$
+\begin{solution}
+False. The $X_i$'s need to be independent and if so the variance would be $n^{-1}\sigma^2$.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+  Let $V \sim \Chi^2_n$. Claim: For large $n$, $V \stackrel{\cdot}\sim \Norm{n, 2n}$.
+\begin{solution}
+True.
+\end{solution}
+\end{truefalse}
+
 
 
 \end{document}
