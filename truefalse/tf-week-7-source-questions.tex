@@ -19,6 +19,14 @@ True.
 
 \begin{truefalse}
 
+Let $X_{n}$ be an unknown distribution with mean $\mu $ and variance $\sigma^{2}$. If $\bar{X}_{n} \to \Norm{\mu, \frac{\sigma}{n}}$ as $n \to \infty$
+then X must be distributed as normal, since filling in $ n=1 $ results in $\bar{X}_{n} \sim \Norm{\mu, \sigma^{2}}$
+\begin{solution}
+False, most of the distributions have $\bar{X}_{n} \to \Norm{\mu, \frac{\sigma}{n}}$ as $n \to \infty$. This is the basis of CLT. 
+\\Also note $X $ instead of $\bar{X}$. X still has the same distribution as it had. The distribution of $\bar{X}_{n}$ converges to $\Norm{\mu, \frac{\sigma^{2}}{n}} $ as $n \to \infty$
+
+=======
+
 Let $X \sim \Pois{\lambda}$ then $$\left( \frac{ \sum^{n}_{i=1} X_{i}}{\sqrt{n} \sqrt{\lambda}} - \sqrt{n}\sqrt{\lambda} \right) \to \Norm{0,1} \quad \text{as } n \to \infty$$.
 \begin{solution}
 Correct\\
@@ -28,8 +36,7 @@ $$ = \left( \frac{ \sum^{n}_{i=1} X_{i}}{\sqrt{n}\lambda} - \sqrt{n}\sqrt{\lambd
 $$
 \to \Norm{0,1} \quad \text{as } n \to \infty$$
 More generally
-$$ \sqrt{n}\left(\frac{\bar{X}_{n} - \mu}{\sigma}  \right) \to \Norm{0,1} \quad \text{as } n \to \infty$$.
-=======
+$$ \sqrt{
 Let $T_n = \frac{Z}{\sqrt{V_n/n}}$, with $Z\sim \mathcal{N}(0,1)$, $V_n\sim \chi_n^2$, Z and V independent. Claim:
 because by SLLN $\frac{V_n}{n}\rightarrow \E{Z_1^2}$ with probability 1 $T_n$ approaches the standard normal distribution.
 \begin{solution}
