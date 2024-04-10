@@ -17,6 +17,18 @@ True.
 \end{solution}
 \end{truefalse}
 
-
+\begin{truefalse}
+Let $X \sim \Pois{\lambda}$ then $$\left( \frac{ \sum^{n}_{i=1} X_{i}}{\sqrt{n} \sqrt{\lambda}} - \sqrt{n}\sqrt{\lambda} \right) \to \Norm{0,1} \quad \text{as } n \to \infty$$.
+\begin{solution}
+Correct\\
+$$\sqrt{n} \left( \frac{ \bar{X}_{n}  - \lambda}{\sqrt{\lambda}}  \right) $$ 
+$$\sqrt{n} \left( \frac{ \frac{1}{n} \sum^{n}_{i=1} X_{i}  }{\sqrt{\lambda}} - \sqrt{\lambda}  \right) $$ 
+$$ = \left( \frac{ \sum^{n}_{i=1} X_{i}}{\sqrt{n}\lambda} - \sqrt{n}\sqrt{\lambda} \right)$$
+$$
+\to \Norm{0,1} \quad \text{as } n \to \infty$$
+More generally
+$$ \sqrt{n}\left(\frac{\bar{X}_{n} - \mu}{\sigma}  \right) \to \Norm{0,1} \quad \text{as } n \to \infty$$.
+\end{solution}
+\end{truefalse}
 
 \end{document}
