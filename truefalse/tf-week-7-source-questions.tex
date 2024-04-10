@@ -18,11 +18,37 @@ True.
 \end{truefalse}
 
 \begin{truefalse}
+
 Let $X_{n}$ be an unknown distribution with mean $\mu $ and variance $\sigma^{2}$. If $\bar{X}_{n} \to \Norm{\mu, \frac{\sigma}{n}}$ as $n \to \infty$
 then X must be distributed as normal, since filling in $ n=1 $ results in $\bar{X}_{n} \sim \Norm{\mu, \sigma^{2}}$
 \begin{solution}
 False, most of the distributions have $\bar{X}_{n} \to \Norm{\mu, \frac{\sigma}{n}}$ as $n \to \infty$. This is the basis of CLT. 
 \\Also note $X $ instead of $\bar{X}$. X still has the same distribution as it had. The distribution of $\bar{X}_{n}$ converges to $\Norm{\mu, \frac{\sigma^{2}}{n}} $ as $n \to \infty$
+
+=======
+
+Let $X \sim \Pois{\lambda}$ then $$\left( \frac{ \sum^{n}_{i=1} X_{i}}{\sqrt{n} \sqrt{\lambda}} - \sqrt{n}\sqrt{\lambda} \right) \to \Norm{0,1} \quad \text{as } n \to \infty$$.
+\begin{solution}
+Correct\\
+$$\sqrt{n} \left( \frac{ \bar{X}_{n}  - \lambda}{\sqrt{\lambda}}  \right) $$ 
+$$\sqrt{n} \left( \frac{ \frac{1}{n} \sum^{n}_{i=1} X_{i}  }{\sqrt{\lambda}} - \sqrt{\lambda}  \right) $$ 
+$$ = \left( \frac{ \sum^{n}_{i=1} X_{i}}{\sqrt{n}\lambda} - \sqrt{n}\sqrt{\lambda} \right)$$
+$$
+\to \Norm{0,1} \quad \text{as } n \to \infty$$
+More generally
+$$ \sqrt{
+Let $T_n = \frac{Z}{\sqrt{V_n/n}}$, with $Z\sim \mathcal{N}(0,1)$, $V_n\sim \chi_n^2$, Z and V independent. Claim:
+because by SLLN $\frac{V_n}{n}\rightarrow \E{Z_1^2}$ with probability 1 $T_n$ approaches the standard normal distribution.
+\begin{solution}
+It's True, see BH 480
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Let $Z_1^2 + \cdots + Z_n^2 = V \sim \chi^2_n$, where $Z_1, \cdots ,Z_n \sim \mathcal{N}(0,1)$ are i.i.d. and given $\E{Z_1^4} = 3$. Claim:
+$\V{V} = 2n^2$
+\begin{solution}
+The claim is false: $\V{V} = n\V{Z_1^2} = n\left(\E{Z_1^4} - \E{Z_1^2}^2\right) = 2n$
 
 \end{solution}
 \end{truefalse}
