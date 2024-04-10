@@ -18,6 +18,18 @@ True.
 \end{truefalse}
 
 \begin{truefalse}
+
+Let $X \sim \Pois{\lambda}$ then $$\left( \frac{ \sum^{n}_{i=1} X_{i}}{\sqrt{n} \sqrt{\lambda}} - \sqrt{n}\sqrt{\lambda} \right) \to \Norm{0,1} \quad \text{as } n \to \infty$$.
+\begin{solution}
+Correct\\
+$$\sqrt{n} \left( \frac{ \bar{X}_{n}  - \lambda}{\sqrt{\lambda}}  \right) $$ 
+$$\sqrt{n} \left( \frac{ \frac{1}{n} \sum^{n}_{i=1} X_{i}  }{\sqrt{\lambda}} - \sqrt{\lambda}  \right) $$ 
+$$ = \left( \frac{ \sum^{n}_{i=1} X_{i}}{\sqrt{n}\lambda} - \sqrt{n}\sqrt{\lambda} \right)$$
+$$
+\to \Norm{0,1} \quad \text{as } n \to \infty$$
+More generally
+$$ \sqrt{n}\left(\frac{\bar{X}_{n} - \mu}{\sigma}  \right) \to \Norm{0,1} \quad \text{as } n \to \infty$$.
+=======
 Let $T_n = \frac{Z}{\sqrt{V_n/n}}$, with $Z\sim \mathcal{N}(0,1)$, $V_n\sim \chi_n^2$, Z and V independent. Claim:
 because by SLLN $\frac{V_n}{n}\rightarrow \E{Z_1^2}$ with probability 1 $T_n$ approaches the standard normal distribution.
 \begin{solution}
@@ -30,6 +42,7 @@ Let $Z_1^2 + \cdots + Z_n^2 = V \sim \chi^2_n$, where $Z_1, \cdots ,Z_n \sim \ma
 $\V{V} = 2n^2$
 \begin{solution}
 The claim is false: $\V{V} = n\V{Z_1^2} = n\left(\E{Z_1^4} - \E{Z_1^2}^2\right) = 2n$
+
 \end{solution}
 \end{truefalse}
 
