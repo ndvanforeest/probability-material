@@ -18,11 +18,12 @@ True. Check the definition.
 \end{truefalse}
 
 \begin{truefalse}
-Let $\{X_{n}\}$ be a sequence of rvs with unknown distribution but with finite mean $\mu $ and variance $\sigma^{2}$.
-If the average $\bar{X}_{n} \to \Norm{\mu, \sigma/n}$ as $n \to \infty$ then $\bar X_{n}$ must be normally distributed for all $n$, since filling in $ n=1 $ results in $\bar{X}_{n} \sim \Norm{\mu, \sigma^{2}}$
+Let $\{X_{n}\}$ be a sequence of i.i.d. rvs with an unknown distribution but with finite mean $\mu $ and variance $\sigma^{2}$.
+If the average $\bar{X}_{n} \to \Norm{\mu, \sigma^{2}/n}$ as $n \to \infty$ then $  X_{n}$ must be normally distributed for all n. 
 \begin{solution}
-It's False. Given a sequence of rvs $\{X_{n}\}$ with finite mean and variance,  $\bar{X}_{n} \to \Norm{\mu, \sigma/n}$ as $n \to \infty$ by the CLT.
-\\Also note $X $ instead of $\bar{X}$. X still has the same distribution as it had. The distribution of $\bar{X}_{n}$ converges to $\Norm{\mu, \frac{\sigma^{2}}{n}} $ as $n \to \infty$
+It's False. Given a sequence of rvs $\{X_{n}\}$ with finite mean and variance,  $\bar{X}_{n} \to \Norm{\mu, \sigma^{2}/n}$ as $n \to \infty$ by the CLT.
+This holds for all sequences of RVS. Not only the normal distribution. 
+
 \end{solution}
 \end{truefalse}
 
