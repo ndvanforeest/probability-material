@@ -57,4 +57,20 @@ It's false: $\V{V} = n\V{Z_1^2} = n\left(\E{Z_1^4} - \E{Z_1^2}^2\right) = 2n$.
 \end{solution}
 \end{truefalse}
 
+\begin{truefalse}
+Let $\bar{Z}_n=\frac{1}{n}\sum_{i=1}^nZ_i$ where $Z_i\sim\Norm{0,1}$, $i=1,\dots,n$. Claim: $\bar{Z}_n\sim\Norm{0,\frac{1}{n}}$, s.t. $n\bar{Z}_n^2\sim\chi^2_1$.
+
+\begin{solution}
+True. $\sqrt{n}\bar{Z}_n\sim\Norm{0,1}\implies n\bar{Z}_n^2\sim\chi^2_1$.
+\end{solution}
+\end{truefalse}
+
+\begin{truefalse}
+Let $Z_i \sim \Norm{0,1}$, $i=1,\dots,n$ with $V_n=\sum_{i=1}^nZ_i^2$. Claim: $\frac{Z_1}{\sqrt{V_n/n}} \sim t_n$.
+
+\begin{solution}
+False. $Z_1$ and $V_n$ are dependent.
+\end{solution}
+\end{truefalse}
+
 \end{document}
