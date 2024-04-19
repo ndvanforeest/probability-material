@@ -31,7 +31,10 @@ Yes.
 
 \begin{truefalse}
 Let $X_{(i)}, i = 1, \ldots, n$ be the order statistic of $\{X_{i}, i=1, \ldots, n\}$.
-Claim: $\P{X_{(j)}\leq x} = \sum_{k=0}^{n}{n \choose k} F(x)^k (1-F(x))^{n-k}$.
+Claim:
+\begin{equation*}
+\P{X_{(j)}\leq x} = \sum_{k=0}^{n}{n \choose k} F(x)^k (1-F(x))^{n-k}.
+\end{equation*}
 
 \begin{solution}
 False, check theorem 8.6.3.
@@ -43,7 +46,10 @@ The LHS depends on $j$, the RHS not, hence it must be false, unless the probabil
 
 \begin{truefalse}
 Let $X_{(i)}, i = 1, \ldots, n$ be the order statistic of the continuous rvs $\{X_{i}, i=1, \ldots, n\}$.
-Claim: $f_{(j)}(x) \d x = n f(x) \d x {n \choose j} F(x)^j (1-F(x))^{n-j}$.
+Claim:
+\begin{equation*}
+f_{(j)}(x) \d x = n f(x) \d x {n \choose j} F(x)^j (1-F(x))^{n-j}.
+\end{equation*}
 \begin{solution}
 It's false, theorem 8.6.4.
 \end{solution}
@@ -54,24 +60,9 @@ It's false, theorem 8.6.4.
 \begin{truefalse}
 Claim: It is a good idea to conceptualize the order statistic as a set rather than as a list.
 \begin{solution}
-No. Elements in a set are not ordered, elements in a sequence or list are.
+False. Elements in a set are not ordered, elements in a sequence or list are.
 \end{solution}
 \end{truefalse}
-
-
-% \begin{truefalse}
-% Claim: The order statistic is a sorted set of numbers.
-
-% \vspace{0.5cm}\noindent  Which of the following options applies?
-% \begin{enumerate}
-% \item The claim is correct.
-% \item The claim is false.
-% \end{enumerate}
-% % \begin{solution}
-% % No. Elements in a set are not ordered, elements in a sequence or list are.
-% % \end{solution}
-% \end{truefalse}
-
 
 \begin{truefalse}
 Let $X_{(i)}, i = 1, \ldots, n$ be the order statistic of the continuous iid rvs $\{X_{i}, i=1, \ldots, n\}$.
@@ -81,13 +72,12 @@ It's true.
 \end{solution}
 \end{truefalse}
 
-\begin{truefalse}
-Given two positive iid rvs $X$ and $Y$. Let $L=\min\{X,  Y\}, M = \max\{X, Y\}$. Claim: $\E{L|M=3}=3/2$.
-
-\begin{solution}
-It's false. For instance, take $X, Y \sim \Exp{10}$.
-\end{solution}
-\end{truefalse}
+% \begin{truefalse}
+% Given two positive iid rvs $X$ and $Y$. Let $L=\min\{X,  Y\}, M = \max\{X, Y\}$. Claim: $\E{L|M=3}=3/2$.
+% \begin{solution}
+% It's false. For instance, take $X, Y \sim \Exp{10}$.
+% \end{solution}
+% \end{truefalse}
 
 \begin{truefalse}
 The continuous rvs $\{X_{i}\}$ with support on $(0, \infty)$ are idd, and $S_n=\sum_{i=1}^n X_{i}$.
@@ -97,7 +87,7 @@ Claim: for some $x$ and $n$,
 \E{X_{n}| S_{n-1} = x} = S_n/n.
 \end{equation}
 \begin{solution}
-It's false because the condition is on $x$ being given. On the LHS we have an $x$, but on the RHS there is no $x$.
+It's false.  The condition is on some given $x$, so  on the LHS we have an $x$. HOwever, on the RHS there is no $x$. Besides this, we condition on $S_{n-1}$, so outcomes dependent on $X_{1}, X_{2}, \ldots, X_{n-1}$, but $X_{n}$ is independent of these rvs.
 \end{solution}
 \end{truefalse}
 
@@ -139,7 +129,7 @@ True.
 \end{truefalse}
 
 \begin{truefalse}
-Let X and Y be two r.v.s. Claim:
+Let X and Y be two rvs. Claim:
 If all is well defined and finite, $\E{X|Y} = c$, where c is some constant
 \begin{solution}
 It's False, $\E{X|Y}$ is a function of Y, which is a random variable.
@@ -149,9 +139,8 @@ It's False, $\E{X|Y}$ is a function of Y, which is a random variable.
 \begin{truefalse}
 Let X be an rv and A an event. Claim: $\E{X\mid\1{A}} = \E{X\mid A}$
 \begin{solution}
-  False, $\E{X\mid\1{A} = 1} = \E{X\mid A}$.
-  
-  Alternative: $\E{X\1{A}} = \E{X\mid A} \P{A}$
+  False. One way to see this is to note that the LHS is a rv, and the RHS is number. In fact, $\E{X\mid\1{A} = 1} = \E{X\mid A}$.
+  An alternative question: Is $\E{X\1{A}} = \E{X\mid A} \P{A}$?
 \end{solution}
 \end{truefalse}
 
