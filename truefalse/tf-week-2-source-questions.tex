@@ -58,7 +58,7 @@ Variations on this type of question.
 \end{truefalse}
 
 \begin{truefalse}
-$p(k) = \frac{1-x}{1-x^{n+1}} x^k$ with $k \in \{0, \dots, n\}$ is a valid PMF for any $x$.
+Claim: $p(k) = \frac{1-x}{1-x^{n+1}} x^k$ with $k \in \{0, \dots, n\}$ is a valid PMF for any $x$.
 \begin{solution}
   False. Not if $x = 0$ or $x = 1$.
 \end{solution}
@@ -107,7 +107,7 @@ True, Step 2 is wrong. Compare the Taylor series for $e^{x}$.
 \end{truefalse}
 
 \begin{truefalse}
-Suppose $f = a x + b$ with $a\neq 0$, then there is a $c$ such that $c e^{-(f(x))^2}$ is the pdf of a normal distribution.
+Claim: suppose $f(x) = a x + b$ with $a\neq 0$, then there is a $c$ such that $c e^{-(f(x))^2}$ is the pdf of a normal distribution.
 \begin{solution}
 It's false in general: when $c=0$, the density is a constant on an infinite support, hence it cannot be the pdf of a normal distribution (because that has finite expectation).
 
@@ -137,7 +137,7 @@ True. $M_{X-Y}(s)=\E{e^{s(X-Y)}}=\E{e^{sX}}\E{e^{-sY}}=M_X(s)M_Y(-s)$.
 \end{truefalse}
 
 \begin{truefalse}
-Given $X\sim \Pois{\lambda}$, $Y \sim \Pois{\mu}$, $X$ and $Y$ are independently, and $\E{e^{tX}} = e^{-\lambda}\sum^{\infty}_{k=0} \frac{(\lambda e^t)^k}{k!}$.
+Given $X\sim \Pois{\lambda}$, $Y \sim \Pois{\mu}$, $X$ and $Y$ are independent, and $\E{e^{tX}} = e^{-\lambda}\sum^{\infty}_{k=0} \frac{(\lambda e^t)^k}{k!}$.
 Claim: $M_{X+Y}(t) = e^{(\lambda \mu)(e^t-1)}$.
 \begin{solution}
 It's false. By Taylor series we find$ \E{e^{tX}} = e^{-\lambda} e^{\lambda e^t}$ and by independence $M_{X+Y}(t) = M_X(t) \cdot M_Y(t) = e^{\lambda(e^t-1)} e^{\mu(e^t-1)} = e^{(\mu + \lambda)(e^t-1)}$
