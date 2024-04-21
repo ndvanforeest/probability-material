@@ -1,34 +1,38 @@
 \input{header.tex}
 \setcounter{theorem}{85}
 \begin{exercise}BH.7.86
-The concepts discussed here are a standard part of the education of GPs (i.e., medical doctors), and in data science in general.
+The concepts discussed here are a standard part of the education of medical doctors, and in data science in general.
 \begin{hint}
 The challenge for you is to try to understand the mathematics behind these concepts.
 Read the exercise a number of times. I found it quite difficult to capture the concepts in formulas. (I solved it once. After two weeks,  I tried to solve it again, and found it just as hard as the first time.) Once you have the model, the technical part itself is simple.
 \end{hint}
 \begin{solution}
-a. It is given that $\P{T\leq t\given D=1} = G(t)$ and $\P{T\leq t\given D=0} = H(t)$. From Theorem 5.3.1.i,  we have that we can associate a rv. to a CDF F. Sometimes we say that the CDF $F$ /induces/ a rv. $X$.  So let us use this here to say that $G$ induces the rv. $T_1$ and $H$ induces $T_0$.
-So the /sensitivity/ is $\P{T_1>t_0} = 1-G(t_0)$ and the /specificity/ is $\P{T_1<t_0} = H(t_0)$.
+a.
+It is given that $\P{T\leq t\given D=1} = G(t)$ and $\P{T\leq t\given D=0} = H(t)$.
+In general, by Theorem 5.3.1.i, we can associate a rv to a CDF $F$; we say that the CDF $F$ \emph{induces} a rv $X$.
+So, in the present case,   $G$ induces the rv $T_1$, and $H$ induces $T_0$.
+With this, the sensitivity of the threshold $t_{0}$ is $\P{T_1>t_0} = \bar G(t_{0}) = 1-G(t_0)$, and the specificity is $\P{T_1<t_0} = H(t_0)$. Write $\bar H(t) = 1- H(t)$.
 
-To make the ROC plot, I first made two plots, one of the sensitivity and the other for 1 minus the specificity, i.e., $1-H(t_0)$.
-Then, in the ROC plot, we put a specificity of $s$ on the \(x\)-axis, then we search for a $t$ such that $1-H(t) = s$, and then we plug this $t$ into $1-G(t)$ to get the sensitivity.
-To help you understand this better, check that $s=0 \implies t = b \implies 1-G(t) = 0$.
-Moreover, check that $s=1\implies t=a \implies 1- G(t) = 1$.
-Hence, the ROC curve starts in the origin and stops at the point $(1,1)$.
+The ROC plot is the curve $s\to (\bar H(s), \bar G(t))$ where $s\in [a, b]$ parametrizes this curve in the $x,y$ plane.
+Note that when $s=a$, $\bar H(a), \bar G(a)) = (1,1)$, and for $s=b$, $(\bar G(b), \bar H(b)) = (0,0)$.
+So, the ROC curve starts at the point $(1,1)$ and moves to $(0,0)$ when $s$ increases from $a$ to $b$.
 
-With this insight, the area under the ROC curve can be written as
+What is the area under the ROC curve?
+Consider a tiny change in the parametrisation from $s$ to $s + \d s$.
+At $s$ the height of the ROC curve is approx $\bar G(s)$, and the increase of the ROC curve along the $x$-axis is $h(s) \d s$, where $h = H'$ is the density of $H$.
+Hence, the total area under the ROC curve is $\int_{a}^{b} \bar G(s) h(s) \d s$.
+
+Next, the joint density of $T_{0}$ and $T_{1}$ is $f_{T_{0}, T_{1}}(s, t) = h(s) g(t)$. Therefore,
 \begin{align*}
-\int_0^1 (1-G(H^{-1}(1-s))) \d s  =
-1 - \int_0^1 G(H^{-1}(1-s)) \d s  =
-1 - \int_a^b G(t) h(t) \d t,
+  \P{T_{1} > T_{0}}
+  &= \int_{a}^{b}\int_s^{b} h(s) g(t) \d t \d s = \int_a^{b} h(s) \bar G(s) \d s.
 \end{align*}
-where, in the last step, we use the 1D change of variable $H(t)=1-s \implies h(t) \d t = -\d s$. It remains to  interpret the integral, so let's plug in the definitions:
-\begin{align*}
-\int_a^b G(t) h(t) \d t =
-\int_a^b \P{T_1\leq t} f_{T_0}(t) \d t =
-\int_a^b \P{T_1\leq T_0\given T_0 = t} f_{T_0}(t) \d t =  \P{T_{1\leq T_0}}.
-\end{align*}
+Clearly, the two integrals are the same.
 
+b. when $g=h$, then $G(t)=H(t)$. The ROC curve is a line with slope 1. The area under the curve is $1/2$, which should be the case because when $g=h$, the test does not say anything useful about $T_{0}$ or $T_{1}$.
+
+In the second case, the curve moves up very steeply when $s$ moves down from $b$.
+Then the area under the ROC curve is nearly one, and the test is very informative.
 \end{solution}
 \end{exercise}
 \input{trailer.tex}

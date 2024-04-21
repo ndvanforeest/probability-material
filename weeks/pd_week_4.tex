@@ -54,18 +54,16 @@ We have solved the recursion, i.e., $T(n)=n-1$, and now we know that in whatever
 Here is the exercise in which we apply recursion to the negative hypergeometric distribution.
 
 \begin{exercise}
-Use recursion to find the expected number $T(b,w)$ of black balls drawn at random without replacement from an urn containing $w\geq 1$ white balls and $b$ black balls \emph{before} we draw 1 white ball.
+Write $T(b,w)$ for the number of black balls drawn at random without replacement from an urn containing $w\geq 1$ white balls and $b$ black balls \emph{before} we draw 1 white ball. Use recurstion to show that
 \begin{align}
   \label{eq:727}
-\E{T(b,w)} = \frac{b}{w+1}
+\E{T(b,w)} = \frac{b}{w+1}.
 \end{align}
-
-In other words, the question is to use recursion to compute  the expectation of a negative hypergeometric distribution with parameters $w,b, r=1$.
-
+In other words, the question is to use recursion to compute  the expectation of a negative hypergeometric distribution with parameters $w,b$ and $r=1$.
 It is convenient to write $N(b,w) = \E{T(b,w)}$; it saves ink and it gives more overview of what we do.
 
 Compare this with the geometric random variable: then we ask how often to throw, for instance, a coin \emph{before} we see tails.
-The coin can be seen as an urn with one white ball (tails) and an infinite number of black ball (heads).
+The coin can be seen as an urn with an infinite number of white balls (tails) and an infinite number of black ball (heads) but such that ratio of black and white balls is such that $p=w/(b+w)$.
 Hence, the negative hypergeometric and geometric distributions are closely related.
 
 \begin{hint}
@@ -101,16 +99,19 @@ where we write $a=b/(b+w)$ for ease and overview.
 
 
 Now we need a real tiny bit of inspiration.
-The equation for $N(b,w)$ looks like a line with slope $a$.
-So, let's \emph{guess} that $N(w,b)=\alpha b$ for some $\alpha>0$.
+The equation for $N(b,w)$ looks like a line dependent on $b$ and with slope $a$. (In words, we see in the expression for $N(w, b)$ that the $b$ reduces by 1, but $w$ remains the same.)
+So, let's \emph{guess} that $N(w,b)=\alpha b + \beta$ for some $\alpha>0$ and $\beta$.
 Guessing is always allowed; if it works, we are done (since the recursion, together with the boundary condition, has a unique solution: just repeatedly applying it allows us to calculate all values).
 In general, you can make any guess whatsoever, but mind that only the good guesses work.
 
-So, trying the form $N(b, w) = \alpha b$ in the above equation for $N(b,w)$, we find that
+The value for $\beta$ follows directly from the boundary condition $N(0, w) = 0$ (we cannot pick a black ball if $b=0$). So $\alpha \cdot 0 + \beta = 0 \implies \beta = 0$.
+
+Continuing with the form $N(b, w) = \alpha b$ in the above equation for $N(b,w)$, we find that
 \begin{equation*}
 \alpha b = \frac{b}{w+b} (1+ \alpha (b-1)) \stackrel{\textrm{\tiny algebra}}{\implies} \alpha = \frac{1}{w+1} \implies  N(b,w) = \frac{b }{w+1}.
 \end{equation*}
-This is consistent with the boundary condition $N(0,w=0$. Hence, we can move from the case $b=0$ to the case with $b=1$, and so on, thereby proving the validity of the formula in general.
+This is consistent with the boundary condition $N(0,w)=0$.
+Hence, we can move from the case $b=0$ to the case with $b=1$, and so on, thereby proving the validity of the formula in general.
 \end{solution}
 \end{exercise}
 
@@ -166,41 +167,40 @@ Example BH.9.1.8 takes a few shortcuts to derive the expectation of the number o
 Use conditioning to close the arguments. (This is background material because this is quite hard.)
 \begin{solution}
 Let $X_{i}$ be the outcome of the $i$th throw of the coin.
-If $X_{i}=0$ for $0\leq i< n$ and $X_{n}=1$, we stop.
-Thus, the expected number of throws $T$ is given as $T=\inf\{n: X_n=1\}$.
+If $X_{i}=0$ for $1\leq i< n$ and $X_{n}=1$, we stop.
+Thus, the number of failures $T$ is given as $T=\inf\{n\geq 1: X_n=1\} - 1$.
+We subtract $1$ because when the first throw results in a $1$ (i.e., a head), we have 0 failures (of the 1 throws).
 
 Here is the first subtlety: we need to take the $\inf$ instead of the $\min$.
 The reason is that, formally, we might need to throw an infinite number of times.
 But, the minimum of an infinite set is not well defined, for instance $\min\{1/n: n=1, 2, 3, \ldots\}$ does not exist.
-To circumvent such problems we can use the infimum, because $\inf\{1/n : n = 1, 2, \ldots\} = 0$.
+To circumvent such problems we can the infimum, because $\inf\{1/n : n = 1, 2, \ldots\} = 0$.
 
-We are interested in $\E T = \E{T|X_{0}=0}$. With LOTE:
+We are interested in $\E T$. With LOTE:
 \begin{align*}
-  \E{T|X_0=0}
-  &= \E{T|X_0=X_1=0} \P{X_1=0} + \E{T|X_0=0, X_1=1} \P{X_1=1}\\
+  \E{T}
+  &= \E{T|X_1=0} \P{X_1=0} + \E{T|X_1=1} \P{X_1=1}.
 \end{align*}
-Now $\E{T|X_0=0, X_1=1} = 0$ because the first outcome resulted in a 1 so that we can stop throwing after this first throw.
-How about the other conditional expectation?
+Now $\E{T|X_1=1} = 0$ because the first outcome resulted in a 1 so that we can stop before having seen a failure.
 
-Here is the second subtlety. By memorylessness,
+How about the other conditional expectation? In this case,
 \begin{align*}
- \E{T-1|X_0=X_1=0} = \E{T|X_0=0}.
+  \E{T\mid X_{1} = 0}
+  &= \sum_{j=0}^{\infty} j \P{T=j|X_{1} = 0} \\
+  &= \sum_{j=0}^{\infty} j \P{T=j, X_{1} = 0}/\P{X_{1} = 0} \\
+  &= \frac{1}{q}\sum_{j=0}^{\infty} j \P{T=j, X_{1} = 0}.
 \end{align*}
-Why is that?
-Well, if I tell you that the first throw results in a $0$, then we need at least two throws, while if I don't tell you the outcome of the first throw, then the first success may occur on the very first throw.
-However, after the first throw resulting in a $0$, the process starts from scratch (which is what memorylessness means).
-
-With this,  and writing $\P{X_1=1}=p$, $\P{X_1=0} = 1-p = q$,
+Now  $\{T=0, X_{1} = 0\} = \varnothing$ and  $\{T=k, X_{1} = 0\} = \{T=k\}$ for $k\geq 1$, because $\{T=k\}=\{X_{1}= X_{2} = \cdots =X_{k} = 0, X_{k+1} = 1\}$ for $k\geq 1$.
+Therefore,
 \begin{align*}
-  \E{T|X_0=0}
-  &= \E{T|X_0=X_1=0} q + 0\cdot p \\
-  &= (1+\E{T-1|X_0=X_1=0}) q \\
-  &= (1+\E{T|X_0=0}) q  \\
-  &= q + q \E{T|X_0=0}.
+  \E{T\mid X_{1} = 0}
+  &= \frac{1}{q}\sum_{j=1}^{\infty} j \P{T=j}
+  = \frac{1}{q}\sum_{j=1}^{\infty} j pq^{j} \\
+  &= \sum_{j=1}^{\infty} j pq^{j-1}  =
+  = \sum_{j=0}^{\infty} (j+1) pq^{j}  = \E{T+1} \\
+  &= 1  + \E T.
 \end{align*}
-And this finally implies that $\E{T} = q/(1-q) = q/p$.
-
-Note that for the first success rv,  $\E{T|X_0=0, X_1=1} = 1$ instead of $0$.
+Thus, $\E{T|X_{1} = 0} = 1 + \E T$, exactly as BH claims in the example, but now we proved it by elementary means instead of relying on slick (but dangerous) arguments.
 \end{solution}
 \end{exercise}
 
