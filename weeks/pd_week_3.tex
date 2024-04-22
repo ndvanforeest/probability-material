@@ -376,7 +376,7 @@ We use a convolution sum. First note that the domain of $X$ and $Y$ is $0,1,2,\l
     &= e^{-(\lambda+\mu)} \sum_{k=0}^n \frac{1}{k!(n-k)!} \cdot \lambda^k\mu^{n-k}  \\
     &= \frac{e^{-(\lambda+\mu)}}{n!} \sum_{k=0}^n \frac{n!}{k!(n-k)!} \cdot \lambda^k\mu^{n-k}  \\
     &= \frac{e^{-(\lambda+\mu)}}{n!} \sum_{k=0}^n {n \choose k} \cdot \lambda^k\mu^{n-k}  \\
-    &= \frac{e^{-(\lambda+\mu)}}{n!} (\lambda + \mu)^k.
+    &= \frac{e^{-(\lambda+\mu)}}{n!} (\lambda + \mu)^n.
 \end{align}
 We recognize this as the PMF of a Poisson distribution with parameter $\lambda+\mu$. Hence, $Z \sim \Pois{\lambda + \mu}$.
 \end{solution}

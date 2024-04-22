@@ -43,10 +43,7 @@
 
 \begin{exercise}
 The lifetime $X$ of a machine is $\Exp{\lambda}$.
-
-a. Compute $\E{X \given X\leq \tau}$ where $\tau$ is some positive constant.
-
-b. As a \emph{check} on the result of a., use  Adam's law and LOTP to show that $\E{X} = \E{\E{X\given Y}} = 1/\lambda$, where $Y=\1{X\leq \tau}$.
+Compute $\E{X \given X\leq \tau}$ where $\tau$ is some positive constant.
 \begin{solution}
 Since $X\sim \Exp{\lambda}$,
 \begin{equation*}
@@ -64,32 +61,72 @@ we get
 &= \frac{1}{1-e^{-\lambda \tau}}\int_{0}^{\tau} \lambda t e^{-\lambda t} \d t.
 \end{align}
 Simplifying,
-\begin{align}
-\label{eq:926}
+\begin{align*}
 \int_0^{\tau} \lambda t e^{-\lambda t} \d t
 &= \left.- t e^{-\lambda t}\right|_{0}^{\tau} + \int_0^{\tau} e^{-\lambda t} \d t \\
 &= -\tau e^{-\lambda \tau} + \frac{e^{-\lambda \tau} -1}{-\lambda} \\
 &= \frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda},
-\end{align}
+\end{align*}
+hence
 \begin{align}
   \label{eq:925}
 \E{X|X\leq \tau}
-&= \frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda(1-e^{-\lambda \tau})}.
+= \frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda(1-e^{-\lambda \tau})}
+= \frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda \P{X\leq \tau}}.
 \end{align}
+\end{solution}
+\end{exercise}
 
-For part 2: by memorylessness, $\E{X\given X>\tau} = \tau + 1/\lambda$. Hence,
+We should check that with this result we can retrieve $\E X = 1/\lambda$. For this we need an intermediate result.
+\begin{exercise}
+Show that $\E{X | \1{A} = 1} = \E{X\mid A}$.
+\begin{solution}
+Here are some observations about sets. Using the sample space  $S$, the definition of probability, and the definition of a rv:
+\begin{align*}
+  \{\1{A} = 1\} &= \{s \in S : \1{A}(s) = 1\} = \{s \in S: s \in A\} = A, \\
+  \{\1{A} = 0\} &= \{s \in S : \1{A}(s) = 0\} = \{s \in S: s \not \in A\} = A^{c}, \\
+  \P{A} &= \P{ s\in S: s \in A}, \\
+  \P{X=x} &= \P{ s\in S: X(s) = x}, \\
+  \P{X=x, Y=y} &= \P{ s\in S: X(s) = x, Y(s)= y}.
+\end{align*}
+With these observations, we write the definitions of $\E{X|A}$ and $\E{X|Y=y}$ in complete form as
+\begin{align*}
+  \E{X|A} &= \frac{1}{\P{A}} \sum_{x} x \P{X=x, A} = \frac{1}{\P{A}} \sum_{x} x \P{s \in S: X(s)=x, s \in A},\\
+  \E{X|Y=y} &= \frac{1}{\P{Y=y}} \sum_{x} x \P{X=x, Y=y} = \frac{1}{\P{Y=y}} \sum_{x} x \P{s \in S: X(s)=x, Y(s) = y}.
+\end{align*}
+Combining all this:
+\begin{align*}
+  \E{X \mid \1{A}=1}
+  &= \frac{1}{\P{s\in S: \1{A}(s)=1}} \sum_{x} x \P{X=x, \1{A}=1} = \frac{1}{\P{A}} \sum_{x} x \P{s \in S: X(s)=x, \1{A}(s)=1},\\
+  &= \frac{1}{\P{A}} \sum_{x} x \P{X=x, A} = \E{X \mid A}.
+\end{align*}
+Likewise:
+\begin{align*}
+  \E{X \mid \1{A}=0}= \E{X \mid A^{c}}.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Use the above two exercises, Adam's law, and LOTP to show that $\E{X} = \E{\E{X\given Y}} = 1/\lambda$, where $Y=\1{X\leq \tau}$.
+
+Note that ${X\leq \tau}$ is an event, while $Y=\1{X \leq \tau}$ is a rv.
+Therefore the following is sloppy notation: $\E{\E{X\given X\leq \tau}}$, and when using, it is easy to get confused, because where is the random variable on which we should condition according to Adam's law? The exercise above addresses this point of confusion.
+\begin{solution}
+By memorylessness, $\E{X\given X>\tau} = \tau + 1/\lambda$. Hence,
 \begin{align}
   \label{eq:94}
 \E X
 &= \E{\E{X\given Y}}, \quad \text{Adam's law} \\
 &= \E{X\given Y=1}\P{Y=1} + \E{X\given Y=0}\P{Y=0}, \quad \text{LOTE}\\
 &= \E{X\given X\leq \tau}\P{X\leq \tau} + \E{X\given X>\tau} \P{X>\tau} \\
-&= \frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda(1-e^{-\lambda \tau})} (1-e^{-\lambda \tau}) + (\tau+ 1/\lambda) e^{-\lambda \tau} \\
+&=  \frac{1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda} + (\tau+ 1/\lambda) e^{-\lambda \tau} \\
 &= 1/\lambda - e^{-\lambda \tau}/\lambda - \tau e^{-\lambda \tau} + \tau e^{-\lambda T} + e^{-\lambda \tau}/\lambda \\
 &=1/\lambda.
 \end{align}
+Observe specifically that, for instance, $\{Y=1\} = \{s : Y(s) = 1\} = \{s : \1{X(s) \leq \tau}=1\} = \{s: X(s) \leq \tau\} = \{X\leq \tau\}$.
 
-Here is a final point for you to think hard about: ${X\leq \tau}$ is an event, $Y=\1{X \leq \tau}$ is a r.v. Therefore the following is sloppy notation: $\E{\E{X\given X\leq \tau}}$, and when using, it is easy to get confused, because where is the random variable  on which we  should condition according to Adam's law?
 \end{solution}
 \end{exercise}
 
@@ -110,23 +147,23 @@ because the expected time until machine 1 fails is $1/\lambda$, then we wait unt
 
 Next condition on the second machine breaking down before $\tau$. Then, since $X_{1}$ and $X_2$ are independent and by the previous exercise,
 \begin{equation}
-\E{T| X_{2}\leq \tau} = \E{X_{1} + X_{2}  |X_2\leq \tau} = \frac{1}{\lambda} + \frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda(1-e^{-\lambda \tau})}.
+\E{T| X_{2}\leq \tau} = \E{X_{1} + X_{2}  |X_2\leq \tau} = \frac{1}{\lambda} + \frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda \P{X_{2} \leq \tau}}.
 \end{equation}
 
-By LOTE and using $\P{X_{2}\geq \tau} = e^{-\lambda \tau}$,
+By LOTE, % and using $\P{X_{2}\geq \tau} = e^{-\lambda \tau}$,
 \begin{align}
   \label{eq:924}
 \E T
 &=
-\E{T| X_{2}\leq \tau} \P{X_{2}\leq \tau} + \E{T| X_{2}\geq \tau} \P{X_{2}\geq \tau} \\
-&=(1-e^{-\lambda \tau})\left( \frac 1\lambda+
-\frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda(1-e^{-\lambda \tau})} \right)
-+e^{-\lambda \tau}\left( \frac{1}{\lambda} + \tau + \E T \right) \\
+\E{T| X_{2}\leq \tau} \P{X_{2}\leq \tau} + \E{T| X_{2} > \tau} \P{X_{2}>  \tau} \\
+&=\P{X_{2}\leq \tau}\left( \frac 1\lambda+
+\frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda \P{X_{2}\leq \tau}} \right)
++ \P{X_{2}>\tau}\left( \frac{1}{\lambda} + \tau + \E T \right) \\
 &=\frac{1}{\lambda} + \frac{ 1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda}
-+e^{-\lambda \tau} \tau + e^{-\lambda \tau}\E T \\
++ \P{X_{2} > \tau}( \tau +\E T) \\
 &\implies \\
-\left( 1-e^{-\lambda \tau} \right) \E T
-&=\frac{2-e^{-\lambda \tau}}{\lambda} \\
+\P{X_{2} \leq \tau} \E T
+&=\frac{2-e^{-\lambda \tau}}{\lambda} - \tau e^{-\lambda \tau}  + \tau \P{X_2>\tau} = \frac{2-e^{-\lambda \tau}}{\lambda} \\
 &\implies \\
 \E T
 &=\frac{2-e^{-\lambda \tau}}{\lambda(1-e^{-\lambda \tau})}.
