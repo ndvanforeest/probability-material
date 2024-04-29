@@ -8,10 +8,10 @@
 
 \begin{document}
 \maketitle
+Below is some general feedback on the assignments. If you have any
+specific questions, feel free to ask them at the next tutorial.
 
 \section*{Assignment 1}
-Below is some general feedback on the first assignment. If you have
-any specific questions, feel free to ask them at the next tutorial.
 
 \begin{itemize}
 \item If a mathematical step is not generally true, add reasoning.
@@ -41,27 +41,92 @@ that it has a uniform distribution.
 If the code is difficult to interpret, keeping the BH exercise in
 mind could make it easier.
 
+\section*{Assignment 2}
+\begin{itemize}
+\item Integral sign order
+\item Indirectly assuming independence
+\item Exponential PDF
+\end{itemize}
+Examples:
+
+Many people had a notation that was equivalent to:
+$$\int_{supp(A)}\int_{supp(B)} a \cdot b \cdot f_{A,B}(a, b)\d a \d b$$
+This is not correct, as this can be interpreted as:
+$$\int_{supp(A)} \left ( \int_{supp(B)} a \cdot b \cdot f_{A,B}(a, b)\d a \right )\d b$$
+
+Hopefully it becomes apparent now why this is not correct.
+The correct notation would be:
+$$\int_{supp(A)}\int_{supp(B)} a \cdot b \cdot f_{A,B}(a, b)\d b \d a$$
+
+Students also often indirectly assume independence, by using either of the following results:
+$$ \E{XY} = \E{X}\E{Y}$$
+$$ \P{A \cup B} = \P{A} \P{B}$$ Whenever using these results, make
+sure that independence is satisfied. Otherwise, these results will
+generally not hold.
+
+In exercise 5.13, the area variable was calculated in the following
+way:
+
+$$\mathrm{value} = \int_0^5 \int_0^1 \1{b - 0.25 < a} \1{a < b + 0.25} e^{-\lambda b}\d a\d b$$
+$$\mathrm{area} = \lambda \cdot value$$
+
+Many students saw $e^{-\lambda d}$ inside the integral as the PDF of
+$B$. However, we must note that the PDF of an exponentially
+distributed rv is given by $f(b) = \lambda e^{-\lambda d}$. In our
+case, $\lambda$ was taken out of the integral and multiplied in the
+next line.
+
+
 \section*{Assignment 3}
+There is no need to include pictures of the handwritten solutions in
+the assignment, hand them in on paper.
 
 \begin{itemize}
 \item Part I
 \end{itemize}
 
-A short summary on what (parts of) the function does, helps the reader
-with the rest of the explanation. A line by line description (of the
-syntax) often does not convey the inner workings of an algorithm as
-well as a few well-constructed sentences on a slightly higher level of
-abstraction.
+Add a short summary on what the function does, it helps with the rest
+of the explanation. A line by line description often does not convey
+the inner workings of an algorithm as well as a few well-constructed
+sentences on a slightly higher level of abstraction.
 
 \begin{itemize}
 \item Part II
 \end{itemize}
 
-Before you can explain what you see, you must understand what you see.
-Why are the relations as they are, why does it make sense, what are
-the implications? Show that you've thought about it.
+We asked to explain the graph, not just to describe it. Before you can
+explain what you see, you must understand what you see. Why are the
+relations as they are, why does it make sense, what are the
+implications? Show that you've thought about it.
 
 Be precise in your descriptions. Not all convex/concave increasing
 functions are logarithmic/exponential.
+
+\section*{Assignment 4}
+
+\begin{itemize}
+\item Relate the code to the exercise
+\end{itemize}
+
+Example:
+
+In exercise 5.2, students are asked to explain the code given in the
+exercise. Many students literally explain what the code does. However,
+linking the code to the exercise we are trying to solve is important.
+What is the meaning of N? It is the number of ping pong balls that fit
+into a Beluga, given the respective draws of their volume from the
+Normal distribution.
+
+\begin{itemize}
+\item Note on plotting the PDF 
+\end{itemize}
+
+In exercise 5.4, you were asked to provide code to make a histogram of
+the \emph{PDF} of N. Plotting the density (rather than the frequency)
+on the y-axis is more appropriate.
+
+Furthermore, although the figure was not explicitly requested, for
+future assignments, please include them even when not explicitly asked
+for. No points were deducted for not including the figure this week.
 
 \end{document}
