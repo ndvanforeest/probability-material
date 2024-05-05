@@ -129,4 +129,52 @@ Furthermore, although the figure was not explicitly requested, for
 future assignments, please include them even when not explicitly asked
 for. No points were deducted for not including the figure this week.
 
+\section*{Assignment 5}
+
+\begin{itemize}
+\item The choice of $\mu = 1/2$ and $\sigma^2 = 1/12$
+\end{itemize}
+
+The $\Unif{0,1}$ distribution is the same as the $\Beta{1,1}$
+distribution, a well-known fact about the Beta distribution. So by
+taking $\mu = 1/2$ and $\sigma^2 = 1/12$, we know $a=b=1$. Working the
+other way around works too: it's easy to calculate $\mu$ and
+$\sigma^2$ for $a=b=1$, making it a good test case.
+
+\begin{itemize}
+\item Variance of an rv in $[0,1]$
+\end{itemize}
+
+From a conceptual point of view it is easy to see that the most
+variance that can be obtained for an rv $X\in[0,1]$, is when $X$ is
+Bernoulli distributed with probability $0.5$, giving a variance of
+$0.25$. A proof for any rv $X\in [0, 1]$ could start with $X^2 < X$.
+What kind of rv has the least variance?
+
+\begin{itemize}
+\item The commented check
+\end{itemize}
+
+Both within textbooks and software libraries there are different
+conventions for parameterizing distributions. Especially when dealing
+with parameters that can be interpreted as a rate you have to be
+careful.
+
+\begin{itemize}
+\item What are these variables?
+\end{itemize}
+
+Total demand would refer to the sum of individual demands, not demand
+conditional on the number of customers. 
+
+\begin{itemize}
+\item \verb|EXn[n]| $=  \E{X \given N=n}$
+\item \verb|EXN| $=  \E{X \given N}$ 
+\item \verb|VXn[n]| $= \V{X \given N=n}$
+\item \verb|VXN| $=  \V{X \given N}$
+\item \verb|VE| $=  \V{\E{X \given N}}$
+\item \verb|EXN.mean()| $=  \E{\E{X \given N}} = \E{X}$
+\end{itemize}
+
+
 \end{document}
