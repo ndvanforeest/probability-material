@@ -214,15 +214,14 @@ P = rep(0, n_max)
 EXn = rep(0, n_max)
 VXn = rep(0, n_max)
 P[1] = length(n_jobs[which(n_jobs == 0)])/days
-for(n in 1:n_max){
-  idx = which(n_jobs == n - 1)
+for(n in 1:(n_max-1)){
+  idx = which(n_jobs == n)
   if (length(idx) == 0){
     next
   }
-  P[n] = length(idx) / days # this
-  m =
-  EXn[n] = mean(demands[idx, c(1:n)]) * (n - 1)  #this
-  VXn[n] = sd(demands[idx, c(1:n)]) * sd(demands[idx, c(1:n)])* (n - 1) #this
+  P[n+1] = length(idx) / days # this
+  EXn[n+1] = mean(demands[idx, c(1:n)]) * n  # this
+  VXn[n+1] = var(as.vector(demands[idx, c(1:n)])) * n # this
 }
 
 EXN = RV(outcomes = EXn, probs = P) # this
