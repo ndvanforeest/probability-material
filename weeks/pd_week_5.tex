@@ -77,56 +77,55 @@ hence
 \end{solution}
 \end{exercise}
 
-We should check that with this result we can retrieve $\E X = 1/\lambda$. For this we need an intermediate result.
-\begin{exercise}
-Show that $\E{X | \1{A} = 1} = \E{X\mid A}$.
-\begin{solution}
-Here are some observations about sets. Using the sample space  $S$, the definition of probability, and the definition of a rv:
-\begin{align*}
-  \{\1{A} = 1\} &= \{s \in S : \1{A}(s) = 1\} = \{s \in S: s \in A\} = A, \\
-  \{\1{A} = 0\} &= \{s \in S : \1{A}(s) = 0\} = \{s \in S: s \not \in A\} = A^{c}, \\
-  \P{A} &= \P{ s\in S: s \in A}, \\
-  \P{X=x} &= \P{ s\in S: X(s) = x}, \\
-  \P{X=x, Y=y} &= \P{ s\in S: X(s) = x, Y(s)= y}.
-\end{align*}
-With these observations, we write the definitions of $\E{X|A}$ and $\E{X|Y=y}$ in complete form as
-\begin{align*}
-  \E{X|A} &= \frac{1}{\P{A}} \sum_{x} x \P{X=x, A} = \frac{1}{\P{A}} \sum_{x} x \P{s \in S: X(s)=x, s \in A},\\
-  \E{X|Y=y} &= \frac{1}{\P{Y=y}} \sum_{x} x \P{X=x, Y=y} = \frac{1}{\P{Y=y}} \sum_{x} x \P{s \in S: X(s)=x, Y(s) = y}.
-\end{align*}
-Combining all this:
-\begin{align*}
-  \E{X \mid \1{A}=1}
-  &= \frac{1}{\P{s\in S: \1{A}(s)=1}} \sum_{x} x \P{X=x, \1{A}=1} = \frac{1}{\P{A}} \sum_{x} x \P{s \in S: X(s)=x, \1{A}(s)=1},\\
-  &= \frac{1}{\P{A}} \sum_{x} x \P{X=x, A} = \E{X \mid A}.
-\end{align*}
-Likewise:
-\begin{align*}
-  \E{X \mid \1{A}=0}= \E{X \mid A^{c}}.
-\end{align*}
-\end{solution}
-\end{exercise}
+We should check that with this result we can retrieve $\E X = 1/\lambda$.
+% For this we need an intermediate result.
+% \begin{exercise}
+% Show that $\E{X | \1{A} = 1} = \E{X\mid A}$.
+% \begin{solution}
+% Here are some observations about sets. Using the sample space  $S$, the definition of probability, and the definition of a rv:
+% \begin{align*}
+%   \{\1{A} = 1\} &= \{s \in S : \1{A}(s) = 1\} = \{s \in S: s \in A\} = A, \\
+%   \{\1{A} = 0\} &= \{s \in S : \1{A}(s) = 0\} = \{s \in S: s \not \in A\} = A^{c}, \\
+%   \P{A} &= \P{ s\in S: s \in A}, \\
+%   \P{X=x} &= \P{ s\in S: X(s) = x}, \\
+%   \P{X=x, Y=y} &= \P{ s\in S: X(s) = x, Y(s)= y}.
+% \end{align*}
+% With these observations, we write the definitions of $\E{X|A}$ and $\E{X|Y=y}$ in complete form as
+% \begin{align*}
+%   \E{X|A} &= \frac{1}{\P{A}} \sum_{x} x \P{X=x, A} = \frac{1}{\P{A}} \sum_{x} x \P{s \in S: X(s)=x, s \in A},\\
+%   \E{X|Y=y} &= \frac{1}{\P{Y=y}} \sum_{x} x \P{X=x, Y=y} = \frac{1}{\P{Y=y}} \sum_{x} x \P{s \in S: X(s)=x, Y(s) = y}.
+% \end{align*}
+% Combining all this:
+% \begin{align*}
+%   \E{X \mid \1{A}=1}
+%   &= \frac{1}{\P{s\in S: \1{A}(s)=1}} \sum_{x} x \P{X=x, \1{A}=1} = \frac{1}{\P{A}} \sum_{x} x \P{s \in S: X(s)=x, \1{A}(s)=1},\\
+%   &= \frac{1}{\P{A}} \sum_{x} x \P{X=x, A} = \E{X \mid A}.
+% \end{align*}
+% Likewise:
+% \begin{align*}
+%   \E{X \mid \1{A}=0}= \E{X \mid A^{c}}.
+% \end{align*}
+% \end{solution}
+% \end{exercise}
 
 
 \begin{exercise}
-Use the above two exercises, Adam's law, and LOTP to show that $\E{X} = \E{\E{X\given Y}} = 1/\lambda$, where $Y=\1{X\leq \tau}$.
-
-Note that ${X\leq \tau}$ is an event, while $Y=\1{X \leq \tau}$ is a rv.
-Therefore the following is sloppy notation: $\E{\E{X\given X\leq \tau}}$, and when using, it is easy to get confused, because where is the random variable on which we should condition according to Adam's law? The exercise above addresses this point of confusion.
+Use LOTE to show that $\E{X} = \E{X \mid X\leq \tau} \P{X\leq \tau} + \E{X \mid X> \tau} \P{X > \tau} = 1/\lambda$.
+% Note that ${X\leq \tau}$ is an event, while $Y=\1{X \leq \tau}$ is a rv.
+% Therefore the following is sloppy notation: $\E{\E{X\given X\leq \tau}}$, and when using, it is easy to get confused, because where is the random variable on which we should condition according to Adam's law? The exercise above addresses this point of confusion.
 \begin{solution}
 By memorylessness, $\E{X\given X>\tau} = \tau + 1/\lambda$. Hence,
 \begin{align}
   \label{eq:94}
 \E X
-&= \E{\E{X\given Y}}, \quad \text{Adam's law} \\
-&= \E{X\given Y=1}\P{Y=1} + \E{X\given Y=0}\P{Y=0}, \quad \text{LOTE}\\
+% &= \E{\E{X\given Y}}, \quad \text{Adam's law} \\
+% &= \E{X\given Y=1}\P{Y=1} + \E{X\given Y=0}\P{Y=0}, \quad \text{LOTE}\\
 &= \E{X\given X\leq \tau}\P{X\leq \tau} + \E{X\given X>\tau} \P{X>\tau} \\
 &=  \frac{1- e^{-\lambda \tau}- \tau \lambda  e^{-\lambda \tau}}{\lambda} + (\tau+ 1/\lambda) e^{-\lambda \tau} \\
 &= 1/\lambda - e^{-\lambda \tau}/\lambda - \tau e^{-\lambda \tau} + \tau e^{-\lambda T} + e^{-\lambda \tau}/\lambda \\
 &=1/\lambda.
 \end{align}
-Observe specifically that, for instance, $\{Y=1\} = \{s : Y(s) = 1\} = \{s : \1{X(s) \leq \tau}=1\} = \{s: X(s) \leq \tau\} = \{X\leq \tau\}$.
-
+%Observe specifically that, for instance, $\{Y=1\} = \{s : Y(s) = 1\} = \{s : \1{X(s) \leq \tau}=1\} = \{s: X(s) \leq \tau\} = \{X\leq \tau\}$.
 \end{solution}
 \end{exercise}
 
@@ -176,7 +175,9 @@ Two challenges: Does the problem become much harder when $X_{1}$ and $X_{2}$ are
 \end{solution}
 \end{exercise}
 
-
+\begin{exercise}
+BH 9.31
+\end{exercise}
 
 \section{Lecture 10}
 

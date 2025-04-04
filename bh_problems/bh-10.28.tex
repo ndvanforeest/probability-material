@@ -1,9 +1,10 @@
 \input{header.tex}
 \setcounter{theorem}{27}
 \begin{exercise} BH.10.28
- Note that standardized version of a rv $X$ is $Y=(X-\mu)/\sigma$ where $\E X = \mu$ and $\V X = \sigma$.
+Note that a standardized version of a rv $X$ is defined as  $Y=(X-\mu)/\sigma$ where $\E X = \mu$ and $\V X = \sigma^{2}$.
+
 \begin{hint}
-The idea is to prove that the MGF of $X_n$ converges to the MGF of a $N(\mu, \sigma^{2})$ rv as $n\to\infty$. Thus, read and follow the proof of the CTL, BH.10.3.1.
+The idea is to prove that the MGF of $X_n$ converges to the MGF of a $N(\mu, \sigma^{2})$ rv as $n\to\infty$. Thus, read and follow the proof of the CLT, BH.10.3.1.
 
 What are  $\E{X_n}$ and $\V{X_n}$ if $X\sim \Pois{n}$?  Once you know that, explain that the MGF of the standardized version of $X_n$ is equal to  $\exp\{-n+s \sqrt n + n e^{-s/\sqrt n}\}$.
 

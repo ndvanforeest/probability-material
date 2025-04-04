@@ -128,9 +128,13 @@ False. By definition: $\E{\E{Y|X,Z}|Z} = \E{Y|Z} $.
 
 \begin{truefalse}
 For any rvs X and Y, we claim that all next steps are correct:
-$\V{Y-\E{Y|X}} = \E{(Y-\E{Y|X})^2} - \E{Y-\E{Y|X}}^2 = \E{(Y-\E{Y|X})^2} = \E{\E{(Y-\E{Y|X})^2|X}} = \E{\V{Y|X}}$
+\begin{align*}
+\V{Y-\E{Y|X}} &= \E{(Y-\E{Y|X})^2} - \E{Y-\E{Y|X}}^2 \\
+  &= \E{(Y-\E{Y|X})^2} - \E{\E{(Y-\E{Y|X})^2|X}} \\
+  &= \E{\V{Y|X}}.
+\end{align*}
 \begin{solution}
-It's true, see BH. 435
+It's true, see BH 435
 \end{solution}
 \end{truefalse}
 

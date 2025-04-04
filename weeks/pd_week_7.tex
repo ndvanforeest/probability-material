@@ -282,8 +282,14 @@ with fname.open("r") as fp:
 
 
 
-Little Mike needs to get ready for school. He must leave within 15 minutes, but there are two more things he needs to do: eat his breakfast and get dressed. The time it takes Mike to eat his breakfast has a mean value of 6 minutes with a standard deviation of 3 minutes. The time it takes Mike to get dressed has a mean value of 4 minutes with a standard deviation of 1 minute.
 \begin{exercise}
+Little Mike needs to get ready for school.
+He must leave within 15 minutes, but there are two more things he needs to do: eat his breakfast and get dressed.
+The time $XS$ it takes Mike to eat his breakfast has a mean value of 6 minutes with a standard deviation of 3 minutes.
+The time $Y$ it takes Mike to get dressed has a mean value of 4 minutes with a standard deviation of 1 minute.
+Assume that $X$ and $Y$ are independent.
+
+
 Give a lower bound for the probability that Mike will be ready for school in time.
 \begin{solution}
 Let $X$ and $Y$ denote the time it takes Mike to eat his breakfast and get dressed, respectively. Let $Z = X + Y$ denote the total time Mike needs to finish his morning routine. Let $\mu$ denote the mean of $Z$, i.e., $\mu = \E{Z} = \E{X+Y} = 6+4 = 10$. Then,
@@ -304,6 +310,10 @@ Hence,
     \P{Z < 15} \geq 1 - 0.4 = 0.6.
 \end{align}
 So the probabilty that Mike will be ready in time is at least 60\%.
+
+Why can't we use the CLT here?
+First of all, the CLT holds in the limit; a sum of two independent rvs does not really represent a sum over many independent rvs.
+Second, it is not given that $X$ and $Y$ are normally distributed, we just know the mean and variances.
 \end{solution}
 \end{exercise}
 

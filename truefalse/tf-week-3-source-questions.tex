@@ -62,12 +62,12 @@ It's false. $X$ and $Y$ need not be independent, as is suggested here.
 
 
 
-\begin{truefalse}
-Take $g(x, X) = \1{X\leq x}$ for some rv $X$ with CDF $F_{X}$. Claim: $\E{g(y, X)} = F_{X}(y)$.
-\begin{solution}
-It's true.
-\end{solution}
-\end{truefalse}
+% \begin{truefalse}
+% Take $g(x, X) = \1{X\leq x}$ for some rv $X$ with CDF $F_{X}$. Claim: $\E{g(y, X)} = F_{X}(y)$.
+% \begin{solution}
+% It's true.
+% \end{solution}
+% \end{truefalse}
 
 
 
@@ -107,7 +107,25 @@ It's false. The PMF does not have a derivative (in the proper sense) at $a_{i}$.
 \end{truefalse}
 
 \begin{truefalse}
-    Let $X \sim \Norm{0,1}$, $Y=X^2$. Claim: The change of variables formula tells us that:
+Let $X \sim \Norm{0,1}$, $Y=X^2$.
+Claim: for the density of $Y$, $f_{Y}(0) = 0$, and on $y>0$,
+    $$f_Y(y)= \frac{\phi(\sqrt{y}) + \phi(-\sqrt{y})}{2\sqrt{y}}$$
+    by the change of variables formula.
+\begin{solution}
+A (True).
+Consider the set $ A = {x : x^{2} =y}$ as the inverse of $y$. The change of variables formula says this
+\begin{equation}
+f_Y(y)= \sum_{x_{i} \in A} f_{X}(x_{i} \left(\frac{\d y}{\d x}(x_{i})\right)^{-1},
+\end{equation}
+if $\d y/\d x (x_{i}) \neq 0$ for all $x_{i} \in  A$. As it is given that $y>0$, this condition is satisfied.
+\end{solution}
+\end{truefalse}
+
+
+
+\begin{truefalse}
+Let $X \sim \Norm{0,1}$, $Y=X^2$.
+Claim: The change of variables formula tells us that:
     $$f_Y(y)=f_X(x)\left|\frac{dx}{dy}\right|=\phi(x)\left|\frac{1}{2x}\right|=\phi(\sqrt{y})\frac{1}{2\sqrt{y}},\quad y>0.$$
 \begin{solution}
         False. $Y=X^2$ is not a strictly increasing (or decreasing) function, so the change of variables formula cannot be applied.
