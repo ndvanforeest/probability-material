@@ -60,37 +60,36 @@ with fname.open("r") as fp:
 
 
 \begin{exercise}
-A shop receives demands with sizes $\{X_{k}\}$ for some product, for instance, cans with beans.
-Write $\mu = \E X$ and $\sigma^{2} = \V X$.
-Suppose $n$ customers arrive so that the total demand $D=\sum_{i=1}^{n} X_{i}$.
-The shop has an initial inventory of $I$ cans on the shelf.
+A shop receives every day $n$ iid demands $\{X_{k}\}$ for some product, for instance, cans with beans. (In reality the total daily number of customers is well approximated by some Poisson distribution.)
+Write $\mu = \E X$ and $\sigma^{2} = \V X$  so that the total demand $D=\sum_{i=1}^{n} X_{i}$.
+The shop replenishes the inventory to level $S$ just before opening the shop in the morning.
 \begin{enumerate}[a.]
-\item Use the CLT to determine $I$ such that the probability that the total demand~$D$ remains below $I$ is larger than some threshold $\alpha$.
-\item The safety stock is defined as $I$ minus the expected demand. How large is the safety stock?
-\item When is it reasonable to use the CLT to estimate $I$?
+\item Use the CLT to determine $S$ such that the probability that the total demand~$D$ remains below $S$ is larger than some threshold $\alpha$.
+\item The safety stock is defined as $S$ minus the expected demand. How large is the safety stock?
+\item When is it reasonable to use the CLT to estimate $S$?
 \end{enumerate}
 \begin{solution}
-We have $D=\sum_{i=1}^{n} X_{i}$. Hence, $\E D = n \E X = n \mu$ and $\V D = n \V X = n \sigma^{2}$. We search for $I$ such that
+We have $D=\sum_{i=1}^{n} X_{i}$. Hence, $\E D = n \E X = n \mu$ and $\V D = n \V X = n \sigma^{2}$. We search for $S$ such that
 \begin{equation}
   \label{eq:131}
-\alpha = \P{D \leq I}   = \P{\bar D_n \leq \bar I_{n}},
+\alpha = \P{D \leq S}   = \P{\bar D_n \leq \bar S_{n}},
 \end{equation}
 where
 \begin{align}
   \label{eq:132}\
 \bar D_{n} &:= \frac{D-n\mu}{\sigma \sqrt n}   = \frac{D/n - \mu}{\sigma/\sqrt n}, &
-\bar I_{n} &:= \frac{I-n\mu}{\sigma \sqrt n}   = \frac{I/n - \mu}{\sigma/\sqrt n}.
+\bar S_{n} &:= \frac{S-n\mu}{\sigma \sqrt n}   = \frac{S/n - \mu}{\sigma/\sqrt n}.
 \end{align}
-Hence, by the CLT, $\bar D_{n}\sim \Norm{0, 1}$ if $n$ large. Thus, we need to find $I$ such that
+Hence, by the CLT, $\bar D_{n}\sim \Norm{0, 1}$ if $n$ large. Thus, we need to find $S$ such that
 \begin{align}
-\P{\bar D_{n} \leq \bar I_{n}} &= \Phi(\bar I_{n}) = \alpha \implies \bar I_{n} = \Phi^{-1}(\alpha) \\
-&\implies  I = n\mu + \sigma \sqrt n \Phi^{-1}(\alpha).
+\P{\bar D_{n} \leq \bar S_{n}} &= \Phi(\bar S_{n}) = \alpha \implies \bar S_{n} = \Phi^{-1}(\alpha) \\
+&\implies  S = n\mu + \sigma \sqrt n \Phi^{-1}(\alpha).
 \end{align}
-Once we found $I$, the safety stock is $I-n\mu$.
+Once we found $S$, the safety stock is $S-n\mu$.
 
 Of course, `reasonable' is an imprecise concept.
 But we are tempted to say that it is reasonable to use the CLT to estimate the distribution of $D$ when we need more than a few customers to empty the stock.
-Hence, when $I/\mu \geq 10$, then the CLT already performs reasonably well to estimate the tail probability $\P{D>I}$.
+Hence, when $S/\mu \geq 10$, then the CLT already performs reasonably well to estimate the tail probability $\P{D>S}$.
 
 An interesting extension is to suppose that the number of customers is Poisson distributed. Then we need Eve's law to determine $\V D$.
 
@@ -103,7 +102,7 @@ An interesting extension is to suppose that the number of customers is Poisson d
 \label{sec:backgr-mater-not}
 
 The next couple of exercises concentrate on the interpretation of expectation when dealing with real money, not just toy examples like throwing dice.
-We use this insight in the next lecturexto explain why people pay for insurance, even though they have a negative expected value due to the payments to the insurance company.
+We use this insight in the next lecture to explain why people pay for insurance, even though they have a negative expected value due to the payments to the insurance company.
 
 \begin{exercise}
 Suppose we have one perfectly fair die.
@@ -120,13 +119,16 @@ This means that our common sense, in some cases, rejects the criterion of maximi
 \end{exercise}
 
 \begin{exercise}
-You are given two options: bet any amount of  money you like on the basis that with probability $p=10^{-6}$ you win  $1 000 001$ times what you wagered, but with probability $1-p$ you loose all.
+You are given two options: bet any amount of  money you like on the basis that with probability $p=10^{-6}$ you win  $1.000.001$ times what you wagered, but with probability $1-p$ you loose all.
 Would you bet all the money you have?
 \begin{solution}
-  Of course not.
-  Loosing all you have is much worse than your increased happyness when your fortune gets doubled.
-  One way to model this effect is to assign a `utility' to your money.
-  A particular model is then to assign a utility of $\log m$ to an amount of money $m$. Then the  utility of doubling is $\log(2m)$ while loosing it all is $\log 0 = -\infty$.
+Of course not.
+With such small expected gain, waging just a small amount of money takes a very long time to result in a significant gain.
+Playing for large quantities is also not interesting.
+Loosing all you have is much worse than your increased happyness when your fortune gets doubled.
+One way to model this effect is to assign a `utility' to your money.
+A particular model is then to assign a utility of $\log m$ to an amount of money $m$.
+Then the utility of doubling is $\log(2m)$ while loosing it all is $\log 0 = -\infty$.
 \end{solution}
 \end{exercise}
 
@@ -144,7 +146,7 @@ m-f + \sum_{n=1}^{\infty} 2^{-n} 2^{n} = \infty.
 
 
 But, how much are you actually prepared to pay to enter this game, given that you can also lose part of your investment $f$?
-To resolve this, we don't focus on monetary expectation but instead on expected utility where we express the utility of having $x$ euro as $\log x$ (so, the utility of $10^{6}$ is twice has much as the utility of $10^{3}$).
+To resolve this, we don't focus on monetary expectation but instead on expected utility where we express the utility of having $x$ euro as $\log x$ (so, the utility of $10^{6}$ is twice as much as the utility of $10^{3}$).
 Explain that, when investing $f$, the expected utility is given by
 \begin{equation}
   \label{eq:135}
