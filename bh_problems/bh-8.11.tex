@@ -30,10 +30,11 @@ Then compute the probability for each branch. This will give the answer of the  
 \begin{solution}
 From the hint, we first focus on a set $\{V\leq 0\} = \{1/T \leq 0\}$. Now,  $1/T\leq 0 \iff T\leq 0$. And therefore $\P{V\leq 0} = \P{T\leq 0} = F_T(0)$.
 
-If $v<0$, then $1/T \leq v \leq 0\iff 1/v \leq T \leq 0$. Therefore
-$F_V(v) = F_T(0) - F_T(1/v)$.
+If $v<0$, then $1/T \leq v \leq 0\iff 1/v \leq T \leq 0$.
+With indicator functions: $\1{1/T \leq v < 0} = \1{1/v \leq T < 0}$.
+Therefore $F_V(v) = F_T(0) - F_T(1/v)$.
 
-If $v>0$, then $1/T \leq v$ when $T<0$ or $T\geq 1/v$. Hence,
+If $v>0$, then $\1{1/T \leq v} = \1{T\leq 0} + \1{T\geq v}$. Hence,
 $F_V(v) = F_T(0) + 1- F_T(1/v)$.
 \end{solution}
 \end{exercise}

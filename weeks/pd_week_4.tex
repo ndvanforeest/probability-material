@@ -14,11 +14,11 @@
 \label{sec:lecture-1}
 
 
-\subsection{Compulory material}
+\subsection{Compulsory material}
 \label{sec:compulory-material}
 
 \begin{itemize}
-\item 9.1: read, but skip example 9.1.6 on the two envelopes paradox.
+\item 9.1: read, but skip example 9.1.6 on the two envelopes paradox. For example BH.9.1.7, see below.
 \item BH video: 26
 \end{itemize}
 
@@ -63,7 +63,7 @@ In other words, the question is to use recursion to compute  the expectation of 
 It is convenient to write $N(b,w) = \E{T(b,w)}$; it saves ink and it gives more overview of what we do.
 
 Compare this with the geometric random variable: then we ask how often to throw, for instance, a coin \emph{before} we see tails.
-The coin can be seen as an urn with an infinite number of white balls (tails) and an infinite number of black ball (heads) but such that ratio of black and white balls is such that $p=w/(b+w)$.
+The coin can be seen as an urn with an infinite number of white balls (tails) and an infinite number of black ball (heads) but such that the ratio of black and white balls is $p=w/(b+w)$.
 Hence, the negative hypergeometric and geometric distributions are closely related.
 
 \begin{hint}
@@ -159,11 +159,36 @@ What an elegant procedure;  we pull ourselves out of the swamp, just like Baron 
 \end{solution}
 \end{exercise}
 
+\begin{remark}
+Consider Example BH.9.1.7 on the mystery prize.
+I (=NvF) like such problems a lot: it deals with optimal control (what is the height of the bid that maximizes the profit?)
+in a stochastic environment.
+However, I find the solution method of the book somewhat hard to understand.
+I would use the tools of Section BH.9.2 directly; perhaps you find it simpler too.
+
+The payoff $W$ is the money I get if my bid $b$ is accepted, that is, $W=(V-b)\1{b\geq 2 V/3}$.
+Note how easy it is include the condition on the acceptance by means of the indicator formula.
+Now,
+\begin{equation*}
+\E{W | V=v} = \E((v-b)\1{v \leq 3b/2}} = (v-b)\1{v \leq 3b/2},
+\end{equation*}
+because everything is a constant.
+\end{remark}
+And thus,
+\begin{align*}
+  \E W
+  &= \int_{0}^{1} \E{W|V=v} f_{V}(v) \d v \\
+  &= \int_{0}^{1} \E{W|V=v}  \d v, \quad \text{$V$ is uniform,} \\
+  &= \int_{0}^{1} (v-b)\1{v\leq 3b/2}  \d v \\
+  &= \int_{0}^{3b/2} (v-b)  \d v  = -3 b^{2}/8,
+\end{align*}
+where the last step follows from some simple algebra. This is the same as BH (\smiley ), but I find the reasoning simpler.
+
 \subsection{Background material, not compulsory}
 \label{sec:backgr-mater-not}
 
 \begin{exercise}
-Example BH.9.1.8 takes a few shortcuts to derive the expectation of the number of tails before a heads appears when throwing a coin.
+Example BH.9.1.8 takes a few shortcuts to derive the expectation of the number of tails before heads appears when throwing a coin.
 Use conditioning to close the arguments. (This is background material because this is quite hard.)
 \begin{solution}
 Let $X_{i}$ be the outcome of the $i$th throw of the coin.
@@ -208,7 +233,7 @@ Thus, $\E{T|X_{1} = 0} = 1 + \E T$, exactly as BH claims in the example, but now
 \section{Lecture 8}
 
 
-\subsection{Compulory material}
+\subsection{Compulsory material}
 
 \begin{itemize}
 \item 9.2: read
