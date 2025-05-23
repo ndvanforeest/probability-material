@@ -9,7 +9,7 @@ One type of question that seems hard to answer by classical means is to characte
 Bootstrapping is nowadays used a lot in data science.
 
 \begin{exercise}
-Run the code below, and then explain what is \mintinline{python}{sample}, \mintinline{python}{bootstrap} and \mintinline{python}{medians}. Why do we use \mintinline{python}{axis=1}?
+Run the code below, and then explain what is \mintinline{python}{sample}, \mintinline{python}{bootstrap} and \mintinline{python}{medians}.
 \end{exercise}
 
 \begin{exercise}
@@ -43,7 +43,7 @@ library(matrixStats)
 
 set.seed(3)
 
-sample = sample(1:200,100, replace=TRUE)
+sample = sample(0:199,100, replace=TRUE)
 n_boot = 5000
 bootstrap = matrix(0,n_boot,length(sample))
 for(i in 1:nrow(bootstrap)){
@@ -62,7 +62,7 @@ df1 = data.frame(medians)
 ggplot()+
 geom_histogram(df1, mapping = aes(x = medians, y = ..density..), bins = 100)+
 geom_vline(xintercept = quantile(medians, 0.025), color = "red", size=2) +
-geom_vline(xintercept = quantile(medians, 0.9725), color = "red", size=2)+
+geom_vline(xintercept = quantile(medians, 0.975), color = "red", size=2)+
 geom_vline(xintercept = mean(medians), color = "red", size=2)
 
 dev.off()
